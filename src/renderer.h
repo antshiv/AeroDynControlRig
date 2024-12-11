@@ -4,6 +4,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <string>
 
 class Renderer {
 public:
@@ -38,13 +39,15 @@ private:
     int projLoc;
 
     // Matrices
-    float model[16];
+    glm::mat4 model;
     glm::mat4 view;
     glm::mat4 projection;
 
     // Helper methods
     unsigned int loadShader(const char* vertexSrc, const char* fragmentSrc);
     void setupCubeGeometry();
+    void setDefaultMatrices();
+
 };
 
 #endif // RENDERER_H
