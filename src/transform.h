@@ -19,19 +19,32 @@ public:
     }
 
     // Set translation
-    void setTranslation(const glm::vec3& translation) {
+    void setTranslation1(const glm::vec3& translation) {
         model = glm::translate(glm::mat4(1.0f), translation);
     }
 
     // Set rotation
-    void setRotation(float angle, const glm::vec3& axis) {
+    void setRotation1(float angle, const glm::vec3& axis) {
         model = glm::rotate(glm::mat4(1.0f), angle, axis);
     }
 
     // Set scaling
-    void setScale(const glm::vec3& scale) {
+    void setScale1(const glm::vec3& scale) {
         model = glm::scale(glm::mat4(1.0f), scale);
     }
+
+void setTranslation(const glm::vec3& translation) {
+    model = glm::translate(model, translation); // Accumulate translation
+}
+
+void setRotation(float angle, const glm::vec3& axis) {
+    model = glm::rotate(model, angle, axis); // Accumulate rotation
+}
+
+void setScale(const glm::vec3& scale) {
+    model = glm::scale(model, scale); // Accumulate scaling
+}
+
 
     // Set view (camera) matrix
     void setView(const glm::vec3& position, const glm::vec3& target, const glm::vec3& up) {

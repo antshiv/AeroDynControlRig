@@ -22,6 +22,7 @@ public:
     // Update logic (e.g., handle user input, update orientation)
     void update();
     void update2D();
+    void update2D_old();
 
     // Render the current frame
     void render();
@@ -29,6 +30,8 @@ public:
 
     // Cleanup before exit
     void shutdown();
+
+    static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 private:
     GLFWwindow* window;

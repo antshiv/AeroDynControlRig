@@ -5,6 +5,8 @@
 #include "attitude/attitude_utils.h"
 #include <ostream>
 #include <iostream>
+#include <glm/gtx/string_cast.hpp>
+
 
 Application::Application() {
     // Constructor code
@@ -24,6 +26,9 @@ bool Application::init() {
 //    currentOrientation.yaw = deg2rad(0.0);
 //    currentOrientation.order = EULER_ZYX;
 
+    float aspectRatio = 800.0f / 600.0f;  // or dynamically: window_width / window_height
+
+
     if (!glfwInit()) {
         std::cerr << "Failed to initialize GLFW" << std::endl;
         return false;
@@ -38,6 +43,18 @@ bool Application::init() {
 
 	glfwMakeContextCurrent(window);
 	std::cout << "Window created successfully: " << window << std::endl;
+
+    glfwMakeContextCurrent(window);
+    
+    int width, height;
+    glfwGetFramebufferSize(window, &width, &height);
+    glViewport(0, 0, width, height);
+
+	    // Set the Application instance as the GLFW user pointer
+    glfwSetWindowUserPointer(window, this);
+
+    // Set the key callback
+    glfwSetKeyCallback(window, keyCallback);
 
 	// Check OpenGL version
 	const GLubyte* rendererName = glGetString(GL_RENDERER);
@@ -55,6 +72,9 @@ bool Application::init() {
     }
 
         // Set orthographic projection for 2D
+    // Set orthographic projection matching window dimensions
+    // Option 1: Maintain height of 2 units (-1 to 1) and scale width by aspect ratio
+    //transform.setOrthographic(-aspectRatio, aspectRatio, -1.0f, 1.0f, -1.0f, 1.0f);
     transform.setOrthographic(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
     return true;
 }
@@ -93,7 +113,8 @@ void Application::update() {
     renderer.setModelMatrix(R);
 }
 
-void Application::update2D() {
+void Application::update2D_old() {
+    //transform.resetModel();
     currentOrientation.yaw += deg2rad(0.5);
 
     double dcm[3][3];
@@ -106,6 +127,26 @@ void Application::update2D() {
     transform.model = rotation; // Update model matrix with rotation
 }
 
+void Application::update2D() {
+    // Add yaw rotation based on Euler angles
+    currentOrientation.yaw += deg2rad(0.5);
+
+    // Compute rotation matrix from Euler angles
+    double dcm[3][3];
+    euler_to_dcm(&currentOrientation, dcm);
+
+    glm::mat4 rotation = glm::mat4(1.0f);
+    rotation[0][0] = dcm[0][0]; rotation[0][1] = dcm[0][1];
+    rotation[1][0] = dcm[1][0]; rotation[1][1] = dcm[1][1];
+
+    // Combine the current model matrix with the rotation matrix
+    transform.model = rotation * transform.model; // Apply rotation without overwriting
+
+    // Debug output to verify transformations
+    std::cout << "Updated Model Matrix: " << glm::to_string(transform.model) << std::endl;
+}
+
+
 
 void Application::render() {
         renderer.renderFrame();
@@ -116,6 +157,8 @@ void Application::render() {
 }
 
 void Application::render2D() {
+std::cout << "Model Matrix Sent to Shader: " << glm::to_string(transform.model) << std::endl;
+    
     renderer.renderFrame2D(transform);
 
     glfwSwapBuffers(window);
@@ -128,5 +171,51 @@ void Application::shutdown() {
     //renderer.shutdown();
     glfwDestroyWindow(window);
     glfwTerminate();
+}
+
+void Application::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+    // Retrieve the Application instance from the user pointer
+    Application* app = reinterpret_cast<Application*>(glfwGetWindowUserPointer(window));
+    if (!app) {
+        std::cerr << "Application instance is null in keyCallback" << std::endl;
+        return;
+    }
+
+    Transform& transform = app->transform; // Access the Transform object
+
+	std::cout << "Key pressed: " << key << std::endl;
+	std::cout << "Translation: " << glm::to_string(transform.model) << std::endl;
+	
+
+    if (action == GLFW_PRESS || action == GLFW_REPEAT) {
+        switch (key) {
+        case GLFW_KEY_W: // Move up
+            transform.setTranslation(glm::vec3(0.0f, 0.1f, 0.0f));
+            break;
+        case GLFW_KEY_S: // Move down
+            transform.setTranslation(glm::vec3(0.0f, -0.1f, 0.0f));
+            break;
+        case GLFW_KEY_A: // Move left
+            transform.setTranslation(glm::vec3(-0.1f, 0.0f, 0.0f));
+            break;
+        case GLFW_KEY_D: // Move right
+            transform.setTranslation(glm::vec3(0.1f, 0.0f, 0.0f));
+            break;
+        case GLFW_KEY_Q: // Rotate counterclockwise
+            transform.setRotation(glm::radians(-10.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+            break;
+        case GLFW_KEY_E: // Rotate clockwise
+            transform.setRotation(glm::radians(10.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+            break;
+        case GLFW_KEY_Z: // Scale up
+            transform.setScale(glm::vec3(1.1f, 1.1f, 1.0f));
+            break;
+        case GLFW_KEY_X: // Scale down
+            transform.setScale(glm::vec3(0.9f, 0.9f, 1.0f));
+            break;
+        default:
+            break;
+        }
+    }
 }
 

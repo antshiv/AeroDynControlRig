@@ -8,6 +8,7 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <glm/gtx/string_cast.hpp>
 
 // Renderer.cpp
 float vertices[] = {
@@ -94,7 +95,7 @@ void Renderer::renderFrame2D(const Transform& transform) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glUseProgram(shaderProgram);
-
+    //std::cout << "Model Matrix: " << glm::to_string(transform.model) << std::endl;
     // Pass matrices from Transform to the shader
     glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(transform.model));
     glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(transform.view));

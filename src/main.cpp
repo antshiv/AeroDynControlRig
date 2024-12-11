@@ -8,7 +8,7 @@ int main() {
     }
 
     while (app.running()) {
-        app.update2D();
+//        app.update2D();
         app.render2D();
     }
 
