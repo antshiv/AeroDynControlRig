@@ -5,6 +5,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <string>
+#include "transform.h"
 
 class Renderer {
 public:
@@ -16,6 +17,7 @@ public:
 
     // Called each frame to render
     void renderFrame();
+    void renderFrame2D(const Transform& transform);
 
     // Set the model matrix for the current frame
     void setModelMatrix(const float* modelMat);
@@ -46,6 +48,7 @@ private:
     // Helper methods
     unsigned int loadShader(const char* vertexSrc, const char* fragmentSrc);
     void setupCubeGeometry();
+    void setupAxisGeometry();
     void setDefaultMatrices();
 
 };

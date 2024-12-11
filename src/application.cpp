@@ -5,6 +5,8 @@
 #include "attitude/attitude_utils.h"
 #include <ostream>
 #include <iostream>
+#include <glm/gtx/string_cast.hpp>
+
 
 Application::Application() {
     // Constructor code
@@ -24,6 +26,9 @@ bool Application::init() {
 //    currentOrientation.yaw = deg2rad(0.0);
 //    currentOrientation.order = EULER_ZYX;
 
+    float aspectRatio = 800.0f / 600.0f;  // or dynamically: window_width / window_height
+
+
     if (!glfwInit()) {
         std::cerr << "Failed to initialize GLFW" << std::endl;
         return false;
@@ -38,6 +43,21 @@ bool Application::init() {
 
 	glfwMakeContextCurrent(window);
 	std::cout << "Window created successfully: " << window << std::endl;
+
+    glfwMakeContextCurrent(window);
+    
+    int width, height;
+    glfwGetFramebufferSize(window, &width, &height);
+    glViewport(0, 0, width, height);
+
+	    // Set the Application instance as the GLFW user pointer
+    glfwSetWindowUserPointer(window, this);
+
+    // Set the key callback
+    glfwSetKeyCallback(window, keyCallback);
+    glfwSetCursorPosCallback(window, [](GLFWwindow* w, double x, double y) {
+        static_cast<Application*>(glfwGetWindowUserPointer(w))->mouseCallback(w, x, y);
+    });
 
 	// Check OpenGL version
 	const GLubyte* rendererName = glGetString(GL_RENDERER);
@@ -54,7 +74,16 @@ bool Application::init() {
 	return false;
     }
 
+   if (!axisRenderer.init()) {
+        std::cerr << "Axis renderer initialization failed." << std::endl;
+        return false;
+    }
 
+        // Set orthographic projection for 2D
+    // Set orthographic projection matching window dimensions
+    // Option 1: Maintain height of 2 units (-1 to 1) and scale width by aspect ratio
+    //transform.setOrthographic(-aspectRatio, aspectRatio, -1.0f, 1.0f, -1.0f, 1.0f);
+    transform.setOrthographic(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
     return true;
 }
 
@@ -92,17 +121,70 @@ void Application::update() {
     renderer.setModelMatrix(R);
 }
 
+void Application::update2D_old() {
+    //transform.resetModel();
+    currentOrientation.yaw += deg2rad(0.5);
+
+    double dcm[3][3];
+    euler_to_dcm(&currentOrientation, dcm);
+
+    glm::mat4 rotation = glm::mat4(1.0f);
+    rotation[0][0] = dcm[0][0]; rotation[0][1] = dcm[0][1];
+    rotation[1][0] = dcm[1][0]; rotation[1][1] = dcm[1][1];
+
+    transform.model = rotation; // Update model matrix with rotation
+}
+
+void Application::update2D() {
+    // Add yaw rotation based on Euler angles
+    currentOrientation.yaw += deg2rad(0.5);
+
+    // Compute rotation matrix from Euler angles
+    double dcm[3][3];
+    euler_to_dcm(&currentOrientation, dcm);
+
+    glm::mat4 rotation = glm::mat4(1.0f);
+    rotation[0][0] = dcm[0][0]; rotation[0][1] = dcm[0][1];
+    rotation[1][0] = dcm[1][0]; rotation[1][1] = dcm[1][1];
+
+    // Combine the current model matrix with the rotation matrix
+    transform.model = rotation * transform.model; // Apply rotation without overwriting
+
+    // Debug output to verify transformations
+    std::cout << "Updated Model Matrix: " << glm::to_string(transform.model) << std::endl;
+}
+
+
+
 void Application::render() {
         renderer.renderFrame();
-
-        // Clear the screen with a color (RGBA)
-//        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-//        glClear(GL_COLOR_BUFFER_BIT);
 
         // Swap buffers and poll events
         glfwSwapBuffers(window);
         glfwPollEvents();
 }
+
+void Application::render2D() {
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    int width, height;
+    glfwGetFramebufferSize(window, &width, &height);
+    
+    // First render main scene
+    glViewport(0, 0, width, height);
+    renderer.renderFrame2D(transform);
+    
+    // Then render axis overlay
+    int axisSize = std::min(width, height) / 6;
+    glViewport(width - axisSize - 10, height - axisSize - 10, axisSize, axisSize);
+    axisRenderer.render(transform);
+    
+    // Swap buffers once at the end of frame
+    glfwSwapBuffers(window);
+    glfwPollEvents();
+
+}
+
 
 void Application::shutdown() {
     // Cleanup resources
@@ -110,4 +192,71 @@ void Application::shutdown() {
     glfwDestroyWindow(window);
     glfwTerminate();
 }
+
+void Application::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+    // Retrieve the Application instance from the user pointer
+    Application* app = reinterpret_cast<Application*>(glfwGetWindowUserPointer(window));
+    if (!app) {
+        std::cerr << "Application instance is null in keyCallback" << std::endl;
+        return;
+    }
+
+    Transform& transform = app->transform; // Access the Transform object
+
+	std::cout << "Key pressed: " << key << std::endl;
+	std::cout << "Translation: " << glm::to_string(transform.model) << std::endl;
+	
+
+    if (action == GLFW_PRESS || action == GLFW_REPEAT) {
+        switch (key) {
+        case GLFW_KEY_W: // Move up
+            transform.setTranslation(glm::vec3(0.0f, 0.1f, 0.0f));
+            break;
+        case GLFW_KEY_S: // Move down
+            transform.setTranslation(glm::vec3(0.0f, -0.1f, 0.0f));
+            break;
+        case GLFW_KEY_A: // Move left
+            transform.setTranslation(glm::vec3(-0.1f, 0.0f, 0.0f));
+            break;
+        case GLFW_KEY_D: // Move right
+            transform.setTranslation(glm::vec3(0.1f, 0.0f, 0.0f));
+            break;
+        case GLFW_KEY_Q: // Rotate counterclockwise
+            transform.setRotation(glm::radians(-10.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+            break;
+        case GLFW_KEY_E: // Rotate clockwise
+            transform.setRotation(glm::radians(10.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+            break;
+        case GLFW_KEY_Z: // Scale up
+            transform.setScale(glm::vec3(1.1f, 1.1f, 1.0f));
+            break;
+        case GLFW_KEY_X: // Scale down
+            transform.setScale(glm::vec3(0.9f, 0.9f, 1.0f));
+            break;
+        default:
+            break;
+        }
+    }
+}
+
+void Application::mouseCallback(GLFWwindow* window, double xpos, double ypos) {
+    static double lastX = xpos, lastY = ypos;
+    double deltaX = xpos - lastX;
+    double deltaY = ypos - lastY;
+
+    lastX = xpos;
+    lastY = ypos;
+
+    // Update yaw and pitch based on mouse movement
+    currentOrientation.yaw += deltaX * 0.005f; // Sensitivity adjustment
+    currentOrientation.pitch += deltaY * 0.005f;
+
+    // Clamp pitch to prevent flipping
+//    currentOrientation.pitch = glm::clamp(currentOrientation.pitch, -glm::half_pi<float>(), glm::half_pi<float>());
+}
+
+void Application::renderAxis() {
+}
+
+
 

@@ -8,6 +8,7 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <glm/gtx/string_cast.hpp>
 
 // Renderer.cpp
 float vertices[] = {
@@ -44,7 +45,7 @@ bool Renderer::init() {
     glEnable(GL_DEPTH_TEST);
 
     // Compile and link shaders
-    shaderProgram = createShaderProgram("shaders/vertex.glsl", "shaders/fragment.glsl");
+    shaderProgram = createShaderProgram("shaders/vertex3D.glsl", "shaders/fragment3D.glsl");
     if (!shaderProgram) {
         std::cerr << "Failed to create shader program" << std::endl;
         return false;
@@ -89,6 +90,20 @@ void Renderer::renderFrame() {
     }
 }
 
+void Renderer::renderFrame2D(const Transform& transform) {
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f); // Background color
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glUseProgram(shaderProgram);
+    //std::cout << "Model Matrix: " << glm::to_string(transform.model) << std::endl;
+    // Pass matrices from Transform to the shader
+    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(transform.model));
+    glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(transform.view));
+    glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(transform.projection));
+
+    glBindVertexArray(vao);
+    glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
+}
 
 void Renderer::setModelMatrix(const float* modelMat) {
     // Copy modelMat into this->model
@@ -239,5 +254,35 @@ GLuint createShaderProgram(const char* vertexPath, const char* fragmentPath) {
     glDeleteShader(fragmentShader);
 
     return program;
+}
+
+void Renderer::setupAxisGeometry() {
+    float vertices[] = {
+        // X-axis (Red)
+        0.0f, 0.0f, 0.0f,   1.0f, 0.0f, 0.0f,
+        1.0f, 0.0f, 0.0f,   1.0f, 0.0f, 0.0f,
+        // Y-axis (Green)
+        0.0f, 0.0f, 0.0f,   0.0f, 1.0f, 0.0f,
+        0.0f, 1.0f, 0.0f,   0.0f, 1.0f, 0.0f,
+        // Z-axis (Blue)
+        0.0f, 0.0f, 0.0f,   0.0f, 0.0f, 1.0f,
+        0.0f, 0.0f, 1.0f,   0.0f, 0.0f, 1.0f,
+    };
+
+    // Store vertex data and setup VAO/VBO
+    glGenVertexArrays(1, &vao);
+    glBindVertexArray(vao);
+
+    glGenBuffers(1, &vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0); // Position
+    glEnableVertexAttribArray(0);
+
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float))); // Color
+    glEnableVertexAttribArray(1);
+
+    glBindVertexArray(0);
 }
 

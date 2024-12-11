@@ -18,6 +18,7 @@ set(TEST_RIG_SOURCES
     src/main.cpp
     src/application.cpp
     src/renderer.cpp
+    src/axis_renderer.cpp
     # ... other source files
 )
 
