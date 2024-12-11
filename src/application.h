@@ -4,12 +4,15 @@
 #include <GLFW/glfw3.h>
 #include "attitude/euler.h" // from your attitude library
 #include "renderer.h"
+#include "transform.h"
 
 class Application {
 public:
     Application();
     ~Application();
 
+    Transform transform; // Transformation manager
+    
     // Initialize the application: create window, init renderer, etc.
     bool init();
 
@@ -18,9 +21,11 @@ public:
 
     // Update logic (e.g., handle user input, update orientation)
     void update();
+    void update2D();
 
     // Render the current frame
     void render();
+    void render2D();
 
     // Cleanup before exit
     void shutdown();

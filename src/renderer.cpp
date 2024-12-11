@@ -89,6 +89,20 @@ void Renderer::renderFrame() {
     }
 }
 
+void Renderer::renderFrame2D(const Transform& transform) {
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f); // Background color
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glUseProgram(shaderProgram);
+
+    // Pass matrices from Transform to the shader
+    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(transform.model));
+    glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(transform.view));
+    glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(transform.projection));
+
+    glBindVertexArray(vao);
+    glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
+}
 
 void Renderer::setModelMatrix(const float* modelMat) {
     // Copy modelMat into this->model

@@ -8,8 +8,8 @@ int main() {
     }
 
     while (app.running()) {
-       // app.update();
-        app.render();
+        app.update2D();
+        app.render2D();
     }
 
     app.shutdown();

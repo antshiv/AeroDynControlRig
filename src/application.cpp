@@ -54,7 +54,8 @@ bool Application::init() {
 	return false;
     }
 
-
+        // Set orthographic projection for 2D
+    transform.setOrthographic(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
     return true;
 }
 
@@ -92,17 +93,35 @@ void Application::update() {
     renderer.setModelMatrix(R);
 }
 
+void Application::update2D() {
+    currentOrientation.yaw += deg2rad(0.5);
+
+    double dcm[3][3];
+    euler_to_dcm(&currentOrientation, dcm);
+
+    glm::mat4 rotation = glm::mat4(1.0f);
+    rotation[0][0] = dcm[0][0]; rotation[0][1] = dcm[0][1];
+    rotation[1][0] = dcm[1][0]; rotation[1][1] = dcm[1][1];
+
+    transform.model = rotation; // Update model matrix with rotation
+}
+
+
 void Application::render() {
         renderer.renderFrame();
-
-        // Clear the screen with a color (RGBA)
-//        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-//        glClear(GL_COLOR_BUFFER_BIT);
 
         // Swap buffers and poll events
         glfwSwapBuffers(window);
         glfwPollEvents();
 }
+
+void Application::render2D() {
+    renderer.renderFrame2D(transform);
+
+    glfwSwapBuffers(window);
+    glfwPollEvents();
+}
+
 
 void Application::shutdown() {
     // Cleanup resources
