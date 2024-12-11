@@ -10,6 +10,7 @@ int main() {
     while (app.running()) {
 //        app.update2D();
         app.render2D();
+//	app.renderAxis();  // Render the axis
     }
 
     app.shutdown();

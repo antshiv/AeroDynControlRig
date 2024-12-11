@@ -45,7 +45,7 @@ bool Renderer::init() {
     glEnable(GL_DEPTH_TEST);
 
     // Compile and link shaders
-    shaderProgram = createShaderProgram("shaders/vertex.glsl", "shaders/fragment.glsl");
+    shaderProgram = createShaderProgram("shaders/vertex3D.glsl", "shaders/fragment3D.glsl");
     if (!shaderProgram) {
         std::cerr << "Failed to create shader program" << std::endl;
         return false;
@@ -254,5 +254,35 @@ GLuint createShaderProgram(const char* vertexPath, const char* fragmentPath) {
     glDeleteShader(fragmentShader);
 
     return program;
+}
+
+void Renderer::setupAxisGeometry() {
+    float vertices[] = {
+        // X-axis (Red)
+        0.0f, 0.0f, 0.0f,   1.0f, 0.0f, 0.0f,
+        1.0f, 0.0f, 0.0f,   1.0f, 0.0f, 0.0f,
+        // Y-axis (Green)
+        0.0f, 0.0f, 0.0f,   0.0f, 1.0f, 0.0f,
+        0.0f, 1.0f, 0.0f,   0.0f, 1.0f, 0.0f,
+        // Z-axis (Blue)
+        0.0f, 0.0f, 0.0f,   0.0f, 0.0f, 1.0f,
+        0.0f, 0.0f, 1.0f,   0.0f, 0.0f, 1.0f,
+    };
+
+    // Store vertex data and setup VAO/VBO
+    glGenVertexArrays(1, &vao);
+    glBindVertexArray(vao);
+
+    glGenBuffers(1, &vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0); // Position
+    glEnableVertexAttribArray(0);
+
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float))); // Color
+    glEnableVertexAttribArray(1);
+
+    glBindVertexArray(0);
 }
 

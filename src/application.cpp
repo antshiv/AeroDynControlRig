@@ -55,6 +55,9 @@ bool Application::init() {
 
     // Set the key callback
     glfwSetKeyCallback(window, keyCallback);
+    glfwSetCursorPosCallback(window, [](GLFWwindow* w, double x, double y) {
+        static_cast<Application*>(glfwGetWindowUserPointer(w))->mouseCallback(w, x, y);
+    });
 
 	// Check OpenGL version
 	const GLubyte* rendererName = glGetString(GL_RENDERER);
@@ -69,6 +72,11 @@ bool Application::init() {
    if (!renderer.init()) {
 	std::cerr << "Renderer initialization failed." << std::endl;
 	return false;
+    }
+
+   if (!axisRenderer.init()) {
+        std::cerr << "Axis renderer initialization failed." << std::endl;
+        return false;
     }
 
         // Set orthographic projection for 2D
@@ -157,12 +165,24 @@ void Application::render() {
 }
 
 void Application::render2D() {
-std::cout << "Model Matrix Sent to Shader: " << glm::to_string(transform.model) << std::endl;
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
+    int width, height;
+    glfwGetFramebufferSize(window, &width, &height);
+    
+    // First render main scene
+    glViewport(0, 0, width, height);
     renderer.renderFrame2D(transform);
-
+    
+    // Then render axis overlay
+    int axisSize = std::min(width, height) / 6;
+    glViewport(width - axisSize - 10, height - axisSize - 10, axisSize, axisSize);
+    axisRenderer.render(transform);
+    
+    // Swap buffers once at the end of frame
     glfwSwapBuffers(window);
     glfwPollEvents();
+
 }
 
 
@@ -218,4 +238,25 @@ void Application::keyCallback(GLFWwindow* window, int key, int scancode, int act
         }
     }
 }
+
+void Application::mouseCallback(GLFWwindow* window, double xpos, double ypos) {
+    static double lastX = xpos, lastY = ypos;
+    double deltaX = xpos - lastX;
+    double deltaY = ypos - lastY;
+
+    lastX = xpos;
+    lastY = ypos;
+
+    // Update yaw and pitch based on mouse movement
+    currentOrientation.yaw += deltaX * 0.005f; // Sensitivity adjustment
+    currentOrientation.pitch += deltaY * 0.005f;
+
+    // Clamp pitch to prevent flipping
+//    currentOrientation.pitch = glm::clamp(currentOrientation.pitch, -glm::half_pi<float>(), glm::half_pi<float>());
+}
+
+void Application::renderAxis() {
+}
+
+
 
