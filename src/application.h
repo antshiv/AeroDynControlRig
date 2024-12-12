@@ -7,6 +7,7 @@
 #include "renderer.h"
 #include "transform.h"
 #include "axis_renderer.h"
+#include "camera.h"
 
 class Application {
 public:
@@ -14,10 +15,11 @@ public:
     ~Application();
 
     Transform transform; // Transformation manager
+    Camera camera;
 
     AxisRenderer axisRenderer;
     int windowHeight, windowWidth;
-	
+    float lastFrame = 0.0f;  // Initialize to 0	
     
     // Initialize the application: create window, init renderer, etc.
     bool init();
@@ -35,11 +37,18 @@ public:
     void render2D();
     void renderAxis();
 
+    void update3D();
+    void render3D();
+
     // Cleanup before exit
     void shutdown();
 
     static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
-    void mouseCallback(GLFWwindow* window, double xpos, double ypos);
+
+    static void mouseCallback(GLFWwindow* window, double xpos, double ypos);
+    static void scrollCallback(GLFWwindow* window, double xoffset, double yoffset);
+
+    void mouseCallback_old(GLFWwindow* window, double xpos, double ypos);
 
 private:
     GLFWwindow* window;
