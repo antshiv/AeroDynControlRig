@@ -286,3 +286,23 @@ void Renderer::setupAxisGeometry() {
     glBindVertexArray(0);
 }
 
+void Renderer::renderFrame3D(const Transform& transform) {
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f); // Background color
+    glUseProgram(shaderProgram);
+
+    // Set all three matrices
+    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(transform.model));
+    glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(transform.view));
+    glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(transform.projection));
+
+    // Enable depth testing for 3D
+    glEnable(GL_DEPTH_TEST);
+
+    // Render 3D objects
+    glBindVertexArray(vao);
+    glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
+
+    // Cleanup
+    glBindVertexArray(0);
+    glUseProgram(0);
+}

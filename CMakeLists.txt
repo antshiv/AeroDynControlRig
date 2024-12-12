@@ -19,6 +19,7 @@ set(TEST_RIG_SOURCES
     src/application.cpp
     src/renderer.cpp
     src/axis_renderer.cpp
+    src/camera.cpp
     # ... other source files
 )
 

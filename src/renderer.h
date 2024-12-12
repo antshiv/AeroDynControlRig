@@ -19,6 +19,8 @@ public:
     void renderFrame();
     void renderFrame2D(const Transform& transform);
 
+    void renderFrame3D(const Transform& transform);
+
     // Set the model matrix for the current frame
     void setModelMatrix(const float* modelMat);
 

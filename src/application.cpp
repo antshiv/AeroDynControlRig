@@ -58,6 +58,7 @@ bool Application::init() {
     glfwSetCursorPosCallback(window, [](GLFWwindow* w, double x, double y) {
         static_cast<Application*>(glfwGetWindowUserPointer(w))->mouseCallback(w, x, y);
     });
+	glfwSetScrollCallback(window, scrollCallback);
 
 	// Check OpenGL version
 	const GLubyte* rendererName = glGetString(GL_RENDERER);
@@ -182,7 +183,6 @@ void Application::render2D() {
     // Swap buffers once at the end of frame
     glfwSwapBuffers(window);
     glfwPollEvents();
-
 }
 
 
@@ -239,7 +239,7 @@ void Application::keyCallback(GLFWwindow* window, int key, int scancode, int act
     }
 }
 
-void Application::mouseCallback(GLFWwindow* window, double xpos, double ypos) {
+void Application::mouseCallback_old(GLFWwindow* window, double xpos, double ypos) {
     static double lastX = xpos, lastY = ypos;
     double deltaX = xpos - lastX;
     double deltaY = ypos - lastY;
@@ -258,5 +258,67 @@ void Application::mouseCallback(GLFWwindow* window, double xpos, double ypos) {
 void Application::renderAxis() {
 }
 
+// Camera mouse callback
+void Application::mouseCallback(GLFWwindow* window, double xpos, double ypos) {
+    static float lastX = xpos, lastY = ypos;
+    float xOffset = xpos - lastX;
+    float yOffset = lastY - ypos; // Reversed since y-coordinates range from bottom to top
+    lastX = xpos;
+    lastY = ypos;
 
+    Application* app = reinterpret_cast<Application*>(glfwGetWindowUserPointer(window));
+    if (app) {
+        app->camera.processMouseMovement(xOffset, yOffset);
+    }
+}
 
+// Camera scroll callback
+void Application::scrollCallback(GLFWwindow* window, double xoffset, double yoffset) {
+    Application* app = reinterpret_cast<Application*>(glfwGetWindowUserPointer(window));
+    if (app) {
+        app->camera.processMouseScroll(yoffset);
+    }
+}
+
+void Application::render3D() {
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    int width, height;
+    glfwGetFramebufferSize(window, &width, &height);
+    float aspectRatio = static_cast<float>(width) / height;
+    
+    // Main 3D viewport
+    glViewport(0, 0, width, height);
+    glEnable(GL_DEPTH_TEST);  // Enable depth testing for 3D
+    
+    // Update the transform with camera matrices
+    transform.view = camera.getViewMatrix();
+    transform.projection = camera.getProjectionMatrix(aspectRatio);
+    
+    // Render main 3D scene
+    renderer.renderFrame3D(transform);
+    
+    // Render axis overlay (with its own view/projection)
+    int axisSize = std::min(width, height) / 6;
+    glViewport(width - axisSize - 10, height - axisSize - 10, axisSize, axisSize);
+    axisRenderer.render(transform);
+    
+    glfwSwapBuffers(window);
+    glfwPollEvents();
+}
+
+void Application::update3D() {
+    // Update camera based on input
+    float currentFrame = glfwGetTime();
+    float deltaTime = currentFrame - lastFrame;
+    lastFrame = currentFrame;
+
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+        camera.processKeyboardInput(FORWARD, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+        camera.processKeyboardInput(BACKWARD, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+        camera.processKeyboardInput(LEFT, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+        camera.processKeyboardInput(RIGHT, deltaTime);
+}
