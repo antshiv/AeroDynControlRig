@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include <glm/gtc/type_ptr.hpp>
+#include <vector>
 
 AxisRenderer::AxisRenderer() : vao(0), vbo(0), shaderProgram(0) {}
 
@@ -19,7 +20,7 @@ bool AxisRenderer::init() {
     }
 
     // Set up geometry for the axis
-    setupAxisGeometry();
+    setupAxisGeometry3D();
 
     // Set up fixed view and projection for bottom-left rendering
     view = glm::lookAt(
@@ -178,4 +179,112 @@ GLuint AxisRenderer::createShaderProgram(const char* vertexPath, const char* fra
     return program;
 }
 
+// axis_renderer.cpp
+void AxisRenderer::setupAxisGeometry3D() {
+    // Each axis will have a line and an arrow head
+    // X axis - Red
+    // Y axis - Green
+    // Z axis - Blue
+    
+    const float AXIS_LENGTH = 1.0f;
+    const float ARROW_HEAD_LENGTH = 0.2f;
+    const float ARROW_HEAD_WIDTH = 0.05f;
+
+    std::vector<float> vertices = {
+        // X-Axis (Red)
+        0.0f, 0.0f, 0.0f,    1.0f, 0.0f, 0.0f,  // Line start
+        AXIS_LENGTH, 0.0f, 0.0f,    1.0f, 0.0f, 0.0f,  // Line end
+        // X-Axis arrow head
+        AXIS_LENGTH, 0.0f, 0.0f,    1.0f, 0.0f, 0.0f,  // Tip
+        AXIS_LENGTH - ARROW_HEAD_LENGTH, ARROW_HEAD_WIDTH, 0.0f,    1.0f, 0.0f, 0.0f,  // Right
+        AXIS_LENGTH - ARROW_HEAD_LENGTH, -ARROW_HEAD_WIDTH, 0.0f,   1.0f, 0.0f, 0.0f,  // Left
+        AXIS_LENGTH - ARROW_HEAD_LENGTH, 0.0f, ARROW_HEAD_WIDTH,    1.0f, 0.0f, 0.0f,  // Top
+        AXIS_LENGTH - ARROW_HEAD_LENGTH, 0.0f, -ARROW_HEAD_WIDTH,   1.0f, 0.0f, 0.0f,  // Bottom
+
+        // Y-Axis (Green)
+        0.0f, 0.0f, 0.0f,    0.0f, 1.0f, 0.0f,  // Line start
+        0.0f, AXIS_LENGTH, 0.0f,    0.0f, 1.0f, 0.0f,  // Line end
+        // Y-Axis arrow head
+        0.0f, AXIS_LENGTH, 0.0f,    0.0f, 1.0f, 0.0f,  // Tip
+        ARROW_HEAD_WIDTH, AXIS_LENGTH - ARROW_HEAD_LENGTH, 0.0f,    0.0f, 1.0f, 0.0f,
+        -ARROW_HEAD_WIDTH, AXIS_LENGTH - ARROW_HEAD_LENGTH, 0.0f,   0.0f, 1.0f, 0.0f,
+        0.0f, AXIS_LENGTH - ARROW_HEAD_LENGTH, ARROW_HEAD_WIDTH,    0.0f, 1.0f, 0.0f,
+        0.0f, AXIS_LENGTH - ARROW_HEAD_LENGTH, -ARROW_HEAD_WIDTH,   0.0f, 1.0f, 0.0f,
+
+        // Z-Axis (Blue)
+        0.0f, 0.0f, 0.0f,    0.0f, 0.0f, 1.0f,  // Line start
+        0.0f, 0.0f, AXIS_LENGTH,    0.0f, 0.0f, 1.0f,  // Line end
+        // Z-Axis arrow head
+        0.0f, 0.0f, AXIS_LENGTH,    0.0f, 0.0f, 1.0f,  // Tip
+        0.0f, ARROW_HEAD_WIDTH, AXIS_LENGTH - ARROW_HEAD_LENGTH,    0.0f, 0.0f, 1.0f,
+        0.0f, -ARROW_HEAD_WIDTH, AXIS_LENGTH - ARROW_HEAD_LENGTH,   0.0f, 0.0f, 1.0f,
+        ARROW_HEAD_WIDTH, 0.0f, AXIS_LENGTH - ARROW_HEAD_LENGTH,    0.0f, 0.0f, 1.0f,
+        -ARROW_HEAD_WIDTH, 0.0f, AXIS_LENGTH - ARROW_HEAD_LENGTH,   0.0f, 0.0f, 1.0f
+    };
+
+    // Generate and bind buffers
+    glGenVertexArrays(1, &vao);
+    glGenBuffers(1, &vbo);
+
+    glBindVertexArray(vao);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
+
+    // Position attribute
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+    
+    // Color attribute
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
+}
+
+void AxisRenderer::render3D(const Transform& transform) {
+    glUseProgram(shaderProgram);
+
+    // Step 1: Extract rotation from transform.model (ignoring translation)
+    glm::mat3 rotationOnly = glm::mat3(transform.model);
+
+    // Step 2: Build axis model matrix: Identity with rotation
+    axisTransform.model = glm::mat4(rotationOnly);
+
+    // Step 3: Use a fixed view matrix at the origin to decouple translation
+    axisTransform.view = glm::lookAt(
+        glm::vec3(0.0f, 0.0f, 5.0f),  // Camera position fixed at (0, 0, 5)
+        glm::vec3(0.0f, 0.0f, 0.0f),  // Look at the origin
+        glm::vec3(0.0f, 1.0f, 0.0f)   // Up vector
+    );
+
+    // Step 4: Keep the same projection matrix as the main scene
+    axisTransform.projection = transform.projection;
+
+    // Step 5: Scale the axis (optional)
+    float scale = 1.0f;  // Adjust the axis size
+    axisTransform.model = glm::scale(axisTransform.model, glm::vec3(scale));
+
+    // Set uniforms
+    GLuint modelLoc = glGetUniformLocation(shaderProgram, "model");
+    GLuint viewLoc = glGetUniformLocation(shaderProgram, "view");
+    GLuint projLoc = glGetUniformLocation(shaderProgram, "projection");
+
+    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, &axisTransform.model[0][0]);
+    glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &axisTransform.view[0][0]);
+    glUniformMatrix4fv(projLoc, 1, GL_FALSE, &axisTransform.projection[0][0]);
+
+    // Step 6: Draw axis lines
+    glBindVertexArray(vao);
+    glDrawArrays(GL_LINES, 0, 6);
+
+    // Step 7: Draw arrowheads
+    for (int i = 0; i < 3; i++) {
+        int baseVertex = 2 + (i * 7);
+        glDrawArrays(GL_TRIANGLE_FAN, baseVertex, 5);
+    }
+
+    glBindVertexArray(0);
+    glUseProgram(0);
+}
 

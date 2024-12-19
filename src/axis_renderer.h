@@ -12,7 +12,7 @@ public:
     GLuint vao, vbo;
     GLuint shaderProgram;
     glm::mat4 view, projection;
-
+    GLuint modelLoc, viewLoc, projLoc;  // Add these uniform locations
     Transform axisTransform;  // Add Transform member
 
     AxisRenderer();
@@ -20,10 +20,12 @@ public:
 
     bool init();
     void render(const Transform& transform);
+    void render3D(const Transform& transform);
     void shutdown();
 
 private:
     void setupAxisGeometry();
+    void setupAxisGeometry3D();
     GLuint createShaderProgram(const char* vertexPath, const char* fragmentPath);
 };
 

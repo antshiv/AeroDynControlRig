@@ -203,41 +203,66 @@ void Application::keyCallback(GLFWwindow* window, int key, int scancode, int act
 
     Transform& transform = app->transform; // Access the Transform object
 
-	std::cout << "Key pressed: " << key << std::endl;
-	std::cout << "Translation: " << glm::to_string(transform.model) << std::endl;
-	
+    std::cout << "Key pressed: " << key << std::endl;
+    std::cout << "Transform Model Matrix: " << glm::to_string(transform.model) << std::endl;
 
+    // Check if the key is pressed or held
     if (action == GLFW_PRESS || action == GLFW_REPEAT) {
         switch (key) {
-        case GLFW_KEY_W: // Move up
+        // Translation
+        case GLFW_KEY_W: // Move up (positive Y-axis)
             transform.setTranslation(glm::vec3(0.0f, 0.1f, 0.0f));
             break;
-        case GLFW_KEY_S: // Move down
+        case GLFW_KEY_S: // Move down (negative Y-axis)
             transform.setTranslation(glm::vec3(0.0f, -0.1f, 0.0f));
             break;
-        case GLFW_KEY_A: // Move left
+        case GLFW_KEY_A: // Move left (negative X-axis)
             transform.setTranslation(glm::vec3(-0.1f, 0.0f, 0.0f));
             break;
-        case GLFW_KEY_D: // Move right
+        case GLFW_KEY_D: // Move right (positive X-axis)
             transform.setTranslation(glm::vec3(0.1f, 0.0f, 0.0f));
             break;
-        case GLFW_KEY_Q: // Rotate counterclockwise
+        case GLFW_KEY_R: // Move forward (positive Z-axis)
+            transform.setTranslation(glm::vec3(0.0f, 0.0f, 0.1f));
+            break;
+        case GLFW_KEY_F: // Move backward (negative Z-axis)
+            transform.setTranslation(glm::vec3(0.0f, 0.0f, -0.1f));
+            break;
+
+        // Rotation
+        case GLFW_KEY_Q: // Rotate counterclockwise around Z-axis
             transform.setRotation(glm::radians(-10.0f), glm::vec3(0.0f, 0.0f, 1.0f));
             break;
-        case GLFW_KEY_E: // Rotate clockwise
+        case GLFW_KEY_E: // Rotate clockwise around Z-axis
             transform.setRotation(glm::radians(10.0f), glm::vec3(0.0f, 0.0f, 1.0f));
             break;
-        case GLFW_KEY_Z: // Scale up
-            transform.setScale(glm::vec3(1.1f, 1.1f, 1.0f));
+        case GLFW_KEY_T: // Rotate counterclockwise around X-axis
+            transform.setRotation(glm::radians(-10.0f), glm::vec3(1.0f, 0.0f, 0.0f));
             break;
-        case GLFW_KEY_X: // Scale down
-            transform.setScale(glm::vec3(0.9f, 0.9f, 1.0f));
+        case GLFW_KEY_Y: // Rotate clockwise around X-axis
+            transform.setRotation(glm::radians(10.0f), glm::vec3(1.0f, 0.0f, 0.0f));
             break;
+        case GLFW_KEY_G: // Rotate counterclockwise around Y-axis
+            transform.setRotation(glm::radians(-10.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+            break;
+        case GLFW_KEY_H: // Rotate clockwise around Y-axis
+            transform.setRotation(glm::radians(10.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+            break;
+
+        // Scaling
+        case GLFW_KEY_Z: // Scale up uniformly
+            transform.setScale(glm::vec3(1.1f, 1.1f, 1.1f));
+            break;
+        case GLFW_KEY_X: // Scale down uniformly
+            transform.setScale(glm::vec3(0.9f, 0.9f, 0.9f));
+            break;
+
         default:
             break;
         }
     }
 }
+
 
 void Application::mouseCallback_old(GLFWwindow* window, double xpos, double ypos) {
     static double lastX = xpos, lastY = ypos;
@@ -301,7 +326,7 @@ void Application::render3D() {
     // Render axis overlay (with its own view/projection)
     int axisSize = std::min(width, height) / 6;
     glViewport(width - axisSize - 10, height - axisSize - 10, axisSize, axisSize);
-    axisRenderer.render(transform);
+    axisRenderer.render3D(transform);
     
     glfwSwapBuffers(window);
     glfwPollEvents();

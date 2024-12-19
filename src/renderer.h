@@ -50,6 +50,7 @@ private:
     // Helper methods
     unsigned int loadShader(const char* vertexSrc, const char* fragmentSrc);
     void setupCubeGeometry();
+    void setupCubeGeometry3D();
     void setupAxisGeometry();
     void setDefaultMatrices();
 
