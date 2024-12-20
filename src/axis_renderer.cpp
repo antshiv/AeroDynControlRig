@@ -262,7 +262,7 @@ void AxisRenderer::render3D(const Transform& transform) {
     axisTransform.projection = transform.projection;
 
     // Step 5: Scale the axis (optional)
-    float scale = 1.0f;  // Adjust the axis size
+    float scale = 0.5f;  // Adjust the axis size
     axisTransform.model = glm::scale(axisTransform.model, glm::vec3(scale));
 
     // Set uniforms
@@ -276,7 +276,10 @@ void AxisRenderer::render3D(const Transform& transform) {
 
     // Step 6: Draw axis lines
     glBindVertexArray(vao);
-    glDrawArrays(GL_LINES, 0, 6);
+    glDrawArrays(GL_LINES, 0, 2); // X-axis line
+    glDrawArrays(GL_LINES, 7, 2); // Y-axis line
+    glDrawArrays(GL_LINES, 14, 2); // Z-axis line
+
 
     // Step 7: Draw arrowheads
     for (int i = 0; i < 3; i++) {

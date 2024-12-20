@@ -5,13 +5,28 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_compile_options(-g)
 
-# Add the attitude library
-add_subdirectory(external/attitudeMathLibrary/)
+# Add Dear ImGui with Docking
+add_definitions(-DIMGUI_IMPL_OPENGL_LOADER_GLAD -DIMGUI_DEFINE_MATH_OPERATORS -DIMGUI_ENABLE_DOCKING -DIMGUI_ENABLE_VIEWPORTS)
 
-# Include directories for the attitude library if needed
-# This might not be necessary if attitude sets INTERFACE include dirs
+# Include Dear ImGui
+include_directories(
+    imgui
+    imgui/backends
+)
+
+# ImGui source files
+set(IMGUI_SRC
+    imgui/imgui.cpp
+    imgui/imgui_draw.cpp
+    imgui/imgui_widgets.cpp
+    imgui/imgui_tables.cpp
+    imgui/backends/imgui_impl_glfw.cpp
+    imgui/backends/imgui_impl_opengl3.cpp
+)
+
+# Include the attitude library
+add_subdirectory(external/attitudeMathLibrary/)
 include_directories(external/attitudeMathLibrary/include)
-include_directories(external/attitudeMathLibrary/include/attitude)
 
 # Source files for the test_rig application
 set(TEST_RIG_SOURCES
@@ -20,25 +35,24 @@ set(TEST_RIG_SOURCES
     src/renderer.cpp
     src/axis_renderer.cpp
     src/camera.cpp
-    # ... other source files
 )
 
-add_executable(test_rig ${TEST_RIG_SOURCES})
+add_executable(test_rig ${TEST_RIG_SOURCES} ${IMGUI_SRC})
 
-# Link the attitude library and other dependencies (OpenGL, GLFW, etc.)
-# For example, if you use GLFW for window creation:
+# Link libraries
 find_package(OpenGL REQUIRED)
-find_package(glfw3 REQUIRED) # or manually link a compiled GLFW
-find_package(GLEW REQUIRED)  # optional if using modern OpenGL
+find_package(glfw3 REQUIRED)
+find_package(GLEW REQUIRED)
 
 target_link_libraries(test_rig
     PRIVATE
-    attitude       # the library target from add_subdirectory
+    attitude
     OpenGL::GL
     glfw
     GLEW::GLEW
+    dl             # Add this line to link the dynamic loading library
+    stdc++         # Explicitly link the standard C++ library
 )
-
 
 # If attitude is set up as an imported or interface library,
 # make sure to link properly and ensure that INTERFACE include dirs are set.
