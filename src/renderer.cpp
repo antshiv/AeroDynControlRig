@@ -62,7 +62,7 @@ bool Renderer::init() {
     }
 
     // Set up geometry
-    setupCubeGeometry();
+    setupCubeGeometry3D();
 	
     setDefaultMatrices();
 
@@ -306,3 +306,79 @@ void Renderer::renderFrame3D(const Transform& transform) {
     glBindVertexArray(0);
     glUseProgram(0);
 }
+
+void Renderer::setupCubeGeometry3D() {
+    // Define vertices for a cube with positions and colors for each face
+    float vertices[] = {
+        // Positions           // Colors
+        // Front face (Red)
+        -0.5f, -0.5f,  0.5f,   1.0f, 0.0f, 0.0f,
+         0.5f, -0.5f,  0.5f,   1.0f, 0.0f, 0.0f,
+         0.5f,  0.5f,  0.5f,   1.0f, 0.0f, 0.0f,
+        -0.5f,  0.5f,  0.5f,   1.0f, 0.0f, 0.0f,
+        // Back face (Green)
+        -0.5f, -0.5f, -0.5f,   0.0f, 1.0f, 0.0f,
+         0.5f, -0.5f, -0.5f,   0.0f, 1.0f, 0.0f,
+         0.5f,  0.5f, -0.5f,   0.0f, 1.0f, 0.0f,
+        -0.5f,  0.5f, -0.5f,   0.0f, 1.0f, 0.0f,
+        // Left face (Blue)
+        -0.5f, -0.5f, -0.5f,   0.0f, 0.0f, 1.0f,
+        -0.5f, -0.5f,  0.5f,   0.0f, 0.0f, 1.0f,
+        -0.5f,  0.5f,  0.5f,   0.0f, 0.0f, 1.0f,
+        -0.5f,  0.5f, -0.5f,   0.0f, 0.0f, 1.0f,
+        // Right face (Yellow)
+         0.5f, -0.5f, -0.5f,   1.0f, 1.0f, 0.0f,
+         0.5f, -0.5f,  0.5f,   1.0f, 1.0f, 0.0f,
+         0.5f,  0.5f,  0.5f,   1.0f, 1.0f, 0.0f,
+         0.5f,  0.5f, -0.5f,   1.0f, 1.0f, 0.0f,
+        // Top face (Cyan)
+        -0.5f,  0.5f,  0.5f,   0.0f, 1.0f, 1.0f,
+         0.5f,  0.5f,  0.5f,   0.0f, 1.0f, 1.0f,
+         0.5f,  0.5f, -0.5f,   0.0f, 1.0f, 1.0f,
+        -0.5f,  0.5f, -0.5f,   0.0f, 1.0f, 1.0f,
+        // Bottom face (Magenta)
+        -0.5f, -0.5f,  0.5f,   1.0f, 0.0f, 1.0f,
+         0.5f, -0.5f,  0.5f,   1.0f, 0.0f, 1.0f,
+         0.5f, -0.5f, -0.5f,   1.0f, 0.0f, 1.0f,
+        -0.5f, -0.5f, -0.5f,   1.0f, 0.0f, 1.0f,
+    };
+
+    // Indices defining the cube faces
+    unsigned int indices[] = {
+        0, 1, 2, 2, 3, 0,       // Front
+        4, 5, 6, 6, 7, 4,       // Back
+        8, 9, 10, 10, 11, 8,    // Left
+        12, 13, 14, 14, 15, 12, // Right
+        16, 17, 18, 18, 19, 16, // Top
+        20, 21, 22, 22, 23, 20  // Bottom
+    };
+
+    // Generate and bind VAO, VBO, EBO
+    glGenVertexArrays(1, &vao);
+    glGenBuffers(1, &vbo);
+    glGenBuffers(1, &ebo);
+
+    glBindVertexArray(vao);
+
+    // Load vertex data into VBO
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+    // Load index data into EBO
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+    // Define vertex attribute for position
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+
+    // Define vertex attribute for color
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
+
+    indexCount = sizeof(indices) / sizeof(unsigned int);
+
+    // Unbind the VAO
+    glBindVertexArray(0);
+}
+

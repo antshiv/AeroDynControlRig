@@ -23,10 +23,18 @@ public:
     glm::vec3 up;
     glm::vec3 right;
     glm::vec3 worldUp;
+    glm::vec3 target;
 
     float yaw;
     float pitch;
     float zoom;
+
+    void reset() {
+        // Reset camera position and orientation to defaults
+        position = glm::vec3(0.0f, 0.0f, 3.0f); // Example position
+        target = glm::vec3(0.0f, 0.0f, 0.0f);   // Look at origin
+        up = glm::vec3(0.0f, 1.0f, 0.0f);       // Up direction
+    }
 
     Camera(glm::vec3 startPosition = glm::vec3(0.0f, 0.0f, 3.0f),
            glm::vec3 startUp = glm::vec3(0.0f, 1.0f, 0.0f),
@@ -44,6 +52,7 @@ public:
 private:
     float movementSpeed = 2.5f;  // Add this as a member variable
     void updateCameraVectors();
+
 };
 
 #endif // CAMERA_H

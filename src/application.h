@@ -24,6 +24,10 @@ public:
     // Initialize the application: create window, init renderer, etc.
     bool init();
 
+    void renderImGui();  // Add this declaration
+    void initImGui();    // Add this declaration
+    void shutdownImGui();  // Add this declaration
+
     // Check if the application should keep running
     bool running() const;
 
@@ -38,7 +42,14 @@ public:
     void renderAxis();
 
     void update3D();
+    void render3D1();
     void render3D();
+
+    void render3DView();
+    void renderTopView();
+    void renderFrontView();
+    void renderSideView();
+    void renderControlPanel();
 
     // Cleanup before exit
     void shutdown();
@@ -53,6 +64,12 @@ public:
 private:
     GLFWwindow* window;
     Renderer renderer;
+
+    GLuint fbo;           // Framebuffer object
+    GLuint renderTexture; // Color attachment
+    GLuint depthBuffer;   // Depth attachment
+
+    float rotationSpeed = 1.0f; // Default rotation speed
 
     // Orientation state from the attitude library
     EulerAngles currentOrientation;

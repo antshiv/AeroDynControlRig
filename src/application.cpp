@@ -6,6 +6,9 @@
 #include <ostream>
 #include <iostream>
 #include <glm/gtx/string_cast.hpp>
+#include "imgui.h"
+#include "backends/imgui_impl_glfw.h"
+#include "backends/imgui_impl_opengl3.h"
 
 
 Application::Application() {
@@ -16,24 +19,14 @@ Application::~Application() {
     // Destructor code
 }
 
-
 bool Application::init() {
-    // Initialize window, OpenGL context
-    // Setup any needed data structures
-    // Initialize orientation
-//    currentOrientation.roll = deg2rad(0.0);
-//    currentOrientation.pitch = deg2rad(0.0);
-//    currentOrientation.yaw = deg2rad(0.0);
-//    currentOrientation.order = EULER_ZYX;
-
-    float aspectRatio = 800.0f / 600.0f;  // or dynamically: window_width / window_height
-
-
+    // Initialize GLFW
     if (!glfwInit()) {
         std::cerr << "Failed to initialize GLFW" << std::endl;
         return false;
     }
 
+    // Create GLFW window before any ImGui initialization
     window = glfwCreateWindow(800, 600, "Dynamic Control System Test Rig", nullptr, nullptr);
     if (!window) {
         std::cerr << "Failed to create GLFW window" << std::endl;
@@ -41,50 +34,55 @@ bool Application::init() {
         return false;
     }
 
-	glfwMakeContextCurrent(window);
-	std::cout << "Window created successfully: " << window << std::endl;
-
     glfwMakeContextCurrent(window);
-    
-    int width, height;
-    glfwGetFramebufferSize(window, &width, &height);
-    glViewport(0, 0, width, height);
+    std::cout << "Window created successfully: " << window << std::endl;
 
-	    // Set the Application instance as the GLFW user pointer
+    // Set GLFW callbacks
     glfwSetWindowUserPointer(window, this);
-
-    // Set the key callback
     glfwSetKeyCallback(window, keyCallback);
-    glfwSetCursorPosCallback(window, [](GLFWwindow* w, double x, double y) {
-        static_cast<Application*>(glfwGetWindowUserPointer(w))->mouseCallback(w, x, y);
-    });
-	glfwSetScrollCallback(window, scrollCallback);
+    //glfwSetCursorPosCallback(window, [](GLFWwindow* w, double x, double y) {
+    //    static_cast<Application*>(glfwGetWindowUserPointer(w))->mouseCallback(w, x, y);
+    //});
+    glfwSetScrollCallback(window, scrollCallback);
 
-	// Check OpenGL version
-	const GLubyte* rendererName = glGetString(GL_RENDERER);
-	const GLubyte* version = glGetString(GL_VERSION);
-	if (rendererName && version) {
-	    std::cout << "Renderer: " << rendererName << "\nOpenGL version: " << version << std::endl;
-	} else {
-	    std::cerr << "Failed to retrieve OpenGL context information." << std::endl;
-	    return false;
-	}
-
-   if (!renderer.init()) {
-	std::cerr << "Renderer initialization failed." << std::endl;
-	return false;
+    // Check OpenGL version
+    const GLubyte* rendererName = glGetString(GL_RENDERER);
+    const GLubyte* version = glGetString(GL_VERSION);
+    if (rendererName && version) {
+        std::cout << "Renderer: " << rendererName << "\nOpenGL version: " << version << std::endl;
+    } else {
+        std::cerr << "Failed to retrieve OpenGL context information." << std::endl;
+        return false;
     }
 
-   if (!axisRenderer.init()) {
+    // Initialize ImGui context AFTER the window is created
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO();
+    (void)io; // Suppress unused variable warning
+
+    // Setup Dear ImGui style
+    ImGui::StyleColorsDark();
+
+    // Initialize ImGui backends
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init("#version 330");
+
+    // Initialize renderers
+    if (!renderer.init()) {
+        std::cerr << "Renderer initialization failed." << std::endl;
+        return false;
+    }
+
+    if (!axisRenderer.init()) {
         std::cerr << "Axis renderer initialization failed." << std::endl;
         return false;
     }
 
-        // Set orthographic projection for 2D
-    // Set orthographic projection matching window dimensions
-    // Option 1: Maintain height of 2 units (-1 to 1) and scale width by aspect ratio
-    //transform.setOrthographic(-aspectRatio, aspectRatio, -1.0f, 1.0f, -1.0f, 1.0f);
-    transform.setOrthographic(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
+    // Set orthographic projection for 2D
+    float aspectRatio = 800.0f / 600.0f; // Adjust dynamically if needed
+    transform.setOrthographic(-aspectRatio, aspectRatio, -1.0f, 1.0f, -1.0f, 1.0f);
+
     return true;
 }
 
@@ -187,6 +185,11 @@ void Application::render2D() {
 
 
 void Application::shutdown() {
+    // Cleanup Dear ImGui
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
+
     // Cleanup resources
     //renderer.shutdown();
     glfwDestroyWindow(window);
@@ -203,41 +206,66 @@ void Application::keyCallback(GLFWwindow* window, int key, int scancode, int act
 
     Transform& transform = app->transform; // Access the Transform object
 
-	std::cout << "Key pressed: " << key << std::endl;
-	std::cout << "Translation: " << glm::to_string(transform.model) << std::endl;
-	
+    std::cout << "Key pressed: " << key << std::endl;
+    std::cout << "Transform Model Matrix: " << glm::to_string(transform.model) << std::endl;
 
+    // Check if the key is pressed or held
     if (action == GLFW_PRESS || action == GLFW_REPEAT) {
         switch (key) {
-        case GLFW_KEY_W: // Move up
+        // Translation
+        case GLFW_KEY_W: // Move up (positive Y-axis)
             transform.setTranslation(glm::vec3(0.0f, 0.1f, 0.0f));
             break;
-        case GLFW_KEY_S: // Move down
+        case GLFW_KEY_S: // Move down (negative Y-axis)
             transform.setTranslation(glm::vec3(0.0f, -0.1f, 0.0f));
             break;
-        case GLFW_KEY_A: // Move left
+        case GLFW_KEY_A: // Move left (negative X-axis)
             transform.setTranslation(glm::vec3(-0.1f, 0.0f, 0.0f));
             break;
-        case GLFW_KEY_D: // Move right
+        case GLFW_KEY_D: // Move right (positive X-axis)
             transform.setTranslation(glm::vec3(0.1f, 0.0f, 0.0f));
             break;
-        case GLFW_KEY_Q: // Rotate counterclockwise
+        case GLFW_KEY_R: // Move forward (positive Z-axis)
+            transform.setTranslation(glm::vec3(0.0f, 0.0f, 0.1f));
+            break;
+        case GLFW_KEY_F: // Move backward (negative Z-axis)
+            transform.setTranslation(glm::vec3(0.0f, 0.0f, -0.1f));
+            break;
+
+        // Rotation
+        case GLFW_KEY_Q: // Rotate counterclockwise around Z-axis
             transform.setRotation(glm::radians(-10.0f), glm::vec3(0.0f, 0.0f, 1.0f));
             break;
-        case GLFW_KEY_E: // Rotate clockwise
+        case GLFW_KEY_E: // Rotate clockwise around Z-axis
             transform.setRotation(glm::radians(10.0f), glm::vec3(0.0f, 0.0f, 1.0f));
             break;
-        case GLFW_KEY_Z: // Scale up
-            transform.setScale(glm::vec3(1.1f, 1.1f, 1.0f));
+        case GLFW_KEY_T: // Rotate counterclockwise around X-axis
+            transform.setRotation(glm::radians(-10.0f), glm::vec3(1.0f, 0.0f, 0.0f));
             break;
-        case GLFW_KEY_X: // Scale down
-            transform.setScale(glm::vec3(0.9f, 0.9f, 1.0f));
+        case GLFW_KEY_Y: // Rotate clockwise around X-axis
+            transform.setRotation(glm::radians(10.0f), glm::vec3(1.0f, 0.0f, 0.0f));
             break;
+        case GLFW_KEY_G: // Rotate counterclockwise around Y-axis
+            transform.setRotation(glm::radians(-10.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+            break;
+        case GLFW_KEY_H: // Rotate clockwise around Y-axis
+            transform.setRotation(glm::radians(10.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+            break;
+
+        // Scaling
+        case GLFW_KEY_Z: // Scale up uniformly
+            transform.setScale(glm::vec3(1.1f, 1.1f, 1.1f));
+            break;
+        case GLFW_KEY_X: // Scale down uniformly
+            transform.setScale(glm::vec3(0.9f, 0.9f, 0.9f));
+            break;
+
         default:
             break;
         }
     }
 }
+
 
 void Application::mouseCallback_old(GLFWwindow* window, double xpos, double ypos) {
     static double lastX = xpos, lastY = ypos;
@@ -280,7 +308,7 @@ void Application::scrollCallback(GLFWwindow* window, double xoffset, double yoff
     }
 }
 
-void Application::render3D() {
+void Application::render3D1() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     int width, height;
@@ -301,8 +329,72 @@ void Application::render3D() {
     // Render axis overlay (with its own view/projection)
     int axisSize = std::min(width, height) / 6;
     glViewport(width - axisSize - 10, height - axisSize - 10, axisSize, axisSize);
-    axisRenderer.render(transform);
+    axisRenderer.render3D(transform);
     
+    glfwSwapBuffers(window);
+    glfwPollEvents();
+}
+
+void Application::render3D() {
+    // Step 1: Clear the framebuffer
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    // Step 2: Render OpenGL 3D content
+    int width, height;
+    glfwGetFramebufferSize(window, &width, &height);
+    glViewport(0, 0, width, height);
+    glEnable(GL_DEPTH_TEST);
+
+    // Set view and projection matrices
+    transform.view = camera.getViewMatrix();
+    transform.projection = camera.getProjectionMatrix(static_cast<float>(width) / height);
+
+    // Render the 3D scene
+    renderer.renderFrame3D(transform);
+    // Render axis overlay (with its own view/projection)
+    int axisSize = std::min(width, height) / 3;
+    glViewport(width - axisSize - 10, height - axisSize - 10, axisSize, axisSize);
+    axisRenderer.render3D(transform);
+
+    // Step 3: Convert model matrix to Euler angles for display
+    glm::mat3 rotationMatrix = glm::mat3(transform.model);
+    double dcm[3][3];
+    for (int i = 0; i < 3; ++i)
+        for (int j = 0; j < 3; ++j)
+            dcm[i][j] = rotationMatrix[i][j]; // Extract rotation component
+
+    // Update current orientation using attitude math library
+    dcm_to_euler(dcm, &currentOrientation.roll, &currentOrientation.pitch, &currentOrientation.yaw);
+
+    // Step 4: Render ImGui UI
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
+
+    // Control Panel
+    ImGui::Begin("Control Panel", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
+    ImGui::Text("3D Scene Controls");
+    ImGui::SliderFloat("Camera Zoom", &camera.zoom, 0.1f, 100.0f);
+    ImGui::SliderFloat("Rotation Speed", &rotationSpeed, 0.1f, 5.0f);
+    if (ImGui::Button("Reset View")) {
+        camera.reset();
+    }
+    ImGui::End();
+
+    // Data Display
+    ImGui::Begin("Data", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
+    ImGui::Text("Orientation Data:");
+    ImGui::Text("Roll: %.1f", rad2deg(currentOrientation.roll)); // Convert to degrees for display
+    ImGui::Text("Pitch: %.1f", rad2deg(currentOrientation.pitch));
+    ImGui::Text("Yaw: %.1f", rad2deg(currentOrientation.yaw));
+    ImGui::End();
+
+    // Render ImGui
+    ImGui::Render();
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+    // Step 5: Swap buffers and poll events
     glfwSwapBuffers(window);
     glfwPollEvents();
 }
@@ -322,3 +414,101 @@ void Application::update3D() {
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         camera.processKeyboardInput(RIGHT, deltaTime);
 }
+
+void Application::render3DView() {
+    if (ImGui::Begin("3D View")) {
+        ImVec2 size = ImGui::GetContentRegionAvail();
+        int width = static_cast<int>(size.x);
+        int height = static_cast<int>(size.y);
+
+        // Set OpenGL viewport and clear buffers
+        glViewport(0, 0, width, height);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glEnable(GL_DEPTH_TEST);
+
+        // Set camera matrices and render the 3D scene
+        transform.view = camera.getViewMatrix();
+        transform.projection = camera.getProjectionMatrix(static_cast<float>(width) / height);
+        renderer.renderFrame3D(transform);
+
+        // Render the axis overlay
+        int axisSize = std::min(width, height) / 6;
+        glViewport(width - axisSize - 10, height - axisSize - 10, axisSize, axisSize);
+        axisRenderer.render3D(transform);
+    }
+    ImGui::End();
+}
+
+void Application::renderTopView() {
+    if (ImGui::Begin("Top View")) {
+        ImVec2 size = ImGui::GetContentRegionAvail();
+        int width = static_cast<int>(size.x);
+        int height = static_cast<int>(size.y);
+
+        glViewport(0, 0, width, height);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glEnable(GL_DEPTH_TEST);
+
+        // Set an orthographic top-down view
+        transform.setOrthographic(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
+        renderer.renderFrame3D(transform);
+
+        // Render the axis overlay
+        axisRenderer.render3D(transform);
+    }
+    ImGui::End();
+}
+
+void Application::renderFrontView() {
+    if (ImGui::Begin("Front View")) {
+        ImVec2 size = ImGui::GetContentRegionAvail();
+        int width = static_cast<int>(size.x);
+        int height = static_cast<int>(size.y);
+
+        glViewport(0, 0, width, height);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glEnable(GL_DEPTH_TEST);
+
+        // Set an orthographic front view
+        transform.setOrthographic(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
+        renderer.renderFrame3D(transform);
+
+        // Render the axis overlay
+        axisRenderer.render3D(transform);
+    }
+    ImGui::End();
+}
+
+void Application::renderSideView() {
+    if (ImGui::Begin("Side View")) {
+        ImVec2 size = ImGui::GetContentRegionAvail();
+        int width = static_cast<int>(size.x);
+        int height = static_cast<int>(size.y);
+
+        glViewport(0, 0, width, height);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glEnable(GL_DEPTH_TEST);
+
+        // Set an orthographic side view
+        transform.setOrthographic(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
+        renderer.renderFrame3D(transform);
+
+        // Render the axis overlay
+        axisRenderer.render3D(transform);
+    }
+    ImGui::End();
+}
+
+
+void Application::renderControlPanel() {
+    if (ImGui::Begin("Control Panel")) {
+        ImGui::Text("Control Panel");
+        static float rotationSpeed = 1.0f;
+        ImGui::SliderFloat("Rotation Speed", &rotationSpeed, 0.1f, 10.0f);
+        ImGui::Text("Use this panel to adjust settings and view data.");
+    }
+    ImGui::End();
+}
+
+
+
