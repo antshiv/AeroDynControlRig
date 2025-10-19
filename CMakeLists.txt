@@ -1,18 +1,12 @@
 cmake_minimum_required(VERSION 3.10)
-project(test_rig_app CXX)
+project(AeroDynControlRig CXX)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_compile_options(-g)
 
 # Add Dear ImGui with Docking
 add_definitions(-DIMGUI_IMPL_OPENGL_LOADER_GLAD -DIMGUI_DEFINE_MATH_OPERATORS -DIMGUI_ENABLE_DOCKING -DIMGUI_ENABLE_VIEWPORTS)
-
-# Include Dear ImGui
-include_directories(
-    imgui
-    imgui/backends
-)
 
 # ImGui source files
 set(IMGUI_SRC
@@ -26,25 +20,33 @@ set(IMGUI_SRC
 
 # Include the attitude library
 add_subdirectory(external/attitudeMathLibrary/)
-include_directories(external/attitudeMathLibrary/include)
 
 # Source files for the test_rig application
 set(TEST_RIG_SOURCES
-    src/main.cpp
-    src/application.cpp
-    src/renderer.cpp
-    src/axis_renderer.cpp
-    src/camera.cpp
+    src/app/main.cpp
+    src/app/application.cpp
+    src/modules/quaternion_demo.cpp
+    src/render/renderer.cpp
+    src/render/axis_renderer.cpp
+    src/render/camera.cpp
 )
 
-add_executable(test_rig ${TEST_RIG_SOURCES} ${IMGUI_SRC})
+add_executable(AeroDynControlRig ${TEST_RIG_SOURCES} ${IMGUI_SRC})
+
+target_include_directories(AeroDynControlRig
+    PRIVATE
+        src
+        imgui
+        imgui/backends
+        external/attitudeMathLibrary/include
+)
 
 # Link libraries
 find_package(OpenGL REQUIRED)
 find_package(glfw3 REQUIRED)
 find_package(GLEW REQUIRED)
 
-target_link_libraries(test_rig
+target_link_libraries(AeroDynControlRig
     PRIVATE
     attitude
     OpenGL::GL

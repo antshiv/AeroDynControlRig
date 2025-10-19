@@ -8,10 +8,7 @@ int main() {
     }
 
     while (app.running()) {
-//        app.update2D();
-//        app.render2D();
-        app.render3D();
-//	app.renderAxis();  // Render the axis
+        app.tick();
     }
 
     app.shutdown();

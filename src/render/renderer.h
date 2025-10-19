@@ -5,7 +5,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <string>
-#include "transform.h"
+#include "core/transform.h"
 
 class Renderer {
 public:
@@ -57,4 +57,3 @@ private:
 };
 
 #endif // RENDERER_H
-

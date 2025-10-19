@@ -1,5 +1,6 @@
 #include "application.h"
-#include "renderer.h"
+#include "render/renderer.h"
+#include "modules/quaternion_demo.h"
 #include "attitude/euler.h"
 #include "attitude/dcm.h"
 #include "attitude/attitude_utils.h"
@@ -83,6 +84,9 @@ bool Application::init() {
     float aspectRatio = 800.0f / 600.0f; // Adjust dynamically if needed
     transform.setOrthographic(-aspectRatio, aspectRatio, -1.0f, 1.0f, -1.0f, 1.0f);
 
+    initializeModules();
+    lastFrame = glfwGetTime();
+
     return true;
 }
 
@@ -98,60 +102,34 @@ bool Application::running() const {
     }
 }
 
-
-
-void Application::update() {
-    // Update your Euler angles or quaternions here:
-    // For example, rotate yaw a bit each frame:
-    currentOrientation.yaw += deg2rad(0.5);
-
-    // Convert Euler to DCM
-    double dcm[3][3];
-    euler_to_dcm(&currentOrientation, dcm);
-
-    // Convert DCM to a 4x4 matrix for OpenGL
-    float R[16] = {
-        (float)dcm[0][0], (float)dcm[0][1], (float)dcm[0][2], 0.0f,
-        (float)dcm[1][0], (float)dcm[1][1], (float)dcm[1][2], 0.0f,
-        (float)dcm[2][0], (float)dcm[2][1], (float)dcm[2][2], 0.0f,
-        0.0f,             0.0f,             0.0f,             1.0f
-    };
-
-    renderer.setModelMatrix(R);
+void Application::initializeModules() {
+    modules.emplace_back(std::make_unique<QuaternionDemoModule>());
+    for (auto& module : modules) {
+        module->initialize(simulationState);
+    }
+    transform.model = simulationState.model_matrix;
 }
 
-void Application::update2D_old() {
-    //transform.resetModel();
-    currentOrientation.yaw += deg2rad(0.5);
 
-    double dcm[3][3];
-    euler_to_dcm(&currentOrientation, dcm);
 
-    glm::mat4 rotation = glm::mat4(1.0f);
-    rotation[0][0] = dcm[0][0]; rotation[0][1] = dcm[0][1];
-    rotation[1][0] = dcm[1][0]; rotation[1][1] = dcm[1][1];
+void Application::tick() {
+    float currentFrame = glfwGetTime();
+    float deltaTime = currentFrame - lastFrame;
+    lastFrame = currentFrame;
 
-    transform.model = rotation; // Update model matrix with rotation
+    updateCamera(deltaTime);
+
+    for (auto& module : modules) {
+        module->update(deltaTime, simulationState);
+    }
+
+    transform.model = simulationState.model_matrix;
+    render3D();
 }
 
-void Application::update2D() {
-    // Add yaw rotation based on Euler angles
-    currentOrientation.yaw += deg2rad(0.5);
+void Application::update2D_old() {}
 
-    // Compute rotation matrix from Euler angles
-    double dcm[3][3];
-    euler_to_dcm(&currentOrientation, dcm);
-
-    glm::mat4 rotation = glm::mat4(1.0f);
-    rotation[0][0] = dcm[0][0]; rotation[0][1] = dcm[0][1];
-    rotation[1][0] = dcm[1][0]; rotation[1][1] = dcm[1][1];
-
-    // Combine the current model matrix with the rotation matrix
-    transform.model = rotation * transform.model; // Apply rotation without overwriting
-
-    // Debug output to verify transformations
-    std::cout << "Updated Model Matrix: " << glm::to_string(transform.model) << std::endl;
-}
+void Application::update2D() {}
 
 
 
@@ -276,8 +254,8 @@ void Application::mouseCallback_old(GLFWwindow* window, double xpos, double ypos
     lastY = ypos;
 
     // Update yaw and pitch based on mouse movement
-    currentOrientation.yaw += deltaX * 0.005f; // Sensitivity adjustment
-    currentOrientation.pitch += deltaY * 0.005f;
+    simulationState.euler.yaw += deltaX * 0.005f;
+    simulationState.euler.pitch += deltaY * 0.005f;
 
     // Clamp pitch to prevent flipping
 //    currentOrientation.pitch = glm::clamp(currentOrientation.pitch, -glm::half_pi<float>(), glm::half_pi<float>());
@@ -336,6 +314,8 @@ void Application::render3D1() {
 }
 
 void Application::render3D() {
+    transform.model = simulationState.model_matrix;
+
     // Step 1: Clear the framebuffer
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -357,16 +337,6 @@ void Application::render3D() {
     glViewport(width - axisSize - 10, height - axisSize - 10, axisSize, axisSize);
     axisRenderer.render3D(transform);
 
-    // Step 3: Convert model matrix to Euler angles for display
-    glm::mat3 rotationMatrix = glm::mat3(transform.model);
-    double dcm[3][3];
-    for (int i = 0; i < 3; ++i)
-        for (int j = 0; j < 3; ++j)
-            dcm[i][j] = rotationMatrix[i][j]; // Extract rotation component
-
-    // Update current orientation using attitude math library
-    dcm_to_euler(dcm, &currentOrientation.roll, &currentOrientation.pitch, &currentOrientation.yaw);
-
     // Step 4: Render ImGui UI
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
@@ -376,7 +346,10 @@ void Application::render3D() {
     ImGui::Begin("Control Panel", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
     ImGui::Text("3D Scene Controls");
     ImGui::SliderFloat("Camera Zoom", &camera.zoom, 0.1f, 100.0f);
-    ImGui::SliderFloat("Rotation Speed", &rotationSpeed, 0.1f, 5.0f);
+    float rotationSpeed = static_cast<float>(simulationState.rotation_speed_deg_per_sec);
+    if (ImGui::SliderFloat("Rotation Speed (deg/s)", &rotationSpeed, 0.1f, 180.0f)) {
+        simulationState.rotation_speed_deg_per_sec = rotationSpeed;
+    }
     if (ImGui::Button("Reset View")) {
         camera.reset();
     }
@@ -385,9 +358,9 @@ void Application::render3D() {
     // Data Display
     ImGui::Begin("Data", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
     ImGui::Text("Orientation Data:");
-    ImGui::Text("Roll: %.1f", rad2deg(currentOrientation.roll)); // Convert to degrees for display
-    ImGui::Text("Pitch: %.1f", rad2deg(currentOrientation.pitch));
-    ImGui::Text("Yaw: %.1f", rad2deg(currentOrientation.yaw));
+    ImGui::Text("Roll: %.1f", rad2deg(simulationState.euler.roll));
+    ImGui::Text("Pitch: %.1f", rad2deg(simulationState.euler.pitch));
+    ImGui::Text("Yaw: %.1f", rad2deg(simulationState.euler.yaw));
     ImGui::End();
 
     // Render ImGui
@@ -399,12 +372,7 @@ void Application::render3D() {
     glfwPollEvents();
 }
 
-void Application::update3D() {
-    // Update camera based on input
-    float currentFrame = glfwGetTime();
-    float deltaTime = currentFrame - lastFrame;
-    lastFrame = currentFrame;
-
+void Application::updateCamera(float deltaTime) {
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
         camera.processKeyboardInput(FORWARD, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
@@ -509,6 +477,3 @@ void Application::renderControlPanel() {
     }
     ImGui::End();
 }
-
-
-

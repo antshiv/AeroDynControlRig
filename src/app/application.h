@@ -4,10 +4,15 @@
 #include <GL/glew.h>  // MUST come first
 #include <GLFW/glfw3.h>
 #include "attitude/euler.h" // from your attitude library
-#include "renderer.h"
-#include "transform.h"
-#include "axis_renderer.h"
-#include "camera.h"
+#include <memory>
+#include <vector>
+
+#include "render/renderer.h"
+#include "core/transform.h"
+#include "render/axis_renderer.h"
+#include "render/camera.h"
+#include "core/simulation_state.h"
+#include "core/module.h"
 
 class Application {
 public:
@@ -31,17 +36,13 @@ public:
     // Check if the application should keep running
     bool running() const;
 
-    // Update logic (e.g., handle user input, update orientation)
-    void update();
+    void tick();
     void update2D();
     void update2D_old();
 
-    // Render the current frame
     void render();
     void render2D();
     void renderAxis();
-
-    void update3D();
     void render3D1();
     void render3D();
 
@@ -71,12 +72,12 @@ private:
 
     float rotationSpeed = 1.0f; // Default rotation speed
 
-    // Orientation state from the attitude library
-    EulerAngles currentOrientation;
+    SimulationState simulationState;
+    std::vector<std::unique_ptr<Module>> modules;
 
-    // Handle input, like keyboard controls
     void processInput();
+    void updateCamera(float deltaTime);
+    void initializeModules();
 };
 
 #endif // APPLICATION_H
-

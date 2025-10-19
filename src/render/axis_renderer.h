@@ -5,7 +5,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <GL/glew.h>  // GLEW must come first
 #include <string>
-#include "transform.h"
+#include "core/transform.h"
 
 class AxisRenderer {
 public:
@@ -30,4 +30,3 @@ private:
 };
 
 #endif // AXIS_RENDERER_H
-
