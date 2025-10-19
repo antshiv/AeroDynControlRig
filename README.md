@@ -48,6 +48,21 @@ Desktop visualization and testbed for the flight-control stack. The rig stitches
 3. Expand UI with tuning panels, telemetry plots, and scenario playback controls.
 4. Hook in log replay and export to evaluate controllers against recorded flights.
 
+## Long-Term Goals
+
+- **Stage 0 – Core Visual Sandbox**  
+  Animate rigid-body orientation from quaternions/Euler angles, provide camera/timestep controls, and validate math and rendering flow.
+- **Stage 1 – Dynamics Explorer**  
+  Load dynamic-model variants, drive them with step/sinusoid/chirp inputs, plot responses, and visualize poles/zeros while tuning parameters.
+- **Stage 2 – Controller Workbench**  
+  Introduce PID/LQR/MPC modules, expose gain tuning with commanded vs. actual plots, and display root locus or pole movement as controllers change.
+- **Stage 3 – Estimation Diagnostics**  
+  Feed noisy sensor data, plot estimator outputs vs. ground truth with residuals/covariances, and test fault scenarios (bias, dropout).
+- **Stage 4 – INS Integration**  
+  Close the full loop (reference → controller → dynamics → sensors → estimator → feedback), script scenarios, and monitor latency/saturation.
+- **Stage 5 – High-Fidelity Simulation**  
+  Render vehicles/obstacles, simulate disturbances (wind, payload shifts), support path-planning behaviours, and log or replay 3D missions.
+
 ## UI Preview
 
 ![Current UI](assets/GUI_screenshot.png)
