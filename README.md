@@ -63,6 +63,23 @@ Desktop visualization and testbed for the flight-control stack. The rig stitches
 - **Stage 5 – High-Fidelity Simulation**  
   Render vehicles/obstacles, simulate disturbances (wind, payload shifts), support path-planning behaviours, and log or replay 3D missions.
 
+## Ecosystem Map
+
+AeroDynControlRig sits at the centre of a toolchain of shared modules and physical rigs:
+
+- **Software Libraries**
+  - [`attitudeMathLibrary/`](../attitudeMathLibrary) – quaternion/Euler/DCM utilities
+  - [`controlSystems/`](../controlSystems) – PID, LQR, MPC primitives
+  - [`stateEstimation/`](../stateEstimation) – complementary, Mahony, EKF filters
+  - [`dynamic_models/`](../dynamic_models) – first-principles plants
+  - [`inertial_navigation_system/`](../inertial_navigation_system) – wraps math + estimation + control into a flight loop
+  - [`rotorDynamics/`](../rotorDynamics) – momentum/blade-element coefficients shared by `dynamic_models` and this simulator
+- **Physical Rigs**
+  - [`ThrustStand/`](../ThrustStand) – propulsion characterisation (thrust/torque curves feed the rotor models)
+  - [`DroneTestRig/`](../DroneTestRig) – multi-axis mounting rig for hardware-in-the-loop control tests
+
+All telemetry and coefficient data loop back into AeroDynControlRig for visualization and INS/controller tuning, keeping software and hardware in sync.
+
 ## UI Preview
 
 ![Current UI](assets/GUI_screenshot.png)

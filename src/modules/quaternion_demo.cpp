@@ -39,6 +39,8 @@ void QuaternionDemoModule::update(double dt, SimulationState& state) {
         return;
     }
 
+    state.time_seconds += dt;
+
     const double yaw_increment = deg2rad(state.rotation_speed_deg_per_sec) * dt;
     state.euler.yaw += yaw_increment;
     normalize_angle(state.euler.yaw);
