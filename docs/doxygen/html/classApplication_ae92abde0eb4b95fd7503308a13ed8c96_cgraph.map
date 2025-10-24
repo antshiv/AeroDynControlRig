@@ -1,5 +1,5 @@
 <map id="Application::init" name="Application::init">
-<area shape="rect" id="node1" title=" " alt="" coords="5,157,129,184"/>
+<area shape="rect" id="node1" title="Initializes the application, setting up GLFW, OpenGL, ImGui, and all core components." alt="" coords="5,157,129,184"/>
 <area shape="rect" id="node2" href="$namespaceui.html#a5e215a312253a017263135e8e9b2fde8" title=" " alt="" coords="215,5,339,32"/>
 <area shape="rect" id="node3" href="$classAxisRenderer.html#aeffaaf38c5561bc783f4d614f3b75edf" title=" " alt="" coords="207,56,346,83"/>
 <area shape="rect" id="node4" href="$classRenderer.html#a628ba0693fd83815acac8c69b7dcf9f0" title=" " alt="" coords="221,107,332,133"/>

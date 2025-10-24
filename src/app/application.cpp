@@ -124,33 +124,61 @@ Application::~Application() {
     // Destructor code
 }
 
+/**
+ * @brief Initializes the application, setting up GLFW, OpenGL, ImGui, and all core components.
+ *
+ * @details This function performs a sequence of critical initialization steps required
+ * for the application to run. It handles window creation, OpenGL context setup,
+ * graphics library extensions (GLEW), the Dear ImGui user interface, and custom
+ * rendering components.
+ *
+ * The order of these initializations is important due to dependencies between libraries.
+ *
+ * @return `true` if all initializations are successful, `false` otherwise.
+ */
 bool Application::init() {
-    // Initialize GLFW
+    // Step 1: Initialize GLFW (Graphics Library Framework)
+    // GLFW is used to create windows, contexts, and manage user input.
+    // It must be initialized before any window or OpenGL context can be created.
     if (!glfwInit()) {
         std::cerr << "Failed to initialize GLFW" << std::endl;
         return false;
     }
 
-    // Create GLFW window before any ImGui initialization
+    // Step 2: Create the GLFW window and OpenGL context
+    // This creates a window with an associated OpenGL context, which is where
+    // all rendering commands will be executed. The window dimensions are 800x600.
     window = glfwCreateWindow(800, 600, "Dynamic Control System Test Rig", nullptr, nullptr);
     if (!window) {
         std::cerr << "Failed to create GLFW window" << std::endl;
-        glfwTerminate();
+        glfwTerminate(); // Terminate GLFW if window creation fails
         return false;
     }
 
+    // Make the newly created window's OpenGL context current on the calling thread.
+    // All subsequent OpenGL commands will be directed to this context.
     glfwMakeContextCurrent(window);
     std::cout << "Window created successfully: " << window << std::endl;
 
-    // Set GLFW callbacks
+    // Step 3: Set up GLFW callbacks for user input
+    // Callbacks link GLFW events (like key presses or scrolling) to application functions.
+    // glfwSetWindowUserPointer allows us to pass a pointer to the Application instance
+    // into static callback functions.
     glfwSetWindowUserPointer(window, this);
     glfwSetKeyCallback(window, keyCallback);
-    //glfwSetCursorPosCallback(window, [](GLFWwindow* w, double x, double y) {
-    //    static_cast<Application*>(glfwGetWindowUserPointer(w))->mouseCallback(w, x, y);
-    //});
+    // Mouse callback is commented out, but would be set here if active.
     glfwSetScrollCallback(window, scrollCallback);
 
-    // Check OpenGL version
+    // Step 4: Initialize GLEW (OpenGL Extension Wrangler Library)
+    // GLEW manages OpenGL extensions and provides a convenient way to access
+    // modern OpenGL functions. It must be initialized after a valid OpenGL
+    // rendering context is created and made current.
+    if (glewInit() != GLEW_OK) {
+        std::cerr << "Failed to initialize GLEW" << std::endl;
+        return false;
+    }
+
+    // Check and log OpenGL version and renderer information for debugging.
     const GLubyte* rendererName = glGetString(GL_RENDERER);
     const GLubyte* version = glGetString(GL_VERSION);
     if (rendererName && version) {
@@ -160,22 +188,30 @@ bool Application::init() {
         return false;
     }
 
-    // Initialize ImGui context AFTER the window is created
+    // Step 5: Initialize ImGui (Dear ImGui) context
+    // ImGui is a bloat-free graphical user interface library. Its context
+    // must be created after the OpenGL context is ready.
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO();
+    // Enable docking feature for flexible window layouts.
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
-    // Setup Dear ImGui style
+    // Step 6: Configure ImGui style and load fonts
+    // Sets the visual theme (dark mode) and loads custom fonts for the UI.
     ImGui::StyleColorsDark();
     ui::ApplyTheme(ImGui::GetStyle());
     ui::LoadFonts(io);
 
-    // Initialize ImGui backends
+    // Step 7: Initialize ImGui backends for GLFW and OpenGL
+    // These backends bridge ImGui with the underlying windowing system (GLFW)
+    // and rendering API (OpenGL), allowing ImGui to draw its UI elements.
     ImGui_ImplGlfw_InitForOpenGL(window, true);
-    ImGui_ImplOpenGL3_Init("#version 330");
+    ImGui_ImplOpenGL3_Init("#version 330"); // Specifies the GLSL version for shaders
 
-    // Initialize renderers
+    // Step 8: Initialize custom renderers
+    // The application uses a primary 3D renderer and a separate axis renderer.
+    // Their initialization involves compiling shaders and setting up VAOs/VBOs.
     if (!renderer.init()) {
         std::cerr << "Renderer initialization failed." << std::endl;
         return false;
@@ -186,13 +222,17 @@ bool Application::init() {
         return false;
     }
 
-    // Set orthographic projection for 2D
+    // Step 9: Set up initial orthographic projection for 2D rendering (if applicable)
+    // This defines the viewing volume for 2D elements.
     float aspectRatio = 800.0f / 600.0f; // Adjust dynamically if needed
     transform.setOrthographic(-aspectRatio, aspectRatio, -1.0f, 1.0f, -1.0f, 1.0f);
 
+    // Step 10: Initialize application modules and GUI panels
+    // These are custom components that encapsulate specific application logic
+    // (e.g., physics simulation, sensor data) and their corresponding UI panels.
     initializeModules();
     initializePanels();
-    lastFrame = glfwGetTime();
+    lastFrame = glfwGetTime(); // Record the time for delta time calculations
 
     return true;
 }

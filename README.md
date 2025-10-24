@@ -14,7 +14,7 @@ Desktop visualization and testbed for the flight-control stack. The rig stitches
 - `imgui/` – Dear ImGui source and backend glue (kept vendor-clean; the app talks to it through thin wrappers in `src/gui`).
 - `src/` – Application code (entry point, simulation modules, rendering, GUI panels). Refactors will pull the existing files into `app/`, `core/`, `modules/`, `render/`, and `gui/` namespaces.
 - `shaders/` – GLSL programs for scene meshes, gizmos, and future HUD widgets.
-- `assets/` – Static resources such as screenshots or fonts (`assets/GUI_screenshot.png` shows the current UI).
+- `assets/` – Static resources such as screenshots or fonts (`assets/ui_preview.png` shows the refreshed cockpit UI).
 - `build/` – CMake build output (ignored by git).
 
 ## Getting Started
@@ -82,6 +82,8 @@ All telemetry and coefficient data loop back into AeroDynControlRig for visualiz
 
 ## UI Preview
 
-![Current UI](assets/GUI_screenshot.png)
+![Previous UI](assets/GUI_screenshot.png)
 
-The blue “Control Panel” drives camera zoom and rotation rate; the black “Data” window shows the current roll/pitch/yaw derived from the quaternion demo.
+![Updated UI](assets/ui_preview.png)
+
+The first capture shows the original compact control layout; the refreshed dashboard mirrors the new design work with a docked control surface on the left, telemetry and diagnostics on the right, and the flight scene card centered with on-card quaternion/Euler readouts.

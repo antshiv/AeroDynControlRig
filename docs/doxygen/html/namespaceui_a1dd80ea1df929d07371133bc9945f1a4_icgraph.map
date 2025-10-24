@@ -1,4 +1,6 @@
 <map id="ui::ValueChip" name="ui::ValueChip">
-<area shape="rect" id="node1" title=" " alt="" coords="185,5,292,32"/>
-<area shape="rect" id="node2" href="$classRotorPanel.html#a4cc8a6932eabe62949fa23c08f79e488" title=" " alt="" coords="5,5,137,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="213,56,320,83"/>
+<area shape="rect" id="node2" href="$classEstimatorPanel.html#a2f2e0dc7c0287d12b71b412a38d25b96" title=" " alt="" coords="5,5,165,32"/>
+<area shape="rect" id="node3" href="$classPowerPanel.html#a707cada1c41c5a1a38f154f6e93c1280" title=" " alt="" coords="17,56,154,83"/>
+<area shape="rect" id="node4" href="$classRotorPanel.html#a4cc8a6932eabe62949fa23c08f79e488" title=" " alt="" coords="19,107,151,133"/>
 </map>

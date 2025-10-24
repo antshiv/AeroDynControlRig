@@ -111,6 +111,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a748bca84fefb9c12661cfaa2f623748d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classApplication.html#a748bca84fefb9c12661cfaa2f623748d">~Application</a> ()</td></tr>
 <tr class="separator:a748bca84fefb9c12661cfaa2f623748d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae92abde0eb4b95fd7503308a13ed8c96"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96">init</a> ()</td></tr>
+<tr class="memdesc:ae92abde0eb4b95fd7503308a13ed8c96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the application, setting up GLFW, OpenGL, ImGui, and all core components.  <a href="classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96">More...</a><br /></td></tr>
 <tr class="separator:ae92abde0eb4b95fd7503308a13ed8c96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a66731baa1a6a13cd42f2a8c9bf34dc0e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classApplication.html#a66731baa1a6a13cd42f2a8c9bf34dc0e">running</a> () const</td></tr>
 <tr class="separator:a66731baa1a6a13cd42f2a8c9bf34dc0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -195,12 +196,17 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Initializes the application, setting up GLFW, OpenGL, ImGui, and all core components. </p>
+<p>This function performs a sequence of critical initialization steps required for the application to run. It handles window creation, OpenGL context setup, graphics library extensions (GLEW), the Dear ImGui user interface, and custom rendering components.</p>
+<p>The order of these initializations is important due to dependencies between libraries.</p>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if all initializations are successful, <code>false</code> otherwise. </dd></dl>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classApplication_ae92abde0eb4b95fd7503308a13ed8c96_cgraph.png" border="0" usemap="#aclassApplication_ae92abde0eb4b95fd7503308a13ed8c96_cgraph" alt=""/></div>
 <map name="aclassApplication_ae92abde0eb4b95fd7503308a13ed8c96_cgraph" id="aclassApplication_ae92abde0eb4b95fd7503308a13ed8c96_cgraph">
-<area shape="rect" title=" " alt="" coords="5,157,129,184"/>
+<area shape="rect" title="Initializes the application, setting up GLFW, OpenGL, ImGui, and all core components." alt="" coords="5,157,129,184"/>
 <area shape="rect" href="namespaceui.html#a5e215a312253a017263135e8e9b2fde8" title=" " alt="" coords="215,5,339,32"/>
 <area shape="rect" href="classAxisRenderer.html#aeffaaf38c5561bc783f4d614f3b75edf" title=" " alt="" coords="207,56,346,83"/>
 <area shape="rect" href="classRenderer.html#a628ba0693fd83815acac8c69b7dcf9f0" title=" " alt="" coords="221,107,332,133"/>
@@ -216,7 +222,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classApplication_ae92abde0eb4b95fd7503308a13ed8c96_icgraph.png" border="0" usemap="#aclassApplication_ae92abde0eb4b95fd7503308a13ed8c96_icgraph" alt=""/></div>
 <map name="aclassApplication_ae92abde0eb4b95fd7503308a13ed8c96_icgraph" id="aclassApplication_ae92abde0eb4b95fd7503308a13ed8c96_icgraph">
-<area shape="rect" title=" " alt="" coords="108,5,232,32"/>
+<area shape="rect" title="Initializes the application, setting up GLFW, OpenGL, ImGui, and all core components." alt="" coords="108,5,232,32"/>
 <area shape="rect" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -280,7 +286,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="classApplication_ad8ade3f4f891c7ac54b5c69d6ca9ce5a_icgraph.png" border="0" usemap="#aclassApplication_ad8ade3f4f891c7ac54b5c69d6ca9ce5a_icgraph" alt=""/></div>
 <map name="aclassApplication_ad8ade3f4f891c7ac54b5c69d6ca9ce5a_icgraph" id="aclassApplication_ad8ade3f4f891c7ac54b5c69d6ca9ce5a_icgraph">
 <area shape="rect" title=" " alt="" coords="280,5,463,32"/>
-<area shape="rect" href="classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96" title=" " alt="" coords="108,5,232,32"/>
+<area shape="rect" href="classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96" title="Initializes the application, setting up GLFW, OpenGL, ImGui, and all core components." alt="" coords="108,5,232,32"/>
 <area shape="rect" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -357,19 +363,18 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classApplication_a4e7a520d659593b385b246a43e604dfb_cgraph.png" border="0" usemap="#aclassApplication_a4e7a520d659593b385b246a43e604dfb_cgraph" alt=""/></div>
 <map name="aclassApplication_a4e7a520d659593b385b246a43e604dfb_cgraph" id="aclassApplication_a4e7a520d659593b385b246a43e604dfb_cgraph">
-<area shape="rect" title=" " alt="" coords="5,284,168,311"/>
-<area shape="rect" href="namespaceui.html#a0053c22f687ace038e6a6625e751ac6c" title=" " alt="" coords="266,5,375,32"/>
-<area shape="rect" href="namespaceui.html#a447c8573ad59f48165a527a06c94fb62" title=" " alt="" coords="473,81,556,108"/>
-<area shape="rect" href="namespaceui.html#a23857d08f2eee27af80c1607a82cfded" title=" " alt="" coords="261,157,380,184"/>
-<area shape="rect" href="namespaceui.html#a27aa4868ffcd17787cc35f7e24a0c616" title=" " alt="" coords="476,309,553,336"/>
-<area shape="rect" href="classPanelManager.html#accbb2906139bed93e60a3b7390c43e90" title=" " alt="" coords="235,208,406,235"/>
-<area shape="rect" href="namespaceui.html#aab4c47f869143e855e5a9cb8b6f2cf8b" title=" " alt="" coords="273,259,369,285"/>
-<area shape="rect" href="classCamera.html#aa2ed9d27803f5edc824e4afe8cbbbfbc" title=" " alt="" coords="216,309,425,336"/>
-<area shape="rect" href="classCamera.html#a2f90e661a78172675ca06ea69667b531" title=" " alt="" coords="233,360,409,387"/>
-<area shape="rect" href="namespaceui.html#aa8a07e2928ca42077565025599baf0f2" title=" " alt="" coords="239,411,402,437"/>
-<area shape="rect" href="namespaceui.html#ad4204ae9873b183dca2479b338348718" title=" " alt="" coords="236,107,405,133"/>
-<area shape="rect" href="classAxisRenderer.html#aeafc1964746638b7067055b5bf616d51" title=" " alt="" coords="232,512,409,539"/>
-<area shape="rect" href="classRenderer.html#a5c4417eb759e6322707ee2ab0ecb595f" title=" " alt="" coords="225,563,416,589"/>
+<area shape="rect" title=" " alt="" coords="5,248,168,274"/>
+<area shape="rect" href="namespaceui.html#a0053c22f687ace038e6a6625e751ac6c" title=" " alt="" coords="266,96,375,122"/>
+<area shape="rect" href="namespaceui.html#a447c8573ad59f48165a527a06c94fb62" title=" " alt="" coords="473,70,556,97"/>
+<area shape="rect" href="namespaceui.html#a23857d08f2eee27af80c1607a82cfded" title=" " alt="" coords="261,146,380,173"/>
+<area shape="rect" href="namespaceui.html#a27aa4868ffcd17787cc35f7e24a0c616" title=" " alt="" coords="476,298,553,325"/>
+<area shape="rect" href="classPanelManager.html#accbb2906139bed93e60a3b7390c43e90" title=" " alt="" coords="235,197,406,224"/>
+<area shape="rect" href="namespaceui.html#aab4c47f869143e855e5a9cb8b6f2cf8b" title=" " alt="" coords="273,248,369,274"/>
+<area shape="rect" href="classCamera.html#aa2ed9d27803f5edc824e4afe8cbbbfbc" title=" " alt="" coords="216,298,425,325"/>
+<area shape="rect" href="classCamera.html#a2f90e661a78172675ca06ea69667b531" title=" " alt="" coords="233,349,409,376"/>
+<area shape="rect" href="namespaceui.html#aa8a07e2928ca42077565025599baf0f2" title=" " alt="" coords="239,400,402,426"/>
+<area shape="rect" href="namespaceui.html#ad4204ae9873b183dca2479b338348718" title=" " alt="" coords="236,45,405,72"/>
+<area shape="rect" href="attitude__utils_8h.html#a32bc85d5e25e4374b31308af4f530377" title=" " alt="" coords="283,501,358,528"/>
 </map>
 </div>
 <div class="dynheader">
@@ -465,7 +470,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="classApplication_a00d67e65679af5ce18f377f3e6d13d31_icgraph.png" border="0" usemap="#aclassApplication_a00d67e65679af5ce18f377f3e6d13d31_icgraph" alt=""/></div>
 <map name="aclassApplication_a00d67e65679af5ce18f377f3e6d13d31_icgraph" id="aclassApplication_a00d67e65679af5ce18f377f3e6d13d31_icgraph">
 <area shape="rect" title=" " alt="" coords="280,5,475,32"/>
-<area shape="rect" href="classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96" title=" " alt="" coords="108,5,232,32"/>
+<area shape="rect" href="classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96" title="Initializes the application, setting up GLFW, OpenGL, ImGui, and all core components." alt="" coords="108,5,232,32"/>
 <area shape="rect" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -517,20 +522,19 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classApplication_af44c742342adf5305e430ff293f147c1_cgraph.png" border="0" usemap="#aclassApplication_af44c742342adf5305e430ff293f147c1_cgraph" alt=""/></div>
 <map name="aclassApplication_af44c742342adf5305e430ff293f147c1_cgraph" id="aclassApplication_af44c742342adf5305e430ff293f147c1_cgraph">
-<area shape="rect" title=" " alt="" coords="5,284,132,311"/>
-<area shape="rect" href="classApplication.html#a4e7a520d659593b385b246a43e604dfb" title=" " alt="" coords="180,284,343,311"/>
-<area shape="rect" href="namespaceui.html#a0053c22f687ace038e6a6625e751ac6c" title=" " alt="" coords="441,5,550,32"/>
-<area shape="rect" href="namespaceui.html#a447c8573ad59f48165a527a06c94fb62" title=" " alt="" coords="648,81,731,108"/>
-<area shape="rect" href="namespaceui.html#a23857d08f2eee27af80c1607a82cfded" title=" " alt="" coords="436,157,555,184"/>
-<area shape="rect" href="namespaceui.html#a27aa4868ffcd17787cc35f7e24a0c616" title=" " alt="" coords="651,309,728,336"/>
-<area shape="rect" href="classPanelManager.html#accbb2906139bed93e60a3b7390c43e90" title=" " alt="" coords="410,208,581,235"/>
-<area shape="rect" href="namespaceui.html#aab4c47f869143e855e5a9cb8b6f2cf8b" title=" " alt="" coords="447,259,543,285"/>
-<area shape="rect" href="classCamera.html#aa2ed9d27803f5edc824e4afe8cbbbfbc" title=" " alt="" coords="391,309,600,336"/>
-<area shape="rect" href="classCamera.html#a2f90e661a78172675ca06ea69667b531" title=" " alt="" coords="407,360,583,387"/>
-<area shape="rect" href="namespaceui.html#aa8a07e2928ca42077565025599baf0f2" title=" " alt="" coords="414,411,577,437"/>
-<area shape="rect" href="namespaceui.html#ad4204ae9873b183dca2479b338348718" title=" " alt="" coords="411,107,580,133"/>
-<area shape="rect" href="classAxisRenderer.html#aeafc1964746638b7067055b5bf616d51" title=" " alt="" coords="407,512,584,539"/>
-<area shape="rect" href="classRenderer.html#a5c4417eb759e6322707ee2ab0ecb595f" title=" " alt="" coords="400,563,591,589"/>
+<area shape="rect" title=" " alt="" coords="5,248,132,274"/>
+<area shape="rect" href="classApplication.html#a4e7a520d659593b385b246a43e604dfb" title=" " alt="" coords="180,248,343,274"/>
+<area shape="rect" href="namespaceui.html#a0053c22f687ace038e6a6625e751ac6c" title=" " alt="" coords="441,96,550,122"/>
+<area shape="rect" href="namespaceui.html#a447c8573ad59f48165a527a06c94fb62" title=" " alt="" coords="648,70,731,97"/>
+<area shape="rect" href="namespaceui.html#a23857d08f2eee27af80c1607a82cfded" title=" " alt="" coords="436,146,555,173"/>
+<area shape="rect" href="namespaceui.html#a27aa4868ffcd17787cc35f7e24a0c616" title=" " alt="" coords="651,298,728,325"/>
+<area shape="rect" href="classPanelManager.html#accbb2906139bed93e60a3b7390c43e90" title=" " alt="" coords="410,197,581,224"/>
+<area shape="rect" href="namespaceui.html#aab4c47f869143e855e5a9cb8b6f2cf8b" title=" " alt="" coords="447,248,543,274"/>
+<area shape="rect" href="classCamera.html#aa2ed9d27803f5edc824e4afe8cbbbfbc" title=" " alt="" coords="391,298,600,325"/>
+<area shape="rect" href="classCamera.html#a2f90e661a78172675ca06ea69667b531" title=" " alt="" coords="407,349,583,376"/>
+<area shape="rect" href="namespaceui.html#aa8a07e2928ca42077565025599baf0f2" title=" " alt="" coords="414,400,577,426"/>
+<area shape="rect" href="namespaceui.html#ad4204ae9873b183dca2479b338348718" title=" " alt="" coords="411,45,580,72"/>
+<area shape="rect" href="attitude__utils_8h.html#a32bc85d5e25e4374b31308af4f530377" title=" " alt="" coords="458,501,533,528"/>
 </map>
 </div>
 <div class="dynheader">

@@ -136,8 +136,8 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a20e333ffdfe2eab81d5e0c9df189595d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acef78e29043f3602fe7456343636eb07"><td class="memItemLeft" align="right" valign="top">glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState.html#acef78e29043f3602fe7456343636eb07">model_matrix</a> {1.0f}</td></tr>
 <tr class="separator:acef78e29043f3602fe7456343636eb07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4210ca42440c1b48ae584837d0d71770"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState.html#a4210ca42440c1b48ae584837d0d71770">rotation_speed_deg_per_sec</a> {30.0}</td></tr>
-<tr class="separator:a4210ca42440c1b48ae584837d0d71770"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d3ee7c82a58aa775399979710170812"><td class="memItemLeft" align="right" valign="top">glm::dvec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState.html#a1d3ee7c82a58aa775399979710170812">angular_rate_deg_per_sec</a> {0.0, 0.0, 30.0}</td></tr>
+<tr class="separator:a1d3ee7c82a58aa775399979710170812"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4cee76b5fa37d7373e805368a70116c6"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState.html#a4cee76b5fa37d7373e805368a70116c6">time_seconds</a> {0.0}</td></tr>
 <tr class="separator:a4cee76b5fa37d7373e805368a70116c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a868d760400e36d6edda9251ce00d0077"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState.html#a868d760400e36d6edda9251ce00d0077">last_dt</a> {0.0}</td></tr>
@@ -160,6 +160,20 @@ Public Attributes</h2></td></tr>
 <tr class="separator:aff22ad8c34d8c4eca0682d4a7bf22fe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a1d3ee7c82a58aa775399979710170812"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d3ee7c82a58aa775399979710170812">&#9670;&nbsp;</a></span>angular_rate_deg_per_sec</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">glm::dvec3 SimulationState::angular_rate_deg_per_sec {0.0, 0.0, 30.0}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aff22ad8c34d8c4eca0682d4a7bf22fe8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aff22ad8c34d8c4eca0682d4a7bf22fe8">&#9670;&nbsp;</a></span>control</h2>
 
@@ -280,20 +294,6 @@ Public Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">std::array&lt;double, 4&gt; SimulationState::quaternion {1.0, 0.0, 0.0, 0.0}</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a4210ca42440c1b48ae584837d0d71770"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4210ca42440c1b48ae584837d0d71770">&#9670;&nbsp;</a></span>rotation_speed_deg_per_sec</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double SimulationState::rotation_speed_deg_per_sec {30.0}</td>
         </tr>
       </table>
 </div><div class="memdoc">
