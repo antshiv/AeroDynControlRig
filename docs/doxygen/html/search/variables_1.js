@@ -1,0 +1,6 @@
+var searchData=
+[
+  ['body_468',['body',['../structui_1_1FontSet.html#ae55a8b9cef412ca2b3bd57e5a7641d72',1,'ui::FontSet']]],
+  ['bus_5fcurrent_469',['bus_current',['../structSimulationState_1_1PowerHistory.html#a2f9b6650250b2e99655faedd0fd084e6',1,'SimulationState::PowerHistory']]],
+  ['bus_5fvoltage_470',['bus_voltage',['../structSimulationState_1_1PowerHistory.html#a853fcd6de59da7e888dd769f86740bf4',1,'SimulationState::PowerHistory']]]
+];

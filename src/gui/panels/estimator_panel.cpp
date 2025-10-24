@@ -1,50 +1,124 @@
 #include "gui/panels/estimator_panel.h"
 
-#include <glm/glm.hpp>
+#include <algorithm>
+#include <array>
+#include <cmath>
+#include <cstdio>
+#include <string>
 
-#include "core/simulation_state.h"
-#include "render/camera.h"
 #include "attitude/attitude_utils.h"
+#include "core/simulation_state.h"
+#include "gui/style.h"
+#include "gui/widgets/card.h"
+#include "gui/widgets/chip.h"
+#include "render/camera.h"
 
 #include "imgui.h"
+
+namespace {
+std::string FormatEuler(double roll, double pitch, double yaw) {
+    char buffer[96];
+    std::snprintf(buffer,
+                  sizeof(buffer),
+                  "%.1f deg, %.1f deg, %.1f deg",
+                  rad2deg(roll),
+                  rad2deg(pitch),
+                  rad2deg(yaw));
+    return std::string(buffer);
+}
+
+std::string FormatEulerDelta(double roll, double pitch, double yaw) {
+    char buffer[96];
+    std::snprintf(buffer,
+                  sizeof(buffer),
+                  "d %.2f deg, %.2f deg, %.2f deg",
+                  rad2deg(roll),
+                  rad2deg(pitch),
+                  rad2deg(yaw));
+    return std::string(buffer);
+}
+
+std::string FormatQuaternion(const std::array<double, 4>& q) {
+    char buffer[128];
+    std::snprintf(buffer,
+                  sizeof(buffer),
+                  "[%.3f, %.3f, %.3f, %.3f]",
+                  q[0],
+                  q[1],
+                  q[2],
+                  q[3]);
+    return std::string(buffer);
+}
+}  // namespace
 
 void EstimatorPanel::draw(SimulationState& state, Camera& camera) {
     (void)camera;
 
-    double roll_true = state.euler.roll;
-    double pitch_true = state.euler.pitch;
-    double yaw_true = state.euler.yaw;
+    ui::CardOptions options;
+    options.min_size = ImVec2(320.0f, 320.0f);
 
-    double roll_est = state.estimator.euler.roll;
-    double pitch_est = state.estimator.euler.pitch;
-    double yaw_est = state.estimator.euler.yaw;
-
-    if (ImGui::Begin(name(), nullptr, ImGuiWindowFlags_AlwaysAutoResize)) {
-        ImGui::Text("True vs Estimated Orientation (deg)");
-        ImGui::Separator();
-        ImGui::Text("Roll:   %.2f / %.2f (err %.2f)", rad2deg(roll_true), rad2deg(roll_est), rad2deg(roll_est - roll_true));
-        ImGui::Text("Pitch:  %.2f / %.2f (err %.2f)", rad2deg(pitch_true), rad2deg(pitch_est), rad2deg(pitch_est - pitch_true));
-        ImGui::Text("Yaw:    %.2f / %.2f (err %.2f)", rad2deg(yaw_true), rad2deg(yaw_est), rad2deg(yaw_est - yaw_true));
-
-        ImGui::Separator();
-        ImGui::Text("Estimator Quaternion:");
-        ImGui::Text("[%.4f, %.4f, %.4f, %.4f]",
-                    state.estimator.quaternion[0],
-                    state.estimator.quaternion[1],
-                    state.estimator.quaternion[2],
-                    state.estimator.quaternion[3]);
-
-        ImGui::Separator();
-        ImGui::Text("Sensor Inputs");
-        ImGui::Text("Gyro (rad/s): %.3f %.3f %.3f",
-                    state.sensor.gyro_rad_s.x,
-                    state.sensor.gyro_rad_s.y,
-                    state.sensor.gyro_rad_s.z);
-        ImGui::Text("Accel (m/s^2): %.3f %.3f %.3f",
-                    state.sensor.accel_mps2.x,
-                    state.sensor.accel_mps2.y,
-                    state.sensor.accel_mps2.z);
+    if (!ui::BeginCard(name(), options, nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse)) {
+        ui::EndCard();
+        return;
     }
-    ImGui::End();
-}
 
+    const ui::Palette& palette = ui::Colors();
+    ui::CardHeader("State Estimation", "Kalman Filter");
+
+    const auto& true_euler = state.euler;
+    const auto& est_euler = state.estimator.euler;
+
+    std::string true_orientation = FormatEuler(true_euler.roll, true_euler.pitch, true_euler.yaw);
+    std::string est_orientation = FormatEuler(est_euler.roll, est_euler.pitch, est_euler.yaw);
+    double err_roll = est_euler.roll - true_euler.roll;
+    double err_pitch = est_euler.pitch - true_euler.pitch;
+    double err_yaw = est_euler.yaw - true_euler.yaw;
+    std::string error_orientation = FormatEulerDelta(err_roll, err_pitch, err_yaw);
+    double max_error_deg = std::max({std::abs(rad2deg(err_roll)),
+                                     std::abs(rad2deg(err_pitch)),
+                                     std::abs(rad2deg(err_yaw))});
+    std::string estimator_quat = FormatQuaternion(state.estimator.quaternion);
+
+    ui::ValueChip("True Orientation", true_orientation.c_str(), ui::ChipConfig{220.0f});
+    ImGui::Dummy(ImVec2(0.0f, 6.0f));
+    ui::ValueChip("Estimated Orientation", est_orientation.c_str(), ui::ChipConfig{220.0f});
+    ImGui::Dummy(ImVec2(0.0f, 6.0f));
+
+    ui::ChipConfig error_config;
+    error_config.min_width = 220.0f;
+    error_config.variant = max_error_deg < 1.0 ? ui::ChipVariant::Positive : ui::ChipVariant::Negative;
+    ui::ValueChip("Orientation Error", error_orientation.c_str(), error_config);
+
+    ImGui::Dummy(ImVec2(0.0f, 6.0f));
+    ui::ValueChip("Estimator Quaternion", estimator_quat.c_str(), ui::ChipConfig{240.0f});
+
+    ImGui::Dummy(ImVec2(0.0f, 10.0f));
+    ImGui::PushStyleColor(ImGuiCol_Text, palette.text_muted);
+    ImGui::Text("Last dt %.5f s", state.last_dt);
+    ImGui::PopStyleColor();
+
+    ImVec2 callout_origin = ImGui::GetCursorScreenPos();
+    const float callout_radius = 28.0f;
+    callout_origin.x += ImGui::GetContentRegionAvail().x - callout_radius * 2.0f - 4.0f;
+    callout_origin.y += 4.0f;
+
+    ImDrawList* draw_list = ImGui::GetWindowDrawList();
+    draw_list->AddCircleFilled(callout_origin + ImVec2(callout_radius, callout_radius),
+                               callout_radius,
+                               ImGui::ColorConvertFloat4ToU32(palette.accent_base));
+    const ui::FontSet& fonts = ui::Fonts();
+    if (fonts.icon) {
+        draw_list->AddText(fonts.icon,
+                           fonts.icon->FontSize,
+                           callout_origin + ImVec2(callout_radius - 12.0f, callout_radius - 12.0f),
+                           ImGui::ColorConvertFloat4ToU32(ImVec4(0.976f, 0.992f, 1.0f, 1.0f)),
+                           u8"\ue946");
+    } else {
+        draw_list->AddText(callout_origin + ImVec2(callout_radius - 12.0f, callout_radius - 8.0f),
+                           ImGui::ColorConvertFloat4ToU32(ImVec4(0.976f, 0.992f, 1.0f, 1.0f)),
+                           "N");
+    }
+    ImGui::Dummy(ImVec2(callout_radius * 2.0f, callout_radius * 2.0f));
+
+    ui::EndCard();
+}

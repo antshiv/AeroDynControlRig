@@ -1,6 +1,7 @@
 #include "gui/panels/control_panel.h"
 
 #include <algorithm>
+#include <glm/gtc/type_ptr.hpp>
 
 #include "core/simulation_state.h"
 #include "render/camera.h"
@@ -18,13 +19,13 @@ void ControlPanel::draw(SimulationState& state, Camera& camera) {
 
     ImGui::Separator();
 
-    double rotation_speed = state.rotation_speed_deg_per_sec;
-    if (ImGui::DragScalar("Rotation Speed (deg/s)", ImGuiDataType_Double, &rotation_speed, 0.1, nullptr, nullptr, "%.2f")) {
-        state.rotation_speed_deg_per_sec = rotation_speed;
+    glm::vec3 body_rates = glm::vec3(state.angular_rate_deg_per_sec);
+    if (ImGui::SliderFloat3("Body Rates (deg/s)", glm::value_ptr(body_rates), -360.0f, 360.0f, "%.1f")) {
+        state.angular_rate_deg_per_sec = glm::dvec3(body_rates);
     }
     ImGui::SameLine();
-    if (ImGui::SmallButton("Zero")) {
-        state.rotation_speed_deg_per_sec = 0.0;
+    if (ImGui::SmallButton("Zero##BodyRates")) {
+        state.angular_rate_deg_per_sec = glm::dvec3(0.0, 0.0, 0.0);
     }
 
     ImGui::Separator();

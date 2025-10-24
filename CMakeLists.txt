@@ -29,11 +29,18 @@ set(TEST_RIG_SOURCES
     src/modules/first_order_dynamics.cpp
     src/modules/sensor_simulator.cpp
     src/modules/complementary_estimator.cpp
+    src/modules/rotor_telemetry.cpp
     src/gui/panel_manager.cpp
+    src/gui/style.cpp
+    src/gui/widgets/card.cpp
+    src/gui/widgets/chip.cpp
     src/gui/panels/control_panel.cpp
     src/gui/panels/telemetry_panel.cpp
     src/gui/panels/dynamics_panel.cpp
     src/gui/panels/estimator_panel.cpp
+    src/gui/panels/rotor_panel.cpp
+    src/gui/panels/power_panel.cpp
+    src/gui/panels/sensor_panel.cpp
     src/render/renderer.cpp
     src/render/axis_renderer.cpp
     src/render/camera.cpp

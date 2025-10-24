@@ -5,7 +5,7 @@
 
 class TelemetryPanel : public Panel {
 public:
-    const char* name() const override { return "Data"; }
+    const char* name() const override { return "Flight Telemetry"; }
     void draw(SimulationState& state, Camera& camera) override;
 };
 

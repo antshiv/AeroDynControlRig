@@ -38,8 +38,8 @@ Desktop visualization and testbed for the flight-control stack. The rig stitches
 ## Current Features
 
 - Quaternion sandbox that animates a rigid body and derives Euler angles via `attitudeMathLibrary`.
-- ImGui control panel for camera zoom/rotation speed and a live orientation readout panel.
-- Axis gizmo overlay for quick spatial orientation.
+- Docking-based ImGui workspace with control, telemetry, dynamics, rotor, sensor, and power panels.
+- Axis gizmo overlay for quick spatial orientation plus OpenGL scene rendering.
 
 ## Roadmap
 

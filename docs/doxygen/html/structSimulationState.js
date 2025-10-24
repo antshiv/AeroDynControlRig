@@ -1,0 +1,25 @@
+var structSimulationState =
+[
+    [ "DynamicsConfig", "structSimulationState_1_1DynamicsConfig.html", "structSimulationState_1_1DynamicsConfig" ],
+    [ "DynamicsState", "structSimulationState_1_1DynamicsState.html", "structSimulationState_1_1DynamicsState" ],
+    [ "EstimatorState", "structSimulationState_1_1EstimatorState.html", "structSimulationState_1_1EstimatorState" ],
+    [ "PowerHistory", "structSimulationState_1_1PowerHistory.html", "structSimulationState_1_1PowerHistory" ],
+    [ "RotorConfig", "structSimulationState_1_1RotorConfig.html", "structSimulationState_1_1RotorConfig" ],
+    [ "RotorTelemetry", "structSimulationState_1_1RotorTelemetry.html", "structSimulationState_1_1RotorTelemetry" ],
+    [ "SensorFrame", "structSimulationState_1_1SensorFrame.html", "structSimulationState_1_1SensorFrame" ],
+    [ "SimulationControl", "structSimulationState_1_1SimulationControl.html", "structSimulationState_1_1SimulationControl" ],
+    [ "control", "structSimulationState.html#aff22ad8c34d8c4eca0682d4a7bf22fe8", null ],
+    [ "dynamics_config", "structSimulationState.html#a2a64ddac248ee5786c0c1529e7904787", null ],
+    [ "dynamics_state", "structSimulationState.html#a16f3f8bb6df5c6b4180d6aeb4f14f84d", null ],
+    [ "estimator", "structSimulationState.html#a0dd1bce87c3574e23c5cbb61b3aa5c4e", null ],
+    [ "euler", "structSimulationState.html#ad15c4910aac271b463e80f987581326a", null ],
+    [ "last_dt", "structSimulationState.html#a868d760400e36d6edda9251ce00d0077", null ],
+    [ "model_matrix", "structSimulationState.html#acef78e29043f3602fe7456343636eb07", null ],
+    [ "power", "structSimulationState.html#aac543bffed2e5932ed574cd35280acab", null ],
+    [ "quaternion", "structSimulationState.html#a20e333ffdfe2eab81d5e0c9df189595d", null ],
+    [ "rotation_speed_deg_per_sec", "structSimulationState.html#a4210ca42440c1b48ae584837d0d71770", null ],
+    [ "rotor", "structSimulationState.html#a43e0b8ce8ca4d5cee64c1aac6c854180", null ],
+    [ "rotor_config", "structSimulationState.html#ad5111699afe705f52a485077cff04b41", null ],
+    [ "sensor", "structSimulationState.html#a196d4bfb8d4683c265f7ca38b9a712e3", null ],
+    [ "time_seconds", "structSimulationState.html#a4cee76b5fa37d7373e805368a70116c6", null ]
+];

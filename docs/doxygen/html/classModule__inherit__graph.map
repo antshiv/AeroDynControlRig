@@ -1,0 +1,8 @@
+<map id="Module" name="Module">
+<area shape="rect" id="node1" title=" " alt="" coords="5,107,76,133"/>
+<area shape="rect" id="node2" href="$classComplementaryEstimatorModule.html" title=" " alt="" coords="124,5,363,32"/>
+<area shape="rect" id="node3" href="$classFirstOrderDynamicsModule.html" title=" " alt="" coords="144,56,343,83"/>
+<area shape="rect" id="node4" href="$classQuaternionDemoModule.html" title=" " alt="" coords="153,107,334,133"/>
+<area shape="rect" id="node5" href="$classRotorTelemetryModule.html" title=" " alt="" coords="158,157,329,184"/>
+<area shape="rect" id="node6" href="$classSensorSimulatorModule.html" title=" " alt="" coords="155,208,332,235"/>
+</map>

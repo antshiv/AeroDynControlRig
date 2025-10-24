@@ -31,7 +31,7 @@ void QuaternionDemoModule::initialize(SimulationState& state) {
     state.euler.order = EULER_ZYX;
     state.quaternion = {1.0, 0.0, 0.0, 0.0};
     state.model_matrix = glm::mat4(1.0f);
-    state.rotation_speed_deg_per_sec = 30.0;
+    state.angular_rate_deg_per_sec = glm::dvec3(0.0, 0.0, 30.0);
 }
 
 void QuaternionDemoModule::update(double dt, SimulationState& state) {
@@ -41,8 +41,18 @@ void QuaternionDemoModule::update(double dt, SimulationState& state) {
 
     state.time_seconds += dt;
 
-    const double yaw_increment = deg2rad(state.rotation_speed_deg_per_sec) * dt;
+    glm::dvec3 rates = state.angular_rate_deg_per_sec;
+
+    const double roll_increment = deg2rad(rates.x) * dt;
+    const double pitch_increment = deg2rad(rates.y) * dt;
+    const double yaw_increment = deg2rad(rates.z) * dt;
+
+    state.euler.roll += roll_increment;
+    state.euler.pitch += pitch_increment;
     state.euler.yaw += yaw_increment;
+
+    normalize_angle(state.euler.roll);
+    normalize_angle(state.euler.pitch);
     normalize_angle(state.euler.yaw);
 
     double dcm[3][3];

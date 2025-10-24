@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Antsnad - Data Source Integrations</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0A4D68",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex min-h-screen w-full">
+<!-- Navigation Drawer -->
+<div class="hidden lg:flex lg:w-64 flex-col gap-4 bg-background-light dark:bg-background-dark p-4 border-r border-gray-200 dark:border-gray-800">
+<div class="flex items-center gap-2 px-4 pb-2">
+<span class="material-symbols-outlined text-primary text-3xl">hub</span>
+<h2 class="text-gray-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1">Antsnad</h2>
+</div>
+<ul class="flex flex-col gap-2">
+<li class="flex h-12 items-center gap-4 rounded-lg px-4 cursor-pointer text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-800"><span class="material-symbols-outlined">dashboard</span><p class="text-base font-medium leading-tight truncate">Dashboard</p></li>
+<li class="flex h-12 items-center gap-4 rounded-lg px-4 bg-primary/20 cursor-pointer text-primary dark:text-primary-light"><span class="material-symbols-outlined">cable</span><p class="text-base font-bold leading-tight truncate">Data Source Integrations</p></li>
+<li class="flex h-12 items-center gap-4 rounded-lg px-4 cursor-pointer text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-800"><span class="material-symbols-outlined">psychology</span><p class="text-base font-medium leading-tight truncate">LLM Management</p></li>
+<li class="flex h-12 items-center gap-4 rounded-lg px-4 cursor-pointer text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-800"><span class="material-symbols-outlined">biotech</span><p class="text-base font-medium leading-tight truncate">Researchers</p></li>
+<li class="flex h-12 items-center gap-4 rounded-lg px-4 cursor-pointer text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-800"><span class="material-symbols-outlined">eco</span><p class="text-base font-medium leading-tight truncate">Conservationists</p></li>
+</ul>
+</div>
+<!-- Main Content -->
+<div class="flex-1 flex flex-col">
+<!-- Top App Bar -->
+<div class="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 justify-between border-b border-gray-200 dark:border-gray-800 lg:hidden">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl">hub</span>
+<h2 class="text-gray-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1">Antsnad</h2>
+</div>
+<button class="lg:hidden text-gray-900 dark:text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<main class="flex-1 p-4 sm:p-6 lg:p-8">
+<div class="flex justify-between items-center mb-6">
+<h1 class="text-gray-900 dark:text-white tracking-light text-[32px] font-bold leading-tight">Data Source Integrations</h1>
+<button class="flex items-center justify-center gap-2 rounded-lg h-10 px-4 bg-primary text-white text-sm font-medium leading-normal shadow-md hover:bg-primary/90">
+<span class="material-symbols-outlined">add</span>
+<span>New Integration</span>
+</button>
+</div>
+<!-- Configured Integrations -->
+<section>
+<h2 class="text-gray-900 dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em] pb-3 pt-5">Configured Integrations</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- Card 1: Connected -->
+<div class="flex flex-col gap-4 rounded-xl bg-white dark:bg-[#192633] p-4 shadow-[0_4px_12px_rgba(0,0,0,0.05)] dark:shadow-[0_0_4px_rgba(0,0,0,0.1)]">
+<div class="flex justify-between items-start">
+<div class="flex flex-col gap-1">
+<p class="text-gray-600 dark:text-[#92adc9] text-sm font-normal leading-normal">Antshiv Robotics</p>
+<p class="text-gray-900 dark:text-white text-lg font-bold leading-tight">Antshiv Robotics - Lab 1</p>
+</div>
+<div class="flex items-center gap-2 text-sm font-medium text-green-500">
+<div class="size-3 rounded-full bg-green-500"></div>
+                                Connected
+                            </div>
+</div>
+<p class="text-gray-500 dark:text-gray-400 text-sm">Last synced: 2 hours ago</p>
+<div class="flex items-center gap-2 mt-auto pt-4 border-t border-gray-200 dark:border-gray-700">
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-4 gap-2 bg-primary/20 text-primary dark:bg-[#233648] dark:text-white text-sm font-medium leading-normal flex-1 hover:bg-primary/30">
+<span class="material-symbols-outlined text-lg">sync</span>
+<span class="truncate">Sync Now</span>
+</button>
+<button class="flex cursor-pointer items-center justify-center rounded-lg h-9 px-3 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 text-sm font-medium">
+<span class="material-symbols-outlined text-lg">edit</span>
+</button>
+<button class="flex cursor-pointer items-center justify-center rounded-lg h-9 px-3 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 text-sm font-medium">
+<span class="material-symbols-outlined text-lg">power_settings_new</span>
+</button>
+</div>
+</div>
+<!-- Card 2: Error -->
+<div class="flex flex-col gap-4 rounded-xl bg-white dark:bg-[#192633] p-4 shadow-[0_4px_12px_rgba(0,0,0,0.05)] dark:shadow-[0_0_4px_rgba(0,0,0,0.1)]">
+<div class="flex justify-between items-start">
+<div class="flex flex-col gap-1">
+<p class="text-gray-600 dark:text-[#92adc9] text-sm font-normal leading-normal">Field Command Center</p>
+<p class="text-gray-900 dark:text-white text-lg font-bold leading-tight">FCC - Amazon Rainforest</p>
+</div>
+<div class="flex items-center gap-2 text-sm font-medium text-red-500">
+<div class="size-3 rounded-full bg-red-500"></div>
+                                Error
+                            </div>
+</div>
+<p class="text-gray-500 dark:text-gray-400 text-sm">Last sync attempt: 1 day ago</p>
+<div class="flex items-center gap-2 mt-auto pt-4 border-t border-gray-200 dark:border-gray-700">
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-4 gap-2 bg-primary/20 text-primary dark:bg-[#233648] dark:text-white text-sm font-medium leading-normal flex-1 hover:bg-primary/30">
+<span class="material-symbols-outlined text-lg">sync_problem</span>
+<span class="truncate">Retry Sync</span>
+</button>
+<button class="flex cursor-pointer items-center justify-center rounded-lg h-9 px-3 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 text-sm font-medium">
+<span class="material-symbols-outlined text-lg">edit</span>
+</button>
+<button class="flex cursor-pointer items-center justify-center rounded-lg h-9 px-3 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 text-sm font-medium">
+<span class="material-symbols-outlined text-lg">power_settings_new</span>
+</button>
+</div>
+</div>
+<!-- Card 3: Disconnected -->
+<div class="flex flex-col gap-4 rounded-xl bg-white dark:bg-[#192633] p-4 shadow-[0_4px_12px_rgba(0,0,0,0.05)] dark:shadow-[0_0_4px_rgba(0,0,0,0.1)]">
+<div class="flex justify-between items-start">
+<div class="flex flex-col gap-1">
+<p class="text-gray-600 dark:text-[#92adc9] text-sm font-normal leading-normal">Diffgram</p>
+<p class="text-gray-900 dark:text-white text-lg font-bold leading-tight">Annotation Project</p>
+</div>
+<div class="flex items-center gap-2 text-sm font-medium text-gray-500 dark:text-gray-400">
+<div class="size-3 rounded-full bg-gray-500 dark:bg-gray-400"></div>
+                                Deactivated
+                            </div>
+</div>
+<p class="text-gray-500 dark:text-gray-400 text-sm">Last synced: 3 weeks ago</p>
+<div class="flex items-center gap-2 mt-auto pt-4 border-t border-gray-200 dark:border-gray-700">
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-4 gap-2 bg-primary/20 text-primary dark:bg-[#233648] dark:text-white text-sm font-medium leading-normal flex-1 hover:bg-primary/30">
+<span class="material-symbols-outlined text-lg">play_circle</span>
+<span class="truncate">Activate</span>
+</button>
+<button class="flex cursor-pointer items-center justify-center rounded-lg h-9 px-3 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 text-sm font-medium">
+<span class="material-symbols-outlined text-lg">edit</span>
+</button>
+<button class="flex cursor-pointer items-center justify-center rounded-lg h-9 px-3 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 text-sm font-medium">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Available Connectors -->
+<section class="mt-12">
+<h2 class="text-gray-900 dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em] pb-3 pt-5">Add a New Integration</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+<!-- Connector Card -->
+<div class="flex flex-col items-center text-center gap-4 rounded-xl bg-white dark:bg-[#192633] p-6 shadow-[0_4px_12px_rgba(0,0,0,0.05)] dark:shadow-[0_0_4px_rgba(0,0,0,0.1)]">
+<div class="flex items-center justify-center size-16 bg-primary/10 rounded-full">
+<span class="material-symbols-outlined text-primary text-4xl">api</span>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-gray-900 dark:text-white text-base font-bold leading-tight">Antshiv Robotics API</p>
+<p class="text-gray-500 dark:text-[#92adc9] text-sm font-normal leading-normal">Sync data from robotic sensors.</p>
+</div>
+<button class="mt-2 flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-4 bg-primary/20 text-primary dark:bg-[#233648] dark:text-white text-sm font-medium leading-normal hover:bg-primary/30">
+                            Connect
+                        </button>
+</div>
+<!-- Connector Card -->
+<div class="flex flex-col items-center text-center gap-4 rounded-xl bg-white dark:bg-[#192633] p-6 shadow-[0_4px_12px_rgba(0,0,0,0.05)] dark:shadow-[0_0_4px_rgba(0,0,0,0.1)]">
+<div class="flex items-center justify-center size-16 bg-primary/10 rounded-full">
+<span class="material-symbols-outlined text-primary text-4xl">upload_file</span>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-gray-900 dark:text-white text-base font-bold leading-tight">Field Command Center</p>
+<p class="text-gray-500 dark:text-[#92adc9] text-sm font-normal leading-normal">Upload logs from field operations.</p>
+</div>
+<button class="mt-2 flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-4 bg-primary/20 text-primary dark:bg-[#233648] dark:text-white text-sm font-medium leading-normal hover:bg-primary/30">
+                            Connect
+                        </button>
+</div>
+<!-- Connector Card -->
+<div class="flex flex-col items-center text-center gap-4 rounded-xl bg-white dark:bg-[#192633] p-6 shadow-[0_4px_12px_rgba(0,0,0,0.05)] dark:shadow-[0_0_4px_rgba(0,0,0,0.1)]">
+<div class="flex items-center justify-center size-16 bg-primary/10 rounded-full">
+<span class="material-symbols-outlined text-primary text-4xl">webhook</span>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-gray-900 dark:text-white text-base font-bold leading-tight">Diffgram Webhook</p>
+<p class="text-gray-500 dark:text-[#92adc9] text-sm font-normal leading-normal">Connect to annotation projects.</p>
+</div>
+<button class="mt-2 flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-4 bg-primary/20 text-primary dark:bg-[#233648] dark:text-white text-sm font-medium leading-normal hover:bg-primary/30">
+                            Connect
+                        </button>
+</div>
+<!-- Connector Card -->
+<div class="flex flex-col items-center text-center gap-4 rounded-xl bg-white dark:bg-[#192633] p-6 shadow-[0_4px_12px_rgba(0,0,0,0.05)] dark:shadow-[0_0_4px_rgba(0,0,0,0.1)]">
+<div class="flex items-center justify-center size-16 bg-primary/10 rounded-full">
+<span class="material-symbols-outlined text-primary text-4xl">cloud_upload</span>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-gray-900 dark:text-white text-base font-bold leading-tight">Generic S3 Bucket</p>
+<p class="text-gray-500 dark:text-[#92adc9] text-sm font-normal leading-normal">Connect to any S3-compatible storage.</p>
+</div>
+<button class="mt-2 flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-4 bg-primary/20 text-primary dark:bg-[#233648] dark:text-white text-sm font-medium leading-normal hover:bg-primary/30">
+                            Connect
+                        </button>
+</div>
+</div>
+</section>
+</main>
+</div>
+</div>
+</body></html>

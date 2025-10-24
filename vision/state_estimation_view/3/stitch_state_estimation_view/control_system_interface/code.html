@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Flight Dynamics Visualization</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3498DB",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101c22",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 400,
+                'GRAD' 0,
+                'opsz' 24
+        }
+    </style>
+</head>
+<body class="bg-background-dark font-display text-white">
+<div class="flex h-screen w-full">
+<!-- Left Control Panel -->
+<aside class="flex flex-col w-72 bg-[#1a2a33] p-4 space-y-6">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12" data-alt="A stylized logo for a flight dynamics application, possibly featuring abstract wing or propeller shapes." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBcTtrSb5RF-f_VKYkBEsYhhdiMWVul1svQuQ6qPJjk7mIxJN72Ym0OzssDrhi4O-_xQEbHX2sHBbgfUZdFSTnud6t_Up3RLFD-7GWzQJTMtKJN1YoYdfSzvRREvTTvBeiLylCGiH7i3s2bd8lzokv_EdazEQd3uBGZkQVdWMo-JuEpb56CLdLYLpTxwljdhQXCl_-ksxvY8jFxrQuF5kB0FaCpa2pF7Oi9y-q-75KSbR_RUO9FBNTBl97g-pZcyZEIDdgY3V5hGJg");'></div>
+<div class="flex flex-col">
+<h1 class="text-white text-lg font-bold">Flight Dynamics</h1>
+<p class="text-[#9db0b9] text-sm">OpenGL Visualization</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/20 text-primary" href="#">
+<span class="material-symbols-outlined">gamepad</span>
+<p class="text-sm font-medium">Manual Controls</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary/10 text-white" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+<p class="text-sm font-medium">Autonomous Systems</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary/10 text-white" href="#">
+<span class="material-symbols-outlined">list_alt</span>
+<p class="text-sm font-medium">Simulation Presets</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary/10 text-white" href="#">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-sm font-medium">Settings</p>
+</a>
+</nav>
+<div class="flex-grow space-y-4">
+<h2 class="text-lg font-semibold text-white">Manual Controls</h2>
+<div class="space-y-4">
+<!-- Throttle Slider -->
+<div class="@container">
+<div class="relative flex w-full flex-col items-start justify-between gap-2">
+<div class="flex w-full shrink-[3] items-center justify-between">
+<p class="text-white text-sm font-medium">Throttle</p>
+<p class="text-white text-xs">75%</p>
+</div>
+<div class="flex h-4 w-full items-center gap-4">
+<div class="flex h-1.5 flex-1 rounded-full bg-[#3b4b54]">
+<div class="h-full rounded-full bg-primary" style="width: 75%;"></div>
+<div class="relative"><div class="absolute -left-2.5 -top-2 size-5 rounded-full bg-white border-4 border-primary"></div></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Pitch Slider -->
+<div class="@container">
+<div class="relative flex w-full flex-col items-start justify-between gap-2">
+<div class="flex w-full shrink-[3] items-center justify-between">
+<p class="text-white text-sm font-medium">Pitch</p>
+<p class="text-white text-xs">45°</p>
+</div>
+<div class="flex h-4 w-full items-center gap-4">
+<div class="flex h-1.5 flex-1 rounded-full bg-[#3b4b54]">
+<div class="h-full rounded-full bg-primary" style="width: 45%;"></div>
+<div class="relative"><div class="absolute -left-2.5 -top-2 size-5 rounded-full bg-white border-4 border-primary"></div></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Roll Slider -->
+<div class="@container">
+<div class="relative flex w-full flex-col items-start justify-between gap-2">
+<div class="flex w-full shrink-[3] items-center justify-between">
+<p class="text-white text-sm font-medium">Roll</p>
+<p class="text-white text-xs">30°</p>
+</div>
+<div class="flex h-4 w-full items-center gap-4">
+<div class="flex h-1.5 flex-1 rounded-full bg-[#3b4b54]">
+<div class="h-full rounded-full bg-primary" style="width: 30%;"></div>
+<div class="relative"><div class="absolute -left-2.5 -top-2 size-5 rounded-full bg-white border-4 border-primary"></div></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Yaw Slider -->
+<div class="@container">
+<div class="relative flex w-full flex-col items-start justify-between gap-2">
+<div class="flex w-full shrink-[3] items-center justify-between">
+<p class="text-white text-sm font-medium">Yaw</p>
+<p class="text-white text-xs">60°</p>
+</div>
+<div class="flex h-4 w-full items-center gap-4">
+<div class="flex h-1.5 flex-1 rounded-full bg-[#3b4b54]">
+<div class="h-full rounded-full bg-primary" style="width: 60%;"></div>
+<div class="relative"><div class="absolute -left-2.5 -top-2 size-5 rounded-full bg-white border-4 border-primary"></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<button class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold tracking-[0.015em] hover:bg-primary/90">
+<span class="truncate">Save Scenario</span>
+</button>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col bg-background-dark">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between h-16 px-6 bg-[#1a2a33]">
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg hover:bg-primary/20">
+<span class="material-symbols-outlined">folder_open</span>
+                        File
+                    </button>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg hover:bg-primary/20">
+<span class="material-symbols-outlined">videocam</span>
+                        View
+                    </button>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-primary/20">
+<span class="material-symbols-outlined">play_arrow</span>
+</button>
+<button class="p-2 rounded-full hover:bg-primary/20">
+<span class="material-symbols-outlined">pause</span>
+</button>
+<button class="p-2 rounded-full hover:bg-primary/20">
+<span class="material-symbols-outlined">replay</span>
+</button>
+</div>
+</header>
+<!-- 3D Visualization Pane -->
+<div class="flex-1 p-4">
+<div class="w-full h-full bg-black rounded-lg flex items-center justify-center">
+<img alt="A 3D model of a quadcopter drone." class="w-1/2 h-1/2 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtaJv6FhfllhUIO4ehWtyBL-tISbJPCP13Je4ZXOpY8r1Wx3-4yI-kTvkXk5yuuPNGr7tZ-g1c3BQOQPbIkvaXjP7ooD_Xt84RCRWhXkza45xONK0LFw7yw9opa4S3ZPBzJXJKm1bt-mplCO6Iw95hk60Ec_2ZAEE9cpROkl6SVeAe2wrtdyY-Ldv0sb1NdLJFDlROoxpAjO6xpXseCdIxUl5O_GZD1kQStBSC1ugJMkJqcujBqCJHfPdhSmaavhPSWtTyhCmUs_E"/>
+</div>
+</div>
+</main>
+<!-- Right Data Visualization Panel -->
+<aside class="flex flex-col w-80 bg-[#1a2a33] p-4 space-y-6">
+<h2 class="text-lg font-semibold text-white">Data Visualization</h2>
+<div class="space-y-4">
+<h3 class="text-md font-medium text-white">Flight Status</h3>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-[#101c22] p-3 rounded-lg text-center">
+<p class="text-xs text-[#9db0b9]">Altitude</p>
+<p class="text-xl font-bold text-white">120m</p>
+</div>
+<div class="bg-[#101c22] p-3 rounded-lg text-center">
+<p class="text-xs text-[#9db0b9]">Speed</p>
+<p class="text-xl font-bold text-white">25m/s</p>
+</div>
+<div class="bg-[#101c22] p-3 rounded-lg text-center">
+<p class="text-xs text-[#9db0b9]">Battery</p>
+<p class="text-xl font-bold text-green-400">82%</p>
+</div>
+<div class="bg-[#101c22] p-3 rounded-lg text-center">
+<p class="text-xs text-[#9db0b9]">GPS</p>
+<p class="text-xl font-bold text-green-400">Locked</p>
+</div>
+</div>
+</div>
+<div class="space-y-2">
+<h3 class="text-md font-medium text-white">Sensor Data (Real-time)</h3>
+<div class="bg-[#101c22] p-3 rounded-lg h-40">
+<img class="w-full h-full object-cover rounded-md" data-alt="A placeholder line graph showing fluctuating sensor data over time. The x-axis represents time, and the y-axis represents sensor values. Multiple colored lines indicate different sensors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtGQtBSCGgjwUrNLzHk-RhRjOcegMYGcxhURJTDbp3uL7AXlfZHT4T60BDb3GlbQ3jmBmVFEaiIt68yR1CVue3KEwYUNcBoFFjXdlo87FofhCFTfKDbV_o9uen5L-tmz7SQz6m4HxUKMPght3WxGAkQ0hE-aO_IKMhG5O5G2Us_EnVGpMgoW3F-MYKCzVPuCdrcPYE8rwQVVEcn_Tnc2nDJQ9ULegTZhKlsqNR00zvmIOKyTQGqwi1KKe4w4afjMc4ACOe2VGkXAw"/>
+</div>
+</div>
+<div class="space-y-2">
+<h3 class="text-md font-medium text-white">Motor Outputs</h3>
+<div class="bg-[#101c22] p-3 rounded-lg h-40">
+<img class="w-full h-full object-cover rounded-md" data-alt="A placeholder bar chart displaying the output levels of four motors. Each bar represents a motor, and its height indicates the current power output." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCW8kuTLTQuVZEv0N5Pm4RPHNKqAazrHxv-vY_cBAxhd3m1XwA4iK44-bvu46I4RlfdoWBhNleKH4kDCXuRiWI3VmqMyfDOHaCrbROk0FCIZShDoEF70YjXIMuFRraY_UHxRuVI2gTRuEHhngvQnBXcrZASxV-FiJDdsTKsT0U4CwLjtxQoNflwkTV-EFUpqujGYK8-BqyDfFTwvQ0j8wIYZjlEv-8uhmnK6nG2Fy0xiOib0MeCI6Nku7RGGdG2Cn5GekFmeKEXhB8"/>
+</div>
+</div>
+<div class="flex-grow"></div>
+<button class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/20 text-primary text-sm font-bold tracking-[0.015em] hover:bg-primary/30">
+<span class="truncate">Export Data</span>
+</button>
+</aside>
+</div>
+</body></html>

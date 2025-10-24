@@ -14,6 +14,7 @@
 #include "core/simulation_state.h"
 #include "core/module.h"
 #include "gui/panel_manager.h"
+#include "imgui.h"
 
 class Application {
 public:
@@ -59,6 +60,12 @@ private:
     void updateCamera(float deltaTime);
     void initializeModules();
     void initializePanels();
+
+    ImTextureID renderSceneToTexture(const ImVec2& size);
+    bool ensureRenderTarget(int width, int height);
+    void destroyRenderTarget();
+    int sceneWidth = 0;
+    int sceneHeight = 0;
 };
 
 #endif // APPLICATION_H

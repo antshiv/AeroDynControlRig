@@ -15,8 +15,11 @@ void SensorSimulatorModule::initialize(SimulationState& state) {
 void SensorSimulatorModule::update(double dt, SimulationState& state) {
     (void)dt;
 
-    double yaw_rate_rad_s = deg2rad(state.rotation_speed_deg_per_sec);
-    state.sensor.gyro_rad_s = glm::vec3(0.0f, 0.0f, static_cast<float>(yaw_rate_rad_s));
+    glm::vec3 gyro_body(
+        static_cast<float>(deg2rad(state.angular_rate_deg_per_sec.x)),
+        static_cast<float>(deg2rad(state.angular_rate_deg_per_sec.y)),
+        static_cast<float>(deg2rad(state.angular_rate_deg_per_sec.z)));
+    state.sensor.gyro_rad_s = gyro_body;
 
     double dcm[3][3];
     euler_to_dcm(&state.euler, dcm);
