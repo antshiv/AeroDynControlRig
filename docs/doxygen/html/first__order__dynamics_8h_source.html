@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -85,29 +87,31 @@ $(document).ready(function(){initNavTree('first__order__dynamics_8h_source.html'
 <div class="title">first_order_dynamics.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="first__order__dynamics_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef FIRST_ORDER_DYNAMICS_H</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define FIRST_ORDER_DYNAMICS_H</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="module_8h.html">core/module.h</a>&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="classFirstOrderDynamicsModule.html">    6</a></span>&#160;<span class="keyword">class </span><a class="code" href="classFirstOrderDynamicsModule.html">FirstOrderDynamicsModule</a> : <span class="keyword">public</span> <a class="code" href="classModule.html">Module</a> {</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classFirstOrderDynamicsModule.html#af656e1c877ebe6715daf657b233091a0">initialize</a>(<a class="code" href="structSimulationState.html">SimulationState</a>&amp; state) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classFirstOrderDynamicsModule.html#a4f8a2e9ddc4375885d92d5a50da73233">update</a>(<span class="keywordtype">double</span> dt, <a class="code" href="structSimulationState.html">SimulationState</a>&amp; state) <span class="keyword">override</span>;</div>
+<a href="first__order__dynamics_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#ifndef FIRST_ORDER_DYNAMICS_H</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#define FIRST_ORDER_DYNAMICS_H</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="module_8h.html">core/module.h</a>&quot;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keywordtype">double</span> internal_state_{0.0};</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keywordtype">double</span> time_constant_{1.0};</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keywordtype">double</span> gain_{1.0};</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;};</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// FIRST_ORDER_DYNAMICS_H</span></div>
-<div class="ttc" id="aclassFirstOrderDynamicsModule_html"><div class="ttname"><a href="classFirstOrderDynamicsModule.html">FirstOrderDynamicsModule</a></div><div class="ttdef"><b>Definition:</b> first_order_dynamics.h:6</div></div>
-<div class="ttc" id="aclassFirstOrderDynamicsModule_html_a4f8a2e9ddc4375885d92d5a50da73233"><div class="ttname"><a href="classFirstOrderDynamicsModule.html#a4f8a2e9ddc4375885d92d5a50da73233">FirstOrderDynamicsModule::update</a></div><div class="ttdeci">void update(double dt, SimulationState &amp;state) override</div><div class="ttdef"><b>Definition:</b> first_order_dynamics.cpp:19</div></div>
-<div class="ttc" id="aclassFirstOrderDynamicsModule_html_af656e1c877ebe6715daf657b233091a0"><div class="ttname"><a href="classFirstOrderDynamicsModule.html#af656e1c877ebe6715daf657b233091a0">FirstOrderDynamicsModule::initialize</a></div><div class="ttdeci">void initialize(SimulationState &amp;state) override</div><div class="ttdef"><b>Definition:</b> first_order_dynamics.cpp:12</div></div>
-<div class="ttc" id="aclassModule_html"><div class="ttname"><a href="classModule.html">Module</a></div><div class="ttdef"><b>Definition:</b> module.h:6</div></div>
-<div class="ttc" id="amodule_8h_html"><div class="ttname"><a href="module_8h.html">module.h</a></div></div>
-<div class="ttc" id="astructSimulationState_html"><div class="ttname"><a href="structSimulationState.html">SimulationState</a></div><div class="ttdef"><b>Definition:</b> simulation_state.h:8</div></div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classFirstOrderDynamicsModule.html">   37</a></span>&#160;<span class="keyword">class </span><a class="code" href="classFirstOrderDynamicsModule.html">FirstOrderDynamicsModule</a> : <span class="keyword">public</span> <a class="code" href="classModule.html">Module</a> {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classFirstOrderDynamicsModule.html#af656e1c877ebe6715daf657b233091a0">initialize</a>(<a class="code" href="structSimulationState.html">SimulationState</a>&amp; state) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classFirstOrderDynamicsModule.html#a4f8a2e9ddc4375885d92d5a50da73233">update</a>(<span class="keywordtype">double</span> dt, <a class="code" href="structSimulationState.html">SimulationState</a>&amp; state) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">double</span> internal_state_{0.0}; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">double</span> time_constant_{1.0};  </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">double</span> gain_{1.0};           </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;};</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// FIRST_ORDER_DYNAMICS_H</span></div>
+<div class="ttc" id="aclassFirstOrderDynamicsModule_html"><div class="ttname"><a href="classFirstOrderDynamicsModule.html">FirstOrderDynamicsModule</a></div><div class="ttdoc">Simulates a simple first-order linear time-invariant (LTI) system.</div><div class="ttdef"><b>Definition:</b> first_order_dynamics.h:37</div></div>
+<div class="ttc" id="aclassFirstOrderDynamicsModule_html_a4f8a2e9ddc4375885d92d5a50da73233"><div class="ttname"><a href="classFirstOrderDynamicsModule.html#a4f8a2e9ddc4375885d92d5a50da73233">FirstOrderDynamicsModule::update</a></div><div class="ttdeci">void update(double dt, SimulationState &amp;state) override</div><div class="ttdoc">Update first-order dynamics state.</div><div class="ttdef"><b>Definition:</b> first_order_dynamics.cpp:19</div></div>
+<div class="ttc" id="aclassFirstOrderDynamicsModule_html_af656e1c877ebe6715daf657b233091a0"><div class="ttname"><a href="classFirstOrderDynamicsModule.html#af656e1c877ebe6715daf657b233091a0">FirstOrderDynamicsModule::initialize</a></div><div class="ttdeci">void initialize(SimulationState &amp;state) override</div><div class="ttdoc">Initialize internal state to zero.</div><div class="ttdef"><b>Definition:</b> first_order_dynamics.cpp:12</div></div>
+<div class="ttc" id="aclassModule_html"><div class="ttname"><a href="classModule.html">Module</a></div><div class="ttdoc">Abstract base class for all simulation modules.</div><div class="ttdef"><b>Definition:</b> module.h:21</div></div>
+<div class="ttc" id="amodule_8h_html"><div class="ttname"><a href="module_8h.html">module.h</a></div><div class="ttdoc">Base interface for simulation modules in the AeroDynControlRig.</div></div>
+<div class="ttc" id="astructSimulationState_html"><div class="ttname"><a href="structSimulationState.html">SimulationState</a></div><div class="ttdoc">Central shared state for the entire simulation.</div><div class="ttdef"><b>Definition:</b> simulation_state.h:26</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

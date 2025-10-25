@@ -1,5 +1,5 @@
 <map id="ControlPanel::draw" name="ControlPanel::draw">
-<area shape="rect" id="node1" title=" " alt="" coords="5,31,149,57"/>
-<area shape="rect" id="node2" href="$classControlPanel.html#a853ba498718fa5c60413eab7e01b4bd8" title=" " alt="" coords="197,5,347,32"/>
-<area shape="rect" id="node3" href="$classCamera.html#a02be8aa0dbef77e02dddc715a726fb67" title=" " alt="" coords="215,56,329,83"/>
+<area shape="rect" id="node1" title="Render the panel&#39;s ImGui interface." alt="" coords="5,31,149,57"/>
+<area shape="rect" id="node2" href="$classControlPanel.html#a853ba498718fa5c60413eab7e01b4bd8" title="Get the display name of this panel." alt="" coords="197,5,347,32"/>
+<area shape="rect" id="node3" href="$classCamera.html#a02be8aa0dbef77e02dddc715a726fb67" title="Reset camera position/orientation/zoom to defaults." alt="" coords="215,56,329,83"/>
 </map>

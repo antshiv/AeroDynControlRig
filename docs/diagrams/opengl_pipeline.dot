@@ -1,0 +1,51 @@
+/**
+ * @file opengl_pipeline.dot
+ * @brief OpenGL rendering pipeline diagram
+ */
+
+digraph OpenGLPipeline {
+    rankdir=LR;
+    node [shape=box, style="rounded,filled", fontname="Arial"];
+    edge [fontname="Arial"];
+
+    // CPU Side
+    subgraph cluster_cpu {
+        label="CPU (C++ Code)";
+        style=filled;
+        fillcolor=lightblue;
+
+        app_tick [label="Application::tick()", fillcolor=lightgreen];
+        setup_buffers [label="Setup VBO/VAO/EBO\n(Vertex Data)", fillcolor=lightyellow];
+        compile_shaders [label="Compile Shaders\n(GLSL)", fillcolor=lightyellow];
+        set_uniforms [label="Set Uniforms\n(model/view/proj)", fillcolor=lightyellow];
+        draw_call [label="glDrawElements()\n(Draw Command)", fillcolor=lightcoral];
+    }
+
+    // GPU Side
+    subgraph cluster_gpu {
+        label="GPU (Graphics Hardware)";
+        style=filled;
+        fillcolor=lavender;
+
+        vertex_shader [label="Vertex Shader\n(Transform Vertices)", shape=ellipse];
+        rasterizer [label="Rasterizer\n(Generate Fragments)", shape=ellipse];
+        fragment_shader [label="Fragment Shader\n(Color Pixels)", shape=ellipse];
+        framebuffer [label="Framebuffer\n(Texture/Screen)", shape=cylinder, fillcolor=lightgreen];
+    }
+
+    // Flow
+    app_tick -> setup_buffers;
+    app_tick -> compile_shaders;
+    setup_buffers -> set_uniforms;
+    compile_shaders -> set_uniforms;
+    set_uniforms -> draw_call;
+
+    draw_call -> vertex_shader [label="GPU processes", style=bold, color=blue];
+    vertex_shader -> rasterizer [label="gl_Position"];
+    rasterizer -> fragment_shader [label="fragments"];
+    fragment_shader -> framebuffer [label="FragColor"];
+
+    // Output
+    framebuffer -> imgui [label="displayed in\nImGui::Image()", style=dashed];
+    imgui [label="ImGui Viewport", shape=box3d, fillcolor=lightcyan];
+}

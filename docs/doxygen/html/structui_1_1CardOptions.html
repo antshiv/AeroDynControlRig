@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -85,24 +87,45 @@ $(document).ready(function(){initNavTree('structui_1_1CardOptions.html',''); ini
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="structui_1_1CardOptions-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">ui::CardOptions Struct Reference</div>  </div>
+<div class="title">ui::CardOptions Struct Reference<div class="ingroups"><a class="el" href="group__WebAnalogy.html">Web Development Analogy</a> &raquo; <a class="el" href="group__UIWidgets.html">UI Widget Library</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Configuration options for Card widget.  
+ <a href="structui_1_1CardOptions.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="card_8h_source.html">card.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a72be65a678a7b3af5389217affc7bb70"><td class="memItemLeft" align="right" valign="top">ImVec2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structui_1_1CardOptions.html#a72be65a678a7b3af5389217affc7bb70">min_size</a> = ImVec2(320.0f, 200.0f)</td></tr>
+<tr class="memdesc:a72be65a678a7b3af5389217affc7bb70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum card dimensions (CSS: min-width, min-height)  <a href="structui_1_1CardOptions.html#a72be65a678a7b3af5389217affc7bb70">More...</a><br /></td></tr>
 <tr class="separator:a72be65a678a7b3af5389217affc7bb70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c0ce36871e19cd9682a832e0576d07f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structui_1_1CardOptions.html#a9c0ce36871e19cd9682a832e0576d07f">enforce_min_size</a> = true</td></tr>
+<tr class="memdesc:a9c0ce36871e19cd9682a832e0576d07f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether to constrain size (default: yes)  <a href="structui_1_1CardOptions.html#a9c0ce36871e19cd9682a832e0576d07f">More...</a><br /></td></tr>
 <tr class="separator:a9c0ce36871e19cd9682a832e0576d07f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac716311d9c572ac0e6bbde6295c4bc97"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structui_1_1CardOptions.html#ac716311d9c572ac0e6bbde6295c4bc97">allow_scrollbar</a> = false</td></tr>
+<tr class="memdesc:ac716311d9c572ac0e6bbde6295c4bc97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable scrolling for overflow content.  <a href="structui_1_1CardOptions.html#ac716311d9c572ac0e6bbde6295c4bc97">More...</a><br /></td></tr>
 <tr class="separator:ac716311d9c572ac0e6bbde6295c4bc97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac2485e683c24f925570b8acbd53a9752"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structui_1_1CardOptions.html#ac2485e683c24f925570b8acbd53a9752">background_alpha</a> = 1.0f</td></tr>
+<tr class="memdesc:ac2485e683c24f925570b8acbd53a9752"><td class="mdescLeft">&#160;</td><td class="mdescRight">Background opacity (0.0 = transparent, 1.0 = opaque)  <a href="structui_1_1CardOptions.html#ac2485e683c24f925570b8acbd53a9752">More...</a><br /></td></tr>
 <tr class="separator:ac2485e683c24f925570b8acbd53a9752"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Data Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Configuration options for Card widget. </p>
+<p><b>Web Equivalent:</b> React component props </p><div class="fragment"><div class="line">&lt;Card</div>
+<div class="line">  minSize={{width: 320, height: 200}}</div>
+<div class="line">  enforceMinSize={true}</div>
+<div class="line">  allowScrollbar={false}</div>
+<div class="line">  backgroundAlpha={1.0}</div>
+<div class="line">/&gt;</div>
+</div><!-- fragment --><p><b>CSS Equivalent:</b> </p><div class="fragment"><div class="line">.card {</div>
+<div class="line">  min-width: 320px;</div>
+<div class="line">  min-height: 200px;</div>
+<div class="line">  background-color: rgba(..., 1.0);</div>
+<div class="line">  overflow: hidden; // if !allow_scrollbar</div>
+<div class="line">}</div>
+</div><!-- fragment --> </div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="ac716311d9c572ac0e6bbde6295c4bc97"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac716311d9c572ac0e6bbde6295c4bc97">&#9670;&nbsp;</a></span>allow_scrollbar</h2>
 
@@ -114,6 +137,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Enable scrolling for overflow content. </p>
 
 </div>
 </div>
@@ -129,6 +154,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Background opacity (0.0 = transparent, 1.0 = opaque) </p>
+
 </div>
 </div>
 <a id="a9c0ce36871e19cd9682a832e0576d07f"></a>
@@ -143,6 +170,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Whether to constrain size (default: yes) </p>
+
 </div>
 </div>
 <a id="a72be65a678a7b3af5389217affc7bb70"></a>
@@ -156,6 +185,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Minimum card dimensions (CSS: min-width, min-height) </p>
 
 </div>
 </div>

@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -90,49 +92,98 @@ $(document).ready(function(){initNavTree('classCamera.html',''); initResizable()
 </div><!--header-->
 <div class="contents">
 
+<p>First-person camera with mouse look and WASD movement.  
+ <a href="classCamera.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="camera_8h_source.html">camera.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a02be8aa0dbef77e02dddc715a726fb67"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a02be8aa0dbef77e02dddc715a726fb67">reset</a> ()</td></tr>
-<tr class="separator:a02be8aa0dbef77e02dddc715a726fb67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa46b61fb3119cb0c888215275f0692a4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#aa46b61fb3119cb0c888215275f0692a4">Camera</a> (glm::vec3 startPosition=glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3 startUp=glm::vec3(0.0f, 1.0f, 0.0f), float startYaw=-90.0f, float startPitch=0.0f)</td></tr>
+<tr class="memdesc:aa46b61fb3119cb0c888215275f0692a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a camera with specified initial state.  <a href="classCamera.html#aa46b61fb3119cb0c888215275f0692a4">More...</a><br /></td></tr>
 <tr class="separator:aa46b61fb3119cb0c888215275f0692a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f90e661a78172675ca06ea69667b531"><td class="memItemLeft" align="right" valign="top">glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a2f90e661a78172675ca06ea69667b531">getViewMatrix</a> () const</td></tr>
+<tr class="memdesc:a2f90e661a78172675ca06ea69667b531"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the view matrix for rendering.  <a href="classCamera.html#a2f90e661a78172675ca06ea69667b531">More...</a><br /></td></tr>
 <tr class="separator:a2f90e661a78172675ca06ea69667b531"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2ed9d27803f5edc824e4afe8cbbbfbc"><td class="memItemLeft" align="right" valign="top">glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#aa2ed9d27803f5edc824e4afe8cbbbfbc">getProjectionMatrix</a> (float aspectRatio) const</td></tr>
+<tr class="memdesc:aa2ed9d27803f5edc824e4afe8cbbbfbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the perspective projection matrix.  <a href="classCamera.html#aa2ed9d27803f5edc824e4afe8cbbbfbc">More...</a><br /></td></tr>
 <tr class="separator:aa2ed9d27803f5edc824e4afe8cbbbfbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d0930626f874469be5849c8b4d8e37e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a2d0930626f874469be5849c8b4d8e37e">processKeyboardInput_old</a> (int key)</td></tr>
+<tr class="memdesc:a2d0930626f874469be5849c8b4d8e37e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process keyboard input (legacy GLFW key codes - deprecated)  <a href="classCamera.html#a2d0930626f874469be5849c8b4d8e37e">More...</a><br /></td></tr>
 <tr class="separator:a2d0930626f874469be5849c8b4d8e37e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f07e3e1263c93781fb17b104d4f4c80"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a4f07e3e1263c93781fb17b104d4f4c80">processMouseMovement</a> (float xOffset, float yOffset, bool constrainPitch=true)</td></tr>
+<tr class="memdesc:a4f07e3e1263c93781fb17b104d4f4c80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process mouse movement for look control.  <a href="classCamera.html#a4f07e3e1263c93781fb17b104d4f4c80">More...</a><br /></td></tr>
 <tr class="separator:a4f07e3e1263c93781fb17b104d4f4c80"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a067090ee525389944ba3bacaa62f7632"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a067090ee525389944ba3bacaa62f7632">processMouseScroll</a> (float yOffset)</td></tr>
+<tr class="memdesc:a067090ee525389944ba3bacaa62f7632"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process mouse scroll for zoom (FOV adjustment)  <a href="classCamera.html#a067090ee525389944ba3bacaa62f7632">More...</a><br /></td></tr>
 <tr class="separator:a067090ee525389944ba3bacaa62f7632"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a717e67854e1f4f06bbf77bba66079015"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a717e67854e1f4f06bbf77bba66079015">processKeyboardInput</a> (<a class="el" href="camera_8h.html#a605494501af59c9191e7e4d6f9a0ebcb">Camera_Movement</a> direction, float deltaTime)</td></tr>
+<tr class="memdesc:a717e67854e1f4f06bbf77bba66079015"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process keyboard input for camera movement.  <a href="classCamera.html#a717e67854e1f4f06bbf77bba66079015">More...</a><br /></td></tr>
 <tr class="separator:a717e67854e1f4f06bbf77bba66079015"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02be8aa0dbef77e02dddc715a726fb67"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a02be8aa0dbef77e02dddc715a726fb67">reset</a> ()</td></tr>
+<tr class="memdesc:a02be8aa0dbef77e02dddc715a726fb67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset camera position/orientation/zoom to defaults.  <a href="classCamera.html#a02be8aa0dbef77e02dddc715a726fb67">More...</a><br /></td></tr>
+<tr class="separator:a02be8aa0dbef77e02dddc715a726fb67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a333a163a3388e87de9387ef54d709d8a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a333a163a3388e87de9387ef54d709d8a">orbit</a> (float yawDegrees, float pitchDegrees)</td></tr>
+<tr class="memdesc:a333a163a3388e87de9387ef54d709d8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Orbit camera around target by adjusting yaw/pitch.  <a href="classCamera.html#a333a163a3388e87de9387ef54d709d8a">More...</a><br /></td></tr>
+<tr class="separator:a333a163a3388e87de9387ef54d709d8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a007363512e7056ecf01edca366257317"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a007363512e7056ecf01edca366257317">pan</a> (float rightDelta, float upDelta)</td></tr>
+<tr class="memdesc:a007363512e7056ecf01edca366257317"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pan camera laterally/vertically in world space.  <a href="classCamera.html#a007363512e7056ecf01edca366257317">More...</a><br /></td></tr>
+<tr class="separator:a007363512e7056ecf01edca366257317"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af30f67caebaf0ac590aae868e6befb55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#af30f67caebaf0ac590aae868e6befb55">dolly</a> (float distance)</td></tr>
+<tr class="memdesc:af30f67caebaf0ac590aae868e6befb55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move camera forward/backward along its front vector.  <a href="classCamera.html#af30f67caebaf0ac590aae868e6befb55">More...</a><br /></td></tr>
+<tr class="separator:af30f67caebaf0ac590aae868e6befb55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea5d41aec5e559dd7c5c584511dc647f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#aea5d41aec5e559dd7c5c584511dc647f">zoomBy</a> (float delta)</td></tr>
+<tr class="memdesc:aea5d41aec5e559dd7c5c584511dc647f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjust field of view-based zoom.  <a href="classCamera.html#aea5d41aec5e559dd7c5c584511dc647f">More...</a><br /></td></tr>
+<tr class="separator:aea5d41aec5e559dd7c5c584511dc647f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3726620788dae5e0c5f535852cdedbb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#ad3726620788dae5e0c5f535852cdedbb">setZoom</a> (float newZoom)</td></tr>
+<tr class="memdesc:ad3726620788dae5e0c5f535852cdedbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set field of view directly.  <a href="classCamera.html#ad3726620788dae5e0c5f535852cdedbb">More...</a><br /></td></tr>
+<tr class="separator:ad3726620788dae5e0c5f535852cdedbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a04b5db2c530d8630660e8cfb93a4b3b5"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a04b5db2c530d8630660e8cfb93a4b3b5">position</a></td></tr>
+<tr class="memdesc:a04b5db2c530d8630660e8cfb93a4b3b5"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classCamera.html" title="First-person camera with mouse look and WASD movement.">Camera</a> position in world space.  <a href="classCamera.html#a04b5db2c530d8630660e8cfb93a4b3b5">More...</a><br /></td></tr>
 <tr class="separator:a04b5db2c530d8630660e8cfb93a4b3b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8847cf29c9c124906ad5d97ecb5c55d1"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a8847cf29c9c124906ad5d97ecb5c55d1">front</a></td></tr>
+<tr class="memdesc:a8847cf29c9c124906ad5d97ecb5c55d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Normalized forward direction vector.  <a href="classCamera.html#a8847cf29c9c124906ad5d97ecb5c55d1">More...</a><br /></td></tr>
 <tr class="separator:a8847cf29c9c124906ad5d97ecb5c55d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3fe5f351380fb118ffc600591769f049"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a3fe5f351380fb118ffc600591769f049">up</a></td></tr>
+<tr class="memdesc:a3fe5f351380fb118ffc600591769f049"><td class="mdescLeft">&#160;</td><td class="mdescRight">Normalized up direction vector (local)  <a href="classCamera.html#a3fe5f351380fb118ffc600591769f049">More...</a><br /></td></tr>
 <tr class="separator:a3fe5f351380fb118ffc600591769f049"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aebffcc6289dd99df7554b18d00a81161"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#aebffcc6289dd99df7554b18d00a81161">right</a></td></tr>
+<tr class="memdesc:aebffcc6289dd99df7554b18d00a81161"><td class="mdescLeft">&#160;</td><td class="mdescRight">Normalized right direction vector (local)  <a href="classCamera.html#aebffcc6289dd99df7554b18d00a81161">More...</a><br /></td></tr>
 <tr class="separator:aebffcc6289dd99df7554b18d00a81161"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a97e7a4ff433ea2bfcbfd40469aaf4d83"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a97e7a4ff433ea2bfcbfd40469aaf4d83">worldUp</a></td></tr>
+<tr class="memdesc:a97e7a4ff433ea2bfcbfd40469aaf4d83"><td class="mdescLeft">&#160;</td><td class="mdescRight">World space up vector (typically +Y)  <a href="classCamera.html#a97e7a4ff433ea2bfcbfd40469aaf4d83">More...</a><br /></td></tr>
 <tr class="separator:a97e7a4ff433ea2bfcbfd40469aaf4d83"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d091a64fbeaf78315a902a3ad9b1010"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a6d091a64fbeaf78315a902a3ad9b1010">target</a></td></tr>
+<tr class="memdesc:a6d091a64fbeaf78315a902a3ad9b1010"><td class="mdescLeft">&#160;</td><td class="mdescRight">Look-at target point (for orbital mode)  <a href="classCamera.html#a6d091a64fbeaf78315a902a3ad9b1010">More...</a><br /></td></tr>
 <tr class="separator:a6d091a64fbeaf78315a902a3ad9b1010"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad76701b22630f2df28a0ae15f0497a3a"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#ad76701b22630f2df28a0ae15f0497a3a">yaw</a></td></tr>
+<tr class="memdesc:ad76701b22630f2df28a0ae15f0497a3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Horizontal rotation (degrees)  <a href="classCamera.html#ad76701b22630f2df28a0ae15f0497a3a">More...</a><br /></td></tr>
 <tr class="separator:ad76701b22630f2df28a0ae15f0497a3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab56fcb39f580e8d2159cf2c9c6d9a65a"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#ab56fcb39f580e8d2159cf2c9c6d9a65a">pitch</a></td></tr>
+<tr class="memdesc:ab56fcb39f580e8d2159cf2c9c6d9a65a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vertical rotation (degrees)  <a href="classCamera.html#ab56fcb39f580e8d2159cf2c9c6d9a65a">More...</a><br /></td></tr>
 <tr class="separator:ab56fcb39f580e8d2159cf2c9c6d9a65a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21fc9e142b104d8e94126657abaa075f"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a21fc9e142b104d8e94126657abaa075f">zoom</a></td></tr>
+<tr class="memdesc:a21fc9e142b104d8e94126657abaa075f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Field of view (degrees), adjusted by scroll.  <a href="classCamera.html#a21fc9e142b104d8e94126657abaa075f">More...</a><br /></td></tr>
 <tr class="separator:a21fc9e142b104d8e94126657abaa075f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>First-person camera with mouse look and WASD movement. </p>
+<p>Implements a free-flying camera suitable for inspecting 3D scenes. The camera supports:</p><ul>
+<li><b>Mouse look</b>: Yaw/pitch control via mouse movement</li>
+<li><b>WASD movement</b>: Translation in view-relative coordinates</li>
+<li><b>Scroll zoom</b>: Adjusts field of view</li>
+</ul>
+<p><b>Coordinate System</b>:</p><ul>
+<li>Position: <a class="el" href="classCamera.html" title="First-person camera with mouse look and WASD movement.">Camera</a> location in world space</li>
+<li>Front: Normalized look direction</li>
+<li>Up: Local up vector (orthogonal to front)</li>
+<li>Right: Local right vector (cross product of front and up)</li>
+</ul>
+<p>The camera generates view and projection matrices for rendering. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa46b61fb3119cb0c888215275f0692a4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa46b61fb3119cb0c888215275f0692a4">&#9670;&nbsp;</a></span>Camera()</h2>
 
@@ -171,9 +222,46 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Construct a camera with specified initial state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">startPosition</td><td>Initial camera position </td></tr>
+    <tr><td class="paramname">startUp</td><td>World up vector </td></tr>
+    <tr><td class="paramname">startYaw</td><td>Initial yaw angle (degrees) </td></tr>
+    <tr><td class="paramname">startPitch</td><td>Initial pitch angle (degrees) </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="af30f67caebaf0ac590aae868e6befb55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af30f67caebaf0ac590aae868e6befb55">&#9670;&nbsp;</a></span>dolly()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Camera::dolly </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>distance</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Move camera forward/backward along its front vector. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">distance</td><td>Positive to move forward (toward look direction) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="aa2ed9d27803f5edc824e4afe8cbbbfbc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa2ed9d27803f5edc824e4afe8cbbbfbc">&#9670;&nbsp;</a></span>getProjectionMatrix()</h2>
 
@@ -189,14 +277,23 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get the perspective projection matrix. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">aspectRatio</td><td>Viewport width / height </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>4x4 projection matrix (camera → clip space) </dd></dl>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classCamera_aa2ed9d27803f5edc824e4afe8cbbbfbc_icgraph.png" border="0" usemap="#aclassCamera_aa2ed9d27803f5edc824e4afe8cbbbfbc_icgraph" alt=""/></div>
 <map name="aclassCamera_aa2ed9d27803f5edc824e4afe8cbbbfbc_icgraph" id="aclassCamera_aa2ed9d27803f5edc824e4afe8cbbbfbc_icgraph">
-<area shape="rect" title=" " alt="" coords="493,5,703,32"/>
-<area shape="rect" href="classApplication.html#a4e7a520d659593b385b246a43e604dfb" title=" " alt="" coords="283,5,445,32"/>
-<area shape="rect" href="classApplication.html#af44c742342adf5305e430ff293f147c1" title=" " alt="" coords="108,5,235,32"/>
+<area shape="rect" title="Get the perspective projection matrix." alt="" coords="493,5,703,32"/>
+<area shape="rect" href="classApplication.html#a4e7a520d659593b385b246a43e604dfb" title="Render the 3D scene (cube + axes)" alt="" coords="283,5,445,32"/>
+<area shape="rect" href="classApplication.html#af44c742342adf5305e430ff293f147c1" title="Execute one frame: update simulation, render 3D, render UI." alt="" coords="108,5,235,32"/>
 <area shape="rect" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -217,17 +314,94 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get the view matrix for rendering. </p>
+<dl class="section return"><dt>Returns</dt><dd>4x4 view matrix (world → camera transform) </dd></dl>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classCamera_a2f90e661a78172675ca06ea69667b531_icgraph.png" border="0" usemap="#aclassCamera_a2f90e661a78172675ca06ea69667b531_icgraph" alt=""/></div>
 <map name="aclassCamera_a2f90e661a78172675ca06ea69667b531_icgraph" id="aclassCamera_a2f90e661a78172675ca06ea69667b531_icgraph">
-<area shape="rect" title=" " alt="" coords="493,5,669,32"/>
-<area shape="rect" href="classApplication.html#a4e7a520d659593b385b246a43e604dfb" title=" " alt="" coords="283,5,445,32"/>
-<area shape="rect" href="classApplication.html#af44c742342adf5305e430ff293f147c1" title=" " alt="" coords="108,5,235,32"/>
+<area shape="rect" title="Get the view matrix for rendering." alt="" coords="493,5,669,32"/>
+<area shape="rect" href="classApplication.html#a4e7a520d659593b385b246a43e604dfb" title="Render the 3D scene (cube + axes)" alt="" coords="283,5,445,32"/>
+<area shape="rect" href="classApplication.html#af44c742342adf5305e430ff293f147c1" title="Execute one frame: update simulation, render 3D, render UI." alt="" coords="108,5,235,32"/>
 <area shape="rect" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
+
+</div>
+</div>
+<a id="a333a163a3388e87de9387ef54d709d8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a333a163a3388e87de9387ef54d709d8a">&#9670;&nbsp;</a></span>orbit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Camera::orbit </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>yawDegrees</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>pitchDegrees</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Orbit camera around target by adjusting yaw/pitch. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">yawDegrees</td><td>Change in yaw (degrees) </td></tr>
+    <tr><td class="paramname">pitchDegrees</td><td>Change in pitch (degrees) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a007363512e7056ecf01edca366257317"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a007363512e7056ecf01edca366257317">&#9670;&nbsp;</a></span>pan()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Camera::pan </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>rightDelta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>upDelta</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pan camera laterally/vertically in world space. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rightDelta</td><td>Offset along camera right vector (units) </td></tr>
+    <tr><td class="paramname">upDelta</td><td>Offset along camera up vector (units) </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -257,6 +431,15 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>Process keyboard input for camera movement. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">direction</td><td>Movement direction enum </td></tr>
+    <tr><td class="paramname">deltaTime</td><td>Time since last frame (seconds) for frame-rate independent movement </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a2d0930626f874469be5849c8b4d8e37e"></a>
@@ -274,6 +457,14 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Process keyboard input (legacy GLFW key codes - deprecated) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>GLFW key code </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -308,13 +499,23 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Process mouse movement for look control. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">xOffset</td><td>Horizontal mouse displacement (pixels) </td></tr>
+    <tr><td class="paramname">yOffset</td><td>Vertical mouse displacement (pixels) </td></tr>
+    <tr><td class="paramname">constrainPitch</td><td>Prevent camera from flipping upside-down </td></tr>
+  </table>
+  </dd>
+</dl>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classCamera_a4f07e3e1263c93781fb17b104d4f4c80_icgraph.png" border="0" usemap="#aclassCamera_a4f07e3e1263c93781fb17b104d4f4c80_icgraph" alt=""/></div>
 <map name="aclassCamera_a4f07e3e1263c93781fb17b104d4f4c80_icgraph" id="aclassCamera_a4f07e3e1263c93781fb17b104d4f4c80_icgraph">
-<area shape="rect" title=" " alt="" coords="256,5,500,32"/>
-<area shape="rect" href="classApplication.html#ac06b8d20f2ad820faafb080ea45ca4d4" title=" " alt="" coords="5,5,208,32"/>
+<area shape="rect" title="Process mouse movement for look control." alt="" coords="256,5,500,32"/>
+<area shape="rect" href="classApplication.html#ac06b8d20f2ad820faafb080ea45ca4d4" title="Mouse movement callback." alt="" coords="5,5,208,32"/>
 </map>
 </div>
 
@@ -335,14 +536,22 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Process mouse scroll for zoom (FOV adjustment) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">yOffset</td><td>Scroll wheel offset </td></tr>
+  </table>
+  </dd>
+</dl>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classCamera_a067090ee525389944ba3bacaa62f7632_icgraph.png" border="0" usemap="#aclassCamera_a067090ee525389944ba3bacaa62f7632_icgraph" alt=""/></div>
 <map name="aclassCamera_a067090ee525389944ba3bacaa62f7632_icgraph" id="aclassCamera_a067090ee525389944ba3bacaa62f7632_icgraph">
-<area shape="rect" title=" " alt="" coords="523,5,733,32"/>
-<area shape="rect" href="classApplication.html#a00d67e65679af5ce18f377f3e6d13d31" title=" " alt="" coords="280,5,475,32"/>
-<area shape="rect" href="classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96" title="Initializes the application, setting up GLFW, OpenGL, ImGui, and all core components." alt="" coords="108,5,232,32"/>
+<area shape="rect" title="Process mouse scroll for zoom (FOV adjustment)" alt="" coords="523,5,733,32"/>
+<area shape="rect" href="classApplication.html#a00d67e65679af5ce18f377f3e6d13d31" title="Mouse scroll callback." alt="" coords="280,5,475,32"/>
+<area shape="rect" href="classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96" title="Initialize the application subsystems." alt="" coords="108,5,232,32"/>
 <area shape="rect" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -354,9 +563,6 @@ Here is the caller graph for this function:</div>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void Camera::reset </td>
@@ -365,21 +571,70 @@ Here is the caller graph for this function:</div>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
+
+<p>Reset camera position/orientation/zoom to defaults. </p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classCamera_a02be8aa0dbef77e02dddc715a726fb67_icgraph.png" border="0" usemap="#aclassCamera_a02be8aa0dbef77e02dddc715a726fb67_icgraph" alt=""/></div>
 <map name="aclassCamera_a02be8aa0dbef77e02dddc715a726fb67_icgraph" id="aclassCamera_a02be8aa0dbef77e02dddc715a726fb67_icgraph">
-<area shape="rect" title=" " alt="" coords="197,5,312,32"/>
-<area shape="rect" href="classControlPanel.html#aeda901d59fe333ed8d5924b99b316801" title=" " alt="" coords="5,5,149,32"/>
+<area shape="rect" title="Reset camera position/orientation/zoom to defaults." alt="" coords="197,5,312,32"/>
+<area shape="rect" href="classControlPanel.html#aeda901d59fe333ed8d5924b99b316801" title="Render the panel&#39;s ImGui interface." alt="" coords="5,5,149,32"/>
 </map>
 </div>
+
+</div>
+</div>
+<a id="ad3726620788dae5e0c5f535852cdedbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3726620788dae5e0c5f535852cdedbb">&#9670;&nbsp;</a></span>setZoom()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Camera::setZoom </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>newZoom</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set field of view directly. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newZoom</td><td>Field of view in degrees (clamped to valid range) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aea5d41aec5e559dd7c5c584511dc647f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea5d41aec5e559dd7c5c584511dc647f">&#9670;&nbsp;</a></span>zoomBy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Camera::zoomBy </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>delta</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adjust field of view-based zoom. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">delta</td><td>Positive value zooms in (narrows FOV) </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -396,6 +651,8 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>Normalized forward direction vector. </p>
+
 </div>
 </div>
 <a id="ab56fcb39f580e8d2159cf2c9c6d9a65a"></a>
@@ -409,6 +666,8 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Vertical rotation (degrees) </p>
 
 </div>
 </div>
@@ -424,6 +683,8 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p><a class="el" href="classCamera.html" title="First-person camera with mouse look and WASD movement.">Camera</a> position in world space. </p>
+
 </div>
 </div>
 <a id="aebffcc6289dd99df7554b18d00a81161"></a>
@@ -437,6 +698,8 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Normalized right direction vector (local) </p>
 
 </div>
 </div>
@@ -452,6 +715,8 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>Look-at target point (for orbital mode) </p>
+
 </div>
 </div>
 <a id="a3fe5f351380fb118ffc600591769f049"></a>
@@ -465,6 +730,8 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Normalized up direction vector (local) </p>
 
 </div>
 </div>
@@ -480,6 +747,8 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>World space up vector (typically +Y) </p>
+
 </div>
 </div>
 <a id="ad76701b22630f2df28a0ae15f0497a3a"></a>
@@ -494,6 +763,8 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>Horizontal rotation (degrees) </p>
+
 </div>
 </div>
 <a id="a21fc9e142b104d8e94126657abaa075f"></a>
@@ -507,6 +778,8 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Field of view (degrees), adjusted by scroll. </p>
 
 </div>
 </div>

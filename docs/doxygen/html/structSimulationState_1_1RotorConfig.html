@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -89,18 +91,26 @@ $(document).ready(function(){initNavTree('structSimulationState_1_1RotorConfig.h
 </div><!--header-->
 <div class="contents">
 
+<p>Physical configuration for rotor/propeller models.  
+ <a href="structSimulationState_1_1RotorConfig.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="simulation__state_8h_source.html">simulation_state.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:ac22572ebe1e7eac96198f96b66b4b12d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1RotorConfig.html#ac22572ebe1e7eac96198f96b66b4b12d">thrust_coefficient</a> {1.2e-6}</td></tr>
+<tr class="memdesc:ac22572ebe1e7eac96198f96b66b4b12d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Thrust coefficient (N/(rad/s)²)  <a href="structSimulationState_1_1RotorConfig.html#ac22572ebe1e7eac96198f96b66b4b12d">More...</a><br /></td></tr>
 <tr class="separator:ac22572ebe1e7eac96198f96b66b4b12d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b8695f683f6bbbb81a0d305657c3898"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1RotorConfig.html#a5b8695f683f6bbbb81a0d305657c3898">torque_coefficient</a> {2.5e-7}</td></tr>
+<tr class="memdesc:a5b8695f683f6bbbb81a0d305657c3898"><td class="mdescLeft">&#160;</td><td class="mdescRight">Torque coefficient (N·m/(rad/s)²)  <a href="structSimulationState_1_1RotorConfig.html#a5b8695f683f6bbbb81a0d305657c3898">More...</a><br /></td></tr>
 <tr class="separator:a5b8695f683f6bbbb81a0d305657c3898"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e1c9768099b41683473c0b3cc2ec990"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1RotorConfig.html#a8e1c9768099b41683473c0b3cc2ec990">arm_length_m</a> {0.2}</td></tr>
+<tr class="memdesc:a8e1c9768099b41683473c0b3cc2ec990"><td class="mdescLeft">&#160;</td><td class="mdescRight">Distance from rotor to center of mass (meters)  <a href="structSimulationState_1_1RotorConfig.html#a8e1c9768099b41683473c0b3cc2ec990">More...</a><br /></td></tr>
 <tr class="separator:a8e1c9768099b41683473c0b3cc2ec990"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Data Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Physical configuration for rotor/propeller models. </p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a8e1c9768099b41683473c0b3cc2ec990"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8e1c9768099b41683473c0b3cc2ec990">&#9670;&nbsp;</a></span>arm_length_m</h2>
 
@@ -112,6 +122,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Distance from rotor to center of mass (meters) </p>
 
 </div>
 </div>
@@ -127,6 +139,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Thrust coefficient (N/(rad/s)²) </p>
+
 </div>
 </div>
 <a id="a5b8695f683f6bbbb81a0d305657c3898"></a>
@@ -140,6 +154,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Torque coefficient (N·m/(rad/s)²) </p>
 
 </div>
 </div>

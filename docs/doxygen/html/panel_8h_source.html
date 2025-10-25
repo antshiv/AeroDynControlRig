@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -85,28 +87,31 @@ $(document).ready(function(){initNavTree('panel_8h_source.html',''); initResizab
 <div class="title">panel.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="panel_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef PANEL_H</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define PANEL_H</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">class </span><a class="code" href="classCamera.html">Camera</a>;</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">struct </span><a class="code" href="structSimulationState.html">SimulationState</a>;</div>
+<a href="panel_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#ifndef PANEL_H</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#define PANEL_H</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="classPanel.html">    9</a></span>&#160;<span class="keyword">class </span><a class="code" href="classPanel.html">Panel</a> {</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="classPanel.html#a7f9c2e03d792b7763150f29d0f8043e8">   11</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classPanel.html#a7f9c2e03d792b7763150f29d0f8043e8">~Panel</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classPanel.html#ae84f74fee1b1c3bf973ffbc5c3c81b57">   12</a></span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="classPanel.html#ae84f74fee1b1c3bf973ffbc5c3c81b57">name</a>() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classPanel.html#ab642ab4938eb6a680bcddd13636a58fa">   13</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classPanel.html#ab642ab4938eb6a680bcddd13636a58fa">draw</a>(<a class="code" href="structSimulationState.html">SimulationState</a>&amp; state, <a class="code" href="classCamera.html">Camera</a>&amp; camera) = 0;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;};</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// PANEL_H</span></div>
-<div class="ttc" id="aclassCamera_html"><div class="ttname"><a href="classCamera.html">Camera</a></div><div class="ttdef"><b>Definition:</b> camera.h:17</div></div>
-<div class="ttc" id="aclassPanel_html"><div class="ttname"><a href="classPanel.html">Panel</a></div><div class="ttdef"><b>Definition:</b> panel.h:9</div></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">class </span><a class="code" href="classCamera.html">Camera</a>;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">struct </span><a class="code" href="structSimulationState.html">SimulationState</a>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classPanel.html">   27</a></span>&#160;<span class="keyword">class </span><a class="code" href="classPanel.html">Panel</a> {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classPanel.html#a7f9c2e03d792b7763150f29d0f8043e8">   29</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classPanel.html#a7f9c2e03d792b7763150f29d0f8043e8">~Panel</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classPanel.html#ae84f74fee1b1c3bf973ffbc5c3c81b57">   38</a></span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="classPanel.html#ae84f74fee1b1c3bf973ffbc5c3c81b57">name</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classPanel.html#ab642ab4938eb6a680bcddd13636a58fa">   49</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classPanel.html#ab642ab4938eb6a680bcddd13636a58fa">draw</a>(<a class="code" href="structSimulationState.html">SimulationState</a>&amp; state, <a class="code" href="classCamera.html">Camera</a>&amp; camera) = 0;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;};</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// PANEL_H</span></div>
+<div class="ttc" id="aclassCamera_html"><div class="ttname"><a href="classCamera.html">Camera</a></div><div class="ttdoc">First-person camera with mouse look and WASD movement.</div><div class="ttdef"><b>Definition:</b> camera.h:43</div></div>
+<div class="ttc" id="aclassPanel_html"><div class="ttname"><a href="classPanel.html">Panel</a></div><div class="ttdoc">Abstract base class for all UI panels.</div><div class="ttdef"><b>Definition:</b> panel.h:27</div></div>
 <div class="ttc" id="aclassPanel_html_a7f9c2e03d792b7763150f29d0f8043e8"><div class="ttname"><a href="classPanel.html#a7f9c2e03d792b7763150f29d0f8043e8">Panel::~Panel</a></div><div class="ttdeci">virtual ~Panel()=default</div></div>
-<div class="ttc" id="aclassPanel_html_ab642ab4938eb6a680bcddd13636a58fa"><div class="ttname"><a href="classPanel.html#ab642ab4938eb6a680bcddd13636a58fa">Panel::draw</a></div><div class="ttdeci">virtual void draw(SimulationState &amp;state, Camera &amp;camera)=0</div></div>
-<div class="ttc" id="aclassPanel_html_ae84f74fee1b1c3bf973ffbc5c3c81b57"><div class="ttname"><a href="classPanel.html#ae84f74fee1b1c3bf973ffbc5c3c81b57">Panel::name</a></div><div class="ttdeci">virtual const char * name() const =0</div></div>
-<div class="ttc" id="astructSimulationState_html"><div class="ttname"><a href="structSimulationState.html">SimulationState</a></div><div class="ttdef"><b>Definition:</b> simulation_state.h:8</div></div>
+<div class="ttc" id="aclassPanel_html_ab642ab4938eb6a680bcddd13636a58fa"><div class="ttname"><a href="classPanel.html#ab642ab4938eb6a680bcddd13636a58fa">Panel::draw</a></div><div class="ttdeci">virtual void draw(SimulationState &amp;state, Camera &amp;camera)=0</div><div class="ttdoc">Render the panel's ImGui interface.</div></div>
+<div class="ttc" id="aclassPanel_html_ae84f74fee1b1c3bf973ffbc5c3c81b57"><div class="ttname"><a href="classPanel.html#ae84f74fee1b1c3bf973ffbc5c3c81b57">Panel::name</a></div><div class="ttdeci">virtual const char * name() const =0</div><div class="ttdoc">Get the display name of this panel.</div></div>
+<div class="ttc" id="astructSimulationState_html"><div class="ttname"><a href="structSimulationState.html">SimulationState</a></div><div class="ttdoc">Central shared state for the entire simulation.</div><div class="ttdef"><b>Definition:</b> simulation_state.h:26</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

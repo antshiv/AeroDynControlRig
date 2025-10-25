@@ -1,6 +1,6 @@
 <map id="Application" name="Application">
-<area shape="rect" id="node1" title=" " alt="" coords="80,184,175,211"/>
-<area shape="rect" id="node2" href="$classCamera.html" title=" " alt="" coords="5,95,79,121"/>
+<area shape="rect" id="node1" title="Main application orchestrating the simulation, rendering, and UI." alt="" coords="80,184,175,211"/>
+<area shape="rect" id="node2" href="$classCamera.html" title="First&#45;person camera with mouse look and WASD movement." alt="" coords="5,95,79,121"/>
 <area shape="rect" id="node3" href="$classTransform.html" title=" " alt="" coords="105,5,192,32"/>
-<area shape="rect" id="node4" href="$classAxisRenderer.html" title=" " alt="" coords="221,95,330,121"/>
+<area shape="rect" id="node4" href="$classAxisRenderer.html" title="Renders RGB coordinate axes as a visual reference overlay." alt="" coords="221,95,330,121"/>
 </map>

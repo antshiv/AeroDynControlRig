@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -89,14 +91,17 @@ $(document).ready(function(){initNavTree('classComplementaryEstimatorModule.html
 </div><!--header-->
 <div class="contents">
 
+<p>Estimates attitude using a complementary filter fusing gyro and accel.  
+ <a href="classComplementaryEstimatorModule.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="complementary__estimator_8h_source.html">complementary_estimator.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for ComplementaryEstimatorModule:</div>
 <div class="dyncontent">
 <div class="center"><img src="classComplementaryEstimatorModule__inherit__graph.png" border="0" usemap="#aComplementaryEstimatorModule_inherit__map" alt="Inheritance graph"/></div>
 <map name="aComplementaryEstimatorModule_inherit__map" id="aComplementaryEstimatorModule_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,80,244,107"/>
-<area shape="rect" href="classModule.html" title=" " alt="" coords="89,5,160,32"/>
+<area shape="rect" title="Estimates attitude using a complementary filter fusing gyro and accel." alt="" coords="5,80,244,107"/>
+<area shape="rect" href="classModule.html" title="Abstract base class for all simulation modules." alt="" coords="89,5,160,32"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -104,24 +109,43 @@ Collaboration diagram for ComplementaryEstimatorModule:</div>
 <div class="dyncontent">
 <div class="center"><img src="classComplementaryEstimatorModule__coll__graph.png" border="0" usemap="#aComplementaryEstimatorModule_coll__map" alt="Collaboration graph"/></div>
 <map name="aComplementaryEstimatorModule_coll__map" id="aComplementaryEstimatorModule_coll__map">
-<area shape="rect" title=" " alt="" coords="5,80,244,107"/>
-<area shape="rect" href="classModule.html" title=" " alt="" coords="89,5,160,32"/>
+<area shape="rect" title="Estimates attitude using a complementary filter fusing gyro and accel." alt="" coords="5,80,244,107"/>
+<area shape="rect" href="classModule.html" title="Abstract base class for all simulation modules." alt="" coords="89,5,160,32"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ac5ed8e8e6884ff510753b154a2e1d9b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComplementaryEstimatorModule.html#ac5ed8e8e6884ff510753b154a2e1d9b5">initialize</a> (<a class="el" href="structSimulationState.html">SimulationState</a> &amp;state) override</td></tr>
+<tr class="memdesc:ac5ed8e8e6884ff510753b154a2e1d9b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize estimator to identity quaternion with zero bias.  <a href="classComplementaryEstimatorModule.html#ac5ed8e8e6884ff510753b154a2e1d9b5">More...</a><br /></td></tr>
 <tr class="separator:ac5ed8e8e6884ff510753b154a2e1d9b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3ba8369b0453cceb8252296387cf1b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComplementaryEstimatorModule.html#ae3ba8369b0453cceb8252296387cf1b9">update</a> (double dt, <a class="el" href="structSimulationState.html">SimulationState</a> &amp;state) override</td></tr>
+<tr class="memdesc:ae3ba8369b0453cceb8252296387cf1b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update attitude estimate using gyro and accel measurements.  <a href="classComplementaryEstimatorModule.html#ae3ba8369b0453cceb8252296387cf1b9">More...</a><br /></td></tr>
 <tr class="separator:ae3ba8369b0453cceb8252296387cf1b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7564bc6705c3f4d5628ae27377daf05a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classComplementaryEstimatorModule.html#a7564bc6705c3f4d5628ae27377daf05a">setGains</a> (float kp, float ki)</td></tr>
+<tr class="memdesc:a7564bc6705c3f4d5628ae27377daf05a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tune the complementary filter gains.  <a href="classComplementaryEstimatorModule.html#a7564bc6705c3f4d5628ae27377daf05a">More...</a><br /></td></tr>
 <tr class="separator:a7564bc6705c3f4d5628ae27377daf05a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classModule"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classModule')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classModule.html">Module</a></td></tr>
 <tr class="memitem:a4a48538d35a2da7fcc32d9f509034723 inherit pub_methods_classModule"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModule.html#a4a48538d35a2da7fcc32d9f509034723">~Module</a> ()=default</td></tr>
 <tr class="separator:a4a48538d35a2da7fcc32d9f509034723 inherit pub_methods_classModule"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Estimates attitude using a complementary filter fusing gyro and accel. </p>
+<p>This module implements a quaternion-based complementary filter with gyro bias estimation. The filter combines:</p><ul>
+<li><b>Gyroscope</b>: High-frequency attitude updates (drift-prone)</li>
+<li><b>Accelerometer</b>: Low-frequency corrections assuming gravity-only environment</li>
+</ul>
+<p>Algorithm:</p><ol type="1">
+<li>Predict quaternion using bias-corrected gyro measurements</li>
+<li>Compute error quaternion from accelerometer-derived attitude</li>
+<li>Apply proportional-integral (PI) correction to quaternion and bias</li>
+</ol>
+<p>Tuning parameters:</p><ul>
+<li>kp: Proportional gain (attitude correction speed)</li>
+<li>ki: Integral gain (bias estimation speed)</li>
+</ul>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classSensorSimulatorModule.html" title="Simulates IMU sensor measurements (gyro + accel) based on vehicle state.">SensorSimulatorModule</a> </dd></dl>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ac5ed8e8e6884ff510753b154a2e1d9b5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac5ed8e8e6884ff510753b154a2e1d9b5">&#9670;&nbsp;</a></span>initialize()</h2>
 
@@ -146,13 +170,21 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Initialize estimator to identity quaternion with zero bias. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>Reference to simulation state </td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p>Reimplemented from <a class="el" href="classModule.html#a217a8e1c2cd1745b1419607cb1a92076">Module</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classComplementaryEstimatorModule_ac5ed8e8e6884ff510753b154a2e1d9b5_cgraph.png" border="0" usemap="#aclassComplementaryEstimatorModule_ac5ed8e8e6884ff510753b154a2e1d9b5_cgraph" alt=""/></div>
 <map name="aclassComplementaryEstimatorModule_ac5ed8e8e6884ff510753b154a2e1d9b5_cgraph" id="aclassComplementaryEstimatorModule_ac5ed8e8e6884ff510753b154a2e1d9b5_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,244,47"/>
+<area shape="rect" title="Initialize estimator to identity quaternion with zero bias." alt="" coords="5,5,244,47"/>
 <area shape="rect" href="quaternion_8h.html#a3ba94d91921f3b30c3de90a19e7099ee" title=" " alt="" coords="292,13,444,39"/>
 </map>
 </div>
@@ -193,6 +225,15 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
+<p>Tune the complementary filter gains. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">kp</td><td>Proportional gain (higher = faster attitude correction) </td></tr>
+    <tr><td class="paramname">ki</td><td>Integral gain (higher = faster bias estimation) </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="ae3ba8369b0453cceb8252296387cf1b9"></a>
@@ -229,13 +270,23 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
+<p>Update attitude estimate using gyro and accel measurements. </p>
+<p>Reads <a class="el" href="structSimulationState.html#a196d4bfb8d4683c265f7ca38b9a712e3">SimulationState::sensor</a> data and writes to <a class="el" href="structSimulationState.html#a0dd1bce87c3574e23c5cbb61b3aa5c4e">SimulationState::estimator</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dt</td><td>Time step (seconds) </td></tr>
+    <tr><td class="paramname">state</td><td>Reference to simulation state (reads sensor.gyro/accel, writes estimator.quaternion and estimator.euler) </td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p>Implements <a class="el" href="classModule.html#ac6bb9eb865c41df66fe428a7c17b98d3">Module</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classComplementaryEstimatorModule_ae3ba8369b0453cceb8252296387cf1b9_cgraph.png" border="0" usemap="#aclassComplementaryEstimatorModule_ae3ba8369b0453cceb8252296387cf1b9_cgraph" alt=""/></div>
 <map name="aclassComplementaryEstimatorModule_ae3ba8369b0453cceb8252296387cf1b9_cgraph" id="aclassComplementaryEstimatorModule_ae3ba8369b0453cceb8252296387cf1b9_cgraph">
-<area shape="rect" title=" " alt="" coords="5,23,244,65"/>
+<area shape="rect" title="Update attitude estimate using gyro and accel measurements." alt="" coords="5,23,244,65"/>
 <area shape="rect" href="quaternion_8h.html#a4724f7a83c16709fb4b1fcfb742c7157" title=" " alt="" coords="295,5,441,32"/>
 <area shape="rect" href="quaternion_8h.html#a3ba94d91921f3b30c3de90a19e7099ee" title=" " alt="" coords="292,56,444,83"/>
 </map>

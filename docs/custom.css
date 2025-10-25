@@ -1,0 +1,68 @@
+/**
+ * @file custom.css
+ * @brief Minimal custom CSS for better code block readability
+ *
+ * This stylesheet makes targeted improvements without disrupting Doxygen's layout.
+ * Only adds padding and spacing to code blocks and tutorial content.
+ */
+
+/* Better code block padding and readability */
+div.fragment {
+    padding: 12px;
+    margin: 12px 0;
+}
+
+/* Improve code line spacing */
+div.line {
+    line-height: 1.4;
+}
+
+/* Better spacing for tutorial content in textblock divs */
+div.textblock {
+    line-height: 1.6;
+}
+
+div.textblock p {
+    margin: 10px 0;
+}
+
+div.textblock ul,
+div.textblock ol {
+    margin: 10px 0;
+}
+
+div.textblock li {
+    margin: 4px 0;
+}
+
+/* Better spacing for headers in documentation pages */
+.contents h1,
+.contents h2,
+.contents h3 {
+    margin-top: 24px;
+    margin-bottom: 12px;
+}
+
+/* Improve inline code readability */
+.contents code {
+    padding: 2px 4px;
+    background-color: #f5f5f5;
+    border-radius: 2px;
+}
+
+/* Better table spacing for markdown tables */
+.contents table {
+    margin: 12px 0;
+}
+
+/* Improve diagram visibility */
+.contents .center img {
+    margin: 16px auto;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+/* Add subtle spacing to TOC */
+.contents div.toc {
+    margin: 16px 0;
+    padding: 12px;
+}

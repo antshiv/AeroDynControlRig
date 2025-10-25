@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -85,54 +87,61 @@ $(document).ready(function(){initNavTree('axis__renderer_8h_source.html',''); in
 <div class="title">axis_renderer.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="axis__renderer_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef AXIS_RENDERER_H</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define AXIS_RENDERER_H</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;glm/gtc/matrix_transform.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;GL/glew.h&gt;</span>  <span class="comment">// GLEW must come first</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="transform_8h.html">core/transform.h</a>&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="classAxisRenderer.html">   10</a></span>&#160;<span class="keyword">class </span><a class="code" href="classAxisRenderer.html">AxisRenderer</a> {</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classAxisRenderer.html#aedefa9c0600e5a194f50abfa85383dca">   12</a></span>&#160;    GLuint <a class="code" href="classAxisRenderer.html#aedefa9c0600e5a194f50abfa85383dca">vao</a>, <a class="code" href="classAxisRenderer.html#a11d0c9da7a034088f7b44026005beab3">vbo</a>;</div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classAxisRenderer.html#a3a9f352852fbba20141f8076798ad333">   13</a></span>&#160;    GLuint <a class="code" href="classAxisRenderer.html#a3a9f352852fbba20141f8076798ad333">shaderProgram</a>;</div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classAxisRenderer.html#a4325e0a917cf26b4a9b265340ceb8875">   14</a></span>&#160;    glm::mat4 <a class="code" href="classAxisRenderer.html#af5e7fb7b7bc2c5ec7194295b24e546b6">view</a>, <a class="code" href="classAxisRenderer.html#a4325e0a917cf26b4a9b265340ceb8875">projection</a>;</div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classAxisRenderer.html#a3d6ea174de4266f2a4bc068229984522">   15</a></span>&#160;    GLuint <a class="code" href="classAxisRenderer.html#a3d6ea174de4266f2a4bc068229984522">modelLoc</a>, <a class="code" href="classAxisRenderer.html#a52e2c42a552b817741ee9c7596214cd3">viewLoc</a>, <a class="code" href="classAxisRenderer.html#a9e56d4084524c7872777f52b5bc107e2">projLoc</a>;  <span class="comment">// Add these uniform locations</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classAxisRenderer.html#a9074f64c35fbc194ae92e31d4b9cbc9c">   16</a></span>&#160;    <a class="code" href="classTransform.html">Transform</a> <a class="code" href="classAxisRenderer.html#a9074f64c35fbc194ae92e31d4b9cbc9c">axisTransform</a>;  <span class="comment">// Add Transform member</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="classAxisRenderer.html#ab2637469087182e25b7b4db2dd1dd15c">AxisRenderer</a>();</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="classAxisRenderer.html#a7fce768f9364c3679434320b8b7aa904">~AxisRenderer</a>();</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classAxisRenderer.html#aeffaaf38c5561bc783f4d614f3b75edf">init</a>();</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classAxisRenderer.html#a84dd219a1a4655ec3b434c4b9705c6a0">render</a>(<span class="keyword">const</span> <a class="code" href="classTransform.html">Transform</a>&amp; transform);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classAxisRenderer.html#aeafc1964746638b7067055b5bf616d51">render3D</a>(<span class="keyword">const</span> <a class="code" href="classTransform.html">Transform</a>&amp; transform);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classAxisRenderer.html#ab327f44ce3abe6fdf30380d4d081b413">shutdown</a>();</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span> setupAxisGeometry();</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">void</span> setupAxisGeometry3D();</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    GLuint createShaderProgram(<span class="keyword">const</span> <span class="keywordtype">char</span>* vertexPath, <span class="keyword">const</span> <span class="keywordtype">char</span>* fragmentPath);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;};</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// AXIS_RENDERER_H</span></div>
-<div class="ttc" id="aclassAxisRenderer_html"><div class="ttname"><a href="classAxisRenderer.html">AxisRenderer</a></div><div class="ttdef"><b>Definition:</b> axis_renderer.h:10</div></div>
-<div class="ttc" id="aclassAxisRenderer_html_a11d0c9da7a034088f7b44026005beab3"><div class="ttname"><a href="classAxisRenderer.html#a11d0c9da7a034088f7b44026005beab3">AxisRenderer::vbo</a></div><div class="ttdeci">GLuint vbo</div><div class="ttdef"><b>Definition:</b> axis_renderer.h:12</div></div>
-<div class="ttc" id="aclassAxisRenderer_html_a3a9f352852fbba20141f8076798ad333"><div class="ttname"><a href="classAxisRenderer.html#a3a9f352852fbba20141f8076798ad333">AxisRenderer::shaderProgram</a></div><div class="ttdeci">GLuint shaderProgram</div><div class="ttdef"><b>Definition:</b> axis_renderer.h:13</div></div>
-<div class="ttc" id="aclassAxisRenderer_html_a3d6ea174de4266f2a4bc068229984522"><div class="ttname"><a href="classAxisRenderer.html#a3d6ea174de4266f2a4bc068229984522">AxisRenderer::modelLoc</a></div><div class="ttdeci">GLuint modelLoc</div><div class="ttdef"><b>Definition:</b> axis_renderer.h:15</div></div>
-<div class="ttc" id="aclassAxisRenderer_html_a4325e0a917cf26b4a9b265340ceb8875"><div class="ttname"><a href="classAxisRenderer.html#a4325e0a917cf26b4a9b265340ceb8875">AxisRenderer::projection</a></div><div class="ttdeci">glm::mat4 projection</div><div class="ttdef"><b>Definition:</b> axis_renderer.h:14</div></div>
-<div class="ttc" id="aclassAxisRenderer_html_a52e2c42a552b817741ee9c7596214cd3"><div class="ttname"><a href="classAxisRenderer.html#a52e2c42a552b817741ee9c7596214cd3">AxisRenderer::viewLoc</a></div><div class="ttdeci">GLuint viewLoc</div><div class="ttdef"><b>Definition:</b> axis_renderer.h:15</div></div>
+<a href="axis__renderer_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#ifndef AXIS_RENDERER_H</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#define AXIS_RENDERER_H</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;glm/gtc/matrix_transform.hpp&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;GL/glew.h&gt;</span>  <span class="comment">// GLEW must come first</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="transform_8h.html">core/transform.h</a>&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classAxisRenderer.html">   32</a></span>&#160;<span class="keyword">class </span><a class="code" href="classAxisRenderer.html">AxisRenderer</a> {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="comment">// === Public Members (for external access) ===</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classAxisRenderer.html#aedefa9c0600e5a194f50abfa85383dca">   35</a></span>&#160;    GLuint <a class="code" href="classAxisRenderer.html#aedefa9c0600e5a194f50abfa85383dca">vao</a>, <a class="code" href="classAxisRenderer.html#a11d0c9da7a034088f7b44026005beab3">vbo</a>;                    </div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classAxisRenderer.html#a3a9f352852fbba20141f8076798ad333">   36</a></span>&#160;    GLuint <a class="code" href="classAxisRenderer.html#a3a9f352852fbba20141f8076798ad333">shaderProgram</a>;               </div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classAxisRenderer.html#a4325e0a917cf26b4a9b265340ceb8875">   37</a></span>&#160;    glm::mat4 <a class="code" href="classAxisRenderer.html#af5e7fb7b7bc2c5ec7194295b24e546b6">view</a>, <a class="code" href="classAxisRenderer.html#a4325e0a917cf26b4a9b265340ceb8875">projection</a>;         </div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classAxisRenderer.html#a3d6ea174de4266f2a4bc068229984522">   38</a></span>&#160;    GLuint <a class="code" href="classAxisRenderer.html#a3d6ea174de4266f2a4bc068229984522">modelLoc</a>, <a class="code" href="classAxisRenderer.html#a52e2c42a552b817741ee9c7596214cd3">viewLoc</a>, <a class="code" href="classAxisRenderer.html#a9e56d4084524c7872777f52b5bc107e2">projLoc</a>;  </div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classAxisRenderer.html#a9074f64c35fbc194ae92e31d4b9cbc9c">   39</a></span>&#160;    <a class="code" href="classTransform.html">Transform</a> <a class="code" href="classAxisRenderer.html#a9074f64c35fbc194ae92e31d4b9cbc9c">axisTransform</a>;            </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="classAxisRenderer.html#ab2637469087182e25b7b4db2dd1dd15c">AxisRenderer</a>();</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="classAxisRenderer.html#a7fce768f9364c3679434320b8b7aa904">~AxisRenderer</a>();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classAxisRenderer.html#aeffaaf38c5561bc783f4d614f3b75edf">init</a>();</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classAxisRenderer.html#a84dd219a1a4655ec3b434c4b9705c6a0">render</a>(<span class="keyword">const</span> <a class="code" href="classTransform.html">Transform</a>&amp; transform);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classAxisRenderer.html#aeafc1964746638b7067055b5bf616d51">render3D</a>(<span class="keyword">const</span> <a class="code" href="classTransform.html">Transform</a>&amp; transform);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classAxisRenderer.html#ab327f44ce3abe6fdf30380d4d081b413">shutdown</a>();</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">void</span> setupAxisGeometry();</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">void</span> setupAxisGeometry3D();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    GLuint createShaderProgram(<span class="keyword">const</span> <span class="keywordtype">char</span>* vertexPath, <span class="keyword">const</span> <span class="keywordtype">char</span>* fragmentPath);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;};</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// AXIS_RENDERER_H</span></div>
+<div class="ttc" id="aclassAxisRenderer_html"><div class="ttname"><a href="classAxisRenderer.html">AxisRenderer</a></div><div class="ttdoc">Renders RGB coordinate axes as a visual reference overlay.</div><div class="ttdef"><b>Definition:</b> axis_renderer.h:32</div></div>
+<div class="ttc" id="aclassAxisRenderer_html_a11d0c9da7a034088f7b44026005beab3"><div class="ttname"><a href="classAxisRenderer.html#a11d0c9da7a034088f7b44026005beab3">AxisRenderer::vbo</a></div><div class="ttdeci">GLuint vbo</div><div class="ttdoc">Vertex array and buffer objects.</div><div class="ttdef"><b>Definition:</b> axis_renderer.h:35</div></div>
+<div class="ttc" id="aclassAxisRenderer_html_a3a9f352852fbba20141f8076798ad333"><div class="ttname"><a href="classAxisRenderer.html#a3a9f352852fbba20141f8076798ad333">AxisRenderer::shaderProgram</a></div><div class="ttdeci">GLuint shaderProgram</div><div class="ttdoc">Shader program for axis rendering.</div><div class="ttdef"><b>Definition:</b> axis_renderer.h:36</div></div>
+<div class="ttc" id="aclassAxisRenderer_html_a3d6ea174de4266f2a4bc068229984522"><div class="ttname"><a href="classAxisRenderer.html#a3d6ea174de4266f2a4bc068229984522">AxisRenderer::modelLoc</a></div><div class="ttdeci">GLuint modelLoc</div><div class="ttdef"><b>Definition:</b> axis_renderer.h:38</div></div>
+<div class="ttc" id="aclassAxisRenderer_html_a4325e0a917cf26b4a9b265340ceb8875"><div class="ttname"><a href="classAxisRenderer.html#a4325e0a917cf26b4a9b265340ceb8875">AxisRenderer::projection</a></div><div class="ttdeci">glm::mat4 projection</div><div class="ttdoc">View and projection matrices.</div><div class="ttdef"><b>Definition:</b> axis_renderer.h:37</div></div>
+<div class="ttc" id="aclassAxisRenderer_html_a52e2c42a552b817741ee9c7596214cd3"><div class="ttname"><a href="classAxisRenderer.html#a52e2c42a552b817741ee9c7596214cd3">AxisRenderer::viewLoc</a></div><div class="ttdeci">GLuint viewLoc</div><div class="ttdef"><b>Definition:</b> axis_renderer.h:38</div></div>
 <div class="ttc" id="aclassAxisRenderer_html_a7fce768f9364c3679434320b8b7aa904"><div class="ttname"><a href="classAxisRenderer.html#a7fce768f9364c3679434320b8b7aa904">AxisRenderer::~AxisRenderer</a></div><div class="ttdeci">~AxisRenderer()</div><div class="ttdef"><b>Definition:</b> axis_renderer.cpp:10</div></div>
-<div class="ttc" id="aclassAxisRenderer_html_a84dd219a1a4655ec3b434c4b9705c6a0"><div class="ttname"><a href="classAxisRenderer.html#a84dd219a1a4655ec3b434c4b9705c6a0">AxisRenderer::render</a></div><div class="ttdeci">void render(const Transform &amp;transform)</div><div class="ttdef"><b>Definition:</b> axis_renderer.cpp:72</div></div>
-<div class="ttc" id="aclassAxisRenderer_html_a9074f64c35fbc194ae92e31d4b9cbc9c"><div class="ttname"><a href="classAxisRenderer.html#a9074f64c35fbc194ae92e31d4b9cbc9c">AxisRenderer::axisTransform</a></div><div class="ttdeci">Transform axisTransform</div><div class="ttdef"><b>Definition:</b> axis_renderer.h:16</div></div>
-<div class="ttc" id="aclassAxisRenderer_html_a9e56d4084524c7872777f52b5bc107e2"><div class="ttname"><a href="classAxisRenderer.html#a9e56d4084524c7872777f52b5bc107e2">AxisRenderer::projLoc</a></div><div class="ttdeci">GLuint projLoc</div><div class="ttdef"><b>Definition:</b> axis_renderer.h:15</div></div>
+<div class="ttc" id="aclassAxisRenderer_html_a84dd219a1a4655ec3b434c4b9705c6a0"><div class="ttname"><a href="classAxisRenderer.html#a84dd219a1a4655ec3b434c4b9705c6a0">AxisRenderer::render</a></div><div class="ttdeci">void render(const Transform &amp;transform)</div><div class="ttdoc">Render axes in 2D mode (legacy - deprecated)</div><div class="ttdef"><b>Definition:</b> axis_renderer.cpp:72</div></div>
+<div class="ttc" id="aclassAxisRenderer_html_a9074f64c35fbc194ae92e31d4b9cbc9c"><div class="ttname"><a href="classAxisRenderer.html#a9074f64c35fbc194ae92e31d4b9cbc9c">AxisRenderer::axisTransform</a></div><div class="ttdeci">Transform axisTransform</div><div class="ttdoc">Transformation utilities.</div><div class="ttdef"><b>Definition:</b> axis_renderer.h:39</div></div>
+<div class="ttc" id="aclassAxisRenderer_html_a9e56d4084524c7872777f52b5bc107e2"><div class="ttname"><a href="classAxisRenderer.html#a9e56d4084524c7872777f52b5bc107e2">AxisRenderer::projLoc</a></div><div class="ttdeci">GLuint projLoc</div><div class="ttdoc">Shader uniform locations.</div><div class="ttdef"><b>Definition:</b> axis_renderer.h:38</div></div>
 <div class="ttc" id="aclassAxisRenderer_html_ab2637469087182e25b7b4db2dd1dd15c"><div class="ttname"><a href="classAxisRenderer.html#ab2637469087182e25b7b4db2dd1dd15c">AxisRenderer::AxisRenderer</a></div><div class="ttdeci">AxisRenderer()</div><div class="ttdef"><b>Definition:</b> axis_renderer.cpp:8</div></div>
-<div class="ttc" id="aclassAxisRenderer_html_ab327f44ce3abe6fdf30380d4d081b413"><div class="ttname"><a href="classAxisRenderer.html#ab327f44ce3abe6fdf30380d4d081b413">AxisRenderer::shutdown</a></div><div class="ttdeci">void shutdown()</div><div class="ttdef"><b>Definition:</b> axis_renderer.cpp:110</div></div>
-<div class="ttc" id="aclassAxisRenderer_html_aeafc1964746638b7067055b5bf616d51"><div class="ttname"><a href="classAxisRenderer.html#aeafc1964746638b7067055b5bf616d51">AxisRenderer::render3D</a></div><div class="ttdeci">void render3D(const Transform &amp;transform)</div><div class="ttdef"><b>Definition:</b> axis_renderer.cpp:245</div></div>
-<div class="ttc" id="aclassAxisRenderer_html_aedefa9c0600e5a194f50abfa85383dca"><div class="ttname"><a href="classAxisRenderer.html#aedefa9c0600e5a194f50abfa85383dca">AxisRenderer::vao</a></div><div class="ttdeci">GLuint vao</div><div class="ttdef"><b>Definition:</b> axis_renderer.h:12</div></div>
-<div class="ttc" id="aclassAxisRenderer_html_aeffaaf38c5561bc783f4d614f3b75edf"><div class="ttname"><a href="classAxisRenderer.html#aeffaaf38c5561bc783f4d614f3b75edf">AxisRenderer::init</a></div><div class="ttdeci">bool init()</div><div class="ttdef"><b>Definition:</b> axis_renderer.cpp:14</div></div>
-<div class="ttc" id="aclassAxisRenderer_html_af5e7fb7b7bc2c5ec7194295b24e546b6"><div class="ttname"><a href="classAxisRenderer.html#af5e7fb7b7bc2c5ec7194295b24e546b6">AxisRenderer::view</a></div><div class="ttdeci">glm::mat4 view</div><div class="ttdef"><b>Definition:</b> axis_renderer.h:14</div></div>
+<div class="ttc" id="aclassAxisRenderer_html_ab327f44ce3abe6fdf30380d4d081b413"><div class="ttname"><a href="classAxisRenderer.html#ab327f44ce3abe6fdf30380d4d081b413">AxisRenderer::shutdown</a></div><div class="ttdeci">void shutdown()</div><div class="ttdoc">Release OpenGL resources.</div><div class="ttdef"><b>Definition:</b> axis_renderer.cpp:110</div></div>
+<div class="ttc" id="aclassAxisRenderer_html_aeafc1964746638b7067055b5bf616d51"><div class="ttname"><a href="classAxisRenderer.html#aeafc1964746638b7067055b5bf616d51">AxisRenderer::render3D</a></div><div class="ttdeci">void render3D(const Transform &amp;transform)</div><div class="ttdoc">Render axes in 3D mode.</div><div class="ttdef"><b>Definition:</b> axis_renderer.cpp:245</div></div>
+<div class="ttc" id="aclassAxisRenderer_html_aedefa9c0600e5a194f50abfa85383dca"><div class="ttname"><a href="classAxisRenderer.html#aedefa9c0600e5a194f50abfa85383dca">AxisRenderer::vao</a></div><div class="ttdeci">GLuint vao</div><div class="ttdef"><b>Definition:</b> axis_renderer.h:35</div></div>
+<div class="ttc" id="aclassAxisRenderer_html_aeffaaf38c5561bc783f4d614f3b75edf"><div class="ttname"><a href="classAxisRenderer.html#aeffaaf38c5561bc783f4d614f3b75edf">AxisRenderer::init</a></div><div class="ttdeci">bool init()</div><div class="ttdoc">Initialize axis renderer (load shaders, setup geometry)</div><div class="ttdef"><b>Definition:</b> axis_renderer.cpp:14</div></div>
+<div class="ttc" id="aclassAxisRenderer_html_af5e7fb7b7bc2c5ec7194295b24e546b6"><div class="ttname"><a href="classAxisRenderer.html#af5e7fb7b7bc2c5ec7194295b24e546b6">AxisRenderer::view</a></div><div class="ttdeci">glm::mat4 view</div><div class="ttdef"><b>Definition:</b> axis_renderer.h:37</div></div>
 <div class="ttc" id="aclassTransform_html"><div class="ttname"><a href="classTransform.html">Transform</a></div><div class="ttdef"><b>Definition:</b> transform.h:7</div></div>
 <div class="ttc" id="atransform_8h_html"><div class="ttname"><a href="transform_8h.html">transform.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

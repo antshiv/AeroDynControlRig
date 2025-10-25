@@ -1,4 +1,4 @@
 <map id="src/modules/sensor_simulator.h" name="src/modules/sensor_simulator.h">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,153,47"/>
-<area shape="rect" id="node2" href="$module_8h.html" title=" " alt="" coords="22,95,137,121"/>
+<area shape="rect" id="node1" title="IMU sensor simulation module (gyroscope + accelerometer)" alt="" coords="5,5,153,47"/>
+<area shape="rect" id="node2" href="$module_8h.html" title="Base interface for simulation modules in the AeroDynControlRig." alt="" coords="22,95,137,121"/>
 </map>

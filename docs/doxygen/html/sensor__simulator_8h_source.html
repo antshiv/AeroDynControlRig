@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -85,27 +87,29 @@ $(document).ready(function(){initNavTree('sensor__simulator_8h_source.html','');
 <div class="title">sensor_simulator.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="sensor__simulator_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SENSOR_SIMULATOR_H</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SENSOR_SIMULATOR_H</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="module_8h.html">core/module.h</a>&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="classSensorSimulatorModule.html">    6</a></span>&#160;<span class="keyword">class </span><a class="code" href="classSensorSimulatorModule.html">SensorSimulatorModule</a> : <span class="keyword">public</span> <a class="code" href="classModule.html">Module</a> {</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classSensorSimulatorModule.html#ace993d9ecc708dea28638f04e87cb031">initialize</a>(<a class="code" href="structSimulationState.html">SimulationState</a>&amp; state) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classSensorSimulatorModule.html#a6960acc8891c14465a3ccde217cd9e78">update</a>(<span class="keywordtype">double</span> dt, <a class="code" href="structSimulationState.html">SimulationState</a>&amp; state) <span class="keyword">override</span>;</div>
+<a href="sensor__simulator_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#ifndef SENSOR_SIMULATOR_H</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#define SENSOR_SIMULATOR_H</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="module_8h.html">core/module.h</a>&quot;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keywordtype">double</span> gravity_{9.80665};</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;};</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// SENSOR_SIMULATOR_H</span></div>
-<div class="ttc" id="aclassModule_html"><div class="ttname"><a href="classModule.html">Module</a></div><div class="ttdef"><b>Definition:</b> module.h:6</div></div>
-<div class="ttc" id="aclassSensorSimulatorModule_html"><div class="ttname"><a href="classSensorSimulatorModule.html">SensorSimulatorModule</a></div><div class="ttdef"><b>Definition:</b> sensor_simulator.h:6</div></div>
-<div class="ttc" id="aclassSensorSimulatorModule_html_a6960acc8891c14465a3ccde217cd9e78"><div class="ttname"><a href="classSensorSimulatorModule.html#a6960acc8891c14465a3ccde217cd9e78">SensorSimulatorModule::update</a></div><div class="ttdeci">void update(double dt, SimulationState &amp;state) override</div><div class="ttdef"><b>Definition:</b> sensor_simulator.cpp:15</div></div>
-<div class="ttc" id="aclassSensorSimulatorModule_html_ace993d9ecc708dea28638f04e87cb031"><div class="ttname"><a href="classSensorSimulatorModule.html#ace993d9ecc708dea28638f04e87cb031">SensorSimulatorModule::initialize</a></div><div class="ttdeci">void initialize(SimulationState &amp;state) override</div><div class="ttdef"><b>Definition:</b> sensor_simulator.cpp:10</div></div>
-<div class="ttc" id="amodule_8h_html"><div class="ttname"><a href="module_8h.html">module.h</a></div></div>
-<div class="ttc" id="astructSimulationState_html"><div class="ttname"><a href="structSimulationState.html">SimulationState</a></div><div class="ttdef"><b>Definition:</b> simulation_state.h:8</div></div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classSensorSimulatorModule.html">   26</a></span>&#160;<span class="keyword">class </span><a class="code" href="classSensorSimulatorModule.html">SensorSimulatorModule</a> : <span class="keyword">public</span> <a class="code" href="classModule.html">Module</a> {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classSensorSimulatorModule.html#ace993d9ecc708dea28638f04e87cb031">initialize</a>(<a class="code" href="structSimulationState.html">SimulationState</a>&amp; state) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classSensorSimulatorModule.html#a6960acc8891c14465a3ccde217cd9e78">update</a>(<span class="keywordtype">double</span> dt, <a class="code" href="structSimulationState.html">SimulationState</a>&amp; state) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">double</span> gravity_{9.80665}; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;};</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// SENSOR_SIMULATOR_H</span></div>
+<div class="ttc" id="aclassModule_html"><div class="ttname"><a href="classModule.html">Module</a></div><div class="ttdoc">Abstract base class for all simulation modules.</div><div class="ttdef"><b>Definition:</b> module.h:21</div></div>
+<div class="ttc" id="aclassSensorSimulatorModule_html"><div class="ttname"><a href="classSensorSimulatorModule.html">SensorSimulatorModule</a></div><div class="ttdoc">Simulates IMU sensor measurements (gyro + accel) based on vehicle state.</div><div class="ttdef"><b>Definition:</b> sensor_simulator.h:26</div></div>
+<div class="ttc" id="aclassSensorSimulatorModule_html_a6960acc8891c14465a3ccde217cd9e78"><div class="ttname"><a href="classSensorSimulatorModule.html#a6960acc8891c14465a3ccde217cd9e78">SensorSimulatorModule::update</a></div><div class="ttdeci">void update(double dt, SimulationState &amp;state) override</div><div class="ttdoc">Generate simulated sensor measurements.</div><div class="ttdef"><b>Definition:</b> sensor_simulator.cpp:15</div></div>
+<div class="ttc" id="aclassSensorSimulatorModule_html_ace993d9ecc708dea28638f04e87cb031"><div class="ttname"><a href="classSensorSimulatorModule.html#ace993d9ecc708dea28638f04e87cb031">SensorSimulatorModule::initialize</a></div><div class="ttdeci">void initialize(SimulationState &amp;state) override</div><div class="ttdoc">Initialize sensor parameters.</div><div class="ttdef"><b>Definition:</b> sensor_simulator.cpp:10</div></div>
+<div class="ttc" id="amodule_8h_html"><div class="ttname"><a href="module_8h.html">module.h</a></div><div class="ttdoc">Base interface for simulation modules in the AeroDynControlRig.</div></div>
+<div class="ttc" id="astructSimulationState_html"><div class="ttname"><a href="structSimulationState.html">SimulationState</a></div><div class="ttdoc">Central shared state for the entire simulation.</div><div class="ttdef"><b>Definition:</b> simulation_state.h:26</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -89,14 +91,17 @@ $(document).ready(function(){initNavTree('classRotorTelemetryModule.html',''); i
 </div><!--header-->
 <div class="contents">
 
+<p>Computes rotor thrust, torque, and power from RPM measurements.  
+ <a href="classRotorTelemetryModule.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="rotor__telemetry_8h_source.html">rotor_telemetry.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for RotorTelemetryModule:</div>
 <div class="dyncontent">
 <div class="center"><img src="classRotorTelemetryModule__inherit__graph.png" border="0" usemap="#aRotorTelemetryModule_inherit__map" alt="Inheritance graph"/></div>
 <map name="aRotorTelemetryModule_inherit__map" id="aRotorTelemetryModule_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,80,176,107"/>
-<area shape="rect" href="classModule.html" title=" " alt="" coords="55,5,126,32"/>
+<area shape="rect" title="Computes rotor thrust, torque, and power from RPM measurements." alt="" coords="5,80,176,107"/>
+<area shape="rect" href="classModule.html" title="Abstract base class for all simulation modules." alt="" coords="55,5,126,32"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -104,22 +109,41 @@ Collaboration diagram for RotorTelemetryModule:</div>
 <div class="dyncontent">
 <div class="center"><img src="classRotorTelemetryModule__coll__graph.png" border="0" usemap="#aRotorTelemetryModule_coll__map" alt="Collaboration graph"/></div>
 <map name="aRotorTelemetryModule_coll__map" id="aRotorTelemetryModule_coll__map">
-<area shape="rect" title=" " alt="" coords="5,80,176,107"/>
-<area shape="rect" href="classModule.html" title=" " alt="" coords="55,5,126,32"/>
+<area shape="rect" title="Computes rotor thrust, torque, and power from RPM measurements." alt="" coords="5,80,176,107"/>
+<area shape="rect" href="classModule.html" title="Abstract base class for all simulation modules." alt="" coords="55,5,126,32"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ae980c57fb18c5ae7fe1db6130fb326d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRotorTelemetryModule.html#ae980c57fb18c5ae7fe1db6130fb326d9">initialize</a> (<a class="el" href="structSimulationState.html">SimulationState</a> &amp;state) override</td></tr>
+<tr class="memdesc:ae980c57fb18c5ae7fe1db6130fb326d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize rotor parameters.  <a href="classRotorTelemetryModule.html#ae980c57fb18c5ae7fe1db6130fb326d9">More...</a><br /></td></tr>
 <tr class="separator:ae980c57fb18c5ae7fe1db6130fb326d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12889773b6366279d8f503e5efe25311"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRotorTelemetryModule.html#a12889773b6366279d8f503e5efe25311">update</a> (double dt, <a class="el" href="structSimulationState.html">SimulationState</a> &amp;state) override</td></tr>
+<tr class="memdesc:a12889773b6366279d8f503e5efe25311"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update rotor telemetry based on RPM.  <a href="classRotorTelemetryModule.html#a12889773b6366279d8f503e5efe25311">More...</a><br /></td></tr>
 <tr class="separator:a12889773b6366279d8f503e5efe25311"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classModule"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classModule')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classModule.html">Module</a></td></tr>
 <tr class="memitem:a4a48538d35a2da7fcc32d9f509034723 inherit pub_methods_classModule"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModule.html#a4a48538d35a2da7fcc32d9f509034723">~Module</a> ()=default</td></tr>
 <tr class="separator:a4a48538d35a2da7fcc32d9f509034723 inherit pub_methods_classModule"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Computes rotor thrust, torque, and power from RPM measurements. </p>
+<p>This module calculates performance metrics for a quadcopter's rotors using first-principles aerodynamics:</p>
+<p><b>Thrust</b>: F = k_T * ω² <b>Torque</b>: τ = k_Q * ω² <b>Power</b>: P = τ * ω</p>
+<p>Where:</p><ul>
+<li>ω = angular velocity (rad/s) = RPM * (2π/60)</li>
+<li>k_T = thrust coefficient (N/(rad/s)²)</li>
+<li>k_Q = torque coefficient (N·m/(rad/s)²)</li>
+</ul>
+<p>The module currently generates synthetic RPM data (sinusoidal variation). Future enhancements:</p><ul>
+<li>Accept commanded RPM from controller module</li>
+<li>Add rotor dynamics (lag between command and actual RPM)</li>
+<li>Include motor voltage/current modeling</li>
+</ul>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="structSimulationState_1_1RotorConfig.html" title="Physical configuration for rotor/propeller models.">SimulationState::RotorConfig</a> </dd>
+<dd>
+<a class="el" href="structSimulationState_1_1RotorTelemetry.html" title="Computed rotor performance metrics.">SimulationState::RotorTelemetry</a> </dd></dl>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ae980c57fb18c5ae7fe1db6130fb326d9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae980c57fb18c5ae7fe1db6130fb326d9">&#9670;&nbsp;</a></span>initialize()</h2>
 
@@ -143,6 +167,14 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Initialize rotor parameters. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>Reference to simulation state </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Reimplemented from <a class="el" href="classModule.html#a217a8e1c2cd1745b1419607cb1a92076">Module</a>.</p>
 
@@ -181,6 +213,16 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Update rotor telemetry based on RPM. </p>
+<p>Calculates per-rotor thrust, torque, and total power consumption. Writes results to <a class="el" href="structSimulationState.html#a43e0b8ce8ca4d5cee64c1aac6c854180">SimulationState::rotor</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dt</td><td>Time step (seconds) </td></tr>
+    <tr><td class="paramname">state</td><td>Reference to simulation state (reads rotor_config, writes rotor telemetry including thrust/torque/power) </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Implements <a class="el" href="classModule.html#ac6bb9eb865c41df66fe428a7c17b98d3">Module</a>.</p>
 

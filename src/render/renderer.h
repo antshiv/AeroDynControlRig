@@ -1,3 +1,8 @@
+/**
+ * @file renderer.h
+ * @brief Main 3D scene renderer using OpenGL 3.3
+ */
+
 #ifndef RENDERER_H
 #define RENDERER_H
 
@@ -7,53 +12,123 @@
 #include <string>
 #include "core/transform.h"
 
+/**
+ * @class Renderer
+ * @brief OpenGL 3.3 renderer for the main 3D scene
+ *
+ * This class manages rendering of the primary 3D geometry (currently a colored cube)
+ * using the modern OpenGL pipeline (VAO/VBO, GLSL shaders).
+ *
+ * **Rendering Pipeline**:
+ * 1. Load and compile vertex/fragment shaders
+ * 2. Setup cube geometry in GPU buffers
+ * 3. Each frame: bind shaders, set matrices, draw indexed geometry
+ *
+ * **Coordinate Spaces**:
+ * - Model: Local object space → transformed by model matrix
+ * - View: Camera/eye space → transformed by view matrix
+ * - Projection: Clip space → transformed by projection matrix
+ *
+ * The model matrix is driven by SimulationState (attitude quaternion),
+ * allowing the cube to visualize vehicle orientation.
+ */
 class Renderer {
 public:
     Renderer();
     ~Renderer();
 
-    // Initialize OpenGL state, load shaders, setup VAOs/VBOs
+    /**
+     * @brief Initialize OpenGL resources (shaders, geometry buffers)
+     * @return true if initialization succeeded, false on error
+     */
     bool init();
 
-    // Called each frame to render
+    /**
+     * @brief Render a frame (legacy 2D mode - deprecated)
+     */
     void renderFrame();
+
+    /**
+     * @brief Render a frame with 2D transformation (legacy)
+     * @param transform 2D transformation utilities
+     */
     void renderFrame2D(const Transform& transform);
 
+    /**
+     * @brief Render a 3D frame with the current model/view/projection matrices
+     * @param transform 3D transformation utilities
+     */
     void renderFrame3D(const Transform& transform);
 
-    // Set the model matrix for the current frame
+    /**
+     * @brief Set the model matrix (object → world transform)
+     * @param modelMat Pointer to 4x4 model matrix (column-major, 16 floats)
+     */
     void setModelMatrix(const float* modelMat);
 
-    // Provide a way to set view and projection matrices
+    /**
+     * @brief Set the view matrix (world → camera transform)
+     * @param view 4x4 view matrix
+     */
     void setViewMatrix(const glm::mat4& view);
+
+    /**
+     * @brief Set the projection matrix (camera → clip space transform)
+     * @param proj 4x4 projection matrix (typically perspective)
+     */
     void setProjectionMatrix(const glm::mat4& proj);
 
-    // Optional shutdown if needed
+    /**
+     * @brief Release OpenGL resources (shaders, VAOs, VBOs)
+     */
     void shutdown();
 
 private:
-    unsigned int shaderProgram;
-    unsigned int vao, vbo, ebo;
+    // === OpenGL Resources ===
+    unsigned int shaderProgram;    ///< Compiled shader program ID
+    unsigned int vao;              ///< Vertex Array Object
+    unsigned int vbo;              ///< Vertex Buffer Object
+    unsigned int ebo;              ///< Element Buffer Object (index buffer)
+    unsigned int indexCount;       ///< Number of indices to draw
 
-    unsigned int indexCount;
+    // === Shader Uniform Locations ===
+    int modelLoc;                  ///< Location of model matrix uniform
+    int viewLoc;                   ///< Location of view matrix uniform
+    int projLoc;                   ///< Location of projection matrix uniform
 
-    // Locations of uniforms
-    int modelLoc;
-    int viewLoc;
-    int projLoc;
+    // === Transformation Matrices ===
+    glm::mat4 model;               ///< Model matrix (object → world)
+    glm::mat4 view;                ///< View matrix (world → camera)
+    glm::mat4 projection;          ///< Projection matrix (camera → clip space)
 
-    // Matrices
-    glm::mat4 model;
-    glm::mat4 view;
-    glm::mat4 projection;
-
-    // Helper methods
+    // === Initialization Helpers ===
+    /**
+     * @brief Load, compile, and link GLSL shaders
+     * @param vertexSrc Vertex shader source code
+     * @param fragmentSrc Fragment shader source code
+     * @return Shader program ID, or 0 on failure
+     */
     unsigned int loadShader(const char* vertexSrc, const char* fragmentSrc);
-    void setupCubeGeometry();
-    void setupCubeGeometry3D();
-    void setupAxisGeometry();
-    void setDefaultMatrices();
 
+    /**
+     * @brief Setup cube geometry in GPU buffers (2D mode - legacy)
+     */
+    void setupCubeGeometry();
+
+    /**
+     * @brief Setup 3D cube geometry with per-vertex colors
+     */
+    void setupCubeGeometry3D();
+
+    /**
+     * @brief Setup axis geometry (unused - see AxisRenderer)
+     */
+    void setupAxisGeometry();
+
+    /**
+     * @brief Initialize matrices to identity/default values
+     */
+    void setDefaultMatrices();
 };
 
 #endif // RENDERER_H

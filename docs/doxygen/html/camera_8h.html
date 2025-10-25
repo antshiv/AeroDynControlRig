@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -88,6 +90,9 @@ $(document).ready(function(){initNavTree('camera_8h.html',''); initResizable(); 
 <div class="title">camera.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>First-person and orbital camera for 3D scene navigation.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;glm/glm.hpp&gt;</code><br />
 <code>#include &lt;glm/gtc/matrix_transform.hpp&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
@@ -95,7 +100,7 @@ Include dependency graph for camera.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="camera_8h__incl.png" border="0" usemap="#asrc_2render_2camera_8h" alt=""/></div>
 <map name="asrc_2render_2camera_8h" id="asrc_2render_2camera_8h">
-<area shape="rect" title=" " alt="" coords="73,5,225,32"/>
+<area shape="rect" title="First&#45;person and orbital camera for 3D scene navigation." alt="" coords="73,5,225,32"/>
 <area shape="rect" title=" " alt="" coords="5,80,109,107"/>
 <area shape="rect" title=" " alt="" coords="134,80,351,107"/>
 </map>
@@ -105,8 +110,8 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="camera_8h__dep__incl.png" border="0" usemap="#asrc_2render_2camera_8hdep" alt=""/></div>
 <map name="asrc_2render_2camera_8hdep" id="asrc_2render_2camera_8hdep">
-<area shape="rect" title=" " alt="" coords="1001,5,1153,32"/>
-<area shape="rect" href="application_8h.html" title=" " alt="" coords="101,87,258,114"/>
+<area shape="rect" title="First&#45;person and orbital camera for 3D scene navigation." alt="" coords="1001,5,1153,32"/>
+<area shape="rect" href="application_8h.html" title="Main application class coordinating rendering, simulation, and UI." alt="" coords="101,87,258,114"/>
 <area shape="rect" href="panel__manager_8cpp.html" title=" " alt="" coords="283,87,479,114"/>
 <area shape="rect" href="control__panel_8cpp.html" title=" " alt="" coords="503,80,664,121"/>
 <area shape="rect" href="dynamics__panel_8cpp.html" title=" " alt="" coords="689,80,867,121"/>
@@ -126,6 +131,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html">Camera</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">First-person camera with mouse look and WASD movement.  <a href="classCamera.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
@@ -140,9 +146,12 @@ Enumerations</h2></td></tr>
 , <a class="el" href="camera_8h.html#a605494501af59c9191e7e4d6f9a0ebcba9b0b4a95b99523966e0e34ffdadac9da">DOWN</a>
 <br />
  }</td></tr>
+<tr class="memdesc:a605494501af59c9191e7e4d6f9a0ebcb"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classCamera.html" title="First-person camera with mouse look and WASD movement.">Camera</a> movement directions for keyboard input.  <a href="camera_8h.html#a605494501af59c9191e7e4d6f9a0ebcb">More...</a><br /></td></tr>
 <tr class="separator:a605494501af59c9191e7e4d6f9a0ebcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>First-person and orbital camera for 3D scene navigation. </p>
+</div><h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="a605494501af59c9191e7e4d6f9a0ebcb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a605494501af59c9191e7e4d6f9a0ebcb">&#9670;&nbsp;</a></span>Camera_Movement</h2>
 
@@ -154,13 +163,21 @@ Enumerations</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p><a class="el" href="classCamera.html" title="First-person camera with mouse look and WASD movement.">Camera</a> movement directions for keyboard input. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a605494501af59c9191e7e4d6f9a0ebcbaa26736999186daf8146f809e863712a1"></a>FORWARD&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a605494501af59c9191e7e4d6f9a0ebcbafed2fca77e454294d6b8bda1bf2c9fd6"></a>BACKWARD&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a605494501af59c9191e7e4d6f9a0ebcbadb45120aafd37a973140edee24708065"></a>LEFT&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a605494501af59c9191e7e4d6f9a0ebcbaec8379af7490bb9eaaf579cf17876f38"></a>RIGHT&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a605494501af59c9191e7e4d6f9a0ebcbaba595d8bca8bc5e67c37c0a9d89becfa"></a>UP&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a605494501af59c9191e7e4d6f9a0ebcba9b0b4a95b99523966e0e34ffdadac9da"></a>DOWN&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a605494501af59c9191e7e4d6f9a0ebcbaa26736999186daf8146f809e863712a1"></a>FORWARD&#160;</td><td class="fielddoc"><p>Move in the direction camera is facing. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a605494501af59c9191e7e4d6f9a0ebcbafed2fca77e454294d6b8bda1bf2c9fd6"></a>BACKWARD&#160;</td><td class="fielddoc"><p>Move away from direction camera is facing. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a605494501af59c9191e7e4d6f9a0ebcbadb45120aafd37a973140edee24708065"></a>LEFT&#160;</td><td class="fielddoc"><p>Strafe left. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a605494501af59c9191e7e4d6f9a0ebcbaec8379af7490bb9eaaf579cf17876f38"></a>RIGHT&#160;</td><td class="fielddoc"><p>Strafe right. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a605494501af59c9191e7e4d6f9a0ebcbaba595d8bca8bc5e67c37c0a9d89becfa"></a>UP&#160;</td><td class="fielddoc"><p>Move upward in world space. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a605494501af59c9191e7e4d6f9a0ebcba9b0b4a95b99523966e0e34ffdadac9da"></a>DOWN&#160;</td><td class="fielddoc"><p>Move downward in world space. </p>
+</td></tr>
 </table>
 
 </div>

@@ -17,7 +17,6 @@ var hierarchy =
       [ "RotorTelemetryModule", "classRotorTelemetryModule.html", null ],
       [ "SensorSimulatorModule", "classSensorSimulatorModule.html", null ]
     ] ],
-    [ "ui::Palette", "structui_1_1Palette.html", null ],
     [ "Panel", "classPanel.html", [
       [ "ControlPanel", "classControlPanel.html", null ],
       [ "DynamicsPanel", "classDynamicsPanel.html", null ],

@@ -1,4 +1,4 @@
 <map id="SensorPanel::name" name="SensorPanel::name">
-<area shape="rect" id="node1" title=" " alt="" coords="195,5,341,32"/>
-<area shape="rect" id="node2" href="$classSensorPanel.html#a2b9f315ae32bd4883b8532d5369c373d" title=" " alt="" coords="5,5,147,32"/>
+<area shape="rect" id="node1" title="Get the display name of this panel." alt="" coords="195,5,341,32"/>
+<area shape="rect" id="node2" href="$classSensorPanel.html#a2b9f315ae32bd4883b8532d5369c373d" title="Render the panel&#39;s ImGui interface." alt="" coords="5,5,147,32"/>
 </map>

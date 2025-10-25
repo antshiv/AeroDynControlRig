@@ -1,10 +1,10 @@
 <map id="src/modules/first_order_dynamics.cpp" name="src/modules/first_order_dynamics.cpp">
 <area shape="rect" id="node1" title=" " alt="" coords="173,5,343,47"/>
-<area shape="rect" id="node2" href="$first__order__dynamics_8h.html" title=" " alt="" coords="5,95,153,136"/>
+<area shape="rect" id="node2" href="$first__order__dynamics_8h.html" title="First&#45;order linear system dynamics for testing and validation." alt="" coords="5,95,153,136"/>
 <area shape="rect" id="node4" title=" " alt="" coords="177,102,240,129"/>
 <area shape="rect" id="node5" title=" " alt="" coords="265,102,350,129"/>
-<area shape="rect" id="node6" href="$simulation__state_8h.html" title=" " alt="" coords="375,102,549,129"/>
-<area shape="rect" id="node3" href="$module_8h.html" title=" " alt="" coords="22,184,137,211"/>
+<area shape="rect" id="node6" href="$simulation__state_8h.html" title="Centralized simulation state shared across all modules and panels." alt="" coords="375,102,549,129"/>
+<area shape="rect" id="node3" href="$module_8h.html" title="Base interface for simulation modules in the AeroDynControlRig." alt="" coords="22,184,137,211"/>
 <area shape="rect" id="node7" title=" " alt="" coords="330,184,386,211"/>
 <area shape="rect" id="node8" title=" " alt="" coords="410,184,514,211"/>
 <area shape="rect" id="node9" href="$euler_8h.html" title=" " alt="" coords="539,184,660,211"/>

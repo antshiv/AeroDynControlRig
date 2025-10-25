@@ -1,10 +1,7 @@
 <map id="ui::EndCard" name="ui::EndCard">
-<area shape="rect" id="node1" title=" " alt="" coords="493,107,589,133"/>
-<area shape="rect" id="node2" href="$classEstimatorPanel.html#a2f2e0dc7c0287d12b71b412a38d25b96" title=" " alt="" coords="284,5,444,32"/>
-<area shape="rect" id="node3" href="$classPowerPanel.html#a707cada1c41c5a1a38f154f6e93c1280" title=" " alt="" coords="295,56,433,83"/>
-<area shape="rect" id="node4" href="$classRotorPanel.html#a4cc8a6932eabe62949fa23c08f79e488" title=" " alt="" coords="298,107,430,133"/>
-<area shape="rect" id="node5" href="$classSensorPanel.html#a2b9f315ae32bd4883b8532d5369c373d" title=" " alt="" coords="293,157,435,184"/>
-<area shape="rect" id="node6" href="$classApplication.html#a4e7a520d659593b385b246a43e604dfb" title=" " alt="" coords="283,208,445,235"/>
-<area shape="rect" id="node7" href="$classApplication.html#af44c742342adf5305e430ff293f147c1" title=" " alt="" coords="108,208,235,235"/>
-<area shape="rect" id="node8" href="$main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,208,60,235"/>
+<area shape="rect" id="node1" title=" " alt="" coords="213,81,309,108"/>
+<area shape="rect" id="node2" href="$classEstimatorPanel.html#a2f2e0dc7c0287d12b71b412a38d25b96" title="Render the panel&#39;s ImGui interface." alt="" coords="5,5,165,32"/>
+<area shape="rect" id="node3" href="$classPowerPanel.html#a707cada1c41c5a1a38f154f6e93c1280" title="Render the panel&#39;s ImGui interface." alt="" coords="17,56,154,83"/>
+<area shape="rect" id="node4" href="$classRotorPanel.html#a4cc8a6932eabe62949fa23c08f79e488" title="Render the panel&#39;s ImGui interface." alt="" coords="19,107,151,133"/>
+<area shape="rect" id="node5" href="$classSensorPanel.html#a2b9f315ae32bd4883b8532d5369c373d" title="Render the panel&#39;s ImGui interface." alt="" coords="15,157,156,184"/>
 </map>

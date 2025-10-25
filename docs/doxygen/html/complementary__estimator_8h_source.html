@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -85,39 +87,41 @@ $(document).ready(function(){initNavTree('complementary__estimator_8h_source.htm
 <div class="title">complementary_estimator.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="complementary__estimator_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef COMPLEMENTARY_ESTIMATOR_H</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define COMPLEMENTARY_ESTIMATOR_H</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;array&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="module_8h.html">core/module.h</a>&quot;</span></div>
+<a href="complementary__estimator_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#ifndef COMPLEMENTARY_ESTIMATOR_H</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#define COMPLEMENTARY_ESTIMATOR_H</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="classComplementaryEstimatorModule.html">    9</a></span>&#160;<span class="keyword">class </span><a class="code" href="classComplementaryEstimatorModule.html">ComplementaryEstimatorModule</a> : <span class="keyword">public</span> <a class="code" href="classModule.html">Module</a> {</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classComplementaryEstimatorModule.html#ac5ed8e8e6884ff510753b154a2e1d9b5">initialize</a>(<a class="code" href="structSimulationState.html">SimulationState</a>&amp; state) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classComplementaryEstimatorModule.html#ae3ba8369b0453cceb8252296387cf1b9">update</a>(<span class="keywordtype">double</span> dt, <a class="code" href="structSimulationState.html">SimulationState</a>&amp; state) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;array&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="module_8h.html">core/module.h</a>&quot;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classComplementaryEstimatorModule.html#a7564bc6705c3f4d5628ae27377daf05a">   14</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classComplementaryEstimatorModule.html#a7564bc6705c3f4d5628ae27377daf05a">setGains</a>(<span class="keywordtype">float</span> kp, <span class="keywordtype">float</span> ki) {</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        kp_ = kp;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        ki_ = ki;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    }</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    std::array&lt;double, 4&gt; q_est_{1.0, 0.0, 0.0, 0.0};</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    glm::vec3 bias_{0.0f};</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">float</span> kp_{2.0f};</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">float</span> ki_{0.05f};</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;};</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// COMPLEMENTARY_ESTIMATOR_H</span></div>
-<div class="ttc" id="aclassComplementaryEstimatorModule_html"><div class="ttname"><a href="classComplementaryEstimatorModule.html">ComplementaryEstimatorModule</a></div><div class="ttdef"><b>Definition:</b> complementary_estimator.h:9</div></div>
-<div class="ttc" id="aclassComplementaryEstimatorModule_html_a7564bc6705c3f4d5628ae27377daf05a"><div class="ttname"><a href="classComplementaryEstimatorModule.html#a7564bc6705c3f4d5628ae27377daf05a">ComplementaryEstimatorModule::setGains</a></div><div class="ttdeci">void setGains(float kp, float ki)</div><div class="ttdef"><b>Definition:</b> complementary_estimator.h:14</div></div>
-<div class="ttc" id="aclassComplementaryEstimatorModule_html_ac5ed8e8e6884ff510753b154a2e1d9b5"><div class="ttname"><a href="classComplementaryEstimatorModule.html#ac5ed8e8e6884ff510753b154a2e1d9b5">ComplementaryEstimatorModule::initialize</a></div><div class="ttdeci">void initialize(SimulationState &amp;state) override</div><div class="ttdef"><b>Definition:</b> complementary_estimator.cpp:24</div></div>
-<div class="ttc" id="aclassComplementaryEstimatorModule_html_ae3ba8369b0453cceb8252296387cf1b9"><div class="ttname"><a href="classComplementaryEstimatorModule.html#ae3ba8369b0453cceb8252296387cf1b9">ComplementaryEstimatorModule::update</a></div><div class="ttdeci">void update(double dt, SimulationState &amp;state) override</div><div class="ttdef"><b>Definition:</b> complementary_estimator.cpp:33</div></div>
-<div class="ttc" id="aclassModule_html"><div class="ttname"><a href="classModule.html">Module</a></div><div class="ttdef"><b>Definition:</b> module.h:6</div></div>
-<div class="ttc" id="amodule_8h_html"><div class="ttname"><a href="module_8h.html">module.h</a></div></div>
-<div class="ttc" id="astructSimulationState_html"><div class="ttname"><a href="structSimulationState.html">SimulationState</a></div><div class="ttdef"><b>Definition:</b> simulation_state.h:8</div></div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classComplementaryEstimatorModule.html">   34</a></span>&#160;<span class="keyword">class </span><a class="code" href="classComplementaryEstimatorModule.html">ComplementaryEstimatorModule</a> : <span class="keyword">public</span> <a class="code" href="classModule.html">Module</a> {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classComplementaryEstimatorModule.html#ac5ed8e8e6884ff510753b154a2e1d9b5">initialize</a>(<a class="code" href="structSimulationState.html">SimulationState</a>&amp; state) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classComplementaryEstimatorModule.html#ae3ba8369b0453cceb8252296387cf1b9">update</a>(<span class="keywordtype">double</span> dt, <a class="code" href="structSimulationState.html">SimulationState</a>&amp; state) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="classComplementaryEstimatorModule.html#a7564bc6705c3f4d5628ae27377daf05a">   58</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classComplementaryEstimatorModule.html#a7564bc6705c3f4d5628ae27377daf05a">setGains</a>(<span class="keywordtype">float</span> kp, <span class="keywordtype">float</span> ki) {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        kp_ = kp;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        ki_ = ki;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    }</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    std::array&lt;double, 4&gt; q_est_{1.0, 0.0, 0.0, 0.0}; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    glm::vec3 bias_{0.0f};                            </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">float</span> kp_{2.0f};                                  </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">float</span> ki_{0.05f};                                 </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;};</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// COMPLEMENTARY_ESTIMATOR_H</span></div>
+<div class="ttc" id="aclassComplementaryEstimatorModule_html"><div class="ttname"><a href="classComplementaryEstimatorModule.html">ComplementaryEstimatorModule</a></div><div class="ttdoc">Estimates attitude using a complementary filter fusing gyro and accel.</div><div class="ttdef"><b>Definition:</b> complementary_estimator.h:34</div></div>
+<div class="ttc" id="aclassComplementaryEstimatorModule_html_a7564bc6705c3f4d5628ae27377daf05a"><div class="ttname"><a href="classComplementaryEstimatorModule.html#a7564bc6705c3f4d5628ae27377daf05a">ComplementaryEstimatorModule::setGains</a></div><div class="ttdeci">void setGains(float kp, float ki)</div><div class="ttdoc">Tune the complementary filter gains.</div><div class="ttdef"><b>Definition:</b> complementary_estimator.h:58</div></div>
+<div class="ttc" id="aclassComplementaryEstimatorModule_html_ac5ed8e8e6884ff510753b154a2e1d9b5"><div class="ttname"><a href="classComplementaryEstimatorModule.html#ac5ed8e8e6884ff510753b154a2e1d9b5">ComplementaryEstimatorModule::initialize</a></div><div class="ttdeci">void initialize(SimulationState &amp;state) override</div><div class="ttdoc">Initialize estimator to identity quaternion with zero bias.</div><div class="ttdef"><b>Definition:</b> complementary_estimator.cpp:24</div></div>
+<div class="ttc" id="aclassComplementaryEstimatorModule_html_ae3ba8369b0453cceb8252296387cf1b9"><div class="ttname"><a href="classComplementaryEstimatorModule.html#ae3ba8369b0453cceb8252296387cf1b9">ComplementaryEstimatorModule::update</a></div><div class="ttdeci">void update(double dt, SimulationState &amp;state) override</div><div class="ttdoc">Update attitude estimate using gyro and accel measurements.</div><div class="ttdef"><b>Definition:</b> complementary_estimator.cpp:33</div></div>
+<div class="ttc" id="aclassModule_html"><div class="ttname"><a href="classModule.html">Module</a></div><div class="ttdoc">Abstract base class for all simulation modules.</div><div class="ttdef"><b>Definition:</b> module.h:21</div></div>
+<div class="ttc" id="amodule_8h_html"><div class="ttname"><a href="module_8h.html">module.h</a></div><div class="ttdoc">Base interface for simulation modules in the AeroDynControlRig.</div></div>
+<div class="ttc" id="astructSimulationState_html"><div class="ttname"><a href="structSimulationState.html">SimulationState</a></div><div class="ttdoc">Central shared state for the entire simulation.</div><div class="ttdef"><b>Definition:</b> simulation_state.h:26</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

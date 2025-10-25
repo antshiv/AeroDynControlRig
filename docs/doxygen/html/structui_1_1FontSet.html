@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -89,20 +91,64 @@ $(document).ready(function(){initNavTree('structui_1_1FontSet.html',''); initRes
 </div><!--header-->
 <div class="contents">
 
+<p>Typography system (font families and sizes)  
+ <a href="structui_1_1FontSet.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="style_8h_source.html">style.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:ae55a8b9cef412ca2b3bd57e5a7641d72"><td class="memItemLeft" align="right" valign="top">ImFont *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structui_1_1FontSet.html#ae55a8b9cef412ca2b3bd57e5a7641d72">body</a> = nullptr</td></tr>
+<tr class="memdesc:ae55a8b9cef412ca2b3bd57e5a7641d72"><td class="mdescLeft">&#160;</td><td class="mdescRight">18px SpaceGrotesk-Regular (default font)  <a href="structui_1_1FontSet.html#ae55a8b9cef412ca2b3bd57e5a7641d72">More...</a><br /></td></tr>
 <tr class="separator:ae55a8b9cef412ca2b3bd57e5a7641d72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8f9610f75ae20c3166b43631e46da3a"><td class="memItemLeft" align="right" valign="top">ImFont *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structui_1_1FontSet.html#ad8f9610f75ae20c3166b43631e46da3a">heading</a> = nullptr</td></tr>
+<tr class="memdesc:ad8f9610f75ae20c3166b43631e46da3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">22px SpaceGrotesk-SemiBold (for titles)  <a href="structui_1_1FontSet.html#ad8f9610f75ae20c3166b43631e46da3a">More...</a><br /></td></tr>
 <tr class="separator:ad8f9610f75ae20c3166b43631e46da3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70b40d183844cf198bc11477a7fbd2f4"><td class="memItemLeft" align="right" valign="top">ImFont *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structui_1_1FontSet.html#a70b40d183844cf198bc11477a7fbd2f4">mono</a> = nullptr</td></tr>
+<tr class="memdesc:a70b40d183844cf198bc11477a7fbd2f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">17px SpaceGrotesk-Medium (for numeric data)  <a href="structui_1_1FontSet.html#a70b40d183844cf198bc11477a7fbd2f4">More...</a><br /></td></tr>
 <tr class="separator:a70b40d183844cf198bc11477a7fbd2f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3f6d92d8b767b73cfd83cd50216cfe7"><td class="memItemLeft" align="right" valign="top">ImFont *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structui_1_1FontSet.html#ad3f6d92d8b767b73cfd83cd50216cfe7">icon</a> = nullptr</td></tr>
+<tr class="memdesc:ad3f6d92d8b767b73cfd83cd50216cfe7"><td class="mdescLeft">&#160;</td><td class="mdescRight">20px MaterialSymbolsRounded (icon glyphs)  <a href="structui_1_1FontSet.html#ad3f6d92d8b767b73cfd83cd50216cfe7">More...</a><br /></td></tr>
 <tr class="separator:ad3f6d92d8b767b73cfd83cd50216cfe7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Data Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Typography system (font families and sizes) </p>
+<p><b>Web Equivalent:</b> </p><div class="fragment"><div class="line">@font-face {</div>
+<div class="line">  font-family: &#39;SpaceGrotesk&#39;;</div>
+<div class="line">  src: url(&#39;SpaceGrotesk-Regular.ttf&#39;);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">body { font-family: &#39;SpaceGrotesk&#39;, sans-serif; font-size: 18px; }</div>
+<div class="line">h1 { font-family: &#39;SpaceGrotesk SemiBold&#39;; font-size: 22px; }</div>
+<div class="line">code { font-family: &#39;SpaceGrotesk Medium&#39;; font-size: 17px; }</div>
+<div class="line">.icon { font-family: &#39;Material Symbols Rounded&#39;; font-size: 20px; }</div>
+</div><!-- fragment --><p><b>Font Files:</b></p><ul>
+<li><code>assets/fonts/SpaceGrotesk-Regular.ttf</code> (body)</li>
+<li><code>assets/fonts/SpaceGrotesk-SemiBold.ttf</code> (heading)</li>
+<li><code>assets/fonts/SpaceGrotesk-Medium.ttf</code> (mono)</li>
+<li><code>assets/fonts/MaterialSymbolsRounded.ttf</code> (icon)</li>
+</ul>
+<p><b>Memory Details:</b></p><ul>
+<li>Font atlas generated in RAM at startup (~2-4 MB)</li>
+<li>Uploaded to GPU VRAM as texture</li>
+<li>Glyphs rendered as textured quads (GPU samples atlas texture)</li>
+</ul>
+<p><b>Usage:</b> </p><div class="fragment"><div class="line"><span class="keyword">const</span> <a class="code" href="structui_1_1FontSet.html">ui::FontSet</a>&amp; fonts = <a class="code" href="namespaceui.html#a0681d3cde6bdb95a6bccbc515685754c">ui::Fonts</a>();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Use heading font</span></div>
+<div class="line"><span class="keywordflow">if</span> (fonts.<a class="code" href="structui_1_1FontSet.html#ad8f9610f75ae20c3166b43631e46da3a">heading</a>) ImGui::PushFont(fonts.<a class="code" href="structui_1_1FontSet.html#ad8f9610f75ae20c3166b43631e46da3a">heading</a>);</div>
+<div class="line">ImGui::Text(<span class="stringliteral">&quot;Large Title&quot;</span>);</div>
+<div class="line"><span class="keywordflow">if</span> (fonts.<a class="code" href="structui_1_1FontSet.html#ad8f9610f75ae20c3166b43631e46da3a">heading</a>) ImGui::PopFont();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Use mono font for code</span></div>
+<div class="line"><span class="keywordflow">if</span> (fonts.<a class="code" href="structui_1_1FontSet.html#a70b40d183844cf198bc11477a7fbd2f4">mono</a>) ImGui::PushFont(fonts.<a class="code" href="structui_1_1FontSet.html#a70b40d183844cf198bc11477a7fbd2f4">mono</a>);</div>
+<div class="line">ImGui::Text(<span class="stringliteral">&quot;quaternion = [%.3f, %.3f, %.3f, %.3f]&quot;</span>, q.w, q.x, q.y, q.z);</div>
+<div class="line"><span class="keywordflow">if</span> (fonts.<a class="code" href="structui_1_1FontSet.html#a70b40d183844cf198bc11477a7fbd2f4">mono</a>) ImGui::PopFont();</div>
+<div class="ttc" id="anamespaceui_html_a0681d3cde6bdb95a6bccbc515685754c"><div class="ttname"><a href="namespaceui.html#a0681d3cde6bdb95a6bccbc515685754c">ui::Fonts</a></div><div class="ttdeci">const FontSet &amp; Fonts()</div><div class="ttdef"><b>Definition:</b> style.cpp:169</div></div>
+<div class="ttc" id="astructui_1_1FontSet_html"><div class="ttname"><a href="structui_1_1FontSet.html">ui::FontSet</a></div><div class="ttdoc">Typography system (font families and sizes)</div><div class="ttdef"><b>Definition:</b> style.h:88</div></div>
+<div class="ttc" id="astructui_1_1FontSet_html_a70b40d183844cf198bc11477a7fbd2f4"><div class="ttname"><a href="structui_1_1FontSet.html#a70b40d183844cf198bc11477a7fbd2f4">ui::FontSet::mono</a></div><div class="ttdeci">ImFont * mono</div><div class="ttdoc">17px SpaceGrotesk-Medium (for numeric data)</div><div class="ttdef"><b>Definition:</b> style.h:91</div></div>
+<div class="ttc" id="astructui_1_1FontSet_html_ad8f9610f75ae20c3166b43631e46da3a"><div class="ttname"><a href="structui_1_1FontSet.html#ad8f9610f75ae20c3166b43631e46da3a">ui::FontSet::heading</a></div><div class="ttdeci">ImFont * heading</div><div class="ttdoc">22px SpaceGrotesk-SemiBold (for titles)</div><div class="ttdef"><b>Definition:</b> style.h:90</div></div>
+</div><!-- fragment --> </div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="ae55a8b9cef412ca2b3bd57e5a7641d72"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae55a8b9cef412ca2b3bd57e5a7641d72">&#9670;&nbsp;</a></span>body</h2>
 
@@ -114,6 +160,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>18px SpaceGrotesk-Regular (default font) </p>
 
 </div>
 </div>
@@ -129,6 +177,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>22px SpaceGrotesk-SemiBold (for titles) </p>
+
 </div>
 </div>
 <a id="ad3f6d92d8b767b73cfd83cd50216cfe7"></a>
@@ -143,6 +193,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>20px MaterialSymbolsRounded (icon glyphs) </p>
+
 </div>
 </div>
 <a id="a70b40d183844cf198bc11477a7fbd2f4"></a>
@@ -156,6 +208,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>17px SpaceGrotesk-Medium (for numeric data) </p>
 
 </div>
 </div>

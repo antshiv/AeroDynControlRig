@@ -1,5 +1,5 @@
 <map id="src/gui/panels/sensor_panel.h" name="src/gui/panels/sensor_panel.h">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,164,47"/>
-<area shape="rect" id="node2" href="$panel_8h.html" title=" " alt="" coords="37,95,132,121"/>
+<area shape="rect" id="node1" title="IMU sensor data display (gyro, accel)" alt="" coords="5,5,164,47"/>
+<area shape="rect" id="node2" href="$panel_8h.html" title="Base interface for ImGui UI panels in the AeroDynControlRig." alt="" coords="37,95,132,121"/>
 <area shape="rect" id="node3" title=" " alt="" coords="55,169,114,196"/>
 </map>

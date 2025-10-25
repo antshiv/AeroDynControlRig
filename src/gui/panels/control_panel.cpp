@@ -14,7 +14,18 @@ void ControlPanel::draw(SimulationState& state, Camera& camera) {
         return;
     }
 
-    ImGui::Text("3D Scene Controls");
+    // === KEYBOARD CONTROLS ===
+    ImGui::TextColored(ImVec4(0.4f, 0.8f, 1.0f, 1.0f), "Keyboard Controls");
+    ImGui::Text("W/S: Pitch  |  A/D: Roll  |  Q/E: Yaw");
+    ImGui::Text("R: Reset to identity quaternion");
+
+    static float rotation_increment_deg = 5.0f;
+    ImGui::SliderFloat("Rotation Step (deg)", &rotation_increment_deg, 0.1f, 45.0f);
+
+    ImGui::Separator();
+
+    // === 3D SCENE ===
+    ImGui::TextColored(ImVec4(0.4f, 0.8f, 1.0f, 1.0f), "3D Scene Controls");
     ImGui::SliderFloat("Camera Zoom", &camera.zoom, 0.1f, 100.0f);
 
     ImGui::Separator();

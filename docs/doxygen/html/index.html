@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>AeroDynControlRig: Main Page</title>
+<title>AeroDynControlRig: AeroDynControlRig Documentation</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -80,11 +82,298 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </iframe>
 </div>
 
-<div class="header">
+<div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">AeroDynControlRig Documentation</div>  </div>
+<div class="title">AeroDynControlRig Documentation </div>  </div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p><a class="anchor" id="md_docs_mainpage"></a> Welcome to the AeroDynControlRig API documentation!</p>
+<h1><a class="anchor" id="autotoc_md223"></a>
+What is AeroDynControlRig?</h1>
+<p>AeroDynControlRig is a <b>desktop visualization and testbed</b> for flight-control stack development. It provides a fast feedback loop for control algorithm development by combining:</p>
+<ul>
+<li><b>Real-time 3D visualization</b> using OpenGL 3.3</li>
+<li><b>Interactive dashboard</b> built with Dear ImGui</li>
+<li><b>Modular simulation architecture</b> for easy extension</li>
+<li><b>Quaternion-based attitude dynamics</b></li>
+<li><b>Sensor simulation and state estimation</b></li>
+</ul>
+<h1><a class="anchor" id="autotoc_md224"></a>
+Quick Start</h1>
+<ol type="1">
+<li><b>Build the project</b>: <div class="fragment"><div class="line">cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo</div>
+<div class="line">cmake --build build</div>
+<div class="line">./build/AeroDynControlRig</div>
+</div><!-- fragment --></li>
+<li><b>Explore the UI</b>:<ul>
+<li>Viewport: 3D cube rotating based on attitude</li>
+<li>Control <a class="el" href="classPanel.html" title="Abstract base class for all UI panels.">Panel</a>: Pause/resume, adjust simulation speed</li>
+<li>Telemetry: View quaternion, Euler angles, rates</li>
+<li>Dynamics: Configure and plot first-order system</li>
+</ul>
+</li>
+<li><b>Understand the code</b>:<ul>
+<li>See <a class="el" href="architecture_8md.html">architecture.md</a> for detailed diagrams and explanations</li>
+<li>Browse the class list to see all 23+ classes with full documentation</li>
+</ul>
+</li>
+</ol>
+<h1><a class="anchor" id="autotoc_md225"></a>
+Architecture Overview</h1>
+<div class="fragment"><div class="line">Application</div>
+<div class="line">    ├─ GLFW Window + OpenGL Context</div>
+<div class="line">    ├─ SimulationState (shared data)</div>
+<div class="line">    │   └─ Updated by Modules</div>
+<div class="line">    │       ├─ QuaternionDemoModule (attitude)</div>
+<div class="line">    │       ├─ SensorSimulatorModule (IMU)</div>
+<div class="line">    │       ├─ ComplementaryEstimatorModule (fusion)</div>
+<div class="line">    │       ├─ RotorTelemetryModule (thrust/power)</div>
+<div class="line">    │       └─ FirstOrderDynamicsModule (test system)</div>
+<div class="line">    ├─ Renderer (3D graphics → off-screen FBO)</div>
+<div class="line">    │   ├─ Cube geometry</div>
+<div class="line">    │   ├─ Axis gizmo</div>
+<div class="line">    │   └─ Camera control</div>
+<div class="line">    └─ PanelManager (ImGui UI)</div>
+<div class="line">        ├─ ControlPanel</div>
+<div class="line">        ├─ TelemetryPanel</div>
+<div class="line">        ├─ DynamicsPanel</div>
+<div class="line">        ├─ EstimatorPanel</div>
+<div class="line">        ├─ RotorPanel</div>
+<div class="line">        ├─ SensorPanel</div>
+<div class="line">        └─ PowerPanel</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md226"></a>
+Essential Reading</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Guide   </th><th class="markdownTableHeadNone">Description    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><a class="el" href="complete_picture.html">The Complete Picture: From Your Intent to Pixels on Screen</a>   </td><td class="markdownTableBodyNone"><b>START HERE!</b> The complete flow: Your code → ImGui → OpenGL → GPU → Monitor (with beautiful diagrams!)    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><a class="el" href="pixel_truth.html">The Pixel Truth: Everything is Just Computing RGBA</a>   </td><td class="markdownTableBodyNone">The fundamental truth: Everything is just computing RGBA for pixels    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><a class="el" href="display_fundamentals.html">Display Fundamentals: Pixels, Framebuffers, and the OS</a>   </td><td class="markdownTableBodyNone">How pixels get on screen - from framebuffers to monitors    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><a class="el" href="hardware_pipeline.html">Hardware Pipeline: RAM → CPU → GPU → Screen</a>   </td><td class="markdownTableBodyNone">Deep dive: RAM → Cache → GPU → Screen. Understand the hardware!    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><a class="el" href="architecture.html">Architecture Guide</a>   </td><td class="markdownTableBodyNone">Comprehensive guide with diagrams explaining OpenGL, ImGui, and how all classes interact    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><a class="el" href="opengl_tutorial.html">OpenGL Deep Dive Tutorial</a>   </td><td class="markdownTableBodyNone">Complete OpenGL tutorial with code examples from our renderer    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><a class="el" href="imgui_tutorial.html">ImGui Deep Dive Tutorial</a>   </td><td class="markdownTableBodyNone">Complete ImGui tutorial with code examples from our panels    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><a class="el" href="opengl_imgui_integration.html">OpenGL + ImGui Integration</a>   </td><td class="markdownTableBodyNone">How OpenGL and ImGui work together in our application    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><a class="el" href="classApplication.html">Application</a>   </td><td class="markdownTableBodyNone">Main orchestrator - initialization sequence and main loop    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><a class="el" href="structSimulationState.html">SimulationState</a>   </td><td class="markdownTableBodyNone">Central data structure - what data flows where    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><a class="el" href="classModule.html">Module</a>   </td><td class="markdownTableBodyNone">Base interface for simulation modules    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><a class="el" href="classPanel.html">Panel</a>   </td><td class="markdownTableBodyNone">Base interface for UI panels   </td></tr>
+</table>
+<h1><a class="anchor" id="autotoc_md227"></a>
+🌟 New: Web Developer? You Already Know This!</h1>
+<p>If you understand HTML, CSS, and JavaScript, you already understand this codebase! We've created a <b>complete mapping</b> between web concepts and our OpenGL/ImGui architecture:</p>
+<h2><a class="anchor" id="autotoc_md228"></a>
+Quick Translation Guide</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Web Concept   </th><th class="markdownTableHeadNone">AeroDynControlRig Equivalent   </th><th class="markdownTableHeadNone">Example    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>&lt;div class="card"&gt;</code>   </td><td class="markdownTableBodyNone"><code><a class="el" href="group__UIWidgets.html#gae86fdebbe43a915410d1bf0c16c4cb17" title="Begin a Card container with consistent styling.">ui::BeginCard()</a></code>   </td><td class="markdownTableBodyNone">Container element    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>style="color: red"</code>   </td><td class="markdownTableBodyNone"><code>ImGui::PushStyleColor()</code>   </td><td class="markdownTableBodyNone">Inline styling    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">CSS custom properties (<code>:root { --primary: #007bff; }</code>)   </td><td class="markdownTableBodyNone"><code>ui::Palette</code> struct   </td><td class="markdownTableBodyNone">Design tokens    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>&lt;button onclick="handleClick()"&gt;</code>   </td><td class="markdownTableBodyNone"><code>if (ImGui::Button(...))</code>   </td><td class="markdownTableBodyNone">Event handling    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>&lt;script&gt;</code> component pattern   </td><td class="markdownTableBodyNone"><code><a class="el" href="classPanel.html" title="Abstract base class for all UI panels.">Panel</a></code> class   </td><td class="markdownTableBodyNone">Reusable UI component    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Global <code>window.appState</code>   </td><td class="markdownTableBodyNone"><code><a class="el" href="structSimulationState.html" title="Central shared state for the entire simulation.">SimulationState</a></code>   </td><td class="markdownTableBodyNone">Global state object   </td></tr>
+</table>
+<p><b>Example - Same UI, Different Syntax:</b></p>
+<p>Web (HTML + CSS + JS): </p><div class="fragment"><div class="line">&lt;div class=&quot;card&quot;&gt;</div>
+<div class="line">  &lt;h2&gt;Rotor Dynamics &lt;span class=&quot;badge-success&quot;&gt;+2.5%&lt;/span&gt;&lt;/h2&gt;</div>
+<div class="line">  &lt;p class=&quot;text-muted&quot;&gt;Rotor RPM&lt;/p&gt;</div>
+<div class="line">  &lt;h1&gt;2140 RPM&lt;/h1&gt;</div>
+<div class="line">&lt;/div&gt;</div>
+<div class="line"> </div>
+<div class="line">&lt;style&gt;</div>
+<div class="line">.card { padding: 16px; background: white; border-radius: 8px; }</div>
+<div class="line">.text-muted { color: #6c757d; }</div>
+<div class="line">.badge-success { color: #28a745; }</div>
+<div class="line">&lt;/style&gt;</div>
+</div><!-- fragment --><p>AeroDynControlRig (C++ + ImGui): </p><div class="fragment"><div class="line"><a class="code" href="group__UIWidgets.html#gae86fdebbe43a915410d1bf0c16c4cb17">ui::BeginCard</a>(<span class="stringliteral">&quot;Rotor&quot;</span>, options);</div>
+<div class="line">    <a class="code" href="group__UIWidgets.html#ga2fb6bd477996a90c7d6373454fe6c06c">ui::CardHeader</a>(<span class="stringliteral">&quot;Rotor Dynamics&quot;</span>, <span class="stringliteral">&quot;+2.5%&quot;</span>, &amp;palette.success);</div>
+<div class="line">    ImGui::PushStyleColor(ImGuiCol_Text, palette.text_muted);</div>
+<div class="line">    ImGui::TextUnformatted(<span class="stringliteral">&quot;Rotor RPM&quot;</span>);</div>
+<div class="line">    ImGui::PopStyleColor();</div>
+<div class="line">    ImGui::PushFont(fonts.heading);</div>
+<div class="line">    ImGui::Text(<span class="stringliteral">&quot;2140 RPM&quot;</span>);</div>
+<div class="line">    ImGui::PopFont();</div>
+<div class="line"><a class="code" href="group__UIWidgets.html#gaab4c47f869143e855e5a9cb8b6f2cf8b">ui::EndCard</a>();</div>
+<div class="ttc" id="agroup__UIWidgets_html_ga2fb6bd477996a90c7d6373454fe6c06c"><div class="ttname"><a href="group__UIWidgets.html#ga2fb6bd477996a90c7d6373454fe6c06c">ui::CardHeader</a></div><div class="ttdeci">void CardHeader(const char *title, const char *badge_label, const ImVec4 *badge_color)</div><div class="ttdoc">Render a card header with optional badge.</div><div class="ttdef"><b>Definition:</b> card.cpp:52</div></div>
+<div class="ttc" id="agroup__UIWidgets_html_gaab4c47f869143e855e5a9cb8b6f2cf8b"><div class="ttname"><a href="group__UIWidgets.html#gaab4c47f869143e855e5a9cb8b6f2cf8b">ui::EndCard</a></div><div class="ttdeci">void EndCard()</div><div class="ttdoc">End a Card container (must be called after BeginCard)</div><div class="ttdef"><b>Definition:</b> card.cpp:46</div></div>
+<div class="ttc" id="agroup__UIWidgets_html_gae86fdebbe43a915410d1bf0c16c4cb17"><div class="ttname"><a href="group__UIWidgets.html#gae86fdebbe43a915410d1bf0c16c4cb17">ui::BeginCard</a></div><div class="ttdeci">bool BeginCard(const char *id, const CardOptions &amp;options, bool *open, ImGuiWindowFlags flags)</div><div class="ttdoc">Begin a Card container with consistent styling.</div><div class="ttdef"><b>Definition:</b> card.cpp:20</div></div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="autotoc_md230"></a>
+Key Concepts</h1>
+<h2><a class="anchor" id="autotoc_md231"></a>
+OpenGL Rendering Pipeline</h2>
+<p>The application uses <b>off-screen rendering</b> with Framebuffer Objects (FBO):</p>
+<ol type="1">
+<li><b>Render 3D scene</b> (cube + axes) to an off-screen texture</li>
+<li><b>Display texture</b> in an ImGui Image() widget</li>
+<li><b>Render ImGui UI</b> on top (panels, controls)</li>
+<li><b>Swap buffers</b> to show the complete frame</li>
+</ol>
+<p>See <a class="el" href="architecture.html">Architecture Guide</a> for detailed pipeline diagrams.</p>
+<h2><a class="anchor" id="autotoc_md232"></a>
+ImGui Immediate Mode</h2>
+<p>Unlike traditional GUIs where you create widgets once and manage their state:</p>
+<div class="fragment"><div class="line"><span class="comment">// Traditional (retained mode)</span></div>
+<div class="line">Button* btn = <span class="keyword">new</span> Button(<span class="stringliteral">&quot;Click&quot;</span>);</div>
+<div class="line"><span class="keywordflow">if</span> (btn-&gt;wasClicked()) { ... }</div>
+</div><!-- fragment --><p>ImGui uses <b>immediate mode</b> - you re-declare the UI every frame:</p>
+<div class="fragment"><div class="line"><span class="comment">// ImGui (immediate mode)</span></div>
+<div class="line"><span class="keywordflow">if</span> (ImGui::Button(<span class="stringliteral">&quot;Click&quot;</span>)) {</div>
+<div class="line">    <span class="comment">// Just clicked!</span></div>
+<div class="line">}</div>
+</div><!-- fragment --><p>ImGui handles all state tracking internally. This makes UI code simple and declarative.</p>
+<h2><a class="anchor" id="autotoc_md233"></a>
+Module System</h2>
+<p>Modules implement the <a class="el" href="classModule.html">Module</a> interface:</p>
+<ul>
+<li><code>initialize(SimulationState&amp; state)</code> - Called once at startup</li>
+<li><code>update(double dt, SimulationState&amp; state)</code> - Called each frame</li>
+</ul>
+<p>All modules read from and write to the shared <a class="el" href="structSimulationState.html">SimulationState</a>, enabling loose coupling.</p>
+<h2><a class="anchor" id="autotoc_md234"></a>
+Panel System</h2>
+<p>Panels implement the <a class="el" href="classPanel.html">Panel</a> interface:</p>
+<ul>
+<li><code>name()</code> - Returns panel display name</li>
+<li><code>draw(SimulationState&amp; state, Camera&amp; camera)</code> - Renders ImGui UI</li>
+</ul>
+<p>Panels can read from state (for display) and write to state (for user controls).</p>
+<h1><a class="anchor" id="autotoc_md235"></a>
+Learning Path</h1>
+<p>If you're new to OpenGL and ImGui, follow this path:</p>
+<ol type="1">
+<li><b>Read the Architecture Guide</b>: <a class="el" href="architecture.html">Architecture Guide</a><ul>
+<li>Understand the frame execution flow</li>
+<li>See how OpenGL and ImGui interact</li>
+<li>Learn the coordinate transformation pipeline</li>
+</ul>
+</li>
+<li><b>Explore the code</b>:<ul>
+<li>Start with <a class="el" href="classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96" title="Initialize the application subsystems.">Application::init()</a> to see initialization</li>
+<li>Follow <a class="el" href="classApplication.html#af44c742342adf5305e430ff293f147c1" title="Execute one frame: update simulation, render 3D, render UI.">Application::tick()</a> to see the main loop</li>
+<li>Read <a class="el" href="classQuaternionDemoModule.html" title="Simulates rigid body attitude dynamics using quaternion integration.">QuaternionDemoModule</a> to see a simple module</li>
+</ul>
+</li>
+<li><b>Make changes</b>:<ul>
+<li>Add a new panel (copy <a class="el" href="classTelemetryPanel.html" title="UI panel displaying vehicle flight state.">TelemetryPanel</a>, modify draw())</li>
+<li>Create a new module (copy <a class="el" href="classFirstOrderDynamicsModule.html" title="Simulates a simple first-order linear time-invariant (LTI) system.">FirstOrderDynamicsModule</a>)</li>
+<li>Modify shader colors in <code>shaders/</code> directory</li>
+</ul>
+</li>
+<li><b>External resources</b>:<ul>
+<li><a href="https://learnopengl.com/">LearnOpenGL</a> - OpenGL tutorials</li>
+<li><a href="https://github.com/ocornut/imgui/blob/master/imgui_demo.cpp">ImGui Demo</a> - Widget examples</li>
+<li><a href="https://glm.g-truc.net/">GLM Documentation</a> - Math library reference</li>
+</ul>
+</li>
+</ol>
+<h1><a class="anchor" id="autotoc_md236"></a>
+Class Categories</h1>
+<h2><a class="anchor" id="autotoc_md237"></a>
+Core Infrastructure</h2>
+<ul>
+<li><a class="el" href="classApplication.html">Application</a> - Main application class</li>
+<li><a class="el" href="structSimulationState.html">SimulationState</a> - Shared data structure</li>
+<li><a class="el" href="classModule.html">Module</a> - Base class for simulation modules</li>
+<li><a class="el" href="classPanel.html">Panel</a> - Base class for UI panels</li>
+<li><a class="el" href="classPanelManager.html">PanelManager</a> - <a class="el" href="classPanel.html" title="Abstract base class for all UI panels.">Panel</a> registry and orchestrator</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md238"></a>
+Rendering</h2>
+<ul>
+<li><a class="el" href="classRenderer.html">Renderer</a> - Main 3D scene renderer (OpenGL)</li>
+<li><a class="el" href="classAxisRenderer.html">AxisRenderer</a> - Coordinate axis gizmo</li>
+<li><a class="el" href="classCamera.html">Camera</a> - First-person camera with mouse look</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md239"></a>
+Simulation Modules</h2>
+<ul>
+<li><a class="el" href="classQuaternionDemoModule.html">QuaternionDemoModule</a> - Attitude dynamics (quaternion integration)</li>
+<li><a class="el" href="classSensorSimulatorModule.html">SensorSimulatorModule</a> - IMU sensor generation (gyro + accel)</li>
+<li><a class="el" href="classComplementaryEstimatorModule.html">ComplementaryEstimatorModule</a> - Sensor fusion (complementary filter)</li>
+<li><a class="el" href="classFirstOrderDynamicsModule.html">FirstOrderDynamicsModule</a> - Test system (LTI dynamics)</li>
+<li><a class="el" href="classRotorTelemetryModule.html">RotorTelemetryModule</a> - Rotor thrust/torque/power calculations</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md240"></a>
+UI Panels</h2>
+<ul>
+<li><a class="el" href="classControlPanel.html">ControlPanel</a> - Simulation playback controls</li>
+<li><a class="el" href="classTelemetryPanel.html">TelemetryPanel</a> - Flight state display</li>
+<li><a class="el" href="classDynamicsPanel.html">DynamicsPanel</a> - First-order system config and plotting</li>
+<li><a class="el" href="classEstimatorPanel.html">EstimatorPanel</a> - State estimator diagnostics</li>
+<li><a class="el" href="classRotorPanel.html">RotorPanel</a> - Rotor performance metrics</li>
+<li><a class="el" href="classSensorPanel.html">SensorPanel</a> - IMU sensor readouts</li>
+<li><a class="el" href="classPowerPanel.html">PowerPanel</a> - Electrical power monitoring</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md241"></a>
+Development Roadmap</h1>
+<p>Current stage: <b>Stage 0 - Core Visual Sandbox</b></p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Stage   </th><th class="markdownTableHeadNone">Goal   </th><th class="markdownTableHeadNone">Status    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">0   </td><td class="markdownTableBodyNone">Core Visual Sandbox   </td><td class="markdownTableBodyNone">✅ In Progress    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone">Dynamics Explorer   </td><td class="markdownTableBodyNone">Planned    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">2   </td><td class="markdownTableBodyNone">Controller Workbench   </td><td class="markdownTableBodyNone">Planned    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">3   </td><td class="markdownTableBodyNone">Estimation Diagnostics   </td><td class="markdownTableBodyNone">Planned    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">4   </td><td class="markdownTableBodyNone">INS Integration   </td><td class="markdownTableBodyNone">Planned    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">5   </td><td class="markdownTableBodyNone">High-Fidelity Simulation   </td><td class="markdownTableBodyNone">Planned   </td></tr>
+</table>
+<p>See <a class="el" href="md_README.html">README.md</a> for detailed roadmap.</p>
+<h1><a class="anchor" id="autotoc_md242"></a>
+Getting Help</h1>
+<ul>
+<li><b>Class documentation</b>: Click on any class name to see detailed API docs</li>
+<li><b>Visual diagrams</b>: All classes have inheritance and collaboration diagrams</li>
+<li><b>Call graphs</b>: Functions show caller/callee relationships (requires Graphviz)</li>
+<li><b>Architecture guide</b>: <a class="el" href="architecture.html">Architecture Guide</a> has comprehensive diagrams</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md243"></a>
+Contributing</h1>
+<p>This project uses:</p><ul>
+<li>C++17 standard</li>
+<li>CMake 3.10+ build system</li>
+<li>Doxygen for documentation (you're reading it!)</li>
+<li>Git submodules for external dependencies</li>
+</ul>
+<p>To add a new module:</p><ol type="1">
+<li>Create header in <code>src/modules/your_module.h</code></li>
+<li>Inherit from <a class="el" href="classModule.html" title="Abstract base class for all simulation modules.">Module</a> and implement initialize() and update()</li>
+<li>Register in Application::initializeModules()</li>
+</ol>
+<p>To add a new panel:</p><ol type="1">
+<li>Create header in <code>src/gui/panels/your_panel.h</code></li>
+<li>Inherit from <a class="el" href="classPanel.html" title="Abstract base class for all UI panels.">Panel</a> and implement name() and draw()</li>
+<li>Register in Application::initializePanels()</li>
+</ol>
+<hr  />
+<p><b>Happy coding!</b> 🚀</p>
+<p>For a deep dive into the architecture, see <a class="el" href="architecture.html">Architecture Guide</a>. </p>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

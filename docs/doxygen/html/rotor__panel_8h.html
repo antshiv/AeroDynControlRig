@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -87,6 +89,9 @@ $(document).ready(function(){initNavTree('rotor__panel_8h.html',''); initResizab
 <div class="title">rotor_panel.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Rotor performance telemetry (RPM, thrust, torque)  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;array&gt;</code><br />
 <code>#include &quot;<a class="el" href="panel_8h_source.html">gui/panel.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
@@ -94,9 +99,9 @@ Include dependency graph for rotor_panel.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="rotor__panel_8h__incl.png" border="0" usemap="#asrc_2gui_2panels_2rotor__panel_8h" alt=""/></div>
 <map name="asrc_2gui_2panels_2rotor__panel_8h" id="asrc_2gui_2panels_2rotor__panel_8h">
-<area shape="rect" title=" " alt="" coords="9,5,156,47"/>
+<area shape="rect" title="Rotor performance telemetry (RPM, thrust, torque)" alt="" coords="9,5,156,47"/>
 <area shape="rect" title=" " alt="" coords="5,95,61,121"/>
-<area shape="rect" href="panel_8h.html" title=" " alt="" coords="86,95,181,121"/>
+<area shape="rect" href="panel_8h.html" title="Base interface for ImGui UI panels in the AeroDynControlRig." alt="" coords="86,95,181,121"/>
 <area shape="rect" title=" " alt="" coords="104,169,163,196"/>
 </map>
 </div>
@@ -105,7 +110,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="rotor__panel_8h__dep__incl.png" border="0" usemap="#asrc_2gui_2panels_2rotor__panel_8hdep" alt=""/></div>
 <map name="asrc_2gui_2panels_2rotor__panel_8hdep" id="asrc_2gui_2panels_2rotor__panel_8hdep">
-<area shape="rect" title=" " alt="" coords="110,5,257,47"/>
+<area shape="rect" title="Rotor performance telemetry (RPM, thrust, torque)" alt="" coords="110,5,257,47"/>
 <area shape="rect" href="application_8cpp.html" title=" " alt="" coords="5,102,177,129"/>
 <area shape="rect" href="rotor__panel_8cpp.html" title=" " alt="" coords="202,95,349,136"/>
 </map>
@@ -116,9 +121,12 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRotorPanel.html">RotorPanel</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">UI panel displaying rotor performance metrics.  <a href="classRotorPanel.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Rotor performance telemetry (RPM, thrust, torque) </p>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

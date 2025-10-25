@@ -6,6 +6,7 @@
 Camera::Camera(glm::vec3 startPosition, glm::vec3 startUp, float startYaw, float startPitch)
     : position(startPosition), worldUp(startUp), yaw(startYaw), pitch(startPitch), zoom(45.0f) {
     updateCameraVectors();
+    target = position + front;
 }
 
 glm::mat4 Camera::getViewMatrix() const {
@@ -47,6 +48,42 @@ void Camera::processMouseScroll(float yOffset) {
     zoom = glm::clamp(zoom, 1.0f, 45.0f);
 }
 
+void Camera::reset() {
+    position = glm::vec3(0.0f, 0.0f, 3.0f);
+    target = glm::vec3(0.0f, 0.0f, 0.0f);
+    worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
+    yaw = -90.0f;
+    pitch = 0.0f;
+    zoom = 45.0f;
+    updateCameraVectors();
+}
+
+void Camera::orbit(float yawDegrees, float pitchDegrees) {
+    yaw += yawDegrees;
+    pitch = glm::clamp(pitch + pitchDegrees, -89.0f, 89.0f);
+    updateCameraVectors();
+}
+
+void Camera::pan(float rightDelta, float upDelta) {
+    glm::vec3 offset = right * rightDelta + up * upDelta;
+    position += offset;
+    target = position + front;
+}
+
+void Camera::dolly(float distance) {
+    glm::vec3 offset = front * distance;
+    position += offset;
+    target = position + front;
+}
+
+void Camera::zoomBy(float delta) {
+    zoom = glm::clamp(zoom - delta, 1.0f, 45.0f);
+}
+
+void Camera::setZoom(float newZoom) {
+    zoom = glm::clamp(newZoom, 1.0f, 45.0f);
+}
+
 void Camera::updateCameraVectors() {
     glm::vec3 newFront;
     newFront.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
@@ -56,6 +93,7 @@ void Camera::updateCameraVectors() {
 
     right = glm::normalize(glm::cross(front, worldUp));
     up = glm::normalize(glm::cross(right, front));
+    target = position + front;
 }
 
 void Camera::processKeyboardInput(Camera_Movement direction, float deltaTime) {

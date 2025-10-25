@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -85,7 +87,8 @@ $(document).ready(function(){initNavTree('style_8h.html',''); initResizable(); }
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">style.h File Reference</div>  </div>
 </div><!--header-->
@@ -124,8 +127,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structui_1_1FontSet.html">ui::FontSet</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structui_1_1Palette.html">ui::Palette</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typography system (font families and sizes)  <a href="structui_1_1FontSet.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
@@ -135,25 +137,45 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a24ddf4dd600de0636aab1b92be79ed76"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceui.html#a24ddf4dd600de0636aab1b92be79ed76">ui::PillStyle</a> { <a class="el" href="namespaceui.html#a24ddf4dd600de0636aab1b92be79ed76a074de7e7c226d5c60f8af14c20725352">ui::Primary</a>
-, <a class="el" href="namespaceui.html#a24ddf4dd600de0636aab1b92be79ed76a0c7d6cf19426e01dcfa32434828ed266">ui::Secondary</a>
+<tr class="memitem:ga0bae71602d651fd19347a1205cbed6e6"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__UITheme.html#ga0bae71602d651fd19347a1205cbed6e6">PillStyle</a> { <a class="el" href="group__UITheme.html#gga0bae71602d651fd19347a1205cbed6e6a074de7e7c226d5c60f8af14c20725352">Primary</a>
+, <a class="el" href="group__UITheme.html#gga0bae71602d651fd19347a1205cbed6e6a0c7d6cf19426e01dcfa32434828ed266">Secondary</a>
  }</td></tr>
-<tr class="separator:a24ddf4dd600de0636aab1b92be79ed76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:ga0bae71602d651fd19347a1205cbed6e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Button style variants (like Bootstrap button classes)  <a href="group__UITheme.html#ga0bae71602d651fd19347a1205cbed6e6">More...</a><br /></td></tr>
+<tr class="separator:ga0bae71602d651fd19347a1205cbed6e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a5e215a312253a017263135e8e9b2fde8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceui.html#a5e215a312253a017263135e8e9b2fde8">ui::ApplyTheme</a> (ImGuiStyle &amp;style)</td></tr>
-<tr class="separator:a5e215a312253a017263135e8e9b2fde8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48a441cbee5cba22b870ab29be0356d2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceui.html#a48a441cbee5cba22b870ab29be0356d2">ui::LoadFonts</a> (ImGuiIO &amp;io, std::string_view font_directory)</td></tr>
-<tr class="separator:a48a441cbee5cba22b870ab29be0356d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27aa4868ffcd17787cc35f7e24a0c616"><td class="memItemLeft" align="right" valign="top">const FontSet &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceui.html#a27aa4868ffcd17787cc35f7e24a0c616">ui::Fonts</a> ()</td></tr>
-<tr class="separator:a27aa4868ffcd17787cc35f7e24a0c616"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a447c8573ad59f48165a527a06c94fb62"><td class="memItemLeft" align="right" valign="top">const Palette &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceui.html#a447c8573ad59f48165a527a06c94fb62">ui::Colors</a> ()</td></tr>
-<tr class="separator:a447c8573ad59f48165a527a06c94fb62"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4204ae9873b183dca2479b338348718"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceui.html#ad4204ae9873b183dca2479b338348718">ui::PushPillButtonStyle</a> (PillStyle style)</td></tr>
-<tr class="separator:ad4204ae9873b183dca2479b338348718"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa8a07e2928ca42077565025599baf0f2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceui.html#aa8a07e2928ca42077565025599baf0f2">ui::PopPillButtonStyle</a> ()</td></tr>
-<tr class="separator:aa8a07e2928ca42077565025599baf0f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6c3ed043c5ee3378cda1949823b515e8"><td class="memItemLeft" align="right" valign="top">*<a class="el" href="group__UITheme.html#gac200124cba8a07d2d724325d999604c7">draw_list</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__UITheme.html#ga6c3ed043c5ee3378cda1949823b515e8">AddRectFilled</a> (min, max, ImGui::ColorConvertFloat4ToU32(palette.success))</td></tr>
+<tr class="separator:ga6c3ed043c5ee3378cda1949823b515e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1effd4ee9b329a5cb4acaa058eccfe1f"><td class="memItemLeft" align="right" valign="top">*endcode ****Hardware likely in L1 cache *CPU converts to bit&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__UITheme.html#ga1effd4ee9b329a5cb4acaa058eccfe1f">RGBA</a> (bit packing) *3. Color sent to GPU as vertex attribute or uniform *4. GPU fragment shader outputs color to framebuffer(VRAM) */struct Palette</td></tr>
+<tr class="separator:ga1effd4ee9b329a5cb4acaa058eccfe1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4e42cd6e394eed69963da09ccf989c02"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__UITheme.html#ga4e42cd6e394eed69963da09ccf989c02">ApplyTheme</a> (ImGuiStyle &amp;style)</td></tr>
+<tr class="memdesc:ga4e42cd6e394eed69963da09ccf989c02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply global theme to ImGui style.  <a href="group__UITheme.html#ga4e42cd6e394eed69963da09ccf989c02">More...</a><br /></td></tr>
+<tr class="separator:ga4e42cd6e394eed69963da09ccf989c02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga937c7fd8bf3958395a41b778183f9acf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__UITheme.html#ga937c7fd8bf3958395a41b778183f9acf">LoadFonts</a> (ImGuiIO &amp;io, std::string_view font_directory=&quot;assets/fonts&quot;)</td></tr>
+<tr class="memdesc:ga937c7fd8bf3958395a41b778183f9acf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load custom fonts from TTF files.  <a href="group__UITheme.html#ga937c7fd8bf3958395a41b778183f9acf">More...</a><br /></td></tr>
+<tr class="separator:ga937c7fd8bf3958395a41b778183f9acf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1873303e53afe443c0c3359865e299de"><td class="memItemLeft" align="right" valign="top">const FontSet &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__UITheme.html#ga1873303e53afe443c0c3359865e299de">Fonts</a> ()</td></tr>
+<tr class="memdesc:ga1873303e53afe443c0c3359865e299de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get global font set.  <a href="group__UITheme.html#ga1873303e53afe443c0c3359865e299de">More...</a><br /></td></tr>
+<tr class="separator:ga1873303e53afe443c0c3359865e299de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga131add7019df35f2ca232f2340ec9af0"><td class="memItemLeft" align="right" valign="top">const Palette &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__UITheme.html#ga131add7019df35f2ca232f2340ec9af0">Colors</a> ()</td></tr>
+<tr class="memdesc:ga131add7019df35f2ca232f2340ec9af0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get global color palette.  <a href="group__UITheme.html#ga131add7019df35f2ca232f2340ec9af0">More...</a><br /></td></tr>
+<tr class="separator:ga131add7019df35f2ca232f2340ec9af0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5bf8f4b674ca2801be29fd1774c43a13"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__UITheme.html#ga5bf8f4b674ca2801be29fd1774c43a13">PushPillButtonStyle</a> (<a class="el" href="group__UITheme.html#ga0bae71602d651fd19347a1205cbed6e6">PillStyle</a> style)</td></tr>
+<tr class="memdesc:ga5bf8f4b674ca2801be29fd1774c43a13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Push pill button styling onto ImGui stack.  <a href="group__UITheme.html#ga5bf8f4b674ca2801be29fd1774c43a13">More...</a><br /></td></tr>
+<tr class="separator:ga5bf8f4b674ca2801be29fd1774c43a13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6a78924148543b108677d6d0c66f9862"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__UITheme.html#ga6a78924148543b108677d6d0c66f9862">PopPillButtonStyle</a> ()</td></tr>
+<tr class="memdesc:ga6a78924148543b108677d6d0c66f9862"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pop pill button styling from ImGui stack.  <a href="group__UITheme.html#ga6a78924148543b108677d6d0c66f9862">More...</a><br /></td></tr>
+<tr class="separator:ga6a78924148543b108677d6d0c66f9862"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ga5e70b3ddaa84506b36b9627c808613f6"><td class="memItemLeft" align="right" valign="top">*endcode ****Color&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__UITheme.html#ga5e70b3ddaa84506b36b9627c808613f6">Format</a></td></tr>
+<tr class="separator:ga5e70b3ddaa84506b36b9627c808613f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac200124cba8a07d2d724325d999604c7"><td class="memItemLeft" align="right" valign="top">***ImDrawList *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__UITheme.html#gac200124cba8a07d2d724325d999604c7">draw_list</a> = ImGui::GetWindowDrawList()</td></tr>
+<tr class="separator:gac200124cba8a07d2d724325d999604c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4f10a85129ed124086cb5f1f84faf361"><td class="memItemLeft" align="right" valign="top">*endcode ****Hardware&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__UITheme.html#ga4f10a85129ed124086cb5f1f84faf361">Path</a></td></tr>
+<tr class="separator:ga4f10a85129ed124086cb5f1f84faf361"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

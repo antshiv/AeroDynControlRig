@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -92,15 +94,15 @@ Directory dependency graph for panels:</div>
 <map name="adir__54c61444dbe80e92b43d038371885871__dep" id="adir__54c61444dbe80e92b43d038371885871__dep">
 <area shape="rect" href="dir_cc657b4ce13702a9d007a200bde234e1.html" title="widgets" alt="" coords="27,148,101,196"/>
 <area shape="rect" href="dir_54c61444dbe80e92b43d038371885871.html" title="panels" alt="" coords="29,52,101,100"/>
-<area shape="rect" href="dir_000009_000010.html" title="8" alt="" coords="68,123,78,137"/>
+<area shape="rect" href="dir_000010_000011.html" title="8" alt="" coords="68,123,78,137"/>
 <area shape="rect" href="dir_397d9aeee4af8edecac90968d93b57df.html" title="external" alt="" coords="137,340,213,388"/>
-<area shape="rect" href="dir_000009_000000.html" title="2" alt="" coords="170,313,180,328"/>
+<area shape="rect" href="dir_000010_000001.html" title="2" alt="" coords="170,313,180,328"/>
 <area shape="rect" href="dir_aebb8dcc11953d78e620bbef0b9e2183.html" title="core" alt="" coords="176,244,248,292"/>
-<area shape="rect" href="dir_000009_000007.html" title="7" alt="" coords="203,217,212,231"/>
+<area shape="rect" href="dir_000010_000008.html" title="7" alt="" coords="203,217,212,231"/>
 <area shape="rect" href="dir_e488ee1cea97fb16abdb5ccc78d2123b.html" title="render" alt="" coords="227,148,299,196"/>
-<area shape="rect" href="dir_000009_000012.html" title="7" alt="" coords="209,131,218,145"/>
-<area shape="rect" href="dir_000007_000000.html" title="1" alt="" coords="194,319,203,334"/>
-<area shape="rect" href="dir_000012_000007.html" title="2" alt="" coords="236,225,245,239"/>
+<area shape="rect" href="dir_000010_000013.html" title="7" alt="" coords="209,131,218,145"/>
+<area shape="rect" href="dir_000008_000001.html" title="1" alt="" coords="194,319,203,334"/>
+<area shape="rect" href="dir_000013_000008.html" title="2" alt="" coords="236,225,245,239"/>
 <area shape="rect" href="dir_99d0482cf009f9d97a0877749b817f19.html" title="gui" alt="" coords="16,16,112,207"/>
 </map>
 </div>
@@ -110,30 +112,37 @@ Files</h2></td></tr>
 <tr class="memitem:control__panel_8cpp"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="control__panel_8cpp.html">control_panel.cpp</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:control__panel_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="control__panel_8h.html">control_panel.h</a> <a href="control__panel_8h_source.html">[code]</a></td></tr>
+<tr class="memdesc:control__panel_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulation playback controls (pause, timestep, speed) <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:dynamics__panel_8cpp"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamics__panel_8cpp.html">dynamics_panel.cpp</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:dynamics__panel_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamics__panel_8h.html">dynamics_panel.h</a> <a href="dynamics__panel_8h_source.html">[code]</a></td></tr>
+<tr class="memdesc:dynamics__panel_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">First-order dynamics configuration and plotting. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:estimator__panel_8cpp"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="estimator__panel_8cpp.html">estimator_panel.cpp</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:estimator__panel_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="estimator__panel_8h.html">estimator_panel.h</a> <a href="estimator__panel_8h_source.html">[code]</a></td></tr>
+<tr class="memdesc:estimator__panel_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">State estimator diagnostics and visualization. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:power__panel_8cpp"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="power__panel_8cpp.html">power_panel.cpp</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:power__panel_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="power__panel_8h.html">power_panel.h</a> <a href="power__panel_8h_source.html">[code]</a></td></tr>
+<tr class="memdesc:power__panel_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Electrical power consumption monitoring. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:rotor__panel_8cpp"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rotor__panel_8cpp.html">rotor_panel.cpp</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:rotor__panel_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rotor__panel_8h.html">rotor_panel.h</a> <a href="rotor__panel_8h_source.html">[code]</a></td></tr>
+<tr class="memdesc:rotor__panel_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotor performance telemetry (RPM, thrust, torque) <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:sensor__panel_8cpp"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sensor__panel_8cpp.html">sensor_panel.cpp</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:sensor__panel_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sensor__panel_8h.html">sensor_panel.h</a> <a href="sensor__panel_8h_source.html">[code]</a></td></tr>
+<tr class="memdesc:sensor__panel_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">IMU sensor data display (gyro, accel) <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:telemetry__panel_8cpp"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="telemetry__panel_8cpp.html">telemetry_panel.cpp</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:telemetry__panel_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="telemetry__panel_8h.html">telemetry_panel.h</a> <a href="telemetry__panel_8h_source.html">[code]</a></td></tr>
+<tr class="memdesc:telemetry__panel_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flight state telemetry display (attitude, rates, time) <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->

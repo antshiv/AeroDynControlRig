@@ -1,0 +1,4 @@
+<map id="Camera::pan" name="Camera::pan">
+<area shape="rect" id="node1" title="Pan camera laterally/vertically in world space." alt="" coords="256,5,361,32"/>
+<area shape="rect" id="node2" href="$classApplication.html#ac06b8d20f2ad820faafb080ea45ca4d4" title="Mouse movement callback." alt="" coords="5,5,208,32"/>
+</map>

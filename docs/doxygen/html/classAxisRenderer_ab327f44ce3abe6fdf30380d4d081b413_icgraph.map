@@ -1,4 +1,4 @@
 <map id="AxisRenderer::shutdown" name="AxisRenderer::shutdown">
-<area shape="rect" id="node1" title=" " alt="" coords="268,5,448,32"/>
+<area shape="rect" id="node1" title="Release OpenGL resources." alt="" coords="268,5,448,32"/>
 <area shape="rect" id="node2" href="$classAxisRenderer.html#a7fce768f9364c3679434320b8b7aa904" title=" " alt="" coords="5,5,220,32"/>
 </map>

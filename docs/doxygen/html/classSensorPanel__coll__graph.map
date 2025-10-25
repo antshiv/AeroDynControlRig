@@ -1,4 +1,4 @@
 <map id="SensorPanel" name="SensorPanel">
-<area shape="rect" id="node1" title=" " alt="" coords="5,80,107,107"/>
-<area shape="rect" id="node2" href="$classPanel.html" title=" " alt="" coords="27,5,85,32"/>
+<area shape="rect" id="node1" title="UI panel displaying simulated IMU sensor measurements." alt="" coords="5,80,107,107"/>
+<area shape="rect" id="node2" href="$classPanel.html" title="Abstract base class for all UI panels." alt="" coords="27,5,85,32"/>
 </map>

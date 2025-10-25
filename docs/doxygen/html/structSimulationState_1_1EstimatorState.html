@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -89,13 +91,16 @@ $(document).ready(function(){initNavTree('structSimulationState_1_1EstimatorStat
 </div><!--header-->
 <div class="contents">
 
+<p>State estimate from sensor fusion algorithm.  
+ <a href="structSimulationState_1_1EstimatorState.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="simulation__state_8h_source.html">simulation_state.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for SimulationState::EstimatorState:</div>
 <div class="dyncontent">
 <div class="center"><img src="structSimulationState_1_1EstimatorState__coll__graph.png" border="0" usemap="#aSimulationState_1_1EstimatorState_coll__map" alt="Collaboration graph"/></div>
 <map name="aSimulationState_1_1EstimatorState_coll__map" id="aSimulationState_1_1EstimatorState_coll__map">
-<area shape="rect" title=" " alt="" coords="5,95,203,136"/>
+<area shape="rect" title="State estimate from sensor fusion algorithm." alt="" coords="5,95,203,136"/>
 <area shape="rect" href="structEulerAngles.html" title=" " alt="" coords="55,5,153,32"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
@@ -103,11 +108,15 @@ Collaboration diagram for SimulationState::EstimatorState:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a52bf2beaa0899ed511b9aef30287d39b"><td class="memItemLeft" align="right" valign="top">std::array&lt; double, 4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1EstimatorState.html#a52bf2beaa0899ed511b9aef30287d39b">quaternion</a> {1.0, 0.0, 0.0, 0.0}</td></tr>
+<tr class="memdesc:a52bf2beaa0899ed511b9aef30287d39b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estimated attitude quaternion [w, x, y, z].  <a href="structSimulationState_1_1EstimatorState.html#a52bf2beaa0899ed511b9aef30287d39b">More...</a><br /></td></tr>
 <tr class="separator:a52bf2beaa0899ed511b9aef30287d39b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2721fbc6802e23014086b671086cb7d5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structEulerAngles.html">EulerAngles</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1EstimatorState.html#a2721fbc6802e23014086b671086cb7d5">euler</a> {0.0, 0.0, 0.0, <a class="el" href="euler_8h.html#ad0e17a21b66e37aa0aaf0cd669bb2cbca4a876418a013e89da4b5486da5767fe3">EULER_ZYX</a>}</td></tr>
+<tr class="memdesc:a2721fbc6802e23014086b671086cb7d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estimated attitude in Euler angles.  <a href="structSimulationState_1_1EstimatorState.html#a2721fbc6802e23014086b671086cb7d5">More...</a><br /></td></tr>
 <tr class="separator:a2721fbc6802e23014086b671086cb7d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Data Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>State estimate from sensor fusion algorithm. </p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a2721fbc6802e23014086b671086cb7d5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2721fbc6802e23014086b671086cb7d5">&#9670;&nbsp;</a></span>euler</h2>
 
@@ -119,6 +128,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Estimated attitude in Euler angles. </p>
 
 </div>
 </div>
@@ -133,6 +144,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Estimated attitude quaternion [w, x, y, z]. </p>
 
 </div>
 </div>

@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -93,20 +95,16 @@ $(document).ready(function(){initNavTree('namespaceui.html',''); initResizable()
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structui_1_1FontSet.html">FontSet</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structui_1_1Palette.html">Palette</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typography system (font families and sizes)  <a href="structui_1_1FontSet.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structui_1_1CardOptions.html">CardOptions</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration options for Card widget.  <a href="structui_1_1CardOptions.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structui_1_1ChipConfig.html">ChipConfig</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a24ddf4dd600de0636aab1b92be79ed76"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceui.html#a24ddf4dd600de0636aab1b92be79ed76">PillStyle</a> { <a class="el" href="namespaceui.html#a24ddf4dd600de0636aab1b92be79ed76a074de7e7c226d5c60f8af14c20725352">Primary</a>
-, <a class="el" href="namespaceui.html#a24ddf4dd600de0636aab1b92be79ed76a0c7d6cf19426e01dcfa32434828ed266">Secondary</a>
- }</td></tr>
-<tr class="separator:a24ddf4dd600de0636aab1b92be79ed76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a916dd6c7f39b45561b618f58b2d65ff8"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceui.html#a916dd6c7f39b45561b618f58b2d65ff8">ChipVariant</a> { <a class="el" href="namespaceui.html#a916dd6c7f39b45561b618f58b2d65ff8ae9bb5320b3890b6747c91b5a71ae5a01">Neutral</a>
 , <a class="el" href="namespaceui.html#a916dd6c7f39b45561b618f58b2d65ff8a3289297424e01eda5b788c083bbf3147">Positive</a>
 , <a class="el" href="namespaceui.html#a916dd6c7f39b45561b618f58b2d65ff8affb9356ff2b7da85c75c92fa7ea03b8b">Negative</a>
@@ -119,20 +117,23 @@ Functions</h2></td></tr>
 <tr class="separator:a5e215a312253a017263135e8e9b2fde8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48a441cbee5cba22b870ab29be0356d2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceui.html#a48a441cbee5cba22b870ab29be0356d2">LoadFonts</a> (ImGuiIO &amp;io, std::string_view font_directory)</td></tr>
 <tr class="separator:a48a441cbee5cba22b870ab29be0356d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27aa4868ffcd17787cc35f7e24a0c616"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structui_1_1FontSet.html">FontSet</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceui.html#a27aa4868ffcd17787cc35f7e24a0c616">Fonts</a> ()</td></tr>
-<tr class="separator:a27aa4868ffcd17787cc35f7e24a0c616"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a447c8573ad59f48165a527a06c94fb62"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structui_1_1Palette.html">Palette</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceui.html#a447c8573ad59f48165a527a06c94fb62">Colors</a> ()</td></tr>
-<tr class="separator:a447c8573ad59f48165a527a06c94fb62"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4204ae9873b183dca2479b338348718"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceui.html#ad4204ae9873b183dca2479b338348718">PushPillButtonStyle</a> (<a class="el" href="namespaceui.html#a24ddf4dd600de0636aab1b92be79ed76">PillStyle</a> style)</td></tr>
+<tr class="memitem:a0681d3cde6bdb95a6bccbc515685754c"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structui_1_1FontSet.html">FontSet</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceui.html#a0681d3cde6bdb95a6bccbc515685754c">Fonts</a> ()</td></tr>
+<tr class="separator:a0681d3cde6bdb95a6bccbc515685754c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3d0346c22a3101df28246449a445ebf"><td class="memItemLeft" align="right" valign="top">const Palette &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceui.html#ab3d0346c22a3101df28246449a445ebf">Colors</a> ()</td></tr>
+<tr class="separator:ab3d0346c22a3101df28246449a445ebf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4204ae9873b183dca2479b338348718"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceui.html#ad4204ae9873b183dca2479b338348718">PushPillButtonStyle</a> (<a class="el" href="group__UITheme.html#ga0bae71602d651fd19347a1205cbed6e6">PillStyle</a> style)</td></tr>
 <tr class="separator:ad4204ae9873b183dca2479b338348718"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa8a07e2928ca42077565025599baf0f2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceui.html#aa8a07e2928ca42077565025599baf0f2">PopPillButtonStyle</a> ()</td></tr>
 <tr class="separator:aa8a07e2928ca42077565025599baf0f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0053c22f687ace038e6a6625e751ac6c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceui.html#a0053c22f687ace038e6a6625e751ac6c">BeginCard</a> (const char *id, const <a class="el" href="structui_1_1CardOptions.html">CardOptions</a> &amp;options, bool *open, ImGuiWindowFlags flags)</td></tr>
-<tr class="separator:a0053c22f687ace038e6a6625e751ac6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab4c47f869143e855e5a9cb8b6f2cf8b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceui.html#aab4c47f869143e855e5a9cb8b6f2cf8b">EndCard</a> ()</td></tr>
-<tr class="separator:aab4c47f869143e855e5a9cb8b6f2cf8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23857d08f2eee27af80c1607a82cfded"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceui.html#a23857d08f2eee27af80c1607a82cfded">CardHeader</a> (const char *title, const char *badge_label, const ImVec4 *badge_color)</td></tr>
-<tr class="separator:a23857d08f2eee27af80c1607a82cfded"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae86fdebbe43a915410d1bf0c16c4cb17"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__UIWidgets.html#gae86fdebbe43a915410d1bf0c16c4cb17">BeginCard</a> (const char *id, const <a class="el" href="structui_1_1CardOptions.html">CardOptions</a> &amp;options=<a class="el" href="structui_1_1CardOptions.html">CardOptions</a>(), bool *open=nullptr, ImGuiWindowFlags flags=0)</td></tr>
+<tr class="memdesc:gae86fdebbe43a915410d1bf0c16c4cb17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Begin a Card container with consistent styling.  <a href="group__UIWidgets.html#gae86fdebbe43a915410d1bf0c16c4cb17">More...</a><br /></td></tr>
+<tr class="separator:gae86fdebbe43a915410d1bf0c16c4cb17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaab4c47f869143e855e5a9cb8b6f2cf8b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__UIWidgets.html#gaab4c47f869143e855e5a9cb8b6f2cf8b">EndCard</a> ()</td></tr>
+<tr class="memdesc:gaab4c47f869143e855e5a9cb8b6f2cf8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">End a Card container (must be called after BeginCard)  <a href="group__UIWidgets.html#gaab4c47f869143e855e5a9cb8b6f2cf8b">More...</a><br /></td></tr>
+<tr class="separator:gaab4c47f869143e855e5a9cb8b6f2cf8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2fb6bd477996a90c7d6373454fe6c06c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__UIWidgets.html#ga2fb6bd477996a90c7d6373454fe6c06c">CardHeader</a> (const char *title, const char *badge_label=nullptr, const ImVec4 *badge_color=nullptr)</td></tr>
+<tr class="memdesc:ga2fb6bd477996a90c7d6373454fe6c06c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Render a card header with optional badge.  <a href="group__UIWidgets.html#ga2fb6bd477996a90c7d6373454fe6c06c">More...</a><br /></td></tr>
+<tr class="separator:ga2fb6bd477996a90c7d6373454fe6c06c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1dd80ea1df929d07371133bc9945f1a4"><td class="memItemLeft" align="right" valign="top">ImVec2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceui.html#a1dd80ea1df929d07371133bc9945f1a4">ValueChip</a> (const char *label, const char *value, const <a class="el" href="structui_1_1ChipConfig.html">ChipConfig</a> &amp;config)</td></tr>
 <tr class="separator:a1dd80ea1df929d07371133bc9945f1a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -164,32 +165,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a24ddf4dd600de0636aab1b92be79ed76"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a24ddf4dd600de0636aab1b92be79ed76">&#9670;&nbsp;</a></span>PillStyle</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="namespaceui.html#a24ddf4dd600de0636aab1b92be79ed76">ui::PillStyle</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a24ddf4dd600de0636aab1b92be79ed76a074de7e7c226d5c60f8af14c20725352"></a>Primary&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a24ddf4dd600de0636aab1b92be79ed76a0c7d6cf19426e01dcfa32434828ed266"></a>Secondary&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-</div>
-</div>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a5e215a312253a017263135e8e9b2fde8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5e215a312253a017263135e8e9b2fde8">&#9670;&nbsp;</a></span>ApplyTheme()</h2>
@@ -212,144 +187,21 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="namespaceui_a5e215a312253a017263135e8e9b2fde8_icgraph.png" border="0" usemap="#anamespaceui_a5e215a312253a017263135e8e9b2fde8_icgraph" alt=""/></div>
 <map name="anamespaceui_a5e215a312253a017263135e8e9b2fde8_icgraph" id="anamespaceui_a5e215a312253a017263135e8e9b2fde8_icgraph">
 <area shape="rect" title=" " alt="" coords="280,5,404,32"/>
-<area shape="rect" href="classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96" title="Initializes the application, setting up GLFW, OpenGL, ImGui, and all core components." alt="" coords="108,5,232,32"/>
+<area shape="rect" href="classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96" title="Initialize the application subsystems." alt="" coords="108,5,232,32"/>
 <area shape="rect" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="a0053c22f687ace038e6a6625e751ac6c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0053c22f687ace038e6a6625e751ac6c">&#9670;&nbsp;</a></span>BeginCard()</h2>
+<a id="ab3d0346c22a3101df28246449a445ebf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3d0346c22a3101df28246449a445ebf">&#9670;&nbsp;</a></span>Colors()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool ui::BeginCard </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structui_1_1CardOptions.html">CardOptions</a> &amp;&#160;</td>
-          <td class="paramname"><em>options</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool *&#160;</td>
-          <td class="paramname"><em>open</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ImGuiWindowFlags&#160;</td>
-          <td class="paramname"><em>flags</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="namespaceui_a0053c22f687ace038e6a6625e751ac6c_cgraph.png" border="0" usemap="#anamespaceui_a0053c22f687ace038e6a6625e751ac6c_cgraph" alt=""/></div>
-<map name="anamespaceui_a0053c22f687ace038e6a6625e751ac6c_cgraph" id="anamespaceui_a0053c22f687ace038e6a6625e751ac6c_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,115,32"/>
-<area shape="rect" href="namespaceui.html#a447c8573ad59f48165a527a06c94fb62" title=" " alt="" coords="163,5,245,32"/>
-</map>
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="namespaceui_a0053c22f687ace038e6a6625e751ac6c_icgraph.png" border="0" usemap="#anamespaceui_a0053c22f687ace038e6a6625e751ac6c_icgraph" alt=""/></div>
-<map name="anamespaceui_a0053c22f687ace038e6a6625e751ac6c_icgraph" id="anamespaceui_a0053c22f687ace038e6a6625e751ac6c_icgraph">
-<area shape="rect" title=" " alt="" coords="493,107,603,133"/>
-<area shape="rect" href="classEstimatorPanel.html#a2f2e0dc7c0287d12b71b412a38d25b96" title=" " alt="" coords="284,5,444,32"/>
-<area shape="rect" href="classPowerPanel.html#a707cada1c41c5a1a38f154f6e93c1280" title=" " alt="" coords="295,56,433,83"/>
-<area shape="rect" href="classRotorPanel.html#a4cc8a6932eabe62949fa23c08f79e488" title=" " alt="" coords="298,107,430,133"/>
-<area shape="rect" href="classSensorPanel.html#a2b9f315ae32bd4883b8532d5369c373d" title=" " alt="" coords="293,157,435,184"/>
-<area shape="rect" href="classApplication.html#a4e7a520d659593b385b246a43e604dfb" title=" " alt="" coords="283,208,445,235"/>
-<area shape="rect" href="classApplication.html#af44c742342adf5305e430ff293f147c1" title=" " alt="" coords="108,208,235,235"/>
-<area shape="rect" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,208,60,235"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a23857d08f2eee27af80c1607a82cfded"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a23857d08f2eee27af80c1607a82cfded">&#9670;&nbsp;</a></span>CardHeader()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ui::CardHeader </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>title</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>badge_label</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const ImVec4 *&#160;</td>
-          <td class="paramname"><em>badge_color</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="namespaceui_a23857d08f2eee27af80c1607a82cfded_cgraph.png" border="0" usemap="#anamespaceui_a23857d08f2eee27af80c1607a82cfded_cgraph" alt=""/></div>
-<map name="anamespaceui_a23857d08f2eee27af80c1607a82cfded_cgraph" id="anamespaceui_a23857d08f2eee27af80c1607a82cfded_cgraph">
-<area shape="rect" title=" " alt="" coords="5,31,124,57"/>
-<area shape="rect" href="namespaceui.html#a447c8573ad59f48165a527a06c94fb62" title=" " alt="" coords="172,5,255,32"/>
-<area shape="rect" href="namespaceui.html#a27aa4868ffcd17787cc35f7e24a0c616" title=" " alt="" coords="175,56,252,83"/>
-</map>
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="namespaceui_a23857d08f2eee27af80c1607a82cfded_icgraph.png" border="0" usemap="#anamespaceui_a23857d08f2eee27af80c1607a82cfded_icgraph" alt=""/></div>
-<map name="anamespaceui_a23857d08f2eee27af80c1607a82cfded_icgraph" id="anamespaceui_a23857d08f2eee27af80c1607a82cfded_icgraph">
-<area shape="rect" title=" " alt="" coords="493,107,612,133"/>
-<area shape="rect" href="classEstimatorPanel.html#a2f2e0dc7c0287d12b71b412a38d25b96" title=" " alt="" coords="284,5,444,32"/>
-<area shape="rect" href="classPowerPanel.html#a707cada1c41c5a1a38f154f6e93c1280" title=" " alt="" coords="295,56,433,83"/>
-<area shape="rect" href="classRotorPanel.html#a4cc8a6932eabe62949fa23c08f79e488" title=" " alt="" coords="298,107,430,133"/>
-<area shape="rect" href="classSensorPanel.html#a2b9f315ae32bd4883b8532d5369c373d" title=" " alt="" coords="293,157,435,184"/>
-<area shape="rect" href="classApplication.html#a4e7a520d659593b385b246a43e604dfb" title=" " alt="" coords="283,208,445,235"/>
-<area shape="rect" href="classApplication.html#af44c742342adf5305e430ff293f147c1" title=" " alt="" coords="108,208,235,235"/>
-<area shape="rect" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,208,60,235"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a447c8573ad59f48165a527a06c94fb62"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a447c8573ad59f48165a527a06c94fb62">&#9670;&nbsp;</a></span>Colors()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="structui_1_1Palette.html">Palette</a> &amp; ui::Colors </td>
+          <td class="memname">const Palette&amp; ui::Colors </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -359,32 +211,29 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespaceui_a447c8573ad59f48165a527a06c94fb62_icgraph.png" border="0" usemap="#anamespaceui_a447c8573ad59f48165a527a06c94fb62_icgraph" alt=""/></div>
-<map name="anamespaceui_a447c8573ad59f48165a527a06c94fb62_icgraph" id="anamespaceui_a447c8573ad59f48165a527a06c94fb62_icgraph">
-<area shape="rect" title=" " alt="" coords="711,146,793,173"/>
-<area shape="rect" href="namespaceui.html#a0053c22f687ace038e6a6625e751ac6c" title=" " alt="" coords="523,70,633,97"/>
-<area shape="rect" href="classEstimatorPanel.html#a2f2e0dc7c0287d12b71b412a38d25b96" title=" " alt="" coords="284,70,444,97"/>
-<area shape="rect" href="classPowerPanel.html#a707cada1c41c5a1a38f154f6e93c1280" title=" " alt="" coords="295,19,433,46"/>
-<area shape="rect" href="classRotorPanel.html#a4cc8a6932eabe62949fa23c08f79e488" title=" " alt="" coords="298,171,430,198"/>
-<area shape="rect" href="classSensorPanel.html#a2b9f315ae32bd4883b8532d5369c373d" title=" " alt="" coords="293,121,435,147"/>
-<area shape="rect" href="classApplication.html#a4e7a520d659593b385b246a43e604dfb" title=" " alt="" coords="283,247,445,274"/>
-<area shape="rect" href="namespaceui.html#a23857d08f2eee27af80c1607a82cfded" title=" " alt="" coords="519,121,637,147"/>
-<area shape="rect" href="namespaceui.html#ad4204ae9873b183dca2479b338348718" title=" " alt="" coords="493,323,663,350"/>
-<area shape="rect" href="classApplication.html#af44c742342adf5305e430ff293f147c1" title=" " alt="" coords="108,247,235,274"/>
-<area shape="rect" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,247,60,274"/>
+<div class="center"><img src="namespaceui_ab3d0346c22a3101df28246449a445ebf_icgraph.png" border="0" usemap="#anamespaceui_ab3d0346c22a3101df28246449a445ebf_icgraph" alt=""/></div>
+<map name="anamespaceui_ab3d0346c22a3101df28246449a445ebf_icgraph" id="anamespaceui_ab3d0346c22a3101df28246449a445ebf_icgraph">
+<area shape="rect" title=" " alt="" coords="431,118,513,144"/>
+<area shape="rect" href="group__UIWidgets.html#gae86fdebbe43a915410d1bf0c16c4cb17" title="Begin a Card container with consistent styling." alt="" coords="243,118,353,144"/>
+<area shape="rect" href="classEstimatorPanel.html#a2f2e0dc7c0287d12b71b412a38d25b96" title="Render the panel&#39;s ImGui interface." alt="" coords="5,16,165,43"/>
+<area shape="rect" href="classPowerPanel.html#a707cada1c41c5a1a38f154f6e93c1280" title="Render the panel&#39;s ImGui interface." alt="" coords="17,67,154,94"/>
+<area shape="rect" href="classRotorPanel.html#a4cc8a6932eabe62949fa23c08f79e488" title="Render the panel&#39;s ImGui interface." alt="" coords="19,118,151,144"/>
+<area shape="rect" href="classSensorPanel.html#a2b9f315ae32bd4883b8532d5369c373d" title="Render the panel&#39;s ImGui interface." alt="" coords="15,168,156,195"/>
+<area shape="rect" href="group__UIWidgets.html#ga2fb6bd477996a90c7d6373454fe6c06c" title="Render a card header with optional badge." alt="" coords="239,67,357,94"/>
+<area shape="rect" href="namespaceui.html#ad4204ae9873b183dca2479b338348718" title=" " alt="" coords="213,270,383,296"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="aab4c47f869143e855e5a9cb8b6f2cf8b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aab4c47f869143e855e5a9cb8b6f2cf8b">&#9670;&nbsp;</a></span>EndCard()</h2>
+<a id="a0681d3cde6bdb95a6bccbc515685754c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0681d3cde6bdb95a6bccbc515685754c">&#9670;&nbsp;</a></span>Fonts()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ui::EndCard </td>
+          <td class="memname">const <a class="el" href="structui_1_1FontSet.html">FontSet</a>&amp; ui::Fonts </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -394,50 +243,15 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespaceui_aab4c47f869143e855e5a9cb8b6f2cf8b_icgraph.png" border="0" usemap="#anamespaceui_aab4c47f869143e855e5a9cb8b6f2cf8b_icgraph" alt=""/></div>
-<map name="anamespaceui_aab4c47f869143e855e5a9cb8b6f2cf8b_icgraph" id="anamespaceui_aab4c47f869143e855e5a9cb8b6f2cf8b_icgraph">
-<area shape="rect" title=" " alt="" coords="493,107,589,133"/>
-<area shape="rect" href="classEstimatorPanel.html#a2f2e0dc7c0287d12b71b412a38d25b96" title=" " alt="" coords="284,5,444,32"/>
-<area shape="rect" href="classPowerPanel.html#a707cada1c41c5a1a38f154f6e93c1280" title=" " alt="" coords="295,56,433,83"/>
-<area shape="rect" href="classRotorPanel.html#a4cc8a6932eabe62949fa23c08f79e488" title=" " alt="" coords="298,107,430,133"/>
-<area shape="rect" href="classSensorPanel.html#a2b9f315ae32bd4883b8532d5369c373d" title=" " alt="" coords="293,157,435,184"/>
-<area shape="rect" href="classApplication.html#a4e7a520d659593b385b246a43e604dfb" title=" " alt="" coords="283,208,445,235"/>
-<area shape="rect" href="classApplication.html#af44c742342adf5305e430ff293f147c1" title=" " alt="" coords="108,208,235,235"/>
-<area shape="rect" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,208,60,235"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a27aa4868ffcd17787cc35f7e24a0c616"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a27aa4868ffcd17787cc35f7e24a0c616">&#9670;&nbsp;</a></span>Fonts()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="structui_1_1FontSet.html">FontSet</a> &amp; ui::Fonts </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="namespaceui_a27aa4868ffcd17787cc35f7e24a0c616_icgraph.png" border="0" usemap="#anamespaceui_a27aa4868ffcd17787cc35f7e24a0c616_icgraph" alt=""/></div>
-<map name="anamespaceui_a27aa4868ffcd17787cc35f7e24a0c616_icgraph" id="anamespaceui_a27aa4868ffcd17787cc35f7e24a0c616_icgraph">
-<area shape="rect" title=" " alt="" coords="660,112,737,139"/>
-<area shape="rect" href="namespaceui.html#a23857d08f2eee27af80c1607a82cfded" title=" " alt="" coords="493,163,612,190"/>
-<area shape="rect" href="classEstimatorPanel.html#a2f2e0dc7c0287d12b71b412a38d25b96" title=" " alt="" coords="284,62,444,88"/>
-<area shape="rect" href="classPowerPanel.html#a707cada1c41c5a1a38f154f6e93c1280" title=" " alt="" coords="295,11,433,38"/>
-<area shape="rect" href="classRotorPanel.html#a4cc8a6932eabe62949fa23c08f79e488" title=" " alt="" coords="298,112,430,139"/>
-<area shape="rect" href="classSensorPanel.html#a2b9f315ae32bd4883b8532d5369c373d" title=" " alt="" coords="293,175,435,202"/>
-<area shape="rect" href="classApplication.html#a4e7a520d659593b385b246a43e604dfb" title=" " alt="" coords="283,251,445,278"/>
-<area shape="rect" href="namespaceui.html#a1dd80ea1df929d07371133bc9945f1a4" title=" " alt="" coords="499,62,606,88"/>
-<area shape="rect" href="classApplication.html#af44c742342adf5305e430ff293f147c1" title=" " alt="" coords="108,251,235,278"/>
-<area shape="rect" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,251,60,278"/>
+<div class="center"><img src="namespaceui_a0681d3cde6bdb95a6bccbc515685754c_icgraph.png" border="0" usemap="#anamespaceui_a0681d3cde6bdb95a6bccbc515685754c_icgraph" alt=""/></div>
+<map name="anamespaceui_a0681d3cde6bdb95a6bccbc515685754c_icgraph" id="anamespaceui_a0681d3cde6bdb95a6bccbc515685754c_icgraph">
+<area shape="rect" title=" " alt="" coords="380,110,457,136"/>
+<area shape="rect" href="group__UIWidgets.html#ga2fb6bd477996a90c7d6373454fe6c06c" title="Render a card header with optional badge." alt="" coords="213,135,332,162"/>
+<area shape="rect" href="classEstimatorPanel.html#a2f2e0dc7c0287d12b71b412a38d25b96" title="Render the panel&#39;s ImGui interface." alt="" coords="5,34,165,60"/>
+<area shape="rect" href="classPowerPanel.html#a707cada1c41c5a1a38f154f6e93c1280" title="Render the panel&#39;s ImGui interface." alt="" coords="17,84,154,111"/>
+<area shape="rect" href="classRotorPanel.html#a4cc8a6932eabe62949fa23c08f79e488" title="Render the panel&#39;s ImGui interface." alt="" coords="19,135,151,162"/>
+<area shape="rect" href="classSensorPanel.html#a2b9f315ae32bd4883b8532d5369c373d" title="Render the panel&#39;s ImGui interface." alt="" coords="15,211,156,238"/>
+<area shape="rect" href="namespaceui.html#a1dd80ea1df929d07371133bc9945f1a4" title=" " alt="" coords="219,34,326,60"/>
 </map>
 </div>
 
@@ -474,7 +288,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="namespaceui_a48a441cbee5cba22b870ab29be0356d2_icgraph.png" border="0" usemap="#anamespaceui_a48a441cbee5cba22b870ab29be0356d2_icgraph" alt=""/></div>
 <map name="anamespaceui_a48a441cbee5cba22b870ab29be0356d2_icgraph" id="anamespaceui_a48a441cbee5cba22b870ab29be0356d2_icgraph">
 <area shape="rect" title=" " alt="" coords="280,5,388,32"/>
-<area shape="rect" href="classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96" title="Initializes the application, setting up GLFW, OpenGL, ImGui, and all core components." alt="" coords="108,5,232,32"/>
+<area shape="rect" href="classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96" title="Initialize the application subsystems." alt="" coords="108,5,232,32"/>
 <area shape="rect" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -495,17 +309,6 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="namespaceui_aa8a07e2928ca42077565025599baf0f2_icgraph.png" border="0" usemap="#anamespaceui_aa8a07e2928ca42077565025599baf0f2_icgraph" alt=""/></div>
-<map name="anamespaceui_aa8a07e2928ca42077565025599baf0f2_icgraph" id="anamespaceui_aa8a07e2928ca42077565025599baf0f2_icgraph">
-<area shape="rect" title=" " alt="" coords="493,5,656,32"/>
-<area shape="rect" href="classApplication.html#a4e7a520d659593b385b246a43e604dfb" title=" " alt="" coords="283,5,445,32"/>
-<area shape="rect" href="classApplication.html#af44c742342adf5305e430ff293f147c1" title=" " alt="" coords="108,5,235,32"/>
-<area shape="rect" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -518,7 +321,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">void ui::PushPillButtonStyle </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceui.html#a24ddf4dd600de0636aab1b92be79ed76">PillStyle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__UITheme.html#ga0bae71602d651fd19347a1205cbed6e6">PillStyle</a>&#160;</td>
           <td class="paramname"><em>style</em></td><td>)</td>
           <td></td>
         </tr>
@@ -530,18 +333,7 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="namespaceui_ad4204ae9873b183dca2479b338348718_cgraph.png" border="0" usemap="#anamespaceui_ad4204ae9873b183dca2479b338348718_cgraph" alt=""/></div>
 <map name="anamespaceui_ad4204ae9873b183dca2479b338348718_cgraph" id="anamespaceui_ad4204ae9873b183dca2479b338348718_cgraph">
 <area shape="rect" title=" " alt="" coords="5,5,175,32"/>
-<area shape="rect" href="namespaceui.html#a447c8573ad59f48165a527a06c94fb62" title=" " alt="" coords="223,5,305,32"/>
-</map>
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="namespaceui_ad4204ae9873b183dca2479b338348718_icgraph.png" border="0" usemap="#anamespaceui_ad4204ae9873b183dca2479b338348718_icgraph" alt=""/></div>
-<map name="anamespaceui_ad4204ae9873b183dca2479b338348718_icgraph" id="anamespaceui_ad4204ae9873b183dca2479b338348718_icgraph">
-<area shape="rect" title=" " alt="" coords="493,5,663,32"/>
-<area shape="rect" href="classApplication.html#a4e7a520d659593b385b246a43e604dfb" title=" " alt="" coords="283,5,445,32"/>
-<area shape="rect" href="classApplication.html#af44c742342adf5305e430ff293f147c1" title=" " alt="" coords="108,5,235,32"/>
-<area shape="rect" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
+<area shape="rect" href="namespaceui.html#ab3d0346c22a3101df28246449a445ebf" title=" " alt="" coords="223,5,305,32"/>
 </map>
 </div>
 
@@ -584,7 +376,7 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="namespaceui_a1dd80ea1df929d07371133bc9945f1a4_cgraph.png" border="0" usemap="#anamespaceui_a1dd80ea1df929d07371133bc9945f1a4_cgraph" alt=""/></div>
 <map name="anamespaceui_a1dd80ea1df929d07371133bc9945f1a4_cgraph" id="anamespaceui_a1dd80ea1df929d07371133bc9945f1a4_cgraph">
 <area shape="rect" title=" " alt="" coords="5,5,112,32"/>
-<area shape="rect" href="namespaceui.html#a27aa4868ffcd17787cc35f7e24a0c616" title=" " alt="" coords="160,5,237,32"/>
+<area shape="rect" href="namespaceui.html#a0681d3cde6bdb95a6bccbc515685754c" title=" " alt="" coords="160,5,237,32"/>
 </map>
 </div>
 <div class="dynheader">
@@ -593,9 +385,9 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="namespaceui_a1dd80ea1df929d07371133bc9945f1a4_icgraph.png" border="0" usemap="#anamespaceui_a1dd80ea1df929d07371133bc9945f1a4_icgraph" alt=""/></div>
 <map name="anamespaceui_a1dd80ea1df929d07371133bc9945f1a4_icgraph" id="anamespaceui_a1dd80ea1df929d07371133bc9945f1a4_icgraph">
 <area shape="rect" title=" " alt="" coords="213,56,320,83"/>
-<area shape="rect" href="classEstimatorPanel.html#a2f2e0dc7c0287d12b71b412a38d25b96" title=" " alt="" coords="5,5,165,32"/>
-<area shape="rect" href="classPowerPanel.html#a707cada1c41c5a1a38f154f6e93c1280" title=" " alt="" coords="17,56,154,83"/>
-<area shape="rect" href="classRotorPanel.html#a4cc8a6932eabe62949fa23c08f79e488" title=" " alt="" coords="19,107,151,133"/>
+<area shape="rect" href="classEstimatorPanel.html#a2f2e0dc7c0287d12b71b412a38d25b96" title="Render the panel&#39;s ImGui interface." alt="" coords="5,5,165,32"/>
+<area shape="rect" href="classPowerPanel.html#a707cada1c41c5a1a38f154f6e93c1280" title="Render the panel&#39;s ImGui interface." alt="" coords="17,56,154,83"/>
+<area shape="rect" href="classRotorPanel.html#a4cc8a6932eabe62949fa23c08f79e488" title="Render the panel&#39;s ImGui interface." alt="" coords="19,107,151,133"/>
 </map>
 </div>
 

@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -85,24 +87,27 @@ $(document).ready(function(){initNavTree('module_8h_source.html',''); initResiza
 <div class="title">module.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="module_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef MODULE_H</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define MODULE_H</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">class </span><a class="code" href="structSimulationState.html">SimulationState</a>;</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="classModule.html">    6</a></span>&#160;<span class="keyword">class </span><a class="code" href="classModule.html">Module</a> {</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="classModule.html#a4a48538d35a2da7fcc32d9f509034723">    8</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classModule.html#a4a48538d35a2da7fcc32d9f509034723">~Module</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="classModule.html#a217a8e1c2cd1745b1419607cb1a92076">    9</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classModule.html#a217a8e1c2cd1745b1419607cb1a92076">initialize</a>(<a class="code" href="structSimulationState.html">SimulationState</a>&amp; state) {}</div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="classModule.html#ac6bb9eb865c41df66fe428a7c17b98d3">   10</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classModule.html#ac6bb9eb865c41df66fe428a7c17b98d3">update</a>(<span class="keywordtype">double</span> dt, <a class="code" href="structSimulationState.html">SimulationState</a>&amp; state) = 0;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;};</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// MODULE_H</span></div>
-<div class="ttc" id="aclassModule_html"><div class="ttname"><a href="classModule.html">Module</a></div><div class="ttdef"><b>Definition:</b> module.h:6</div></div>
-<div class="ttc" id="aclassModule_html_a217a8e1c2cd1745b1419607cb1a92076"><div class="ttname"><a href="classModule.html#a217a8e1c2cd1745b1419607cb1a92076">Module::initialize</a></div><div class="ttdeci">virtual void initialize(SimulationState &amp;state)</div><div class="ttdef"><b>Definition:</b> module.h:9</div></div>
+<a href="module_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#ifndef MODULE_H</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#define MODULE_H</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">class </span><a class="code" href="structSimulationState.html">SimulationState</a>;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classModule.html">   21</a></span>&#160;<span class="keyword">class </span><a class="code" href="classModule.html">Module</a> {</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classModule.html#a4a48538d35a2da7fcc32d9f509034723">   23</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classModule.html#a4a48538d35a2da7fcc32d9f509034723">~Module</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classModule.html#a217a8e1c2cd1745b1419607cb1a92076">   33</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classModule.html#a217a8e1c2cd1745b1419607cb1a92076">initialize</a>(<a class="code" href="structSimulationState.html">SimulationState</a>&amp; state) {}</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="classModule.html#ac6bb9eb865c41df66fe428a7c17b98d3">   44</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classModule.html#ac6bb9eb865c41df66fe428a7c17b98d3">update</a>(<span class="keywordtype">double</span> dt, <a class="code" href="structSimulationState.html">SimulationState</a>&amp; state) = 0;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;};</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// MODULE_H</span></div>
+<div class="ttc" id="aclassModule_html"><div class="ttname"><a href="classModule.html">Module</a></div><div class="ttdoc">Abstract base class for all simulation modules.</div><div class="ttdef"><b>Definition:</b> module.h:21</div></div>
+<div class="ttc" id="aclassModule_html_a217a8e1c2cd1745b1419607cb1a92076"><div class="ttname"><a href="classModule.html#a217a8e1c2cd1745b1419607cb1a92076">Module::initialize</a></div><div class="ttdeci">virtual void initialize(SimulationState &amp;state)</div><div class="ttdoc">Initialize the module with the current simulation state.</div><div class="ttdef"><b>Definition:</b> module.h:33</div></div>
 <div class="ttc" id="aclassModule_html_a4a48538d35a2da7fcc32d9f509034723"><div class="ttname"><a href="classModule.html#a4a48538d35a2da7fcc32d9f509034723">Module::~Module</a></div><div class="ttdeci">virtual ~Module()=default</div></div>
-<div class="ttc" id="aclassModule_html_ac6bb9eb865c41df66fe428a7c17b98d3"><div class="ttname"><a href="classModule.html#ac6bb9eb865c41df66fe428a7c17b98d3">Module::update</a></div><div class="ttdeci">virtual void update(double dt, SimulationState &amp;state)=0</div></div>
-<div class="ttc" id="astructSimulationState_html"><div class="ttname"><a href="structSimulationState.html">SimulationState</a></div><div class="ttdef"><b>Definition:</b> simulation_state.h:8</div></div>
+<div class="ttc" id="aclassModule_html_ac6bb9eb865c41df66fe428a7c17b98d3"><div class="ttname"><a href="classModule.html#ac6bb9eb865c41df66fe428a7c17b98d3">Module::update</a></div><div class="ttdeci">virtual void update(double dt, SimulationState &amp;state)=0</div><div class="ttdoc">Update the module for one simulation timestep.</div></div>
+<div class="ttc" id="astructSimulationState_html"><div class="ttname"><a href="structSimulationState.html">SimulationState</a></div><div class="ttdoc">Central shared state for the entire simulation.</div><div class="ttdef"><b>Definition:</b> simulation_state.h:26</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['begincard_378',['BeginCard',['../namespaceui.html#a0053c22f687ace038e6a6625e751ac6c',1,'ui']]]
+  ['begincard_430',['BeginCard',['../group__UIWidgets.html#gae86fdebbe43a915410d1bf0c16c4cb17',1,'ui']]]
 ];

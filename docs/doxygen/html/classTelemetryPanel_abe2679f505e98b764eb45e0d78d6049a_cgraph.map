@@ -1,5 +1,5 @@
 <map id="TelemetryPanel::draw" name="TelemetryPanel::draw">
-<area shape="rect" id="node1" title=" " alt="" coords="5,31,168,57"/>
-<area shape="rect" id="node2" href="$classTelemetryPanel.html#a77e48ecea338c0898ac6c5c206094204" title=" " alt="" coords="216,5,383,32"/>
+<area shape="rect" id="node1" title="Render the panel&#39;s ImGui interface." alt="" coords="5,31,168,57"/>
+<area shape="rect" id="node2" href="$classTelemetryPanel.html#a77e48ecea338c0898ac6c5c206094204" title="Get the display name of this panel." alt="" coords="216,5,383,32"/>
 <area shape="rect" id="node3" href="$attitude__utils_8h.html#a32bc85d5e25e4374b31308af4f530377" title=" " alt="" coords="262,56,337,83"/>
 </map>

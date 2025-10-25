@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -89,22 +91,32 @@ $(document).ready(function(){initNavTree('structSimulationState_1_1DynamicsConfi
 </div><!--header-->
 <div class="contents">
 
+<p>Configuration for first-order dynamics test module.  
+ <a href="structSimulationState_1_1DynamicsConfig.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="simulation__state_8h_source.html">simulation_state.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:ab644a6aada947d56b62a9c6d5efe94d0"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1DynamicsConfig.html#ab644a6aada947d56b62a9c6d5efe94d0">input_target</a> {1.0}</td></tr>
+<tr class="memdesc:ab644a6aada947d56b62a9c6d5efe94d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Target input value (constant mode)  <a href="structSimulationState_1_1DynamicsConfig.html#ab644a6aada947d56b62a9c6d5efe94d0">More...</a><br /></td></tr>
 <tr class="separator:ab644a6aada947d56b62a9c6d5efe94d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a941861e000f4ecc2d0b758e5880cea8e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1DynamicsConfig.html#a941861e000f4ecc2d0b758e5880cea8e">use_sine</a> {false}</td></tr>
+<tr class="memdesc:a941861e000f4ecc2d0b758e5880cea8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable sinusoidal input signal.  <a href="structSimulationState_1_1DynamicsConfig.html#a941861e000f4ecc2d0b758e5880cea8e">More...</a><br /></td></tr>
 <tr class="separator:a941861e000f4ecc2d0b758e5880cea8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22ece5cc26bb34aa228ff461bb78d5c8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1DynamicsConfig.html#a22ece5cc26bb34aa228ff461bb78d5c8">sine_frequency_hz</a> {0.5}</td></tr>
+<tr class="memdesc:a22ece5cc26bb34aa228ff461bb78d5c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frequency for sinusoidal input (Hz)  <a href="structSimulationState_1_1DynamicsConfig.html#a22ece5cc26bb34aa228ff461bb78d5c8">More...</a><br /></td></tr>
 <tr class="separator:a22ece5cc26bb34aa228ff461bb78d5c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abeef1aa626b54f6a20173469a7ac9177"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1DynamicsConfig.html#abeef1aa626b54f6a20173469a7ac9177">time_constant</a> {1.0}</td></tr>
+<tr class="memdesc:abeef1aa626b54f6a20173469a7ac9177"><td class="mdescLeft">&#160;</td><td class="mdescRight">First-order system time constant (seconds)  <a href="structSimulationState_1_1DynamicsConfig.html#abeef1aa626b54f6a20173469a7ac9177">More...</a><br /></td></tr>
 <tr class="separator:abeef1aa626b54f6a20173469a7ac9177"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8355822e30f47d528e75ac6654459169"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1DynamicsConfig.html#a8355822e30f47d528e75ac6654459169">gain</a> {1.0}</td></tr>
+<tr class="memdesc:a8355822e30f47d528e75ac6654459169"><td class="mdescLeft">&#160;</td><td class="mdescRight">System gain.  <a href="structSimulationState_1_1DynamicsConfig.html#a8355822e30f47d528e75ac6654459169">More...</a><br /></td></tr>
 <tr class="separator:a8355822e30f47d528e75ac6654459169"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Data Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Configuration for first-order dynamics test module. </p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a8355822e30f47d528e75ac6654459169"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8355822e30f47d528e75ac6654459169">&#9670;&nbsp;</a></span>gain</h2>
 
@@ -116,6 +128,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>System gain. </p>
 
 </div>
 </div>
@@ -131,6 +145,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Target input value (constant mode) </p>
+
 </div>
 </div>
 <a id="a22ece5cc26bb34aa228ff461bb78d5c8"></a>
@@ -144,6 +160,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Frequency for sinusoidal input (Hz) </p>
 
 </div>
 </div>
@@ -159,6 +177,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>First-order system time constant (seconds) </p>
+
 </div>
 </div>
 <a id="a941861e000f4ecc2d0b758e5880cea8e"></a>
@@ -172,6 +192,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Enable sinusoidal input signal. </p>
 
 </div>
 </div>

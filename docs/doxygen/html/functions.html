@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -87,15 +89,6 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <li>accel_mps2
 : <a class="el" href="structSimulationState_1_1SensorFrame.html#af95bd651021b78768ae4529091d6bd52">SimulationState::SensorFrame</a>
 </li>
-<li>accent_active
-: <a class="el" href="structui_1_1Palette.html#a0f5dd0d4cd30a7174a458e2e9d0c7e0c">ui::Palette</a>
-</li>
-<li>accent_base
-: <a class="el" href="structui_1_1Palette.html#a1e6a6b14381fbcfafb32f942558fc90e">ui::Palette</a>
-</li>
-<li>accent_hover
-: <a class="el" href="structui_1_1Palette.html#a6dcfeb04766e310ede35c81f18be86dd">ui::Palette</a>
-</li>
 <li>allow_scrollbar
 : <a class="el" href="structui_1_1CardOptions.html#ac716311d9c572ac0e6bbde6295c4bc97">ui::CardOptions</a>
 </li>
@@ -143,18 +136,6 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <li>Camera()
 : <a class="el" href="classCamera.html#aa46b61fb3119cb0c888215275f0692a4">Camera</a>
 </li>
-<li>canvas_bg
-: <a class="el" href="structui_1_1Palette.html#aaf9af73167077f91b149c58878d7f466">ui::Palette</a>
-</li>
-<li>card_bg
-: <a class="el" href="structui_1_1Palette.html#a7df9bac98d6f81bbc70779e7534dc30b">ui::Palette</a>
-</li>
-<li>card_border
-: <a class="el" href="structui_1_1Palette.html#a73b422c9c175f477dcdfb13df3913603">ui::Palette</a>
-</li>
-<li>card_header
-: <a class="el" href="structui_1_1Palette.html#a5a2e99779f623893b14d0b89a8c2509d">ui::Palette</a>
-</li>
 <li>control
 : <a class="el" href="structSimulationState.html#aff22ad8c34d8c4eca0682d4a7bf22fe8">SimulationState</a>
 </li>
@@ -162,8 +143,8 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 
 
 <h3><a id="index_d"></a>- d -</h3><ul>
-<li>danger
-: <a class="el" href="structui_1_1Palette.html#abb98f92f8ab6491236b49b3b32e72d66">ui::Palette</a>
+<li>dolly()
+: <a class="el" href="classCamera.html#af30f67caebaf0ac590aae868e6befb55">Camera</a>
 </li>
 <li>draw()
 : <a class="el" href="classControlPanel.html#aeda901d59fe333ed8d5924b99b316801">ControlPanel</a>
@@ -323,6 +304,9 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 
 
 <h3><a id="index_o"></a>- o -</h3><ul>
+<li>orbit()
+: <a class="el" href="classCamera.html#a333a163a3388e87de9387ef54d709d8a">Camera</a>
+</li>
 <li>order
 : <a class="el" href="structEulerAngles.html#acbe48a11870ecd443a36a9a73880433f">EulerAngles</a>
 </li>
@@ -333,6 +317,9 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 
 
 <h3><a id="index_p"></a>- p -</h3><ul>
+<li>pan()
+: <a class="el" href="classCamera.html#a007363512e7056ecf01edca366257317">Camera</a>
+</li>
 <li>paused
 : <a class="el" href="structSimulationState_1_1SimulationControl.html#aa12b4ff18fde97ee1efa2c3048e00c90">SimulationState::SimulationControl</a>
 </li>
@@ -472,6 +459,9 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <li>setViewMatrix()
 : <a class="el" href="classRenderer.html#a7e13393392708399974fd1c6fcaf56cb">Renderer</a>
 </li>
+<li>setZoom()
+: <a class="el" href="classCamera.html#ad3726620788dae5e0c5f535852cdedbb">Camera</a>
+</li>
 <li>shaderProgram
 : <a class="el" href="classAxisRenderer.html#a3a9f352852fbba20141f8076798ad333">AxisRenderer</a>
 </li>
@@ -483,30 +473,12 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <li>sine_frequency_hz
 : <a class="el" href="structSimulationState_1_1DynamicsConfig.html#a22ece5cc26bb34aa228ff461bb78d5c8">SimulationState::DynamicsConfig</a>
 </li>
-<li>slate_active
-: <a class="el" href="structui_1_1Palette.html#ae0f91bfcb641e7ca1ab71e48463a4bea">ui::Palette</a>
-</li>
-<li>slate_base
-: <a class="el" href="structui_1_1Palette.html#acafd068ad8fe8ddc450c26414e4ad2c2">ui::Palette</a>
-</li>
-<li>slate_hover
-: <a class="el" href="structui_1_1Palette.html#ab626f37aa78bd33411ece40208148f6c">ui::Palette</a>
-</li>
-<li>success
-: <a class="el" href="structui_1_1Palette.html#a5586e47f0b78c8eaf4f3e52ba85b0bfe">ui::Palette</a>
-</li>
 </ul>
 
 
 <h3><a id="index_t"></a>- t -</h3><ul>
 <li>target
 : <a class="el" href="classCamera.html#a6d091a64fbeaf78315a902a3ad9b1010">Camera</a>
-</li>
-<li>text_muted
-: <a class="el" href="structui_1_1Palette.html#a76e362f3a440a98c3e9114806ec55f52">ui::Palette</a>
-</li>
-<li>text_primary
-: <a class="el" href="structui_1_1Palette.html#a0c4905ea1f963daa4a6da51e1a4d6fab">ui::Palette</a>
 </li>
 <li>thrust_coefficient
 : <a class="el" href="structSimulationState_1_1RotorConfig.html#ac22572ebe1e7eac96198f96b66b4b12d">SimulationState::RotorConfig</a>
@@ -562,6 +534,9 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <li>use_fixed_dt
 : <a class="el" href="structSimulationState_1_1SimulationControl.html#abfee3fbb74e2fbf35a5ce513c49fac95">SimulationState::SimulationControl</a>
 </li>
+<li>use_legacy_ui
+: <a class="el" href="structSimulationState_1_1SimulationControl.html#ad2abe9d386b9810570d7601c85cd1c21">SimulationState::SimulationControl</a>
+</li>
 <li>use_sine
 : <a class="el" href="structSimulationState_1_1DynamicsConfig.html#a941861e000f4ecc2d0b758e5880cea8e">SimulationState::DynamicsConfig</a>
 </li>
@@ -589,9 +564,6 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 
 
 <h3><a id="index_w"></a>- w -</h3><ul>
-<li>warning
-: <a class="el" href="structui_1_1Palette.html#a1d6e9951f349d4267a8e929184b80ac2">ui::Palette</a>
-</li>
 <li>windowHeight
 : <a class="el" href="classApplication.html#a17803b92ef5a3cd10484efc61e1c7d4f">Application</a>
 </li>
@@ -615,6 +587,9 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <h3><a id="index_z"></a>- z -</h3><ul>
 <li>zoom
 : <a class="el" href="classCamera.html#a21fc9e142b104d8e94126657abaa075f">Camera</a>
+</li>
+<li>zoomBy()
+: <a class="el" href="classCamera.html#aea5d41aec5e559dd7c5c584511dc647f">Camera</a>
 </li>
 </ul>
 

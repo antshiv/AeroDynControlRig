@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -89,14 +91,17 @@ $(document).ready(function(){initNavTree('classSensorSimulatorModule.html',''); 
 </div><!--header-->
 <div class="contents">
 
+<p>Simulates IMU sensor measurements (gyro + accel) based on vehicle state.  
+ <a href="classSensorSimulatorModule.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="sensor__simulator_8h_source.html">sensor_simulator.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for SensorSimulatorModule:</div>
 <div class="dyncontent">
 <div class="center"><img src="classSensorSimulatorModule__inherit__graph.png" border="0" usemap="#aSensorSimulatorModule_inherit__map" alt="Inheritance graph"/></div>
 <map name="aSensorSimulatorModule_inherit__map" id="aSensorSimulatorModule_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,80,183,107"/>
-<area shape="rect" href="classModule.html" title=" " alt="" coords="59,5,129,32"/>
+<area shape="rect" title="Simulates IMU sensor measurements (gyro + accel) based on vehicle state." alt="" coords="5,80,183,107"/>
+<area shape="rect" href="classModule.html" title="Abstract base class for all simulation modules." alt="" coords="59,5,129,32"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -104,22 +109,33 @@ Collaboration diagram for SensorSimulatorModule:</div>
 <div class="dyncontent">
 <div class="center"><img src="classSensorSimulatorModule__coll__graph.png" border="0" usemap="#aSensorSimulatorModule_coll__map" alt="Collaboration graph"/></div>
 <map name="aSensorSimulatorModule_coll__map" id="aSensorSimulatorModule_coll__map">
-<area shape="rect" title=" " alt="" coords="5,80,183,107"/>
-<area shape="rect" href="classModule.html" title=" " alt="" coords="59,5,129,32"/>
+<area shape="rect" title="Simulates IMU sensor measurements (gyro + accel) based on vehicle state." alt="" coords="5,80,183,107"/>
+<area shape="rect" href="classModule.html" title="Abstract base class for all simulation modules." alt="" coords="59,5,129,32"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ace993d9ecc708dea28638f04e87cb031"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSensorSimulatorModule.html#ace993d9ecc708dea28638f04e87cb031">initialize</a> (<a class="el" href="structSimulationState.html">SimulationState</a> &amp;state) override</td></tr>
+<tr class="memdesc:ace993d9ecc708dea28638f04e87cb031"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize sensor parameters.  <a href="classSensorSimulatorModule.html#ace993d9ecc708dea28638f04e87cb031">More...</a><br /></td></tr>
 <tr class="separator:ace993d9ecc708dea28638f04e87cb031"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6960acc8891c14465a3ccde217cd9e78"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSensorSimulatorModule.html#a6960acc8891c14465a3ccde217cd9e78">update</a> (double dt, <a class="el" href="structSimulationState.html">SimulationState</a> &amp;state) override</td></tr>
+<tr class="memdesc:a6960acc8891c14465a3ccde217cd9e78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate simulated sensor measurements.  <a href="classSensorSimulatorModule.html#a6960acc8891c14465a3ccde217cd9e78">More...</a><br /></td></tr>
 <tr class="separator:a6960acc8891c14465a3ccde217cd9e78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classModule"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classModule')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classModule.html">Module</a></td></tr>
 <tr class="memitem:a4a48538d35a2da7fcc32d9f509034723 inherit pub_methods_classModule"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModule.html#a4a48538d35a2da7fcc32d9f509034723">~Module</a> ()=default</td></tr>
 <tr class="separator:a4a48538d35a2da7fcc32d9f509034723 inherit pub_methods_classModule"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Simulates IMU sensor measurements (gyro + accel) based on vehicle state. </p>
+<p>This module generates synthetic sensor data by transforming true vehicle state into body-frame measurements:</p>
+<p><b>Gyroscope</b>: Reads angular velocity directly from state (with unit conversion) <b>Accelerometer</b>: Transforms gravity vector into body frame using current attitude</p>
+<p>Future enhancements:</p><ul>
+<li>Add sensor noise (white noise, bias drift)</li>
+<li>Include linear acceleration terms</li>
+<li>Model sensor saturation and quantization </li>
+</ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ace993d9ecc708dea28638f04e87cb031"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ace993d9ecc708dea28638f04e87cb031">&#9670;&nbsp;</a></span>initialize()</h2>
 
@@ -143,6 +159,14 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Initialize sensor parameters. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>Reference to simulation state </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Reimplemented from <a class="el" href="classModule.html#a217a8e1c2cd1745b1419607cb1a92076">Module</a>.</p>
 
@@ -182,13 +206,26 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Generate simulated sensor measurements. </p>
+<p>Updates <a class="el" href="structSimulationState.html#a196d4bfb8d4683c265f7ca38b9a712e3">SimulationState::sensor</a> with:</p><ul>
+<li>gyro_rad_s: Angular velocity in body frame (rad/s)</li>
+<li>accel_mps2: Specific force in body frame (m/s²), including gravity</li>
+</ul>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dt</td><td>Time step (seconds) </td></tr>
+    <tr><td class="paramname">state</td><td>Reference to simulation state (reads quaternion/angular_rate, writes sensor.gyro_rad_s and sensor.accel_mps2) </td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p>Implements <a class="el" href="classModule.html#ac6bb9eb865c41df66fe428a7c17b98d3">Module</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classSensorSimulatorModule_a6960acc8891c14465a3ccde217cd9e78_cgraph.png" border="0" usemap="#aclassSensorSimulatorModule_a6960acc8891c14465a3ccde217cd9e78_cgraph" alt=""/></div>
 <map name="aclassSensorSimulatorModule_a6960acc8891c14465a3ccde217cd9e78_cgraph" id="aclassSensorSimulatorModule_a6960acc8891c14465a3ccde217cd9e78_cgraph">
-<area shape="rect" title=" " alt="" coords="5,23,183,65"/>
+<area shape="rect" title="Generate simulated sensor measurements." alt="" coords="5,23,183,65"/>
 <area shape="rect" href="attitude__utils_8h.html#af35bb275d1a55f131c558f847308bcfc" title=" " alt="" coords="249,5,323,32"/>
 <area shape="rect" href="euler_8h.html#ab7c44642cefabbc5e92862442acf03ee" title=" " alt="" coords="231,56,341,83"/>
 </map>

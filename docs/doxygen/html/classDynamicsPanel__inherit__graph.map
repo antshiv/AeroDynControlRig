@@ -1,4 +1,4 @@
 <map id="DynamicsPanel" name="DynamicsPanel">
-<area shape="rect" id="node1" title=" " alt="" coords="5,80,128,107"/>
-<area shape="rect" id="node2" href="$classPanel.html" title=" " alt="" coords="38,5,95,32"/>
+<area shape="rect" id="node1" title="UI panel for configuring and visualizing first&#45;order dynamics." alt="" coords="5,80,128,107"/>
+<area shape="rect" id="node2" href="$classPanel.html" title="Abstract base class for all UI panels." alt="" coords="38,5,95,32"/>
 </map>

@@ -1,4 +1,4 @@
 <map id="TelemetryPanel::name" name="TelemetryPanel::name">
-<area shape="rect" id="node1" title=" " alt="" coords="216,5,383,32"/>
-<area shape="rect" id="node2" href="$classTelemetryPanel.html#abe2679f505e98b764eb45e0d78d6049a" title=" " alt="" coords="5,5,168,32"/>
+<area shape="rect" id="node1" title="Get the display name of this panel." alt="" coords="216,5,383,32"/>
+<area shape="rect" id="node2" href="$classTelemetryPanel.html#abe2679f505e98b764eb45e0d78d6049a" title="Render the panel&#39;s ImGui interface." alt="" coords="5,5,168,32"/>
 </map>

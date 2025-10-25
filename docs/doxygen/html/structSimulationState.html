@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -90,57 +92,74 @@ $(document).ready(function(){initNavTree('structSimulationState.html',''); initR
 </div><!--header-->
 <div class="contents">
 
+<p>Central shared state for the entire simulation.  
+ <a href="structSimulationState.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="simulation__state_8h_source.html">simulation_state.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for SimulationState:</div>
 <div class="dyncontent">
 <div class="center"><img src="structSimulationState__coll__graph.png" border="0" usemap="#aSimulationState_coll__map" alt="Collaboration graph"/></div>
 <map name="aSimulationState_coll__map" id="aSimulationState_coll__map">
-<area shape="rect" title=" " alt="" coords="585,263,712,289"/>
-<area shape="rect" href="structSimulationState_1_1EstimatorState.html" title=" " alt="" coords="208,73,405,114"/>
+<area shape="rect" title="Central shared state for the entire simulation." alt="" coords="585,263,712,289"/>
+<area shape="rect" href="structSimulationState_1_1EstimatorState.html" title="State estimate from sensor fusion algorithm." alt="" coords="208,73,405,114"/>
 <area shape="rect" href="structEulerAngles.html" title=" " alt="" coords="5,45,104,72"/>
-<area shape="rect" href="structSimulationState_1_1SensorFrame.html" title=" " alt="" coords="197,139,416,165"/>
-<area shape="rect" href="structSimulationState_1_1DynamicsState.html" title=" " alt="" coords="207,190,406,231"/>
-<area shape="rect" href="structSimulationState_1_1DynamicsConfig.html" title=" " alt="" coords="207,255,406,297"/>
-<area shape="rect" href="structSimulationState_1_1RotorTelemetry.html" title=" " alt="" coords="189,321,424,348"/>
-<area shape="rect" href="structSimulationState_1_1SimulationControl.html" title=" " alt="" coords="205,373,409,414"/>
-<area shape="rect" href="structSimulationState_1_1PowerHistory.html" title=" " alt="" coords="196,439,417,465"/>
-<area shape="rect" href="structSimulationState_1_1RotorConfig.html" title=" " alt="" coords="201,489,412,516"/>
+<area shape="rect" href="structSimulationState_1_1SensorFrame.html" title="Simulated IMU sensor measurements." alt="" coords="197,139,416,165"/>
+<area shape="rect" href="structSimulationState_1_1DynamicsState.html" title="State variables for first&#45;order dynamics module." alt="" coords="207,190,406,231"/>
+<area shape="rect" href="structSimulationState_1_1DynamicsConfig.html" title="Configuration for first&#45;order dynamics test module." alt="" coords="207,255,406,297"/>
+<area shape="rect" href="structSimulationState_1_1RotorTelemetry.html" title="Computed rotor performance metrics." alt="" coords="189,321,424,348"/>
+<area shape="rect" href="structSimulationState_1_1SimulationControl.html" title="User&#45;controlled simulation playback parameters." alt="" coords="205,373,409,414"/>
+<area shape="rect" href="structSimulationState_1_1PowerHistory.html" title="Electrical power consumption tracking." alt="" coords="196,439,417,465"/>
+<area shape="rect" href="structSimulationState_1_1RotorConfig.html" title="Physical configuration for rotor/propeller models." alt="" coords="201,489,412,516"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1DynamicsConfig.html">DynamicsConfig</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration for first-order dynamics test module.  <a href="structSimulationState_1_1DynamicsConfig.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1DynamicsState.html">DynamicsState</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">State variables for first-order dynamics module.  <a href="structSimulationState_1_1DynamicsState.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1EstimatorState.html">EstimatorState</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">State estimate from sensor fusion algorithm.  <a href="structSimulationState_1_1EstimatorState.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1PowerHistory.html">PowerHistory</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Electrical power consumption tracking.  <a href="structSimulationState_1_1PowerHistory.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1RotorConfig.html">RotorConfig</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Physical configuration for rotor/propeller models.  <a href="structSimulationState_1_1RotorConfig.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1RotorTelemetry.html">RotorTelemetry</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computed rotor performance metrics.  <a href="structSimulationState_1_1RotorTelemetry.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1SensorFrame.html">SensorFrame</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulated IMU sensor measurements.  <a href="structSimulationState_1_1SensorFrame.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1SimulationControl.html">SimulationControl</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">User-controlled simulation playback parameters.  <a href="structSimulationState_1_1SimulationControl.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:ad15c4910aac271b463e80f987581326a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structEulerAngles.html">EulerAngles</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState.html#ad15c4910aac271b463e80f987581326a">euler</a> {0.0, 0.0, 0.0, <a class="el" href="euler_8h.html#ad0e17a21b66e37aa0aaf0cd669bb2cbca4a876418a013e89da4b5486da5767fe3">EULER_ZYX</a>}</td></tr>
+<tr class="memdesc:ad15c4910aac271b463e80f987581326a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current attitude in Euler angles (ZYX convention)  <a href="structSimulationState.html#ad15c4910aac271b463e80f987581326a">More...</a><br /></td></tr>
 <tr class="separator:ad15c4910aac271b463e80f987581326a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20e333ffdfe2eab81d5e0c9df189595d"><td class="memItemLeft" align="right" valign="top">std::array&lt; double, 4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState.html#a20e333ffdfe2eab81d5e0c9df189595d">quaternion</a> {1.0, 0.0, 0.0, 0.0}</td></tr>
+<tr class="memdesc:a20e333ffdfe2eab81d5e0c9df189595d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current attitude quaternion [w, x, y, z].  <a href="structSimulationState.html#a20e333ffdfe2eab81d5e0c9df189595d">More...</a><br /></td></tr>
 <tr class="separator:a20e333ffdfe2eab81d5e0c9df189595d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acef78e29043f3602fe7456343636eb07"><td class="memItemLeft" align="right" valign="top">glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState.html#acef78e29043f3602fe7456343636eb07">model_matrix</a> {1.0f}</td></tr>
+<tr class="memdesc:acef78e29043f3602fe7456343636eb07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Model transformation matrix for rendering.  <a href="structSimulationState.html#acef78e29043f3602fe7456343636eb07">More...</a><br /></td></tr>
 <tr class="separator:acef78e29043f3602fe7456343636eb07"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d3ee7c82a58aa775399979710170812"><td class="memItemLeft" align="right" valign="top">glm::dvec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState.html#a1d3ee7c82a58aa775399979710170812">angular_rate_deg_per_sec</a> {0.0, 0.0, 30.0}</td></tr>
+<tr class="memdesc:a1d3ee7c82a58aa775399979710170812"><td class="mdescLeft">&#160;</td><td class="mdescRight">Angular velocity (deg/s) about body axes.  <a href="structSimulationState.html#a1d3ee7c82a58aa775399979710170812">More...</a><br /></td></tr>
 <tr class="separator:a1d3ee7c82a58aa775399979710170812"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4cee76b5fa37d7373e805368a70116c6"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState.html#a4cee76b5fa37d7373e805368a70116c6">time_seconds</a> {0.0}</td></tr>
+<tr class="memdesc:a4cee76b5fa37d7373e805368a70116c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Elapsed simulation time (seconds)  <a href="structSimulationState.html#a4cee76b5fa37d7373e805368a70116c6">More...</a><br /></td></tr>
 <tr class="separator:a4cee76b5fa37d7373e805368a70116c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a868d760400e36d6edda9251ce00d0077"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState.html#a868d760400e36d6edda9251ce00d0077">last_dt</a> {0.0}</td></tr>
+<tr class="memdesc:a868d760400e36d6edda9251ce00d0077"><td class="mdescLeft">&#160;</td><td class="mdescRight">Last frame's timestep (seconds)  <a href="structSimulationState.html#a868d760400e36d6edda9251ce00d0077">More...</a><br /></td></tr>
 <tr class="separator:a868d760400e36d6edda9251ce00d0077"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a64ddac248ee5786c0c1529e7904787"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structSimulationState_1_1DynamicsConfig.html">SimulationState::DynamicsConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState.html#a2a64ddac248ee5786c0c1529e7904787">dynamics_config</a></td></tr>
 <tr class="separator:a2a64ddac248ee5786c0c1529e7904787"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -159,7 +178,15 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:aff22ad8c34d8c4eca0682d4a7bf22fe8"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structSimulationState_1_1SimulationControl.html">SimulationState::SimulationControl</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState.html#aff22ad8c34d8c4eca0682d4a7bf22fe8">control</a></td></tr>
 <tr class="separator:aff22ad8c34d8c4eca0682d4a7bf22fe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Data Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Central shared state for the entire simulation. </p>
+<p>This structure contains all simulation data, configuration, and telemetry. It is passed to all modules (for read/write) and panels (for visualization). The state is organized into nested structs for logical grouping.</p>
+<p>Key design principles:</p><ul>
+<li>Single source of truth for all simulation data</li>
+<li>Modules communicate through state (loose coupling)</li>
+<li>Panels have read/write access for interactive control </li>
+</ul>
+</div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a1d3ee7c82a58aa775399979710170812"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1d3ee7c82a58aa775399979710170812">&#9670;&nbsp;</a></span>angular_rate_deg_per_sec</h2>
 
@@ -171,6 +198,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Angular velocity (deg/s) about body axes. </p>
 
 </div>
 </div>
@@ -242,6 +271,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Current attitude in Euler angles (ZYX convention) </p>
+
 </div>
 </div>
 <a id="a868d760400e36d6edda9251ce00d0077"></a>
@@ -256,6 +287,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Last frame's timestep (seconds) </p>
+
 </div>
 </div>
 <a id="acef78e29043f3602fe7456343636eb07"></a>
@@ -269,6 +302,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Model transformation matrix for rendering. </p>
 
 </div>
 </div>
@@ -297,6 +332,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Current attitude quaternion [w, x, y, z]. </p>
 
 </div>
 </div>
@@ -353,6 +390,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Elapsed simulation time (seconds) </p>
 
 </div>
 </div>

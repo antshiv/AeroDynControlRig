@@ -2,7 +2,6 @@ var annotated_dup =
 [
     [ "ui", "namespaceui.html", [
       [ "FontSet", "structui_1_1FontSet.html", "structui_1_1FontSet" ],
-      [ "Palette", "structui_1_1Palette.html", "structui_1_1Palette" ],
       [ "CardOptions", "structui_1_1CardOptions.html", "structui_1_1CardOptions" ],
       [ "ChipConfig", "structui_1_1ChipConfig.html", "structui_1_1ChipConfig" ]
     ] ],

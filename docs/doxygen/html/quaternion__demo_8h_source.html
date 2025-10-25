@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -85,24 +87,26 @@ $(document).ready(function(){initNavTree('quaternion__demo_8h_source.html',''); 
 <div class="title">quaternion_demo.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="quaternion__demo_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef QUATERNION_DEMO_H</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define QUATERNION_DEMO_H</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="module_8h.html">core/module.h</a>&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="classQuaternionDemoModule.html">    6</a></span>&#160;<span class="keyword">class </span><a class="code" href="classQuaternionDemoModule.html">QuaternionDemoModule</a> : <span class="keyword">public</span> <a class="code" href="classModule.html">Module</a> {</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classQuaternionDemoModule.html#ad63ea1676441df198c307140bfdb6fb9">initialize</a>(<a class="code" href="structSimulationState.html">SimulationState</a>&amp; state) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classQuaternionDemoModule.html#ad7ebf21527722e8f6efb2eae537da1d0">update</a>(<span class="keywordtype">double</span> dt, <a class="code" href="structSimulationState.html">SimulationState</a>&amp; state) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;};</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// QUATERNION_DEMO_H</span></div>
-<div class="ttc" id="aclassModule_html"><div class="ttname"><a href="classModule.html">Module</a></div><div class="ttdef"><b>Definition:</b> module.h:6</div></div>
-<div class="ttc" id="aclassQuaternionDemoModule_html"><div class="ttname"><a href="classQuaternionDemoModule.html">QuaternionDemoModule</a></div><div class="ttdef"><b>Definition:</b> quaternion_demo.h:6</div></div>
-<div class="ttc" id="aclassQuaternionDemoModule_html_ad63ea1676441df198c307140bfdb6fb9"><div class="ttname"><a href="classQuaternionDemoModule.html#ad63ea1676441df198c307140bfdb6fb9">QuaternionDemoModule::initialize</a></div><div class="ttdeci">void initialize(SimulationState &amp;state) override</div><div class="ttdef"><b>Definition:</b> quaternion_demo.cpp:27</div></div>
-<div class="ttc" id="aclassQuaternionDemoModule_html_ad7ebf21527722e8f6efb2eae537da1d0"><div class="ttname"><a href="classQuaternionDemoModule.html#ad7ebf21527722e8f6efb2eae537da1d0">QuaternionDemoModule::update</a></div><div class="ttdeci">void update(double dt, SimulationState &amp;state) override</div><div class="ttdef"><b>Definition:</b> quaternion_demo.cpp:37</div></div>
-<div class="ttc" id="amodule_8h_html"><div class="ttname"><a href="module_8h.html">module.h</a></div></div>
-<div class="ttc" id="astructSimulationState_html"><div class="ttname"><a href="structSimulationState.html">SimulationState</a></div><div class="ttdef"><b>Definition:</b> simulation_state.h:8</div></div>
+<a href="quaternion__demo_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#ifndef QUATERNION_DEMO_H</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#define QUATERNION_DEMO_H</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="module_8h.html">core/module.h</a>&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classQuaternionDemoModule.html">   24</a></span>&#160;<span class="keyword">class </span><a class="code" href="classQuaternionDemoModule.html">QuaternionDemoModule</a> : <span class="keyword">public</span> <a class="code" href="classModule.html">Module</a> {</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classQuaternionDemoModule.html#ad63ea1676441df198c307140bfdb6fb9">initialize</a>(<a class="code" href="structSimulationState.html">SimulationState</a>&amp; state) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classQuaternionDemoModule.html#ad7ebf21527722e8f6efb2eae537da1d0">update</a>(<span class="keywordtype">double</span> dt, <a class="code" href="structSimulationState.html">SimulationState</a>&amp; state) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;};</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// QUATERNION_DEMO_H</span></div>
+<div class="ttc" id="aclassModule_html"><div class="ttname"><a href="classModule.html">Module</a></div><div class="ttdoc">Abstract base class for all simulation modules.</div><div class="ttdef"><b>Definition:</b> module.h:21</div></div>
+<div class="ttc" id="aclassQuaternionDemoModule_html"><div class="ttname"><a href="classQuaternionDemoModule.html">QuaternionDemoModule</a></div><div class="ttdoc">Simulates rigid body attitude dynamics using quaternion integration.</div><div class="ttdef"><b>Definition:</b> quaternion_demo.h:24</div></div>
+<div class="ttc" id="aclassQuaternionDemoModule_html_ad63ea1676441df198c307140bfdb6fb9"><div class="ttname"><a href="classQuaternionDemoModule.html#ad63ea1676441df198c307140bfdb6fb9">QuaternionDemoModule::initialize</a></div><div class="ttdeci">void initialize(SimulationState &amp;state) override</div><div class="ttdoc">Initialize the module (sets initial quaternion to identity)</div><div class="ttdef"><b>Definition:</b> quaternion_demo.cpp:27</div></div>
+<div class="ttc" id="aclassQuaternionDemoModule_html_ad7ebf21527722e8f6efb2eae537da1d0"><div class="ttname"><a href="classQuaternionDemoModule.html#ad7ebf21527722e8f6efb2eae537da1d0">QuaternionDemoModule::update</a></div><div class="ttdeci">void update(double dt, SimulationState &amp;state) override</div><div class="ttdoc">Update attitude quaternion based on angular velocity.</div><div class="ttdef"><b>Definition:</b> quaternion_demo.cpp:37</div></div>
+<div class="ttc" id="amodule_8h_html"><div class="ttname"><a href="module_8h.html">module.h</a></div><div class="ttdoc">Base interface for simulation modules in the AeroDynControlRig.</div></div>
+<div class="ttc" id="astructSimulationState_html"><div class="ttname"><a href="structSimulationState.html">SimulationState</a></div><div class="ttdoc">Central shared state for the entire simulation.</div><div class="ttdef"><b>Definition:</b> simulation_state.h:26</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

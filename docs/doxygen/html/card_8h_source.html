@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -90,37 +92,39 @@ $(document).ready(function(){initNavTree('card_8h_source.html',''); initResizabl
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;imgui.h&quot;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceui.html">ui</a> {</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="structui_1_1CardOptions.html">    8</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structui_1_1CardOptions.html">CardOptions</a> {</div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="structui_1_1CardOptions.html#a72be65a678a7b3af5389217affc7bb70">    9</a></span>&#160;    ImVec2 <a class="code" href="structui_1_1CardOptions.html#a72be65a678a7b3af5389217affc7bb70">min_size</a> = ImVec2(320.0f, 200.0f);</div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="structui_1_1CardOptions.html#a9c0ce36871e19cd9682a832e0576d07f">   10</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="structui_1_1CardOptions.html#a9c0ce36871e19cd9682a832e0576d07f">enforce_min_size</a> = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="structui_1_1CardOptions.html#ac716311d9c572ac0e6bbde6295c4bc97">   11</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="structui_1_1CardOptions.html#ac716311d9c572ac0e6bbde6295c4bc97">allow_scrollbar</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="structui_1_1CardOptions.html#ac2485e683c24f925570b8acbd53a9752">   12</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="structui_1_1CardOptions.html#ac2485e683c24f925570b8acbd53a9752">background_alpha</a> = 1.0f;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;};</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="namespaceui.html#a0053c22f687ace038e6a6625e751ac6c">BeginCard</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* <span class="keywordtype">id</span>,</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;               <span class="keyword">const</span> <a class="code" href="structui_1_1CardOptions.html">CardOptions</a>&amp; options = <a class="code" href="structui_1_1CardOptions.html">CardOptions</a>(),</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;               <span class="keywordtype">bool</span>* open = <span class="keyword">nullptr</span>,</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;               ImGuiWindowFlags flags = 0);</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespaceui.html#aab4c47f869143e855e5a9cb8b6f2cf8b">EndCard</a>();</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespaceui.html#a23857d08f2eee27af80c1607a82cfded">CardHeader</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* title,</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;                <span class="keyword">const</span> <span class="keywordtype">char</span>* badge_label = <span class="keyword">nullptr</span>,</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;                <span class="keyword">const</span> ImVec4* badge_color = <span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;}  <span class="comment">// namespace ui</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// GUI_WIDGETS_CARD_H</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceui.html">ui</a> {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="structui_1_1CardOptions.html">   53</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structui_1_1CardOptions.html">CardOptions</a> {</div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="structui_1_1CardOptions.html#a72be65a678a7b3af5389217affc7bb70">   54</a></span>&#160;    ImVec2 <a class="code" href="structui_1_1CardOptions.html#a72be65a678a7b3af5389217affc7bb70">min_size</a> = ImVec2(320.0f, 200.0f);  </div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="structui_1_1CardOptions.html#a9c0ce36871e19cd9682a832e0576d07f">   55</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="structui_1_1CardOptions.html#a9c0ce36871e19cd9682a832e0576d07f">enforce_min_size</a> = <span class="keyword">true</span>;              </div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="structui_1_1CardOptions.html#ac716311d9c572ac0e6bbde6295c4bc97">   56</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="structui_1_1CardOptions.html#ac716311d9c572ac0e6bbde6295c4bc97">allow_scrollbar</a> = <span class="keyword">false</span>;              </div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="structui_1_1CardOptions.html#ac2485e683c24f925570b8acbd53a9752">   57</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="structui_1_1CardOptions.html#ac2485e683c24f925570b8acbd53a9752">background_alpha</a> = 1.0f;             </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;};</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="group__UIWidgets.html#gae86fdebbe43a915410d1bf0c16c4cb17">BeginCard</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* <span class="keywordtype">id</span>,</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;               <span class="keyword">const</span> <a class="code" href="structui_1_1CardOptions.html">CardOptions</a>&amp; options = <a class="code" href="structui_1_1CardOptions.html">CardOptions</a>(),</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;               <span class="keywordtype">bool</span>* open = <span class="keyword">nullptr</span>,</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;               ImGuiWindowFlags flags = 0);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__UIWidgets.html#gaab4c47f869143e855e5a9cb8b6f2cf8b">EndCard</a>();</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__UIWidgets.html#ga2fb6bd477996a90c7d6373454fe6c06c">CardHeader</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* title,</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;                <span class="keyword">const</span> <span class="keywordtype">char</span>* badge_label = <span class="keyword">nullptr</span>,</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;                <span class="keyword">const</span> ImVec4* badge_color = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; <span class="comment">// end of UIWidgets group</span></div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160; </div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;}  <span class="comment">// namespace ui</span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160; </div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// GUI_WIDGETS_CARD_H</span></div>
+<div class="ttc" id="agroup__UIWidgets_html_ga2fb6bd477996a90c7d6373454fe6c06c"><div class="ttname"><a href="group__UIWidgets.html#ga2fb6bd477996a90c7d6373454fe6c06c">ui::CardHeader</a></div><div class="ttdeci">void CardHeader(const char *title, const char *badge_label, const ImVec4 *badge_color)</div><div class="ttdoc">Render a card header with optional badge.</div><div class="ttdef"><b>Definition:</b> card.cpp:52</div></div>
+<div class="ttc" id="agroup__UIWidgets_html_gaab4c47f869143e855e5a9cb8b6f2cf8b"><div class="ttname"><a href="group__UIWidgets.html#gaab4c47f869143e855e5a9cb8b6f2cf8b">ui::EndCard</a></div><div class="ttdeci">void EndCard()</div><div class="ttdoc">End a Card container (must be called after BeginCard)</div><div class="ttdef"><b>Definition:</b> card.cpp:46</div></div>
+<div class="ttc" id="agroup__UIWidgets_html_gae86fdebbe43a915410d1bf0c16c4cb17"><div class="ttname"><a href="group__UIWidgets.html#gae86fdebbe43a915410d1bf0c16c4cb17">ui::BeginCard</a></div><div class="ttdeci">bool BeginCard(const char *id, const CardOptions &amp;options, bool *open, ImGuiWindowFlags flags)</div><div class="ttdoc">Begin a Card container with consistent styling.</div><div class="ttdef"><b>Definition:</b> card.cpp:20</div></div>
 <div class="ttc" id="anamespaceui_html"><div class="ttname"><a href="namespaceui.html">ui</a></div><div class="ttdef"><b>Definition:</b> style.cpp:9</div></div>
-<div class="ttc" id="anamespaceui_html_a0053c22f687ace038e6a6625e751ac6c"><div class="ttname"><a href="namespaceui.html#a0053c22f687ace038e6a6625e751ac6c">ui::BeginCard</a></div><div class="ttdeci">bool BeginCard(const char *id, const CardOptions &amp;options, bool *open, ImGuiWindowFlags flags)</div><div class="ttdef"><b>Definition:</b> card.cpp:20</div></div>
-<div class="ttc" id="anamespaceui_html_a23857d08f2eee27af80c1607a82cfded"><div class="ttname"><a href="namespaceui.html#a23857d08f2eee27af80c1607a82cfded">ui::CardHeader</a></div><div class="ttdeci">void CardHeader(const char *title, const char *badge_label, const ImVec4 *badge_color)</div><div class="ttdef"><b>Definition:</b> card.cpp:52</div></div>
-<div class="ttc" id="anamespaceui_html_aab4c47f869143e855e5a9cb8b6f2cf8b"><div class="ttname"><a href="namespaceui.html#aab4c47f869143e855e5a9cb8b6f2cf8b">ui::EndCard</a></div><div class="ttdeci">void EndCard()</div><div class="ttdef"><b>Definition:</b> card.cpp:46</div></div>
-<div class="ttc" id="astructui_1_1CardOptions_html"><div class="ttname"><a href="structui_1_1CardOptions.html">ui::CardOptions</a></div><div class="ttdef"><b>Definition:</b> card.h:8</div></div>
-<div class="ttc" id="astructui_1_1CardOptions_html_a72be65a678a7b3af5389217affc7bb70"><div class="ttname"><a href="structui_1_1CardOptions.html#a72be65a678a7b3af5389217affc7bb70">ui::CardOptions::min_size</a></div><div class="ttdeci">ImVec2 min_size</div><div class="ttdef"><b>Definition:</b> card.h:9</div></div>
-<div class="ttc" id="astructui_1_1CardOptions_html_a9c0ce36871e19cd9682a832e0576d07f"><div class="ttname"><a href="structui_1_1CardOptions.html#a9c0ce36871e19cd9682a832e0576d07f">ui::CardOptions::enforce_min_size</a></div><div class="ttdeci">bool enforce_min_size</div><div class="ttdef"><b>Definition:</b> card.h:10</div></div>
-<div class="ttc" id="astructui_1_1CardOptions_html_ac2485e683c24f925570b8acbd53a9752"><div class="ttname"><a href="structui_1_1CardOptions.html#ac2485e683c24f925570b8acbd53a9752">ui::CardOptions::background_alpha</a></div><div class="ttdeci">float background_alpha</div><div class="ttdef"><b>Definition:</b> card.h:12</div></div>
-<div class="ttc" id="astructui_1_1CardOptions_html_ac716311d9c572ac0e6bbde6295c4bc97"><div class="ttname"><a href="structui_1_1CardOptions.html#ac716311d9c572ac0e6bbde6295c4bc97">ui::CardOptions::allow_scrollbar</a></div><div class="ttdeci">bool allow_scrollbar</div><div class="ttdef"><b>Definition:</b> card.h:11</div></div>
+<div class="ttc" id="astructui_1_1CardOptions_html"><div class="ttname"><a href="structui_1_1CardOptions.html">ui::CardOptions</a></div><div class="ttdoc">Configuration options for Card widget.</div><div class="ttdef"><b>Definition:</b> card.h:53</div></div>
+<div class="ttc" id="astructui_1_1CardOptions_html_a72be65a678a7b3af5389217affc7bb70"><div class="ttname"><a href="structui_1_1CardOptions.html#a72be65a678a7b3af5389217affc7bb70">ui::CardOptions::min_size</a></div><div class="ttdeci">ImVec2 min_size</div><div class="ttdoc">Minimum card dimensions (CSS: min-width, min-height)</div><div class="ttdef"><b>Definition:</b> card.h:54</div></div>
+<div class="ttc" id="astructui_1_1CardOptions_html_a9c0ce36871e19cd9682a832e0576d07f"><div class="ttname"><a href="structui_1_1CardOptions.html#a9c0ce36871e19cd9682a832e0576d07f">ui::CardOptions::enforce_min_size</a></div><div class="ttdeci">bool enforce_min_size</div><div class="ttdoc">Whether to constrain size (default: yes)</div><div class="ttdef"><b>Definition:</b> card.h:55</div></div>
+<div class="ttc" id="astructui_1_1CardOptions_html_ac2485e683c24f925570b8acbd53a9752"><div class="ttname"><a href="structui_1_1CardOptions.html#ac2485e683c24f925570b8acbd53a9752">ui::CardOptions::background_alpha</a></div><div class="ttdeci">float background_alpha</div><div class="ttdoc">Background opacity (0.0 = transparent, 1.0 = opaque)</div><div class="ttdef"><b>Definition:</b> card.h:57</div></div>
+<div class="ttc" id="astructui_1_1CardOptions_html_ac716311d9c572ac0e6bbde6295c4bc97"><div class="ttname"><a href="structui_1_1CardOptions.html#ac716311d9c572ac0e6bbde6295c4bc97">ui::CardOptions::allow_scrollbar</a></div><div class="ttdeci">bool allow_scrollbar</div><div class="ttdoc">Enable scrolling for overflow content.</div><div class="ttdef"><b>Definition:</b> card.h:56</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

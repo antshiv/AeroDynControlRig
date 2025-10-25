@@ -1,4 +1,4 @@
 <map id="ComplementaryEstimatorModule::initialize" name="ComplementaryEstimatorModule::initialize">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,244,47"/>
+<area shape="rect" id="node1" title="Initialize estimator to identity quaternion with zero bias." alt="" coords="5,5,244,47"/>
 <area shape="rect" id="node2" href="$quaternion_8h.html#a3ba94d91921f3b30c3de90a19e7099ee" title=" " alt="" coords="292,13,444,39"/>
 </map>

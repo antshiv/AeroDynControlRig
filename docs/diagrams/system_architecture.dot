@@ -1,0 +1,100 @@
+/**
+ * @file system_architecture.dot
+ * @brief Main system architecture diagram
+ */
+
+digraph SystemArchitecture {
+    rankdir=TB;
+    node [shape=box, style="rounded,filled", fillcolor=lightblue, fontname="Arial"];
+    edge [fontname="Arial"];
+
+    // Main application
+    app [label="Application\n(Main Orchestrator)", fillcolor=lightgreen, shape=box3d];
+
+    // GLFW and OpenGL
+    glfw [label="GLFW Window\n+ OpenGL Context", fillcolor=lightyellow];
+
+    // State
+    state [label="SimulationState\n(Shared Data)", fillcolor=lightcoral];
+
+    // Modules
+    subgraph cluster_modules {
+        label="Simulation Modules";
+        style=filled;
+        fillcolor=lightgray;
+
+        quat [label="QuaternionDemo\n(Attitude)"];
+        sensor [label="SensorSimulator\n(IMU)"];
+        est [label="ComplementaryEstimator\n(Fusion)"];
+        rotor [label="RotorTelemetry\n(Thrust/Power)"];
+        dyn [label="FirstOrderDynamics\n(Test System)"];
+    }
+
+    // Rendering
+    subgraph cluster_render {
+        label="Rendering System";
+        style=filled;
+        fillcolor=lightcyan;
+
+        renderer [label="Renderer\n(3D Scene)"];
+        axis [label="AxisRenderer\n(Gizmo)"];
+        camera [label="Camera\n(View Control)"];
+    }
+
+    // UI
+    subgraph cluster_ui {
+        label="UI System (ImGui)";
+        style=filled;
+        fillcolor=lavender;
+
+        panelMgr [label="PanelManager"];
+        ctrl [label="ControlPanel"];
+        telem [label="TelemetryPanel"];
+        dynPanel [label="DynamicsPanel"];
+        estPanel [label="EstimatorPanel"];
+        rotorPanel [label="RotorPanel"];
+        sensorPanel [label="SensorPanel"];
+        powerPanel [label="PowerPanel"];
+    }
+
+    // Connections
+    app -> glfw [label="creates"];
+    app -> state [label="owns"];
+    app -> quat [label="owns"];
+    app -> sensor [label="owns"];
+    app -> est [label="owns"];
+    app -> rotor [label="owns"];
+    app -> dyn [label="owns"];
+    app -> renderer [label="owns"];
+    app -> axis [label="owns"];
+    app -> camera [label="owns"];
+    app -> panelMgr [label="owns"];
+
+    // Modules read/write state
+    quat -> state [label="updates", style=bold, color=blue];
+    sensor -> state [label="updates", style=bold, color=blue];
+    est -> state [label="updates", style=bold, color=blue];
+    rotor -> state [label="updates", style=bold, color=blue];
+    dyn -> state [label="updates", style=bold, color=blue];
+
+    // Rendering uses state
+    renderer -> state [label="reads", style=dashed, color=green];
+    camera -> renderer [label="provides view"];
+
+    // UI reads state
+    panelMgr -> ctrl;
+    panelMgr -> telem;
+    panelMgr -> dynPanel;
+    panelMgr -> estPanel;
+    panelMgr -> rotorPanel;
+    panelMgr -> sensorPanel;
+    panelMgr -> powerPanel;
+
+    telem -> state [label="reads", style=dashed, color=green];
+    ctrl -> state [label="reads/writes", style=dotted, color=red];
+    dynPanel -> state [label="reads", style=dashed, color=green];
+    estPanel -> state [label="reads", style=dashed, color=green];
+    rotorPanel -> state [label="reads", style=dashed, color=green];
+    sensorPanel -> state [label="reads", style=dashed, color=green];
+    powerPanel -> state [label="reads", style=dashed, color=green];
+}

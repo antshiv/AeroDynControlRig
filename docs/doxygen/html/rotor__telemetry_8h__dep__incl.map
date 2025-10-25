@@ -1,5 +1,5 @@
 <map id="src/modules/rotor_telemetry.h" name="src/modules/rotor_telemetry.h">
-<area shape="rect" id="node1" title=" " alt="" coords="96,5,313,32"/>
+<area shape="rect" id="node1" title="Quadcopter rotor performance calculation module." alt="" coords="96,5,313,32"/>
 <area shape="rect" id="node2" href="$application_8cpp.html" title=" " alt="" coords="5,80,177,107"/>
 <area shape="rect" id="node3" href="$rotor__telemetry_8cpp.html" title=" " alt="" coords="202,80,434,107"/>
 </map>

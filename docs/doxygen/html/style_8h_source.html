@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -96,81 +98,135 @@ $(document).ready(function(){initNavTree('style_8h_source.html',''); initResizab
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">struct </span>ImGuiIO;</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">struct </span>ImGuiStyle;</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceui.html">ui</a> {</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="structui_1_1FontSet.html">   14</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structui_1_1FontSet.html">FontSet</a> {</div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="structui_1_1FontSet.html#ae55a8b9cef412ca2b3bd57e5a7641d72">   15</a></span>&#160;    ImFont* <a class="code" href="structui_1_1FontSet.html#ae55a8b9cef412ca2b3bd57e5a7641d72">body</a> = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="structui_1_1FontSet.html#ad8f9610f75ae20c3166b43631e46da3a">   16</a></span>&#160;    ImFont* <a class="code" href="structui_1_1FontSet.html#ad8f9610f75ae20c3166b43631e46da3a">heading</a> = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="structui_1_1FontSet.html#a70b40d183844cf198bc11477a7fbd2f4">   17</a></span>&#160;    ImFont* <a class="code" href="structui_1_1FontSet.html#a70b40d183844cf198bc11477a7fbd2f4">mono</a> = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="structui_1_1FontSet.html#ad3f6d92d8b767b73cfd83cd50216cfe7">   18</a></span>&#160;    ImFont* <a class="code" href="structui_1_1FontSet.html#ad3f6d92d8b767b73cfd83cd50216cfe7">icon</a> = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;};</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="structui_1_1Palette.html">   21</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structui_1_1Palette.html">Palette</a> {</div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="structui_1_1Palette.html#aaf9af73167077f91b149c58878d7f466">   22</a></span>&#160;    ImVec4 <a class="code" href="structui_1_1Palette.html#aaf9af73167077f91b149c58878d7f466">canvas_bg</a>;</div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="structui_1_1Palette.html#a7df9bac98d6f81bbc70779e7534dc30b">   23</a></span>&#160;    ImVec4 <a class="code" href="structui_1_1Palette.html#a7df9bac98d6f81bbc70779e7534dc30b">card_bg</a>;</div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="structui_1_1Palette.html#a73b422c9c175f477dcdfb13df3913603">   24</a></span>&#160;    ImVec4 <a class="code" href="structui_1_1Palette.html#a73b422c9c175f477dcdfb13df3913603">card_border</a>;</div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="structui_1_1Palette.html#a5a2e99779f623893b14d0b89a8c2509d">   25</a></span>&#160;    ImVec4 <a class="code" href="structui_1_1Palette.html#a5a2e99779f623893b14d0b89a8c2509d">card_header</a>;</div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="structui_1_1Palette.html#acafd068ad8fe8ddc450c26414e4ad2c2">   26</a></span>&#160;    ImVec4 <a class="code" href="structui_1_1Palette.html#acafd068ad8fe8ddc450c26414e4ad2c2">slate_base</a>;</div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="structui_1_1Palette.html#ab626f37aa78bd33411ece40208148f6c">   27</a></span>&#160;    ImVec4 <a class="code" href="structui_1_1Palette.html#ab626f37aa78bd33411ece40208148f6c">slate_hover</a>;</div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="structui_1_1Palette.html#ae0f91bfcb641e7ca1ab71e48463a4bea">   28</a></span>&#160;    ImVec4 <a class="code" href="structui_1_1Palette.html#ae0f91bfcb641e7ca1ab71e48463a4bea">slate_active</a>;</div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="structui_1_1Palette.html#a1e6a6b14381fbcfafb32f942558fc90e">   29</a></span>&#160;    ImVec4 <a class="code" href="structui_1_1Palette.html#a1e6a6b14381fbcfafb32f942558fc90e">accent_base</a>;</div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="structui_1_1Palette.html#a6dcfeb04766e310ede35c81f18be86dd">   30</a></span>&#160;    ImVec4 <a class="code" href="structui_1_1Palette.html#a6dcfeb04766e310ede35c81f18be86dd">accent_hover</a>;</div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="structui_1_1Palette.html#a0f5dd0d4cd30a7174a458e2e9d0c7e0c">   31</a></span>&#160;    ImVec4 <a class="code" href="structui_1_1Palette.html#a0f5dd0d4cd30a7174a458e2e9d0c7e0c">accent_active</a>;</div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="structui_1_1Palette.html#a0c4905ea1f963daa4a6da51e1a4d6fab">   32</a></span>&#160;    ImVec4 <a class="code" href="structui_1_1Palette.html#a0c4905ea1f963daa4a6da51e1a4d6fab">text_primary</a>;</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="structui_1_1Palette.html#a76e362f3a440a98c3e9114806ec55f52">   33</a></span>&#160;    ImVec4 <a class="code" href="structui_1_1Palette.html#a76e362f3a440a98c3e9114806ec55f52">text_muted</a>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="structui_1_1Palette.html#a5586e47f0b78c8eaf4f3e52ba85b0bfe">   34</a></span>&#160;    ImVec4 <a class="code" href="structui_1_1Palette.html#a5586e47f0b78c8eaf4f3e52ba85b0bfe">success</a>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="structui_1_1Palette.html#a1d6e9951f349d4267a8e929184b80ac2">   35</a></span>&#160;    ImVec4 <a class="code" href="structui_1_1Palette.html#a1d6e9951f349d4267a8e929184b80ac2">warning</a>;</div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="structui_1_1Palette.html#abb98f92f8ab6491236b49b3b32e72d66">   36</a></span>&#160;    ImVec4 <a class="code" href="structui_1_1Palette.html#abb98f92f8ab6491236b49b3b32e72d66">danger</a>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;};</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespaceui.html#a5e215a312253a017263135e8e9b2fde8">ApplyTheme</a>(ImGuiStyle&amp; style);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="namespaceui.html#a48a441cbee5cba22b870ab29be0356d2">LoadFonts</a>(ImGuiIO&amp; io, std::string_view font_directory = <span class="stringliteral">&quot;assets/fonts&quot;</span>);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">const</span> <a class="code" href="structui_1_1FontSet.html">FontSet</a>&amp; <a class="code" href="namespaceui.html#a27aa4868ffcd17787cc35f7e24a0c616">Fonts</a>();</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">const</span> <a class="code" href="structui_1_1Palette.html">Palette</a>&amp; <a class="code" href="namespaceui.html#a447c8573ad59f48165a527a06c94fb62">Colors</a>();</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="namespaceui.html#a24ddf4dd600de0636aab1b92be79ed76">   45</a></span>&#160;<span class="keyword">enum class</span> <a class="code" href="namespaceui.html#a24ddf4dd600de0636aab1b92be79ed76">PillStyle</a> {</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="namespaceui.html#a24ddf4dd600de0636aab1b92be79ed76a074de7e7c226d5c60f8af14c20725352">Primary</a>,</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <a class="code" href="namespaceui.html#a24ddf4dd600de0636aab1b92be79ed76a0c7d6cf19426e01dcfa32434828ed266">Secondary</a></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;};</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespaceui.html#ad4204ae9873b183dca2479b338348718">PushPillButtonStyle</a>(<a class="code" href="namespaceui.html#a24ddf4dd600de0636aab1b92be79ed76">PillStyle</a> style);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespaceui.html#aa8a07e2928ca42077565025599baf0f2">PopPillButtonStyle</a>();</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;}  <span class="comment">// namespace ui</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// GUI_STYLE_H</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceui.html">ui</a> {</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="structui_1_1FontSet.html">   88</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structui_1_1FontSet.html">FontSet</a> {</div>
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="structui_1_1FontSet.html#ae55a8b9cef412ca2b3bd57e5a7641d72">   89</a></span>&#160;    ImFont* <a class="code" href="structui_1_1FontSet.html#ae55a8b9cef412ca2b3bd57e5a7641d72">body</a> = <span class="keyword">nullptr</span>;     </div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="structui_1_1FontSet.html#ad8f9610f75ae20c3166b43631e46da3a">   90</a></span>&#160;    ImFont* <a class="code" href="structui_1_1FontSet.html#ad8f9610f75ae20c3166b43631e46da3a">heading</a> = <span class="keyword">nullptr</span>;  </div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="structui_1_1FontSet.html#a70b40d183844cf198bc11477a7fbd2f4">   91</a></span>&#160;    ImFont* <a class="code" href="structui_1_1FontSet.html#a70b40d183844cf198bc11477a7fbd2f4">mono</a> = <span class="keyword">nullptr</span>;     </div>
+<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="structui_1_1FontSet.html#ad3f6d92d8b767b73cfd83cd50216cfe7">   92</a></span>&#160;    ImFont* <a class="code" href="structui_1_1FontSet.html#ad3f6d92d8b767b73cfd83cd50216cfe7">icon</a> = <span class="keyword">nullptr</span>;     </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;};</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; *   --canvas-bg: #0c1014;   <span class="comment">// Dark canvas</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; *   --card-bg: #111618;     <span class="comment">// Card background</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; *   --card-border: #293640; <span class="comment">// Card borders</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; *   --card-header: #182025; <span class="comment">// Header background</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; *</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; *   <span class="comment">/* Interactive (slate) */</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; *   --slate-base: #283339;   <span class="comment">// Default button/input</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; *   --slate-hover: #303d42;  <span class="comment">// Hover state</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; *   --slate-active: #213037; <span class="comment">// Active/pressed state</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; *</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; *   <span class="comment">/* Accent (primary blue) */</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; *   --accent-base: #1193d4;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; *   --accent-hover: #16a4e5;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; *   --accent-active: #0c78bb;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; *</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; *   <span class="comment">/* Text */</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; *   --text-primary: #dceef8; <span class="comment">// High contrast</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; *   --text-muted: #98aeb9;   <span class="comment">// Lower contrast</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; *</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; *   <span class="comment">/* Semantic */</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; *   --success: #39c26e; <span class="comment">// Green</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; *   --warning: #f6bf3d; <span class="comment">// Yellow</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; *   --danger: #f05446;  <span class="comment">// Red</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; * }</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; * <span class="keyword">@end</span>code</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; *</div>
+<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="group__UITheme.html#ga5e70b3ddaa84506b36b9627c808613f6">  128</a></span>&#160; * **Color <a class="code" href="group__UITheme.html#ga5e70b3ddaa84506b36b9627c808613f6">Format</a>:**</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; * - ImVec4 stores <a class="code" href="group__UITheme.html#ga1effd4ee9b329a5cb4acaa058eccfe1f">RGBA</a> as floats (0.0-1.0 range)</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; * - Example: `#1193d4` = `ImVec4(0.066, 0.576, 0.831, 1.0)`</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; * - Alpha channel always 1.0 (fully opaque) unless transparency needed</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; *</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; * **Usage:**</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; * @code{.cpp}</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; * <span class="keyword">const</span> ui::Palette&amp; palette = <a class="code" href="namespaceui.html#ab3d0346c22a3101df28246449a445ebf">ui::Colors</a>();</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; *</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; * <span class="comment">// Apply text color</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; * ImGui::PushStyleColor(ImGuiCol_Text, palette.text_muted);</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; * ImGui::TextUnformatted(<span class="stringliteral">&quot;Label&quot;</span>);</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; * ImGui::PopStyleColor();</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; *</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160; * <span class="comment">// Draw custom colored rectangle</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno"><a class="line" href="group__UITheme.html#gac200124cba8a07d2d724325d999604c7">  143</a></span>&#160; * ImDrawList* <a class="code" href="group__UITheme.html#gac200124cba8a07d2d724325d999604c7">draw_list</a> = ImGui::GetWindowDrawList();</div>
+<div class="line"><a name="l00144"></a><span class="lineno"><a class="line" href="group__UITheme.html#ga6c3ed043c5ee3378cda1949823b515e8">  144</a></span>&#160; * <a class="code" href="group__UITheme.html#gac200124cba8a07d2d724325d999604c7">draw_list</a>-&gt;AddRectFilled(min, max, ImGui::ColorConvertFloat4ToU32(palette.success));</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; * <span class="keyword">@end</span>code</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; *</div>
+<div class="line"><a name="l00147"></a><span class="lineno"><a class="line" href="group__UITheme.html#ga4f10a85129ed124086cb5f1f84faf361">  147</a></span>&#160; * **Hardware <a class="code" href="group__UITheme.html#ga4f10a85129ed124086cb5f1f84faf361">Path</a>:**</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; * When you use a color:</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; * 1. CPU reads color from palette (RAM, likely in L1 cache)</div>
+<div class="line"><a name="l00150"></a><span class="lineno"><a class="line" href="group__UITheme.html#ga1effd4ee9b329a5cb4acaa058eccfe1f">  150</a></span>&#160; * 2. CPU converts to 32-bit <a class="code" href="group__UITheme.html#ga1effd4ee9b329a5cb4acaa058eccfe1f">RGBA</a> (bit packing)</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; * 3. Color sent to GPU as vertex attribute or uniform</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; * 4. GPU fragment shader outputs color to framebuffer (VRAM)</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; */</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="keyword">struct </span>Palette {</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <span class="comment">// Background colors</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    ImVec4 canvas_bg;    </div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    ImVec4 card_bg;      </div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    ImVec4 card_border;  </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    ImVec4 card_header;  </div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <span class="comment">// Interactive element colors (slate = neutral)</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    ImVec4 slate_base;   </div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    ImVec4 slate_hover;  </div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    ImVec4 slate_active; </div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <span class="comment">// Accent colors (blue = primary action)</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    ImVec4 accent_base;   </div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    ImVec4 accent_hover;  </div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    ImVec4 accent_active; </div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    <span class="comment">// Text colors</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    ImVec4 text_primary; </div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    ImVec4 text_muted;   </div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    <span class="comment">// Semantic colors (status indication)</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    ImVec4 success; </div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    ImVec4 warning; </div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    ImVec4 danger;  </div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;};</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
+<div class="line"><a name="l00220"></a><span class="lineno"><a class="line" href="group__UITheme.html#ga4e42cd6e394eed69963da09ccf989c02">  220</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__UITheme.html#ga4e42cd6e394eed69963da09ccf989c02">ApplyTheme</a>(ImGuiStyle&amp; style);</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; </div>
+<div class="line"><a name="l00262"></a><span class="lineno"><a class="line" href="group__UITheme.html#ga937c7fd8bf3958395a41b778183f9acf">  262</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="group__UITheme.html#ga937c7fd8bf3958395a41b778183f9acf">LoadFonts</a>(ImGuiIO&amp; io, std::string_view font_directory = <span class="stringliteral">&quot;assets/fonts&quot;</span>);</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160; </div>
+<div class="line"><a name="l00279"></a><span class="lineno"><a class="line" href="group__UITheme.html#ga1873303e53afe443c0c3359865e299de">  279</a></span>&#160;<span class="keyword">const</span> FontSet&amp; <a class="code" href="group__UITheme.html#ga1873303e53afe443c0c3359865e299de">Fonts</a>();</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160; </div>
+<div class="line"><a name="l00297"></a><span class="lineno"><a class="line" href="group__UITheme.html#ga131add7019df35f2ca232f2340ec9af0">  297</a></span>&#160;<span class="keyword">const</span> Palette&amp; <a class="code" href="group__UITheme.html#ga131add7019df35f2ca232f2340ec9af0">Colors</a>();</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160; </div>
+<div class="line"><a name="l00308"></a><span class="lineno"><a class="line" href="group__UITheme.html#ga0bae71602d651fd19347a1205cbed6e6">  308</a></span>&#160;<span class="keyword">enum class</span> <a class="code" href="group__UITheme.html#ga0bae71602d651fd19347a1205cbed6e6">PillStyle</a> {</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    <a class="code" href="group__UITheme.html#gga0bae71602d651fd19347a1205cbed6e6a074de7e7c226d5c60f8af14c20725352">Primary</a>,   </div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    <a class="code" href="group__UITheme.html#gga0bae71602d651fd19347a1205cbed6e6a0c7d6cf19426e01dcfa32434828ed266">Secondary</a>  </div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;};</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160; </div>
+<div class="line"><a name="l00350"></a><span class="lineno"><a class="line" href="group__UITheme.html#ga5bf8f4b674ca2801be29fd1774c43a13">  350</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__UITheme.html#ga5bf8f4b674ca2801be29fd1774c43a13">PushPillButtonStyle</a>(<a class="code" href="group__UITheme.html#ga0bae71602d651fd19347a1205cbed6e6">PillStyle</a> style);</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160; </div>
+<div class="line"><a name="l00361"></a><span class="lineno"><a class="line" href="group__UITheme.html#ga6a78924148543b108677d6d0c66f9862">  361</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__UITheme.html#ga6a78924148543b108677d6d0c66f9862">PopPillButtonStyle</a>();</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160; <span class="comment">// end of UITheme group</span></div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160; </div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;}  <span class="comment">// namespace ui</span></div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160; </div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// GUI_STYLE_H</span></div>
+<div class="ttc" id="agroup__UITheme_html_ga0bae71602d651fd19347a1205cbed6e6"><div class="ttname"><a href="group__UITheme.html#ga0bae71602d651fd19347a1205cbed6e6">PillStyle</a></div><div class="ttdeci">PillStyle</div><div class="ttdoc">Button style variants (like Bootstrap button classes)</div><div class="ttdef"><b>Definition:</b> style.h:308</div></div>
+<div class="ttc" id="agroup__UITheme_html_ga131add7019df35f2ca232f2340ec9af0"><div class="ttname"><a href="group__UITheme.html#ga131add7019df35f2ca232f2340ec9af0">Colors</a></div><div class="ttdeci">const Palette &amp; Colors()</div><div class="ttdoc">Get global color palette.</div></div>
+<div class="ttc" id="agroup__UITheme_html_ga1873303e53afe443c0c3359865e299de"><div class="ttname"><a href="group__UITheme.html#ga1873303e53afe443c0c3359865e299de">Fonts</a></div><div class="ttdeci">const FontSet &amp; Fonts()</div><div class="ttdoc">Get global font set.</div></div>
+<div class="ttc" id="agroup__UITheme_html_ga1effd4ee9b329a5cb4acaa058eccfe1f"><div class="ttname"><a href="group__UITheme.html#ga1effd4ee9b329a5cb4acaa058eccfe1f">RGBA</a></div><div class="ttdeci">*endcode ****Hardware likely in L1 cache *CPU converts to bit RGBA(bit packing) *3. Color sent to GPU as vertex attribute or uniform *4. GPU fragment shader outputs color to framebuffer(VRAM) */struct Palette</div><div class="ttdef"><b>Definition:</b> style.h:150</div></div>
+<div class="ttc" id="agroup__UITheme_html_ga4e42cd6e394eed69963da09ccf989c02"><div class="ttname"><a href="group__UITheme.html#ga4e42cd6e394eed69963da09ccf989c02">ApplyTheme</a></div><div class="ttdeci">void ApplyTheme(ImGuiStyle &amp;style)</div><div class="ttdoc">Apply global theme to ImGui style.</div></div>
+<div class="ttc" id="agroup__UITheme_html_ga4f10a85129ed124086cb5f1f84faf361"><div class="ttname"><a href="group__UITheme.html#ga4f10a85129ed124086cb5f1f84faf361">Path</a></div><div class="ttdeci">*endcode ****Hardware Path</div><div class="ttdef"><b>Definition:</b> style.h:149</div></div>
+<div class="ttc" id="agroup__UITheme_html_ga5bf8f4b674ca2801be29fd1774c43a13"><div class="ttname"><a href="group__UITheme.html#ga5bf8f4b674ca2801be29fd1774c43a13">PushPillButtonStyle</a></div><div class="ttdeci">void PushPillButtonStyle(PillStyle style)</div><div class="ttdoc">Push pill button styling onto ImGui stack.</div></div>
+<div class="ttc" id="agroup__UITheme_html_ga5e70b3ddaa84506b36b9627c808613f6"><div class="ttname"><a href="group__UITheme.html#ga5e70b3ddaa84506b36b9627c808613f6">Format</a></div><div class="ttdeci">*endcode ****Color Format</div><div class="ttdef"><b>Definition:</b> style.h:130</div></div>
+<div class="ttc" id="agroup__UITheme_html_ga6a78924148543b108677d6d0c66f9862"><div class="ttname"><a href="group__UITheme.html#ga6a78924148543b108677d6d0c66f9862">PopPillButtonStyle</a></div><div class="ttdeci">void PopPillButtonStyle()</div><div class="ttdoc">Pop pill button styling from ImGui stack.</div></div>
+<div class="ttc" id="agroup__UITheme_html_ga937c7fd8bf3958395a41b778183f9acf"><div class="ttname"><a href="group__UITheme.html#ga937c7fd8bf3958395a41b778183f9acf">LoadFonts</a></div><div class="ttdeci">bool LoadFonts(ImGuiIO &amp;io, std::string_view font_directory=&quot;assets/fonts&quot;)</div><div class="ttdoc">Load custom fonts from TTF files.</div></div>
+<div class="ttc" id="agroup__UITheme_html_gac200124cba8a07d2d724325d999604c7"><div class="ttname"><a href="group__UITheme.html#gac200124cba8a07d2d724325d999604c7">draw_list</a></div><div class="ttdeci">***ImDrawList * draw_list</div><div class="ttdef"><b>Definition:</b> style.h:143</div></div>
+<div class="ttc" id="agroup__UITheme_html_gga0bae71602d651fd19347a1205cbed6e6a074de7e7c226d5c60f8af14c20725352"><div class="ttname"><a href="group__UITheme.html#gga0bae71602d651fd19347a1205cbed6e6a074de7e7c226d5c60f8af14c20725352">PillStyle::Primary</a></div><div class="ttdeci">@ Primary</div><div class="ttdoc">Accent color (blue) - primary action.</div></div>
+<div class="ttc" id="agroup__UITheme_html_gga0bae71602d651fd19347a1205cbed6e6a0c7d6cf19426e01dcfa32434828ed266"><div class="ttname"><a href="group__UITheme.html#gga0bae71602d651fd19347a1205cbed6e6a0c7d6cf19426e01dcfa32434828ed266">PillStyle::Secondary</a></div><div class="ttdeci">@ Secondary</div><div class="ttdoc">Slate color (gray) - secondary action.</div></div>
 <div class="ttc" id="anamespaceui_html"><div class="ttname"><a href="namespaceui.html">ui</a></div><div class="ttdef"><b>Definition:</b> style.cpp:9</div></div>
-<div class="ttc" id="anamespaceui_html_a24ddf4dd600de0636aab1b92be79ed76"><div class="ttname"><a href="namespaceui.html#a24ddf4dd600de0636aab1b92be79ed76">ui::PillStyle</a></div><div class="ttdeci">PillStyle</div><div class="ttdef"><b>Definition:</b> style.h:45</div></div>
-<div class="ttc" id="anamespaceui_html_a24ddf4dd600de0636aab1b92be79ed76a074de7e7c226d5c60f8af14c20725352"><div class="ttname"><a href="namespaceui.html#a24ddf4dd600de0636aab1b92be79ed76a074de7e7c226d5c60f8af14c20725352">ui::PillStyle::Primary</a></div><div class="ttdeci">@ Primary</div></div>
-<div class="ttc" id="anamespaceui_html_a24ddf4dd600de0636aab1b92be79ed76a0c7d6cf19426e01dcfa32434828ed266"><div class="ttname"><a href="namespaceui.html#a24ddf4dd600de0636aab1b92be79ed76a0c7d6cf19426e01dcfa32434828ed266">ui::PillStyle::Secondary</a></div><div class="ttdeci">@ Secondary</div></div>
-<div class="ttc" id="anamespaceui_html_a27aa4868ffcd17787cc35f7e24a0c616"><div class="ttname"><a href="namespaceui.html#a27aa4868ffcd17787cc35f7e24a0c616">ui::Fonts</a></div><div class="ttdeci">const FontSet &amp; Fonts()</div><div class="ttdef"><b>Definition:</b> style.cpp:169</div></div>
-<div class="ttc" id="anamespaceui_html_a447c8573ad59f48165a527a06c94fb62"><div class="ttname"><a href="namespaceui.html#a447c8573ad59f48165a527a06c94fb62">ui::Colors</a></div><div class="ttdeci">const Palette &amp; Colors()</div><div class="ttdef"><b>Definition:</b> style.cpp:173</div></div>
-<div class="ttc" id="anamespaceui_html_a48a441cbee5cba22b870ab29be0356d2"><div class="ttname"><a href="namespaceui.html#a48a441cbee5cba22b870ab29be0356d2">ui::LoadFonts</a></div><div class="ttdeci">bool LoadFonts(ImGuiIO &amp;io, std::string_view font_directory)</div><div class="ttdef"><b>Definition:</b> style.cpp:127</div></div>
-<div class="ttc" id="anamespaceui_html_a5e215a312253a017263135e8e9b2fde8"><div class="ttname"><a href="namespaceui.html#a5e215a312253a017263135e8e9b2fde8">ui::ApplyTheme</a></div><div class="ttdeci">void ApplyTheme(ImGuiStyle &amp;style)</div><div class="ttdef"><b>Definition:</b> style.cpp:71</div></div>
-<div class="ttc" id="anamespaceui_html_aa8a07e2928ca42077565025599baf0f2"><div class="ttname"><a href="namespaceui.html#aa8a07e2928ca42077565025599baf0f2">ui::PopPillButtonStyle</a></div><div class="ttdeci">void PopPillButtonStyle()</div><div class="ttdef"><b>Definition:</b> style.cpp:204</div></div>
-<div class="ttc" id="anamespaceui_html_ad4204ae9873b183dca2479b338348718"><div class="ttname"><a href="namespaceui.html#ad4204ae9873b183dca2479b338348718">ui::PushPillButtonStyle</a></div><div class="ttdeci">void PushPillButtonStyle(PillStyle style)</div><div class="ttdef"><b>Definition:</b> style.cpp:177</div></div>
-<div class="ttc" id="astructui_1_1FontSet_html"><div class="ttname"><a href="structui_1_1FontSet.html">ui::FontSet</a></div><div class="ttdef"><b>Definition:</b> style.h:14</div></div>
-<div class="ttc" id="astructui_1_1FontSet_html_a70b40d183844cf198bc11477a7fbd2f4"><div class="ttname"><a href="structui_1_1FontSet.html#a70b40d183844cf198bc11477a7fbd2f4">ui::FontSet::mono</a></div><div class="ttdeci">ImFont * mono</div><div class="ttdef"><b>Definition:</b> style.h:17</div></div>
-<div class="ttc" id="astructui_1_1FontSet_html_ad3f6d92d8b767b73cfd83cd50216cfe7"><div class="ttname"><a href="structui_1_1FontSet.html#ad3f6d92d8b767b73cfd83cd50216cfe7">ui::FontSet::icon</a></div><div class="ttdeci">ImFont * icon</div><div class="ttdef"><b>Definition:</b> style.h:18</div></div>
-<div class="ttc" id="astructui_1_1FontSet_html_ad8f9610f75ae20c3166b43631e46da3a"><div class="ttname"><a href="structui_1_1FontSet.html#ad8f9610f75ae20c3166b43631e46da3a">ui::FontSet::heading</a></div><div class="ttdeci">ImFont * heading</div><div class="ttdef"><b>Definition:</b> style.h:16</div></div>
-<div class="ttc" id="astructui_1_1FontSet_html_ae55a8b9cef412ca2b3bd57e5a7641d72"><div class="ttname"><a href="structui_1_1FontSet.html#ae55a8b9cef412ca2b3bd57e5a7641d72">ui::FontSet::body</a></div><div class="ttdeci">ImFont * body</div><div class="ttdef"><b>Definition:</b> style.h:15</div></div>
-<div class="ttc" id="astructui_1_1Palette_html"><div class="ttname"><a href="structui_1_1Palette.html">ui::Palette</a></div><div class="ttdef"><b>Definition:</b> style.h:21</div></div>
-<div class="ttc" id="astructui_1_1Palette_html_a0c4905ea1f963daa4a6da51e1a4d6fab"><div class="ttname"><a href="structui_1_1Palette.html#a0c4905ea1f963daa4a6da51e1a4d6fab">ui::Palette::text_primary</a></div><div class="ttdeci">ImVec4 text_primary</div><div class="ttdef"><b>Definition:</b> style.h:32</div></div>
-<div class="ttc" id="astructui_1_1Palette_html_a0f5dd0d4cd30a7174a458e2e9d0c7e0c"><div class="ttname"><a href="structui_1_1Palette.html#a0f5dd0d4cd30a7174a458e2e9d0c7e0c">ui::Palette::accent_active</a></div><div class="ttdeci">ImVec4 accent_active</div><div class="ttdef"><b>Definition:</b> style.h:31</div></div>
-<div class="ttc" id="astructui_1_1Palette_html_a1d6e9951f349d4267a8e929184b80ac2"><div class="ttname"><a href="structui_1_1Palette.html#a1d6e9951f349d4267a8e929184b80ac2">ui::Palette::warning</a></div><div class="ttdeci">ImVec4 warning</div><div class="ttdef"><b>Definition:</b> style.h:35</div></div>
-<div class="ttc" id="astructui_1_1Palette_html_a1e6a6b14381fbcfafb32f942558fc90e"><div class="ttname"><a href="structui_1_1Palette.html#a1e6a6b14381fbcfafb32f942558fc90e">ui::Palette::accent_base</a></div><div class="ttdeci">ImVec4 accent_base</div><div class="ttdef"><b>Definition:</b> style.h:29</div></div>
-<div class="ttc" id="astructui_1_1Palette_html_a5586e47f0b78c8eaf4f3e52ba85b0bfe"><div class="ttname"><a href="structui_1_1Palette.html#a5586e47f0b78c8eaf4f3e52ba85b0bfe">ui::Palette::success</a></div><div class="ttdeci">ImVec4 success</div><div class="ttdef"><b>Definition:</b> style.h:34</div></div>
-<div class="ttc" id="astructui_1_1Palette_html_a5a2e99779f623893b14d0b89a8c2509d"><div class="ttname"><a href="structui_1_1Palette.html#a5a2e99779f623893b14d0b89a8c2509d">ui::Palette::card_header</a></div><div class="ttdeci">ImVec4 card_header</div><div class="ttdef"><b>Definition:</b> style.h:25</div></div>
-<div class="ttc" id="astructui_1_1Palette_html_a6dcfeb04766e310ede35c81f18be86dd"><div class="ttname"><a href="structui_1_1Palette.html#a6dcfeb04766e310ede35c81f18be86dd">ui::Palette::accent_hover</a></div><div class="ttdeci">ImVec4 accent_hover</div><div class="ttdef"><b>Definition:</b> style.h:30</div></div>
-<div class="ttc" id="astructui_1_1Palette_html_a73b422c9c175f477dcdfb13df3913603"><div class="ttname"><a href="structui_1_1Palette.html#a73b422c9c175f477dcdfb13df3913603">ui::Palette::card_border</a></div><div class="ttdeci">ImVec4 card_border</div><div class="ttdef"><b>Definition:</b> style.h:24</div></div>
-<div class="ttc" id="astructui_1_1Palette_html_a76e362f3a440a98c3e9114806ec55f52"><div class="ttname"><a href="structui_1_1Palette.html#a76e362f3a440a98c3e9114806ec55f52">ui::Palette::text_muted</a></div><div class="ttdeci">ImVec4 text_muted</div><div class="ttdef"><b>Definition:</b> style.h:33</div></div>
-<div class="ttc" id="astructui_1_1Palette_html_a7df9bac98d6f81bbc70779e7534dc30b"><div class="ttname"><a href="structui_1_1Palette.html#a7df9bac98d6f81bbc70779e7534dc30b">ui::Palette::card_bg</a></div><div class="ttdeci">ImVec4 card_bg</div><div class="ttdef"><b>Definition:</b> style.h:23</div></div>
-<div class="ttc" id="astructui_1_1Palette_html_aaf9af73167077f91b149c58878d7f466"><div class="ttname"><a href="structui_1_1Palette.html#aaf9af73167077f91b149c58878d7f466">ui::Palette::canvas_bg</a></div><div class="ttdeci">ImVec4 canvas_bg</div><div class="ttdef"><b>Definition:</b> style.h:22</div></div>
-<div class="ttc" id="astructui_1_1Palette_html_ab626f37aa78bd33411ece40208148f6c"><div class="ttname"><a href="structui_1_1Palette.html#ab626f37aa78bd33411ece40208148f6c">ui::Palette::slate_hover</a></div><div class="ttdeci">ImVec4 slate_hover</div><div class="ttdef"><b>Definition:</b> style.h:27</div></div>
-<div class="ttc" id="astructui_1_1Palette_html_abb98f92f8ab6491236b49b3b32e72d66"><div class="ttname"><a href="structui_1_1Palette.html#abb98f92f8ab6491236b49b3b32e72d66">ui::Palette::danger</a></div><div class="ttdeci">ImVec4 danger</div><div class="ttdef"><b>Definition:</b> style.h:36</div></div>
-<div class="ttc" id="astructui_1_1Palette_html_acafd068ad8fe8ddc450c26414e4ad2c2"><div class="ttname"><a href="structui_1_1Palette.html#acafd068ad8fe8ddc450c26414e4ad2c2">ui::Palette::slate_base</a></div><div class="ttdeci">ImVec4 slate_base</div><div class="ttdef"><b>Definition:</b> style.h:26</div></div>
-<div class="ttc" id="astructui_1_1Palette_html_ae0f91bfcb641e7ca1ab71e48463a4bea"><div class="ttname"><a href="structui_1_1Palette.html#ae0f91bfcb641e7ca1ab71e48463a4bea">ui::Palette::slate_active</a></div><div class="ttdeci">ImVec4 slate_active</div><div class="ttdef"><b>Definition:</b> style.h:28</div></div>
+<div class="ttc" id="anamespaceui_html_ab3d0346c22a3101df28246449a445ebf"><div class="ttname"><a href="namespaceui.html#ab3d0346c22a3101df28246449a445ebf">ui::Colors</a></div><div class="ttdeci">const Palette &amp; Colors()</div><div class="ttdef"><b>Definition:</b> style.cpp:173</div></div>
+<div class="ttc" id="astructui_1_1FontSet_html"><div class="ttname"><a href="structui_1_1FontSet.html">ui::FontSet</a></div><div class="ttdoc">Typography system (font families and sizes)</div><div class="ttdef"><b>Definition:</b> style.h:88</div></div>
+<div class="ttc" id="astructui_1_1FontSet_html_a70b40d183844cf198bc11477a7fbd2f4"><div class="ttname"><a href="structui_1_1FontSet.html#a70b40d183844cf198bc11477a7fbd2f4">ui::FontSet::mono</a></div><div class="ttdeci">ImFont * mono</div><div class="ttdoc">17px SpaceGrotesk-Medium (for numeric data)</div><div class="ttdef"><b>Definition:</b> style.h:91</div></div>
+<div class="ttc" id="astructui_1_1FontSet_html_ad3f6d92d8b767b73cfd83cd50216cfe7"><div class="ttname"><a href="structui_1_1FontSet.html#ad3f6d92d8b767b73cfd83cd50216cfe7">ui::FontSet::icon</a></div><div class="ttdeci">ImFont * icon</div><div class="ttdoc">20px MaterialSymbolsRounded (icon glyphs)</div><div class="ttdef"><b>Definition:</b> style.h:92</div></div>
+<div class="ttc" id="astructui_1_1FontSet_html_ad8f9610f75ae20c3166b43631e46da3a"><div class="ttname"><a href="structui_1_1FontSet.html#ad8f9610f75ae20c3166b43631e46da3a">ui::FontSet::heading</a></div><div class="ttdeci">ImFont * heading</div><div class="ttdoc">22px SpaceGrotesk-SemiBold (for titles)</div><div class="ttdef"><b>Definition:</b> style.h:90</div></div>
+<div class="ttc" id="astructui_1_1FontSet_html_ae55a8b9cef412ca2b3bd57e5a7641d72"><div class="ttname"><a href="structui_1_1FontSet.html#ae55a8b9cef412ca2b3bd57e5a7641d72">ui::FontSet::body</a></div><div class="ttdeci">ImFont * body</div><div class="ttdoc">18px SpaceGrotesk-Regular (default font)</div><div class="ttdef"><b>Definition:</b> style.h:89</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

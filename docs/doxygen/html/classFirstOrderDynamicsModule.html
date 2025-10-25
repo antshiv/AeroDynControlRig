@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -89,14 +91,17 @@ $(document).ready(function(){initNavTree('classFirstOrderDynamicsModule.html',''
 </div><!--header-->
 <div class="contents">
 
+<p>Simulates a simple first-order linear time-invariant (LTI) system.  
+ <a href="classFirstOrderDynamicsModule.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="first__order__dynamics_8h_source.html">first_order_dynamics.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for FirstOrderDynamicsModule:</div>
 <div class="dyncontent">
 <div class="center"><img src="classFirstOrderDynamicsModule__inherit__graph.png" border="0" usemap="#aFirstOrderDynamicsModule_inherit__map" alt="Inheritance graph"/></div>
 <map name="aFirstOrderDynamicsModule_inherit__map" id="aFirstOrderDynamicsModule_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,80,204,107"/>
-<area shape="rect" href="classModule.html" title=" " alt="" coords="69,5,140,32"/>
+<area shape="rect" title="Simulates a simple first&#45;order linear time&#45;invariant (LTI) system." alt="" coords="5,80,204,107"/>
+<area shape="rect" href="classModule.html" title="Abstract base class for all simulation modules." alt="" coords="69,5,140,32"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -104,22 +109,42 @@ Collaboration diagram for FirstOrderDynamicsModule:</div>
 <div class="dyncontent">
 <div class="center"><img src="classFirstOrderDynamicsModule__coll__graph.png" border="0" usemap="#aFirstOrderDynamicsModule_coll__map" alt="Collaboration graph"/></div>
 <map name="aFirstOrderDynamicsModule_coll__map" id="aFirstOrderDynamicsModule_coll__map">
-<area shape="rect" title=" " alt="" coords="5,80,204,107"/>
-<area shape="rect" href="classModule.html" title=" " alt="" coords="69,5,140,32"/>
+<area shape="rect" title="Simulates a simple first&#45;order linear time&#45;invariant (LTI) system." alt="" coords="5,80,204,107"/>
+<area shape="rect" href="classModule.html" title="Abstract base class for all simulation modules." alt="" coords="69,5,140,32"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:af656e1c877ebe6715daf657b233091a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFirstOrderDynamicsModule.html#af656e1c877ebe6715daf657b233091a0">initialize</a> (<a class="el" href="structSimulationState.html">SimulationState</a> &amp;state) override</td></tr>
+<tr class="memdesc:af656e1c877ebe6715daf657b233091a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize internal state to zero.  <a href="classFirstOrderDynamicsModule.html#af656e1c877ebe6715daf657b233091a0">More...</a><br /></td></tr>
 <tr class="separator:af656e1c877ebe6715daf657b233091a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f8a2e9ddc4375885d92d5a50da73233"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFirstOrderDynamicsModule.html#a4f8a2e9ddc4375885d92d5a50da73233">update</a> (double dt, <a class="el" href="structSimulationState.html">SimulationState</a> &amp;state) override</td></tr>
+<tr class="memdesc:a4f8a2e9ddc4375885d92d5a50da73233"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update first-order dynamics state.  <a href="classFirstOrderDynamicsModule.html#a4f8a2e9ddc4375885d92d5a50da73233">More...</a><br /></td></tr>
 <tr class="separator:a4f8a2e9ddc4375885d92d5a50da73233"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classModule"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classModule')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classModule.html">Module</a></td></tr>
 <tr class="memitem:a4a48538d35a2da7fcc32d9f509034723 inherit pub_methods_classModule"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModule.html#a4a48538d35a2da7fcc32d9f509034723">~Module</a> ()=default</td></tr>
 <tr class="separator:a4a48538d35a2da7fcc32d9f509034723 inherit pub_methods_classModule"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Simulates a simple first-order linear time-invariant (LTI) system. </p>
+<p>This module provides a test platform for control algorithm development. It implements the transfer function:</p>
+<p>G(s) = K / (τs + 1)</p>
+<p>Where:</p><ul>
+<li>K = gain (output/input ratio at steady state)</li>
+<li>τ = time constant (seconds to reach 63.2% of final value)</li>
+</ul>
+<p><b>State-space form</b>: dx/dt = (1/τ) * (K*u - x) y = x</p>
+<p>Input modes:</p><ul>
+<li>Constant: Fixed target value</li>
+<li>Sinusoidal: Frequency-swept input for Bode analysis</li>
+</ul>
+<p>Useful for:</p><ul>
+<li>Testing PID controllers</li>
+<li>Verifying numerical integration</li>
+<li>Demonstrating basic control concepts </li>
+</ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="af656e1c877ebe6715daf657b233091a0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af656e1c877ebe6715daf657b233091a0">&#9670;&nbsp;</a></span>initialize()</h2>
 
@@ -143,6 +168,14 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Initialize internal state to zero. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>Reference to simulation state </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Reimplemented from <a class="el" href="classModule.html#a217a8e1c2cd1745b1419607cb1a92076">Module</a>.</p>
 
@@ -181,6 +214,16 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Update first-order dynamics state. </p>
+<p>Integrates the differential equation using Euler method. Reads config from <a class="el" href="structSimulationState.html#a2a64ddac248ee5786c0c1529e7904787">SimulationState::dynamics_config</a> and writes output to <a class="el" href="structSimulationState.html#a16f3f8bb6df5c6b4180d6aeb4f14f84d">SimulationState::dynamics_state</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dt</td><td>Time step (seconds) </td></tr>
+    <tr><td class="paramname">state</td><td>Reference to simulation state (reads dynamics_config, writes dynamics_state) </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Implements <a class="el" href="classModule.html#ac6bb9eb865c41df66fe428a7c17b98d3">Module</a>.</p>
 

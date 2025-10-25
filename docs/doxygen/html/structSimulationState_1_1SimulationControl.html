@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -89,20 +91,32 @@ $(document).ready(function(){initNavTree('structSimulationState_1_1SimulationCon
 </div><!--header-->
 <div class="contents">
 
+<p>User-controlled simulation playback parameters.  
+ <a href="structSimulationState_1_1SimulationControl.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="simulation__state_8h_source.html">simulation_state.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:aa12b4ff18fde97ee1efa2c3048e00c90"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1SimulationControl.html#aa12b4ff18fde97ee1efa2c3048e00c90">paused</a> {false}</td></tr>
+<tr class="memdesc:aa12b4ff18fde97ee1efa2c3048e00c90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pause simulation updates.  <a href="structSimulationState_1_1SimulationControl.html#aa12b4ff18fde97ee1efa2c3048e00c90">More...</a><br /></td></tr>
 <tr class="separator:aa12b4ff18fde97ee1efa2c3048e00c90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2abe9d386b9810570d7601c85cd1c21"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1SimulationControl.html#ad2abe9d386b9810570d7601c85cd1c21">use_legacy_ui</a> {false}</td></tr>
+<tr class="memdesc:ad2abe9d386b9810570d7601c85cd1c21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Toggle between legacy and dashboard layouts.  <a href="structSimulationState_1_1SimulationControl.html#ad2abe9d386b9810570d7601c85cd1c21">More...</a><br /></td></tr>
+<tr class="separator:ad2abe9d386b9810570d7601c85cd1c21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abfee3fbb74e2fbf35a5ce513c49fac95"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1SimulationControl.html#abfee3fbb74e2fbf35a5ce513c49fac95">use_fixed_dt</a> {false}</td></tr>
+<tr class="memdesc:abfee3fbb74e2fbf35a5ce513c49fac95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use fixed timestep instead of real-time.  <a href="structSimulationState_1_1SimulationControl.html#abfee3fbb74e2fbf35a5ce513c49fac95">More...</a><br /></td></tr>
 <tr class="separator:abfee3fbb74e2fbf35a5ce513c49fac95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b77ed0268a4bf54066341dd372eeb4b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1SimulationControl.html#a6b77ed0268a4bf54066341dd372eeb4b">fixed_dt</a> {0.01}</td></tr>
+<tr class="memdesc:a6b77ed0268a4bf54066341dd372eeb4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fixed timestep value (seconds)  <a href="structSimulationState_1_1SimulationControl.html#a6b77ed0268a4bf54066341dd372eeb4b">More...</a><br /></td></tr>
 <tr class="separator:a6b77ed0268a4bf54066341dd372eeb4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58982a6333aafd7e628ec0a1260adaad"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1SimulationControl.html#a58982a6333aafd7e628ec0a1260adaad">time_scale</a> {1.0}</td></tr>
+<tr class="memdesc:a58982a6333aafd7e628ec0a1260adaad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulation speed multiplier.  <a href="structSimulationState_1_1SimulationControl.html#a58982a6333aafd7e628ec0a1260adaad">More...</a><br /></td></tr>
 <tr class="separator:a58982a6333aafd7e628ec0a1260adaad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Data Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>User-controlled simulation playback parameters. </p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a6b77ed0268a4bf54066341dd372eeb4b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6b77ed0268a4bf54066341dd372eeb4b">&#9670;&nbsp;</a></span>fixed_dt</h2>
 
@@ -114,6 +128,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Fixed timestep value (seconds) </p>
 
 </div>
 </div>
@@ -129,6 +145,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Pause simulation updates. </p>
+
 </div>
 </div>
 <a id="a58982a6333aafd7e628ec0a1260adaad"></a>
@@ -143,6 +161,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Simulation speed multiplier. </p>
+
 </div>
 </div>
 <a id="abfee3fbb74e2fbf35a5ce513c49fac95"></a>
@@ -156,6 +176,24 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Use fixed timestep instead of real-time. </p>
+
+</div>
+</div>
+<a id="ad2abe9d386b9810570d7601c85cd1c21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2abe9d386b9810570d7601c85cd1c21">&#9670;&nbsp;</a></span>use_legacy_ui</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SimulationState::SimulationControl::use_legacy_ui {false}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Toggle between legacy and dashboard layouts. </p>
 
 </div>
 </div>

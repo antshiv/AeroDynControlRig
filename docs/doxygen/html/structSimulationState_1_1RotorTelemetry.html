@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -89,22 +91,32 @@ $(document).ready(function(){initNavTree('structSimulationState_1_1RotorTelemetr
 </div><!--header-->
 <div class="contents">
 
+<p>Computed rotor performance metrics.  
+ <a href="structSimulationState_1_1RotorTelemetry.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="simulation__state_8h_source.html">simulation_state.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a4c4f76c0c8e65e295ebe33daf31cb560"><td class="memItemLeft" align="right" valign="top">std::array&lt; double, 4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1RotorTelemetry.html#a4c4f76c0c8e65e295ebe33daf31cb560">rpm</a> {0.0, 0.0, 0.0, 0.0}</td></tr>
+<tr class="memdesc:a4c4f76c0c8e65e295ebe33daf31cb560"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotor speeds (RPM)  <a href="structSimulationState_1_1RotorTelemetry.html#a4c4f76c0c8e65e295ebe33daf31cb560">More...</a><br /></td></tr>
 <tr class="separator:a4c4f76c0c8e65e295ebe33daf31cb560"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6dc1dfde74bdc86f0731d61dd1260ee8"><td class="memItemLeft" align="right" valign="top">std::array&lt; double, 4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1RotorTelemetry.html#a6dc1dfde74bdc86f0731d61dd1260ee8">thrust_newton</a> {0.0, 0.0, 0.0, 0.0}</td></tr>
+<tr class="memdesc:a6dc1dfde74bdc86f0731d61dd1260ee8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Individual thrust per rotor (N)  <a href="structSimulationState_1_1RotorTelemetry.html#a6dc1dfde74bdc86f0731d61dd1260ee8">More...</a><br /></td></tr>
 <tr class="separator:a6dc1dfde74bdc86f0731d61dd1260ee8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5d4b903a1ffec6892106b08337f11af"><td class="memItemLeft" align="right" valign="top">std::array&lt; double, 4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1RotorTelemetry.html#ab5d4b903a1ffec6892106b08337f11af">torque_newton_metre</a> {0.0, 0.0, 0.0, 0.0}</td></tr>
+<tr class="memdesc:ab5d4b903a1ffec6892106b08337f11af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Individual torque per rotor (N·m)  <a href="structSimulationState_1_1RotorTelemetry.html#ab5d4b903a1ffec6892106b08337f11af">More...</a><br /></td></tr>
 <tr class="separator:ab5d4b903a1ffec6892106b08337f11af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a990995626f1f92655b5c318f979f3099"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1RotorTelemetry.html#a990995626f1f92655b5c318f979f3099">total_thrust_newton</a> {0.0}</td></tr>
+<tr class="memdesc:a990995626f1f92655b5c318f979f3099"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sum of all rotor thrust (N)  <a href="structSimulationState_1_1RotorTelemetry.html#a990995626f1f92655b5c318f979f3099">More...</a><br /></td></tr>
 <tr class="separator:a990995626f1f92655b5c318f979f3099"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5512f4d77583b87fd15942131404776"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1RotorTelemetry.html#aa5512f4d77583b87fd15942131404776">total_power_watt</a> {0.0}</td></tr>
+<tr class="memdesc:aa5512f4d77583b87fd15942131404776"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total electrical power consumption (W)  <a href="structSimulationState_1_1RotorTelemetry.html#aa5512f4d77583b87fd15942131404776">More...</a><br /></td></tr>
 <tr class="separator:aa5512f4d77583b87fd15942131404776"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Data Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Computed rotor performance metrics. </p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a4c4f76c0c8e65e295ebe33daf31cb560"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4c4f76c0c8e65e295ebe33daf31cb560">&#9670;&nbsp;</a></span>rpm</h2>
 
@@ -116,6 +128,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Rotor speeds (RPM) </p>
 
 </div>
 </div>
@@ -131,6 +145,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Individual thrust per rotor (N) </p>
+
 </div>
 </div>
 <a id="ab5d4b903a1ffec6892106b08337f11af"></a>
@@ -144,6 +160,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Individual torque per rotor (N·m) </p>
 
 </div>
 </div>
@@ -159,6 +177,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Total electrical power consumption (W) </p>
+
 </div>
 </div>
 <a id="a990995626f1f92655b5c318f979f3099"></a>
@@ -172,6 +192,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Sum of all rotor thrust (N) </p>
 
 </div>
 </div>

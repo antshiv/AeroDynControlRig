@@ -1,4 +1,4 @@
 <map id="euler_to_quaternion" name="euler_to_quaternion">
 <area shape="rect" id="node1" title=" " alt="" coords="235,13,387,39"/>
-<area shape="rect" id="node2" href="$classQuaternionDemoModule.html#ad7ebf21527722e8f6efb2eae537da1d0" title=" " alt="" coords="5,5,187,47"/>
+<area shape="rect" id="node2" href="$classQuaternionDemoModule.html#ad7ebf21527722e8f6efb2eae537da1d0" title="Update attitude quaternion based on angular velocity." alt="" coords="5,5,187,47"/>
 </map>

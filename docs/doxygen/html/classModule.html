@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -89,18 +91,21 @@ $(document).ready(function(){initNavTree('classModule.html',''); initResizable()
 </div><!--header-->
 <div class="contents">
 
+<p>Abstract base class for all simulation modules.  
+ <a href="classModule.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="module_8h_source.html">module.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Module:</div>
 <div class="dyncontent">
 <div class="center"><img src="classModule__inherit__graph.png" border="0" usemap="#aModule_inherit__map" alt="Inheritance graph"/></div>
 <map name="aModule_inherit__map" id="aModule_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,107,76,133"/>
-<area shape="rect" href="classComplementaryEstimatorModule.html" title=" " alt="" coords="124,5,363,32"/>
-<area shape="rect" href="classFirstOrderDynamicsModule.html" title=" " alt="" coords="144,56,343,83"/>
-<area shape="rect" href="classQuaternionDemoModule.html" title=" " alt="" coords="153,107,334,133"/>
-<area shape="rect" href="classRotorTelemetryModule.html" title=" " alt="" coords="158,157,329,184"/>
-<area shape="rect" href="classSensorSimulatorModule.html" title=" " alt="" coords="155,208,332,235"/>
+<area shape="rect" title="Abstract base class for all simulation modules." alt="" coords="5,107,76,133"/>
+<area shape="rect" href="classComplementaryEstimatorModule.html" title="Estimates attitude using a complementary filter fusing gyro and accel." alt="" coords="124,5,363,32"/>
+<area shape="rect" href="classFirstOrderDynamicsModule.html" title="Simulates a simple first&#45;order linear time&#45;invariant (LTI) system." alt="" coords="144,56,343,83"/>
+<area shape="rect" href="classQuaternionDemoModule.html" title="Simulates rigid body attitude dynamics using quaternion integration." alt="" coords="153,107,334,133"/>
+<area shape="rect" href="classRotorTelemetryModule.html" title="Computes rotor thrust, torque, and power from RPM measurements." alt="" coords="158,157,329,184"/>
+<area shape="rect" href="classSensorSimulatorModule.html" title="Simulates IMU sensor measurements (gyro + accel) based on vehicle state." alt="" coords="155,208,332,235"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -109,11 +114,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4a48538d35a2da7fcc32d9f509034723"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModule.html#a4a48538d35a2da7fcc32d9f509034723">~Module</a> ()=default</td></tr>
 <tr class="separator:a4a48538d35a2da7fcc32d9f509034723"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a217a8e1c2cd1745b1419607cb1a92076"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModule.html#a217a8e1c2cd1745b1419607cb1a92076">initialize</a> (<a class="el" href="structSimulationState.html">SimulationState</a> &amp;state)</td></tr>
+<tr class="memdesc:a217a8e1c2cd1745b1419607cb1a92076"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the module with the current simulation state.  <a href="classModule.html#a217a8e1c2cd1745b1419607cb1a92076">More...</a><br /></td></tr>
 <tr class="separator:a217a8e1c2cd1745b1419607cb1a92076"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6bb9eb865c41df66fe428a7c17b98d3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModule.html#ac6bb9eb865c41df66fe428a7c17b98d3">update</a> (double dt, <a class="el" href="structSimulationState.html">SimulationState</a> &amp;state)=0</td></tr>
+<tr class="memdesc:ac6bb9eb865c41df66fe428a7c17b98d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the module for one simulation timestep.  <a href="classModule.html#ac6bb9eb865c41df66fe428a7c17b98d3">More...</a><br /></td></tr>
 <tr class="separator:ac6bb9eb865c41df66fe428a7c17b98d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Abstract base class for all simulation modules. </p>
+<p>Modules encapsulate discrete simulation components (dynamics, sensors, estimators, etc.) and operate on the shared <a class="el" href="structSimulationState.html" title="Central shared state for the entire simulation.">SimulationState</a>. Each module is initialized once and updated each simulation tick.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="structSimulationState.html" title="Central shared state for the entire simulation.">SimulationState</a> </dd></dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a4a48538d35a2da7fcc32d9f509034723"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4a48538d35a2da7fcc32d9f509034723">&#9670;&nbsp;</a></span>~Module()</h2>
 
@@ -164,6 +175,15 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Initialize the module with the current simulation state. </p>
+<p>Called once during application startup. Override to set initial values in the simulation state or prepare internal resources.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>Reference to the shared simulation state </td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p>Reimplemented in <a class="el" href="classSensorSimulatorModule.html#ace993d9ecc708dea28638f04e87cb031">SensorSimulatorModule</a>, <a class="el" href="classRotorTelemetryModule.html#ae980c57fb18c5ae7fe1db6130fb326d9">RotorTelemetryModule</a>, <a class="el" href="classQuaternionDemoModule.html#ad63ea1676441df198c307140bfdb6fb9">QuaternionDemoModule</a>, <a class="el" href="classFirstOrderDynamicsModule.html#af656e1c877ebe6715daf657b233091a0">FirstOrderDynamicsModule</a>, and <a class="el" href="classComplementaryEstimatorModule.html#ac5ed8e8e6884ff510753b154a2e1d9b5">ComplementaryEstimatorModule</a>.</p>
 
 </div>
@@ -201,6 +221,16 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Update the module for one simulation timestep. </p>
+<p>Called every frame (or simulation tick) to advance the module's state. Implement module-specific physics, algorithms, or state transitions here.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dt</td><td>Time elapsed since last update (seconds) </td></tr>
+    <tr><td class="paramname">state</td><td>Reference to the shared simulation state (read/write) </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Implemented in <a class="el" href="classSensorSimulatorModule.html#a6960acc8891c14465a3ccde217cd9e78">SensorSimulatorModule</a>, <a class="el" href="classRotorTelemetryModule.html#a12889773b6366279d8f503e5efe25311">RotorTelemetryModule</a>, <a class="el" href="classQuaternionDemoModule.html#ad7ebf21527722e8f6efb2eae537da1d0">QuaternionDemoModule</a>, <a class="el" href="classFirstOrderDynamicsModule.html#a4f8a2e9ddc4375885d92d5a50da73233">FirstOrderDynamicsModule</a>, and <a class="el" href="classComplementaryEstimatorModule.html#ae3ba8369b0453cceb8252296387cf1b9">ComplementaryEstimatorModule</a>.</p>
 

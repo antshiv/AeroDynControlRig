@@ -1,4 +1,4 @@
 <map id="FirstOrderDynamicsModule" name="FirstOrderDynamicsModule">
-<area shape="rect" id="node1" title=" " alt="" coords="5,80,204,107"/>
-<area shape="rect" id="node2" href="$classModule.html" title=" " alt="" coords="69,5,140,32"/>
+<area shape="rect" id="node1" title="Simulates a simple first&#45;order linear time&#45;invariant (LTI) system." alt="" coords="5,80,204,107"/>
+<area shape="rect" id="node2" href="$classModule.html" title="Abstract base class for all simulation modules." alt="" coords="69,5,140,32"/>
 </map>

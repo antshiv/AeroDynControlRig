@@ -1,4 +1,4 @@
 <map id="src/gui/panel.h" name="src/gui/panel.h">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,123,32"/>
+<area shape="rect" id="node1" title="Base interface for ImGui UI panels in the AeroDynControlRig." alt="" coords="5,5,123,32"/>
 <area shape="rect" id="node2" title=" " alt="" coords="35,80,93,107"/>
 </map>

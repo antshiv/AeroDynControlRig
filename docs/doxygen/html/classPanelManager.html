@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -89,16 +91,37 @@ $(document).ready(function(){initNavTree('classPanelManager.html',''); initResiz
 </div><!--header-->
 <div class="contents">
 
+<p>Manages registration and rendering of all UI panels.  
+ <a href="classPanelManager.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="panel__manager_8h_source.html">panel_manager.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a750c3149501b22f4a28951514c75b833"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPanelManager.html#a750c3149501b22f4a28951514c75b833">registerPanel</a> (std::unique_ptr&lt; <a class="el" href="classPanel.html">Panel</a> &gt; panel)</td></tr>
+<tr class="memdesc:a750c3149501b22f4a28951514c75b833"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a panel for rendering.  <a href="classPanelManager.html#a750c3149501b22f4a28951514c75b833">More...</a><br /></td></tr>
 <tr class="separator:a750c3149501b22f4a28951514c75b833"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:accbb2906139bed93e60a3b7390c43e90"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPanelManager.html#accbb2906139bed93e60a3b7390c43e90">drawAll</a> (<a class="el" href="structSimulationState.html">SimulationState</a> &amp;state, <a class="el" href="classCamera.html">Camera</a> &amp;camera)</td></tr>
+<tr class="memdesc:accbb2906139bed93e60a3b7390c43e90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Render all registered panels.  <a href="classPanelManager.html#accbb2906139bed93e60a3b7390c43e90">More...</a><br /></td></tr>
 <tr class="separator:accbb2906139bed93e60a3b7390c43e90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Manages registration and rendering of all UI panels. </p>
+<p>The <a class="el" href="classPanelManager.html" title="Manages registration and rendering of all UI panels.">PanelManager</a> acts as a central registry for all ImGui panels in the application. It:</p><ul>
+<li>Stores unique_ptr ownership of all panels</li>
+<li>Iterates through panels and calls draw() each frame</li>
+<li>Provides a single point of control for UI rendering</li>
+</ul>
+<p><b>Usage</b>:</p><ol type="1">
+<li>Register panels during initialization: <code>registerPanel(std::make_unique&lt;MyPanel&gt;())</code></li>
+<li>Call <code><a class="el" href="classPanelManager.html#accbb2906139bed93e60a3b7390c43e90" title="Render all registered panels.">drawAll()</a></code> each frame to render all registered panels</li>
+</ol>
+<p><b>Design</b>:</p><ul>
+<li>Panels are stored in registration order</li>
+<li>Each panel is responsible for creating its own ImGui window</li>
+<li><a class="el" href="classPanelManager.html" title="Manages registration and rendering of all UI panels.">PanelManager</a> does not manage window layout (handled by ImGui docking) </li>
+</ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="accbb2906139bed93e60a3b7390c43e90"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#accbb2906139bed93e60a3b7390c43e90">&#9670;&nbsp;</a></span>drawAll()</h2>
 
@@ -124,17 +147,16 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classPanelManager_accbb2906139bed93e60a3b7390c43e90_icgraph.png" border="0" usemap="#aclassPanelManager_accbb2906139bed93e60a3b7390c43e90_icgraph" alt=""/></div>
-<map name="aclassPanelManager_accbb2906139bed93e60a3b7390c43e90_icgraph" id="aclassPanelManager_accbb2906139bed93e60a3b7390c43e90_icgraph">
-<area shape="rect" title=" " alt="" coords="493,5,664,32"/>
-<area shape="rect" href="classApplication.html#a4e7a520d659593b385b246a43e604dfb" title=" " alt="" coords="283,5,445,32"/>
-<area shape="rect" href="classApplication.html#af44c742342adf5305e430ff293f147c1" title=" " alt="" coords="108,5,235,32"/>
-<area shape="rect" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
-</map>
-</div>
+
+<p>Render all registered panels. </p>
+<p>Calls draw() on each panel in registration order.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>Reference to simulation state (passed to panels) </td></tr>
+    <tr><td class="paramname">camera</td><td>Reference to camera (passed to panels) </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -153,6 +175,15 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Register a panel for rendering. </p>
+<p>Takes ownership of the panel via unique_ptr.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">panel</td><td>Unique pointer to a Panel-derived instance </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

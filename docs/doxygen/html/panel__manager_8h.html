@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -87,6 +89,9 @@ $(document).ready(function(){initNavTree('panel__manager_8h.html',''); initResiz
 <div class="title">panel_manager.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Registry and orchestrator for ImGui UI panels.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;memory&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 <code>#include &quot;<a class="el" href="panel_8h_source.html">gui/panel.h</a>&quot;</code><br />
@@ -95,10 +100,10 @@ Include dependency graph for panel_manager.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="panel__manager_8h__incl.png" border="0" usemap="#asrc_2gui_2panel__manager_8h" alt=""/></div>
 <map name="asrc_2gui_2panel__manager_8h" id="asrc_2gui_2panel__manager_8h">
-<area shape="rect" title=" " alt="" coords="48,5,229,32"/>
+<area shape="rect" title="Registry and orchestrator for ImGui UI panels." alt="" coords="48,5,229,32"/>
 <area shape="rect" title=" " alt="" coords="5,80,83,107"/>
 <area shape="rect" title=" " alt="" coords="107,80,170,107"/>
-<area shape="rect" href="panel_8h.html" title=" " alt="" coords="194,80,289,107"/>
+<area shape="rect" href="panel_8h.html" title="Base interface for ImGui UI panels in the AeroDynControlRig." alt="" coords="194,80,289,107"/>
 <area shape="rect" title=" " alt="" coords="212,155,271,181"/>
 </map>
 </div>
@@ -107,9 +112,9 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="panel__manager_8h__dep__incl.png" border="0" usemap="#asrc_2gui_2panel__manager_8hdep" alt=""/></div>
 <map name="asrc_2gui_2panel__manager_8hdep" id="asrc_2gui_2panel__manager_8hdep">
-<area shape="rect" title=" " alt="" coords="117,5,298,32"/>
+<area shape="rect" title="Registry and orchestrator for ImGui UI panels." alt="" coords="117,5,298,32"/>
 <area shape="rect" href="application_8cpp.html" title=" " alt="" coords="5,155,177,181"/>
-<area shape="rect" href="application_8h.html" title=" " alt="" coords="129,80,286,107"/>
+<area shape="rect" href="application_8h.html" title="Main application class coordinating rendering, simulation, and UI." alt="" coords="129,80,286,107"/>
 <area shape="rect" href="panel__manager_8cpp.html" title=" " alt="" coords="311,80,507,107"/>
 <area shape="rect" href="main_8cpp.html" title=" " alt="" coords="202,155,335,181"/>
 </map>
@@ -120,9 +125,12 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPanelManager.html">PanelManager</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manages registration and rendering of all UI panels.  <a href="classPanelManager.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Registry and orchestrator for ImGui UI panels. </p>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

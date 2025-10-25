@@ -1,13 +1,10 @@
 <map id="ui::Colors" name="ui::Colors">
-<area shape="rect" id="node1" title=" " alt="" coords="711,146,793,173"/>
-<area shape="rect" id="node2" href="$namespaceui.html#a0053c22f687ace038e6a6625e751ac6c" title=" " alt="" coords="523,70,633,97"/>
-<area shape="rect" id="node3" href="$classEstimatorPanel.html#a2f2e0dc7c0287d12b71b412a38d25b96" title=" " alt="" coords="284,70,444,97"/>
-<area shape="rect" id="node4" href="$classPowerPanel.html#a707cada1c41c5a1a38f154f6e93c1280" title=" " alt="" coords="295,19,433,46"/>
-<area shape="rect" id="node5" href="$classRotorPanel.html#a4cc8a6932eabe62949fa23c08f79e488" title=" " alt="" coords="298,171,430,198"/>
-<area shape="rect" id="node6" href="$classSensorPanel.html#a2b9f315ae32bd4883b8532d5369c373d" title=" " alt="" coords="293,121,435,147"/>
-<area shape="rect" id="node7" href="$classApplication.html#a4e7a520d659593b385b246a43e604dfb" title=" " alt="" coords="283,247,445,274"/>
-<area shape="rect" id="node10" href="$namespaceui.html#a23857d08f2eee27af80c1607a82cfded" title=" " alt="" coords="519,121,637,147"/>
-<area shape="rect" id="node11" href="$namespaceui.html#ad4204ae9873b183dca2479b338348718" title=" " alt="" coords="493,323,663,350"/>
-<area shape="rect" id="node8" href="$classApplication.html#af44c742342adf5305e430ff293f147c1" title=" " alt="" coords="108,247,235,274"/>
-<area shape="rect" id="node9" href="$main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,247,60,274"/>
+<area shape="rect" id="node1" title=" " alt="" coords="431,118,513,144"/>
+<area shape="rect" id="node2" href="$namespaceui.html#a0053c22f687ace038e6a6625e751ac6c" title=" " alt="" coords="243,118,353,144"/>
+<area shape="rect" id="node3" href="$classEstimatorPanel.html#a2f2e0dc7c0287d12b71b412a38d25b96" title="Render the panel&#39;s ImGui interface." alt="" coords="5,16,165,43"/>
+<area shape="rect" id="node4" href="$classPowerPanel.html#a707cada1c41c5a1a38f154f6e93c1280" title="Render the panel&#39;s ImGui interface." alt="" coords="17,67,154,94"/>
+<area shape="rect" id="node5" href="$classRotorPanel.html#a4cc8a6932eabe62949fa23c08f79e488" title="Render the panel&#39;s ImGui interface." alt="" coords="19,118,151,144"/>
+<area shape="rect" id="node6" href="$classSensorPanel.html#a2b9f315ae32bd4883b8532d5369c373d" title="Render the panel&#39;s ImGui interface." alt="" coords="15,168,156,195"/>
+<area shape="rect" id="node7" href="$namespaceui.html#a23857d08f2eee27af80c1607a82cfded" title=" " alt="" coords="239,67,357,94"/>
+<area shape="rect" id="node8" href="$namespaceui.html#ad4204ae9873b183dca2479b338348718" title=" " alt="" coords="213,270,383,296"/>
 </map>

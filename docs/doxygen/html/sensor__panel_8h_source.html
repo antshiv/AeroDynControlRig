@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -85,25 +87,26 @@ $(document).ready(function(){initNavTree('sensor__panel_8h_source.html',''); ini
 <div class="title">sensor_panel.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="sensor__panel_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SENSOR_PANEL_H</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SENSOR_PANEL_H</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="panel_8h.html">gui/panel.h</a>&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="classSensorPanel.html">    6</a></span>&#160;<span class="keyword">class </span><a class="code" href="classSensorPanel.html">SensorPanel</a> : <span class="keyword">public</span> <a class="code" href="classPanel.html">Panel</a> {</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="classSensorPanel.html#a5ce71616ac2e024bab8bbdc2e44ac0eb">    8</a></span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="classSensorPanel.html#a5ce71616ac2e024bab8bbdc2e44ac0eb">name</a>()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;Sensor Suite&quot;</span>; }</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classSensorPanel.html#a2b9f315ae32bd4883b8532d5369c373d">draw</a>(<a class="code" href="structSimulationState.html">SimulationState</a>&amp; state, <a class="code" href="classCamera.html">Camera</a>&amp; camera) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;};</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// SENSOR_PANEL_H</span></div>
-<div class="ttc" id="aclassCamera_html"><div class="ttname"><a href="classCamera.html">Camera</a></div><div class="ttdef"><b>Definition:</b> camera.h:17</div></div>
-<div class="ttc" id="aclassPanel_html"><div class="ttname"><a href="classPanel.html">Panel</a></div><div class="ttdef"><b>Definition:</b> panel.h:9</div></div>
-<div class="ttc" id="aclassSensorPanel_html"><div class="ttname"><a href="classSensorPanel.html">SensorPanel</a></div><div class="ttdef"><b>Definition:</b> sensor_panel.h:6</div></div>
-<div class="ttc" id="aclassSensorPanel_html_a2b9f315ae32bd4883b8532d5369c373d"><div class="ttname"><a href="classSensorPanel.html#a2b9f315ae32bd4883b8532d5369c373d">SensorPanel::draw</a></div><div class="ttdeci">void draw(SimulationState &amp;state, Camera &amp;camera) override</div><div class="ttdef"><b>Definition:</b> sensor_panel.cpp:91</div></div>
-<div class="ttc" id="aclassSensorPanel_html_a5ce71616ac2e024bab8bbdc2e44ac0eb"><div class="ttname"><a href="classSensorPanel.html#a5ce71616ac2e024bab8bbdc2e44ac0eb">SensorPanel::name</a></div><div class="ttdeci">const char * name() const override</div><div class="ttdef"><b>Definition:</b> sensor_panel.h:8</div></div>
-<div class="ttc" id="apanel_8h_html"><div class="ttname"><a href="panel_8h.html">panel.h</a></div></div>
-<div class="ttc" id="astructSimulationState_html"><div class="ttname"><a href="structSimulationState.html">SimulationState</a></div><div class="ttdef"><b>Definition:</b> simulation_state.h:8</div></div>
+<a href="sensor__panel_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#ifndef SENSOR_PANEL_H</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#define SENSOR_PANEL_H</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="panel_8h.html">gui/panel.h</a>&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classSensorPanel.html">   23</a></span>&#160;<span class="keyword">class </span><a class="code" href="classSensorPanel.html">SensorPanel</a> : <span class="keyword">public</span> <a class="code" href="classPanel.html">Panel</a> {</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classSensorPanel.html#a5ce71616ac2e024bab8bbdc2e44ac0eb">   25</a></span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="classSensorPanel.html#a5ce71616ac2e024bab8bbdc2e44ac0eb">name</a>()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;Sensor Suite&quot;</span>; }</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classSensorPanel.html#a2b9f315ae32bd4883b8532d5369c373d">draw</a>(<a class="code" href="structSimulationState.html">SimulationState</a>&amp; state, <a class="code" href="classCamera.html">Camera</a>&amp; camera) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;};</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// SENSOR_PANEL_H</span></div>
+<div class="ttc" id="aclassCamera_html"><div class="ttname"><a href="classCamera.html">Camera</a></div><div class="ttdoc">First-person camera with mouse look and WASD movement.</div><div class="ttdef"><b>Definition:</b> camera.h:43</div></div>
+<div class="ttc" id="aclassPanel_html"><div class="ttname"><a href="classPanel.html">Panel</a></div><div class="ttdoc">Abstract base class for all UI panels.</div><div class="ttdef"><b>Definition:</b> panel.h:27</div></div>
+<div class="ttc" id="aclassSensorPanel_html"><div class="ttname"><a href="classSensorPanel.html">SensorPanel</a></div><div class="ttdoc">UI panel displaying simulated IMU sensor measurements.</div><div class="ttdef"><b>Definition:</b> sensor_panel.h:23</div></div>
+<div class="ttc" id="aclassSensorPanel_html_a2b9f315ae32bd4883b8532d5369c373d"><div class="ttname"><a href="classSensorPanel.html#a2b9f315ae32bd4883b8532d5369c373d">SensorPanel::draw</a></div><div class="ttdeci">void draw(SimulationState &amp;state, Camera &amp;camera) override</div><div class="ttdoc">Render the panel's ImGui interface.</div><div class="ttdef"><b>Definition:</b> sensor_panel.cpp:91</div></div>
+<div class="ttc" id="aclassSensorPanel_html_a5ce71616ac2e024bab8bbdc2e44ac0eb"><div class="ttname"><a href="classSensorPanel.html#a5ce71616ac2e024bab8bbdc2e44ac0eb">SensorPanel::name</a></div><div class="ttdeci">const char * name() const override</div><div class="ttdoc">Get the display name of this panel.</div><div class="ttdef"><b>Definition:</b> sensor_panel.h:25</div></div>
+<div class="ttc" id="apanel_8h_html"><div class="ttname"><a href="panel_8h.html">panel.h</a></div><div class="ttdoc">Base interface for ImGui UI panels in the AeroDynControlRig.</div></div>
+<div class="ttc" id="astructSimulationState_html"><div class="ttname"><a href="structSimulationState.html">SimulationState</a></div><div class="ttdoc">Central shared state for the entire simulation.</div><div class="ttdef"><b>Definition:</b> simulation_state.h:26</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

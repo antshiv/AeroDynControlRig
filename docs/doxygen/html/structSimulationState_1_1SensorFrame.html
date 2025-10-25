@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -89,16 +91,23 @@ $(document).ready(function(){initNavTree('structSimulationState_1_1SensorFrame.h
 </div><!--header-->
 <div class="contents">
 
+<p>Simulated IMU sensor measurements.  
+ <a href="structSimulationState_1_1SensorFrame.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="simulation__state_8h_source.html">simulation_state.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:ac624a2a4eb8ddf5fa6388b1a4082a4d7"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1SensorFrame.html#ac624a2a4eb8ddf5fa6388b1a4082a4d7">gyro_rad_s</a> {0.0f}</td></tr>
+<tr class="memdesc:ac624a2a4eb8ddf5fa6388b1a4082a4d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gyroscope measurement (rad/s) in body frame.  <a href="structSimulationState_1_1SensorFrame.html#ac624a2a4eb8ddf5fa6388b1a4082a4d7">More...</a><br /></td></tr>
 <tr class="separator:ac624a2a4eb8ddf5fa6388b1a4082a4d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af95bd651021b78768ae4529091d6bd52"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1SensorFrame.html#af95bd651021b78768ae4529091d6bd52">accel_mps2</a> {0.0f}</td></tr>
+<tr class="memdesc:af95bd651021b78768ae4529091d6bd52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accelerometer measurement (m/s²) in body frame.  <a href="structSimulationState_1_1SensorFrame.html#af95bd651021b78768ae4529091d6bd52">More...</a><br /></td></tr>
 <tr class="separator:af95bd651021b78768ae4529091d6bd52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Data Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Simulated IMU sensor measurements. </p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="af95bd651021b78768ae4529091d6bd52"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af95bd651021b78768ae4529091d6bd52">&#9670;&nbsp;</a></span>accel_mps2</h2>
 
@@ -110,6 +119,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Accelerometer measurement (m/s²) in body frame. </p>
 
 </div>
 </div>
@@ -124,6 +135,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Gyroscope measurement (rad/s) in body frame. </p>
 
 </div>
 </div>

@@ -1,4 +1,4 @@
 <map id="SensorSimulatorModule" name="SensorSimulatorModule">
-<area shape="rect" id="node1" title=" " alt="" coords="5,80,183,107"/>
-<area shape="rect" id="node2" href="$classModule.html" title=" " alt="" coords="59,5,129,32"/>
+<area shape="rect" id="node1" title="Simulates IMU sensor measurements (gyro + accel) based on vehicle state." alt="" coords="5,80,183,107"/>
+<area shape="rect" id="node2" href="$classModule.html" title="Abstract base class for all simulation modules." alt="" coords="59,5,129,32"/>
 </map>

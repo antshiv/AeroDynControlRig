@@ -1,4 +1,4 @@
 <map id="EstimatorPanel::name" name="EstimatorPanel::name">
-<area shape="rect" id="node1" title=" " alt="" coords="213,5,379,32"/>
-<area shape="rect" id="node2" href="$classEstimatorPanel.html#a2f2e0dc7c0287d12b71b412a38d25b96" title=" " alt="" coords="5,5,165,32"/>
+<area shape="rect" id="node1" title="Get the display name of this panel." alt="" coords="213,5,379,32"/>
+<area shape="rect" id="node2" href="$classEstimatorPanel.html#a2f2e0dc7c0287d12b71b412a38d25b96" title="Render the panel&#39;s ImGui interface." alt="" coords="5,5,165,32"/>
 </map>

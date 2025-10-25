@@ -1,27 +1,18 @@
 <map id="main" name="main">
-<area shape="rect" id="node1" title=" " alt="" coords="5,291,60,317"/>
-<area shape="rect" id="node2" href="$classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96" title="Initializes the application, setting up GLFW, OpenGL, ImGui, and all core components." alt="" coords="129,183,253,209"/>
-<area shape="rect" id="node11" href="$classApplication.html#a66731baa1a6a13cd42f2a8c9bf34dc0e" title=" " alt="" coords="115,265,267,292"/>
-<area shape="rect" id="node12" href="$classApplication.html#ad434bdac305884ce971ded815384c976" title=" " alt="" coords="108,316,275,343"/>
-<area shape="rect" id="node13" href="$classApplication.html#af44c742342adf5305e430ff293f147c1" title=" " alt="" coords="128,429,255,456"/>
-<area shape="rect" id="node3" href="$namespaceui.html#a5e215a312253a017263135e8e9b2fde8" title=" " alt="" coords="360,56,484,83"/>
-<area shape="rect" id="node4" href="$classAxisRenderer.html#aeffaaf38c5561bc783f4d614f3b75edf" title=" " alt="" coords="353,107,491,133"/>
-<area shape="rect" id="node5" href="$classRenderer.html#a628ba0693fd83815acac8c69b7dcf9f0" title=" " alt="" coords="367,157,477,184"/>
-<area shape="rect" id="node6" href="$classApplication.html#ad8ade3f4f891c7ac54b5c69d6ca9ce5a" title=" " alt="" coords="331,208,513,235"/>
-<area shape="rect" id="node7" href="$namespaceui.html#a48a441cbee5cba22b870ab29be0356d2" title=" " alt="" coords="368,259,476,285"/>
-<area shape="rect" id="node8" href="$classApplication.html#a00d67e65679af5ce18f377f3e6d13d31" title=" " alt="" coords="325,309,519,336"/>
-<area shape="rect" id="node10" href="$classTransform.html#a6eefe7b697e85bbc809482184bc21e0e" title=" " alt="" coords="323,5,521,32"/>
-<area shape="rect" id="node9" href="$classCamera.html#a067090ee525389944ba3bacaa62f7632" title=" " alt="" coords="569,277,780,304"/>
-<area shape="rect" id="node14" href="$classApplication.html#a4e7a520d659593b385b246a43e604dfb" title=" " alt="" coords="341,556,503,583"/>
-<area shape="rect" id="node15" href="$namespaceui.html#a0053c22f687ace038e6a6625e751ac6c" title=" " alt="" coords="620,379,729,405"/>
-<area shape="rect" id="node16" href="$namespaceui.html#a447c8573ad59f48165a527a06c94fb62" title=" " alt="" coords="828,455,911,481"/>
-<area shape="rect" id="node17" href="$namespaceui.html#a23857d08f2eee27af80c1607a82cfded" title=" " alt="" coords="615,531,734,557"/>
-<area shape="rect" id="node18" href="$namespaceui.html#a27aa4868ffcd17787cc35f7e24a0c616" title=" " alt="" coords="831,683,908,709"/>
-<area shape="rect" id="node19" href="$classPanelManager.html#accbb2906139bed93e60a3b7390c43e90" title=" " alt="" coords="589,581,760,608"/>
-<area shape="rect" id="node20" href="$namespaceui.html#aab4c47f869143e855e5a9cb8b6f2cf8b" title=" " alt="" coords="627,632,723,659"/>
-<area shape="rect" id="node21" href="$classCamera.html#aa2ed9d27803f5edc824e4afe8cbbbfbc" title=" " alt="" coords="570,683,779,709"/>
-<area shape="rect" id="node22" href="$classCamera.html#a2f90e661a78172675ca06ea69667b531" title=" " alt="" coords="587,733,763,760"/>
-<area shape="rect" id="node23" href="$namespaceui.html#aa8a07e2928ca42077565025599baf0f2" title=" " alt="" coords="593,784,756,811"/>
-<area shape="rect" id="node24" href="$namespaceui.html#ad4204ae9873b183dca2479b338348718" title=" " alt="" coords="590,480,759,507"/>
-<area shape="rect" id="node25" href="$attitude__utils_8h.html#a32bc85d5e25e4374b31308af4f530377" title=" " alt="" coords="637,328,712,355"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,247,60,273"/>
+<area shape="rect" id="node2" href="$classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96" title="Initialize the application subsystems." alt="" coords="129,164,253,191"/>
+<area shape="rect" id="node11" href="$classApplication.html#a66731baa1a6a13cd42f2a8c9bf34dc0e" title="Check if the application should continue running." alt="" coords="115,221,267,248"/>
+<area shape="rect" id="node12" href="$classApplication.html#ad434bdac305884ce971ded815384c976" title="Clean up resources before exit." alt="" coords="108,272,275,299"/>
+<area shape="rect" id="node13" href="$classApplication.html#af44c742342adf5305e430ff293f147c1" title="Execute one frame: update simulation, render 3D, render UI." alt="" coords="128,335,255,361"/>
+<area shape="rect" id="node3" href="$namespaceui.html#a5e215a312253a017263135e8e9b2fde8" title=" " alt="" coords="360,5,484,32"/>
+<area shape="rect" id="node4" href="$classAxisRenderer.html#aeffaaf38c5561bc783f4d614f3b75edf" title="Initialize axis renderer (load shaders, setup geometry)" alt="" coords="353,56,491,83"/>
+<area shape="rect" id="node5" href="$classRenderer.html#a628ba0693fd83815acac8c69b7dcf9f0" title="Initialize OpenGL resources (shaders, geometry buffers)" alt="" coords="367,107,477,133"/>
+<area shape="rect" id="node6" href="$classApplication.html#ad8ade3f4f891c7ac54b5c69d6ca9ce5a" title="Keyboard input callback." alt="" coords="331,157,513,184"/>
+<area shape="rect" id="node7" href="$namespaceui.html#a48a441cbee5cba22b870ab29be0356d2" title=" " alt="" coords="368,208,476,235"/>
+<area shape="rect" id="node8" href="$classApplication.html#a00d67e65679af5ce18f377f3e6d13d31" title="Mouse scroll callback." alt="" coords="325,259,519,285"/>
+<area shape="rect" id="node10" href="$classTransform.html#a6eefe7b697e85bbc809482184bc21e0e" title=" " alt="" coords="323,309,521,336"/>
+<area shape="rect" id="node9" href="$classCamera.html#a067090ee525389944ba3bacaa62f7632" title="Process mouse scroll for zoom (FOV adjustment)" alt="" coords="569,259,780,285"/>
+<area shape="rect" id="node14" href="$classApplication.html#a4e7a520d659593b385b246a43e604dfb" title="Render the 3D scene (cube + axes)" alt="" coords="341,360,503,387"/>
+<area shape="rect" id="node15" href="$classCamera.html#aa2ed9d27803f5edc824e4afe8cbbbfbc" title="Get the perspective projection matrix." alt="" coords="570,335,779,361"/>
+<area shape="rect" id="node16" href="$classCamera.html#a2f90e661a78172675ca06ea69667b531" title="Get the view matrix for rendering." alt="" coords="587,385,763,412"/>
 </map>

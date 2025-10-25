@@ -1,5 +1,5 @@
 <map id="ui::ApplyTheme" name="ui::ApplyTheme">
 <area shape="rect" id="node1" title=" " alt="" coords="280,5,404,32"/>
-<area shape="rect" id="node2" href="$classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96" title="Initializes the application, setting up GLFW, OpenGL, ImGui, and all core components." alt="" coords="108,5,232,32"/>
+<area shape="rect" id="node2" href="$classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96" title="Initialize the application subsystems." alt="" coords="108,5,232,32"/>
 <area shape="rect" id="node3" href="$main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
 </map>

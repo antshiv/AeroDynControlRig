@@ -17,12 +17,18 @@
 #include "gui/panels/sensor_panel.h"
 #include "attitude/euler.h"
 #include "attitude/dcm.h"
+#include "attitude/quaternion.h"
 #include "attitude/attitude_utils.h"
 #include <iostream>
 #include <algorithm>
 #include <string>
 #include <cstdio>
 #include <cstdint>
+#include <cmath>
+
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 #include "imgui.h"
 #include "imgui_internal.h"
 #include "backends/imgui_impl_glfw.h"
@@ -135,6 +141,104 @@ Application::~Application() {
  * The order of these initializations is important due to dependencies between libraries.
  *
  * @return `true` if all initializations are successful, `false` otherwise.
+ */
+
+/**
+ * @brief Initialize the complete application stack
+ *
+ * This function executes the critical initialization sequence for all subsystems.
+ * The order is **carefully arranged** to satisfy dependencies between components.
+ *
+ * @note Initialization Order Diagram
+ *
+ * @code
+ * ┌─────────────────────────────────────────────────────────────┐
+ * │ Application::init() - Initialization Sequence               │
+ * └─────────────────────────────────────────────────────────────┘
+ *
+ * Step 1: glfwInit()
+ *    │
+ *    ├─► Initializes GLFW library
+ *    └─► Prepares windowing system
+ *
+ * Step 2: glfwCreateWindow()
+ *    │
+ *    ├─► Creates OS window (800x600)
+ *    ├─► Creates OpenGL 3.3 context
+ *    └─► Returns window handle
+ *
+ * Step 3: glfwMakeContextCurrent()
+ *    │
+ *    ├─► Binds OpenGL context to this thread
+ *    └─► All subsequent GL calls use this context
+ *
+ * Step 4: glewInit()
+ *    │
+ *    ├─► Loads OpenGL function pointers
+ *    ├─► Enables access to GL 3.3+ functions
+ *    └─► MUST happen after context is current
+ *
+ * Step 5: ImGui::CreateContext()
+ *    │
+ *    ├─► Creates ImGui context
+ *    ├─► Enables ImGui docking
+ *    └─► MUST happen after GL context exists
+ *
+ * Step 6: ImGui_ImplGlfw_InitForOpenGL()
+ *         ImGui_ImplOpenGL3_Init()
+ *    │
+ *    ├─► Links ImGui to GLFW (input handling)
+ *    ├─► Links ImGui to OpenGL (rendering)
+ *    └─► Compiles ImGui's internal shaders
+ *
+ * Step 7: renderer.init()
+ *         axisRenderer.init()
+ *    │
+ *    ├─► Compiles GLSL shaders (vertex + fragment)
+ *    ├─► Creates VAO/VBO/EBO for geometry
+ *    ├─► Uploads cube and axis vertices to GPU
+ *    └─► MUST happen after glewInit()
+ *
+ * Step 8: initializeModules()
+ *    │
+ *    ├─► Creates QuaternionDemoModule
+ *    ├─► Creates SensorSimulatorModule
+ *    ├─► Creates ComplementaryEstimatorModule
+ *    ├─► Creates FirstOrderDynamicsModule
+ *    ├─► Creates RotorTelemetryModule
+ *    └─► Calls initialize() on each module
+ *
+ * Step 9: initializePanels()
+ *    │
+ *    ├─► Registers ControlPanel
+ *    ├─► Registers TelemetryPanel
+ *    ├─► Registers DynamicsPanel
+ *    ├─► Registers EstimatorPanel
+ *    ├─► Registers RotorPanel
+ *    ├─► Registers SensorPanel
+ *    └─► Registers PowerPanel
+ *
+ * Result: Application ready for main loop
+ * @endcode
+ *
+ * @section init_dependencies Dependency Chain
+ *
+ * The initialization order **cannot be changed** without breaking the application:
+ *
+ * - GLFW must initialize before creating windows
+ * - Window must exist before creating OpenGL context
+ * - OpenGL context must be current before GLEW init
+ * - GLEW must load GL functions before calling any GL commands
+ * - GL context must exist before ImGui init
+ * - ImGui must initialize before compiling its backends
+ * - Shaders can only compile after GLEW loads GL functions
+ * - Modules/panels can initialize anytime after their dependencies
+ *
+ * @return true if all initialization steps succeed
+ * @return false if any step fails (with error logged to stderr)
+ *
+ * @see Application::tick() for the main loop that uses these initialized resources
+ * @see Application::shutdown() for the reverse teardown sequence
  */
 bool Application::init() {
     // Step 1: Initialize GLFW (Graphics Library Framework)
@@ -347,6 +451,75 @@ void Application::keyCallback(GLFWwindow* window, int key, int scancode, int act
 
     if (action == GLFW_PRESS && key == GLFW_KEY_ESCAPE) {
         glfwSetWindowShouldClose(window, GLFW_TRUE);
+        return;
+    }
+
+    // === KEYBOARD-CONTROLLED QUATERNION ROTATION ===
+    if (action == GLFW_PRESS || action == GLFW_REPEAT) {
+        const double rotation_deg = 5.0;  // Degrees per key press
+
+        // Convert current quaternion to Euler angles
+        double roll, pitch, yaw;
+        double q[4] = {
+            app->simulationState.quaternion[0],  // w
+            app->simulationState.quaternion[1],  // x
+            app->simulationState.quaternion[2],  // y
+            app->simulationState.quaternion[3]   // z
+        };
+        quaternion_to_euler(q, &roll, &pitch, &yaw);
+
+        // Convert to degrees for easier manipulation
+        roll = rad2deg(roll);
+        pitch = rad2deg(pitch);
+        yaw = rad2deg(yaw);
+
+        // Apply rotation based on key
+        if (key == GLFW_KEY_W) {
+            // Pitch up
+            pitch += rotation_deg;
+        }
+        else if (key == GLFW_KEY_S) {
+            // Pitch down
+            pitch -= rotation_deg;
+        }
+        else if (key == GLFW_KEY_A) {
+            // Roll left
+            roll += rotation_deg;
+        }
+        else if (key == GLFW_KEY_D) {
+            // Roll right
+            roll -= rotation_deg;
+        }
+        else if (key == GLFW_KEY_Q) {
+            // Yaw left
+            yaw += rotation_deg;
+        }
+        else if (key == GLFW_KEY_E) {
+            // Yaw right
+            yaw -= rotation_deg;
+        }
+        else if (key == GLFW_KEY_R) {
+            // Reset to identity quaternion (no rotation)
+            app->simulationState.quaternion = {1.0, 0.0, 0.0, 0.0};
+            app->simulationState.angular_rate_deg_per_sec = glm::dvec3(0.0, 0.0, 0.0);
+            return;
+        }
+        else {
+            return;  // No rotation key pressed
+        }
+
+        // Convert back to radians and then to quaternion
+        EulerAngles euler_angles;
+        euler_angles.roll = deg2rad(roll);
+        euler_angles.pitch = deg2rad(pitch);
+        euler_angles.yaw = deg2rad(yaw);
+        euler_angles.order = EULER_ZYX;  // Yaw-Pitch-Roll order
+
+        double q_new[4];
+        euler_to_quaternion(&euler_angles, q_new);
+
+        // Update state
+        app->simulationState.quaternion = {q_new[0], q_new[1], q_new[2], q_new[3]};
     }
 }
 
@@ -512,12 +685,16 @@ void Application::renderDashboardLayout(ImGuiIO& io) {
                            ImDrawFlags_RoundCornersAll,
                            2.0f);
 
+        bool viewport_hovered = false;
+        bool viewport_active = false;
         ImTextureID scene_texture = renderSceneToTexture(viewport_size);
         if (scene_texture) {
             ImGui::Image(scene_texture,
                          viewport_size,
                          ImVec2(0.0f, 1.0f),
                          ImVec2(1.0f, 0.0f));
+            viewport_hovered = ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenBlockedByPopup);
+            viewport_active = ImGui::IsItemActive();
 
             char quat_buf[96];
             std::snprintf(
@@ -567,6 +744,28 @@ void Application::renderDashboardLayout(ImGuiIO& io) {
             ImGui::SetCursorScreenPos(canvas_pos + ImVec2(0.0f, viewport_size.y));
         }
 
+        if (viewport_active || (viewport_hovered && ImGui::IsMouseDown(ImGuiMouseButton_Left))) {
+            const float orbit_sensitivity = 0.25f;
+            if (ImGui::IsMouseDragging(ImGuiMouseButton_Left)) {
+                ImVec2 drag = ImGui::GetMouseDragDelta(ImGuiMouseButton_Left);
+                camera.processMouseMovement(drag.x * orbit_sensitivity, -drag.y * orbit_sensitivity);
+                ImGui::ResetMouseDragDelta(ImGuiMouseButton_Left);
+            }
+        }
+
+        if (viewport_active || viewport_hovered) {
+            const float pan_sensitivity = 0.004f;
+            if (ImGui::IsMouseDragging(ImGuiMouseButton_Middle)) {
+                ImVec2 drag = ImGui::GetMouseDragDelta(ImGuiMouseButton_Middle);
+                camera.pan(-drag.x * pan_sensitivity, drag.y * pan_sensitivity);
+                ImGui::ResetMouseDragDelta(ImGuiMouseButton_Middle);
+            } else if (ImGui::IsMouseDragging(ImGuiMouseButton_Right)) {
+                ImVec2 drag = ImGui::GetMouseDragDelta(ImGuiMouseButton_Right);
+                camera.pan(-drag.x * pan_sensitivity, drag.y * pan_sensitivity);
+                ImGui::ResetMouseDragDelta(ImGuiMouseButton_Right);
+            }
+        }
+
         ImGui::Dummy(ImVec2(0.0f, 12.0f));
 
         // Footer control strip
@@ -582,36 +781,143 @@ void Application::renderDashboardLayout(ImGuiIO& io) {
 
         ImGui::SetCursorScreenPos(footer_pos + ImVec2(24.0f, 18.0f));
 
-        auto footer_button = [&](const char* id, const char* label) {
-            std::string text = label;
-            if (fonts.icon) {
-                text = std::string(u8"\ue5d1 ") + label;  // Material rotate icon
-            }
-            ImGui::PushID(id);
-            ui::PushPillButtonStyle(ui::PillStyle::Secondary);
-            ImGui::Button(text.c_str(), ImVec2(120.0f, 0.0f));
-            ui::PopPillButtonStyle();
-            ImGui::PopID();
-        };
+        const float orbit_step_deg = 15.0f;
+        const float tilt_step_deg = 10.0f;
+        const float pan_step_units = 0.35f;
+        const float dolly_step_units = 0.6f;
+        const float zoom_step_deg = 5.0f;
 
-        footer_button("rotate", "Rotate");
-        ImGui::SameLine(0.0f, 18.0f);
-
-        auto footer_button_plain = [&](const char* id, const char* label, const char* icon_code) {
+        auto scene_control_button = [&](const char* id,
+                                        const char* label,
+                                        const char* icon_code,
+                                        auto popup_builder) {
             std::string text = label;
             if (fonts.icon && icon_code) {
                 text = std::string(icon_code) + " " + label;
             }
             ImGui::PushID(id);
             ui::PushPillButtonStyle(ui::PillStyle::Secondary);
-            ImGui::Button(text.c_str(), ImVec2(120.0f, 0.0f));
+            if (ImGui::Button(text.c_str(), ImVec2(120.0f, 0.0f))) {
+                ImGui::OpenPopup("popup");
+            }
+            bool hovered = ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenBlockedByPopup);
+            popup_builder("popup", hovered);
             ui::PopPillButtonStyle();
             ImGui::PopID();
         };
 
-        footer_button_plain("pan", "Pan", u8"\ue55d");
+        scene_control_button(
+            "rotate",
+            "Rotate",
+            u8"\ue5d1",
+            [&](const char* popup_id, bool hovered) {
+                if (hovered) {
+                    ImGui::SetTooltip("Orbit the camera. Keys: Q/E, arrow keys, IJKL");
+                }
+                if (ImGui::BeginPopup(popup_id)) {
+                    ImGui::TextUnformatted("Orbit camera");
+                    ImGui::Separator();
+                    if (ImGui::MenuItem("Orbit left", "Q / ← / J")) {
+                        camera.orbit(-orbit_step_deg, 0.0f);
+                    }
+                    if (ImGui::MenuItem("Orbit right", "E / → / L")) {
+                        camera.orbit(orbit_step_deg, 0.0f);
+                    }
+                    if (ImGui::MenuItem("Tilt up", "I / ↑")) {
+                        camera.orbit(0.0f, tilt_step_deg);
+                    }
+                    if (ImGui::MenuItem("Tilt down", "K / ↓")) {
+                        camera.orbit(0.0f, -tilt_step_deg);
+                    }
+                    ImGui::Separator();
+                    if (ImGui::MenuItem("Reset view")) {
+                        camera.reset();
+                    }
+                    ImGui::EndPopup();
+                }
+            });
         ImGui::SameLine(0.0f, 18.0f);
-        footer_button_plain("zoom", "Zoom", u8"\ue8ff");
+
+        scene_control_button(
+            "pan",
+            "Pan",
+            u8"\ue55d",
+            [&](const char* popup_id, bool hovered) {
+                if (hovered) {
+                    ImGui::SetTooltip("Translate the camera laterally. Keys: WASD");
+                }
+                if (ImGui::BeginPopup(popup_id)) {
+                    ImGui::TextUnformatted("Pan camera");
+                    ImGui::Separator();
+                    if (ImGui::MenuItem("Pan left", "A")) {
+                        camera.pan(-pan_step_units, 0.0f);
+                    }
+                    if (ImGui::MenuItem("Pan right", "D")) {
+                        camera.pan(pan_step_units, 0.0f);
+                    }
+                    if (ImGui::MenuItem("Pan up")) {
+                        camera.pan(0.0f, pan_step_units);
+                    }
+                    if (ImGui::MenuItem("Pan down")) {
+                        camera.pan(0.0f, -pan_step_units);
+                    }
+                    ImGui::EndPopup();
+                }
+            });
+        ImGui::SameLine(0.0f, 18.0f);
+
+        scene_control_button(
+            "zoom",
+            "Zoom",
+            u8"\ue8ff",
+            [&](const char* popup_id, bool hovered) {
+                if (hovered) {
+                    ImGui::SetTooltip("Adjust zoom. Use mouse wheel for quick changes.");
+                }
+                if (ImGui::BeginPopup(popup_id)) {
+                    ImGui::TextUnformatted("Zoom & dolly");
+                    ImGui::Separator();
+                    if (ImGui::MenuItem("Zoom in", "Wheel up")) {
+                        camera.zoomBy(zoom_step_deg);
+                    }
+                    if (ImGui::MenuItem("Zoom out", "Wheel down")) {
+                        camera.zoomBy(-zoom_step_deg);
+                    }
+                    ImGui::Separator();
+                    if (ImGui::MenuItem("Dolly closer")) {
+                        camera.dolly(dolly_step_units);
+                    }
+                    if (ImGui::MenuItem("Dolly farther")) {
+                        camera.dolly(-dolly_step_units);
+                    }
+                    ImGui::Separator();
+                    if (ImGui::MenuItem("Reset zoom")) {
+                        camera.setZoom(45.0f);
+                    }
+                    ImGui::EndPopup();
+                }
+            });
+        ImGui::SameLine(0.0f, 18.0f);
+        scene_control_button(
+            "help",
+            "Controls",
+            u8"\ue887",
+            [&](const char* popup_id, bool hovered) {
+                if (hovered) {
+                    ImGui::SetTooltip("Show keyboard and mouse shortcuts");
+                }
+                if (ImGui::BeginPopup(popup_id)) {
+                    ImGui::TextUnformatted("Scene controls");
+                    ImGui::Separator();
+                    ImGui::TextUnformatted("Orbit: left-drag, Q/E, arrows, IJKL");
+                    ImGui::TextUnformatted("Pan: right/middle drag, WASD");
+                    ImGui::TextUnformatted("Zoom: mouse wheel or Zoom menu");
+                    ImGui::TextUnformatted("Reset: Rotate→Reset view, Zoom→Reset zoom");
+                    ImGui::Separator();
+                    ImGui::TextUnformatted("Space: zero body rates");
+                    ImGui::EndPopup();
+                }
+            });
     }
     ui::EndCard();
 

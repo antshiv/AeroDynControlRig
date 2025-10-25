@@ -1,0 +1,67 @@
+/**
+ * @file data_flow.dot
+ * @brief Data flow through simulation modules
+ */
+
+digraph DataFlow {
+    rankdir=LR;
+    node [shape=box, style="rounded,filled", fontname="Arial"];
+    edge [fontname="Arial"];
+
+    // State fields
+    subgraph cluster_state {
+        label="SimulationState (Shared)";
+        style=filled;
+        fillcolor=lightyellow;
+
+        angular_rate [label="angular_rate\n(deg/s)", shape=cylinder];
+        quaternion [label="quaternion\n[w,x,y,z]", shape=cylinder];
+        euler [label="euler\n(roll,pitch,yaw)", shape=cylinder];
+        sensor_gyro [label="sensor.gyro\n(rad/s)", shape=cylinder];
+        sensor_accel [label="sensor.accel\n(m/s²)", shape=cylinder];
+        est_quat [label="estimator.quat\n[w,x,y,z]", shape=cylinder];
+        rotor_rpm [label="rotor.rpm[4]", shape=cylinder];
+        rotor_thrust [label="rotor.thrust[4]", shape=cylinder];
+    }
+
+    // Modules
+    quat_mod [label="QuaternionDemo\nModule", fillcolor=lightblue];
+    sensor_mod [label="SensorSimulator\nModule", fillcolor=lightblue];
+    est_mod [label="ComplementaryEstimator\nModule", fillcolor=lightblue];
+    rotor_mod [label="RotorTelemetry\nModule", fillcolor=lightblue];
+
+    // Panels
+    telem_panel [label="Telemetry\nPanel", fillcolor=lightgreen];
+    est_panel [label="Estimator\nPanel", fillcolor=lightgreen];
+    sensor_panel [label="Sensor\nPanel", fillcolor=lightgreen];
+    rotor_panel [label="Rotor\nPanel", fillcolor=lightgreen];
+
+    // Data flow
+    angular_rate -> quat_mod [label="reads", color=blue];
+    quat_mod -> quaternion [label="writes", color=red, style=bold];
+    quat_mod -> euler [label="writes", color=red, style=bold];
+
+    quaternion -> sensor_mod [label="reads", color=blue];
+    angular_rate -> sensor_mod [label="reads", color=blue];
+    sensor_mod -> sensor_gyro [label="writes", color=red, style=bold];
+    sensor_mod -> sensor_accel [label="writes", color=red, style=bold];
+
+    sensor_gyro -> est_mod [label="reads", color=blue];
+    sensor_accel -> est_mod [label="reads", color=blue];
+    est_mod -> est_quat [label="writes", color=red, style=bold];
+
+    rotor_mod -> rotor_rpm [label="writes", color=red, style=bold];
+    rotor_mod -> rotor_thrust [label="writes", color=red, style=bold];
+
+    // Panels read
+    quaternion -> telem_panel [label="reads", color=green, style=dashed];
+    euler -> telem_panel [label="reads", color=green, style=dashed];
+
+    est_quat -> est_panel [label="reads", color=green, style=dashed];
+
+    sensor_gyro -> sensor_panel [label="reads", color=green, style=dashed];
+    sensor_accel -> sensor_panel [label="reads", color=green, style=dashed];
+
+    rotor_rpm -> rotor_panel [label="reads", color=green, style=dashed];
+    rotor_thrust -> rotor_panel [label="reads", color=green, style=dashed];
+}

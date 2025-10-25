@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -90,13 +92,16 @@ $(document).ready(function(){initNavTree('classAxisRenderer.html',''); initResiz
 </div><!--header-->
 <div class="contents">
 
+<p>Renders RGB coordinate axes as a visual reference overlay.  
+ <a href="classAxisRenderer.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="axis__renderer_8h_source.html">axis_renderer.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for AxisRenderer:</div>
 <div class="dyncontent">
 <div class="center"><img src="classAxisRenderer__coll__graph.png" border="0" usemap="#aAxisRenderer_coll__map" alt="Collaboration graph"/></div>
 <map name="aAxisRenderer_coll__map" id="aAxisRenderer_coll__map">
-<area shape="rect" title=" " alt="" coords="5,95,115,121"/>
+<area shape="rect" title="Renders RGB coordinate axes as a visual reference overlay." alt="" coords="5,95,115,121"/>
 <area shape="rect" href="classTransform.html" title=" " alt="" coords="17,5,103,32"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
@@ -108,12 +113,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7fce768f9364c3679434320b8b7aa904"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisRenderer.html#a7fce768f9364c3679434320b8b7aa904">~AxisRenderer</a> ()</td></tr>
 <tr class="separator:a7fce768f9364c3679434320b8b7aa904"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeffaaf38c5561bc783f4d614f3b75edf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisRenderer.html#aeffaaf38c5561bc783f4d614f3b75edf">init</a> ()</td></tr>
+<tr class="memdesc:aeffaaf38c5561bc783f4d614f3b75edf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize axis renderer (load shaders, setup geometry)  <a href="classAxisRenderer.html#aeffaaf38c5561bc783f4d614f3b75edf">More...</a><br /></td></tr>
 <tr class="separator:aeffaaf38c5561bc783f4d614f3b75edf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84dd219a1a4655ec3b434c4b9705c6a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisRenderer.html#a84dd219a1a4655ec3b434c4b9705c6a0">render</a> (const <a class="el" href="classTransform.html">Transform</a> &amp;transform)</td></tr>
+<tr class="memdesc:a84dd219a1a4655ec3b434c4b9705c6a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Render axes in 2D mode (legacy - deprecated)  <a href="classAxisRenderer.html#a84dd219a1a4655ec3b434c4b9705c6a0">More...</a><br /></td></tr>
 <tr class="separator:a84dd219a1a4655ec3b434c4b9705c6a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeafc1964746638b7067055b5bf616d51"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisRenderer.html#aeafc1964746638b7067055b5bf616d51">render3D</a> (const <a class="el" href="classTransform.html">Transform</a> &amp;transform)</td></tr>
+<tr class="memdesc:aeafc1964746638b7067055b5bf616d51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Render axes in 3D mode.  <a href="classAxisRenderer.html#aeafc1964746638b7067055b5bf616d51">More...</a><br /></td></tr>
 <tr class="separator:aeafc1964746638b7067055b5bf616d51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab327f44ce3abe6fdf30380d4d081b413"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisRenderer.html#ab327f44ce3abe6fdf30380d4d081b413">shutdown</a> ()</td></tr>
+<tr class="memdesc:ab327f44ce3abe6fdf30380d4d081b413"><td class="mdescLeft">&#160;</td><td class="mdescRight">Release OpenGL resources.  <a href="classAxisRenderer.html#ab327f44ce3abe6fdf30380d4d081b413">More...</a><br /></td></tr>
 <tr class="separator:ab327f44ce3abe6fdf30380d4d081b413"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -121,23 +130,41 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:aedefa9c0600e5a194f50abfa85383dca"><td class="memItemLeft" align="right" valign="top">GLuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisRenderer.html#aedefa9c0600e5a194f50abfa85383dca">vao</a></td></tr>
 <tr class="separator:aedefa9c0600e5a194f50abfa85383dca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a11d0c9da7a034088f7b44026005beab3"><td class="memItemLeft" align="right" valign="top">GLuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisRenderer.html#a11d0c9da7a034088f7b44026005beab3">vbo</a></td></tr>
+<tr class="memdesc:a11d0c9da7a034088f7b44026005beab3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vertex array and buffer objects.  <a href="classAxisRenderer.html#a11d0c9da7a034088f7b44026005beab3">More...</a><br /></td></tr>
 <tr class="separator:a11d0c9da7a034088f7b44026005beab3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a9f352852fbba20141f8076798ad333"><td class="memItemLeft" align="right" valign="top">GLuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisRenderer.html#a3a9f352852fbba20141f8076798ad333">shaderProgram</a></td></tr>
+<tr class="memdesc:a3a9f352852fbba20141f8076798ad333"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shader program for axis rendering.  <a href="classAxisRenderer.html#a3a9f352852fbba20141f8076798ad333">More...</a><br /></td></tr>
 <tr class="separator:a3a9f352852fbba20141f8076798ad333"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5e7fb7b7bc2c5ec7194295b24e546b6"><td class="memItemLeft" align="right" valign="top">glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisRenderer.html#af5e7fb7b7bc2c5ec7194295b24e546b6">view</a></td></tr>
 <tr class="separator:af5e7fb7b7bc2c5ec7194295b24e546b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4325e0a917cf26b4a9b265340ceb8875"><td class="memItemLeft" align="right" valign="top">glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisRenderer.html#a4325e0a917cf26b4a9b265340ceb8875">projection</a></td></tr>
+<tr class="memdesc:a4325e0a917cf26b4a9b265340ceb8875"><td class="mdescLeft">&#160;</td><td class="mdescRight">View and projection matrices.  <a href="classAxisRenderer.html#a4325e0a917cf26b4a9b265340ceb8875">More...</a><br /></td></tr>
 <tr class="separator:a4325e0a917cf26b4a9b265340ceb8875"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d6ea174de4266f2a4bc068229984522"><td class="memItemLeft" align="right" valign="top">GLuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisRenderer.html#a3d6ea174de4266f2a4bc068229984522">modelLoc</a></td></tr>
 <tr class="separator:a3d6ea174de4266f2a4bc068229984522"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52e2c42a552b817741ee9c7596214cd3"><td class="memItemLeft" align="right" valign="top">GLuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisRenderer.html#a52e2c42a552b817741ee9c7596214cd3">viewLoc</a></td></tr>
 <tr class="separator:a52e2c42a552b817741ee9c7596214cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e56d4084524c7872777f52b5bc107e2"><td class="memItemLeft" align="right" valign="top">GLuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisRenderer.html#a9e56d4084524c7872777f52b5bc107e2">projLoc</a></td></tr>
+<tr class="memdesc:a9e56d4084524c7872777f52b5bc107e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shader uniform locations.  <a href="classAxisRenderer.html#a9e56d4084524c7872777f52b5bc107e2">More...</a><br /></td></tr>
 <tr class="separator:a9e56d4084524c7872777f52b5bc107e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9074f64c35fbc194ae92e31d4b9cbc9c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classTransform.html">Transform</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisRenderer.html#a9074f64c35fbc194ae92e31d4b9cbc9c">axisTransform</a></td></tr>
+<tr class="memdesc:a9074f64c35fbc194ae92e31d4b9cbc9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transformation utilities.  <a href="classAxisRenderer.html#a9074f64c35fbc194ae92e31d4b9cbc9c">More...</a><br /></td></tr>
 <tr class="separator:a9074f64c35fbc194ae92e31d4b9cbc9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Renders RGB coordinate axes as a visual reference overlay. </p>
+<p>This renderer draws a 3-axis gizmo to indicate world coordinate frame:</p><ul>
+<li><b>Red</b>: +X axis</li>
+<li><b>Green</b>: +Y axis</li>
+<li><b>Blue</b>: +Z axis</li>
+</ul>
+<p>The axes are rendered as colored line segments originating from the origin. Useful for debugging orientation and as a visual reference for camera position.</p>
+<p><b>Implementation</b>:</p><ul>
+<li>Uses separate shader program from main scene renderer</li>
+<li>Geometry stored in VAO/VBO as line list with per-vertex colors</li>
+<li>Renders on top of scene geometry (can be depth-tested or overlaid) </li>
+</ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab2637469087182e25b7b4db2dd1dd15c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab2637469087182e25b7b4db2dd1dd15c">&#9670;&nbsp;</a></span>AxisRenderer()</h2>
 
@@ -175,7 +202,7 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="classAxisRenderer_a7fce768f9364c3679434320b8b7aa904_cgraph.png" border="0" usemap="#aclassAxisRenderer_a7fce768f9364c3679434320b8b7aa904_cgraph" alt=""/></div>
 <map name="aclassAxisRenderer_a7fce768f9364c3679434320b8b7aa904_cgraph" id="aclassAxisRenderer_a7fce768f9364c3679434320b8b7aa904_cgraph">
 <area shape="rect" title=" " alt="" coords="5,5,220,32"/>
-<area shape="rect" href="classAxisRenderer.html#ab327f44ce3abe6fdf30380d4d081b413" title=" " alt="" coords="268,5,448,32"/>
+<area shape="rect" href="classAxisRenderer.html#ab327f44ce3abe6fdf30380d4d081b413" title="Release OpenGL resources." alt="" coords="268,5,448,32"/>
 </map>
 </div>
 
@@ -196,13 +223,16 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Initialize axis renderer (load shaders, setup geometry) </p>
+<dl class="section return"><dt>Returns</dt><dd>true if initialization succeeded, false on error </dd></dl>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classAxisRenderer_aeffaaf38c5561bc783f4d614f3b75edf_icgraph.png" border="0" usemap="#aclassAxisRenderer_aeffaaf38c5561bc783f4d614f3b75edf_icgraph" alt=""/></div>
 <map name="aclassAxisRenderer_aeffaaf38c5561bc783f4d614f3b75edf_icgraph" id="aclassAxisRenderer_aeffaaf38c5561bc783f4d614f3b75edf_icgraph">
-<area shape="rect" title=" " alt="" coords="280,5,419,32"/>
-<area shape="rect" href="classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96" title="Initializes the application, setting up GLFW, OpenGL, ImGui, and all core components." alt="" coords="108,5,232,32"/>
+<area shape="rect" title="Initialize axis renderer (load shaders, setup geometry)" alt="" coords="280,5,419,32"/>
+<area shape="rect" href="classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96" title="Initialize the application subsystems." alt="" coords="108,5,232,32"/>
 <area shape="rect" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -225,6 +255,14 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>Render axes in 2D mode (legacy - deprecated) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">transform</td><td>Transformation utilities </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="aeafc1964746638b7067055b5bf616d51"></a>
@@ -243,6 +281,14 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>Render axes in 3D mode. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">transform</td><td>Transformation utilities (view/projection matrices) </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="ab327f44ce3abe6fdf30380d4d081b413"></a>
@@ -259,12 +305,14 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Release OpenGL resources. </p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classAxisRenderer_ab327f44ce3abe6fdf30380d4d081b413_icgraph.png" border="0" usemap="#aclassAxisRenderer_ab327f44ce3abe6fdf30380d4d081b413_icgraph" alt=""/></div>
 <map name="aclassAxisRenderer_ab327f44ce3abe6fdf30380d4d081b413_icgraph" id="aclassAxisRenderer_ab327f44ce3abe6fdf30380d4d081b413_icgraph">
-<area shape="rect" title=" " alt="" coords="268,5,448,32"/>
+<area shape="rect" title="Release OpenGL resources." alt="" coords="268,5,448,32"/>
 <area shape="rect" href="classAxisRenderer.html#a7fce768f9364c3679434320b8b7aa904" title=" " alt="" coords="5,5,220,32"/>
 </map>
 </div>
@@ -283,6 +331,8 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Transformation utilities. </p>
 
 </div>
 </div>
@@ -312,6 +362,8 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>View and projection matrices. </p>
+
 </div>
 </div>
 <a id="a9e56d4084524c7872777f52b5bc107e2"></a>
@@ -326,6 +378,8 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>Shader uniform locations. </p>
+
 </div>
 </div>
 <a id="a3a9f352852fbba20141f8076798ad333"></a>
@@ -339,6 +393,8 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Shader program for axis rendering. </p>
 
 </div>
 </div>
@@ -367,6 +423,8 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Vertex array and buffer objects. </p>
 
 </div>
 </div>

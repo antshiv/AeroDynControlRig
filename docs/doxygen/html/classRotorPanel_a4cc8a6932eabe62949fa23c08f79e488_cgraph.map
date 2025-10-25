@@ -1,10 +1,10 @@
 <map id="RotorPanel::draw" name="RotorPanel::draw">
-<area shape="rect" id="node1" title=" " alt="" coords="5,157,137,184"/>
-<area shape="rect" id="node2" href="$namespaceui.html#a0053c22f687ace038e6a6625e751ac6c" title=" " alt="" coords="199,5,309,32"/>
-<area shape="rect" id="node3" href="$namespaceui.html#a447c8573ad59f48165a527a06c94fb62" title=" " alt="" coords="371,56,453,83"/>
-<area shape="rect" id="node4" href="$namespaceui.html#a23857d08f2eee27af80c1607a82cfded" title=" " alt="" coords="195,107,313,133"/>
-<area shape="rect" id="node5" href="$namespaceui.html#a27aa4868ffcd17787cc35f7e24a0c616" title=" " alt="" coords="373,157,451,184"/>
-<area shape="rect" id="node6" href="$namespaceui.html#aab4c47f869143e855e5a9cb8b6f2cf8b" title=" " alt="" coords="206,208,302,235"/>
-<area shape="rect" id="node7" href="$classRotorPanel.html#a73e51d326aa393b0cff9184f140f4779" title=" " alt="" coords="185,259,323,285"/>
+<area shape="rect" id="node1" title="Render the panel&#39;s ImGui interface." alt="" coords="5,157,137,184"/>
+<area shape="rect" id="node2" href="$group__UIWidgets.html#gae86fdebbe43a915410d1bf0c16c4cb17" title="Begin a Card container with consistent styling." alt="" coords="199,5,309,32"/>
+<area shape="rect" id="node3" href="$namespaceui.html#ab3d0346c22a3101df28246449a445ebf" title=" " alt="" coords="371,56,453,83"/>
+<area shape="rect" id="node4" href="$group__UIWidgets.html#ga2fb6bd477996a90c7d6373454fe6c06c" title="Render a card header with optional badge." alt="" coords="195,107,313,133"/>
+<area shape="rect" id="node5" href="$namespaceui.html#a0681d3cde6bdb95a6bccbc515685754c" title=" " alt="" coords="373,157,451,184"/>
+<area shape="rect" id="node6" href="$group__UIWidgets.html#gaab4c47f869143e855e5a9cb8b6f2cf8b" title="End a Card container (must be called after BeginCard)" alt="" coords="206,208,302,235"/>
+<area shape="rect" id="node7" href="$classRotorPanel.html#a73e51d326aa393b0cff9184f140f4779" title="Get the display name of this panel." alt="" coords="185,259,323,285"/>
 <area shape="rect" id="node8" href="$namespaceui.html#a1dd80ea1df929d07371133bc9945f1a4" title=" " alt="" coords="201,309,307,336"/>
 </map>

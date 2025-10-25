@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -91,16 +93,19 @@ $(document).ready(function(){initNavTree('classApplication.html',''); initResiza
 </div><!--header-->
 <div class="contents">
 
+<p>Main application orchestrating the simulation, rendering, and UI.  
+ <a href="classApplication.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="application_8h_source.html">application.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for Application:</div>
 <div class="dyncontent">
 <div class="center"><img src="classApplication__coll__graph.png" border="0" usemap="#aApplication_coll__map" alt="Collaboration graph"/></div>
 <map name="aApplication_coll__map" id="aApplication_coll__map">
-<area shape="rect" title=" " alt="" coords="80,184,175,211"/>
-<area shape="rect" href="classCamera.html" title=" " alt="" coords="5,95,79,121"/>
+<area shape="rect" title="Main application orchestrating the simulation, rendering, and UI." alt="" coords="80,184,175,211"/>
+<area shape="rect" href="classCamera.html" title="First&#45;person camera with mouse look and WASD movement." alt="" coords="5,95,79,121"/>
 <area shape="rect" href="classTransform.html" title=" " alt="" coords="105,5,192,32"/>
-<area shape="rect" href="classAxisRenderer.html" title=" " alt="" coords="221,95,330,121"/>
+<area shape="rect" href="classAxisRenderer.html" title="Renders RGB coordinate axes as a visual reference overlay." alt="" coords="221,95,330,121"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -111,42 +116,70 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a748bca84fefb9c12661cfaa2f623748d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classApplication.html#a748bca84fefb9c12661cfaa2f623748d">~Application</a> ()</td></tr>
 <tr class="separator:a748bca84fefb9c12661cfaa2f623748d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae92abde0eb4b95fd7503308a13ed8c96"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96">init</a> ()</td></tr>
-<tr class="memdesc:ae92abde0eb4b95fd7503308a13ed8c96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the application, setting up GLFW, OpenGL, ImGui, and all core components.  <a href="classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96">More...</a><br /></td></tr>
+<tr class="memdesc:ae92abde0eb4b95fd7503308a13ed8c96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the application subsystems.  <a href="classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96">More...</a><br /></td></tr>
 <tr class="separator:ae92abde0eb4b95fd7503308a13ed8c96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a66731baa1a6a13cd42f2a8c9bf34dc0e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classApplication.html#a66731baa1a6a13cd42f2a8c9bf34dc0e">running</a> () const</td></tr>
+<tr class="memdesc:a66731baa1a6a13cd42f2a8c9bf34dc0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the application should continue running.  <a href="classApplication.html#a66731baa1a6a13cd42f2a8c9bf34dc0e">More...</a><br /></td></tr>
 <tr class="separator:a66731baa1a6a13cd42f2a8c9bf34dc0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af44c742342adf5305e430ff293f147c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classApplication.html#af44c742342adf5305e430ff293f147c1">tick</a> ()</td></tr>
+<tr class="memdesc:af44c742342adf5305e430ff293f147c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute one frame: update simulation, render 3D, render UI.  <a href="classApplication.html#af44c742342adf5305e430ff293f147c1">More...</a><br /></td></tr>
 <tr class="separator:af44c742342adf5305e430ff293f147c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e7a520d659593b385b246a43e604dfb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classApplication.html#a4e7a520d659593b385b246a43e604dfb">render3D</a> ()</td></tr>
+<tr class="memdesc:a4e7a520d659593b385b246a43e604dfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Render the 3D scene (cube + axes)  <a href="classApplication.html#a4e7a520d659593b385b246a43e604dfb">More...</a><br /></td></tr>
 <tr class="separator:a4e7a520d659593b385b246a43e604dfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad434bdac305884ce971ded815384c976"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classApplication.html#ad434bdac305884ce971ded815384c976">shutdown</a> ()</td></tr>
+<tr class="memdesc:ad434bdac305884ce971ded815384c976"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clean up resources before exit.  <a href="classApplication.html#ad434bdac305884ce971ded815384c976">More...</a><br /></td></tr>
 <tr class="separator:ad434bdac305884ce971ded815384c976"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ad8ade3f4f891c7ac54b5c69d6ca9ce5a"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classApplication.html#ad8ade3f4f891c7ac54b5c69d6ca9ce5a">keyCallback</a> (GLFWwindow *window, int key, int scancode, int action, int mods)</td></tr>
+<tr class="memdesc:ad8ade3f4f891c7ac54b5c69d6ca9ce5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keyboard input callback.  <a href="classApplication.html#ad8ade3f4f891c7ac54b5c69d6ca9ce5a">More...</a><br /></td></tr>
 <tr class="separator:ad8ade3f4f891c7ac54b5c69d6ca9ce5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac06b8d20f2ad820faafb080ea45ca4d4"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classApplication.html#ac06b8d20f2ad820faafb080ea45ca4d4">mouseCallback</a> (GLFWwindow *window, double xpos, double ypos)</td></tr>
+<tr class="memdesc:ac06b8d20f2ad820faafb080ea45ca4d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mouse movement callback.  <a href="classApplication.html#ac06b8d20f2ad820faafb080ea45ca4d4">More...</a><br /></td></tr>
 <tr class="separator:ac06b8d20f2ad820faafb080ea45ca4d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a00d67e65679af5ce18f377f3e6d13d31"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classApplication.html#a00d67e65679af5ce18f377f3e6d13d31">scrollCallback</a> (GLFWwindow *window, double xoffset, double yoffset)</td></tr>
+<tr class="memdesc:a00d67e65679af5ce18f377f3e6d13d31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mouse scroll callback.  <a href="classApplication.html#a00d67e65679af5ce18f377f3e6d13d31">More...</a><br /></td></tr>
 <tr class="separator:a00d67e65679af5ce18f377f3e6d13d31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a32eeac4b1ccc4e25034a54214c1df85b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classTransform.html">Transform</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classApplication.html#a32eeac4b1ccc4e25034a54214c1df85b">transform</a></td></tr>
+<tr class="memdesc:a32eeac4b1ccc4e25034a54214c1df85b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transformation matrix utilities.  <a href="classApplication.html#a32eeac4b1ccc4e25034a54214c1df85b">More...</a><br /></td></tr>
 <tr class="separator:a32eeac4b1ccc4e25034a54214c1df85b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a30d655c36d8fdd1158ca0522ce0770cd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCamera.html">Camera</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classApplication.html#a30d655c36d8fdd1158ca0522ce0770cd">camera</a></td></tr>
+<tr class="memdesc:a30d655c36d8fdd1158ca0522ce0770cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">3D scene camera  <a href="classApplication.html#a30d655c36d8fdd1158ca0522ce0770cd">More...</a><br /></td></tr>
 <tr class="separator:a30d655c36d8fdd1158ca0522ce0770cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42a1438eeea6d6e393cfc000230c3011"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classAxisRenderer.html">AxisRenderer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classApplication.html#a42a1438eeea6d6e393cfc000230c3011">axisRenderer</a></td></tr>
+<tr class="memdesc:a42a1438eeea6d6e393cfc000230c3011"><td class="mdescLeft">&#160;</td><td class="mdescRight">Coordinate axis overlay renderer.  <a href="classApplication.html#a42a1438eeea6d6e393cfc000230c3011">More...</a><br /></td></tr>
 <tr class="separator:a42a1438eeea6d6e393cfc000230c3011"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17803b92ef5a3cd10484efc61e1c7d4f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classApplication.html#a17803b92ef5a3cd10484efc61e1c7d4f">windowHeight</a></td></tr>
+<tr class="memdesc:a17803b92ef5a3cd10484efc61e1c7d4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current window height (pixels)  <a href="classApplication.html#a17803b92ef5a3cd10484efc61e1c7d4f">More...</a><br /></td></tr>
 <tr class="separator:a17803b92ef5a3cd10484efc61e1c7d4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6348c95a0b888c492bf1d8887e1d2b26"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classApplication.html#a6348c95a0b888c492bf1d8887e1d2b26">windowWidth</a></td></tr>
+<tr class="memdesc:a6348c95a0b888c492bf1d8887e1d2b26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current window width (pixels)  <a href="classApplication.html#a6348c95a0b888c492bf1d8887e1d2b26">More...</a><br /></td></tr>
 <tr class="separator:a6348c95a0b888c492bf1d8887e1d2b26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e2800cbc39cb5864efacb202b6bfb68"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classApplication.html#a7e2800cbc39cb5864efacb202b6bfb68">lastFrame</a> = 0.0f</td></tr>
+<tr class="memdesc:a7e2800cbc39cb5864efacb202b6bfb68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timestamp of last frame (seconds)  <a href="classApplication.html#a7e2800cbc39cb5864efacb202b6bfb68">More...</a><br /></td></tr>
 <tr class="separator:a7e2800cbc39cb5864efacb202b6bfb68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Main application orchestrating the simulation, rendering, and UI. </p>
+<p>The <a class="el" href="classApplication.html" title="Main application orchestrating the simulation, rendering, and UI.">Application</a> class manages the complete lifecycle of the AeroDynControlRig:</p><ul>
+<li>Initializes GLFW window, OpenGL context, and ImGui</li>
+<li>Manages simulation modules (dynamics, sensors, estimators)</li>
+<li>Orchestrates 3D rendering (scene + axis overlays)</li>
+<li>Renders ImGui dashboard with multiple panels</li>
+<li>Handles user input via GLFW callbacks</li>
+</ul>
+<p>Architecture:</p><ul>
+<li>Modules update simulation state each tick</li>
+<li>Panels visualize and control simulation state</li>
+<li><a class="el" href="classRenderer.html" title="OpenGL 3.3 renderer for the main 3D scene.">Renderer</a> displays 3D scene to off-screen framebuffer</li>
+<li>ImGui displays framebuffer texture alongside control panels </li>
+</ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="afa8cc05ce6b6092be5ecdfdae44e05f8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afa8cc05ce6b6092be5ecdfdae44e05f8">&#9670;&nbsp;</a></span>Application()</h2>
 
@@ -197,24 +230,140 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Initializes the application, setting up GLFW, OpenGL, ImGui, and all core components. </p>
+<p>Initialize the application subsystems. </p>
+<p>Initializes the application, setting up GLFW, OpenGL, ImGui, and all core components.</p>
+<p>Initialization sequence:</p><ol type="1">
+<li>GLFW library and window creation</li>
+<li>OpenGL context and GLEW extension loading</li>
+<li>Dear ImGui setup with docking/viewports</li>
+<li>Renderers (main scene + axis overlay)</li>
+<li>Simulation modules (dynamics, sensors, estimators, etc.)</li>
+<li>UI panels</li>
+</ol>
+<dl class="section return"><dt>Returns</dt><dd>true if initialization succeeded, false otherwise</dd></dl>
 <p>This function performs a sequence of critical initialization steps required for the application to run. It handles window creation, OpenGL context setup, graphics library extensions (GLEW), the Dear ImGui user interface, and custom rendering components.</p>
 <p>The order of these initializations is important due to dependencies between libraries.</p>
-<dl class="section return"><dt>Returns</dt><dd><code>true</code> if all initializations are successful, <code>false</code> otherwise. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if all initializations are successful, <code>false</code> otherwise.</dd></dl>
+<p>Initialize the complete application stack</p>
+<p>This function executes the critical initialization sequence for all subsystems. The order is <b>carefully arranged</b> to satisfy dependencies between components.</p>
+<dl class="section note"><dt>Note</dt><dd>Initialization Order Diagram</dd></dl>
+<div class="fragment"><div class="line">┌─────────────────────────────────────────────────────────────┐</div>
+<div class="line">│ <a class="code" href="classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96">Application::init</a>() - Initialization Sequence               │</div>
+<div class="line">└─────────────────────────────────────────────────────────────┘</div>
+<div class="line"> </div>
+<div class="line">Step 1: glfwInit()</div>
+<div class="line">   │</div>
+<div class="line">   ├─► Initializes GLFW library</div>
+<div class="line">   └─► Prepares windowing system</div>
+<div class="line"> </div>
+<div class="line">Step 2: glfwCreateWindow()</div>
+<div class="line">   │</div>
+<div class="line">   ├─► Creates OS window (800x600)</div>
+<div class="line">   ├─► Creates OpenGL 3.3 context</div>
+<div class="line">   └─► Returns window handle</div>
+<div class="line"> </div>
+<div class="line">Step 3: glfwMakeContextCurrent()</div>
+<div class="line">   │</div>
+<div class="line">   ├─► Binds OpenGL context to this thread</div>
+<div class="line">   └─► All subsequent GL calls use this context</div>
+<div class="line"> </div>
+<div class="line">Step 4: glewInit()</div>
+<div class="line">   │</div>
+<div class="line">   ├─► Loads OpenGL function pointers</div>
+<div class="line">   ├─► Enables access to GL 3.3+ functions</div>
+<div class="line">   └─► MUST happen after context is current</div>
+<div class="line"> </div>
+<div class="line">Step 5: ImGui::CreateContext()</div>
+<div class="line">   │</div>
+<div class="line">   ├─► Creates ImGui context</div>
+<div class="line">   ├─► Enables ImGui docking</div>
+<div class="line">   └─► MUST happen after GL context exists</div>
+<div class="line"> </div>
+<div class="line">Step 6: ImGui_ImplGlfw_InitForOpenGL()</div>
+<div class="line">        ImGui_ImplOpenGL3_Init()</div>
+<div class="line">   │</div>
+<div class="line">   ├─► Links ImGui to GLFW (input handling)</div>
+<div class="line">   ├─► Links ImGui to OpenGL (rendering)</div>
+<div class="line">   └─► Compiles ImGui&#39;s internal shaders</div>
+<div class="line"> </div>
+<div class="line">Step 7: renderer.<a class="code" href="classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96">init</a>()</div>
+<div class="line">        <a class="code" href="classApplication.html#a42a1438eeea6d6e393cfc000230c3011">axisRenderer</a>.<a class="code" href="classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96">init</a>()</div>
+<div class="line">   │</div>
+<div class="line">   ├─► Compiles GLSL shaders (vertex + fragment)</div>
+<div class="line">   ├─► Creates VAO/VBO/EBO for geometry</div>
+<div class="line">   ├─► Uploads cube and axis <a class="code" href="renderer_8cpp.html#a25986ed96a435775e363f05540a2f9c4">vertices</a> to GPU</div>
+<div class="line">   └─► MUST happen after glewInit()</div>
+<div class="line"> </div>
+<div class="line">Step 8: initializeModules()</div>
+<div class="line">   │</div>
+<div class="line">   ├─► Creates <a class="code" href="classQuaternionDemoModule.html">QuaternionDemoModule</a></div>
+<div class="line">   ├─► Creates <a class="code" href="classSensorSimulatorModule.html">SensorSimulatorModule</a></div>
+<div class="line">   ├─► Creates <a class="code" href="classComplementaryEstimatorModule.html">ComplementaryEstimatorModule</a></div>
+<div class="line">   ├─► Creates <a class="code" href="classFirstOrderDynamicsModule.html">FirstOrderDynamicsModule</a></div>
+<div class="line">   ├─► Creates <a class="code" href="classRotorTelemetryModule.html">RotorTelemetryModule</a></div>
+<div class="line">   └─► Calls initialize() on each module</div>
+<div class="line"> </div>
+<div class="line">Step 9: initializePanels()</div>
+<div class="line">   │</div>
+<div class="line">   ├─► Registers <a class="code" href="classControlPanel.html">ControlPanel</a></div>
+<div class="line">   ├─► Registers <a class="code" href="classTelemetryPanel.html">TelemetryPanel</a></div>
+<div class="line">   ├─► Registers <a class="code" href="classDynamicsPanel.html">DynamicsPanel</a></div>
+<div class="line">   ├─► Registers <a class="code" href="classEstimatorPanel.html">EstimatorPanel</a></div>
+<div class="line">   ├─► Registers <a class="code" href="classRotorPanel.html">RotorPanel</a></div>
+<div class="line">   ├─► Registers <a class="code" href="classSensorPanel.html">SensorPanel</a></div>
+<div class="line">   └─► Registers <a class="code" href="classPowerPanel.html">PowerPanel</a></div>
+<div class="line"> </div>
+<div class="line">Result: <a class="code" href="classApplication.html">Application</a> ready for <a class="code" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> loop</div>
+<div class="ttc" id="aclassApplication_html"><div class="ttname"><a href="classApplication.html">Application</a></div><div class="ttdoc">Main application orchestrating the simulation, rendering, and UI.</div><div class="ttdef"><b>Definition:</b> application.h:41</div></div>
+<div class="ttc" id="aclassApplication_html_a42a1438eeea6d6e393cfc000230c3011"><div class="ttname"><a href="classApplication.html#a42a1438eeea6d6e393cfc000230c3011">Application::axisRenderer</a></div><div class="ttdeci">AxisRenderer axisRenderer</div><div class="ttdoc">Coordinate axis overlay renderer.</div><div class="ttdef"><b>Definition:</b> application.h:49</div></div>
+<div class="ttc" id="aclassApplication_html_ae92abde0eb4b95fd7503308a13ed8c96"><div class="ttname"><a href="classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96">Application::init</a></div><div class="ttdeci">bool init()</div><div class="ttdoc">Initialize the application subsystems.</div><div class="ttdef"><b>Definition:</b> application.cpp:237</div></div>
+<div class="ttc" id="aclassComplementaryEstimatorModule_html"><div class="ttname"><a href="classComplementaryEstimatorModule.html">ComplementaryEstimatorModule</a></div><div class="ttdoc">Estimates attitude using a complementary filter fusing gyro and accel.</div><div class="ttdef"><b>Definition:</b> complementary_estimator.h:34</div></div>
+<div class="ttc" id="aclassControlPanel_html"><div class="ttname"><a href="classControlPanel.html">ControlPanel</a></div><div class="ttdoc">UI panel for simulation playback control.</div><div class="ttdef"><b>Definition:</b> control_panel.h:22</div></div>
+<div class="ttc" id="aclassDynamicsPanel_html"><div class="ttname"><a href="classDynamicsPanel.html">DynamicsPanel</a></div><div class="ttdoc">UI panel for configuring and visualizing first-order dynamics.</div><div class="ttdef"><b>Definition:</b> dynamics_panel.h:28</div></div>
+<div class="ttc" id="aclassEstimatorPanel_html"><div class="ttname"><a href="classEstimatorPanel.html">EstimatorPanel</a></div><div class="ttdoc">UI panel displaying state estimator outputs and diagnostics.</div><div class="ttdef"><b>Definition:</b> estimator_panel.h:23</div></div>
+<div class="ttc" id="aclassFirstOrderDynamicsModule_html"><div class="ttname"><a href="classFirstOrderDynamicsModule.html">FirstOrderDynamicsModule</a></div><div class="ttdoc">Simulates a simple first-order linear time-invariant (LTI) system.</div><div class="ttdef"><b>Definition:</b> first_order_dynamics.h:37</div></div>
+<div class="ttc" id="aclassPowerPanel_html"><div class="ttname"><a href="classPowerPanel.html">PowerPanel</a></div><div class="ttdoc">UI panel monitoring electrical power consumption.</div><div class="ttdef"><b>Definition:</b> power_panel.h:27</div></div>
+<div class="ttc" id="aclassQuaternionDemoModule_html"><div class="ttname"><a href="classQuaternionDemoModule.html">QuaternionDemoModule</a></div><div class="ttdoc">Simulates rigid body attitude dynamics using quaternion integration.</div><div class="ttdef"><b>Definition:</b> quaternion_demo.h:24</div></div>
+<div class="ttc" id="aclassRotorPanel_html"><div class="ttname"><a href="classRotorPanel.html">RotorPanel</a></div><div class="ttdoc">UI panel displaying rotor performance metrics.</div><div class="ttdef"><b>Definition:</b> rotor_panel.h:26</div></div>
+<div class="ttc" id="aclassRotorTelemetryModule_html"><div class="ttname"><a href="classRotorTelemetryModule.html">RotorTelemetryModule</a></div><div class="ttdoc">Computes rotor thrust, torque, and power from RPM measurements.</div><div class="ttdef"><b>Definition:</b> rotor_telemetry.h:36</div></div>
+<div class="ttc" id="aclassSensorPanel_html"><div class="ttname"><a href="classSensorPanel.html">SensorPanel</a></div><div class="ttdoc">UI panel displaying simulated IMU sensor measurements.</div><div class="ttdef"><b>Definition:</b> sensor_panel.h:23</div></div>
+<div class="ttc" id="aclassSensorSimulatorModule_html"><div class="ttname"><a href="classSensorSimulatorModule.html">SensorSimulatorModule</a></div><div class="ttdoc">Simulates IMU sensor measurements (gyro + accel) based on vehicle state.</div><div class="ttdef"><b>Definition:</b> sensor_simulator.h:26</div></div>
+<div class="ttc" id="aclassTelemetryPanel_html"><div class="ttname"><a href="classTelemetryPanel.html">TelemetryPanel</a></div><div class="ttdoc">UI panel displaying vehicle flight state.</div><div class="ttdef"><b>Definition:</b> telemetry_panel.h:23</div></div>
+<div class="ttc" id="amain_8cpp_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdef"><b>Definition:</b> main.cpp:4</div></div>
+<div class="ttc" id="arenderer_8cpp_html_a25986ed96a435775e363f05540a2f9c4"><div class="ttname"><a href="renderer_8cpp.html#a25986ed96a435775e363f05540a2f9c4">vertices</a></div><div class="ttdeci">float vertices[]</div><div class="ttdef"><b>Definition:</b> renderer.cpp:14</div></div>
+</div><!-- fragment --><h1><a class="anchor" id="init_dependencies"></a>
+Dependency Chain</h1>
+<p>The initialization order <b>cannot be changed</b> without breaking the application:</p>
+<ul>
+<li>GLFW must initialize before creating windows</li>
+<li>Window must exist before creating OpenGL context</li>
+<li>OpenGL context must be current before GLEW init</li>
+<li>GLEW must load GL functions before calling any GL commands</li>
+<li>GL context must exist before ImGui init</li>
+<li>ImGui must initialize before compiling its backends</li>
+<li>Shaders can only compile after GLEW loads GL functions</li>
+<li>Modules/panels can initialize anytime after their dependencies</li>
+</ul>
+<dl class="section return"><dt>Returns</dt><dd>true if all initialization steps succeed </dd>
+<dd>
+false if any step fails (with error logged to stderr)</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classApplication.html#af44c742342adf5305e430ff293f147c1" title="Execute one frame: update simulation, render 3D, render UI.">Application::tick()</a> for the <a class="el" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> loop that uses these initialized resources </dd>
+<dd>
+<a class="el" href="classApplication.html#ad434bdac305884ce971ded815384c976" title="Clean up resources before exit.">Application::shutdown()</a> for the reverse teardown sequence </dd></dl>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classApplication_ae92abde0eb4b95fd7503308a13ed8c96_cgraph.png" border="0" usemap="#aclassApplication_ae92abde0eb4b95fd7503308a13ed8c96_cgraph" alt=""/></div>
 <map name="aclassApplication_ae92abde0eb4b95fd7503308a13ed8c96_cgraph" id="aclassApplication_ae92abde0eb4b95fd7503308a13ed8c96_cgraph">
-<area shape="rect" title="Initializes the application, setting up GLFW, OpenGL, ImGui, and all core components." alt="" coords="5,157,129,184"/>
+<area shape="rect" title="Initialize the application subsystems." alt="" coords="5,157,129,184"/>
 <area shape="rect" href="namespaceui.html#a5e215a312253a017263135e8e9b2fde8" title=" " alt="" coords="215,5,339,32"/>
-<area shape="rect" href="classAxisRenderer.html#aeffaaf38c5561bc783f4d614f3b75edf" title=" " alt="" coords="207,56,346,83"/>
-<area shape="rect" href="classRenderer.html#a628ba0693fd83815acac8c69b7dcf9f0" title=" " alt="" coords="221,107,332,133"/>
-<area shape="rect" href="classApplication.html#ad8ade3f4f891c7ac54b5c69d6ca9ce5a" title=" " alt="" coords="185,157,368,184"/>
+<area shape="rect" href="classAxisRenderer.html#aeffaaf38c5561bc783f4d614f3b75edf" title="Initialize axis renderer (load shaders, setup geometry)" alt="" coords="207,56,346,83"/>
+<area shape="rect" href="classRenderer.html#a628ba0693fd83815acac8c69b7dcf9f0" title="Initialize OpenGL resources (shaders, geometry buffers)" alt="" coords="221,107,332,133"/>
+<area shape="rect" href="classApplication.html#ad8ade3f4f891c7ac54b5c69d6ca9ce5a" title="Keyboard input callback." alt="" coords="185,157,368,184"/>
 <area shape="rect" href="namespaceui.html#a48a441cbee5cba22b870ab29be0356d2" title=" " alt="" coords="223,208,331,235"/>
-<area shape="rect" href="classApplication.html#a00d67e65679af5ce18f377f3e6d13d31" title=" " alt="" coords="179,259,374,285"/>
+<area shape="rect" href="classApplication.html#a00d67e65679af5ce18f377f3e6d13d31" title="Mouse scroll callback." alt="" coords="179,259,374,285"/>
 <area shape="rect" href="classTransform.html#a6eefe7b697e85bbc809482184bc21e0e" title=" " alt="" coords="177,309,376,336"/>
-<area shape="rect" href="classCamera.html#a067090ee525389944ba3bacaa62f7632" title=" " alt="" coords="424,259,635,285"/>
+<area shape="rect" href="classCamera.html#a067090ee525389944ba3bacaa62f7632" title="Process mouse scroll for zoom (FOV adjustment)" alt="" coords="424,259,635,285"/>
 </map>
 </div>
 <div class="dynheader">
@@ -222,7 +371,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classApplication_ae92abde0eb4b95fd7503308a13ed8c96_icgraph.png" border="0" usemap="#aclassApplication_ae92abde0eb4b95fd7503308a13ed8c96_icgraph" alt=""/></div>
 <map name="aclassApplication_ae92abde0eb4b95fd7503308a13ed8c96_icgraph" id="aclassApplication_ae92abde0eb4b95fd7503308a13ed8c96_icgraph">
-<area shape="rect" title="Initializes the application, setting up GLFW, OpenGL, ImGui, and all core components." alt="" coords="108,5,232,32"/>
+<area shape="rect" title="Initialize the application subsystems." alt="" coords="108,5,232,32"/>
 <area shape="rect" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -280,13 +429,25 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Keyboard input callback. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">window</td><td>GLFW window handle </td></tr>
+    <tr><td class="paramname">key</td><td>Key code </td></tr>
+    <tr><td class="paramname">scancode</td><td>Platform-specific scancode </td></tr>
+    <tr><td class="paramname">action</td><td>GLFW_PRESS, GLFW_RELEASE, or GLFW_REPEAT </td></tr>
+    <tr><td class="paramname">mods</td><td>Modifier key flags </td></tr>
+  </table>
+  </dd>
+</dl>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classApplication_ad8ade3f4f891c7ac54b5c69d6ca9ce5a_icgraph.png" border="0" usemap="#aclassApplication_ad8ade3f4f891c7ac54b5c69d6ca9ce5a_icgraph" alt=""/></div>
 <map name="aclassApplication_ad8ade3f4f891c7ac54b5c69d6ca9ce5a_icgraph" id="aclassApplication_ad8ade3f4f891c7ac54b5c69d6ca9ce5a_icgraph">
-<area shape="rect" title=" " alt="" coords="280,5,463,32"/>
-<area shape="rect" href="classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96" title="Initializes the application, setting up GLFW, OpenGL, ImGui, and all core components." alt="" coords="108,5,232,32"/>
+<area shape="rect" title="Keyboard input callback." alt="" coords="280,5,463,32"/>
+<area shape="rect" href="classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96" title="Initialize the application subsystems." alt="" coords="108,5,232,32"/>
 <area shape="rect" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -332,13 +493,23 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Mouse movement callback. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">window</td><td>GLFW window handle </td></tr>
+    <tr><td class="paramname">xpos</td><td>Mouse X position </td></tr>
+    <tr><td class="paramname">ypos</td><td>Mouse Y position </td></tr>
+  </table>
+  </dd>
+</dl>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classApplication_ac06b8d20f2ad820faafb080ea45ca4d4_cgraph.png" border="0" usemap="#aclassApplication_ac06b8d20f2ad820faafb080ea45ca4d4_cgraph" alt=""/></div>
 <map name="aclassApplication_ac06b8d20f2ad820faafb080ea45ca4d4_cgraph" id="aclassApplication_ac06b8d20f2ad820faafb080ea45ca4d4_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,208,32"/>
-<area shape="rect" href="classCamera.html#a4f07e3e1263c93781fb17b104d4f4c80" title=" " alt="" coords="256,5,500,32"/>
+<area shape="rect" title="Mouse movement callback." alt="" coords="5,5,208,32"/>
+<area shape="rect" href="classCamera.html#a4f07e3e1263c93781fb17b104d4f4c80" title="Process mouse movement for look control." alt="" coords="256,5,500,32"/>
 </map>
 </div>
 
@@ -358,23 +529,17 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Render the 3D scene (cube + axes) </p>
+<p>Called by <a class="el" href="classApplication.html#af44c742342adf5305e430ff293f147c1" title="Execute one frame: update simulation, render 3D, render UI.">tick()</a> to render geometry to the off-screen framebuffer. The resulting texture is displayed in the ImGui viewport. </p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classApplication_a4e7a520d659593b385b246a43e604dfb_cgraph.png" border="0" usemap="#aclassApplication_a4e7a520d659593b385b246a43e604dfb_cgraph" alt=""/></div>
 <map name="aclassApplication_a4e7a520d659593b385b246a43e604dfb_cgraph" id="aclassApplication_a4e7a520d659593b385b246a43e604dfb_cgraph">
-<area shape="rect" title=" " alt="" coords="5,248,168,274"/>
-<area shape="rect" href="namespaceui.html#a0053c22f687ace038e6a6625e751ac6c" title=" " alt="" coords="266,96,375,122"/>
-<area shape="rect" href="namespaceui.html#a447c8573ad59f48165a527a06c94fb62" title=" " alt="" coords="473,70,556,97"/>
-<area shape="rect" href="namespaceui.html#a23857d08f2eee27af80c1607a82cfded" title=" " alt="" coords="261,146,380,173"/>
-<area shape="rect" href="namespaceui.html#a27aa4868ffcd17787cc35f7e24a0c616" title=" " alt="" coords="476,298,553,325"/>
-<area shape="rect" href="classPanelManager.html#accbb2906139bed93e60a3b7390c43e90" title=" " alt="" coords="235,197,406,224"/>
-<area shape="rect" href="namespaceui.html#aab4c47f869143e855e5a9cb8b6f2cf8b" title=" " alt="" coords="273,248,369,274"/>
-<area shape="rect" href="classCamera.html#aa2ed9d27803f5edc824e4afe8cbbbfbc" title=" " alt="" coords="216,298,425,325"/>
-<area shape="rect" href="classCamera.html#a2f90e661a78172675ca06ea69667b531" title=" " alt="" coords="233,349,409,376"/>
-<area shape="rect" href="namespaceui.html#aa8a07e2928ca42077565025599baf0f2" title=" " alt="" coords="239,400,402,426"/>
-<area shape="rect" href="namespaceui.html#ad4204ae9873b183dca2479b338348718" title=" " alt="" coords="236,45,405,72"/>
-<area shape="rect" href="attitude__utils_8h.html#a32bc85d5e25e4374b31308af4f530377" title=" " alt="" coords="283,501,358,528"/>
+<area shape="rect" title="Render the 3D scene (cube + axes)" alt="" coords="5,31,168,57"/>
+<area shape="rect" href="classCamera.html#aa2ed9d27803f5edc824e4afe8cbbbfbc" title="Get the perspective projection matrix." alt="" coords="216,5,425,32"/>
+<area shape="rect" href="classCamera.html#a2f90e661a78172675ca06ea69667b531" title="Get the view matrix for rendering." alt="" coords="233,56,409,83"/>
 </map>
 </div>
 <div class="dynheader">
@@ -382,8 +547,8 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classApplication_a4e7a520d659593b385b246a43e604dfb_icgraph.png" border="0" usemap="#aclassApplication_a4e7a520d659593b385b246a43e604dfb_icgraph" alt=""/></div>
 <map name="aclassApplication_a4e7a520d659593b385b246a43e604dfb_icgraph" id="aclassApplication_a4e7a520d659593b385b246a43e604dfb_icgraph">
-<area shape="rect" title=" " alt="" coords="283,5,445,32"/>
-<area shape="rect" href="classApplication.html#af44c742342adf5305e430ff293f147c1" title=" " alt="" coords="108,5,235,32"/>
+<area shape="rect" title="Render the 3D scene (cube + axes)" alt="" coords="283,5,445,32"/>
+<area shape="rect" href="classApplication.html#af44c742342adf5305e430ff293f147c1" title="Execute one frame: update simulation, render 3D, render UI." alt="" coords="108,5,235,32"/>
 <area shape="rect" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -404,12 +569,15 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Check if the application should continue running. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if window is still open, false if close requested </dd></dl>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classApplication_a66731baa1a6a13cd42f2a8c9bf34dc0e_icgraph.png" border="0" usemap="#aclassApplication_a66731baa1a6a13cd42f2a8c9bf34dc0e_icgraph" alt=""/></div>
 <map name="aclassApplication_a66731baa1a6a13cd42f2a8c9bf34dc0e_icgraph" id="aclassApplication_a66731baa1a6a13cd42f2a8c9bf34dc0e_icgraph">
-<area shape="rect" title=" " alt="" coords="108,5,260,32"/>
+<area shape="rect" title="Check if the application should continue running." alt="" coords="108,5,260,32"/>
 <area shape="rect" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -455,13 +623,23 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Mouse scroll callback. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">window</td><td>GLFW window handle </td></tr>
+    <tr><td class="paramname">xoffset</td><td>Horizontal scroll offset </td></tr>
+    <tr><td class="paramname">yoffset</td><td>Vertical scroll offset </td></tr>
+  </table>
+  </dd>
+</dl>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classApplication_a00d67e65679af5ce18f377f3e6d13d31_cgraph.png" border="0" usemap="#aclassApplication_a00d67e65679af5ce18f377f3e6d13d31_cgraph" alt=""/></div>
 <map name="aclassApplication_a00d67e65679af5ce18f377f3e6d13d31_cgraph" id="aclassApplication_a00d67e65679af5ce18f377f3e6d13d31_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,200,32"/>
-<area shape="rect" href="classCamera.html#a067090ee525389944ba3bacaa62f7632" title=" " alt="" coords="248,5,459,32"/>
+<area shape="rect" title="Mouse scroll callback." alt="" coords="5,5,200,32"/>
+<area shape="rect" href="classCamera.html#a067090ee525389944ba3bacaa62f7632" title="Process mouse scroll for zoom (FOV adjustment)" alt="" coords="248,5,459,32"/>
 </map>
 </div>
 <div class="dynheader">
@@ -469,8 +647,8 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classApplication_a00d67e65679af5ce18f377f3e6d13d31_icgraph.png" border="0" usemap="#aclassApplication_a00d67e65679af5ce18f377f3e6d13d31_icgraph" alt=""/></div>
 <map name="aclassApplication_a00d67e65679af5ce18f377f3e6d13d31_icgraph" id="aclassApplication_a00d67e65679af5ce18f377f3e6d13d31_icgraph">
-<area shape="rect" title=" " alt="" coords="280,5,475,32"/>
-<area shape="rect" href="classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96" title="Initializes the application, setting up GLFW, OpenGL, ImGui, and all core components." alt="" coords="108,5,232,32"/>
+<area shape="rect" title="Mouse scroll callback." alt="" coords="280,5,475,32"/>
+<area shape="rect" href="classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96" title="Initialize the application subsystems." alt="" coords="108,5,232,32"/>
 <area shape="rect" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -491,12 +669,15 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Clean up resources before exit. </p>
+<p>Destroys render targets, shuts down ImGui, and terminates GLFW. </p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classApplication_ad434bdac305884ce971ded815384c976_icgraph.png" border="0" usemap="#aclassApplication_ad434bdac305884ce971ded815384c976_icgraph" alt=""/></div>
 <map name="aclassApplication_ad434bdac305884ce971ded815384c976_icgraph" id="aclassApplication_ad434bdac305884ce971ded815384c976_icgraph">
-<area shape="rect" title=" " alt="" coords="108,5,275,32"/>
+<area shape="rect" title="Clean up resources before exit." alt="" coords="108,5,275,32"/>
 <area shape="rect" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -517,24 +698,18 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Execute one frame: update simulation, render 3D, render UI. </p>
+<p>Called each iteration of the main loop. Updates modules, renders 3D scene to framebuffer, and draws ImGui interface. </p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classApplication_af44c742342adf5305e430ff293f147c1_cgraph.png" border="0" usemap="#aclassApplication_af44c742342adf5305e430ff293f147c1_cgraph" alt=""/></div>
 <map name="aclassApplication_af44c742342adf5305e430ff293f147c1_cgraph" id="aclassApplication_af44c742342adf5305e430ff293f147c1_cgraph">
-<area shape="rect" title=" " alt="" coords="5,248,132,274"/>
-<area shape="rect" href="classApplication.html#a4e7a520d659593b385b246a43e604dfb" title=" " alt="" coords="180,248,343,274"/>
-<area shape="rect" href="namespaceui.html#a0053c22f687ace038e6a6625e751ac6c" title=" " alt="" coords="441,96,550,122"/>
-<area shape="rect" href="namespaceui.html#a447c8573ad59f48165a527a06c94fb62" title=" " alt="" coords="648,70,731,97"/>
-<area shape="rect" href="namespaceui.html#a23857d08f2eee27af80c1607a82cfded" title=" " alt="" coords="436,146,555,173"/>
-<area shape="rect" href="namespaceui.html#a27aa4868ffcd17787cc35f7e24a0c616" title=" " alt="" coords="651,298,728,325"/>
-<area shape="rect" href="classPanelManager.html#accbb2906139bed93e60a3b7390c43e90" title=" " alt="" coords="410,197,581,224"/>
-<area shape="rect" href="namespaceui.html#aab4c47f869143e855e5a9cb8b6f2cf8b" title=" " alt="" coords="447,248,543,274"/>
-<area shape="rect" href="classCamera.html#aa2ed9d27803f5edc824e4afe8cbbbfbc" title=" " alt="" coords="391,298,600,325"/>
-<area shape="rect" href="classCamera.html#a2f90e661a78172675ca06ea69667b531" title=" " alt="" coords="407,349,583,376"/>
-<area shape="rect" href="namespaceui.html#aa8a07e2928ca42077565025599baf0f2" title=" " alt="" coords="414,400,577,426"/>
-<area shape="rect" href="namespaceui.html#ad4204ae9873b183dca2479b338348718" title=" " alt="" coords="411,45,580,72"/>
-<area shape="rect" href="attitude__utils_8h.html#a32bc85d5e25e4374b31308af4f530377" title=" " alt="" coords="458,501,533,528"/>
+<area shape="rect" title="Execute one frame: update simulation, render 3D, render UI." alt="" coords="5,31,132,57"/>
+<area shape="rect" href="classApplication.html#a4e7a520d659593b385b246a43e604dfb" title="Render the 3D scene (cube + axes)" alt="" coords="180,31,343,57"/>
+<area shape="rect" href="classCamera.html#aa2ed9d27803f5edc824e4afe8cbbbfbc" title="Get the perspective projection matrix." alt="" coords="391,5,600,32"/>
+<area shape="rect" href="classCamera.html#a2f90e661a78172675ca06ea69667b531" title="Get the view matrix for rendering." alt="" coords="407,56,583,83"/>
 </map>
 </div>
 <div class="dynheader">
@@ -542,7 +717,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classApplication_af44c742342adf5305e430ff293f147c1_icgraph.png" border="0" usemap="#aclassApplication_af44c742342adf5305e430ff293f147c1_icgraph" alt=""/></div>
 <map name="aclassApplication_af44c742342adf5305e430ff293f147c1_icgraph" id="aclassApplication_af44c742342adf5305e430ff293f147c1_icgraph">
-<area shape="rect" title=" " alt="" coords="108,5,235,32"/>
+<area shape="rect" title="Execute one frame: update simulation, render 3D, render UI." alt="" coords="108,5,235,32"/>
 <area shape="rect" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -562,6 +737,8 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>Coordinate axis overlay renderer. </p>
+
 </div>
 </div>
 <a id="a30d655c36d8fdd1158ca0522ce0770cd"></a>
@@ -575,6 +752,8 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>3D scene camera </p>
 
 </div>
 </div>
@@ -590,6 +769,8 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>Timestamp of last frame (seconds) </p>
+
 </div>
 </div>
 <a id="a32eeac4b1ccc4e25034a54214c1df85b"></a>
@@ -603,6 +784,8 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Transformation matrix utilities. </p>
 
 </div>
 </div>
@@ -618,6 +801,8 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>Current window height (pixels) </p>
+
 </div>
 </div>
 <a id="a6348c95a0b888c492bf1d8887e1d2b26"></a>
@@ -631,6 +816,8 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Current window width (pixels) </p>
 
 </div>
 </div>

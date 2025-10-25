@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -89,22 +91,27 @@ $(document).ready(function(){initNavTree('classCamera.html',''); initResizable()
 <p>This is the complete list of members for <a class="el" href="classCamera.html">Camera</a>, including all inherited members.</p>
 <table class="directory">
   <tr class="even"><td class="entry"><a class="el" href="classCamera.html#aa46b61fb3119cb0c888215275f0692a4">Camera</a>(glm::vec3 startPosition=glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3 startUp=glm::vec3(0.0f, 1.0f, 0.0f), float startYaw=-90.0f, float startPitch=0.0f)</td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classCamera.html#a8847cf29c9c124906ad5d97ecb5c55d1">front</a></td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classCamera.html#aa2ed9d27803f5edc824e4afe8cbbbfbc">getProjectionMatrix</a>(float aspectRatio) const</td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classCamera.html#a2f90e661a78172675ca06ea69667b531">getViewMatrix</a>() const</td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classCamera.html#ab56fcb39f580e8d2159cf2c9c6d9a65a">pitch</a></td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classCamera.html#a04b5db2c530d8630660e8cfb93a4b3b5">position</a></td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classCamera.html#a717e67854e1f4f06bbf77bba66079015">processKeyboardInput</a>(Camera_Movement direction, float deltaTime)</td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classCamera.html#a2d0930626f874469be5849c8b4d8e37e">processKeyboardInput_old</a>(int key)</td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classCamera.html#a4f07e3e1263c93781fb17b104d4f4c80">processMouseMovement</a>(float xOffset, float yOffset, bool constrainPitch=true)</td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classCamera.html#a067090ee525389944ba3bacaa62f7632">processMouseScroll</a>(float yOffset)</td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classCamera.html#a02be8aa0dbef77e02dddc715a726fb67">reset</a>()</td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classCamera.html#aebffcc6289dd99df7554b18d00a81161">right</a></td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classCamera.html#af30f67caebaf0ac590aae868e6befb55">dolly</a>(float distance)</td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classCamera.html#a8847cf29c9c124906ad5d97ecb5c55d1">front</a></td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classCamera.html#aa2ed9d27803f5edc824e4afe8cbbbfbc">getProjectionMatrix</a>(float aspectRatio) const</td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classCamera.html#a2f90e661a78172675ca06ea69667b531">getViewMatrix</a>() const</td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classCamera.html#a333a163a3388e87de9387ef54d709d8a">orbit</a>(float yawDegrees, float pitchDegrees)</td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classCamera.html#a007363512e7056ecf01edca366257317">pan</a>(float rightDelta, float upDelta)</td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classCamera.html#ab56fcb39f580e8d2159cf2c9c6d9a65a">pitch</a></td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classCamera.html#a04b5db2c530d8630660e8cfb93a4b3b5">position</a></td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classCamera.html#a717e67854e1f4f06bbf77bba66079015">processKeyboardInput</a>(Camera_Movement direction, float deltaTime)</td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classCamera.html#a2d0930626f874469be5849c8b4d8e37e">processKeyboardInput_old</a>(int key)</td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classCamera.html#a4f07e3e1263c93781fb17b104d4f4c80">processMouseMovement</a>(float xOffset, float yOffset, bool constrainPitch=true)</td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classCamera.html#a067090ee525389944ba3bacaa62f7632">processMouseScroll</a>(float yOffset)</td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classCamera.html#a02be8aa0dbef77e02dddc715a726fb67">reset</a>()</td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classCamera.html#aebffcc6289dd99df7554b18d00a81161">right</a></td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classCamera.html#ad3726620788dae5e0c5f535852cdedbb">setZoom</a>(float newZoom)</td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classCamera.html#a6d091a64fbeaf78315a902a3ad9b1010">target</a></td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="classCamera.html#a3fe5f351380fb118ffc600591769f049">up</a></td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classCamera.html#a97e7a4ff433ea2bfcbfd40469aaf4d83">worldUp</a></td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="classCamera.html#ad76701b22630f2df28a0ae15f0497a3a">yaw</a></td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classCamera.html#a21fc9e142b104d8e94126657abaa075f">zoom</a></td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classCamera.html#aea5d41aec5e559dd7c5c584511dc647f">zoomBy</a>(float delta)</td><td class="entry"><a class="el" href="classCamera.html">Camera</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

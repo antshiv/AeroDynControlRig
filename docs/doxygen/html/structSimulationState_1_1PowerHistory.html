@@ -17,6 +17,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -27,6 +28,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AeroDynControlRig
    </div>
+   <div id="projectbrief">Flight control algorithm testbed with OpenGL 3D visualization and ImGui dashboard</div>
   </td>
  </tr>
  </tbody>
@@ -89,18 +91,26 @@ $(document).ready(function(){initNavTree('structSimulationState_1_1PowerHistory.
 </div><!--header-->
 <div class="contents">
 
+<p>Electrical power consumption tracking.  
+ <a href="structSimulationState_1_1PowerHistory.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="simulation__state_8h_source.html">simulation_state.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a853fcd6de59da7e888dd769f86740bf4"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1PowerHistory.html#a853fcd6de59da7e888dd769f86740bf4">bus_voltage</a> {22.2}</td></tr>
+<tr class="memdesc:a853fcd6de59da7e888dd769f86740bf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Battery/bus voltage (V)  <a href="structSimulationState_1_1PowerHistory.html#a853fcd6de59da7e888dd769f86740bf4">More...</a><br /></td></tr>
 <tr class="separator:a853fcd6de59da7e888dd769f86740bf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f9b6650250b2e99655faedd0fd084e6"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1PowerHistory.html#a2f9b6650250b2e99655faedd0fd084e6">bus_current</a> {0.0}</td></tr>
+<tr class="memdesc:a2f9b6650250b2e99655faedd0fd084e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total current draw (A)  <a href="structSimulationState_1_1PowerHistory.html#a2f9b6650250b2e99655faedd0fd084e6">More...</a><br /></td></tr>
 <tr class="separator:a2f9b6650250b2e99655faedd0fd084e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0fbf98c90c75967a6cac1952c390c725"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1PowerHistory.html#a0fbf98c90c75967a6cac1952c390c725">energy_joule</a> {0.0}</td></tr>
+<tr class="memdesc:a0fbf98c90c75967a6cac1952c390c725"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cumulative energy consumed (J)  <a href="structSimulationState_1_1PowerHistory.html#a0fbf98c90c75967a6cac1952c390c725">More...</a><br /></td></tr>
 <tr class="separator:a0fbf98c90c75967a6cac1952c390c725"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Data Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Electrical power consumption tracking. </p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a2f9b6650250b2e99655faedd0fd084e6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2f9b6650250b2e99655faedd0fd084e6">&#9670;&nbsp;</a></span>bus_current</h2>
 
@@ -112,6 +122,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Total current draw (A) </p>
 
 </div>
 </div>
@@ -127,6 +139,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Battery/bus voltage (V) </p>
+
 </div>
 </div>
 <a id="a0fbf98c90c75967a6cac1952c390c725"></a>
@@ -140,6 +154,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Cumulative energy consumed (J) </p>
 
 </div>
 </div>

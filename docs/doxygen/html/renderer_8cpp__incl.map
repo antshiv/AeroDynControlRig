@@ -1,6 +1,6 @@
 <map id="src/render/renderer.cpp" name="src/render/renderer.cpp">
 <area shape="rect" id="node1" title=" " alt="" coords="611,5,783,32"/>
-<area shape="rect" id="node2" href="$renderer_8h.html" title=" " alt="" coords="269,80,357,107"/>
+<area shape="rect" id="node2" href="$renderer_8h.html" title="Main 3D scene renderer using OpenGL 3.3." alt="" coords="269,80,357,107"/>
 <area shape="rect" id="node4" title=" " alt="" coords="143,229,361,256"/>
 <area shape="rect" id="node5" title=" " alt="" coords="290,155,446,181"/>
 <area shape="rect" id="node6" title=" " alt="" coords="471,155,529,181"/>
