@@ -58,7 +58,7 @@
  * 1. **@ref web_analogy** - Complete web development mapping
  * 2. **@ref gpu_pipeline** - How everything gets rendered (RAM → GPU → Screen)
  * 3. **@ref UITheme** - Color palette and typography (CSS equivalent)
- * 4. **@ref UIWidgets** - Custom components (React/Bootstrap equivalent)
+ * 4. **@ref UIWidgets** - Custom components (vanilla web component pattern)
  *
  * @{
  * @}
@@ -70,7 +70,7 @@
  * @section ui_arch_intro Introduction
  *
  * AeroDynControlRig's UI follows a **component-based architecture** similar to modern
- * web frameworks (React, Vue). The system has three layers:
+ * web fundamentals (HTML, CSS, JavaScript). The system has three layers:
  *
  * 1. **Theme Layer** (global styling) - @ref UITheme
  * 2. **Widget Layer** (reusable components) - @ref UIWidgets
@@ -80,7 +80,7 @@
  *
  * ```
  * ┌─────────────────────────────────────────┐
- * │ SimulationState (central state)         │  ← Like Redux/Vuex store
+ * │ SimulationState (central state)         │  ← Like window.appState global state
  * └─────────────────────────────────────────┘
  *         ↑                    ↓
  *         │                    │
@@ -88,7 +88,7 @@
  *         │                    │
  *         │                    ↓
  *         │          ┌──────────────────────┐
- *         │          │ Panel::draw()        │  ← Like React render()
+ *         │          │ Panel::draw()        │  ← Like JavaScript component render()
  *         │          │  - Calculate data    │
  *         │          │  - Render widgets    │
  *         │          └──────────────────────┘
@@ -144,12 +144,12 @@
  *
  * @section ui_arch_panels Panel System
  *
- * Panels are like React components - they read from state and render UI:
+ * Panels are like JavaScript component classes - they read from state and render UI:
  *
  * ```cpp
  * class RotorPanel : public Panel {
  *     void draw(SimulationState& state, Camera& camera) override {
- *         // 1. Calculate derived data (like React render)
+ *         // 1. Calculate derived data (like JavaScript component logic)
  *         float avg_rpm = calculateAverage(state.rotor.rpm);
  *
  *         // 2. Render UI (declarative)

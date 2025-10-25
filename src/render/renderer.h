@@ -85,21 +85,36 @@ public:
 
 private:
     // === OpenGL Resources ===
-    unsigned int shaderProgram;    ///< Compiled shader program ID
-    unsigned int vao;              ///< Vertex Array Object
-    unsigned int vbo;              ///< Vertex Buffer Object
-    unsigned int ebo;              ///< Element Buffer Object (index buffer)
-    unsigned int indexCount;       ///< Number of indices to draw
+    unsigned int shaderProgram;              ///< Lighting shader program ID
+    unsigned int backgroundShaderProgram;    ///< Background gradient shader ID
+
+    unsigned int cubeVao;                   ///< Cube VAO
+    unsigned int cubeVbo;                   ///< Cube VBO
+    unsigned int cubeEbo;                   ///< Cube EBO
+
+    unsigned int backgroundVao;             ///< Background quad VAO
+    unsigned int backgroundVbo;             ///< Background quad VBO
+
+    unsigned int cubeIndexCount;            ///< Index count for cube
 
     // === Shader Uniform Locations ===
     int modelLoc;                  ///< Location of model matrix uniform
     int viewLoc;                   ///< Location of view matrix uniform
     int projLoc;                   ///< Location of projection matrix uniform
+    int lightDirLoc;               ///< Location of light direction uniform
+    int ambientColorLoc;           ///< Location of ambient color uniform
+    int lightColorLoc;             ///< Location of directional light color uniform
+    int cameraPosLoc;              ///< Location of camera position uniform
 
     // === Transformation Matrices ===
     glm::mat4 model;               ///< Model matrix (object → world)
     glm::mat4 view;                ///< View matrix (world → camera)
     glm::mat4 projection;          ///< Projection matrix (camera → clip space)
+
+    // === Lighting Parameters ===
+    glm::vec3 lightDirection{glm::normalize(glm::vec3(-0.35f, -0.70f, -0.25f))};
+    glm::vec3 ambientColor{0.36f, 0.38f, 0.46f};
+    glm::vec3 directionalColor{1.12f, 1.08f, 1.02f};
 
     // === Initialization Helpers ===
     /**
@@ -111,19 +126,14 @@ private:
     unsigned int loadShader(const char* vertexSrc, const char* fragmentSrc);
 
     /**
-     * @brief Setup cube geometry in GPU buffers (2D mode - legacy)
-     */
-    void setupCubeGeometry();
-
-    /**
      * @brief Setup 3D cube geometry with per-vertex colors
      */
     void setupCubeGeometry3D();
 
     /**
-     * @brief Setup axis geometry (unused - see AxisRenderer)
+     * @brief Setup full-screen background quad
      */
-    void setupAxisGeometry();
+    void setupBackgroundQuad();
 
     /**
      * @brief Initialize matrices to identity/default values

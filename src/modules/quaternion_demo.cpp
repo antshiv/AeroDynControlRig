@@ -69,4 +69,32 @@ void QuaternionDemoModule::update(double dt, SimulationState& state) {
     double q[4];
     euler_to_quaternion(&state.euler, q);
     state.quaternion = {q[0], q[1], q[2], q[3]};
+
+    // Capture attitude history for plotting
+    if (state.time_seconds - state.attitude_history.last_sample_time >= state.attitude_history.sample_interval) {
+        SimulationState::AttitudeSample sample;
+        sample.timestamp = state.time_seconds;
+        sample.quaternion = state.quaternion;
+        sample.roll = state.euler.roll;
+        sample.pitch = state.euler.pitch;
+        sample.yaw = state.euler.yaw;
+        sample.angular_rate = glm::dvec3(
+            deg2rad(state.angular_rate_deg_per_sec.x),
+            deg2rad(state.angular_rate_deg_per_sec.y),
+            deg2rad(state.angular_rate_deg_per_sec.z)
+        );
+
+        state.attitude_history.samples.push_back(sample);
+        state.attitude_history.last_sample_time = state.time_seconds;
+
+        // Prune old samples
+        while (!state.attitude_history.samples.empty()) {
+            double age = state.time_seconds - state.attitude_history.samples.front().timestamp;
+            if (age > state.attitude_history.window_seconds) {
+                state.attitude_history.samples.pop_front();
+            } else {
+                break;
+            }
+        }
+    }
 }

@@ -7,6 +7,8 @@
 #define SIMULATION_STATE_H
 
 #include <array>
+#include <deque>
+#include <limits>
 #include <glm/glm.hpp>
 #include "attitude/euler.h"
 
@@ -29,6 +31,76 @@ struct SimulationState {
     std::array<double, 4> quaternion{1.0, 0.0, 0.0, 0.0};     ///< Current attitude quaternion [w, x, y, z]
     glm::mat4 model_matrix{1.0f};                             ///< Model transformation matrix for rendering
     glm::dvec3 angular_rate_deg_per_sec{0.0, 0.0, 30.0};     ///< Angular velocity (deg/s) about body axes
+
+    /**
+     * @struct AttitudeSample
+     * @brief Historical sample of attitude for plotting/analysis
+     */
+    struct AttitudeSample {
+        double timestamp{0.0};                      ///< Absolute simulation time of the sample
+        std::array<double, 4> quaternion{1.0, 0.0, 0.0, 0.0}; ///< Quaternion components [w, x, y, z]
+        double roll{0.0};                           ///< Roll angle (rad)
+        double pitch{0.0};                          ///< Pitch angle (rad)
+        double yaw{0.0};                            ///< Yaw angle (rad)
+        glm::dvec3 angular_rate{0.0};               ///< Angular rates (rad/s) in body frame
+    };
+
+    struct AttitudeHistory {
+        std::deque<AttitudeSample> samples;     ///< Ring-buffer of samples (oldest at front)
+        double window_seconds{15.0};            ///< Time window to retain (seconds)
+        double sample_interval{0.05};           ///< Desired sampling period (seconds)
+        double last_sample_time{-std::numeric_limits<double>::infinity()}; ///< Timestamp of last captured sample
+    } attitude_history;
+
+    /**
+     * @struct RotorSample
+     * @brief Historical sample of rotor telemetry for one motor
+     */
+    struct RotorSample {
+        double timestamp{0.0};      ///< Absolute simulation time
+        float rpm{0.0f};            ///< Revolutions per minute
+        float thrust{0.0f};         ///< Thrust force (N)
+        float power{0.0f};          ///< Power consumption (W)
+        float temperature{0.0f};    ///< Motor temperature (°C)
+        float voltage{0.0f};        ///< Motor voltage (V)
+        float current{0.0f};        ///< Motor current (A)
+    };
+
+    struct RotorHistory {
+        std::deque<RotorSample> rotor1_samples;  ///< Motor 1 telemetry
+        std::deque<RotorSample> rotor2_samples;  ///< Motor 2 telemetry
+        std::deque<RotorSample> rotor3_samples;  ///< Motor 3 telemetry
+        std::deque<RotorSample> rotor4_samples;  ///< Motor 4 telemetry
+        double window_seconds{60.0};             ///< Time window (60s for rotor analysis)
+        double sample_interval{0.1};             ///< Sample rate (10 Hz)
+        double last_sample_time{-std::numeric_limits<double>::infinity()};
+    } rotor_history;
+
+    /**
+     * @struct SensorSample
+     * @brief Historical IMU sensor sample
+     */
+    struct SensorSample {
+        double timestamp{0.0};           ///< Absolute simulation time
+        glm::vec3 gyro_rad_s{0.0f};      ///< Gyroscope (rad/s)
+        glm::vec3 accel_mps2{0.0f};      ///< Accelerometer (m/s²)
+        glm::vec3 mag_gauss{0.0f};       ///< Magnetometer (gauss)
+    };
+
+    struct SensorHistory {
+        std::deque<SensorSample> samples;
+        double window_seconds{30.0};     ///< Time window (30s for sensor plots)
+        double sample_interval{0.01};    ///< Sample rate (100 Hz, typical IMU rate)
+        double last_sample_time{-std::numeric_limits<double>::infinity()};
+    } sensor_history;
+
+    struct AttitudeHistoryVideoConfig {
+        bool recording{true};                   ///< Whether video capture is active
+        double playback_speed{1.0};             ///< Playback speed multiplier for history replay
+        float trail_length_seconds{5.0f};       ///< Duration of on-scene trail overlay
+        float trail_width{2.0f};                ///< Pixel width for trail rendering
+    } attitude_history_video;
+
 
     // === Timing ===
     double time_seconds{0.0};      ///< Elapsed simulation time (seconds)
@@ -111,11 +183,12 @@ struct SimulationState {
      * @brief User-controlled simulation playback parameters
      */
     struct SimulationControl {
-        bool paused{false};          ///< Pause simulation updates
-        bool use_legacy_ui{false};   ///< Toggle between legacy and dashboard layouts
-        bool use_fixed_dt{false};    ///< Use fixed timestep instead of real-time
-        double fixed_dt{0.01};       ///< Fixed timestep value (seconds)
-        double time_scale{1.0};      ///< Simulation speed multiplier
+        bool paused{false};              ///< Pause simulation updates
+        bool use_legacy_ui{false};       ///< Toggle between legacy and dashboard layouts
+        bool use_fixed_dt{false};        ///< Use fixed timestep instead of real-time
+        double fixed_dt{0.01};           ///< Fixed timestep value (seconds)
+        double time_scale{1.0};          ///< Simulation speed multiplier
+        bool manual_rotation_mode{false}; ///< If true: discrete step rotation (W/A/S/D/Q/E). If false: continuous angular rates (arrow keys)
     } control;
 };
 

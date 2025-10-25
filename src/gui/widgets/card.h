@@ -8,11 +8,11 @@
  * @ingroup WebAnalogy
  * @brief Custom ImGui widgets that mirror web component libraries
  *
- * This module provides reusable UI components similar to React/Vue component libraries
- * or CSS frameworks like Bootstrap. Each widget encapsulates styling, layout, and behavior.
+ * This module provides reusable UI components similar to CSS component libraries
+ * like Bootstrap. Each widget encapsulates styling, layout, and behavior.
  *
  * **Web Analogy:**
- * - `BeginCard/EndCard` = `<Card>` component (React) or `.card` class (Bootstrap)
+ * - `BeginCard/EndCard` = Custom `<div class="card">` element or `.card` class (Bootstrap)
  * - `CardHeader` = `<CardHeader>` with optional badge
  * - `ValueChip` = `<span class="badge">` or Material-UI Chip
  *
@@ -30,14 +30,14 @@ namespace ui {
 /**
  * @brief Configuration options for Card widget
  *
- * **Web Equivalent:** React component props
- * @code{.jsx}
- * <Card
- *   minSize={{width: 320, height: 200}}
- *   enforceMinSize={true}
- *   allowScrollbar={false}
- *   backgroundAlpha={1.0}
- * />
+ * **Web Equivalent:** HTML data attributes or JavaScript config object
+ * @code{.html}
+ * <div class="card"
+ *      data-min-width="320"
+ *      data-min-height="200"
+ *      data-scrollable="false"
+ *      data-bg-alpha="1.0">
+ * </div>
  * @endcode
  *
  * **CSS Equivalent:**

@@ -11,9 +11,11 @@
 #include "gui/style.h"
 #include "gui/widgets/card.h"
 #include "gui/widgets/chip.h"
+#include "gui/widgets/plot_widget.h"
 #include "render/camera.h"
 
 #include "imgui.h"
+#include "implot.h"
 
 namespace {
 std::string FormatEuler(double roll, double pitch, double yaw) {
@@ -119,6 +121,95 @@ void EstimatorPanel::draw(SimulationState& state, Camera& camera) {
                            "N");
     }
     ImGui::Dummy(ImVec2(callout_radius * 2.0f, callout_radius * 2.0f));
+
+    // === ATTITUDE HISTORY PLOT ===
+    ImGui::Separator();
+    ImGui::TextColored(ImVec4(0.4f, 0.8f, 1.0f, 1.0f), "Attitude History");
+
+    // Time window controls
+    float window_sec = static_cast<float>(state.attitude_history.window_seconds);
+    ImGui::Text("Time Window:");
+    ImGui::SameLine();
+    if (ImGui::Button("10s")) state.attitude_history.window_seconds = 10.0;
+    ImGui::SameLine();
+    if (ImGui::Button("30s")) state.attitude_history.window_seconds = 30.0;
+    ImGui::SameLine();
+    if (ImGui::Button("60s")) state.attitude_history.window_seconds = 60.0;
+    ImGui::SameLine();
+    if (ImGui::SliderFloat("##window", &window_sec, 5.0f, 120.0f, "%.0fs")) {
+        state.attitude_history.window_seconds = window_sec;
+    }
+
+    // Plot controls
+    static bool pause_updates = false;
+    ImGui::Checkbox("Pause Updates", &pause_updates);
+    ImGui::SameLine();
+    if (ImGui::Button("Clear History")) {
+        state.attitude_history.samples.clear();
+        state.attitude_history.last_sample_time = -std::numeric_limits<double>::infinity();
+    }
+
+    if (!state.attitude_history.samples.empty()) {
+        ui::PlotConfig plot_config;
+        plot_config.title = "Roll/Pitch/Yaw (deg)";
+        plot_config.y_label = "Angle (deg)";
+        plot_config.size = ImVec2(-1, 250);
+        plot_config.y_min = -180.0;
+        plot_config.y_max = 180.0;
+        plot_config.auto_fit = false;
+
+        // Auto-adjust X axis to show the time window
+        if (!state.attitude_history.samples.empty()) {
+            plot_config.x_min = state.attitude_history.samples.back().timestamp - state.attitude_history.window_seconds;
+            plot_config.x_max = state.attitude_history.samples.back().timestamp;
+        }
+
+        if (ui::BeginPlot(plot_config)) {
+            ui::PlotAttitudeAngles(state.attitude_history.samples);
+            ui::EndPlot();
+        }
+    } else {
+        ImGui::TextDisabled("No attitude history data yet...");
+        ImGui::TextDisabled("Press M to toggle rotation mode and start moving the drone");
+    }
+
+    // === ANGULAR RATE PLOT ===
+    ImGui::Spacing();
+    ImGui::Separator();
+    ImGui::TextColored(ImVec4(0.4f, 0.8f, 1.0f, 1.0f), "Angular Rates (Body Frame)");
+
+    if (!state.attitude_history.samples.empty()) {
+        ui::PlotConfig rate_config;
+        rate_config.title = "Angular Rates (deg/s)";
+        rate_config.y_label = "Rate (deg/s)";
+        rate_config.size = ImVec2(-1, 200);
+        rate_config.y_min = -360.0;
+        rate_config.y_max = 360.0;
+        rate_config.auto_fit = false;
+
+        // Auto-adjust X axis
+        if (!state.attitude_history.samples.empty()) {
+            rate_config.x_min = state.attitude_history.samples.back().timestamp - state.attitude_history.window_seconds;
+            rate_config.x_max = state.attitude_history.samples.back().timestamp;
+        }
+
+        if (ui::BeginPlot(rate_config)) {
+            // Define colors for angular rates
+            static const ImVec4 red(1.0f, 0.3f, 0.3f, 1.0f);
+            static const ImVec4 green(0.3f, 1.0f, 0.3f, 1.0f);
+            static const ImVec4 blue(0.3f, 0.3f, 1.0f, 1.0f);
+
+            // Plot angular rates (convert rad/s to deg/s)
+            ui::PlotLine("Roll Rate", state.attitude_history.samples,
+                         [](const SimulationState::AttitudeSample& s) { return s.angular_rate.x * 57.2958; }, &red);
+            ui::PlotLine("Pitch Rate", state.attitude_history.samples,
+                         [](const SimulationState::AttitudeSample& s) { return s.angular_rate.y * 57.2958; }, &green);
+            ui::PlotLine("Yaw Rate", state.attitude_history.samples,
+                         [](const SimulationState::AttitudeSample& s) { return s.angular_rate.z * 57.2958; }, &blue);
+
+            ui::EndPlot();
+        }
+    }
 
     ui::EndCard();
 }

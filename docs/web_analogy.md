@@ -73,9 +73,9 @@ ui::EndCard();                                                      // </div>
 | `<select>` | `ImGui::Combo()` | Dropdown menu |
 | `<span class="badge">` | `ui::CardHeader()` badge parameter | Status indicator |
 
-### Custom Components (Like React Components)
+### Custom Components (Like Reusable Web Components)
 
-Just as React has `<Card>`, `<Button>`, `<Badge>`, we have:
+Just as web developers create reusable components with custom elements, we have:
 
 ```cpp
 namespace ui {
@@ -92,10 +92,10 @@ namespace ui {
 }
 ```
 
-**Usage matches React props:**
+**Usage matches component configuration:**
 
 ```cpp
-// React: <Card minSize={{width: 320, height: 360}} allowScrollbar={false}>
+// Web component: <custom-card min-width="320" min-height="360" scrollable="false">
 ui::CardOptions options;
 options.min_size = ImVec2(320.0f, 360.0f);
 options.allow_scrollbar = false;
@@ -281,23 +281,23 @@ if (ImGui::SliderFloat("Zoom", &camera.zoom, 0.5f, 5.0f)) {
 - **Web (retained mode)**: Create widget once, attach listeners, manually update DOM when state changes
 - **ImGui (immediate mode)**: Re-declare widget every frame with current state, ImGui handles everything
 
-### Data Binding (Like Vue/React)
+### Data Binding (Like Dynamic Web UIs)
 
-**React:**
-```jsx
-function ControlPanel({ state }) {
-  return (
-    <div>
-      <button onClick={() => state.paused = !state.paused}>
-        {state.paused ? 'Resume' : 'Pause'}
-      </button>
-      <input
-        type="range"
-        value={state.timeScale}
-        onChange={e => state.timeScale = e.target.value}
-      />
-    </div>
-  );
+**JavaScript (vanilla):**
+```javascript
+function renderControlPanel(state) {
+  const button = document.getElementById('pause-btn');
+  button.textContent = state.paused ? 'Resume' : 'Pause';
+  button.onclick = () => {
+    state.paused = !state.paused;
+    renderControlPanel(state); // Re-render
+  };
+
+  const slider = document.getElementById('time-scale');
+  slider.value = state.timeScale;
+  slider.oninput = (e) => {
+    state.timeScale = e.target.value;
+  };
 }
 ```
 
@@ -312,26 +312,33 @@ void ControlPanel::draw(SimulationState& state, Camera& camera) {
 }
 ```
 
-Both are **declarative** - you describe what the UI should look like given the current state, and the framework handles updates.
+ImGui is **declarative** - you describe what the UI should look like given the current state, and ImGui handles updates (similar to how you'd re-render the DOM in vanilla JavaScript).
 
 ---
 
-## 4. Component Architecture (React-Like Panels)
+## 4. Component Architecture (Panel Pattern)
 
-### React Component
-```jsx
-class RotorPanel extends React.Component {
-  render() {
-    const { state } = this.props;
-    const avgRpm = state.rotor.rpm.reduce((a, b) => a + b) / state.rotor.rpm.length;
+### JavaScript Component Pattern
+```javascript
+class RotorPanel {
+  constructor(containerId) {
+    this.container = document.getElementById(containerId);
+  }
 
-    return (
-      <Card title="Rotor Dynamics" badge="Real-time +2.5%">
-        <p className="text-muted">Rotor RPM</p>
-        <h1>{avgRpm.toFixed(0)} RPM</h1>
-        <Chip label="Total Thrust" value={`${state.rotor.totalThrust} N`} />
-      </Card>
-    );
+  render(state) {
+    const avgRpm = state.rotor.rpm.reduce((a, b) => a + b, 0) / state.rotor.rpm.length;
+
+    this.container.innerHTML = `
+      <div class="card">
+        <div class="card-header">
+          <h2>Rotor Dynamics</h2>
+          <span class="badge">Real-time +2.5%</span>
+        </div>
+        <p class="text-muted">Rotor RPM</p>
+        <h1>${avgRpm.toFixed(0)} RPM</h1>
+        <div class="chip">Total Thrust: ${state.rotor.totalThrust} N</div>
+      </div>
+    `;
   }
 }
 ```
@@ -346,14 +353,14 @@ public:
     const char* name() const override { return "Rotor Dynamics"; }
 
     void draw(SimulationState& state, Camera& camera) override {
-        // Calculate derived data (like React render())
+        // Calculate derived data (like JavaScript component logic)
         float rpm_sum = 0.0f;
         for (double rpm : state.rotor.rpm) {
             rpm_sum += static_cast<float>(rpm);
         }
         float avg_rpm = rpm_sum / state.rotor.rpm.size();
 
-        // Render UI (declarative, like JSX)
+        // Render UI (declarative, like building HTML)
         ui::BeginCard(name(), options);
             ui::CardHeader("Rotor Dynamics", "Real-time +2.5%", &palette.success);
 
@@ -373,14 +380,18 @@ public:
 };
 ```
 
-### Panel Registration (Like React Router)
+### Panel Registration (Like Component Registry)
 
-**React Router:**
-```jsx
-<Routes>
-  <Route path="/rotor" element={<RotorPanel />} />
-  <Route path="/telemetry" element={<TelemetryPanel />} />
-</Routes>
+**JavaScript (manual component registration):**
+```javascript
+const panelRegistry = [];
+panelRegistry.push(new RotorPanel('rotor-container'));
+panelRegistry.push(new TelemetryPanel('telemetry-container'));
+
+// Render all panels
+function renderAll(state) {
+  panelRegistry.forEach(panel => panel.render(state));
+}
 ```
 
 **AeroDynControlRig:**
@@ -454,23 +465,21 @@ This creates a complex grid layout similar to CSS Grid's `grid-template-areas`.
 
 ---
 
-## 6. State Management (Vuex/Redux-Like)
+## 6. State Management (Global State Pattern)
 
-### Redux Store
+### JavaScript Global State
 ```javascript
-// Central state
-const store = {
-  state: {
-    attitude: { quaternion: [1, 0, 0, 0] },
-    rotor: { rpm: [0, 0, 0, 0], totalThrust: 0 },
-    control: { paused: false, timeScale: 1.0 }
-  }
+// Central state (like window.appState)
+const appState = {
+  attitude: { quaternion: [1, 0, 0, 0] },
+  rotor: { rpm: [0, 0, 0, 0], totalThrust: 0 },
+  control: { paused: false, timeScale: 1.0 }
 };
 
-// All components read from store
-function RotorPanel() {
-  const rpm = store.state.rotor.rpm;
-  // ...
+// All components read from global state
+function renderRotorPanel() {
+  const rpm = appState.rotor.rpm;
+  // Update DOM based on state
 }
 ```
 
@@ -479,7 +488,7 @@ function RotorPanel() {
 File: `src/core/simulation_state.h`
 
 ```cpp
-// Central state (like Redux store)
+// Central state (like window.appState)
 struct SimulationState {
     // Attitude state
     struct {
@@ -510,12 +519,12 @@ struct SimulationState {
 **All modules and panels receive a reference to this shared state:**
 
 ```cpp
-// Modules update state (like Redux actions)
+// Modules update state (like JavaScript updating appState)
 void QuaternionDemoModule::update(double dt, SimulationState& state) {
     state.attitude.quaternion = /* integrate angular velocity */;
 }
 
-// Panels read state (like React components)
+// Panels read state (like JavaScript reading appState)
 void RotorPanel::draw(SimulationState& state, Camera& camera) {
     float avg_rpm = calculateAverage(state.rotor.rpm);
     ImGui::Text("%.0f RPM", avg_rpm);
@@ -534,8 +543,8 @@ void RotorPanel::draw(SimulationState& state, Camera& camera) {
 | **Components** | `<Card>`, `<Button>` | `ui::BeginCard()`, `ImGui::Button()` |
 | **Design Tokens** | CSS custom properties | `Palette` struct |
 | **Typography** | `@font-face`, `font-family` | `FontSet` struct |
-| **State Management** | Redux/Vuex | `SimulationState` |
-| **Data Binding** | Vue `v-model`, React `useState` | ImGui immediate mode |
+| **State Management** | `window.appState` | `SimulationState` |
+| **Data Binding** | DOM manipulation | ImGui immediate mode |
 | **Component Props** | `<Card title="..." />` | `ui::BeginCard(id, options)` |
 | **Theming** | CSS theme files | `ApplyTheme(style)` |
 | **Interactivity** | Event listeners | `if (ImGui::Button(...))` |
@@ -546,11 +555,14 @@ void RotorPanel::draw(SimulationState& state, Camera& camera) {
 
 ### Example 1: Button with Conditional Text
 
-**Web (React):**
-```jsx
-<button onClick={() => setPaused(!paused)}>
-  {paused ? 'Resume' : 'Pause'}
-</button>
+**Web (vanilla JavaScript):**
+```javascript
+const button = document.getElementById('pause-btn');
+button.textContent = state.paused ? 'Resume' : 'Pause';
+button.onclick = () => {
+  state.paused = !state.paused;
+  button.textContent = state.paused ? 'Resume' : 'Pause';
+};
 ```
 
 **AeroDynControlRig:**
@@ -587,11 +599,11 @@ ui::EndCard();
 
 ### Example 3: Color Badge Based on Condition
 
-**Web:**
-```jsx
-<span className={delta >= 0 ? 'badge-success' : 'badge-danger'}>
-  Real-time {delta >= 0 ? '+' : ''}{delta.toFixed(1)}%
-</span>
+**Web (JavaScript):**
+```javascript
+const badge = document.createElement('span');
+badge.className = delta >= 0 ? 'badge-success' : 'badge-danger';
+badge.textContent = `Real-time ${delta >= 0 ? '+' : ''}${delta.toFixed(1)}%`;
 ```
 
 **AeroDynControlRig:**
@@ -608,7 +620,7 @@ ui::CardHeader("Rotor Dynamics", badge_label, &badge_color);
 
 ### ✅ DO: Think in Components
 
-**Web:** Break UI into reusable React components
+**Web:** Break UI into reusable component functions
 **ImGui:** Create reusable widget functions in `gui/widgets/`
 
 ```cpp
@@ -637,7 +649,7 @@ ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.5f, 0.5f, 0.5f, 1.0f));
 
 ### ✅ DO: Separate Logic from Presentation
 
-**Web:** Keep business logic separate from JSX
+**Web:** Keep business logic separate from DOM manipulation
 **ImGui:** Calculate data before rendering widgets
 
 ```cpp
@@ -681,9 +693,9 @@ If you know web development, you already understand this codebase:
 | **ImGui widgets** | HTML elements (`<div>`, `<button>`, `<input>`) |
 | **Style push/pop** | Inline CSS (`style="..."`) |
 | **Palette** | CSS custom properties (`--color-primary`) |
-| **Panels** | React/Vue components |
-| **SimulationState** | Redux/Vuex store |
-| **Immediate mode** | Declarative UI (React render function) |
+| **Panels** | JavaScript component classes |
+| **SimulationState** | Global `window.appState` object |
+| **Immediate mode** | Declarative UI (re-rendering the DOM) |
 | **Dockspace** | CSS Grid layout |
 
 The only difference is **syntax**:

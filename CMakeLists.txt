@@ -18,6 +18,12 @@ set(IMGUI_SRC
     imgui/backends/imgui_impl_opengl3.cpp
 )
 
+# ImPlot source files (plotting library for ImGui)
+set(IMPLOT_SRC
+    external/implot/implot.cpp
+    external/implot/implot_items.cpp
+)
+
 # Include the attitude library
 add_subdirectory(external/attitudeMathLibrary/)
 
@@ -46,13 +52,14 @@ set(TEST_RIG_SOURCES
     src/render/camera.cpp
 )
 
-add_executable(AeroDynControlRig ${TEST_RIG_SOURCES} ${IMGUI_SRC})
+add_executable(AeroDynControlRig ${TEST_RIG_SOURCES} ${IMGUI_SRC} ${IMPLOT_SRC})
 
 target_include_directories(AeroDynControlRig
     PRIVATE
         src
         imgui
         imgui/backends
+        external/implot
         external/attitudeMathLibrary/include
 )
 

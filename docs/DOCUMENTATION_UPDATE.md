@@ -10,8 +10,8 @@ I've created comprehensive Doxygen documentation that maps your OpenGL/ImGui arc
    - Shows CSS ↔ Theme system equivalences
    - Shows JavaScript ↔ Immediate mode equivalences
    - Includes side-by-side code comparisons
-   - Documents component architecture (React-like panels)
-   - Explains state management (Redux-like SimulationState)
+   - Documents component architecture (JavaScript class-based panels)
+   - Explains state management (global state pattern like window.appState)
 
 ### 2. **GPU Pipeline Guide** (`docs/gpu_pipeline.md`)
    - **22 KB, 900+ lines** of low-level hardware explanation
@@ -208,7 +208,7 @@ bool LoadFonts(ImGuiIO& io, std::string_view font_directory);
 ### For Yourself (Future Reference)
 1. "How do I style a button?" → Check `src/gui/style.h` docs
 2. "What does glBufferData do?" → Check `gpu_pipeline.md`
-3. "How are panels like React?" → Check `web_analogy.md`
+3. "How are panels like JavaScript components?" → Check `web_analogy.md`
 
 ### For Teaching Others
 1. Show them the web analogy guide

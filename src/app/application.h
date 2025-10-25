@@ -200,6 +200,7 @@ private:
      * Releases framebuffer, texture, and depth buffer resources.
      */
     void destroyRenderTarget();
+    void captureAttitudeHistorySample();
 
     // === UI Layout Modes ===
     /**

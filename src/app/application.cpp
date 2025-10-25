@@ -25,6 +25,7 @@
 #include <cstdio>
 #include <cstdint>
 #include <cmath>
+#include <limits>
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
@@ -33,6 +34,7 @@
 #include "imgui_internal.h"
 #include "backends/imgui_impl_glfw.h"
 #include "backends/imgui_impl_opengl3.h"
+#include "implot.h"
 #include <GLFW/glfw3.h>
 
 namespace {
@@ -307,6 +309,9 @@ bool Application::init() {
     ui::ApplyTheme(ImGui::GetStyle());
     ui::LoadFonts(io);
 
+    // Step 6.5: Initialize ImPlot context (for plotting library)
+    ImPlot::CreateContext();
+
     // Step 7: Initialize ImGui backends for GLFW and OpenGL
     // These backends bridge ImGui with the underlying windowing system (GLFW)
     // and rendering API (OpenGL), allowing ImGui to draw its UI elements.
@@ -374,33 +379,42 @@ void Application::tick() {
 
     updateCamera(static_cast<float>(real_dt));
 
-    // Handle body rotation speed adjustments via keyboard.
-    glm::dvec3& body_rates = simulationState.angular_rate_deg_per_sec;
-    auto adjust_rotation = [&](int key, int axis, double direction) {
-        if (glfwGetKey(window, key) == GLFW_PRESS) {
-            const double kRotationAccelDegPerSec2 = 180.0;
-            body_rates[axis] += direction * kRotationAccelDegPerSec2 * real_dt;
+    // === ROTATION MODE TOGGLE ===
+    // Two modes: Manual (discrete steps) vs Automatic (continuous angular rates)
+    // Toggle with 'M' key, controlled in keyCallback
+
+    if (!simulationState.control.manual_rotation_mode) {
+        // AUTOMATIC MODE: Continuous angular rate control (like flying a drone)
+        glm::dvec3& body_rates = simulationState.angular_rate_deg_per_sec;
+        auto adjust_rotation = [&](int key, int axis, double direction) {
+            if (glfwGetKey(window, key) == GLFW_PRESS) {
+                const double kRotationAccelDegPerSec2 = 180.0;
+                body_rates[axis] += direction * kRotationAccelDegPerSec2 * real_dt;
+            }
+        };
+
+        // Roll (X) via Q/E
+        adjust_rotation(GLFW_KEY_Q, 0, 1.0);
+        adjust_rotation(GLFW_KEY_E, 0, -1.0);
+
+        // Pitch (Y) via Up/Down arrows or I/K
+        adjust_rotation(GLFW_KEY_UP, 1, 1.0);
+        adjust_rotation(GLFW_KEY_DOWN, 1, -1.0);
+        adjust_rotation(GLFW_KEY_I, 1, 1.0);
+        adjust_rotation(GLFW_KEY_K, 1, -1.0);
+
+        // Yaw (Z) via Left/Right arrows or J/L
+        adjust_rotation(GLFW_KEY_LEFT, 2, 1.0);
+        adjust_rotation(GLFW_KEY_RIGHT, 2, -1.0);
+        adjust_rotation(GLFW_KEY_J, 2, 1.0);
+        adjust_rotation(GLFW_KEY_L, 2, -1.0);
+
+        if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
+            body_rates = glm::dvec3(0.0f);
         }
-    };
-
-    // Roll (X) via Q/E
-    adjust_rotation(GLFW_KEY_Q, 0, 1.0);
-    adjust_rotation(GLFW_KEY_E, 0, -1.0);
-
-    // Pitch (Y) via Up/Down arrows or I/K
-    adjust_rotation(GLFW_KEY_UP, 1, 1.0);
-    adjust_rotation(GLFW_KEY_DOWN, 1, -1.0);
-    adjust_rotation(GLFW_KEY_I, 1, 1.0);
-    adjust_rotation(GLFW_KEY_K, 1, -1.0);
-
-    // Yaw (Z) via Left/Right arrows or J/L
-    adjust_rotation(GLFW_KEY_LEFT, 2, 1.0);
-    adjust_rotation(GLFW_KEY_RIGHT, 2, -1.0);
-    adjust_rotation(GLFW_KEY_J, 2, 1.0);
-    adjust_rotation(GLFW_KEY_L, 2, -1.0);
-
-    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
-        body_rates = glm::dvec3(0.0f);
+    } else {
+        // MANUAL MODE: Keep angular rates at zero (rotation via W/A/S/D/Q/E in keyCallback)
+        simulationState.angular_rate_deg_per_sec = glm::dvec3(0.0);
     }
 
     if (!simulationState.control.paused) {
@@ -419,6 +433,7 @@ void Application::tick() {
         simulationState.last_dt = 0.0;
     }
 
+    captureAttitudeHistorySample();
     transform.model = simulationState.model_matrix;
     render3D();
 }
@@ -429,6 +444,7 @@ void Application::shutdown() {
     // Cleanup Dear ImGui
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
+    ImPlot::DestroyContext();
     ImGui::DestroyContext();
 
     // Cleanup resources
@@ -454,9 +470,28 @@ void Application::keyCallback(GLFWwindow* window, int key, int scancode, int act
         return;
     }
 
-    // === KEYBOARD-CONTROLLED QUATERNION ROTATION ===
+    // Toggle rotation mode: Manual (discrete steps) vs Automatic (continuous rates)
+    if (action == GLFW_PRESS && key == GLFW_KEY_M) {
+        app->simulationState.control.manual_rotation_mode = !app->simulationState.control.manual_rotation_mode;
+        std::cout << "Rotation mode: "
+                  << (app->simulationState.control.manual_rotation_mode ? "MANUAL (discrete steps)" : "AUTOMATIC (continuous rates)")
+                  << std::endl;
+        // Reset angular rates when switching to manual mode
+        if (app->simulationState.control.manual_rotation_mode) {
+            app->simulationState.angular_rate_deg_per_sec = glm::dvec3(0.0);
+        }
+        return;
+    }
+
+    // === MANUAL ROTATION MODE: Keyboard-controlled discrete quaternion steps ===
+    // Only active when manual_rotation_mode is enabled
+    if (!app->simulationState.control.manual_rotation_mode) {
+        return;  // Automatic mode: use arrow keys/Q/E/I/K/J/L in tick() instead
+    }
     if (action == GLFW_PRESS || action == GLFW_REPEAT) {
-        const double rotation_deg = 5.0;  // Degrees per key press
+        // Check if Shift is held for fine control (1 degree vs 5 degrees)
+        bool shift_held = (mods & GLFW_MOD_SHIFT) != 0;
+        const double rotation_deg = shift_held ? 1.0 : 5.0;  // 1° with Shift, 5° default
 
         // Convert current quaternion to Euler angles
         double roll, pitch, yaw;
@@ -594,6 +629,49 @@ void Application::render3D() {
     // Step 5: Swap buffers and poll events
     glfwSwapBuffers(window);
     glfwPollEvents();
+}
+
+void Application::captureAttitudeHistorySample() {
+    auto& history = simulationState.attitude_history;
+    const auto& video_cfg = simulationState.attitude_history_video;
+    const double now = simulationState.time_seconds;
+
+    if (!std::isfinite(now)) {
+        return;
+    }
+
+    if (!video_cfg.recording) {
+        return;
+    }
+
+    if (now < history.last_sample_time) {
+        history.samples.clear();
+        history.last_sample_time = -std::numeric_limits<double>::infinity();
+    }
+
+    const double interval = std::max(1e-6, history.sample_interval);
+    if (!history.samples.empty() && (now - history.last_sample_time) < interval) {
+        return;
+    }
+
+    SimulationState::AttitudeSample sample;
+    sample.timestamp = now;
+    sample.quaternion = simulationState.quaternion;
+    sample.roll = simulationState.euler.roll;
+    sample.pitch = simulationState.euler.pitch;
+    sample.yaw = simulationState.euler.yaw;
+    history.samples.emplace_back(sample);
+    history.last_sample_time = now;
+
+    const double window = std::max(interval, std::max(0.1, history.window_seconds));
+    while (!history.samples.empty() && (now - history.samples.front().timestamp) > window) {
+        history.samples.pop_front();
+    }
+
+    const size_t max_samples = static_cast<size_t>(window / interval) + 8;
+    while (history.samples.size() > max_samples && !history.samples.empty()) {
+        history.samples.pop_front();
+    }
 }
 
 void Application::renderDashboardLayout(ImGuiIO& io) {
@@ -735,6 +813,20 @@ void Application::renderDashboardLayout(ImGuiIO& io) {
             draw_list->AddText(text_pos + ImVec2(0.0f, 40.0f),
                                ImGui::ColorConvertFloat4ToU32(palette.text_muted),
                                rates_buf);
+
+            const auto& history_cfg = simulationState.attitude_history_video;
+            const bool recording = history_cfg.recording;
+            ImVec4 status_color = recording ? ImVec4(0.86f, 0.29f, 0.29f, 1.0f)
+                                             : ImVec4(0.50f, 0.55f, 0.65f, 1.0f);
+            char history_buf[128];
+            std::snprintf(history_buf,
+                          sizeof(history_buf),
+                          recording ? "History REC • %.1fx" : "History paused • %.1fx",
+                          history_cfg.playback_speed);
+
+            draw_list->AddText(text_pos + ImVec2(0.0f, 60.0f),
+                               ImGui::ColorConvertFloat4ToU32(status_color),
+                               history_buf);
         } else {
             ImGui::Dummy(viewport_size);
             ImGui::SetCursorScreenPos(canvas_pos + ImVec2(18.0f, 18.0f));
@@ -1065,6 +1157,7 @@ ImTextureID Application::renderSceneToTexture(const ImVec2& size) {
     Transform scene_transform = transform;
     scene_transform.projection = camera.getProjectionMatrix(static_cast<float>(requested_width) /
                                                             static_cast<float>(requested_height));
+    scene_transform.camera_position = camera.position;
 
     renderer.renderFrame3D(scene_transform);
     axisRenderer.render3D(scene_transform);

@@ -9,9 +9,13 @@ public:
     glm::mat4 model;      // Local transformations
     glm::mat4 view;       // Camera transformations
     glm::mat4 projection; // Projection matrix
+    glm::vec3 camera_position; // Camera world position
 
     Transform() 
-        : model(glm::mat4(1.0f)), view(glm::mat4(1.0f)), projection(glm::mat4(1.0f)) {}
+        : model(glm::mat4(1.0f)),
+          view(glm::mat4(1.0f)),
+          projection(glm::mat4(1.0f)),
+          camera_position(0.0f, 0.0f, 3.0f) {}
 
     // Reset model matrix to identity
     void resetModel() {
@@ -48,6 +52,7 @@ void setScale(const glm::vec3& scale) {
 
     // Set view (camera) matrix
     void setView(const glm::vec3& position, const glm::vec3& target, const glm::vec3& up) {
+        camera_position = position;
         view = glm::lookAt(position, target, up);
     }
 
@@ -63,4 +68,3 @@ void setScale(const glm::vec3& scale) {
 };
 
 #endif // TRANSFORM_H
-
