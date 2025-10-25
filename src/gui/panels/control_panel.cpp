@@ -64,5 +64,11 @@ void ControlPanel::draw(SimulationState& state, Camera& camera) {
         camera.reset();
     }
 
+    ImGui::Separator();
+    bool use_legacy_ui = state.control.use_legacy_ui;
+    if (ImGui::Checkbox("Show legacy quaternion UI", &use_legacy_ui)) {
+        state.control.use_legacy_ui = use_legacy_ui;
+    }
+
     ImGui::End();
 }

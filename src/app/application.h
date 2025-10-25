@@ -64,6 +64,8 @@ private:
     ImTextureID renderSceneToTexture(const ImVec2& size);
     bool ensureRenderTarget(int width, int height);
     void destroyRenderTarget();
+    void renderDashboardLayout(ImGuiIO& io);
+    void renderLegacyLayout();
     int sceneWidth = 0;
     int sceneHeight = 0;
 };

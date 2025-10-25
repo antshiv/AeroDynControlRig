@@ -59,6 +59,7 @@ struct SimulationState {
 
     struct SimulationControl {
         bool paused{false};
+        bool use_legacy_ui{false};
         bool use_fixed_dt{false};
         double fixed_dt{0.01};
         double time_scale{1.0};

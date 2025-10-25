@@ -283,13 +283,17 @@ void Application::tick() {
     adjust_rotation(GLFW_KEY_Q, 0, 1.0);
     adjust_rotation(GLFW_KEY_E, 0, -1.0);
 
-    // Pitch (Y) via Up/Down arrows
+    // Pitch (Y) via Up/Down arrows or I/K
     adjust_rotation(GLFW_KEY_UP, 1, 1.0);
     adjust_rotation(GLFW_KEY_DOWN, 1, -1.0);
+    adjust_rotation(GLFW_KEY_I, 1, 1.0);
+    adjust_rotation(GLFW_KEY_K, 1, -1.0);
 
-    // Yaw (Z) via Left/Right arrows
+    // Yaw (Z) via Left/Right arrows or J/L
     adjust_rotation(GLFW_KEY_LEFT, 2, 1.0);
     adjust_rotation(GLFW_KEY_RIGHT, 2, -1.0);
+    adjust_rotation(GLFW_KEY_J, 2, 1.0);
+    adjust_rotation(GLFW_KEY_L, 2, -1.0);
 
     if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
         body_rates = glm::dvec3(0.0f);
@@ -404,6 +408,22 @@ void Application::render3D() {
     ImGui::NewFrame();
 
     ImGuiIO& io = ImGui::GetIO();
+    if (simulationState.control.use_legacy_ui) {
+        renderLegacyLayout();
+    } else {
+        renderDashboardLayout(io);
+    }
+
+    // Render ImGui
+    ImGui::Render();
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+    // Step 5: Swap buffers and poll events
+    glfwSwapBuffers(window);
+    glfwPollEvents();
+}
+
+void Application::renderDashboardLayout(ImGuiIO& io) {
     if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable) {
         ImGuiViewport* viewport = ImGui::GetMainViewport();
         const ImVec2 dock_pos = ImVec2(viewport->Pos.x + kDockspaceMargin,
@@ -596,14 +616,104 @@ void Application::render3D() {
     ui::EndCard();
 
     panelManager.drawAll(simulationState, camera);
+}
 
-    // Render ImGui
-    ImGui::Render();
-    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+void Application::renderLegacyLayout() {
+    ImGui::SetNextWindowPos(ImVec2(32.0f, 32.0f), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowSize(ImVec2(700.0f, 480.0f), ImGuiCond_FirstUseEver);
+    if (ImGui::Begin("Quaternion Playground")) {
+        ImVec2 avail = ImGui::GetContentRegionAvail();
+        avail.x = std::max(avail.x, 1.0f);
+        avail.y = std::max(avail.y, 1.0f);
+        ImTextureID scene_texture = renderSceneToTexture(avail);
+        if (scene_texture) {
+            ImGui::Image(scene_texture,
+                         avail,
+                         ImVec2(0.0f, 1.0f),
+                         ImVec2(1.0f, 0.0f));
+        } else {
+            ImGui::TextUnformatted("Scene renderer unavailable");
+        }
+    }
+    ImGui::End();
 
-    // Step 5: Swap buffers and poll events
-    glfwSwapBuffers(window);
-    glfwPollEvents();
+    ImGui::SetNextWindowPos(ImVec2(760.0f, 32.0f), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowSize(ImVec2(360.0f, 260.0f), ImGuiCond_FirstUseEver);
+    if (ImGui::Begin("Quaternion Controls")) {
+        bool use_modern_dashboard = !simulationState.control.use_legacy_ui;
+        if (ImGui::Checkbox("Use modern dashboard", &use_modern_dashboard)) {
+            simulationState.control.use_legacy_ui = !use_modern_dashboard;
+        }
+
+        ImGui::Separator();
+        float body_rates[3] = {
+            static_cast<float>(simulationState.angular_rate_deg_per_sec.x),
+            static_cast<float>(simulationState.angular_rate_deg_per_sec.y),
+            static_cast<float>(simulationState.angular_rate_deg_per_sec.z)
+        };
+        if (ImGui::SliderFloat3("Body Rates (deg/s)", body_rates, -360.0f, 360.0f, "%.1f")) {
+            simulationState.angular_rate_deg_per_sec = glm::dvec3(body_rates[0], body_rates[1], body_rates[2]);
+        }
+        if (ImGui::Button("Zero Rates")) {
+            simulationState.angular_rate_deg_per_sec = glm::dvec3(0.0);
+        }
+
+        bool paused = simulationState.control.paused;
+        if (ImGui::Checkbox("Pause Simulation", &paused)) {
+            simulationState.control.paused = paused;
+        }
+
+        bool use_fixed_dt = simulationState.control.use_fixed_dt;
+        if (ImGui::Checkbox("Use Fixed dt", &use_fixed_dt)) {
+            simulationState.control.use_fixed_dt = use_fixed_dt;
+        }
+        if (simulationState.control.use_fixed_dt) {
+            double fixed_dt = simulationState.control.fixed_dt;
+            if (ImGui::DragScalar("Fixed dt (s)", ImGuiDataType_Double, &fixed_dt, 0.0001, nullptr, nullptr, "%.4f")) {
+                fixed_dt = std::clamp(fixed_dt, 1e-5, 0.5);
+                simulationState.control.fixed_dt = fixed_dt;
+            }
+        } else {
+            float time_scale = static_cast<float>(simulationState.control.time_scale);
+            if (ImGui::SliderFloat("Time Scale", &time_scale, 0.0f, 2.0f, "%.2f")) {
+                simulationState.control.time_scale = std::max(0.0, static_cast<double>(time_scale));
+            }
+        }
+
+        ImGui::Separator();
+        ImGui::Text("Last dt: %.5f s", simulationState.last_dt);
+        ImGui::Text("Sim time: %.2f s", simulationState.time_seconds);
+        if (ImGui::Button("Reset Simulation Time")) {
+            simulationState.time_seconds = 0.0;
+        }
+    }
+    ImGui::End();
+
+    ImGui::SetNextWindowPos(ImVec2(760.0f, 312.0f), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowSize(ImVec2(360.0f, 220.0f), ImGuiCond_FirstUseEver);
+    if (ImGui::Begin("Orientation State")) {
+        ImGui::Text("Quaternion");
+        ImGui::Text("[%.4f, %.4f, %.4f, %.4f]",
+                    simulationState.quaternion[0],
+                    simulationState.quaternion[1],
+                    simulationState.quaternion[2],
+                    simulationState.quaternion[3]);
+
+        ImGui::Separator();
+        ImGui::Text("Euler (deg)");
+        ImGui::Text("Roll %.1f  Pitch %.1f  Yaw %.1f",
+                    rad2deg(simulationState.euler.roll),
+                    rad2deg(simulationState.euler.pitch),
+                    rad2deg(simulationState.euler.yaw));
+
+        ImGui::Separator();
+        ImGui::Text("Body Rates (deg/s)");
+        ImGui::Text("Roll %.1f  Pitch %.1f  Yaw %.1f",
+                    simulationState.angular_rate_deg_per_sec.x,
+                    simulationState.angular_rate_deg_per_sec.y,
+                    simulationState.angular_rate_deg_per_sec.z);
+    }
+    ImGui::End();
 }
 
 void Application::updateCamera(float deltaTime) {
