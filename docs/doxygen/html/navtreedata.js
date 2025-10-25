@@ -433,101 +433,129 @@ var NAVTREE =
     ] ],
     [ "pixel_truth", "md_docs_pixel_truth.html", null ],
     [ "The Pixel Truth: Everything is Just Computing RGBA", "pixel_truth.html", null ],
+    [ "React/Redux to Vanilla HTML/CSS/JS Cleanup", "md_docs_REACT_TO_VANILLA_CLEANUP_2025_10_25.html", [
+      [ "Files Updated", "md_docs_REACT_TO_VANILLA_CLEANUP_2025_10_25.html#autotoc_md407", [
+        [ "1. <tt>/docs/web_analogy.md</tt>", "md_docs_REACT_TO_VANILLA_CLEANUP_2025_10_25.html#autotoc_md408", null ],
+        [ "2. <tt>/src/gui/widgets/card.h</tt>", "md_docs_REACT_TO_VANILLA_CLEANUP_2025_10_25.html#autotoc_md409", null ],
+        [ "3. <tt>/docs/groups.dox</tt>", "md_docs_REACT_TO_VANILLA_CLEANUP_2025_10_25.html#autotoc_md410", null ]
+      ] ],
+      [ "Philosophy Change", "md_docs_REACT_TO_VANILLA_CLEANUP_2025_10_25.html#autotoc_md412", [
+        [ "Before", "md_docs_REACT_TO_VANILLA_CLEANUP_2025_10_25.html#autotoc_md413", null ],
+        [ "After", "md_docs_REACT_TO_VANILLA_CLEANUP_2025_10_25.html#autotoc_md414", null ]
+      ] ],
+      [ "Why This Change", "md_docs_REACT_TO_VANILLA_CLEANUP_2025_10_25.html#autotoc_md416", null ],
+      [ "Vanilla JavaScript Pattern Used", "md_docs_REACT_TO_VANILLA_CLEANUP_2025_10_25.html#autotoc_md418", [
+        [ "Component Pattern", "md_docs_REACT_TO_VANILLA_CLEANUP_2025_10_25.html#autotoc_md419", null ],
+        [ "State Management Pattern", "md_docs_REACT_TO_VANILLA_CLEANUP_2025_10_25.html#autotoc_md420", null ],
+        [ "Component Registry Pattern", "md_docs_REACT_TO_VANILLA_CLEANUP_2025_10_25.html#autotoc_md421", null ]
+      ] ],
+      [ "Comparison Table Update", "md_docs_REACT_TO_VANILLA_CLEANUP_2025_10_25.html#autotoc_md423", [
+        [ "Before", "md_docs_REACT_TO_VANILLA_CLEANUP_2025_10_25.html#autotoc_md424", null ],
+        [ "After", "md_docs_REACT_TO_VANILLA_CLEANUP_2025_10_25.html#autotoc_md425", null ]
+      ] ],
+      [ "Verification", "md_docs_REACT_TO_VANILLA_CLEANUP_2025_10_25.html#autotoc_md427", null ],
+      [ "Next Steps", "md_docs_REACT_TO_VANILLA_CLEANUP_2025_10_25.html#autotoc_md429", null ],
+      [ "Notes", "md_docs_REACT_TO_VANILLA_CLEANUP_2025_10_25.html#autotoc_md431", null ],
+      [ "Summary of Changes", "md_docs_REACT_TO_VANILLA_CLEANUP_2025_10_25.html#autotoc_md432", null ]
+    ] ],
     [ "Documentation Guide", "md_docs_README.html", [
-      [ "Generating Documentation", "md_docs_README.html#autotoc_md406", [
-        [ "Prerequisites", "md_docs_README.html#autotoc_md407", null ],
-        [ "Build Documentation", "md_docs_README.html#autotoc_md408", null ],
-        [ "View Documentation", "md_docs_README.html#autotoc_md409", null ]
+      [ "Generating Documentation", "md_docs_README.html#autotoc_md434", [
+        [ "Prerequisites", "md_docs_README.html#autotoc_md435", null ],
+        [ "Build Documentation", "md_docs_README.html#autotoc_md436", null ],
+        [ "View Documentation", "md_docs_README.html#autotoc_md437", null ]
       ] ],
-      [ "Documentation Structure", "md_docs_README.html#autotoc_md410", null ],
-      [ "Documentation Features", "md_docs_README.html#autotoc_md411", [
-        [ "1. Interactive Class Diagrams", "md_docs_README.html#autotoc_md412", null ],
-        [ "2. Call Graphs", "md_docs_README.html#autotoc_md413", null ],
-        [ "3. Source Code Browser", "md_docs_README.html#autotoc_md414", null ],
-        [ "4. Visual Diagrams in Comments", "md_docs_README.html#autotoc_md415", null ],
-        [ "5. Search Functionality", "md_docs_README.html#autotoc_md416", null ]
+      [ "Documentation Structure", "md_docs_README.html#autotoc_md438", null ],
+      [ "Documentation Features", "md_docs_README.html#autotoc_md439", [
+        [ "1. Interactive Class Diagrams", "md_docs_README.html#autotoc_md440", null ],
+        [ "2. Call Graphs", "md_docs_README.html#autotoc_md441", null ],
+        [ "3. Source Code Browser", "md_docs_README.html#autotoc_md442", null ],
+        [ "4. Visual Diagrams in Comments", "md_docs_README.html#autotoc_md443", null ],
+        [ "5. Search Functionality", "md_docs_README.html#autotoc_md444", null ]
       ] ],
-      [ "Key Pages to Start With", "md_docs_README.html#autotoc_md417", null ],
-      [ "Diagram Types", "md_docs_README.html#autotoc_md418", [
-        [ "Class Diagrams", "md_docs_README.html#autotoc_md419", null ],
-        [ "Collaboration Diagrams", "md_docs_README.html#autotoc_md420", null ],
-        [ "Call Graphs", "md_docs_README.html#autotoc_md421", null ]
+      [ "Key Pages to Start With", "md_docs_README.html#autotoc_md445", null ],
+      [ "Diagram Types", "md_docs_README.html#autotoc_md446", [
+        [ "Class Diagrams", "md_docs_README.html#autotoc_md447", null ],
+        [ "Collaboration Diagrams", "md_docs_README.html#autotoc_md448", null ],
+        [ "Call Graphs", "md_docs_README.html#autotoc_md449", null ]
       ] ],
-      [ "Tips for Navigating", "md_docs_README.html#autotoc_md422", [
-        [ "For Beginners", "md_docs_README.html#autotoc_md423", null ],
-        [ "For Understanding Data Flow", "md_docs_README.html#autotoc_md424", null ],
-        [ "For Understanding Rendering", "md_docs_README.html#autotoc_md425", null ],
-        [ "For Adding Features", "md_docs_README.html#autotoc_md426", null ]
+      [ "Tips for Navigating", "md_docs_README.html#autotoc_md450", [
+        [ "For Beginners", "md_docs_README.html#autotoc_md451", null ],
+        [ "For Understanding Data Flow", "md_docs_README.html#autotoc_md452", null ],
+        [ "For Understanding Rendering", "md_docs_README.html#autotoc_md453", null ],
+        [ "For Adding Features", "md_docs_README.html#autotoc_md454", null ]
       ] ],
-      [ "Customizing Documentation", "md_docs_README.html#autotoc_md427", null ],
-      [ "Updating Documentation", "md_docs_README.html#autotoc_md428", null ],
-      [ "Troubleshooting", "md_docs_README.html#autotoc_md429", [
-        [ "\"Doxygen not found\"", "md_docs_README.html#autotoc_md430", null ],
-        [ "\"Graphs not generating\"", "md_docs_README.html#autotoc_md431", null ],
-        [ "\"Call graphs missing\"", "md_docs_README.html#autotoc_md432", null ],
-        [ "\"Class diagrams missing\"", "md_docs_README.html#autotoc_md433", null ],
-        [ "\"Documentation incomplete\"", "md_docs_README.html#autotoc_md434", null ]
+      [ "Customizing Documentation", "md_docs_README.html#autotoc_md455", null ],
+      [ "Updating Documentation", "md_docs_README.html#autotoc_md456", null ],
+      [ "Troubleshooting", "md_docs_README.html#autotoc_md457", [
+        [ "\"Doxygen not found\"", "md_docs_README.html#autotoc_md458", null ],
+        [ "\"Graphs not generating\"", "md_docs_README.html#autotoc_md459", null ],
+        [ "\"Call graphs missing\"", "md_docs_README.html#autotoc_md460", null ],
+        [ "\"Class diagrams missing\"", "md_docs_README.html#autotoc_md461", null ],
+        [ "\"Documentation incomplete\"", "md_docs_README.html#autotoc_md462", null ]
       ] ],
-      [ "Resources", "md_docs_README.html#autotoc_md435", null ]
+      [ "Resources", "md_docs_README.html#autotoc_md463", null ]
     ] ],
     [ "Web Development Analogy", "web_analogy.html", [
-      [ "Overview", "web_analogy.html#autotoc_md437", null ],
-      [ "The Three Pillars: HTML ↔ CSS ↔ JavaScript", "web_analogy.html#autotoc_md439", null ],
-      [ "1. HTML = Structure (ImGui Widgets)", "web_analogy.html#autotoc_md441", [
-        [ "Web Markup", "web_analogy.html#autotoc_md442", null ],
-        [ "AeroDynControlRig Equivalent", "web_analogy.html#autotoc_md443", null ],
-        [ "Key Equivalences", "web_analogy.html#autotoc_md444", null ],
-        [ "Custom Components (Like React Components)", "web_analogy.html#autotoc_md445", null ]
+      [ "Overview", "web_analogy.html#autotoc_md465", null ],
+      [ "The Three Pillars: HTML ↔ CSS ↔ JavaScript", "web_analogy.html#autotoc_md467", null ],
+      [ "1. HTML = Structure (ImGui Widgets)", "web_analogy.html#autotoc_md469", [
+        [ "Web Markup", "web_analogy.html#autotoc_md470", null ],
+        [ "AeroDynControlRig Equivalent", "web_analogy.html#autotoc_md471", null ],
+        [ "Key Equivalences", "web_analogy.html#autotoc_md472", null ],
+        [ "Custom Components (Like Reusable Web Components)", "web_analogy.html#autotoc_md473", null ]
       ] ],
-      [ "2. CSS = Styling (Theme System)", "web_analogy.html#autotoc_md447", [
-        [ "Web Stylesheet", "web_analogy.html#autotoc_md448", null ],
-        [ "AeroDynControlRig Equivalent", "web_analogy.html#autotoc_md449", null ],
-        [ "CSS-Like Utilities", "web_analogy.html#autotoc_md450", null ],
-        [ "Typography System", "web_analogy.html#autotoc_md451", null ]
+      [ "2. CSS = Styling (Theme System)", "web_analogy.html#autotoc_md475", [
+        [ "Web Stylesheet", "web_analogy.html#autotoc_md476", null ],
+        [ "AeroDynControlRig Equivalent", "web_analogy.html#autotoc_md477", null ],
+        [ "CSS-Like Utilities", "web_analogy.html#autotoc_md478", null ],
+        [ "Typography System", "web_analogy.html#autotoc_md479", null ]
       ] ],
-      [ "3. JavaScript = Interactivity (Immediate Mode)", "web_analogy.html#autotoc_md453", [
-        [ "Web Event Handling", "web_analogy.html#autotoc_md454", null ],
-        [ "AeroDynControlRig Equivalent (Immediate Mode)", "web_analogy.html#autotoc_md455", null ],
-        [ "Data Binding (Like Vue/React)", "web_analogy.html#autotoc_md456", null ]
+      [ "3. JavaScript = Interactivity (Immediate Mode)", "web_analogy.html#autotoc_md481", [
+        [ "Web Event Handling", "web_analogy.html#autotoc_md482", null ],
+        [ "AeroDynControlRig Equivalent (Immediate Mode)", "web_analogy.html#autotoc_md483", null ],
+        [ "Data Binding (Like Dynamic Web UIs)", "web_analogy.html#autotoc_md484", null ]
       ] ],
-      [ "4. Component Architecture (React-Like Panels)", "web_analogy.html#autotoc_md458", [
-        [ "React Component", "web_analogy.html#autotoc_md459", null ],
-        [ "AeroDynControlRig Panel", "web_analogy.html#autotoc_md460", null ],
-        [ "Panel Registration (Like React Router)", "web_analogy.html#autotoc_md461", null ]
+      [ "4. Component Architecture (Panel Pattern)", "web_analogy.html#autotoc_md486", [
+        [ "JavaScript Component Pattern", "web_analogy.html#autotoc_md487", null ],
+        [ "AeroDynControlRig Panel", "web_analogy.html#autotoc_md488", null ],
+        [ "Panel Registration (Like Component Registry)", "web_analogy.html#autotoc_md489", null ]
       ] ],
-      [ "5. Layout System (Flexbox/Grid-Like)", "web_analogy.html#autotoc_md463", [
-        [ "Web Flexbox", "web_analogy.html#autotoc_md464", null ],
-        [ "ImGui Equivalent", "web_analogy.html#autotoc_md465", null ],
-        [ "Dockspace = CSS Grid", "web_analogy.html#autotoc_md466", null ]
+      [ "5. Layout System (Flexbox/Grid-Like)", "web_analogy.html#autotoc_md491", [
+        [ "Web Flexbox", "web_analogy.html#autotoc_md492", null ],
+        [ "ImGui Equivalent", "web_analogy.html#autotoc_md493", null ],
+        [ "Dockspace = CSS Grid", "web_analogy.html#autotoc_md494", null ]
       ] ],
-      [ "6. State Management (Vuex/Redux-Like)", "web_analogy.html#autotoc_md468", [
-        [ "Redux Store", "web_analogy.html#autotoc_md469", null ],
-        [ "SimulationState (Global State)", "web_analogy.html#autotoc_md470", null ]
+      [ "6. State Management (Global State Pattern)", "web_analogy.html#autotoc_md496", [
+        [ "JavaScript Global State", "web_analogy.html#autotoc_md497", null ],
+        [ "SimulationState (Global State)", "web_analogy.html#autotoc_md498", null ]
       ] ],
-      [ "7. Comparison Table", "web_analogy.html#autotoc_md472", null ],
-      [ "8. Code-to-Code Translation Examples", "web_analogy.html#autotoc_md474", [
-        [ "Example 1: Button with Conditional Text", "web_analogy.html#autotoc_md475", null ],
-        [ "Example 2: Styled Container with Header", "web_analogy.html#autotoc_md476", null ],
-        [ "Example 3: Color Badge Based on Condition", "web_analogy.html#autotoc_md477", null ]
+      [ "7. Comparison Table", "web_analogy.html#autotoc_md500", null ],
+      [ "8. Code-to-Code Translation Examples", "web_analogy.html#autotoc_md502", [
+        [ "Example 1: Button with Conditional Text", "web_analogy.html#autotoc_md503", null ],
+        [ "Example 2: Styled Container with Header", "web_analogy.html#autotoc_md504", null ],
+        [ "Example 3: Color Badge Based on Condition", "web_analogy.html#autotoc_md505", null ]
       ] ],
-      [ "9. Best Practices (Web → ImGui)", "web_analogy.html#autotoc_md479", [
-        [ "✅ DO: Think in Components", "web_analogy.html#autotoc_md480", null ],
-        [ "✅ DO: Use Design Tokens", "web_analogy.html#autotoc_md481", null ],
-        [ "✅ DO: Separate Logic from Presentation", "web_analogy.html#autotoc_md482", null ],
-        [ "❌ DON'T: Mix Styles Inconsistently", "web_analogy.html#autotoc_md483", null ]
+      [ "9. Best Practices (Web → ImGui)", "web_analogy.html#autotoc_md507", [
+        [ "✅ DO: Think in Components", "web_analogy.html#autotoc_md508", null ],
+        [ "✅ DO: Use Design Tokens", "web_analogy.html#autotoc_md509", null ],
+        [ "✅ DO: Separate Logic from Presentation", "web_analogy.html#autotoc_md510", null ],
+        [ "❌ DON'T: Mix Styles Inconsistently", "web_analogy.html#autotoc_md511", null ]
       ] ],
-      [ "10. Summary", "web_analogy.html#autotoc_md485", null ],
-      [ "Related Documentation", "web_analogy.html#autotoc_md487", null ]
+      [ "10. Summary", "web_analogy.html#autotoc_md513", null ],
+      [ "Related Documentation", "web_analogy.html#autotoc_md515", null ]
     ] ],
     [ "AeroDynControlRig", "md_README.html", [
-      [ "Overview", "md_README.html#autotoc_md489", null ],
-      [ "Directory Layout", "md_README.html#autotoc_md490", null ],
-      [ "Getting Started", "md_README.html#autotoc_md491", null ],
-      [ "Current Features", "md_README.html#autotoc_md492", null ],
-      [ "Roadmap", "md_README.html#autotoc_md493", null ],
-      [ "Long-Term Goals", "md_README.html#autotoc_md494", null ],
-      [ "Ecosystem Map", "md_README.html#autotoc_md495", null ],
-      [ "UI Preview", "md_README.html#autotoc_md496", null ]
+      [ "Overview", "md_README.html#autotoc_md517", null ],
+      [ "Directory Layout", "md_README.html#autotoc_md518", null ],
+      [ "Getting Started", "md_README.html#autotoc_md519", null ],
+      [ "Current Features", "md_README.html#autotoc_md520", null ],
+      [ "Roadmap", "md_README.html#autotoc_md521", null ],
+      [ "Long-Term Goals", "md_README.html#autotoc_md522", null ],
+      [ "Ecosystem Map", "md_README.html#autotoc_md523", null ],
+      [ "UI Preview", "md_README.html#autotoc_md524", [
+        [ "Latest UI (October 2025)", "md_README.html#autotoc_md525", null ],
+        [ "Previous Iterations", "md_README.html#autotoc_md526", null ]
+      ] ]
     ] ],
     [ "Modules", "modules.html", "modules" ],
     [ "Namespaces", "namespaces.html", [
@@ -543,7 +571,7 @@ var NAVTREE =
       [ "Class Index", "classes.html", null ],
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
-        [ "All", "functions.html", null ],
+        [ "All", "functions.html", "functions_dup" ],
         [ "Functions", "functions_func.html", null ],
         [ "Variables", "functions_vars.html", null ]
       ] ]
@@ -553,7 +581,6 @@ var NAVTREE =
       [ "File Members", "globals.html", [
         [ "All", "globals.html", null ],
         [ "Functions", "globals_func.html", null ],
-        [ "Variables", "globals_vars.html", null ],
         [ "Enumerations", "globals_enum.html", null ],
         [ "Enumerator", "globals_eval.html", null ],
         [ "Macros", "globals_defs.html", null ]
@@ -565,9 +592,10 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"euler_8c.html#ad774b88fd06267fc2a237871fc635362",
-"md_docs_NAVIGATION.html#autotoc_md269",
-"structSimulationState_1_1PowerHistory.html#a0fbf98c90c75967a6cac1952c390c725"
+"dynamics__panel_8h.html",
+"md_docs_DOCUMENTATION_UPDATE.html#autotoc_md77",
+"renderer_8h_source.html",
+"web_analogy.html#autotoc_md502"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

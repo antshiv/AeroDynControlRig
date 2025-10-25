@@ -1,0 +1,10 @@
+<map id="ui::Fonts" name="ui::Fonts">
+<area shape="rect" id="node1" title="Get global font set." alt="" coords="380,97,457,124"/>
+<area shape="rect" id="node2" href="$group__UIWidgets.html#ga2fb6bd477996a90c7d6373454fe6c06c" title="Render a card header with optional badge." alt="" coords="213,123,332,149"/>
+<area shape="rect" id="node3" href="$classEstimatorPanel.html#a2f2e0dc7c0287d12b71b412a38d25b96" title="Render the panel&#39;s ImGui interface." alt="" coords="5,56,165,83"/>
+<area shape="rect" id="node4" href="$classPowerPanel.html#a707cada1c41c5a1a38f154f6e93c1280" title="Render the panel&#39;s ImGui interface." alt="" coords="17,5,154,32"/>
+<area shape="rect" id="node6" href="$classRotorPanel.html#a4cc8a6932eabe62949fa23c08f79e488" title="Render the panel&#39;s ImGui interface." alt="" coords="19,173,151,200"/>
+<area shape="rect" id="node7" href="$classSensorPanel.html#a2b9f315ae32bd4883b8532d5369c373d" title="Render the panel&#39;s ImGui interface." alt="" coords="15,224,156,251"/>
+<area shape="rect" id="node8" href="$namespaceui.html#a1dd80ea1df929d07371133bc9945f1a4" title=" " alt="" coords="219,72,326,99"/>
+<area shape="rect" id="node5" href="$classRotorAnalysisPanel.html#a09515034d2e55f6aa1d35d8cbc74863c" title="Render the panel&#39;s ImGui interface." alt="" coords="12,107,159,149"/>
+</map>

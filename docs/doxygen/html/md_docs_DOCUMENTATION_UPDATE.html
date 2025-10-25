@@ -98,8 +98,8 @@ What Was Created</h1>
 <li>Shows CSS ↔ Theme system equivalences</li>
 <li>Shows JavaScript ↔ Immediate mode equivalences</li>
 <li>Includes side-by-side code comparisons</li>
-<li>Documents component architecture (React-like panels)</li>
-<li>Explains state management (Redux-like <a class="el" href="structSimulationState.html" title="Central shared state for the entire simulation.">SimulationState</a>)</li>
+<li>Documents component architecture (JavaScript class-based panels)</li>
+<li>Explains state management (global state pattern like window.appState)</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md47"></a>
 2. &lt;strong&gt;GPU Pipeline Guide&lt;/strong&gt; (&lt;tt&gt;docs/gpu_pipeline.md&lt;/tt&gt;)</h2>
@@ -176,8 +176,7 @@ Key Features</h1>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md58"></a>
 2. Hardware Pipeline Documentation</h2>
 <p><b>Before:</b> </p><div class="fragment"><div class="line"><span class="comment">// This uploads vertices to GPU... somehow?</span></div>
-<div class="line">glBufferData(GL_ARRAY_BUFFER, <span class="keyword">sizeof</span>(<a class="code" href="renderer_8cpp.html#a25986ed96a435775e363f05540a2f9c4">vertices</a>), <a class="code" href="renderer_8cpp.html#a25986ed96a435775e363f05540a2f9c4">vertices</a>, GL_STATIC_DRAW);</div>
-<div class="ttc" id="arenderer_8cpp_html_a25986ed96a435775e363f05540a2f9c4"><div class="ttname"><a href="renderer_8cpp.html#a25986ed96a435775e363f05540a2f9c4">vertices</a></div><div class="ttdeci">float vertices[]</div><div class="ttdef"><b>Definition:</b> renderer.cpp:14</div></div>
+<div class="line">glBufferData(GL_ARRAY_BUFFER, <span class="keyword">sizeof</span>(vertices), vertices, GL_STATIC_DRAW);</div>
 </div><!-- fragment --><p><b>After (in docs):</b> </p><div class="fragment"><div class="line">What Happens:</div>
 <div class="line">1. CPU writes vertices to staging buffer in RAM</div>
 <div class="line">2. OpenGL driver allocates VRAM on GPU</div>
@@ -256,8 +255,8 @@ Color Palette Documentation</h2>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md68"></a>
 Font Loading Documentation</h2>
 <div class="fragment"><div class="line"> </div>
-<div class="line"><span class="keywordtype">bool</span> <a class="code" href="group__UITheme.html#ga937c7fd8bf3958395a41b778183f9acf">LoadFonts</a>(ImGuiIO&amp; io, std::string_view font_directory);</div>
-<div class="ttc" id="agroup__UITheme_html_ga937c7fd8bf3958395a41b778183f9acf"><div class="ttname"><a href="group__UITheme.html#ga937c7fd8bf3958395a41b778183f9acf">LoadFonts</a></div><div class="ttdeci">bool LoadFonts(ImGuiIO &amp;io, std::string_view font_directory=&quot;assets/fonts&quot;)</div><div class="ttdoc">Load custom fonts from TTF files.</div></div>
+<div class="line"><span class="keywordtype">bool</span> <a class="code" href="group__UITheme.html#ga97e4fd264352b07f6d75c83922240cb4">LoadFonts</a>(ImGuiIO&amp; io, std::string_view font_directory);</div>
+<div class="ttc" id="agroup__UITheme_html_ga97e4fd264352b07f6d75c83922240cb4"><div class="ttname"><a href="group__UITheme.html#ga97e4fd264352b07f6d75c83922240cb4">ui::LoadFonts</a></div><div class="ttdeci">bool LoadFonts(ImGuiIO &amp;io, std::string_view font_directory)</div><div class="ttdoc">Load custom fonts from TTF files.</div><div class="ttdef"><b>Definition:</b> style.cpp:127</div></div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md69"></a>
 How to Use This Documentation</h1>
 <h2><a class="anchor" id="autotoc_md70"></a>
@@ -272,7 +271,7 @@ For Yourself (Future Reference)</h2>
 <ol type="1">
 <li>"How do I style a button?" → Check <code><a class="el" href="style_8h.html">src/gui/style.h</a></code> docs</li>
 <li>"What does glBufferData do?" → Check <code><a class="el" href="gpu__pipeline_8md.html">gpu_pipeline.md</a></code></li>
-<li>"How are panels like React?" → Check <code><a class="el" href="web__analogy_8md.html">web_analogy.md</a></code></li>
+<li>"How are panels like JavaScript components?" → Check <code><a class="el" href="web__analogy_8md.html">web_analogy.md</a></code></li>
 </ol>
 <h2><a class="anchor" id="autotoc_md72"></a>
 For Teaching Others</h2>

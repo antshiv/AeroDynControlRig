@@ -1,0 +1,4 @@
+<map id="RotorAnalysisPanel::name" name="RotorAnalysisPanel::name">
+<area shape="rect" id="node1" title="Get the display name of this panel." alt="" coords="200,5,347,47"/>
+<area shape="rect" id="node2" href="$classRotorAnalysisPanel.html#a09515034d2e55f6aa1d35d8cbc74863c" title="Render the panel&#39;s ImGui interface." alt="" coords="5,5,152,47"/>
+</map>

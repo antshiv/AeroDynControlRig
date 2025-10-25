@@ -1,5 +1,5 @@
 <map id="ui::CardHeader" name="ui::CardHeader">
 <area shape="rect" id="node1" title="Render a card header with optional badge." alt="" coords="5,31,124,57"/>
-<area shape="rect" id="node2" href="$namespaceui.html#ab3d0346c22a3101df28246449a445ebf" title=" " alt="" coords="172,5,255,32"/>
-<area shape="rect" id="node3" href="$namespaceui.html#a0681d3cde6bdb95a6bccbc515685754c" title=" " alt="" coords="175,56,252,83"/>
+<area shape="rect" id="node2" href="$group__UITheme.html#ga447c8573ad59f48165a527a06c94fb62" title="Get global color palette." alt="" coords="172,5,255,32"/>
+<area shape="rect" id="node3" href="$group__UITheme.html#ga27aa4868ffcd17787cc35f7e24a0c616" title="Get global font set." alt="" coords="175,56,252,83"/>
 </map>

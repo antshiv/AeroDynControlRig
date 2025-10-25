@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['web_20development_20analogy_646',['Web Development Analogy',['../web_analogy.html',1,'']]]
+  ['ui_20architecture_20overview_796',['UI Architecture Overview',['../ui_architecture.html',1,'']]]
 ];

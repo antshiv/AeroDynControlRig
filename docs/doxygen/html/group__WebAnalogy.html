@@ -148,9 +148,11 @@ Styling (CSS ↔ Palette)</h3>
 <div class="line">  --accent-base: #1193d4;</div>
 <div class="line">  --text-muted: #98aeb9;</div>
 <div class="line">}</div>
-</div><!-- fragment --> <div class="fragment"><div class="line"><span class="keyword">const</span> ui::Palette&amp; palette = <a class="code" href="namespaceui.html#ab3d0346c22a3101df28246449a445ebf">ui::Colors</a>();</div>
-<div class="line">ImGui::PushStyleColor(ImGuiCol_Text, palette.text_muted);</div>
-<div class="ttc" id="anamespaceui_html_ab3d0346c22a3101df28246449a445ebf"><div class="ttname"><a href="namespaceui.html#ab3d0346c22a3101df28246449a445ebf">ui::Colors</a></div><div class="ttdeci">const Palette &amp; Colors()</div><div class="ttdef"><b>Definition:</b> style.cpp:173</div></div>
+</div><!-- fragment --> <div class="fragment"><div class="line"><span class="keyword">const</span> <a class="code" href="structui_1_1Palette.html">ui::Palette</a>&amp; palette = <a class="code" href="group__UITheme.html#ga447c8573ad59f48165a527a06c94fb62">ui::Colors</a>();</div>
+<div class="line">ImGui::PushStyleColor(ImGuiCol_Text, palette.<a class="code" href="structui_1_1Palette.html#a76e362f3a440a98c3e9114806ec55f52">text_muted</a>);</div>
+<div class="ttc" id="agroup__UITheme_html_ga447c8573ad59f48165a527a06c94fb62"><div class="ttname"><a href="group__UITheme.html#ga447c8573ad59f48165a527a06c94fb62">ui::Colors</a></div><div class="ttdeci">const Palette &amp; Colors()</div><div class="ttdoc">Get global color palette.</div><div class="ttdef"><b>Definition:</b> style.cpp:173</div></div>
+<div class="ttc" id="astructui_1_1Palette_html"><div class="ttname"><a href="structui_1_1Palette.html">ui::Palette</a></div><div class="ttdoc">Color palette (design tokens)</div><div class="ttdef"><b>Definition:</b> style.h:145</div></div>
+<div class="ttc" id="astructui_1_1Palette_html_a76e362f3a440a98c3e9114806ec55f52"><div class="ttname"><a href="structui_1_1Palette.html#a76e362f3a440a98c3e9114806ec55f52">ui::Palette::text_muted</a></div><div class="ttdeci">ImVec4 text_muted</div><div class="ttdoc">#98aeb9 - Lower contrast (labels, secondary)</div><div class="ttdef"><b>Definition:</b> style.h:164</div></div>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md137"></a>
 Interactivity (JavaScript ↔ ImGui)</h3>
 <div class="fragment"><div class="line">button.addEventListener(&#39;click&#39;, () =&gt; {</div>
@@ -165,7 +167,7 @@ Essential Reading</h2>
 <li><b><a class="el" href="web_analogy.html">Web Development Analogy</a></b> - Complete web development mapping</li>
 <li><b><a class="el" href="gpu_pipeline.html">GPU Pipeline: From RAM to Screen</a></b> - How everything gets rendered (RAM → GPU → Screen)</li>
 <li><b><a class="el" href="group__UITheme.html">UI Theme System</a></b> - Color palette and typography (CSS equivalent)</li>
-<li><b><a class="el" href="group__UIWidgets.html">UI Widget Library</a></b> - Custom components (React/Bootstrap equivalent) </li>
+<li><b><a class="el" href="group__UIWidgets.html">UI Widget Library</a></b> - Custom components (vanilla web component pattern) </li>
 </ol>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -291,7 +291,7 @@ Public Attributes</h2></td></tr>
 <div class="line">   │</div>
 <div class="line">   ├─► Compiles GLSL shaders (vertex + fragment)</div>
 <div class="line">   ├─► Creates VAO/VBO/EBO for geometry</div>
-<div class="line">   ├─► Uploads cube and axis <a class="code" href="renderer_8cpp.html#a25986ed96a435775e363f05540a2f9c4">vertices</a> to GPU</div>
+<div class="line">   ├─► Uploads cube and axis vertices to GPU</div>
 <div class="line">   └─► MUST happen after glewInit()</div>
 <div class="line"> </div>
 <div class="line">Step 8: initializeModules()</div>
@@ -316,7 +316,7 @@ Public Attributes</h2></td></tr>
 <div class="line">Result: <a class="code" href="classApplication.html">Application</a> ready for <a class="code" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> loop</div>
 <div class="ttc" id="aclassApplication_html"><div class="ttname"><a href="classApplication.html">Application</a></div><div class="ttdoc">Main application orchestrating the simulation, rendering, and UI.</div><div class="ttdef"><b>Definition:</b> application.h:41</div></div>
 <div class="ttc" id="aclassApplication_html_a42a1438eeea6d6e393cfc000230c3011"><div class="ttname"><a href="classApplication.html#a42a1438eeea6d6e393cfc000230c3011">Application::axisRenderer</a></div><div class="ttdeci">AxisRenderer axisRenderer</div><div class="ttdoc">Coordinate axis overlay renderer.</div><div class="ttdef"><b>Definition:</b> application.h:49</div></div>
-<div class="ttc" id="aclassApplication_html_ae92abde0eb4b95fd7503308a13ed8c96"><div class="ttname"><a href="classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96">Application::init</a></div><div class="ttdeci">bool init()</div><div class="ttdoc">Initialize the application subsystems.</div><div class="ttdef"><b>Definition:</b> application.cpp:237</div></div>
+<div class="ttc" id="aclassApplication_html_ae92abde0eb4b95fd7503308a13ed8c96"><div class="ttname"><a href="classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96">Application::init</a></div><div class="ttdeci">bool init()</div><div class="ttdoc">Initialize the application subsystems.</div><div class="ttdef"><b>Definition:</b> application.cpp:246</div></div>
 <div class="ttc" id="aclassComplementaryEstimatorModule_html"><div class="ttname"><a href="classComplementaryEstimatorModule.html">ComplementaryEstimatorModule</a></div><div class="ttdoc">Estimates attitude using a complementary filter fusing gyro and accel.</div><div class="ttdef"><b>Definition:</b> complementary_estimator.h:34</div></div>
 <div class="ttc" id="aclassControlPanel_html"><div class="ttname"><a href="classControlPanel.html">ControlPanel</a></div><div class="ttdoc">UI panel for simulation playback control.</div><div class="ttdef"><b>Definition:</b> control_panel.h:22</div></div>
 <div class="ttc" id="aclassDynamicsPanel_html"><div class="ttname"><a href="classDynamicsPanel.html">DynamicsPanel</a></div><div class="ttdoc">UI panel for configuring and visualizing first-order dynamics.</div><div class="ttdef"><b>Definition:</b> dynamics_panel.h:28</div></div>
@@ -330,7 +330,6 @@ Public Attributes</h2></td></tr>
 <div class="ttc" id="aclassSensorSimulatorModule_html"><div class="ttname"><a href="classSensorSimulatorModule.html">SensorSimulatorModule</a></div><div class="ttdoc">Simulates IMU sensor measurements (gyro + accel) based on vehicle state.</div><div class="ttdef"><b>Definition:</b> sensor_simulator.h:26</div></div>
 <div class="ttc" id="aclassTelemetryPanel_html"><div class="ttname"><a href="classTelemetryPanel.html">TelemetryPanel</a></div><div class="ttdoc">UI panel displaying vehicle flight state.</div><div class="ttdef"><b>Definition:</b> telemetry_panel.h:23</div></div>
 <div class="ttc" id="amain_8cpp_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdef"><b>Definition:</b> main.cpp:4</div></div>
-<div class="ttc" id="arenderer_8cpp_html_a25986ed96a435775e363f05540a2f9c4"><div class="ttname"><a href="renderer_8cpp.html#a25986ed96a435775e363f05540a2f9c4">vertices</a></div><div class="ttdeci">float vertices[]</div><div class="ttdef"><b>Definition:</b> renderer.cpp:14</div></div>
 </div><!-- fragment --><h1><a class="anchor" id="init_dependencies"></a>
 Dependency Chain</h1>
 <p>The initialization order <b>cannot be changed</b> without breaking the application:</p>
@@ -356,13 +355,17 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="classApplication_ae92abde0eb4b95fd7503308a13ed8c96_cgraph.png" border="0" usemap="#aclassApplication_ae92abde0eb4b95fd7503308a13ed8c96_cgraph" alt=""/></div>
 <map name="aclassApplication_ae92abde0eb4b95fd7503308a13ed8c96_cgraph" id="aclassApplication_ae92abde0eb4b95fd7503308a13ed8c96_cgraph">
 <area shape="rect" title="Initialize the application subsystems." alt="" coords="5,157,129,184"/>
-<area shape="rect" href="namespaceui.html#a5e215a312253a017263135e8e9b2fde8" title=" " alt="" coords="215,5,339,32"/>
+<area shape="rect" href="group__UITheme.html#ga5e215a312253a017263135e8e9b2fde8" title="Apply global theme to ImGui style." alt="" coords="215,5,339,32"/>
 <area shape="rect" href="classAxisRenderer.html#aeffaaf38c5561bc783f4d614f3b75edf" title="Initialize axis renderer (load shaders, setup geometry)" alt="" coords="207,56,346,83"/>
 <area shape="rect" href="classRenderer.html#a628ba0693fd83815acac8c69b7dcf9f0" title="Initialize OpenGL resources (shaders, geometry buffers)" alt="" coords="221,107,332,133"/>
 <area shape="rect" href="classApplication.html#ad8ade3f4f891c7ac54b5c69d6ca9ce5a" title="Keyboard input callback." alt="" coords="185,157,368,184"/>
-<area shape="rect" href="namespaceui.html#a48a441cbee5cba22b870ab29be0356d2" title=" " alt="" coords="223,208,331,235"/>
+<area shape="rect" href="group__UITheme.html#ga97e4fd264352b07f6d75c83922240cb4" title="Load custom fonts from TTF files." alt="" coords="223,208,331,235"/>
 <area shape="rect" href="classApplication.html#a00d67e65679af5ce18f377f3e6d13d31" title="Mouse scroll callback." alt="" coords="179,259,374,285"/>
 <area shape="rect" href="classTransform.html#a6eefe7b697e85bbc809482184bc21e0e" title=" " alt="" coords="177,309,376,336"/>
+<area shape="rect" href="attitude__utils_8h.html#af35bb275d1a55f131c558f847308bcfc" title=" " alt="" coords="492,56,567,83"/>
+<area shape="rect" href="euler_8h.html#ad774b88fd06267fc2a237871fc635362" title=" " alt="" coords="453,107,605,133"/>
+<area shape="rect" href="quaternion_8h.html#a3ba94d91921f3b30c3de90a19e7099ee" title=" " alt="" coords="453,157,605,184"/>
+<area shape="rect" href="attitude__utils_8h.html#a32bc85d5e25e4374b31308af4f530377" title=" " alt="" coords="492,208,567,235"/>
 <area shape="rect" href="classCamera.html#a067090ee525389944ba3bacaa62f7632" title="Process mouse scroll for zoom (FOV adjustment)" alt="" coords="424,259,635,285"/>
 </map>
 </div>
@@ -441,6 +444,18 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classApplication_ad8ade3f4f891c7ac54b5c69d6ca9ce5a_cgraph.png" border="0" usemap="#aclassApplication_ad8ade3f4f891c7ac54b5c69d6ca9ce5a_cgraph" alt=""/></div>
+<map name="aclassApplication_ad8ade3f4f891c7ac54b5c69d6ca9ce5a_cgraph" id="aclassApplication_ad8ade3f4f891c7ac54b5c69d6ca9ce5a_cgraph">
+<area shape="rect" title="Keyboard input callback." alt="" coords="5,81,188,108"/>
+<area shape="rect" href="attitude__utils_8h.html#af35bb275d1a55f131c558f847308bcfc" title=" " alt="" coords="275,5,349,32"/>
+<area shape="rect" href="euler_8h.html#ad774b88fd06267fc2a237871fc635362" title=" " alt="" coords="236,56,388,83"/>
+<area shape="rect" href="quaternion_8h.html#a3ba94d91921f3b30c3de90a19e7099ee" title=" " alt="" coords="236,107,388,133"/>
+<area shape="rect" href="attitude__utils_8h.html#a32bc85d5e25e4374b31308af4f530377" title=" " alt="" coords="275,157,349,184"/>
+</map>
+</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">

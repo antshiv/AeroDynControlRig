@@ -1,5 +1,8 @@
 <map id="rad2deg" name="rad2deg">
-<area shape="rect" id="node1" title=" " alt="" coords="216,31,291,57"/>
-<area shape="rect" id="node2" href="$classEstimatorPanel.html#a2f2e0dc7c0287d12b71b412a38d25b96" title="Render the panel&#39;s ImGui interface." alt="" coords="7,5,167,32"/>
-<area shape="rect" id="node3" href="$classTelemetryPanel.html#abe2679f505e98b764eb45e0d78d6049a" title="Render the panel&#39;s ImGui interface." alt="" coords="5,56,168,83"/>
+<area shape="rect" id="node1" title=" " alt="" coords="511,56,585,83"/>
+<area shape="rect" id="node2" href="$classEstimatorPanel.html#a2f2e0dc7c0287d12b71b412a38d25b96" title="Render the panel&#39;s ImGui interface." alt="" coords="291,5,451,32"/>
+<area shape="rect" id="node3" href="$classTelemetryPanel.html#abe2679f505e98b764eb45e0d78d6049a" title="Render the panel&#39;s ImGui interface." alt="" coords="290,56,453,83"/>
+<area shape="rect" id="node4" href="$classApplication.html#ad8ade3f4f891c7ac54b5c69d6ca9ce5a" title="Keyboard input callback." alt="" coords="280,107,463,133"/>
+<area shape="rect" id="node5" href="$classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96" title="Initialize the application subsystems." alt="" coords="108,107,232,133"/>
+<area shape="rect" id="node6" href="$main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,107,60,133"/>
 </map>

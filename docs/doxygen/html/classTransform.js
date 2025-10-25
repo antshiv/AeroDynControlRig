@@ -11,6 +11,7 @@ var classTransform =
     [ "setTranslation", "classTransform.html#ae1b7e0362cdfc8d6ed881b3023dd5cce", null ],
     [ "setTranslation1", "classTransform.html#a4840cde7459bf532fdd87bd6e271cb2e", null ],
     [ "setView", "classTransform.html#a320cb63df36f7ec51c398df036830b3d", null ],
+    [ "camera_position", "classTransform.html#af65e2f54792fff55655f1c9c0f36e289", null ],
     [ "model", "classTransform.html#a59fc1b7a6ee66a26d4e969213ad97aa7", null ],
     [ "projection", "classTransform.html#a11fd76e01c56ea2a0c3d51f91209e430", null ],
     [ "view", "classTransform.html#ac8b39784d6f10a8f64749d271192646c", null ]

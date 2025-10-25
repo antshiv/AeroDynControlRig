@@ -4,7 +4,9 @@
 <area shape="rect" id="node4" title=" " alt="" coords="225,80,287,107"/>
 <area shape="rect" id="node5" href="$simulation__state_8h.html" title="Centralized simulation state shared across all modules and panels." alt="" coords="311,80,486,107"/>
 <area shape="rect" id="node3" href="$module_8h.html" title="Base interface for simulation modules in the AeroDynControlRig." alt="" coords="45,155,160,181"/>
-<area shape="rect" id="node6" title=" " alt="" coords="267,155,323,181"/>
-<area shape="rect" id="node7" title=" " alt="" coords="347,155,451,181"/>
-<area shape="rect" id="node8" href="$euler_8h.html" title=" " alt="" coords="475,155,597,181"/>
+<area shape="rect" id="node6" title=" " alt="" coords="201,155,257,181"/>
+<area shape="rect" id="node7" title=" " alt="" coords="282,155,345,181"/>
+<area shape="rect" id="node8" title=" " alt="" coords="369,155,428,181"/>
+<area shape="rect" id="node9" title=" " alt="" coords="452,155,556,181"/>
+<area shape="rect" id="node10" href="$euler_8h.html" title=" " alt="" coords="581,155,702,181"/>
 </map>

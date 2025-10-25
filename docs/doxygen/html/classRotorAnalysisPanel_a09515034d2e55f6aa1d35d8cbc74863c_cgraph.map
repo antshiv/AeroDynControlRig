@@ -1,0 +1,10 @@
+<map id="RotorAnalysisPanel::draw" name="RotorAnalysisPanel::draw">
+<area shape="rect" id="node1" title="Render the panel&#39;s ImGui interface." alt="" coords="5,125,152,166"/>
+<area shape="rect" id="node2" href="$group__UIWidgets.html#gae86fdebbe43a915410d1bf0c16c4cb17" title="Begin a Card container with consistent styling." alt="" coords="219,5,328,32"/>
+<area shape="rect" id="node3" href="$group__UITheme.html#ga447c8573ad59f48165a527a06c94fb62" title="Get global color palette." alt="" coords="395,56,477,83"/>
+<area shape="rect" id="node4" href="$group__UIWidgets.html#ga2fb6bd477996a90c7d6373454fe6c06c" title="Render a card header with optional badge." alt="" coords="214,107,333,133"/>
+<area shape="rect" id="node6" href="$group__UIWidgets.html#gaab4c47f869143e855e5a9cb8b6f2cf8b" title="End a Card container (must be called after BeginCard)" alt="" coords="225,157,321,184"/>
+<area shape="rect" id="node7" href="$classRotorAnalysisPanel.html#a7ba37002b62dc336cd40b15c6e4a53ae" title="Get the display name of this panel." alt="" coords="200,209,347,250"/>
+<area shape="rect" id="node8" href="$namespaceui.html#a1dd80ea1df929d07371133bc9945f1a4" title=" " alt="" coords="220,275,327,301"/>
+<area shape="rect" id="node5" href="$group__UITheme.html#ga27aa4868ffcd17787cc35f7e24a0c616" title="Get global font set." alt="" coords="397,191,475,217"/>
+</map>

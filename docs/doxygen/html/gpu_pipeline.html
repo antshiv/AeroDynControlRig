@@ -199,9 +199,9 @@ Stage 1: CPU Side - Your C++ Code</h1>
 <div class="line">    <span class="comment">// Step 3: Render everything</span></div>
 <div class="line">    <a class="code" href="classApplication.html#a4e7a520d659593b385b246a43e604dfb">render3D</a>();  <span class="comment">// This triggers GPU commands</span></div>
 <div class="line">}</div>
-<div class="ttc" id="aclassApplication_html_a4e7a520d659593b385b246a43e604dfb"><div class="ttname"><a href="classApplication.html#a4e7a520d659593b385b246a43e604dfb">Application::render3D</a></div><div class="ttdeci">void render3D()</div><div class="ttdoc">Render the 3D scene (cube + axes)</div><div class="ttdef"><b>Definition:</b> application.cpp:486</div></div>
+<div class="ttc" id="aclassApplication_html_a4e7a520d659593b385b246a43e604dfb"><div class="ttname"><a href="classApplication.html#a4e7a520d659593b385b246a43e604dfb">Application::render3D</a></div><div class="ttdeci">void render3D()</div><div class="ttdoc">Render the 3D scene (cube + axes)</div><div class="ttdef"><b>Definition:</b> application.cpp:597</div></div>
 <div class="ttc" id="aclassApplication_html_a7e2800cbc39cb5864efacb202b6bfb68"><div class="ttname"><a href="classApplication.html#a7e2800cbc39cb5864efacb202b6bfb68">Application::lastFrame</a></div><div class="ttdeci">float lastFrame</div><div class="ttdoc">Timestamp of last frame (seconds)</div><div class="ttdef"><b>Definition:</b> application.h:52</div></div>
-<div class="ttc" id="aclassApplication_html_af44c742342adf5305e430ff293f147c1"><div class="ttname"><a href="classApplication.html#af44c742342adf5305e430ff293f147c1">Application::tick</a></div><div class="ttdeci">void tick()</div><div class="ttdoc">Execute one frame: update simulation, render 3D, render UI.</div><div class="ttdef"><b>Definition:</b> application.cpp:364</div></div>
+<div class="ttc" id="aclassApplication_html_af44c742342adf5305e430ff293f147c1"><div class="ttname"><a href="classApplication.html#af44c742342adf5305e430ff293f147c1">Application::tick</a></div><div class="ttdeci">void tick()</div><div class="ttdoc">Execute one frame: update simulation, render 3D, render UI.</div><div class="ttdef"><b>Definition:</b> application.cpp:376</div></div>
 </div><!-- fragment --><p><b>Memory Location:</b> Your code is in RAM, executing on CPU cores. The <code>simulationState</code> object lives in <b>heap memory (RAM)</b>.</p>
 <p><b>CPU Cache:</b> When modules access <code>simulationState.attitude.quaternion</code>, the CPU checks:</p><ol type="1">
 <li><b>L1 cache</b> (4 cycles, ~1ns) - Private per CPU core, ~32-64 KB</li>
@@ -237,10 +237,10 @@ Stage 1: CPU Side - Your C++ Code</h1>
 <div class="line">    state.attitude.<a class="code" href="structSimulationState.html#acef78e29043f3602fe7456343636eb07">model_matrix</a> = quaternionToDCM(q_new); <span class="comment">// 4x4 matrix ops</span></div>
 <div class="line">}</div>
 <div class="ttc" id="aclassQuaternionDemoModule_html_ad7ebf21527722e8f6efb2eae537da1d0"><div class="ttname"><a href="classQuaternionDemoModule.html#ad7ebf21527722e8f6efb2eae537da1d0">QuaternionDemoModule::update</a></div><div class="ttdeci">void update(double dt, SimulationState &amp;state) override</div><div class="ttdoc">Update attitude quaternion based on angular velocity.</div><div class="ttdef"><b>Definition:</b> quaternion_demo.cpp:37</div></div>
-<div class="ttc" id="astructSimulationState_html"><div class="ttname"><a href="structSimulationState.html">SimulationState</a></div><div class="ttdoc">Central shared state for the entire simulation.</div><div class="ttdef"><b>Definition:</b> simulation_state.h:26</div></div>
-<div class="ttc" id="astructSimulationState_html_a1d3ee7c82a58aa775399979710170812"><div class="ttname"><a href="structSimulationState.html#a1d3ee7c82a58aa775399979710170812">SimulationState::angular_rate_deg_per_sec</a></div><div class="ttdeci">glm::dvec3 angular_rate_deg_per_sec</div><div class="ttdoc">Angular velocity (deg/s) about body axes.</div><div class="ttdef"><b>Definition:</b> simulation_state.h:31</div></div>
-<div class="ttc" id="astructSimulationState_html_a20e333ffdfe2eab81d5e0c9df189595d"><div class="ttname"><a href="structSimulationState.html#a20e333ffdfe2eab81d5e0c9df189595d">SimulationState::quaternion</a></div><div class="ttdeci">std::array&lt; double, 4 &gt; quaternion</div><div class="ttdoc">Current attitude quaternion [w, x, y, z].</div><div class="ttdef"><b>Definition:</b> simulation_state.h:29</div></div>
-<div class="ttc" id="astructSimulationState_html_acef78e29043f3602fe7456343636eb07"><div class="ttname"><a href="structSimulationState.html#acef78e29043f3602fe7456343636eb07">SimulationState::model_matrix</a></div><div class="ttdeci">glm::mat4 model_matrix</div><div class="ttdoc">Model transformation matrix for rendering.</div><div class="ttdef"><b>Definition:</b> simulation_state.h:30</div></div>
+<div class="ttc" id="astructSimulationState_html"><div class="ttname"><a href="structSimulationState.html">SimulationState</a></div><div class="ttdoc">Central shared state for the entire simulation.</div><div class="ttdef"><b>Definition:</b> simulation_state.h:28</div></div>
+<div class="ttc" id="astructSimulationState_html_a1d3ee7c82a58aa775399979710170812"><div class="ttname"><a href="structSimulationState.html#a1d3ee7c82a58aa775399979710170812">SimulationState::angular_rate_deg_per_sec</a></div><div class="ttdeci">glm::dvec3 angular_rate_deg_per_sec</div><div class="ttdoc">Angular velocity (deg/s) about body axes.</div><div class="ttdef"><b>Definition:</b> simulation_state.h:33</div></div>
+<div class="ttc" id="astructSimulationState_html_a20e333ffdfe2eab81d5e0c9df189595d"><div class="ttname"><a href="structSimulationState.html#a20e333ffdfe2eab81d5e0c9df189595d">SimulationState::quaternion</a></div><div class="ttdeci">std::array&lt; double, 4 &gt; quaternion</div><div class="ttdoc">Current attitude quaternion [w, x, y, z].</div><div class="ttdef"><b>Definition:</b> simulation_state.h:31</div></div>
+<div class="ttc" id="astructSimulationState_html_acef78e29043f3602fe7456343636eb07"><div class="ttname"><a href="structSimulationState.html#acef78e29043f3602fe7456343636eb07">SimulationState::model_matrix</a></div><div class="ttdeci">glm::mat4 model_matrix</div><div class="ttdoc">Model transformation matrix for rendering.</div><div class="ttdef"><b>Definition:</b> simulation_state.h:32</div></div>
 </div><!-- fragment --><p><b>CPU Execution Details:</b></p><ul>
 <li><b>Instruction Decode:</b> CPU decodes x86-64 instructions (ADD, MUL, LOAD, STORE)</li>
 <li><b>Vector Units:</b> GLM uses SIMD (SSE/AVX) - processes 4 floats/doubles in parallel on CPU</li>
@@ -266,7 +266,7 @@ Stage 1: CPU Side - Your C++ Code</h1>
 <div class="line"> </div>
 <div class="line"><span class="comment">// For each UI element, ImGui generates triangles</span></div>
 <div class="line"><span class="comment">// Example: A rectangle (2 triangles = 6 vertices)</span></div>
-<div class="line">ImDrawVert <a class="code" href="renderer_8cpp.html#a25986ed96a435775e363f05540a2f9c4">vertices</a>[6] = {</div>
+<div class="line">ImDrawVert vertices[6] = {</div>
 <div class="line">    {{x0, y0}, {0, 0}, color},  <span class="comment">// Triangle 1</span></div>
 <div class="line">    {{x1, y0}, {1, 0}, color},</div>
 <div class="line">    {{x0, y1}, {0, 1}, color},</div>
@@ -274,7 +274,6 @@ Stage 1: CPU Side - Your C++ Code</h1>
 <div class="line">    {{x1, y0}, {1, 0}, color},</div>
 <div class="line">    {{x1, y1}, {1, 1}, color}</div>
 <div class="line">};</div>
-<div class="ttc" id="arenderer_8cpp_html_a25986ed96a435775e363f05540a2f9c4"><div class="ttname"><a href="renderer_8cpp.html#a25986ed96a435775e363f05540a2f9c4">vertices</a></div><div class="ttdeci">float vertices[]</div><div class="ttdef"><b>Definition:</b> renderer.cpp:14</div></div>
 </div><!-- fragment --><p><b>Memory Location:</b> This vertex array is allocated in <b>heap memory (RAM)</b> via <code>malloc()</code> or <code>new</code>.</p>
 <p><b>Buffer Size:</b> For a complex UI with 1000 widgets:</p><ul>
 <li>~10,000 vertices × 20 bytes = <b>200 KB</b> in RAM</li>
@@ -300,7 +299,7 @@ Stage 1: CPU Side - Your C++ Code</h1>
 <div class="line">    <span class="comment">// CPU tells GPU to draw triangles</span></div>
 <div class="line">    glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);  <span class="comment">// ← Render command queued</span></div>
 <div class="line">}</div>
-<div class="ttc" id="aclassRenderer_html_a02a137957c8783a44df5cad4b5e1b635"><div class="ttname"><a href="classRenderer.html#a02a137957c8783a44df5cad4b5e1b635">Renderer::renderFrame</a></div><div class="ttdeci">void renderFrame()</div><div class="ttdoc">Render a frame (legacy 2D mode - deprecated)</div><div class="ttdef"><b>Definition:</b> renderer.cpp:72</div></div>
+<div class="ttc" id="aclassRenderer_html_a02a137957c8783a44df5cad4b5e1b635"><div class="ttname"><a href="classRenderer.html#a02a137957c8783a44df5cad4b5e1b635">Renderer::renderFrame</a></div><div class="ttdeci">void renderFrame()</div><div class="ttdoc">Render a frame (legacy 2D mode - deprecated)</div><div class="ttdef"><b>Definition:</b> renderer.cpp:86</div></div>
 <div class="ttc" id="aclassTransform_html"><div class="ttname"><a href="classTransform.html">Transform</a></div><div class="ttdef"><b>Definition:</b> transform.h:7</div></div>
 <div class="ttc" id="aclassTransform_html_a11fd76e01c56ea2a0c3d51f91209e430"><div class="ttname"><a href="classTransform.html#a11fd76e01c56ea2a0c3d51f91209e430">Transform::projection</a></div><div class="ttdeci">glm::mat4 projection</div><div class="ttdef"><b>Definition:</b> transform.h:11</div></div>
 <div class="ttc" id="aclassTransform_html_a59fc1b7a6ee66a26d4e969213ad97aa7"><div class="ttname"><a href="classTransform.html#a59fc1b7a6ee66a26d4e969213ad97aa7">Transform::model</a></div><div class="ttdeci">glm::mat4 model</div><div class="ttdef"><b>Definition:</b> transform.h:9</div></div>
@@ -351,15 +350,15 @@ Stage 2: PCIe Bus Transfer</h1>
 </ol>
 <p><b>File Reference:</b> Vertex upload happens in <code><a class="el" href="renderer_8cpp.html">src/render/renderer.cpp</a>:125-150</code></p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> Renderer::setupCubeGeometry() {</div>
-<div class="line">    <span class="keywordtype">float</span> <a class="code" href="renderer_8cpp.html#a25986ed96a435775e363f05540a2f9c4">vertices</a>[] = { <span class="comment">/* 8 vertices × 3 floats = 96 bytes */</span> };</div>
+<div class="line">    <span class="keywordtype">float</span> vertices[] = { <span class="comment">/* 8 vertices × 3 floats = 96 bytes */</span> };</div>
 <div class="line"> </div>
 <div class="line">    glGenBuffers(1, &amp;vbo);</div>
 <div class="line">    glBindBuffer(GL_ARRAY_BUFFER, vbo);</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// THIS is the PCIe transfer: RAM → GPU VRAM</span></div>
 <div class="line">    glBufferData(GL_ARRAY_BUFFER,         <span class="comment">// Target</span></div>
-<div class="line">                 <span class="keyword">sizeof</span>(<a class="code" href="renderer_8cpp.html#a25986ed96a435775e363f05540a2f9c4">vertices</a>),         <span class="comment">// 96 bytes</span></div>
-<div class="line">                 <a class="code" href="renderer_8cpp.html#a25986ed96a435775e363f05540a2f9c4">vertices</a>,                 <span class="comment">// Source address in RAM</span></div>
+<div class="line">                 <span class="keyword">sizeof</span>(vertices),         <span class="comment">// 96 bytes</span></div>
+<div class="line">                 vertices,                 <span class="comment">// Source address in RAM</span></div>
 <div class="line">                 GL_STATIC_DRAW);          <span class="comment">// Hint: data won&#39;t change</span></div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// GPU now has a copy in VRAM. CPU can free RAM copy.</span></div>

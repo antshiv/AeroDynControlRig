@@ -241,14 +241,13 @@ Key OpenGL Concepts</h3>
 <h4><a class="anchor" id="autotoc_md10"></a>
 1. Vertex Buffer Objects (VBO)</h4>
 <div class="fragment"><div class="line"><span class="comment">// Stores vertex data in GPU memory</span></div>
-<div class="line"><span class="keywordtype">float</span> <a class="code" href="renderer_8cpp.html#a25986ed96a435775e363f05540a2f9c4">vertices</a>[] = {</div>
+<div class="line"><span class="keywordtype">float</span> vertices[] = {</div>
 <div class="line">    <span class="comment">// Position        Color</span></div>
 <div class="line">    -0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,  <span class="comment">// Vertex 0: red</span></div>
 <div class="line">     0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,  <span class="comment">// Vertex 1: green</span></div>
 <div class="line">    <span class="comment">// ... more vertices</span></div>
 <div class="line">};</div>
-<div class="line">glBufferData(GL_ARRAY_BUFFER, <span class="keyword">sizeof</span>(<a class="code" href="renderer_8cpp.html#a25986ed96a435775e363f05540a2f9c4">vertices</a>), <a class="code" href="renderer_8cpp.html#a25986ed96a435775e363f05540a2f9c4">vertices</a>, GL_STATIC_DRAW);</div>
-<div class="ttc" id="arenderer_8cpp_html_a25986ed96a435775e363f05540a2f9c4"><div class="ttname"><a href="renderer_8cpp.html#a25986ed96a435775e363f05540a2f9c4">vertices</a></div><div class="ttdeci">float vertices[]</div><div class="ttdef"><b>Definition:</b> renderer.cpp:14</div></div>
+<div class="line">glBufferData(GL_ARRAY_BUFFER, <span class="keyword">sizeof</span>(vertices), vertices, GL_STATIC_DRAW);</div>
 </div><!-- fragment --><h4><a class="anchor" id="autotoc_md11"></a>
 2. Vertex Array Objects (VAO)</h4>
 <div class="fragment"><div class="line"><span class="comment">// Stores the &quot;format&quot; of vertex data</span></div>

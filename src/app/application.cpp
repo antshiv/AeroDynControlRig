@@ -15,6 +15,7 @@
 #include "gui/panels/rotor_panel.h"
 #include "gui/panels/power_panel.h"
 #include "gui/panels/sensor_panel.h"
+#include "gui/panels/rotor_analysis_panel.h"
 #include "attitude/euler.h"
 #include "attitude/dcm.h"
 #include "attitude/quaternion.h"
@@ -1138,6 +1139,7 @@ void Application::initializePanels() {
     panelManager.registerPanel(std::make_unique<SensorPanel>());
     panelManager.registerPanel(std::make_unique<DynamicsPanel>());
     panelManager.registerPanel(std::make_unique<EstimatorPanel>());
+    panelManager.registerPanel(std::make_unique<RotorAnalysisPanel>());
 }
 
 ImTextureID Application::renderSceneToTexture(const ImVec2& size) {

@@ -37,9 +37,13 @@ Desktop visualization and testbed for the flight-control stack. The rig stitches
 
 ## Current Features
 
-- Quaternion sandbox that animates a rigid body and derives Euler angles via `attitudeMathLibrary`.
-- Docking-based ImGui workspace with control, telemetry, dynamics, rotor, sensor, and power panels.
-- Axis gizmo overlay for quick spatial orientation plus OpenGL scene rendering.
+- **Quaternion Visualization** – Real-time 3D rotation with dual modes (AUTOMATIC for continuous drone simulation, MANUAL for discrete quaternion testing)
+- **Real-Time Telemetry** – ImPlot-powered graphs for attitude angles, angular rates, and rotor dynamics with configurable time windows (5-120s)
+- **Rotor Analysis Panel** – Per-motor telemetry with thrust/RPM/power/temperature plots, raw data tables, and CSV export
+- **State Estimator Panel** – Complementary filter output with error tracking and attitude history visualization
+- **Docking Workspace** – Fully customizable ImGui layout with control, telemetry, dynamics, rotor, sensor, power, and estimator panels
+- **Axis Gizmo & Scene** – OpenGL 3.3 rendering with proper face culling and depth testing
+- **In-App Documentation** – Keyboard controls help modal with mode-specific instructions
 
 ## Roadmap
 
@@ -82,8 +86,20 @@ All telemetry and coefficient data loop back into AeroDynControlRig for visualiz
 
 ## UI Preview
 
-![Previous UI](assets/GUI_screenshot.png)
+### Latest UI (October 2025)
+![Latest UI](assets/ui_preview_2.png)
 
+The current interface features a comprehensive docking layout with:
+- **Flight Scene** (left) – 3D quaternion visualization with real-time orientation data
+- **Control Panel** – Keyboard controls, rotation modes (AUTOMATIC/MANUAL), and simulation settings
+- **Estimator Panel** – Kalman filter output with attitude/rate plots and error tracking
+- **Sensor Suite** – IMU data (gyroscope, accelerometer, magnetometer) visualization
+- **Rotor Analysis** (right) – Per-motor performance with color-coded selection, telemetry plots, and data export
+- **Power Monitor** – Bus voltage, current, and energy consumption tracking
+- **Flight Telemetry** – Additional system metrics and diagnostics
+
+### Previous Iterations
+![Previous UI](assets/GUI_screenshot.png)
 ![Updated UI](assets/ui_preview.png)
 
-The first capture shows the original compact control layout; the refreshed dashboard mirrors the new design work with a docked control surface on the left, telemetry and diagnostics on the right, and the flight scene card centered with on-card quaternion/Euler readouts.
+The evolution shows progression from a basic control layout to a fully-featured flight dynamics workbench with real-time plotting, multi-panel telemetry, and professional styling.

@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('ui_architecture.html',''); initResizab
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="ui_arch_intro"></a>
 Introduction</h1>
-<p>AeroDynControlRig's UI follows a <b>component-based architecture</b> similar to modern web frameworks (React, Vue). The system has three layers:</p>
+<p>AeroDynControlRig's UI follows a <b>component-based architecture</b> similar to modern web fundamentals (HTML, CSS, JavaScript). The system has three layers:</p>
 <ol type="1">
 <li><b>Theme Layer</b> (global styling) - <a class="el" href="group__UITheme.html">UI Theme System</a></li>
 <li><b>Widget Layer</b> (reusable components) - <a class="el" href="group__UIWidgets.html">UI Widget Library</a></li>
@@ -98,7 +98,7 @@ Introduction</h1>
 <h1><a class="anchor" id="ui_arch_data"></a>
 Data Flow</h1>
 <div class="fragment"><div class="line">┌─────────────────────────────────────────┐</div>
-<div class="line">│ <a class="code" href="structSimulationState.html">SimulationState</a> (central state)         │  ← Like Redux/Vuex store</div>
+<div class="line">│ <a class="code" href="structSimulationState.html">SimulationState</a> (central state)         │  ← Like window.appState global state</div>
 <div class="line">└─────────────────────────────────────────┘</div>
 <div class="line">        ↑                    ↓</div>
 <div class="line">        │                    │</div>
@@ -106,7 +106,7 @@ Data Flow</h1>
 <div class="line">        │                    │</div>
 <div class="line">        │                    ↓</div>
 <div class="line">        │          ┌──────────────────────┐</div>
-<div class="line">        │          │ <a class="code" href="classPanel.html#ab642ab4938eb6a680bcddd13636a58fa">Panel::draw</a>()        │  ← Like React render()</div>
+<div class="line">        │          │ <a class="code" href="classPanel.html#ab642ab4938eb6a680bcddd13636a58fa">Panel::draw</a>()        │  ← Like JavaScript component render()</div>
 <div class="line">        │          │  - Calculate data    │</div>
 <div class="line">        │          │  - Render widgets    │</div>
 <div class="line">        │          └──────────────────────┘</div>
@@ -130,7 +130,7 @@ Data Flow</h1>
 <div class="ttc" id="aclassPanel_html_ab642ab4938eb6a680bcddd13636a58fa"><div class="ttname"><a href="classPanel.html#ab642ab4938eb6a680bcddd13636a58fa">Panel::draw</a></div><div class="ttdeci">virtual void draw(SimulationState &amp;state, Camera &amp;camera)=0</div><div class="ttdoc">Render the panel's ImGui interface.</div></div>
 <div class="ttc" id="agroup__UIWidgets_html_gae86fdebbe43a915410d1bf0c16c4cb17"><div class="ttname"><a href="group__UIWidgets.html#gae86fdebbe43a915410d1bf0c16c4cb17">ui::BeginCard</a></div><div class="ttdeci">bool BeginCard(const char *id, const CardOptions &amp;options, bool *open, ImGuiWindowFlags flags)</div><div class="ttdoc">Begin a Card container with consistent styling.</div><div class="ttdef"><b>Definition:</b> card.cpp:20</div></div>
 <div class="ttc" id="anamespaceui_html_a1dd80ea1df929d07371133bc9945f1a4"><div class="ttname"><a href="namespaceui.html#a1dd80ea1df929d07371133bc9945f1a4">ui::ValueChip</a></div><div class="ttdeci">ImVec2 ValueChip(const char *label, const char *value, const ChipConfig &amp;config)</div><div class="ttdef"><b>Definition:</b> chip.cpp:44</div></div>
-<div class="ttc" id="astructSimulationState_html"><div class="ttname"><a href="structSimulationState.html">SimulationState</a></div><div class="ttdoc">Central shared state for the entire simulation.</div><div class="ttdef"><b>Definition:</b> simulation_state.h:26</div></div>
+<div class="ttc" id="astructSimulationState_html"><div class="ttname"><a href="structSimulationState.html">SimulationState</a></div><div class="ttdoc">Central shared state for the entire simulation.</div><div class="ttdef"><b>Definition:</b> simulation_state.h:28</div></div>
 </div><!-- fragment --><h1><a class="anchor" id="ui_arch_styling"></a>
 Styling System</h1>
 <p>The styling system uses <b>design tokens</b> (like CSS custom properties):</p>
@@ -143,12 +143,12 @@ Styling System</h1>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Global theme application</span></div>
-<div class="line"><span class="keywordtype">void</span> <a class="code" href="group__UITheme.html#ga4e42cd6e394eed69963da09ccf989c02">ApplyTheme</a>(ImGuiStyle&amp; style) {</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="group__UITheme.html#ga5e215a312253a017263135e8e9b2fde8">ApplyTheme</a>(ImGuiStyle&amp; style) {</div>
 <div class="line">    style.WindowPadding = ImVec2(26, 22);  <span class="comment">// Like CSS padding</span></div>
 <div class="line">    style.WindowRounding = 18.0f;          <span class="comment">// Like CSS border-radius</span></div>
 <div class="line">    style.Colors[...] = palette.card_bg;   <span class="comment">// Like CSS background-color</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__UITheme_html_ga4e42cd6e394eed69963da09ccf989c02"><div class="ttname"><a href="group__UITheme.html#ga4e42cd6e394eed69963da09ccf989c02">ApplyTheme</a></div><div class="ttdeci">void ApplyTheme(ImGuiStyle &amp;style)</div><div class="ttdoc">Apply global theme to ImGui style.</div></div>
+<div class="ttc" id="agroup__UITheme_html_ga5e215a312253a017263135e8e9b2fde8"><div class="ttname"><a href="group__UITheme.html#ga5e215a312253a017263135e8e9b2fde8">ui::ApplyTheme</a></div><div class="ttdeci">void ApplyTheme(ImGuiStyle &amp;style)</div><div class="ttdoc">Apply global theme to ImGui style.</div><div class="ttdef"><b>Definition:</b> style.cpp:71</div></div>
 </div><!-- fragment --><h1><a class="anchor" id="ui_arch_components"></a>
 Component System</h1>
 <p>Custom widgets provide reusable UI elements:</p>
@@ -164,10 +164,10 @@ Component System</h1>
 </table>
 <h1><a class="anchor" id="ui_arch_panels"></a>
 Panel System</h1>
-<p>Panels are like React components - they read from state and render UI:</p>
+<p>Panels are like JavaScript component classes - they read from state and render UI:</p>
 <div class="fragment"><div class="line"><span class="keyword">class </span><a class="code" href="classRotorPanel.html">RotorPanel</a> : <span class="keyword">public</span> <a class="code" href="classPanel.html">Panel</a> {</div>
 <div class="line">    <span class="keywordtype">void</span> <a class="code" href="classRotorPanel.html#a4cc8a6932eabe62949fa23c08f79e488">draw</a>(<a class="code" href="structSimulationState.html">SimulationState</a>&amp; state, <a class="code" href="classCamera.html">Camera</a>&amp; camera)<span class="keyword"> override </span>{</div>
-<div class="line">        <span class="comment">// 1. Calculate derived data (like React render)</span></div>
+<div class="line">        <span class="comment">// 1. Calculate derived data (like JavaScript component logic)</span></div>
 <div class="line">        <span class="keywordtype">float</span> avg_rpm = calculateAverage(state.<a class="code" href="structSimulationState.html#a43e0b8ce8ca4d5cee64c1aac6c854180">rotor</a>.<a class="code" href="structSimulationState_1_1RotorTelemetry.html#a4c4f76c0c8e65e295ebe33daf31cb560">rpm</a>);</div>
 <div class="line"> </div>
 <div class="line">        <span class="comment">// 2. Render UI (declarative)</span></div>
@@ -185,7 +185,7 @@ Panel System</h1>
 <div class="ttc" id="aclassRotorPanel_html_a73e51d326aa393b0cff9184f140f4779"><div class="ttname"><a href="classRotorPanel.html#a73e51d326aa393b0cff9184f140f4779">RotorPanel::name</a></div><div class="ttdeci">const char * name() const override</div><div class="ttdoc">Get the display name of this panel.</div><div class="ttdef"><b>Definition:</b> rotor_panel.h:28</div></div>
 <div class="ttc" id="agroup__UIWidgets_html_ga2fb6bd477996a90c7d6373454fe6c06c"><div class="ttname"><a href="group__UIWidgets.html#ga2fb6bd477996a90c7d6373454fe6c06c">ui::CardHeader</a></div><div class="ttdeci">void CardHeader(const char *title, const char *badge_label, const ImVec4 *badge_color)</div><div class="ttdoc">Render a card header with optional badge.</div><div class="ttdef"><b>Definition:</b> card.cpp:52</div></div>
 <div class="ttc" id="agroup__UIWidgets_html_gaab4c47f869143e855e5a9cb8b6f2cf8b"><div class="ttname"><a href="group__UIWidgets.html#gaab4c47f869143e855e5a9cb8b6f2cf8b">ui::EndCard</a></div><div class="ttdeci">void EndCard()</div><div class="ttdoc">End a Card container (must be called after BeginCard)</div><div class="ttdef"><b>Definition:</b> card.cpp:46</div></div>
-<div class="ttc" id="astructSimulationState_1_1RotorTelemetry_html_a4c4f76c0c8e65e295ebe33daf31cb560"><div class="ttname"><a href="structSimulationState_1_1RotorTelemetry.html#a4c4f76c0c8e65e295ebe33daf31cb560">SimulationState::RotorTelemetry::rpm</a></div><div class="ttdeci">std::array&lt; double, 4 &gt; rpm</div><div class="ttdoc">Rotor speeds (RPM)</div><div class="ttdef"><b>Definition:</b> simulation_state.h:92</div></div>
+<div class="ttc" id="astructSimulationState_1_1RotorTelemetry_html_a4c4f76c0c8e65e295ebe33daf31cb560"><div class="ttname"><a href="structSimulationState_1_1RotorTelemetry.html#a4c4f76c0c8e65e295ebe33daf31cb560">SimulationState::RotorTelemetry::rpm</a></div><div class="ttdeci">std::array&lt; double, 4 &gt; rpm</div><div class="ttdoc">Rotor speeds (RPM)</div><div class="ttdef"><b>Definition:</b> simulation_state.h:164</div></div>
 <div class="ttc" id="astructSimulationState_html_a43e0b8ce8ca4d5cee64c1aac6c854180"><div class="ttname"><a href="structSimulationState.html#a43e0b8ce8ca4d5cee64c1aac6c854180">SimulationState::rotor</a></div><div class="ttdeci">struct SimulationState::RotorTelemetry rotor</div></div>
 </div><!-- fragment --><h1><a class="anchor" id="ui_arch_layout"></a>
 Layout System</h1>

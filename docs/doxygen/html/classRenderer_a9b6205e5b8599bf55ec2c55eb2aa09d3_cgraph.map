@@ -1,0 +1,4 @@
+<map id="Renderer::renderFrame2D" name="Renderer::renderFrame2D">
+<area shape="rect" id="node1" title="Render a frame with 2D transformation (legacy)" alt="" coords="5,5,196,32"/>
+<area shape="rect" id="node2" href="$classRenderer.html#a5c4417eb759e6322707ee2ab0ecb595f" title="Render a 3D frame with the current model/view/projection matrices." alt="" coords="244,5,435,32"/>
+</map>

@@ -294,7 +294,7 @@ Frame Structure</h2>
 <div class="line">    <span class="comment">// 5. Swap buffers</span></div>
 <div class="line">    glfwSwapBuffers(window);</div>
 <div class="line">}</div>
-<div class="ttc" id="aclassApplication_html_af44c742342adf5305e430ff293f147c1"><div class="ttname"><a href="classApplication.html#af44c742342adf5305e430ff293f147c1">Application::tick</a></div><div class="ttdeci">void tick()</div><div class="ttdoc">Execute one frame: update simulation, render 3D, render UI.</div><div class="ttdef"><b>Definition:</b> application.cpp:364</div></div>
+<div class="ttc" id="aclassApplication_html_af44c742342adf5305e430ff293f147c1"><div class="ttname"><a href="classApplication.html#af44c742342adf5305e430ff293f147c1">Application::tick</a></div><div class="ttdeci">void tick()</div><div class="ttdoc">Execute one frame: update simulation, render 3D, render UI.</div><div class="ttdef"><b>Definition:</b> application.cpp:376</div></div>
 </div><!-- fragment --><hr  />
 <h2><a class="anchor" id="autotoc_md153"></a>
 Core Widgets</h2>
@@ -454,9 +454,9 @@ Basic Window</h3>
 <div class="line">    ImGui::End();</div>
 <div class="line">}</div>
 <div class="ttc" id="aclassCamera_html"><div class="ttname"><a href="classCamera.html">Camera</a></div><div class="ttdoc">First-person camera with mouse look and WASD movement.</div><div class="ttdef"><b>Definition:</b> camera.h:43</div></div>
-<div class="ttc" id="aclassTelemetryPanel_html_abe2679f505e98b764eb45e0d78d6049a"><div class="ttname"><a href="classTelemetryPanel.html#abe2679f505e98b764eb45e0d78d6049a">TelemetryPanel::draw</a></div><div class="ttdeci">void draw(SimulationState &amp;state, Camera &amp;camera) override</div><div class="ttdoc">Render the panel's ImGui interface.</div><div class="ttdef"><b>Definition:</b> telemetry_panel.cpp:9</div></div>
-<div class="ttc" id="astructSimulationState_html"><div class="ttname"><a href="structSimulationState.html">SimulationState</a></div><div class="ttdoc">Central shared state for the entire simulation.</div><div class="ttdef"><b>Definition:</b> simulation_state.h:26</div></div>
-<div class="ttc" id="astructSimulationState_html_a20e333ffdfe2eab81d5e0c9df189595d"><div class="ttname"><a href="structSimulationState.html#a20e333ffdfe2eab81d5e0c9df189595d">SimulationState::quaternion</a></div><div class="ttdeci">std::array&lt; double, 4 &gt; quaternion</div><div class="ttdoc">Current attitude quaternion [w, x, y, z].</div><div class="ttdef"><b>Definition:</b> simulation_state.h:29</div></div>
+<div class="ttc" id="aclassTelemetryPanel_html_abe2679f505e98b764eb45e0d78d6049a"><div class="ttname"><a href="classTelemetryPanel.html#abe2679f505e98b764eb45e0d78d6049a">TelemetryPanel::draw</a></div><div class="ttdeci">void draw(SimulationState &amp;state, Camera &amp;camera) override</div><div class="ttdoc">Render the panel's ImGui interface.</div><div class="ttdef"><b>Definition:</b> telemetry_panel.cpp:10</div></div>
+<div class="ttc" id="astructSimulationState_html"><div class="ttname"><a href="structSimulationState.html">SimulationState</a></div><div class="ttdoc">Central shared state for the entire simulation.</div><div class="ttdef"><b>Definition:</b> simulation_state.h:28</div></div>
+<div class="ttc" id="astructSimulationState_html_a20e333ffdfe2eab81d5e0c9df189595d"><div class="ttname"><a href="structSimulationState.html#a20e333ffdfe2eab81d5e0c9df189595d">SimulationState::quaternion</a></div><div class="ttdeci">std::array&lt; double, 4 &gt; quaternion</div><div class="ttdoc">Current attitude quaternion [w, x, y, z].</div><div class="ttdef"><b>Definition:</b> simulation_state.h:31</div></div>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md170"></a>
 Window Flags</h3>
 <div class="fragment"><div class="line">ImGuiWindowFlags flags = ImGuiWindowFlags_NoResize |</div>
@@ -689,13 +689,13 @@ Capturing Input</h3>
 Custom Rendering</h2>
 <h3><a class="anchor" id="autotoc_md196"></a>
 Draw Lists</h3>
-<div class="fragment"><div class="line">ImDrawList* <a class="code" href="group__UITheme.html#gac200124cba8a07d2d724325d999604c7">draw_list</a> = ImGui::GetWindowDrawList();</div>
+<div class="fragment"><div class="line">ImDrawList* draw_list = ImGui::GetWindowDrawList();</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Get window position</span></div>
 <div class="line">ImVec2 pos = ImGui::GetCursorScreenPos();</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Draw line</span></div>
-<div class="line"><a class="code" href="group__UITheme.html#gac200124cba8a07d2d724325d999604c7">draw_list</a>-&gt;AddLine(</div>
+<div class="line">draw_list-&gt;AddLine(</div>
 <div class="line">    ImVec2(pos.x, pos.y),</div>
 <div class="line">    ImVec2(pos.x + 100, pos.y + 100),</div>
 <div class="line">    IM_COL32(255, 0, 0, 255),  <span class="comment">// Red</span></div>
@@ -703,33 +703,32 @@ Draw Lists</h3>
 <div class="line">);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Draw rectangle</span></div>
-<div class="line"><a class="code" href="group__UITheme.html#gac200124cba8a07d2d724325d999604c7">draw_list</a>-&gt;AddRect(</div>
+<div class="line">draw_list-&gt;AddRect(</div>
 <div class="line">    ImVec2(pos.x, pos.y),</div>
 <div class="line">    ImVec2(pos.x + 200, pos.y + 100),</div>
 <div class="line">    IM_COL32(0, 255, 0, 255)   <span class="comment">// Green</span></div>
 <div class="line">);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Filled rectangle</span></div>
-<div class="line"><a class="code" href="group__UITheme.html#gac200124cba8a07d2d724325d999604c7">draw_list</a>-&gt;AddRectFilled(</div>
+<div class="line">draw_list-&gt;AddRectFilled(</div>
 <div class="line">    ImVec2(pos.x, pos.y),</div>
 <div class="line">    ImVec2(pos.x + 200, pos.y + 100),</div>
 <div class="line">    IM_COL32(0, 0, 255, 128)   <span class="comment">// Blue, semi-transparent</span></div>
 <div class="line">);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Circle</span></div>
-<div class="line"><a class="code" href="group__UITheme.html#gac200124cba8a07d2d724325d999604c7">draw_list</a>-&gt;AddCircle(</div>
+<div class="line">draw_list-&gt;AddCircle(</div>
 <div class="line">    ImVec2(pos.x + 100, pos.y + 100),</div>
 <div class="line">    50.0f,                     <span class="comment">// Radius</span></div>
 <div class="line">    IM_COL32(255, 255, 0, 255) <span class="comment">// Yellow</span></div>
 <div class="line">);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Text</span></div>
-<div class="line"><a class="code" href="group__UITheme.html#gac200124cba8a07d2d724325d999604c7">draw_list</a>-&gt;AddText(</div>
+<div class="line">draw_list-&gt;AddText(</div>
 <div class="line">    ImVec2(pos.x, pos.y),</div>
 <div class="line">    IM_COL32(255, 255, 255, 255),</div>
 <div class="line">    <span class="stringliteral">&quot;Custom text&quot;</span></div>
 <div class="line">);</div>
-<div class="ttc" id="agroup__UITheme_html_gac200124cba8a07d2d724325d999604c7"><div class="ttname"><a href="group__UITheme.html#gac200124cba8a07d2d724325d999604c7">draw_list</a></div><div class="ttdeci">***ImDrawList * draw_list</div><div class="ttdef"><b>Definition:</b> style.h:143</div></div>
 </div><!-- fragment --><hr  />
 <h2><a class="anchor" id="autotoc_md198"></a>
 Panel Manager Pattern</h2>
@@ -829,8 +828,8 @@ Conditional UI</h3>
 <div class="line"><span class="keywordflow">if</span> (showAdvanced) {</div>
 <div class="line">    <span class="comment">// Advanced controls...</span></div>
 <div class="line">}</div>
-<div class="ttc" id="astructSimulationState_1_1SimulationControl_html_a6b77ed0268a4bf54066341dd372eeb4b"><div class="ttname"><a href="structSimulationState_1_1SimulationControl.html#a6b77ed0268a4bf54066341dd372eeb4b">SimulationState::SimulationControl::fixed_dt</a></div><div class="ttdeci">double fixed_dt</div><div class="ttdoc">Fixed timestep value (seconds)</div><div class="ttdef"><b>Definition:</b> simulation_state.h:117</div></div>
-<div class="ttc" id="astructSimulationState_1_1SimulationControl_html_abfee3fbb74e2fbf35a5ce513c49fac95"><div class="ttname"><a href="structSimulationState_1_1SimulationControl.html#abfee3fbb74e2fbf35a5ce513c49fac95">SimulationState::SimulationControl::use_fixed_dt</a></div><div class="ttdeci">bool use_fixed_dt</div><div class="ttdoc">Use fixed timestep instead of real-time.</div><div class="ttdef"><b>Definition:</b> simulation_state.h:116</div></div>
+<div class="ttc" id="astructSimulationState_1_1SimulationControl_html_a6b77ed0268a4bf54066341dd372eeb4b"><div class="ttname"><a href="structSimulationState_1_1SimulationControl.html#a6b77ed0268a4bf54066341dd372eeb4b">SimulationState::SimulationControl::fixed_dt</a></div><div class="ttdeci">double fixed_dt</div><div class="ttdoc">Fixed timestep value (seconds)</div><div class="ttdef"><b>Definition:</b> simulation_state.h:189</div></div>
+<div class="ttc" id="astructSimulationState_1_1SimulationControl_html_abfee3fbb74e2fbf35a5ce513c49fac95"><div class="ttname"><a href="structSimulationState_1_1SimulationControl.html#abfee3fbb74e2fbf35a5ce513c49fac95">SimulationState::SimulationControl::use_fixed_dt</a></div><div class="ttdeci">bool use_fixed_dt</div><div class="ttdoc">Use fixed timestep instead of real-time.</div><div class="ttdef"><b>Definition:</b> simulation_state.h:188</div></div>
 <div class="ttc" id="astructSimulationState_html_aff22ad8c34d8c4eca0682d4a7bf22fe8"><div class="ttname"><a href="structSimulationState.html#aff22ad8c34d8c4eca0682d4a7bf22fe8">SimulationState::control</a></div><div class="ttdeci">struct SimulationState::SimulationControl control</div></div>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md207"></a>
 Tooltips</h3>

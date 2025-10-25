@@ -1,0 +1,4 @@
+<map id="RotorAnalysisPanel" name="RotorAnalysisPanel">
+<area shape="rect" id="node1" title="Rotor dynamics analysis panel with per&#45;motor telemetry." alt="" coords="5,80,152,107"/>
+<area shape="rect" id="node2" href="$classPanel.html" title="Abstract base class for all UI panels." alt="" coords="50,5,107,32"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="RingBuffer::push" name="RingBuffer::push">
+<area shape="rect" id="node1" title="Force add sample regardless of timing." alt="" coords="5,5,135,32"/>
+<area shape="rect" id="node2" href="$structRingBuffer.html#af68df3b6d240b4eb2f79d26a3d7a9d1c" title="Remove samples older than time window." alt="" coords="183,5,317,32"/>
+</map>

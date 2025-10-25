@@ -1,0 +1,11 @@
+<map id="ui::Colors" name="ui::Colors">
+<area shape="rect" id="node1" title="Get global color palette." alt="" coords="431,146,513,173"/>
+<area shape="rect" id="node2" href="$group__UIWidgets.html#gae86fdebbe43a915410d1bf0c16c4cb17" title="Begin a Card container with consistent styling." alt="" coords="243,70,353,97"/>
+<area shape="rect" id="node3" href="$classEstimatorPanel.html#a2f2e0dc7c0287d12b71b412a38d25b96" title="Render the panel&#39;s ImGui interface." alt="" coords="5,70,165,97"/>
+<area shape="rect" id="node4" href="$classPowerPanel.html#a707cada1c41c5a1a38f154f6e93c1280" title="Render the panel&#39;s ImGui interface." alt="" coords="17,19,154,46"/>
+<area shape="rect" id="node5" href="$classRotorAnalysisPanel.html#a09515034d2e55f6aa1d35d8cbc74863c" title="Render the panel&#39;s ImGui interface." alt="" coords="12,172,159,213"/>
+<area shape="rect" id="node6" href="$classRotorPanel.html#a4cc8a6932eabe62949fa23c08f79e488" title="Render the panel&#39;s ImGui interface." alt="" coords="19,121,151,147"/>
+<area shape="rect" id="node7" href="$classSensorPanel.html#a2b9f315ae32bd4883b8532d5369c373d" title="Render the panel&#39;s ImGui interface." alt="" coords="15,238,156,265"/>
+<area shape="rect" id="node8" href="$group__UIWidgets.html#ga2fb6bd477996a90c7d6373454fe6c06c" title="Render a card header with optional badge." alt="" coords="239,121,357,147"/>
+<area shape="rect" id="node9" href="$group__UITheme.html#gad4204ae9873b183dca2479b338348718" title="Push pill button styling onto ImGui stack." alt="" coords="213,323,383,350"/>
+</map>

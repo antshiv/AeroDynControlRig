@@ -1,4 +1,4 @@
 <map id="ui::BeginCard" name="ui::BeginCard">
 <area shape="rect" id="node1" title="Begin a Card container with consistent styling." alt="" coords="5,5,115,32"/>
-<area shape="rect" id="node2" href="$namespaceui.html#ab3d0346c22a3101df28246449a445ebf" title=" " alt="" coords="163,5,245,32"/>
+<area shape="rect" id="node2" href="$group__UITheme.html#ga447c8573ad59f48165a527a06c94fb62" title="Get global color palette." alt="" coords="163,5,245,32"/>
 </map>

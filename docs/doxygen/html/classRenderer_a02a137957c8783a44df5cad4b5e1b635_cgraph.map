@@ -1,0 +1,4 @@
+<map id="Renderer::renderFrame" name="Renderer::renderFrame">
+<area shape="rect" id="node1" title="Render a frame (legacy 2D mode &#45; deprecated)" alt="" coords="5,5,177,32"/>
+<area shape="rect" id="node2" href="$classRenderer.html#a5c4417eb759e6322707ee2ab0ecb595f" title="Render a 3D frame with the current model/view/projection matrices." alt="" coords="225,5,416,32"/>
+</map>

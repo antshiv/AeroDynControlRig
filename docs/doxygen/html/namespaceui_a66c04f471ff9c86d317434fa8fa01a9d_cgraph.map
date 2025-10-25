@@ -1,0 +1,6 @@
+<map id="ui::TimeSeriesPlot" name="ui::TimeSeriesPlot">
+<area shape="rect" id="node1" title="Complete plot widget with frame." alt="" coords="5,56,145,83"/>
+<area shape="rect" id="node2" href="$namespaceui.html#aaa9d9acdba2cfad6a5f2d008df7fd0de" title="Begin a plot with standard configuration." alt="" coords="193,5,297,32"/>
+<area shape="rect" id="node3" href="$namespaceui.html#afc5f0defcd6efeffca4db37b32b8327f" title="End plot (must be called if BeginPlot returned true)" alt="" coords="200,56,291,83"/>
+<area shape="rect" id="node4" href="$namespaceui.html#ade1895c8a68d441f4cc933792a68f90f" title="Plot a single time&#45;series line." alt="" coords="198,107,293,133"/>
+</map>

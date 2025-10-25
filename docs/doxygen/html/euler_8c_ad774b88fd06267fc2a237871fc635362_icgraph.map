@@ -1,4 +1,7 @@
 <map id="euler_to_quaternion" name="euler_to_quaternion">
-<area shape="rect" id="node1" title=" " alt="" coords="235,13,387,39"/>
-<area shape="rect" id="node2" href="$classQuaternionDemoModule.html#ad7ebf21527722e8f6efb2eae537da1d0" title="Update attitude quaternion based on angular velocity." alt="" coords="5,5,187,47"/>
+<area shape="rect" id="node1" title=" " alt="" coords="511,35,663,61"/>
+<area shape="rect" id="node2" href="$classApplication.html#ad8ade3f4f891c7ac54b5c69d6ca9ce5a" title="Keyboard input callback." alt="" coords="280,5,463,32"/>
+<area shape="rect" id="node5" href="$classQuaternionDemoModule.html#ad7ebf21527722e8f6efb2eae537da1d0" title="Update attitude quaternion based on angular velocity." alt="" coords="281,57,462,98"/>
+<area shape="rect" id="node3" href="$classApplication.html#ae92abde0eb4b95fd7503308a13ed8c96" title="Initialize the application subsystems." alt="" coords="108,5,232,32"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
 </map>

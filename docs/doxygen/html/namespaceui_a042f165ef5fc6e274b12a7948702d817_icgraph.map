@@ -1,0 +1,4 @@
+<map id="ui::PlotAttitudeAngles" name="ui::PlotAttitudeAngles">
+<area shape="rect" id="node1" title="Plot multiple lines with automatic colors." alt="" coords="213,5,376,32"/>
+<area shape="rect" id="node2" href="$classEstimatorPanel.html#a2f2e0dc7c0287d12b71b412a38d25b96" title="Render the panel&#39;s ImGui interface." alt="" coords="5,5,165,32"/>
+</map>

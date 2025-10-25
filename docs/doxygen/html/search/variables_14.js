@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['yaw_598',['yaw',['../classCamera.html#ad76701b22630f2df28a0ae15f0497a3a',1,'Camera::yaw()'],['../structEulerAngles.html#a4dc9e3ffc0285a52e2e1d26b43e270a6',1,'EulerAngles::yaw()']]]
+  ['x_5flabel_741',['x_label',['../structui_1_1PlotConfig.html#adffd4448ad258d917737c0edf131955b',1,'ui::PlotConfig']]],
+  ['x_5fmax_742',['x_max',['../structui_1_1PlotConfig.html#a3f3e024bf87060fa300e389ff1006a17',1,'ui::PlotConfig']]],
+  ['x_5fmin_743',['x_min',['../structui_1_1PlotConfig.html#a2cdcae46a938a7ea2a5982b218d1471a',1,'ui::PlotConfig']]]
 ];

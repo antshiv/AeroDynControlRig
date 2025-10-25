@@ -1,0 +1,4 @@
+<map id="ui::PushPillButtonStyle" name="ui::PushPillButtonStyle">
+<area shape="rect" id="node1" title="Push pill button styling onto ImGui stack." alt="" coords="5,5,175,32"/>
+<area shape="rect" id="node2" href="$group__UITheme.html#ga447c8573ad59f48165a527a06c94fb62" title="Get global color palette." alt="" coords="223,5,305,32"/>
+</map>

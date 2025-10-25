@@ -16,6 +16,10 @@ var dir_54c61444dbe80e92b43d038371885871 =
     [ "power_panel.h", "power__panel_8h.html", [
       [ "PowerPanel", "classPowerPanel.html", "classPowerPanel" ]
     ] ],
+    [ "rotor_analysis_panel.cpp", "rotor__analysis__panel_8cpp.html", null ],
+    [ "rotor_analysis_panel.h", "rotor__analysis__panel_8h.html", [
+      [ "RotorAnalysisPanel", "classRotorAnalysisPanel.html", "classRotorAnalysisPanel" ]
+    ] ],
     [ "rotor_panel.cpp", "rotor__panel_8cpp.html", null ],
     [ "rotor_panel.h", "rotor__panel_8h.html", [
       [ "RotorPanel", "classRotorPanel.html", "classRotorPanel" ]

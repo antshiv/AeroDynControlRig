@@ -1,9 +1,9 @@
 <map id="SensorPanel::draw" name="SensorPanel::draw">
 <area shape="rect" id="node1" title="Render the panel&#39;s ImGui interface." alt="" coords="5,132,147,159"/>
 <area shape="rect" id="node2" href="$group__UIWidgets.html#gae86fdebbe43a915410d1bf0c16c4cb17" title="Begin a Card container with consistent styling." alt="" coords="213,5,323,32"/>
-<area shape="rect" id="node3" href="$namespaceui.html#ab3d0346c22a3101df28246449a445ebf" title=" " alt="" coords="389,56,472,83"/>
+<area shape="rect" id="node3" href="$group__UITheme.html#ga447c8573ad59f48165a527a06c94fb62" title="Get global color palette." alt="" coords="389,56,472,83"/>
 <area shape="rect" id="node4" href="$group__UIWidgets.html#ga2fb6bd477996a90c7d6373454fe6c06c" title="Render a card header with optional badge." alt="" coords="209,107,327,133"/>
-<area shape="rect" id="node5" href="$namespaceui.html#a0681d3cde6bdb95a6bccbc515685754c" title=" " alt="" coords="392,132,469,159"/>
+<area shape="rect" id="node5" href="$group__UITheme.html#ga27aa4868ffcd17787cc35f7e24a0c616" title="Get global font set." alt="" coords="392,132,469,159"/>
 <area shape="rect" id="node6" href="$group__UIWidgets.html#gaab4c47f869143e855e5a9cb8b6f2cf8b" title="End a Card container (must be called after BeginCard)" alt="" coords="220,208,316,235"/>
 <area shape="rect" id="node7" href="$classSensorPanel.html#a5ce71616ac2e024bab8bbdc2e44ac0eb" title="Get the display name of this panel." alt="" coords="195,259,341,285"/>
 </map>

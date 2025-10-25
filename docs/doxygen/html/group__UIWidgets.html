@@ -123,9 +123,9 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Custom ImGui widgets that mirror web component libraries. </p>
-<p>This module provides reusable UI components similar to React/Vue component libraries or CSS frameworks like Bootstrap. Each widget encapsulates styling, layout, and behavior.</p>
+<p>This module provides reusable UI components similar to CSS component libraries like Bootstrap. Each widget encapsulates styling, layout, and behavior.</p>
 <p><b>Web Analogy:</b></p><ul>
-<li><code>BeginCard/EndCard</code> = <code>&lt;Card&gt;</code> component (React) or <code>.card</code> class (Bootstrap)</li>
+<li><code>BeginCard/EndCard</code> = Custom <code>&lt;div class="card"&gt;</code> element or <code>.card</code> class (Bootstrap)</li>
 <li><code>CardHeader</code> = <code>&lt;CardHeader&gt;</code> with optional badge</li>
 <li><code>ValueChip</code> = <code>&lt;span class="badge"&gt;</code> or Material-UI Chip</li>
 </ul>
@@ -224,7 +224,7 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="group__UIWidgets_gae86fdebbe43a915410d1bf0c16c4cb17_cgraph.png" border="0" usemap="#agroup__UIWidgets_gae86fdebbe43a915410d1bf0c16c4cb17_cgraph" alt=""/></div>
 <map name="agroup__UIWidgets_gae86fdebbe43a915410d1bf0c16c4cb17_cgraph" id="agroup__UIWidgets_gae86fdebbe43a915410d1bf0c16c4cb17_cgraph">
 <area shape="rect" title="Begin a Card container with consistent styling." alt="" coords="5,5,115,32"/>
-<area shape="rect" href="namespaceui.html#ab3d0346c22a3101df28246449a445ebf" title=" " alt="" coords="163,5,245,32"/>
+<area shape="rect" href="group__UITheme.html#ga447c8573ad59f48165a527a06c94fb62" title="Get global color palette." alt="" coords="163,5,245,32"/>
 </map>
 </div>
 <div class="dynheader">
@@ -232,11 +232,12 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="group__UIWidgets_gae86fdebbe43a915410d1bf0c16c4cb17_icgraph.png" border="0" usemap="#agroup__UIWidgets_gae86fdebbe43a915410d1bf0c16c4cb17_icgraph" alt=""/></div>
 <map name="agroup__UIWidgets_gae86fdebbe43a915410d1bf0c16c4cb17_icgraph" id="agroup__UIWidgets_gae86fdebbe43a915410d1bf0c16c4cb17_icgraph">
-<area shape="rect" title="Begin a Card container with consistent styling." alt="" coords="213,81,323,108"/>
+<area shape="rect" title="Begin a Card container with consistent styling." alt="" coords="213,115,323,141"/>
 <area shape="rect" href="classEstimatorPanel.html#a2f2e0dc7c0287d12b71b412a38d25b96" title="Render the panel&#39;s ImGui interface." alt="" coords="5,5,165,32"/>
 <area shape="rect" href="classPowerPanel.html#a707cada1c41c5a1a38f154f6e93c1280" title="Render the panel&#39;s ImGui interface." alt="" coords="17,56,154,83"/>
-<area shape="rect" href="classRotorPanel.html#a4cc8a6932eabe62949fa23c08f79e488" title="Render the panel&#39;s ImGui interface." alt="" coords="19,107,151,133"/>
-<area shape="rect" href="classSensorPanel.html#a2b9f315ae32bd4883b8532d5369c373d" title="Render the panel&#39;s ImGui interface." alt="" coords="15,157,156,184"/>
+<area shape="rect" href="classRotorAnalysisPanel.html#a09515034d2e55f6aa1d35d8cbc74863c" title="Render the panel&#39;s ImGui interface." alt="" coords="12,107,159,149"/>
+<area shape="rect" href="classRotorPanel.html#a4cc8a6932eabe62949fa23c08f79e488" title="Render the panel&#39;s ImGui interface." alt="" coords="19,173,151,200"/>
+<area shape="rect" href="classSensorPanel.html#a2b9f315ae32bd4883b8532d5369c373d" title="Render the panel&#39;s ImGui interface." alt="" coords="15,224,156,251"/>
 </map>
 </div>
 
@@ -307,26 +308,29 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
-<p><b>Example:</b> </p><div class="fragment"><div class="line"><span class="keyword">const</span> ui::Palette&amp; palette = <a class="code" href="namespaceui.html#ab3d0346c22a3101df28246449a445ebf">ui::Colors</a>();</div>
+<p><b>Example:</b> </p><div class="fragment"><div class="line"><span class="keyword">const</span> <a class="code" href="structui_1_1Palette.html">ui::Palette</a>&amp; palette = <a class="code" href="group__UITheme.html#ga447c8573ad59f48165a527a06c94fb62">ui::Colors</a>();</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Header with success badge (green)</span></div>
-<div class="line"><a class="code" href="group__UIWidgets.html#ga2fb6bd477996a90c7d6373454fe6c06c">ui::CardHeader</a>(<span class="stringliteral">&quot;Rotor Dynamics&quot;</span>, <span class="stringliteral">&quot;Real-time +2.5%&quot;</span>, &amp;palette.success);</div>
+<div class="line"><a class="code" href="group__UIWidgets.html#ga2fb6bd477996a90c7d6373454fe6c06c">ui::CardHeader</a>(<span class="stringliteral">&quot;Rotor Dynamics&quot;</span>, <span class="stringliteral">&quot;Real-time +2.5%&quot;</span>, &amp;palette.<a class="code" href="structui_1_1Palette.html#a5586e47f0b78c8eaf4f3e52ba85b0bfe">success</a>);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Header with danger badge (red)</span></div>
-<div class="line"><a class="code" href="group__UIWidgets.html#ga2fb6bd477996a90c7d6373454fe6c06c">ui::CardHeader</a>(<span class="stringliteral">&quot;Rotor Dynamics&quot;</span>, <span class="stringliteral">&quot;Offline&quot;</span>, &amp;palette.danger);</div>
+<div class="line"><a class="code" href="group__UIWidgets.html#ga2fb6bd477996a90c7d6373454fe6c06c">ui::CardHeader</a>(<span class="stringliteral">&quot;Rotor Dynamics&quot;</span>, <span class="stringliteral">&quot;Offline&quot;</span>, &amp;palette.<a class="code" href="structui_1_1Palette.html#abb98f92f8ab6491236b49b3b32e72d66">danger</a>);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Header with no badge</span></div>
 <div class="line"><a class="code" href="group__UIWidgets.html#ga2fb6bd477996a90c7d6373454fe6c06c">ui::CardHeader</a>(<span class="stringliteral">&quot;Telemetry&quot;</span>);</div>
-<div class="ttc" id="anamespaceui_html_ab3d0346c22a3101df28246449a445ebf"><div class="ttname"><a href="namespaceui.html#ab3d0346c22a3101df28246449a445ebf">ui::Colors</a></div><div class="ttdeci">const Palette &amp; Colors()</div><div class="ttdef"><b>Definition:</b> style.cpp:173</div></div>
-</div><!-- fragment --><dl class="section see"><dt>See also</dt><dd><a class="el" href="group__UIWidgets.html#gae86fdebbe43a915410d1bf0c16c4cb17" title="Begin a Card container with consistent styling.">BeginCard()</a>, <a class="el" href="style_8h.html">gui/style.h</a> (for Palette colors) </dd></dl>
+<div class="ttc" id="agroup__UITheme_html_ga447c8573ad59f48165a527a06c94fb62"><div class="ttname"><a href="group__UITheme.html#ga447c8573ad59f48165a527a06c94fb62">ui::Colors</a></div><div class="ttdeci">const Palette &amp; Colors()</div><div class="ttdoc">Get global color palette.</div><div class="ttdef"><b>Definition:</b> style.cpp:173</div></div>
+<div class="ttc" id="astructui_1_1Palette_html"><div class="ttname"><a href="structui_1_1Palette.html">ui::Palette</a></div><div class="ttdoc">Color palette (design tokens)</div><div class="ttdef"><b>Definition:</b> style.h:145</div></div>
+<div class="ttc" id="astructui_1_1Palette_html_a5586e47f0b78c8eaf4f3e52ba85b0bfe"><div class="ttname"><a href="structui_1_1Palette.html#a5586e47f0b78c8eaf4f3e52ba85b0bfe">ui::Palette::success</a></div><div class="ttdeci">ImVec4 success</div><div class="ttdoc">#39c26e - Green (positive, connected, OK)</div><div class="ttdef"><b>Definition:</b> style.h:167</div></div>
+<div class="ttc" id="astructui_1_1Palette_html_abb98f92f8ab6491236b49b3b32e72d66"><div class="ttname"><a href="structui_1_1Palette.html#abb98f92f8ab6491236b49b3b32e72d66">ui::Palette::danger</a></div><div class="ttdeci">ImVec4 danger</div><div class="ttdoc">#f05446 - Red (error, critical, offline)</div><div class="ttdef"><b>Definition:</b> style.h:169</div></div>
+</div><!-- fragment --><dl class="section see"><dt>See also</dt><dd><a class="el" href="group__UIWidgets.html#gae86fdebbe43a915410d1bf0c16c4cb17" title="Begin a Card container with consistent styling.">BeginCard()</a>, <a class="el" href="style_8h.html">gui/style.h</a> (for <a class="el" href="structui_1_1Palette.html" title="Color palette (design tokens)">Palette</a> colors) </dd></dl>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="group__UIWidgets_ga2fb6bd477996a90c7d6373454fe6c06c_cgraph.png" border="0" usemap="#agroup__UIWidgets_ga2fb6bd477996a90c7d6373454fe6c06c_cgraph" alt=""/></div>
 <map name="agroup__UIWidgets_ga2fb6bd477996a90c7d6373454fe6c06c_cgraph" id="agroup__UIWidgets_ga2fb6bd477996a90c7d6373454fe6c06c_cgraph">
 <area shape="rect" title="Render a card header with optional badge." alt="" coords="5,31,124,57"/>
-<area shape="rect" href="namespaceui.html#ab3d0346c22a3101df28246449a445ebf" title=" " alt="" coords="172,5,255,32"/>
-<area shape="rect" href="namespaceui.html#a0681d3cde6bdb95a6bccbc515685754c" title=" " alt="" coords="175,56,252,83"/>
+<area shape="rect" href="group__UITheme.html#ga447c8573ad59f48165a527a06c94fb62" title="Get global color palette." alt="" coords="172,5,255,32"/>
+<area shape="rect" href="group__UITheme.html#ga27aa4868ffcd17787cc35f7e24a0c616" title="Get global font set." alt="" coords="175,56,252,83"/>
 </map>
 </div>
 <div class="dynheader">
@@ -334,11 +338,12 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="group__UIWidgets_ga2fb6bd477996a90c7d6373454fe6c06c_icgraph.png" border="0" usemap="#agroup__UIWidgets_ga2fb6bd477996a90c7d6373454fe6c06c_icgraph" alt=""/></div>
 <map name="agroup__UIWidgets_ga2fb6bd477996a90c7d6373454fe6c06c_icgraph" id="agroup__UIWidgets_ga2fb6bd477996a90c7d6373454fe6c06c_icgraph">
-<area shape="rect" title="Render a card header with optional badge." alt="" coords="213,81,332,108"/>
+<area shape="rect" title="Render a card header with optional badge." alt="" coords="213,115,332,141"/>
 <area shape="rect" href="classEstimatorPanel.html#a2f2e0dc7c0287d12b71b412a38d25b96" title="Render the panel&#39;s ImGui interface." alt="" coords="5,5,165,32"/>
 <area shape="rect" href="classPowerPanel.html#a707cada1c41c5a1a38f154f6e93c1280" title="Render the panel&#39;s ImGui interface." alt="" coords="17,56,154,83"/>
-<area shape="rect" href="classRotorPanel.html#a4cc8a6932eabe62949fa23c08f79e488" title="Render the panel&#39;s ImGui interface." alt="" coords="19,107,151,133"/>
-<area shape="rect" href="classSensorPanel.html#a2b9f315ae32bd4883b8532d5369c373d" title="Render the panel&#39;s ImGui interface." alt="" coords="15,157,156,184"/>
+<area shape="rect" href="classRotorAnalysisPanel.html#a09515034d2e55f6aa1d35d8cbc74863c" title="Render the panel&#39;s ImGui interface." alt="" coords="12,107,159,149"/>
+<area shape="rect" href="classRotorPanel.html#a4cc8a6932eabe62949fa23c08f79e488" title="Render the panel&#39;s ImGui interface." alt="" coords="19,173,151,200"/>
+<area shape="rect" href="classSensorPanel.html#a2b9f315ae32bd4883b8532d5369c373d" title="Render the panel&#39;s ImGui interface." alt="" coords="15,224,156,251"/>
 </map>
 </div>
 
@@ -373,11 +378,12 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="group__UIWidgets_gaab4c47f869143e855e5a9cb8b6f2cf8b_icgraph.png" border="0" usemap="#agroup__UIWidgets_gaab4c47f869143e855e5a9cb8b6f2cf8b_icgraph" alt=""/></div>
 <map name="agroup__UIWidgets_gaab4c47f869143e855e5a9cb8b6f2cf8b_icgraph" id="agroup__UIWidgets_gaab4c47f869143e855e5a9cb8b6f2cf8b_icgraph">
-<area shape="rect" title="End a Card container (must be called after BeginCard)" alt="" coords="213,81,309,108"/>
+<area shape="rect" title="End a Card container (must be called after BeginCard)" alt="" coords="213,115,309,141"/>
 <area shape="rect" href="classEstimatorPanel.html#a2f2e0dc7c0287d12b71b412a38d25b96" title="Render the panel&#39;s ImGui interface." alt="" coords="5,5,165,32"/>
 <area shape="rect" href="classPowerPanel.html#a707cada1c41c5a1a38f154f6e93c1280" title="Render the panel&#39;s ImGui interface." alt="" coords="17,56,154,83"/>
-<area shape="rect" href="classRotorPanel.html#a4cc8a6932eabe62949fa23c08f79e488" title="Render the panel&#39;s ImGui interface." alt="" coords="19,107,151,133"/>
-<area shape="rect" href="classSensorPanel.html#a2b9f315ae32bd4883b8532d5369c373d" title="Render the panel&#39;s ImGui interface." alt="" coords="15,157,156,184"/>
+<area shape="rect" href="classRotorAnalysisPanel.html#a09515034d2e55f6aa1d35d8cbc74863c" title="Render the panel&#39;s ImGui interface." alt="" coords="12,107,159,149"/>
+<area shape="rect" href="classRotorPanel.html#a4cc8a6932eabe62949fa23c08f79e488" title="Render the panel&#39;s ImGui interface." alt="" coords="19,173,151,200"/>
+<area shape="rect" href="classSensorPanel.html#a2b9f315ae32bd4883b8532d5369c373d" title="Render the panel&#39;s ImGui interface." alt="" coords="15,224,156,251"/>
 </map>
 </div>
 

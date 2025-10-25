@@ -1,0 +1,5 @@
+<map id="RingBuffer::prune" name="RingBuffer::prune">
+<area shape="rect" id="node1" title="Remove samples older than time window." alt="" coords="200,31,335,57"/>
+<area shape="rect" id="node2" href="$structRingBuffer.html#a66eec22cde382c88ebc50dd92650206d" title="Force add sample regardless of timing." alt="" coords="14,5,143,32"/>
+<area shape="rect" id="node3" href="$structRingBuffer.html#a4776276b872c65f1e177a65bf54176f0" title="Add sample if enough time has passed since last sample." alt="" coords="5,56,152,83"/>
+</map>

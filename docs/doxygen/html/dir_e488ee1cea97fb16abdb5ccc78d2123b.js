@@ -6,7 +6,7 @@ var dir_e488ee1cea97fb16abdb5ccc78d2123b =
     ] ],
     [ "camera.cpp", "camera_8cpp.html", null ],
     [ "camera.h", "camera_8h.html", "camera_8h" ],
-    [ "renderer.cpp", "renderer_8cpp.html", "renderer_8cpp" ],
+    [ "renderer.cpp", "renderer_8cpp.html", null ],
     [ "renderer.h", "renderer_8h.html", [
       [ "Renderer", "classRenderer.html", "classRenderer" ]
     ] ]

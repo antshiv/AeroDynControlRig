@@ -1,10 +1,11 @@
 <map id="Panel" name="Panel">
-<area shape="rect" id="node1" title="Abstract base class for all UI panels." alt="" coords="5,157,63,184"/>
-<area shape="rect" id="node2" href="$classControlPanel.html" title="UI panel for simulation playback control." alt="" coords="120,5,224,32"/>
-<area shape="rect" id="node3" href="$classDynamicsPanel.html" title="UI panel for configuring and visualizing first&#45;order dynamics." alt="" coords="111,56,233,83"/>
-<area shape="rect" id="node4" href="$classEstimatorPanel.html" title="UI panel displaying state estimator outputs and diagnostics." alt="" coords="112,107,232,133"/>
-<area shape="rect" id="node5" href="$classPowerPanel.html" title="UI panel monitoring electrical power consumption." alt="" coords="123,157,221,184"/>
-<area shape="rect" id="node6" href="$classRotorPanel.html" title="UI panel displaying rotor performance metrics." alt="" coords="126,208,218,235"/>
-<area shape="rect" id="node7" href="$classSensorPanel.html" title="UI panel displaying simulated IMU sensor measurements." alt="" coords="121,259,223,285"/>
-<area shape="rect" id="node8" href="$classTelemetryPanel.html" title="UI panel displaying vehicle flight state." alt="" coords="111,309,233,336"/>
+<area shape="rect" id="node1" title="Abstract base class for all UI panels." alt="" coords="5,183,63,209"/>
+<area shape="rect" id="node2" href="$classControlPanel.html" title="UI panel for simulation playback control." alt="" coords="132,5,236,32"/>
+<area shape="rect" id="node3" href="$classDynamicsPanel.html" title="UI panel for configuring and visualizing first&#45;order dynamics." alt="" coords="123,56,245,83"/>
+<area shape="rect" id="node4" href="$classEstimatorPanel.html" title="UI panel displaying state estimator outputs and diagnostics." alt="" coords="124,107,244,133"/>
+<area shape="rect" id="node5" href="$classPowerPanel.html" title="UI panel monitoring electrical power consumption." alt="" coords="135,157,233,184"/>
+<area shape="rect" id="node6" href="$classRotorAnalysisPanel.html" title="Rotor dynamics analysis panel with per&#45;motor telemetry." alt="" coords="111,208,257,235"/>
+<area shape="rect" id="node7" href="$classRotorPanel.html" title="UI panel displaying rotor performance metrics." alt="" coords="138,259,230,285"/>
+<area shape="rect" id="node8" href="$classSensorPanel.html" title="UI panel displaying simulated IMU sensor measurements." alt="" coords="133,309,235,336"/>
+<area shape="rect" id="node9" href="$classTelemetryPanel.html" title="UI panel displaying vehicle flight state." alt="" coords="123,360,245,387"/>
 </map>

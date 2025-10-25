@@ -1,14 +1,23 @@
 var structSimulationState =
 [
+    [ "AttitudeHistory", "structSimulationState_1_1AttitudeHistory.html", "structSimulationState_1_1AttitudeHistory" ],
+    [ "AttitudeHistoryVideoConfig", "structSimulationState_1_1AttitudeHistoryVideoConfig.html", "structSimulationState_1_1AttitudeHistoryVideoConfig" ],
+    [ "AttitudeSample", "structSimulationState_1_1AttitudeSample.html", "structSimulationState_1_1AttitudeSample" ],
     [ "DynamicsConfig", "structSimulationState_1_1DynamicsConfig.html", "structSimulationState_1_1DynamicsConfig" ],
     [ "DynamicsState", "structSimulationState_1_1DynamicsState.html", "structSimulationState_1_1DynamicsState" ],
     [ "EstimatorState", "structSimulationState_1_1EstimatorState.html", "structSimulationState_1_1EstimatorState" ],
     [ "PowerHistory", "structSimulationState_1_1PowerHistory.html", "structSimulationState_1_1PowerHistory" ],
     [ "RotorConfig", "structSimulationState_1_1RotorConfig.html", "structSimulationState_1_1RotorConfig" ],
+    [ "RotorHistory", "structSimulationState_1_1RotorHistory.html", "structSimulationState_1_1RotorHistory" ],
+    [ "RotorSample", "structSimulationState_1_1RotorSample.html", "structSimulationState_1_1RotorSample" ],
     [ "RotorTelemetry", "structSimulationState_1_1RotorTelemetry.html", "structSimulationState_1_1RotorTelemetry" ],
     [ "SensorFrame", "structSimulationState_1_1SensorFrame.html", "structSimulationState_1_1SensorFrame" ],
+    [ "SensorHistory", "structSimulationState_1_1SensorHistory.html", "structSimulationState_1_1SensorHistory" ],
+    [ "SensorSample", "structSimulationState_1_1SensorSample.html", "structSimulationState_1_1SensorSample" ],
     [ "SimulationControl", "structSimulationState_1_1SimulationControl.html", "structSimulationState_1_1SimulationControl" ],
     [ "angular_rate_deg_per_sec", "structSimulationState.html#a1d3ee7c82a58aa775399979710170812", null ],
+    [ "attitude_history", "structSimulationState.html#ab9c0132592f435ddf75dcb3f4f378f6a", null ],
+    [ "attitude_history_video", "structSimulationState.html#a2a0c9016e08e5a0babb3059d4c91fb4f", null ],
     [ "control", "structSimulationState.html#aff22ad8c34d8c4eca0682d4a7bf22fe8", null ],
     [ "dynamics_config", "structSimulationState.html#a2a64ddac248ee5786c0c1529e7904787", null ],
     [ "dynamics_state", "structSimulationState.html#a16f3f8bb6df5c6b4180d6aeb4f14f84d", null ],
@@ -20,6 +29,8 @@ var structSimulationState =
     [ "quaternion", "structSimulationState.html#a20e333ffdfe2eab81d5e0c9df189595d", null ],
     [ "rotor", "structSimulationState.html#a43e0b8ce8ca4d5cee64c1aac6c854180", null ],
     [ "rotor_config", "structSimulationState.html#ad5111699afe705f52a485077cff04b41", null ],
+    [ "rotor_history", "structSimulationState.html#ab9e4e4ae25b4c508b6aa66c4a33046c1", null ],
     [ "sensor", "structSimulationState.html#a196d4bfb8d4683c265f7ca38b9a712e3", null ],
+    [ "sensor_history", "structSimulationState.html#a679322fecabf8ad04767f7c95c7c71e7", null ],
     [ "time_seconds", "structSimulationState.html#a4cee76b5fa37d7373e805368a70116c6", null ]
 ];

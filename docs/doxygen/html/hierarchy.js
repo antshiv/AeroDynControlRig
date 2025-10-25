@@ -1,6 +1,9 @@
 var hierarchy =
 [
     [ "Application", "classApplication.html", null ],
+    [ "SimulationState::AttitudeHistory", "structSimulationState_1_1AttitudeHistory.html", null ],
+    [ "SimulationState::AttitudeHistoryVideoConfig", "structSimulationState_1_1AttitudeHistoryVideoConfig.html", null ],
+    [ "SimulationState::AttitudeSample", "structSimulationState_1_1AttitudeSample.html", null ],
     [ "AxisRenderer", "classAxisRenderer.html", null ],
     [ "Camera", "classCamera.html", null ],
     [ "ui::CardOptions", "structui_1_1CardOptions.html", null ],
@@ -17,21 +20,29 @@ var hierarchy =
       [ "RotorTelemetryModule", "classRotorTelemetryModule.html", null ],
       [ "SensorSimulatorModule", "classSensorSimulatorModule.html", null ]
     ] ],
+    [ "ui::Palette", "structui_1_1Palette.html", null ],
     [ "Panel", "classPanel.html", [
       [ "ControlPanel", "classControlPanel.html", null ],
       [ "DynamicsPanel", "classDynamicsPanel.html", null ],
       [ "EstimatorPanel", "classEstimatorPanel.html", null ],
       [ "PowerPanel", "classPowerPanel.html", null ],
+      [ "RotorAnalysisPanel", "classRotorAnalysisPanel.html", null ],
       [ "RotorPanel", "classRotorPanel.html", null ],
       [ "SensorPanel", "classSensorPanel.html", null ],
       [ "TelemetryPanel", "classTelemetryPanel.html", null ]
     ] ],
     [ "PanelManager", "classPanelManager.html", null ],
+    [ "ui::PlotConfig", "structui_1_1PlotConfig.html", null ],
     [ "SimulationState::PowerHistory", "structSimulationState_1_1PowerHistory.html", null ],
     [ "Renderer", "classRenderer.html", null ],
+    [ "RingBuffer< T >", "structRingBuffer.html", null ],
     [ "SimulationState::RotorConfig", "structSimulationState_1_1RotorConfig.html", null ],
+    [ "SimulationState::RotorHistory", "structSimulationState_1_1RotorHistory.html", null ],
+    [ "SimulationState::RotorSample", "structSimulationState_1_1RotorSample.html", null ],
     [ "SimulationState::RotorTelemetry", "structSimulationState_1_1RotorTelemetry.html", null ],
     [ "SimulationState::SensorFrame", "structSimulationState_1_1SensorFrame.html", null ],
+    [ "SimulationState::SensorHistory", "structSimulationState_1_1SensorHistory.html", null ],
+    [ "SimulationState::SensorSample", "structSimulationState_1_1SensorSample.html", null ],
     [ "SimulationState::SimulationControl", "structSimulationState_1_1SimulationControl.html", null ],
     [ "SimulationState", "structSimulationState.html", null ],
     [ "Transform", "classTransform.html", null ]

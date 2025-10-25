@@ -1,0 +1,11 @@
+<map id="src/gui/panels/rotor_analysis_panel.h" name="src/gui/panels/rotor_analysis_panel.h">
+<area shape="rect" id="node1" title="Panel for analyzing individual rotor performance metrics." alt="" coords="65,5,211,47"/>
+<area shape="rect" id="node2" title=" " alt="" coords="107,169,169,196"/>
+<area shape="rect" id="node3" href="$panel_8h.html" title="Base interface for ImGui UI panels in the AeroDynControlRig." alt="" coords="5,95,100,121"/>
+<area shape="rect" id="node5" href="$simulation__state_8h.html" title="Centralized simulation state shared across all modules and panels." alt="" coords="236,95,411,121"/>
+<area shape="rect" id="node4" title=" " alt="" coords="23,169,82,196"/>
+<area shape="rect" id="node6" title=" " alt="" coords="469,169,525,196"/>
+<area shape="rect" id="node7" title=" " alt="" coords="549,169,607,196"/>
+<area shape="rect" id="node8" title=" " alt="" coords="194,169,298,196"/>
+<area shape="rect" id="node9" href="$euler_8h.html" title=" " alt="" coords="323,169,444,196"/>
+</map>

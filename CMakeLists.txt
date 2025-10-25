@@ -47,6 +47,7 @@ set(TEST_RIG_SOURCES
     src/gui/panels/rotor_panel.cpp
     src/gui/panels/power_panel.cpp
     src/gui/panels/sensor_panel.cpp
+    src/gui/panels/rotor_analysis_panel.cpp
     src/render/renderer.cpp
     src/render/axis_renderer.cpp
     src/render/camera.cpp

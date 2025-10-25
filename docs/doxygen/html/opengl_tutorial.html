@@ -223,7 +223,7 @@ What is a Vertex?</h3>
 Example from &lt;tt&gt;renderer.cpp&lt;/tt&gt;</h3>
 <div class="fragment"><div class="line"><span class="comment">// Define 8 vertices for a cube</span></div>
 <div class="line"><span class="comment">// Each vertex: 6 floats (3 for position + 3 for color)</span></div>
-<div class="line"><span class="keywordtype">float</span> <a class="code" href="renderer_8cpp.html#a25986ed96a435775e363f05540a2f9c4">vertices</a>[] = {</div>
+<div class="line"><span class="keywordtype">float</span> vertices[] = {</div>
 <div class="line">    <span class="comment">// Position          Color</span></div>
 <div class="line">    <span class="comment">// x     y     z     r    g    b</span></div>
 <div class="line">    -0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f,  <span class="comment">// Vertex 0: Red</span></div>
@@ -232,7 +232,6 @@ Example from &lt;tt&gt;renderer.cpp&lt;/tt&gt;</h3>
 <div class="line">    -0.5f,  0.5f, -0.5f, 1.0f, 1.0f, 0.0f,  <span class="comment">// Vertex 3: Yellow</span></div>
 <div class="line">    <span class="comment">// ... 4 more vertices for the back face</span></div>
 <div class="line">};</div>
-<div class="ttc" id="arenderer_8cpp_html_a25986ed96a435775e363f05540a2f9c4"><div class="ttname"><a href="renderer_8cpp.html#a25986ed96a435775e363f05540a2f9c4">vertices</a></div><div class="ttdeci">float vertices[]</div><div class="ttdef"><b>Definition:</b> renderer.cpp:14</div></div>
 </div><!-- fragment --><p><b>Why floats?</b> GPUs work with floating-point numbers. Coordinates are typically in range [-1, 1] for normalized device coordinates (NDC).</p>
 <hr  />
 <h2><a class="anchor" id="autotoc_md341"></a>
@@ -260,8 +259,8 @@ Creating a VBO in Our Code</h3>
 <div class="line"><span class="comment">// Step 3: Upload vertex data to GPU</span></div>
 <div class="line">glBufferData(</div>
 <div class="line">    GL_ARRAY_BUFFER,           <span class="comment">// Target: array buffer</span></div>
-<div class="line">    <span class="keyword">sizeof</span>(<a class="code" href="renderer_8cpp.html#a25986ed96a435775e363f05540a2f9c4">vertices</a>),          <span class="comment">// Size in bytes</span></div>
-<div class="line">    <a class="code" href="renderer_8cpp.html#a25986ed96a435775e363f05540a2f9c4">vertices</a>,                  <span class="comment">// Pointer to data</span></div>
+<div class="line">    <span class="keyword">sizeof</span>(vertices),          <span class="comment">// Size in bytes</span></div>
+<div class="line">    vertices,                  <span class="comment">// Pointer to data</span></div>
 <div class="line">    GL_STATIC_DRAW             <span class="comment">// Usage hint: data won&#39;t change</span></div>
 <div class="line">);</div>
 </div><!-- fragment --><p><b>Think of binding like selecting a tool</b>: You "bind" (select) a VBO before operating on it.</p>
@@ -353,7 +352,7 @@ The Solution: Indexed Drawing</h3>
 <div class="fragment"><div class="line"><span class="comment">// From renderer.cpp</span></div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Instead of storing 36 vertices, store 8 unique ones</span></div>
-<div class="line"><span class="keywordtype">float</span> <a class="code" href="renderer_8cpp.html#a25986ed96a435775e363f05540a2f9c4">vertices</a>[8 * 6] = { <span class="comment">/* ... */</span> };</div>
+<div class="line"><span class="keywordtype">float</span> vertices[8 * 6] = { <span class="comment">/* ... */</span> };</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Then define triangles using indices</span></div>
 <div class="line"><span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> indices[] = {</div>
@@ -714,13 +713,13 @@ Complete Rendering Loop</h2>
 <div class="line">}</div>
 <div class="ttc" id="aclassApplication_html_a30d655c36d8fdd1158ca0522ce0770cd"><div class="ttname"><a href="classApplication.html#a30d655c36d8fdd1158ca0522ce0770cd">Application::camera</a></div><div class="ttdeci">Camera camera</div><div class="ttdoc">3D scene camera</div><div class="ttdef"><b>Definition:</b> application.h:48</div></div>
 <div class="ttc" id="aclassApplication_html_a32eeac4b1ccc4e25034a54214c1df85b"><div class="ttname"><a href="classApplication.html#a32eeac4b1ccc4e25034a54214c1df85b">Application::transform</a></div><div class="ttdeci">Transform transform</div><div class="ttdoc">Transformation matrix utilities.</div><div class="ttdef"><b>Definition:</b> application.h:47</div></div>
-<div class="ttc" id="aclassApplication_html_af44c742342adf5305e430ff293f147c1"><div class="ttname"><a href="classApplication.html#af44c742342adf5305e430ff293f147c1">Application::tick</a></div><div class="ttdeci">void tick()</div><div class="ttdoc">Execute one frame: update simulation, render 3D, render UI.</div><div class="ttdef"><b>Definition:</b> application.cpp:364</div></div>
+<div class="ttc" id="aclassApplication_html_af44c742342adf5305e430ff293f147c1"><div class="ttname"><a href="classApplication.html#af44c742342adf5305e430ff293f147c1">Application::tick</a></div><div class="ttdeci">void tick()</div><div class="ttdoc">Execute one frame: update simulation, render 3D, render UI.</div><div class="ttdef"><b>Definition:</b> application.cpp:376</div></div>
 <div class="ttc" id="aclassPanelManager_html_accbb2906139bed93e60a3b7390c43e90"><div class="ttname"><a href="classPanelManager.html#accbb2906139bed93e60a3b7390c43e90">PanelManager::drawAll</a></div><div class="ttdeci">void drawAll(SimulationState &amp;state, Camera &amp;camera)</div><div class="ttdoc">Render all registered panels.</div><div class="ttdef"><b>Definition:</b> panel_manager.cpp:10</div></div>
-<div class="ttc" id="aclassRenderer_html_a5a9884059a536cf621b3fc92bf4922ad"><div class="ttname"><a href="classRenderer.html#a5a9884059a536cf621b3fc92bf4922ad">Renderer::setModelMatrix</a></div><div class="ttdeci">void setModelMatrix(const float *modelMat)</div><div class="ttdoc">Set the model matrix (object → world transform)</div><div class="ttdef"><b>Definition:</b> renderer.cpp:108</div></div>
-<div class="ttc" id="aclassRenderer_html_a5c4417eb759e6322707ee2ab0ecb595f"><div class="ttname"><a href="classRenderer.html#a5c4417eb759e6322707ee2ab0ecb595f">Renderer::renderFrame3D</a></div><div class="ttdeci">void renderFrame3D(const Transform &amp;transform)</div><div class="ttdoc">Render a 3D frame with the current model/view/projection matrices.</div><div class="ttdef"><b>Definition:</b> renderer.cpp:289</div></div>
-<div class="ttc" id="aclassRenderer_html_a7e13393392708399974fd1c6fcaf56cb"><div class="ttname"><a href="classRenderer.html#a7e13393392708399974fd1c6fcaf56cb">Renderer::setViewMatrix</a></div><div class="ttdeci">void setViewMatrix(const glm::mat4 &amp;view)</div><div class="ttdoc">Set the view matrix (world → camera transform)</div><div class="ttdef"><b>Definition:</b> renderer.cpp:113</div></div>
-<div class="ttc" id="aclassRenderer_html_ae2535387a5c53cb9f04ba2599fe2a1c8"><div class="ttname"><a href="classRenderer.html#ae2535387a5c53cb9f04ba2599fe2a1c8">Renderer::setProjectionMatrix</a></div><div class="ttdeci">void setProjectionMatrix(const glm::mat4 &amp;proj)</div><div class="ttdoc">Set the projection matrix (camera → clip space transform)</div><div class="ttdef"><b>Definition:</b> renderer.cpp:117</div></div>
-<div class="ttc" id="astructSimulationState_html_acef78e29043f3602fe7456343636eb07"><div class="ttname"><a href="structSimulationState.html#acef78e29043f3602fe7456343636eb07">SimulationState::model_matrix</a></div><div class="ttdeci">glm::mat4 model_matrix</div><div class="ttdoc">Model transformation matrix for rendering.</div><div class="ttdef"><b>Definition:</b> simulation_state.h:30</div></div>
+<div class="ttc" id="aclassRenderer_html_a5a9884059a536cf621b3fc92bf4922ad"><div class="ttname"><a href="classRenderer.html#a5a9884059a536cf621b3fc92bf4922ad">Renderer::setModelMatrix</a></div><div class="ttdeci">void setModelMatrix(const float *modelMat)</div><div class="ttdoc">Set the model matrix (object → world transform)</div><div class="ttdef"><b>Definition:</b> renderer.cpp:98</div></div>
+<div class="ttc" id="aclassRenderer_html_a5c4417eb759e6322707ee2ab0ecb595f"><div class="ttname"><a href="classRenderer.html#a5c4417eb759e6322707ee2ab0ecb595f">Renderer::renderFrame3D</a></div><div class="ttdeci">void renderFrame3D(const Transform &amp;transform)</div><div class="ttdoc">Render a 3D frame with the current model/view/projection matrices.</div><div class="ttdef"><b>Definition:</b> renderer.cpp:235</div></div>
+<div class="ttc" id="aclassRenderer_html_a7e13393392708399974fd1c6fcaf56cb"><div class="ttname"><a href="classRenderer.html#a7e13393392708399974fd1c6fcaf56cb">Renderer::setViewMatrix</a></div><div class="ttdeci">void setViewMatrix(const glm::mat4 &amp;view)</div><div class="ttdoc">Set the view matrix (world → camera transform)</div><div class="ttdef"><b>Definition:</b> renderer.cpp:103</div></div>
+<div class="ttc" id="aclassRenderer_html_ae2535387a5c53cb9f04ba2599fe2a1c8"><div class="ttname"><a href="classRenderer.html#ae2535387a5c53cb9f04ba2599fe2a1c8">Renderer::setProjectionMatrix</a></div><div class="ttdeci">void setProjectionMatrix(const glm::mat4 &amp;proj)</div><div class="ttdoc">Set the projection matrix (camera → clip space transform)</div><div class="ttdef"><b>Definition:</b> renderer.cpp:107</div></div>
+<div class="ttc" id="astructSimulationState_html_acef78e29043f3602fe7456343636eb07"><div class="ttname"><a href="structSimulationState.html#acef78e29043f3602fe7456343636eb07">SimulationState::model_matrix</a></div><div class="ttdeci">glm::mat4 model_matrix</div><div class="ttdoc">Model transformation matrix for rendering.</div><div class="ttdef"><b>Definition:</b> simulation_state.h:32</div></div>
 </div><!-- fragment --><hr  />
 <h2><a class="anchor" id="autotoc_md387"></a>
 Common Pitfalls and Solutions</h2>

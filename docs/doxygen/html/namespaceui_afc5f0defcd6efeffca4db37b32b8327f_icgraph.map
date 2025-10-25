@@ -1,0 +1,5 @@
+<map id="ui::EndPlot" name="ui::EndPlot">
+<area shape="rect" id="node1" title="End plot (must be called if BeginPlot returned true)" alt="" coords="213,31,304,57"/>
+<area shape="rect" id="node2" href="$classEstimatorPanel.html#a2f2e0dc7c0287d12b71b412a38d25b96" title="Render the panel&#39;s ImGui interface." alt="" coords="5,5,165,32"/>
+<area shape="rect" id="node3" href="$namespaceui.html#a66c04f471ff9c86d317434fa8fa01a9d" title="Complete plot widget with frame." alt="" coords="15,56,155,83"/>
+</map>
