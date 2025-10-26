@@ -10,6 +10,38 @@
 div.fragment {
     padding: 12px;
     margin: 12px 0;
+    background-color: #f8f8f8;
+    border: 1px solid #e0e0e0;
+}
+
+/* Dark mode for code blocks */
+@media (prefers-color-scheme: dark) {
+    div.fragment {
+        background-color: #1e1e1e;
+        border: 1px solid #3d3d3d;
+        color: #d4d4d4;
+    }
+
+    div.fragment .line {
+        color: #d4d4d4;
+    }
+
+    /* Syntax highlighting in dark mode */
+    div.fragment .keyword {
+        color: #569cd6;
+    }
+
+    div.fragment .comment {
+        color: #6a9955;
+    }
+
+    div.fragment .stringliteral {
+        color: #ce9178;
+    }
+
+    div.fragment .preprocessor {
+        color: #c586c0;
+    }
 }
 
 /* Improve code line spacing */
@@ -43,16 +75,51 @@ div.textblock li {
     margin-bottom: 12px;
 }
 
-/* Improve inline code readability */
+/* Improve inline code readability - Light mode */
 .contents code {
     padding: 2px 4px;
     background-color: #f5f5f5;
+    color: #2C3E50;
     border-radius: 2px;
+}
+
+/* Dark mode support for inline code */
+@media (prefers-color-scheme: dark) {
+    .contents code {
+        background-color: #2d2d2d;
+        color: #e8e8e8;
+    }
 }
 
 /* Better table spacing for markdown tables */
 .contents table {
     margin: 12px 0;
+}
+
+/* Dark mode for tables */
+@media (prefers-color-scheme: dark) {
+    .contents table {
+        background-color: #1e1e1e;
+        border-color: #3d3d3d;
+    }
+
+    .contents table th {
+        background-color: #2d2d2d;
+        color: #e8e8e8;
+        border-color: #3d3d3d;
+    }
+
+    .contents table td {
+        background-color: #1e1e1e;
+        color: #d4d4d4;
+        border-color: #3d3d3d;
+    }
+
+    /* Ensure inline code in tables is readable */
+    .contents table code {
+        background-color: #2d2d2d;
+        color: #e8e8e8;
+    }
 }
 
 /* Improve diagram visibility */

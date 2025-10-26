@@ -638,16 +638,14 @@ void Application::render3D() {
 
 void Application::captureAttitudeHistorySample() {
     auto& history = simulationState.attitude_history;
-    const auto& video_cfg = simulationState.attitude_history_video;
     const double now = simulationState.time_seconds;
 
     if (!std::isfinite(now)) {
         return;
     }
 
-    if (!video_cfg.recording) {
-        return;
-    }
+    // Note: Removed video_cfg.recording check - telemetry graphs should always update
+    // The recording flag only affects video/trail features, not real-time telemetry
 
     if (now < history.last_sample_time) {
         history.samples.clear();
@@ -665,6 +663,8 @@ void Application::captureAttitudeHistorySample() {
     sample.roll = simulationState.euler.roll;
     sample.pitch = simulationState.euler.pitch;
     sample.yaw = simulationState.euler.yaw;
+    // Convert angular rates from deg/s to rad/s for storage
+    sample.angular_rate = simulationState.angular_rate_deg_per_sec * (M_PI / 180.0);
     history.samples.emplace_back(sample);
     history.last_sample_time = now;
 

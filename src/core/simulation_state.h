@@ -48,7 +48,7 @@ struct SimulationState {
     struct AttitudeHistory {
         std::deque<AttitudeSample> samples;     ///< Ring-buffer of samples (oldest at front)
         double window_seconds{15.0};            ///< Time window to retain (seconds)
-        double sample_interval{0.05};           ///< Desired sampling period (seconds)
+        double sample_interval{0.016};          ///< Desired sampling period (seconds) - ~60Hz for smooth plots
         double last_sample_time{-std::numeric_limits<double>::infinity()}; ///< Timestamp of last captured sample
     } attitude_history;
 
