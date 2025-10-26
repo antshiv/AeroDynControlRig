@@ -428,6 +428,7 @@ void Application::tick() {
                         : real_dt * simulationState.control.time_scale;
 
         simulationState.last_dt = dt;
+        simulationState.time_seconds += dt;  // Increment simulation time
 
         if (dt > 0.0) {
             for (auto& module : modules) {
