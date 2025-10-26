@@ -9,7 +9,10 @@
  * AeroDynControlRig is a flight dynamics simulator that renders 3D quadcopter visualization using OpenGL.
  * Understanding how data flows from user input to rendered pixels is essential for working with this codebase.
  *
- * @image html pipeline_overview.svg "Complete Rendering Pipeline" width=1000px
+ * <div style="text-align: center; background: white; padding: 20px; border-radius: 8px; margin: 20px 0;">
+ *   <img src="pipeline_overview.svg" alt="Complete Rendering Pipeline" style="max-width: 100%; height: auto;"/>
+ *   <p style="color: #2C3E50; font-style: italic; margin-top: 10px;">Complete Rendering Pipeline</p>
+ * </div>
  *
  * @section arch_pipeline The Complete Pipeline
  *
@@ -35,7 +38,10 @@
  *
  * OpenGL uses three types of buffer objects to manage geometry data:
  *
- * @image html vao_vbo_ebo.svg "VAO, VBO, and EBO Relationship" width=900px
+ * <div style="text-align: center; background: white; padding: 20px; border-radius: 8px; margin: 20px 0;">
+ *   <img src="vao_vbo_ebo.svg" alt="VAO, VBO, and EBO Relationship" style="max-width: 100%; height: auto;"/>
+ *   <p style="color: #2C3E50; font-style: italic; margin-top: 10px;">VAO, VBO, and EBO Relationship</p>
+ * </div>
  *
  * ### VBO (Vertex Buffer Object) - The Data
  *
@@ -98,7 +104,10 @@
  *
  * @section arch_transformations Rotation Transformations
  *
- * @image html quaternion_to_matrix.svg "Quaternion to OpenGL Matrix Conversion" width=1000px
+ * <div style="text-align: center; background: white; padding: 20px; border-radius: 8px; margin: 20px 0;">
+ *   <img src="quaternion_to_matrix.svg" alt="Quaternion to OpenGL Matrix Conversion" style="max-width: 100%; height: auto;"/>
+ *   <p style="color: #2C3E50; font-style: italic; margin-top: 10px;">Quaternion to OpenGL Matrix Conversion</p>
+ * </div>
  *
  * ### Why Three Representations?
  *

@@ -4,19 +4,11 @@ This guide explains how to enable GitHub Pages for your Doxygen documentation.
 
 ## One-Time Setup (5 minutes)
 
-### Step 1: Update README Badges
+### Step 1: ✅ Already Complete!
 
-Replace `yourusername` in `README.md` with your actual GitHub username:
-
-```markdown
-[![Doxygen](https://github.com/YOURUSERNAME/AeroDynControlRig/actions/workflows/doxygen.yml/badge.svg)](https://github.com/YOURUSERNAME/AeroDynControlRig/actions/workflows/doxygen.yml)
-[![Documentation](https://img.shields.io/badge/docs-doxygen-blue.svg)](https://YOURUSERNAME.github.io/AeroDynControlRig/)
-```
-
-Also update the documentation link:
-```markdown
-📚 **[View Documentation](https://YOURUSERNAME.github.io/AeroDynControlRig/)** - Complete system architecture with visual diagrams
-```
+The README badges and documentation links are already configured with the correct URLs:
+- Badge: https://github.com/antshiv/AeroDynControlRig/actions/workflows/doxygen.yml/badge.svg
+- Docs: https://antshiv.github.io/AeroDynControlRig/
 
 ### Step 2: Push to GitHub
 
@@ -54,7 +46,7 @@ After setup, every time you push to `main`:
 
 ## How to Access Documentation
 
-**Live URL**: `https://yourusername.github.io/AeroDynControlRig/`
+**Live URL**: https://antshiv.github.io/AeroDynControlRig/
 
 **What's Included**:
 - Complete system architecture

@@ -194,11 +194,7 @@ $(document).ready(function(){initNavTree('architecture.html',''); initResizable(
 <h1><a class="anchor" id="arch_overview"></a>
 Overview</h1>
 <p>AeroDynControlRig is a flight dynamics simulator that renders 3D quadcopter visualization using OpenGL. Understanding how data flows from user input to rendered pixels is essential for working with this codebase.</p>
-<div class="image">
-<object type="image/svg+xml" data="pipeline_overview.svg" width="1000px" style="pointer-events: none;"></object>
-<div class="caption">
-Complete Rendering Pipeline</div></div>
-<h1><a class="anchor" id="arch_pipeline"></a>
+<div style="text-align: center; background: white; padding: 20px; border-radius: 8px; margin: 20px 0;"> <img src="pipeline_overview.svg" alt="Complete Rendering Pipeline" style="pointer-events: none; max-width: 100%; height: auto;" class="inline"/> </div><div style="text-align: center; background: white; padding: 20px; border-radius: 8px; margin: 20px 0;">Complete Rendering Pipeline</div><div style="text-align: center; background: white; padding: 20px; border-radius: 8px; margin: 20px 0;"> </div><h1><a class="anchor" id="arch_pipeline"></a>
 The Complete Pipeline</h1>
 <h3><a class="anchor" id="autotoc_md0"></a>
 From Keyboard to Photons: The Journey</h3>
@@ -220,11 +216,7 @@ From Keyboard to Photons: The Journey</h3>
 <h1><a class="anchor" id="arch_opengl_buffers"></a>
 OpenGL Buffer Objects</h1>
 <p>OpenGL uses three types of buffer objects to manage geometry data:</p>
-<div class="image">
-<object type="image/svg+xml" data="vao_vbo_ebo.svg" width="900px" style="pointer-events: none;"></object>
-<div class="caption">
-VAO, VBO, and EBO Relationship</div></div>
-<h3><a class="anchor" id="autotoc_md1"></a>
+<div style="text-align: center; background: white; padding: 20px; border-radius: 8px; margin: 20px 0;"> <img src="vao_vbo_ebo.svg" alt="VAO, VBO, and EBO Relationship" style="pointer-events: none; max-width: 100%; height: auto;" class="inline"/> </div><div style="text-align: center; background: white; padding: 20px; border-radius: 8px; margin: 20px 0;">VAO, VBO, and EBO Relationship</div><div style="text-align: center; background: white; padding: 20px; border-radius: 8px; margin: 20px 0;"> </div><h3><a class="anchor" id="autotoc_md1"></a>
 VBO (Vertex Buffer Object) - The Data</h3>
 <p>Contains the actual vertex data (positions, colors, normals, etc.)</p>
 <div class="fragment"><div class="line"><span class="keywordtype">float</span> vertices[] = {</div>
@@ -269,11 +261,7 @@ Drawing with VAO/VBO/EBO</h3>
 </div><!-- fragment --><p>The GPU reads the VBO layout from the VAO, fetches vertices using EBO indices, and draws triangles.</p>
 <h1><a class="anchor" id="arch_transformations"></a>
 Rotation Transformations</h1>
-<div class="image">
-<object type="image/svg+xml" data="quaternion_to_matrix.svg" width="1000px" style="pointer-events: none;"></object>
-<div class="caption">
-Quaternion to OpenGL Matrix Conversion</div></div>
-<h3><a class="anchor" id="autotoc_md5"></a>
+<div style="text-align: center; background: white; padding: 20px; border-radius: 8px; margin: 20px 0;"> <img src="quaternion_to_matrix.svg" alt="Quaternion to OpenGL Matrix Conversion" style="pointer-events: none; max-width: 100%; height: auto;" class="inline"/> </div><div style="text-align: center; background: white; padding: 20px; border-radius: 8px; margin: 20px 0;">Quaternion to OpenGL Matrix Conversion</div><div style="text-align: center; background: white; padding: 20px; border-radius: 8px; margin: 20px 0;"> </div><h3><a class="anchor" id="autotoc_md5"></a>
 Why Three Representations?</h3>
 <h4><a class="anchor" id="autotoc_md6"></a>
 Quaternion (Internal Representation)</h4>
