@@ -1,16 +1,19 @@
 <map id="SimulationState" name="SimulationState">
-<area shape="rect" id="node1" title="Central shared state for the entire simulation." alt="" coords="623,397,749,424"/>
-<area shape="rect" id="node2" href="$structSimulationState_1_1EstimatorState.html" title="State estimate from sensor fusion algorithm." alt="" coords="208,98,405,139"/>
-<area shape="rect" id="node3" href="$structEulerAngles.html" title=" " alt="" coords="5,71,104,97"/>
-<area shape="rect" id="node4" href="$structSimulationState_1_1SensorFrame.html" title="Simulated IMU sensor measurements." alt="" coords="197,164,416,191"/>
-<area shape="rect" id="node5" href="$structSimulationState_1_1DynamicsState.html" title="State variables for first&#45;order dynamics module." alt="" coords="207,215,406,257"/>
-<area shape="rect" id="node6" href="$structSimulationState_1_1DynamicsConfig.html" title="Configuration for first&#45;order dynamics test module." alt="" coords="207,281,406,322"/>
-<area shape="rect" id="node7" href="$structSimulationState_1_1RotorTelemetry.html" title="Computed rotor performance metrics." alt="" coords="189,347,424,373"/>
-<area shape="rect" id="node8" href="$structSimulationState_1_1RotorHistory.html" title=" " alt="" coords="199,397,415,424"/>
-<area shape="rect" id="node9" href="$structSimulationState_1_1SensorHistory.html" title=" " alt="" coords="194,448,419,475"/>
-<area shape="rect" id="node10" href="$structSimulationState_1_1AttitudeHistoryVideoConfig.html" title=" " alt="" coords="213,499,400,541"/>
-<area shape="rect" id="node11" href="$structSimulationState_1_1AttitudeHistory.html" title=" " alt="" coords="213,565,400,606"/>
-<area shape="rect" id="node12" href="$structSimulationState_1_1SimulationControl.html" title="User&#45;controlled simulation playback parameters." alt="" coords="205,630,409,671"/>
-<area shape="rect" id="node13" href="$structSimulationState_1_1PowerHistory.html" title="Electrical power consumption tracking." alt="" coords="196,696,417,723"/>
-<area shape="rect" id="node14" href="$structSimulationState_1_1RotorConfig.html" title="Physical configuration for rotor/propeller models." alt="" coords="201,747,412,773"/>
+<area shape="rect" id="node1" title="Central shared state for the entire simulation." alt="" coords="635,492,761,519"/>
+<area shape="rect" id="node2" href="$structSimulationState_1_1EstimatorState.html" title="State estimate from sensor fusion algorithm." alt="" coords="214,101,411,142"/>
+<area shape="rect" id="node3" href="$structEulerAngles.html" title=" " alt="" coords="5,73,104,100"/>
+<area shape="rect" id="node4" href="$structSimulationState_1_1SensorFrame.html" title="Simulated IMU sensor measurements." alt="" coords="203,167,422,193"/>
+<area shape="rect" id="node5" href="$structSimulationState_1_1DynamicsState.html" title="State variables for first&#45;order dynamics module." alt="" coords="213,218,412,259"/>
+<area shape="rect" id="node6" href="$structSimulationState_1_1DynamicsConfig.html" title="Configuration for first&#45;order dynamics test module." alt="" coords="213,283,412,325"/>
+<area shape="rect" id="node7" href="$structSimulationState_1_1RotorTelemetry.html" title="Computed rotor performance metrics." alt="" coords="195,349,430,376"/>
+<area shape="rect" id="node8" href="$structSimulationState_1_1VehicleConfig.html" title="Physical parameters for quadcopter model." alt="" coords="222,401,403,442"/>
+<area shape="rect" id="node9" href="$structSimulationState_1_1RotorHistory.html" title=" " alt="" coords="205,467,421,493"/>
+<area shape="rect" id="node10" href="$structSimulationState_1_1SensorHistory.html" title=" " alt="" coords="200,517,425,544"/>
+<area shape="rect" id="node11" href="$structSimulationState_1_1PhysicsState.html" title="Complete 6&#45;DOF rigid body state for quadcopter dynamics." alt="" coords="221,569,404,610"/>
+<area shape="rect" id="node12" href="$structSimulationState_1_1AttitudeHistoryVideoConfig.html" title=" " alt="" coords="219,634,406,675"/>
+<area shape="rect" id="node13" href="$structSimulationState_1_1AttitudeHistory.html" title=" " alt="" coords="219,699,406,741"/>
+<area shape="rect" id="node14" href="$structSimulationState_1_1SimulationControl.html" title="User&#45;controlled simulation playback parameters." alt="" coords="211,765,415,806"/>
+<area shape="rect" id="node15" href="$structSimulationState_1_1MotorCommands.html" title="Commanded rotor speeds for control input." alt="" coords="189,831,436,857"/>
+<area shape="rect" id="node16" href="$structSimulationState_1_1PowerHistory.html" title="Electrical power consumption tracking." alt="" coords="202,881,423,908"/>
+<area shape="rect" id="node17" href="$structSimulationState_1_1RotorConfig.html" title="Physical configuration for rotor/propeller models." alt="" coords="207,932,418,959"/>
 </map>

@@ -8,6 +8,10 @@ var dir_ddb4d7e95cc2d6c8e1ade10a20d7247d =
     [ "first_order_dynamics.h", "first__order__dynamics_8h.html", [
       [ "FirstOrderDynamicsModule", "classFirstOrderDynamicsModule.html", "classFirstOrderDynamicsModule" ]
     ] ],
+    [ "quadcopter_dynamics.cpp", "quadcopter__dynamics_8cpp.html", null ],
+    [ "quadcopter_dynamics.h", "quadcopter__dynamics_8h.html", [
+      [ "QuadcopterDynamicsModule", "classQuadcopterDynamicsModule.html", "classQuadcopterDynamicsModule" ]
+    ] ],
     [ "quaternion_demo.cpp", "quaternion__demo_8cpp.html", null ],
     [ "quaternion_demo.h", "quaternion__demo_8h.html", [
       [ "QuaternionDemoModule", "classQuaternionDemoModule.html", "classQuaternionDemoModule" ]

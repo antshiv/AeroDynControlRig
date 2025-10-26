@@ -1,6 +1,7 @@
 #include "application.h"
 #include "render/renderer.h"
 #include "modules/quaternion_demo.h"
+#include "modules/quadcopter_dynamics.h"
 #include "modules/first_order_dynamics.h"
 #include "modules/sensor_simulator.h"
 #include "modules/complementary_estimator.h"
@@ -360,7 +361,10 @@ bool Application::running() const {
 }
 
 void Application::initializeModules() {
-    modules.emplace_back(std::make_unique<QuaternionDemoModule>());
+    // Use QuadcopterDynamicsModule for physics-based simulation
+    modules.emplace_back(std::make_unique<QuadcopterDynamicsModule>());
+    // Keep QuaternionDemoModule commented out (replaced by QuadcopterDynamicsModule)
+    // modules.emplace_back(std::make_unique<QuaternionDemoModule>());
     modules.emplace_back(std::make_unique<FirstOrderDynamicsModule>());
     modules.emplace_back(std::make_unique<SensorSimulatorModule>());
     modules.emplace_back(std::make_unique<ComplementaryEstimatorModule>());
@@ -510,11 +514,11 @@ void Application::keyCallback(GLFWwindow* window, int key, int scancode, int act
         yaw = rad2deg(yaw);
 
         // Apply rotation based on key
-        if (key == GLFW_KEY_W) {
+        if (key == GLFW_KEY_W || key == GLFW_KEY_I || key == GLFW_KEY_UP) {
             // Pitch up
             pitch += rotation_deg;
         }
-        else if (key == GLFW_KEY_S) {
+        else if (key == GLFW_KEY_S || key == GLFW_KEY_K || key == GLFW_KEY_DOWN) {
             // Pitch down
             pitch -= rotation_deg;
         }
@@ -526,11 +530,11 @@ void Application::keyCallback(GLFWwindow* window, int key, int scancode, int act
             // Roll right
             roll -= rotation_deg;
         }
-        else if (key == GLFW_KEY_Q) {
+        else if (key == GLFW_KEY_Q || key == GLFW_KEY_J || key == GLFW_KEY_LEFT) {
             // Yaw left
             yaw += rotation_deg;
         }
-        else if (key == GLFW_KEY_E) {
+        else if (key == GLFW_KEY_E || key == GLFW_KEY_L || key == GLFW_KEY_RIGHT) {
             // Yaw right
             yaw -= rotation_deg;
         }
@@ -1163,6 +1167,9 @@ ImTextureID Application::renderSceneToTexture(const ImVec2& size) {
 
     renderer.renderFrame3D(scene_transform);
     axisRenderer.render3D(scene_transform);
+
+    // Render corner gizmo overlay (top-right corner)
+    axisRenderer.renderCornerGizmo(scene_transform, requested_width, requested_height, 3);
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 

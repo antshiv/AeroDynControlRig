@@ -121,6 +121,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aeafc1964746638b7067055b5bf616d51"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisRenderer.html#aeafc1964746638b7067055b5bf616d51">render3D</a> (const <a class="el" href="classTransform.html">Transform</a> &amp;transform)</td></tr>
 <tr class="memdesc:aeafc1964746638b7067055b5bf616d51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Render axes in 3D mode.  <a href="classAxisRenderer.html#aeafc1964746638b7067055b5bf616d51">More...</a><br /></td></tr>
 <tr class="separator:aeafc1964746638b7067055b5bf616d51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5acba49f712b1ca5777576827e977511"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisRenderer.html#a5acba49f712b1ca5777576827e977511">renderCornerGizmo</a> (const <a class="el" href="classTransform.html">Transform</a> &amp;transform, int windowWidth, int windowHeight, int corner=3)</td></tr>
+<tr class="memdesc:a5acba49f712b1ca5777576827e977511"><td class="mdescLeft">&#160;</td><td class="mdescRight">Render axis gizmo in screen corner (overlay)  <a href="classAxisRenderer.html#a5acba49f712b1ca5777576827e977511">More...</a><br /></td></tr>
+<tr class="separator:a5acba49f712b1ca5777576827e977511"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab327f44ce3abe6fdf30380d4d081b413"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisRenderer.html#ab327f44ce3abe6fdf30380d4d081b413">shutdown</a> ()</td></tr>
 <tr class="memdesc:ab327f44ce3abe6fdf30380d4d081b413"><td class="mdescLeft">&#160;</td><td class="mdescRight">Release OpenGL resources.  <a href="classAxisRenderer.html#ab327f44ce3abe6fdf30380d4d081b413">More...</a><br /></td></tr>
 <tr class="separator:ab327f44ce3abe6fdf30380d4d081b413"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -285,6 +288,57 @@ Here is the caller graph for this function:</div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">transform</td><td>Transformation utilities (view/projection matrices) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5acba49f712b1ca5777576827e977511"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5acba49f712b1ca5777576827e977511">&#9670;&nbsp;</a></span>renderCornerGizmo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void AxisRenderer::renderCornerGizmo </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classTransform.html">Transform</a> &amp;&#160;</td>
+          <td class="paramname"><em>transform</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>windowWidth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>windowHeight</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>corner</em> = <code>3</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Render axis gizmo in screen corner (overlay) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">transform</td><td>Transformation utilities (view/projection matrices) </td></tr>
+    <tr><td class="paramname">windowWidth</td><td>Width of the window in pixels </td></tr>
+    <tr><td class="paramname">windowHeight</td><td>Height of the window in pixels </td></tr>
+    <tr><td class="paramname">corner</td><td>0=bottom-left, 1=bottom-right, 2=top-left, 3=top-right </td></tr>
   </table>
   </dd>
 </dl>

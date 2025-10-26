@@ -1,6 +1,11 @@
 # AeroDynControlRig
 
+[![Doxygen](https://github.com/yourusername/AeroDynControlRig/actions/workflows/doxygen.yml/badge.svg)](https://github.com/yourusername/AeroDynControlRig/actions/workflows/doxygen.yml)
+[![Documentation](https://img.shields.io/badge/docs-doxygen-blue.svg)](https://yourusername.github.io/AeroDynControlRig/)
+
 Desktop visualization and testbed for the flight-control stack. The rig stitches together OpenGL rendering, GLFW window/input handling, and Dear ImGui dashboards so we can exercise quaternion math today and layer in PID control, dynamic models, state estimation, and the full INS loop tomorrow.
+
+📚 **[View Documentation](https://yourusername.github.io/AeroDynControlRig/)** - Complete system architecture with visual diagrams
 
 ## Overview
 

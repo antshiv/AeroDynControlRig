@@ -27,11 +27,15 @@ set(IMPLOT_SRC
 # Include the attitude library
 add_subdirectory(external/attitudeMathLibrary/)
 
+# Include the dynamic models library
+add_subdirectory(external/dynamic_models/)
+
 # Source files for the test_rig application
 set(TEST_RIG_SOURCES
     src/app/main.cpp
     src/app/application.cpp
     src/modules/quaternion_demo.cpp
+    src/modules/quadcopter_dynamics.cpp
     src/modules/first_order_dynamics.cpp
     src/modules/sensor_simulator.cpp
     src/modules/complementary_estimator.cpp
@@ -62,6 +66,7 @@ target_include_directories(AeroDynControlRig
         imgui/backends
         external/implot
         external/attitudeMathLibrary/include
+        external/dynamic_models/include
 )
 
 # Link libraries
@@ -72,6 +77,7 @@ find_package(GLEW REQUIRED)
 target_link_libraries(AeroDynControlRig
     PRIVATE
     attitude
+    dynamic_models
     OpenGL::GL
     glfw
     GLEW::GLEW

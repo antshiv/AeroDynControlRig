@@ -1,0 +1,4 @@
+<map id="QuadcopterDynamicsModule" name="QuadcopterDynamicsModule">
+<area shape="rect" id="node1" title="Physics&#45;based quadcopter simulation using dynamic_models library." alt="" coords="5,80,216,107"/>
+<area shape="rect" id="node2" href="$classModule.html" title="Abstract base class for all simulation modules." alt="" coords="75,5,146,32"/>
+</map>

@@ -6,6 +6,8 @@ var structSimulationState =
     [ "DynamicsConfig", "structSimulationState_1_1DynamicsConfig.html", "structSimulationState_1_1DynamicsConfig" ],
     [ "DynamicsState", "structSimulationState_1_1DynamicsState.html", "structSimulationState_1_1DynamicsState" ],
     [ "EstimatorState", "structSimulationState_1_1EstimatorState.html", "structSimulationState_1_1EstimatorState" ],
+    [ "MotorCommands", "structSimulationState_1_1MotorCommands.html", "structSimulationState_1_1MotorCommands" ],
+    [ "PhysicsState", "structSimulationState_1_1PhysicsState.html", "structSimulationState_1_1PhysicsState" ],
     [ "PowerHistory", "structSimulationState_1_1PowerHistory.html", "structSimulationState_1_1PowerHistory" ],
     [ "RotorConfig", "structSimulationState_1_1RotorConfig.html", "structSimulationState_1_1RotorConfig" ],
     [ "RotorHistory", "structSimulationState_1_1RotorHistory.html", "structSimulationState_1_1RotorHistory" ],
@@ -15,6 +17,7 @@ var structSimulationState =
     [ "SensorHistory", "structSimulationState_1_1SensorHistory.html", "structSimulationState_1_1SensorHistory" ],
     [ "SensorSample", "structSimulationState_1_1SensorSample.html", "structSimulationState_1_1SensorSample" ],
     [ "SimulationControl", "structSimulationState_1_1SimulationControl.html", "structSimulationState_1_1SimulationControl" ],
+    [ "VehicleConfig", "structSimulationState_1_1VehicleConfig.html", "structSimulationState_1_1VehicleConfig" ],
     [ "angular_rate_deg_per_sec", "structSimulationState.html#a1d3ee7c82a58aa775399979710170812", null ],
     [ "attitude_history", "structSimulationState.html#ab9c0132592f435ddf75dcb3f4f378f6a", null ],
     [ "attitude_history_video", "structSimulationState.html#a2a0c9016e08e5a0babb3059d4c91fb4f", null ],
@@ -25,6 +28,8 @@ var structSimulationState =
     [ "euler", "structSimulationState.html#ad15c4910aac271b463e80f987581326a", null ],
     [ "last_dt", "structSimulationState.html#a868d760400e36d6edda9251ce00d0077", null ],
     [ "model_matrix", "structSimulationState.html#acef78e29043f3602fe7456343636eb07", null ],
+    [ "motor_commands", "structSimulationState.html#ac79308c88d4a0c4f6ca40d64b8cf613e", null ],
+    [ "physics", "structSimulationState.html#a74f3488dd8c6b14c2234f683dcd070ea", null ],
     [ "power", "structSimulationState.html#aac543bffed2e5932ed574cd35280acab", null ],
     [ "quaternion", "structSimulationState.html#a20e333ffdfe2eab81d5e0c9df189595d", null ],
     [ "rotor", "structSimulationState.html#a43e0b8ce8ca4d5cee64c1aac6c854180", null ],
@@ -32,5 +37,6 @@ var structSimulationState =
     [ "rotor_history", "structSimulationState.html#ab9e4e4ae25b4c508b6aa66c4a33046c1", null ],
     [ "sensor", "structSimulationState.html#a196d4bfb8d4683c265f7ca38b9a712e3", null ],
     [ "sensor_history", "structSimulationState.html#a679322fecabf8ad04767f7c95c7c71e7", null ],
-    [ "time_seconds", "structSimulationState.html#a4cee76b5fa37d7373e805368a70116c6", null ]
+    [ "time_seconds", "structSimulationState.html#a4cee76b5fa37d7373e805368a70116c6", null ],
+    [ "vehicle_config", "structSimulationState.html#aac21e52ca6ee9d509535b1b461eca6f2", null ]
 ];

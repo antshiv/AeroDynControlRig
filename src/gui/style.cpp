@@ -131,6 +131,7 @@ bool LoadFonts(ImGuiIO& io, std::string_view font_directory) {
     constexpr float kHeadingFont = 22.0f;
     constexpr float kMonoFont = 17.0f;
     constexpr float kIconFont = 20.0f;
+    constexpr float kMetricsFont = 36.0f;  // Large font for primary metric values
 
     const std::string body_path = JoinPath(font_directory, "SpaceGrotesk-Regular.ttf");
     const std::string heading_path = JoinPath(font_directory, "SpaceGrotesk-SemiBold.ttf");
@@ -145,6 +146,12 @@ bool LoadFonts(ImGuiIO& io, std::string_view font_directory) {
     g_fonts.heading = LoadFont(io, heading_path, kHeadingFont);
     if (!g_fonts.heading) {
         g_fonts.heading = g_fonts.body;
+    }
+
+    // Large metrics font for primary values (36px)
+    g_fonts.metrics = LoadFont(io, heading_path, kMetricsFont);
+    if (!g_fonts.metrics) {
+        g_fonts.metrics = g_fonts.heading;
     }
 
     g_fonts.mono = LoadFont(io, mono_path, kMonoFont);

@@ -101,20 +101,23 @@ Collaboration diagram for SimulationState:</div>
 <div class="dyncontent">
 <div class="center"><img src="structSimulationState__coll__graph.png" border="0" usemap="#aSimulationState_coll__map" alt="Collaboration graph"/></div>
 <map name="aSimulationState_coll__map" id="aSimulationState_coll__map">
-<area shape="rect" title="Central shared state for the entire simulation." alt="" coords="623,397,749,424"/>
-<area shape="rect" href="structSimulationState_1_1EstimatorState.html" title="State estimate from sensor fusion algorithm." alt="" coords="208,98,405,139"/>
-<area shape="rect" href="structEulerAngles.html" title=" " alt="" coords="5,71,104,97"/>
-<area shape="rect" href="structSimulationState_1_1SensorFrame.html" title="Simulated IMU sensor measurements." alt="" coords="197,164,416,191"/>
-<area shape="rect" href="structSimulationState_1_1DynamicsState.html" title="State variables for first&#45;order dynamics module." alt="" coords="207,215,406,257"/>
-<area shape="rect" href="structSimulationState_1_1DynamicsConfig.html" title="Configuration for first&#45;order dynamics test module." alt="" coords="207,281,406,322"/>
-<area shape="rect" href="structSimulationState_1_1RotorTelemetry.html" title="Computed rotor performance metrics." alt="" coords="189,347,424,373"/>
-<area shape="rect" href="structSimulationState_1_1RotorHistory.html" title=" " alt="" coords="199,397,415,424"/>
-<area shape="rect" href="structSimulationState_1_1SensorHistory.html" title=" " alt="" coords="194,448,419,475"/>
-<area shape="rect" href="structSimulationState_1_1AttitudeHistoryVideoConfig.html" title=" " alt="" coords="213,499,400,541"/>
-<area shape="rect" href="structSimulationState_1_1AttitudeHistory.html" title=" " alt="" coords="213,565,400,606"/>
-<area shape="rect" href="structSimulationState_1_1SimulationControl.html" title="User&#45;controlled simulation playback parameters." alt="" coords="205,630,409,671"/>
-<area shape="rect" href="structSimulationState_1_1PowerHistory.html" title="Electrical power consumption tracking." alt="" coords="196,696,417,723"/>
-<area shape="rect" href="structSimulationState_1_1RotorConfig.html" title="Physical configuration for rotor/propeller models." alt="" coords="201,747,412,773"/>
+<area shape="rect" title="Central shared state for the entire simulation." alt="" coords="635,492,761,519"/>
+<area shape="rect" href="structSimulationState_1_1EstimatorState.html" title="State estimate from sensor fusion algorithm." alt="" coords="214,101,411,142"/>
+<area shape="rect" href="structEulerAngles.html" title=" " alt="" coords="5,73,104,100"/>
+<area shape="rect" href="structSimulationState_1_1SensorFrame.html" title="Simulated IMU sensor measurements." alt="" coords="203,167,422,193"/>
+<area shape="rect" href="structSimulationState_1_1DynamicsState.html" title="State variables for first&#45;order dynamics module." alt="" coords="213,218,412,259"/>
+<area shape="rect" href="structSimulationState_1_1DynamicsConfig.html" title="Configuration for first&#45;order dynamics test module." alt="" coords="213,283,412,325"/>
+<area shape="rect" href="structSimulationState_1_1RotorTelemetry.html" title="Computed rotor performance metrics." alt="" coords="195,349,430,376"/>
+<area shape="rect" href="structSimulationState_1_1VehicleConfig.html" title="Physical parameters for quadcopter model." alt="" coords="222,401,403,442"/>
+<area shape="rect" href="structSimulationState_1_1RotorHistory.html" title=" " alt="" coords="205,467,421,493"/>
+<area shape="rect" href="structSimulationState_1_1SensorHistory.html" title=" " alt="" coords="200,517,425,544"/>
+<area shape="rect" href="structSimulationState_1_1PhysicsState.html" title="Complete 6&#45;DOF rigid body state for quadcopter dynamics." alt="" coords="221,569,404,610"/>
+<area shape="rect" href="structSimulationState_1_1AttitudeHistoryVideoConfig.html" title=" " alt="" coords="219,634,406,675"/>
+<area shape="rect" href="structSimulationState_1_1AttitudeHistory.html" title=" " alt="" coords="219,699,406,741"/>
+<area shape="rect" href="structSimulationState_1_1SimulationControl.html" title="User&#45;controlled simulation playback parameters." alt="" coords="211,765,415,806"/>
+<area shape="rect" href="structSimulationState_1_1MotorCommands.html" title="Commanded rotor speeds for control input." alt="" coords="189,831,436,857"/>
+<area shape="rect" href="structSimulationState_1_1PowerHistory.html" title="Electrical power consumption tracking." alt="" coords="202,881,423,908"/>
+<area shape="rect" href="structSimulationState_1_1RotorConfig.html" title="Physical configuration for rotor/propeller models." alt="" coords="207,932,418,959"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -135,6 +138,12 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1EstimatorState.html">EstimatorState</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">State estimate from sensor fusion algorithm.  <a href="structSimulationState_1_1EstimatorState.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1MotorCommands.html">MotorCommands</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Commanded rotor speeds for control input.  <a href="structSimulationState_1_1MotorCommands.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1PhysicsState.html">PhysicsState</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complete 6-DOF rigid body state for quadcopter dynamics.  <a href="structSimulationState_1_1PhysicsState.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1PowerHistory.html">PowerHistory</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Electrical power consumption tracking.  <a href="structSimulationState_1_1PowerHistory.html#details">More...</a><br /></td></tr>
@@ -160,6 +169,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1SimulationControl.html">SimulationControl</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">User-controlled simulation playback parameters.  <a href="structSimulationState_1_1SimulationControl.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState_1_1VehicleConfig.html">VehicleConfig</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Physical parameters for quadcopter model.  <a href="structSimulationState_1_1VehicleConfig.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -190,6 +202,12 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a868d760400e36d6edda9251ce00d0077"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState.html#a868d760400e36d6edda9251ce00d0077">last_dt</a> {0.0}</td></tr>
 <tr class="memdesc:a868d760400e36d6edda9251ce00d0077"><td class="mdescLeft">&#160;</td><td class="mdescRight">Last frame's timestep (seconds)  <a href="structSimulationState.html#a868d760400e36d6edda9251ce00d0077">More...</a><br /></td></tr>
 <tr class="separator:a868d760400e36d6edda9251ce00d0077"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74f3488dd8c6b14c2234f683dcd070ea"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structSimulationState_1_1PhysicsState.html">SimulationState::PhysicsState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState.html#a74f3488dd8c6b14c2234f683dcd070ea">physics</a></td></tr>
+<tr class="separator:a74f3488dd8c6b14c2234f683dcd070ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac21e52ca6ee9d509535b1b461eca6f2"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structSimulationState_1_1VehicleConfig.html">SimulationState::VehicleConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState.html#aac21e52ca6ee9d509535b1b461eca6f2">vehicle_config</a></td></tr>
+<tr class="separator:aac21e52ca6ee9d509535b1b461eca6f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac79308c88d4a0c4f6ca40d64b8cf613e"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structSimulationState_1_1MotorCommands.html">SimulationState::MotorCommands</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState.html#ac79308c88d4a0c4f6ca40d64b8cf613e">motor_commands</a></td></tr>
+<tr class="separator:ac79308c88d4a0c4f6ca40d64b8cf613e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a64ddac248ee5786c0c1529e7904787"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structSimulationState_1_1DynamicsConfig.html">SimulationState::DynamicsConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState.html#a2a64ddac248ee5786c0c1529e7904787">dynamics_config</a></td></tr>
 <tr class="separator:a2a64ddac248ee5786c0c1529e7904787"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a16f3f8bb6df5c6b4180d6aeb4f14f84d"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structSimulationState_1_1DynamicsState.html">SimulationState::DynamicsState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSimulationState.html#a16f3f8bb6df5c6b4180d6aeb4f14f84d">dynamics_state</a></td></tr>
@@ -364,6 +382,34 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ac79308c88d4a0c4f6ca40d64b8cf613e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac79308c88d4a0c4f6ca40d64b8cf613e">&#9670;&nbsp;</a></span>motor_commands</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structSimulationState_1_1MotorCommands.html">SimulationState::MotorCommands</a> SimulationState::motor_commands</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a74f3488dd8c6b14c2234f683dcd070ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74f3488dd8c6b14c2234f683dcd070ea">&#9670;&nbsp;</a></span>physics</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structSimulationState_1_1PhysicsState.html">SimulationState::PhysicsState</a> SimulationState::physics</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aac543bffed2e5932ed574cd35280acab"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aac543bffed2e5932ed574cd35280acab">&#9670;&nbsp;</a></span>power</h2>
 
@@ -477,6 +523,20 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Elapsed simulation time (seconds) </p>
+
+</div>
+</div>
+<a id="aac21e52ca6ee9d509535b1b461eca6f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac21e52ca6ee9d509535b1b461eca6f2">&#9670;&nbsp;</a></span>vehicle_config</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structSimulationState_1_1VehicleConfig.html">SimulationState::VehicleConfig</a> SimulationState::vehicle_config</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

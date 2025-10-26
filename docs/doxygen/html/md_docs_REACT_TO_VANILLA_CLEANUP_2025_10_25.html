@@ -89,9 +89,9 @@ $(document).ready(function(){initNavTree('md_docs_REACT_TO_VANILLA_CLEANUP_2025_
 <div class="contents">
 <div class="textblock"><p><b>Date:</b> 2025-10-25 <b>Reason:</b> Remove React/Redux/JSX references and replace with pure HTML/CSS/JavaScript examples</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md407"></a>
+<h1><a class="anchor" id="autotoc_md430"></a>
 Files Updated</h1>
-<h2><a class="anchor" id="autotoc_md408"></a>
+<h2><a class="anchor" id="autotoc_md431"></a>
 1. &lt;tt&gt;/docs/web_analogy.md&lt;/tt&gt;</h2>
 <p><b>Changes:</b></p><ul>
 <li>Replaced all React component examples with vanilla JavaScript component pattern</li>
@@ -109,14 +109,14 @@ Files Updated</h1>
 <li><code>useState/useEffect</code> → Manual DOM updates</li>
 <li><code>Redux actions</code> → Direct state mutation</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md409"></a>
+<h2><a class="anchor" id="autotoc_md432"></a>
 2. &lt;tt&gt;/src/gui/widgets/card.h&lt;/tt&gt;</h2>
 <p><b>Changes:</b></p><ul>
 <li>Changed "React/Vue component libraries" to "CSS component libraries"</li>
 <li>Replaced JSX code example with HTML data attributes</li>
 <li>Updated component prop analogy from React to vanilla web components</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md410"></a>
+<h2><a class="anchor" id="autotoc_md433"></a>
 3. &lt;tt&gt;/docs/groups.dox&lt;/tt&gt;</h2>
 <p><b>Changes:</b></p><ul>
 <li>Line 61: "React/Bootstrap equivalent" → "vanilla web component pattern"</li>
@@ -131,16 +131,16 @@ Files Updated</h1>
 <p><b>After:</b> </p><div class="fragment"><div class="line"> </div>
 </div><!-- fragment --><p> */ </p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md412"></a>
+<h1><a class="anchor" id="autotoc_md435"></a>
 Philosophy Change</h1>
-<h2><a class="anchor" id="autotoc_md413"></a>
+<h2><a class="anchor" id="autotoc_md436"></a>
 Before</h2>
 <p>Documentation compared ImGui to modern JavaScript frameworks:</p><ul>
 <li>React for component architecture</li>
 <li>Redux for state management</li>
 <li>JSX for declarative UI</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md414"></a>
+<h2><a class="anchor" id="autotoc_md437"></a>
 After</h2>
 <p>Documentation compares ImGui to <b>pure web fundamentals</b>:</p><ul>
 <li>Vanilla JavaScript component pattern (ES6 classes)</li>
@@ -148,7 +148,7 @@ After</h2>
 <li>Direct DOM manipulation or <code>innerHTML</code></li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md416"></a>
+<h1><a class="anchor" id="autotoc_md439"></a>
 Why This Change</h1>
 <p><b>From user feedback:</b> </p><blockquote class="doxtable">
 <p>"please don't compare to react and whatever bullshit framework. those are nothing to do with html css and js... please stick with pure html css and js since that is how i build all my applications in web." </p>
@@ -160,9 +160,9 @@ Why This Change</h1>
 <li>Framework-free comparisons are <b>more universal</b> and timeless</li>
 </ol>
 <hr  />
-<h1><a class="anchor" id="autotoc_md418"></a>
+<h1><a class="anchor" id="autotoc_md441"></a>
 Vanilla JavaScript Pattern Used</h1>
-<h2><a class="anchor" id="autotoc_md419"></a>
+<h2><a class="anchor" id="autotoc_md442"></a>
 Component Pattern</h2>
 <div class="fragment"><div class="line">class RotorPanel {</div>
 <div class="line">  constructor(containerId) {</div>
@@ -182,7 +182,7 @@ Component Pattern</h2>
 <div class="line">    `;</div>
 <div class="line">  }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md420"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md443"></a>
 State Management Pattern</h2>
 <div class="fragment"><div class="line">// Global state (like window.appState)</div>
 <div class="line">const appState = {</div>
@@ -196,7 +196,7 @@ State Management Pattern</h2>
 <div class="line">  appState.control.paused = !appState.control.paused;</div>
 <div class="line">  renderAll(); // Re-render UI</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md421"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md444"></a>
 Component Registry Pattern</h2>
 <div class="fragment"><div class="line">const panels = [</div>
 <div class="line">  new RotorPanel(&#39;rotor-container&#39;),</div>
@@ -210,9 +210,9 @@ Component Registry Pattern</h2>
 <div class="line">// Update loop</div>
 <div class="line">setInterval(renderAll, 16); // ~60fps</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md423"></a>
+<h1><a class="anchor" id="autotoc_md446"></a>
 Comparison Table Update</h1>
-<h2><a class="anchor" id="autotoc_md424"></a>
+<h2><a class="anchor" id="autotoc_md447"></a>
 Before</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -224,7 +224,7 @@ Before</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>Rendering</b>   </td><td class="markdownTableBodyNone">Like React render()   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md425"></a>
+<h2><a class="anchor" id="autotoc_md448"></a>
 After</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -237,7 +237,7 @@ After</h2>
 <td class="markdownTableBodyNone"><b>Rendering</b>   </td><td class="markdownTableBodyNone">Re-render DOM every frame   </td></tr>
 </table>
 <hr  />
-<h1><a class="anchor" id="autotoc_md427"></a>
+<h1><a class="anchor" id="autotoc_md450"></a>
 Verification</h1>
 <p>Run these commands to verify all React/Redux references are removed:</p>
 <div class="fragment"><div class="line"># Check docs for React mentions</div>
@@ -248,7 +248,7 @@ Verification</h1>
 <div class="line"> </div>
 <div class="line"># Expected: Only this cleanup document should show up</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md429"></a>
+<h1><a class="anchor" id="autotoc_md452"></a>
 Next Steps</h1>
 <p>If more React/Redux/JSX mentions are found:</p><ol type="1">
 <li>Replace with vanilla JavaScript examples</li>
@@ -258,7 +258,7 @@ Next Steps</h1>
 <li>Update this document with new changes</li>
 </ol>
 <hr  />
-<h1><a class="anchor" id="autotoc_md431"></a>
+<h1><a class="anchor" id="autotoc_md454"></a>
 Notes</h1>
 <ul>
 <li>All examples now use <b>pure HTML, CSS, and JavaScript</b></li>
@@ -267,7 +267,7 @@ Notes</h1>
 <li>Matches the <b>C and CPU, zero abstraction cost</b> philosophy throughout the project</li>
 </ul>
 <p><b>Status:</b> ✅ Complete <b>Last Verified:</b> 2025-10-25</p>
-<h1><a class="anchor" id="autotoc_md432"></a>
+<h1><a class="anchor" id="autotoc_md455"></a>
 Summary of Changes</h1>
 <p><b>Total files updated:</b> 3</p><ol type="1">
 <li><code>/docs/web_analogy.md</code> - 15+ React/Redux/JSX replacements</li>

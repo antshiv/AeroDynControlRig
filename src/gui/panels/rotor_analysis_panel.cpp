@@ -310,6 +310,7 @@ void RotorAnalysisPanel::drawTemperaturePlot(const SimulationState& state) {
 
 void RotorAnalysisPanel::drawDataTable(const SimulationState& state) {
     const auto& samples = getSamples(state);
+    const ui::Palette& palette = ui::Colors();
 
     ImGui::TextColored(ImVec4(0.4f, 0.8f, 1.0f, 1.0f), "Raw Telemetry Data");
 
@@ -318,15 +319,23 @@ void RotorAnalysisPanel::drawDataTable(const SimulationState& state) {
         return;
     }
 
-    // Show last 10 samples in table
-    if (ImGui::BeginTable("RotorData", 6, ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg | ImGuiTableFlags_ScrollY, ImVec2(0, 200))) {
+    // Enhanced table with better padding and sizing
+    ImGui::PushStyleVar(ImGuiStyleVar_CellPadding, ImVec2(14.0f, 10.0f));
+    if (ImGui::BeginTable("RotorData", 6,
+                          ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg | ImGuiTableFlags_ScrollY | ImGuiTableFlags_SizingStretchSame,
+                          ImVec2(0, 200))) {
         ImGui::TableSetupColumn("Timestamp");
         ImGui::TableSetupColumn("RPM");
         ImGui::TableSetupColumn("Thrust (N)");
         ImGui::TableSetupColumn("Power (W)");
         ImGui::TableSetupColumn("Temp (°C)");
         ImGui::TableSetupColumn("Voltage (V)");
+
+        // Enhanced header with better contrast
+        ImGui::PushStyleColor(ImGuiCol_TableHeaderBg, palette.card_header);
+        ImGui::PushStyleColor(ImGuiCol_Text, palette.text_primary);
         ImGui::TableHeadersRow();
+        ImGui::PopStyleColor(2);
 
         // Show last 50 samples
         size_t start_idx = samples.size() > 50 ? samples.size() - 50 : 0;
@@ -346,8 +355,18 @@ void RotorAnalysisPanel::drawDataTable(const SimulationState& state) {
             ImGui::TableNextColumn();
             ImGui::Text("%.1f", sample.power);
 
+            // Color-code temperature based on value
             ImGui::TableNextColumn();
-            ImGui::Text("%.1f", sample.temperature);
+            const ui::Palette& palette = ui::Colors();
+            ImVec4 temp_color = palette.text_primary;
+            if (sample.temperature > 80.0f) {
+                temp_color = palette.danger;  // Red for high temp
+            } else if (sample.temperature > 60.0f) {
+                temp_color = palette.warning; // Yellow for warm
+            } else {
+                temp_color = palette.success; // Green for good
+            }
+            ImGui::TextColored(temp_color, "%.1f", sample.temperature);
 
             ImGui::TableNextColumn();
             ImGui::Text("%.2f", sample.voltage);
@@ -355,6 +374,7 @@ void RotorAnalysisPanel::drawDataTable(const SimulationState& state) {
 
         ImGui::EndTable();
     }
+    ImGui::PopStyleVar(); // Pop CellPadding
 }
 
 void RotorAnalysisPanel::exportToCSV(const SimulationState& state) {

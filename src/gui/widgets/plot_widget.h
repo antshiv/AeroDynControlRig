@@ -57,7 +57,12 @@ void PlotLine(const char* label, const std::deque<T>& samples, ValueGetter value
         ImPlot::PushStyleColor(ImPlotCol_Line, *color);
     }
 
+    // Increase line thickness for better visibility (default is 1.0)
+    ImPlot::PushStyleVar(ImPlotStyleVar_LineWeight, 2.5f);
+
     ImPlot::PlotLine(label, x_data.data(), y_data.data(), x_data.size());
+
+    ImPlot::PopStyleVar();
 
     if (color) {
         ImPlot::PopStyleColor();

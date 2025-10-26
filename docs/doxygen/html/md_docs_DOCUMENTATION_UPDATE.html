@@ -88,9 +88,9 @@ $(document).ready(function(){initNavTree('md_docs_DOCUMENTATION_UPDATE.html','')
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>I've created comprehensive Doxygen documentation that maps your OpenGL/ImGui architecture to web development concepts and explains the complete hardware pipeline from RAM to GPU to screen.</p>
-<h1><a class="anchor" id="autotoc_md45"></a>
+<h1><a class="anchor" id="autotoc_md68"></a>
 What Was Created</h1>
-<h2><a class="anchor" id="autotoc_md46"></a>
+<h2><a class="anchor" id="autotoc_md69"></a>
 1. &lt;strong&gt;Web Analogy Guide&lt;/strong&gt; (&lt;tt&gt;docs/web_analogy.md&lt;/tt&gt;)</h2>
 <ul>
 <li><b>23 KB, 600+ lines</b> of detailed mapping between web and your code</li>
@@ -101,7 +101,7 @@ What Was Created</h1>
 <li>Documents component architecture (JavaScript class-based panels)</li>
 <li>Explains state management (global state pattern like window.appState)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md47"></a>
+<h2><a class="anchor" id="autotoc_md70"></a>
 2. &lt;strong&gt;GPU Pipeline Guide&lt;/strong&gt; (&lt;tt&gt;docs/gpu_pipeline.md&lt;/tt&gt;)</h2>
 <ul>
 <li><b>22 KB, 900+ lines</b> of low-level hardware explanation</li>
@@ -112,7 +112,7 @@ What Was Created</h1>
 <li>Frame timing breakdown (where the 16.67ms goes)</li>
 <li>Bandwidth analysis (CPU, PCIe, GPU memory)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md48"></a>
+<h2><a class="anchor" id="autotoc_md71"></a>
 3. &lt;strong&gt;Doxygen Module Groups&lt;/strong&gt; (&lt;tt&gt;docs/groups.dox&lt;/tt&gt;)</h2>
 <ul>
 <li>Created <code>@defgroup WebAnalogy</code> with quick reference tables</li>
@@ -120,9 +120,9 @@ What Was Created</h1>
 <li>Created <code>@defgroup UITheme</code> for styling system</li>
 <li>Created <code>@page ui_architecture</code> overview</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md49"></a>
+<h2><a class="anchor" id="autotoc_md72"></a>
 4. &lt;strong&gt;Enhanced Header Documentation&lt;/strong&gt;</h2>
-<h3><a class="anchor" id="autotoc_md50"></a>
+<h3><a class="anchor" id="autotoc_md73"></a>
 &lt;tt&gt;src/gui/widgets/card.h&lt;/tt&gt;</h3>
 <ul>
 <li>Added 150+ lines of Doxygen comments</li>
@@ -131,7 +131,7 @@ What Was Created</h1>
 <li>Documents hardware flow (CPU → GPU)</li>
 <li>Includes usage examples</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md51"></a>
+<h3><a class="anchor" id="autotoc_md74"></a>
 &lt;tt&gt;src/gui/style.h&lt;/tt&gt;</h3>
 <ul>
 <li>Added 200+ lines of Doxygen comments</li>
@@ -140,7 +140,7 @@ What Was Created</h1>
 <li>Explains memory flow (font atlas in RAM → GPU VRAM)</li>
 <li>Shows color format conversions</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md52"></a>
+<h2><a class="anchor" id="autotoc_md75"></a>
 5. &lt;strong&gt;Updated Main Documentation&lt;/strong&gt; (&lt;tt&gt;docs/mainpage.md&lt;/tt&gt;)</h2>
 <ul>
 <li>Added prominent "Web Developer? You Already Know This!" section</li>
@@ -148,14 +148,14 @@ What Was Created</h1>
 <li>Side-by-side HTML vs C++ comparison</li>
 <li>Links to new documentation</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md53"></a>
+<h1><a class="anchor" id="autotoc_md76"></a>
 How to View the Documentation</h1>
-<h2><a class="anchor" id="autotoc_md54"></a>
+<h2><a class="anchor" id="autotoc_md77"></a>
 Option 1: Generate HTML Docs (Recommended)</h2>
 <div class="fragment"><div class="line">cd /home/antshiv/Workspace/AeroDynControlRig</div>
 <div class="line">doxygen  # Generates docs in html/ directory</div>
 <div class="line">./view_docs.sh  # Opens in browser</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md55"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md78"></a>
 Option 2: Read Markdown Directly</h2>
 <div class="fragment"><div class="line"># Web analogy guide</div>
 <div class="line">cat docs/web_analogy.md | less</div>
@@ -165,15 +165,15 @@ Option 2: Read Markdown Directly</h2>
 <div class="line"> </div>
 <div class="line"># Module groups</div>
 <div class="line">cat docs/groups.dox | less</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md56"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md79"></a>
 Key Features</h1>
-<h2><a class="anchor" id="autotoc_md57"></a>
+<h2><a class="anchor" id="autotoc_md80"></a>
 1. Web Analogy Documentation</h2>
 <p><b>Before:</b> </p><div class="fragment"><div class="line"><span class="comment">// What is this BeginCard thing?</span></div>
 <div class="line"><a class="code" href="group__UIWidgets.html#gae86fdebbe43a915410d1bf0c16c4cb17">ui::BeginCard</a>(<span class="stringliteral">&quot;MyPanel&quot;</span>, options);</div>
 <div class="ttc" id="agroup__UIWidgets_html_gae86fdebbe43a915410d1bf0c16c4cb17"><div class="ttname"><a href="group__UIWidgets.html#gae86fdebbe43a915410d1bf0c16c4cb17">ui::BeginCard</a></div><div class="ttdeci">bool BeginCard(const char *id, const CardOptions &amp;options, bool *open, ImGuiWindowFlags flags)</div><div class="ttdoc">Begin a Card container with consistent styling.</div><div class="ttdef"><b>Definition:</b> card.cpp:20</div></div>
 </div><!-- fragment --><p><b>After (in docs):</b> </p><div class="fragment"><div class="line"> </div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md58"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md81"></a>
 2. Hardware Pipeline Documentation</h2>
 <p><b>Before:</b> </p><div class="fragment"><div class="line"><span class="comment">// This uploads vertices to GPU... somehow?</span></div>
 <div class="line">glBufferData(GL_ARRAY_BUFFER, <span class="keyword">sizeof</span>(vertices), vertices, GL_STATIC_DRAW);</div>
@@ -184,7 +184,7 @@ Key Features</h1>
 <div class="line">4. GPU copies data to VRAM (760 GB/s internal bandwidth!)</div>
 <div class="line">5. Data stays in VRAM until deleted</div>
 <div class="line">6. Vertex shader reads from VRAM via L2 cache</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md59"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md82"></a>
 3. Cross-Referenced Examples</h2>
 <p>Every major concept shows:</p><ul>
 <li>Web equivalent code (HTML/CSS/JS)</li>
@@ -192,7 +192,7 @@ Key Features</h1>
 <li>Where in your codebase it's used (<a href="file:line">file:line</a>)</li>
 <li>What happens in hardware (CPU/GPU/Memory)</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md60"></a>
+<h1><a class="anchor" id="autotoc_md83"></a>
 File Changes Summary</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -211,39 +211,39 @@ File Changes Summary</h1>
 <td class="markdownTableBodyNone"><code><a class="el" href="mainpage_8md.html">docs/mainpage.md</a></code>   </td><td class="markdownTableBodyNone">50+   </td><td class="markdownTableBodyNone">Updated front page   </td></tr>
 </table>
 <p><b>Total: ~2050 lines of documentation added!</b></p>
-<h1><a class="anchor" id="autotoc_md61"></a>
+<h1><a class="anchor" id="autotoc_md84"></a>
 What This Achieves</h1>
-<h2><a class="anchor" id="autotoc_md62"></a>
+<h2><a class="anchor" id="autotoc_md85"></a>
 1. &lt;strong&gt;Lowers Barrier to Entry&lt;/strong&gt;</h2>
 <ul>
 <li>Web developers can understand your code immediately</li>
 <li>"Oh, BeginCard is just `&lt;div class="card"&gt;`!"</li>
 <li>No need to learn ImGui from scratch</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md63"></a>
+<h2><a class="anchor" id="autotoc_md86"></a>
 2. &lt;strong&gt;Explains the "Why"&lt;/strong&gt;</h2>
 <ul>
 <li>Not just "what" the code does</li>
 <li>But "why" it's structured this way</li>
 <li>And "how" it maps to familiar concepts</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md64"></a>
+<h2><a class="anchor" id="autotoc_md87"></a>
 3. &lt;strong&gt;Demystifies the Hardware&lt;/strong&gt;</h2>
 <ul>
 <li>Complete pipeline from C++ to pixels</li>
 <li>Shows exactly where data lives (RAM/Cache/VRAM)</li>
 <li>Explains GPU parallelism (10,000 threads!)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md65"></a>
+<h2><a class="anchor" id="autotoc_md88"></a>
 4. &lt;strong&gt;Makes Design Decisions Clear&lt;/strong&gt;</h2>
 <ul>
 <li>Why use a Palette struct? (Design tokens)</li>
 <li>Why stack-based styles? (Scoped styling)</li>
 <li>Why immediate mode? (Simpler than retained mode)</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md66"></a>
+<h1><a class="anchor" id="autotoc_md89"></a>
 Example Documentation Snippets</h1>
-<h2><a class="anchor" id="autotoc_md67"></a>
+<h2><a class="anchor" id="autotoc_md90"></a>
 Color Palette Documentation</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="keyword">struct </span>Palette {</div>
@@ -252,35 +252,35 @@ Color Palette Documentation</h2>
 <div class="line">    ImVec4 accent_base;  </div>
 <div class="line">    <span class="comment">// ...</span></div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md68"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md91"></a>
 Font Loading Documentation</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="keywordtype">bool</span> <a class="code" href="group__UITheme.html#ga97e4fd264352b07f6d75c83922240cb4">LoadFonts</a>(ImGuiIO&amp; io, std::string_view font_directory);</div>
 <div class="ttc" id="agroup__UITheme_html_ga97e4fd264352b07f6d75c83922240cb4"><div class="ttname"><a href="group__UITheme.html#ga97e4fd264352b07f6d75c83922240cb4">ui::LoadFonts</a></div><div class="ttdeci">bool LoadFonts(ImGuiIO &amp;io, std::string_view font_directory)</div><div class="ttdoc">Load custom fonts from TTF files.</div><div class="ttdef"><b>Definition:</b> style.cpp:127</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md69"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md92"></a>
 How to Use This Documentation</h1>
-<h2><a class="anchor" id="autotoc_md70"></a>
+<h2><a class="anchor" id="autotoc_md93"></a>
 For New Contributors</h2>
 <ol type="1">
 <li>Start with <code>@ref web_analogy</code> - maps familiar concepts</li>
 <li>Read <code>@ref gpu_pipeline</code> - understand the rendering</li>
 <li>Browse enhanced headers - see API docs with context</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md71"></a>
+<h2><a class="anchor" id="autotoc_md94"></a>
 For Yourself (Future Reference)</h2>
 <ol type="1">
 <li>"How do I style a button?" → Check <code><a class="el" href="style_8h.html">src/gui/style.h</a></code> docs</li>
 <li>"What does glBufferData do?" → Check <code><a class="el" href="gpu__pipeline_8md.html">gpu_pipeline.md</a></code></li>
 <li>"How are panels like JavaScript components?" → Check <code><a class="el" href="web__analogy_8md.html">web_analogy.md</a></code></li>
 </ol>
-<h2><a class="anchor" id="autotoc_md72"></a>
+<h2><a class="anchor" id="autotoc_md95"></a>
 For Teaching Others</h2>
 <ol type="1">
 <li>Show them the web analogy guide</li>
 <li>They immediately understand the architecture</li>
 <li>Point to specific code with new inline comments</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md73"></a>
+<h1><a class="anchor" id="autotoc_md96"></a>
 Next Steps (Optional)</h1>
 <p>If you want to expand this documentation:</p>
 <ol type="1">
@@ -306,7 +306,7 @@ Next Steps (Optional)</h1>
 </ul>
 </li>
 </ol>
-<h1><a class="anchor" id="autotoc_md74"></a>
+<h1><a class="anchor" id="autotoc_md97"></a>
 Generating the Docs</h1>
 <p>To generate and view the HTML documentation:</p>
 <div class="fragment"><div class="line">cd /home/antshiv/Workspace/AeroDynControlRig</div>
@@ -324,9 +324,9 @@ Generating the Docs</h1>
 <li>**"Classes"** → Click any class → See detailed docs</li>
 <li>**"Files"** → See enhanced header comments</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md75"></a>
+<h1><a class="anchor" id="autotoc_md98"></a>
 Documentation Quality</h1>
-<h2><a class="anchor" id="autotoc_md76"></a>
+<h2><a class="anchor" id="autotoc_md99"></a>
 Coverage</h2>
 <ul>
 <li>✅ All public APIs documented</li>
@@ -335,14 +335,14 @@ Coverage</h2>
 <li>✅ Usage examples provided</li>
 <li>✅ Cross-references added</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md77"></a>
+<h2><a class="anchor" id="autotoc_md100"></a>
 Depth</h2>
 <ul>
 <li>🌟 <b>Beginner-friendly</b> (web analogy)</li>
 <li>🌟 <b>Intermediate</b> (API docs with context)</li>
 <li>🌟 <b>Advanced</b> (hardware pipeline details)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md78"></a>
+<h2><a class="anchor" id="autotoc_md101"></a>
 Accessibility</h2>
 <ul>
 <li>📖 Markdown docs (readable without Doxygen)</li>
@@ -350,7 +350,7 @@ Accessibility</h2>
 <li>💻 Inline comments (visible in IDE)</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md80"></a>
+<h1><a class="anchor" id="autotoc_md103"></a>
 Summary</h1>
 <p>You now have <b>publication-quality documentation</b> that:</p>
 <ol type="1">

@@ -88,86 +88,86 @@ $(document).ready(function(){initNavTree('imgui_tutorial.html',''); initResizabl
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#autotoc_md139">ImGui Deep Dive Tutorial</a><ul><li class="level2"><a href="#autotoc_md140">What is ImGui?</a><ul><li class="level3"><a href="#autotoc_md141">Why ImGui for Our Application?</a></li>
+<ul><li class="level1"><a href="#autotoc_md162">ImGui Deep Dive Tutorial</a><ul><li class="level2"><a href="#autotoc_md163">What is ImGui?</a><ul><li class="level3"><a href="#autotoc_md164">Why ImGui for Our Application?</a></li>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md143">The Big Idea: Immediate Mode</a><ul><li class="level3"><a href="#autotoc_md144">Traditional GUI (Retained Mode)</a></li>
-<li class="level3"><a href="#autotoc_md145">ImGui (Immediate Mode)</a></li>
+<li class="level2"><a href="#autotoc_md166">The Big Idea: Immediate Mode</a><ul><li class="level3"><a href="#autotoc_md167">Traditional GUI (Retained Mode)</a></li>
+<li class="level3"><a href="#autotoc_md168">ImGui (Immediate Mode)</a></li>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md147">Setup and Initialization</a><ul><li class="level3"><a href="#autotoc_md148">From &lt;tt&gt;application.cpp init()&lt;/tt&gt;</a></li>
-<li class="level3"><a href="#autotoc_md149">What Each Backend Does</a></li>
+<li class="level2"><a href="#autotoc_md170">Setup and Initialization</a><ul><li class="level3"><a href="#autotoc_md171">From &lt;tt&gt;application.cpp init()&lt;/tt&gt;</a></li>
+<li class="level3"><a href="#autotoc_md172">What Each Backend Does</a></li>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md151">Frame Structure</a></li>
-<li class="level2"><a href="#autotoc_md153">Core Widgets</a><ul><li class="level3"><a href="#autotoc_md154">Buttons</a></li>
-<li class="level3"><a href="#autotoc_md155">Text</a></li>
-<li class="level3"><a href="#autotoc_md156">Sliders</a></li>
-<li class="level3"><a href="#autotoc_md157">Input Fields</a></li>
-<li class="level3"><a href="#autotoc_md158">Checkboxes</a></li>
-<li class="level3"><a href="#autotoc_md159">Combo Boxes (Dropdowns)</a></li>
-<li class="level3"><a href="#autotoc_md160">Radio Buttons</a></li>
+<li class="level2"><a href="#autotoc_md174">Frame Structure</a></li>
+<li class="level2"><a href="#autotoc_md176">Core Widgets</a><ul><li class="level3"><a href="#autotoc_md177">Buttons</a></li>
+<li class="level3"><a href="#autotoc_md178">Text</a></li>
+<li class="level3"><a href="#autotoc_md179">Sliders</a></li>
+<li class="level3"><a href="#autotoc_md180">Input Fields</a></li>
+<li class="level3"><a href="#autotoc_md181">Checkboxes</a></li>
+<li class="level3"><a href="#autotoc_md182">Combo Boxes (Dropdowns)</a></li>
+<li class="level3"><a href="#autotoc_md183">Radio Buttons</a></li>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md162">Layout and Spacing</a><ul><li class="level3"><a href="#autotoc_md163">Same Line</a></li>
-<li class="level3"><a href="#autotoc_md164">Spacing</a></li>
-<li class="level3"><a href="#autotoc_md165">Columns</a></li>
-<li class="level3"><a href="#autotoc_md166">Groups</a></li>
+<li class="level2"><a href="#autotoc_md185">Layout and Spacing</a><ul><li class="level3"><a href="#autotoc_md186">Same Line</a></li>
+<li class="level3"><a href="#autotoc_md187">Spacing</a></li>
+<li class="level3"><a href="#autotoc_md188">Columns</a></li>
+<li class="level3"><a href="#autotoc_md189">Groups</a></li>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md168">Windows and Panels</a><ul><li class="level3"><a href="#autotoc_md169">Basic Window</a></li>
-<li class="level3"><a href="#autotoc_md170">Window Flags</a></li>
-<li class="level3"><a href="#autotoc_md171">Child Windows (Scrollable Regions)</a></li>
+<li class="level2"><a href="#autotoc_md191">Windows and Panels</a><ul><li class="level3"><a href="#autotoc_md192">Basic Window</a></li>
+<li class="level3"><a href="#autotoc_md193">Window Flags</a></li>
+<li class="level3"><a href="#autotoc_md194">Child Windows (Scrollable Regions)</a></li>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md173">Advanced Widgets</a><ul><li class="level3"><a href="#autotoc_md174">Plotting</a></li>
-<li class="level3"><a href="#autotoc_md175">Progress Bars</a></li>
-<li class="level3"><a href="#autotoc_md176">Color Pickers</a></li>
-<li class="level3"><a href="#autotoc_md177">Images</a></li>
-<li class="level3"><a href="#autotoc_md178">Trees</a></li>
-<li class="level3"><a href="#autotoc_md179">Tabs</a></li>
+<li class="level2"><a href="#autotoc_md196">Advanced Widgets</a><ul><li class="level3"><a href="#autotoc_md197">Plotting</a></li>
+<li class="level3"><a href="#autotoc_md198">Progress Bars</a></li>
+<li class="level3"><a href="#autotoc_md199">Color Pickers</a></li>
+<li class="level3"><a href="#autotoc_md200">Images</a></li>
+<li class="level3"><a href="#autotoc_md201">Trees</a></li>
+<li class="level3"><a href="#autotoc_md202">Tabs</a></li>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md181">Styling and Theming</a><ul><li class="level3"><a href="#autotoc_md182">Colors</a></li>
-<li class="level3"><a href="#autotoc_md183">Sizes and Spacing</a></li>
-<li class="level3"><a href="#autotoc_md184">Fonts</a></li>
+<li class="level2"><a href="#autotoc_md204">Styling and Theming</a><ul><li class="level3"><a href="#autotoc_md205">Colors</a></li>
+<li class="level3"><a href="#autotoc_md206">Sizes and Spacing</a></li>
+<li class="level3"><a href="#autotoc_md207">Fonts</a></li>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md186">Docking</a><ul><li class="level3"><a href="#autotoc_md187">Enable Docking</a></li>
-<li class="level3"><a href="#autotoc_md188">Dockspace Example</a></li>
+<li class="level2"><a href="#autotoc_md209">Docking</a><ul><li class="level3"><a href="#autotoc_md210">Enable Docking</a></li>
+<li class="level3"><a href="#autotoc_md211">Dockspace Example</a></li>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md190">Input Handling</a><ul><li class="level3"><a href="#autotoc_md191">Mouse</a></li>
-<li class="level3"><a href="#autotoc_md192">Keyboard</a></li>
-<li class="level3"><a href="#autotoc_md193">Capturing Input</a></li>
+<li class="level2"><a href="#autotoc_md213">Input Handling</a><ul><li class="level3"><a href="#autotoc_md214">Mouse</a></li>
+<li class="level3"><a href="#autotoc_md215">Keyboard</a></li>
+<li class="level3"><a href="#autotoc_md216">Capturing Input</a></li>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md195">Custom Rendering</a><ul><li class="level3"><a href="#autotoc_md196">Draw Lists</a></li>
+<li class="level2"><a href="#autotoc_md218">Custom Rendering</a><ul><li class="level3"><a href="#autotoc_md219">Draw Lists</a></li>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md198">Panel Manager Pattern</a><ul><li class="level3"><a href="#autotoc_md199">Base Panel Interface</a></li>
-<li class="level3"><a href="#autotoc_md200">Implementing a Panel</a></li>
-<li class="level3"><a href="#autotoc_md201">Panel Manager</a></li>
-<li class="level3"><a href="#autotoc_md202">Usage</a></li>
+<li class="level2"><a href="#autotoc_md221">Panel Manager Pattern</a><ul><li class="level3"><a href="#autotoc_md222">Base Panel Interface</a></li>
+<li class="level3"><a href="#autotoc_md223">Implementing a Panel</a></li>
+<li class="level3"><a href="#autotoc_md224">Panel Manager</a></li>
+<li class="level3"><a href="#autotoc_md225">Usage</a></li>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md204">Common Patterns</a><ul><li class="level3"><a href="#autotoc_md205">Read-Only Display</a></li>
-<li class="level3"><a href="#autotoc_md206">Conditional UI</a></li>
-<li class="level3"><a href="#autotoc_md207">Tooltips</a></li>
+<li class="level2"><a href="#autotoc_md227">Common Patterns</a><ul><li class="level3"><a href="#autotoc_md228">Read-Only Display</a></li>
+<li class="level3"><a href="#autotoc_md229">Conditional UI</a></li>
+<li class="level3"><a href="#autotoc_md230">Tooltips</a></li>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md209">Performance Tips</a><ul><li class="level3"><a href="#autotoc_md210">1. Minimize State Changes</a></li>
-<li class="level3"><a href="#autotoc_md211">2. Collapse Unused Panels</a></li>
-<li class="level3"><a href="#autotoc_md212">3. Limit PlotLines Data</a></li>
+<li class="level2"><a href="#autotoc_md232">Performance Tips</a><ul><li class="level3"><a href="#autotoc_md233">1. Minimize State Changes</a></li>
+<li class="level3"><a href="#autotoc_md234">2. Collapse Unused Panels</a></li>
+<li class="level3"><a href="#autotoc_md235">3. Limit PlotLines Data</a></li>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md214">Debugging ImGui</a><ul><li class="level3"><a href="#autotoc_md215">Demo Window</a></li>
-<li class="level3"><a href="#autotoc_md216">Metrics Window</a></li>
-<li class="level3"><a href="#autotoc_md217">Debug Log</a></li>
+<li class="level2"><a href="#autotoc_md237">Debugging ImGui</a><ul><li class="level3"><a href="#autotoc_md238">Demo Window</a></li>
+<li class="level3"><a href="#autotoc_md239">Metrics Window</a></li>
+<li class="level3"><a href="#autotoc_md240">Debug Log</a></li>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md219">Next Steps</a></li>
-<li class="level2"><a href="#autotoc_md220">Resources</a></li>
+<li class="level2"><a href="#autotoc_md242">Next Steps</a></li>
+<li class="level2"><a href="#autotoc_md243">Resources</a></li>
 </ul>
 </li>
 </ul>
@@ -178,9 +178,9 @@ $(document).ready(function(){initNavTree('imgui_tutorial.html',''); initResizabl
 </ul>
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md139"></a>
+<h1><a class="anchor" id="autotoc_md162"></a>
 ImGui Deep Dive Tutorial</h1>
-<h2><a class="anchor" id="autotoc_md140"></a>
+<h2><a class="anchor" id="autotoc_md163"></a>
 What is ImGui?</h2>
 <p><b>Dear ImGui</b> (Immediate Mode GUI) is a bloat-free graphical user interface library for C++. It's perfect for:</p><ul>
 <li>Debug tools</li>
@@ -188,7 +188,7 @@ What is ImGui?</h2>
 <li>Visualization dashboards (like ours!)</li>
 <li>Prototyping UIs quickly</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md141"></a>
+<h3><a class="anchor" id="autotoc_md164"></a>
 Why ImGui for Our Application?</h3>
 <ul>
 <li><b>Fast Development</b>: Create complex UIs in minutes</li>
@@ -197,9 +197,9 @@ Why ImGui for Our Application?</h3>
 <li><b>OpenGL Integration</b>: Works perfectly with our 3D renderer</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md143"></a>
+<h2><a class="anchor" id="autotoc_md166"></a>
 The Big Idea: Immediate Mode</h2>
-<h3><a class="anchor" id="autotoc_md144"></a>
+<h3><a class="anchor" id="autotoc_md167"></a>
 Traditional GUI (Retained Mode)</h3>
 <div class="fragment"><div class="line"><span class="comment">// Create widgets once, they persist</span></div>
 <div class="line">Button* pauseButton = <span class="keyword">new</span> Button(<span class="stringliteral">&quot;Pause&quot;</span>);</div>
@@ -221,7 +221,7 @@ Traditional GUI (Retained Mode)</h3>
 <li>Synchronization issues</li>
 <li>Memory management complexity</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md145"></a>
+<h3><a class="anchor" id="autotoc_md168"></a>
 ImGui (Immediate Mode)</h3>
 <div class="fragment"><div class="line"><span class="comment">// Re-declare UI every frame!</span></div>
 <div class="line"><span class="keywordflow">while</span> (running) {</div>
@@ -242,9 +242,9 @@ ImGui (Immediate Mode)</h3>
 </ul>
 <p><b>Key Insight</b>: You describe what the UI should look like RIGHT NOW. ImGui figures out the rest.</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md147"></a>
+<h2><a class="anchor" id="autotoc_md170"></a>
 Setup and Initialization</h2>
-<h3><a class="anchor" id="autotoc_md148"></a>
+<h3><a class="anchor" id="autotoc_md171"></a>
 From &lt;tt&gt;application.cpp init()&lt;/tt&gt;</h3>
 <div class="fragment"><div class="line"><span class="comment">// Step 1: Create ImGui context</span></div>
 <div class="line">IMGUI_CHECKVERSION();</div>
@@ -260,7 +260,7 @@ From &lt;tt&gt;application.cpp init()&lt;/tt&gt;</h3>
 <div class="line"><span class="comment">// Step 4: Initialize platform backends</span></div>
 <div class="line">ImGui_ImplGlfw_InitForOpenGL(window, <span class="keyword">true</span>);</div>
 <div class="line">ImGui_ImplOpenGL3_Init(<span class="stringliteral">&quot;#version 330&quot;</span>);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md149"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md172"></a>
 What Each Backend Does</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -271,7 +271,7 @@ What Each Backend Does</h3>
 <td class="markdownTableBodyNone"><code>ImGui_ImplOpenGL3</code>   </td><td class="markdownTableBodyNone">Renders ImGui using OpenGL draw calls   </td></tr>
 </table>
 <hr  />
-<h2><a class="anchor" id="autotoc_md151"></a>
+<h2><a class="anchor" id="autotoc_md174"></a>
 Frame Structure</h2>
 <p>Every frame follows this pattern:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> <a class="code" href="classApplication.html#af44c742342adf5305e430ff293f147c1">Application::tick</a>() {</div>
@@ -294,11 +294,11 @@ Frame Structure</h2>
 <div class="line">    <span class="comment">// 5. Swap buffers</span></div>
 <div class="line">    glfwSwapBuffers(window);</div>
 <div class="line">}</div>
-<div class="ttc" id="aclassApplication_html_af44c742342adf5305e430ff293f147c1"><div class="ttname"><a href="classApplication.html#af44c742342adf5305e430ff293f147c1">Application::tick</a></div><div class="ttdeci">void tick()</div><div class="ttdoc">Execute one frame: update simulation, render 3D, render UI.</div><div class="ttdef"><b>Definition:</b> application.cpp:376</div></div>
+<div class="ttc" id="aclassApplication_html_af44c742342adf5305e430ff293f147c1"><div class="ttname"><a href="classApplication.html#af44c742342adf5305e430ff293f147c1">Application::tick</a></div><div class="ttdeci">void tick()</div><div class="ttdoc">Execute one frame: update simulation, render 3D, render UI.</div><div class="ttdef"><b>Definition:</b> application.cpp:380</div></div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md153"></a>
+<h2><a class="anchor" id="autotoc_md176"></a>
 Core Widgets</h2>
-<h3><a class="anchor" id="autotoc_md154"></a>
+<h3><a class="anchor" id="autotoc_md177"></a>
 Buttons</h3>
 <div class="fragment"><div class="line"><span class="comment">// From control_panel.cpp</span></div>
 <div class="line"> </div>
@@ -316,7 +316,7 @@ Buttons</h3>
 <div class="line">ImGui::Button(<span class="stringliteral">&quot;Can&#39;t Click Me&quot;</span>);</div>
 <div class="line">ImGui::EndDisabled();</div>
 </div><!-- fragment --><p><b>Return value</b>: <code>true</code> if clicked THIS frame.</p>
-<h3><a class="anchor" id="autotoc_md155"></a>
+<h3><a class="anchor" id="autotoc_md178"></a>
 Text</h3>
 <div class="fragment"><div class="line"><span class="comment">// Simple text</span></div>
 <div class="line">ImGui::Text(<span class="stringliteral">&quot;Simulation Time: %.2f s&quot;</span>, time);</div>
@@ -330,7 +330,7 @@ Text</h3>
 <div class="line"><span class="comment">// Formatted text</span></div>
 <div class="line">ImGui::Text(<span class="stringliteral">&quot;Quaternion: [%.3f, %.3f, %.3f, %.3f]&quot;</span>,</div>
 <div class="line">            quat[0], quat[1], quat[2], quat[3]);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md156"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md179"></a>
 Sliders</h3>
 <div class="fragment"><div class="line"><span class="comment">// From control_panel.cpp</span></div>
 <div class="line"> </div>
@@ -347,7 +347,7 @@ Sliders</h3>
 <div class="line"><span class="comment">// Angle slider (displays in degrees)</span></div>
 <div class="line">ImGui::SliderAngle(<span class="stringliteral">&quot;Yaw&quot;</span>, &amp;yaw);</div>
 </div><!-- fragment --><p><b>Return value</b>: <code>true</code> if value changed.</p>
-<h3><a class="anchor" id="autotoc_md157"></a>
+<h3><a class="anchor" id="autotoc_md180"></a>
 Input Fields</h3>
 <div class="fragment"><div class="line"><span class="comment">// Float input</span></div>
 <div class="line"><span class="keywordtype">float</span> value = 1.0f;</div>
@@ -363,7 +363,7 @@ Input Fields</h3>
 <div class="line"> </div>
 <div class="line"><span class="comment">// With hints</span></div>
 <div class="line">ImGui::InputTextWithHint(<span class="stringliteral">&quot;##search&quot;</span>, <span class="stringliteral">&quot;Search...&quot;</span>, buffer, 256);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md158"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md181"></a>
 Checkboxes</h3>
 <div class="fragment"><div class="line"><span class="comment">// From control_panel.cpp</span></div>
 <div class="line"> </div>
@@ -375,7 +375,7 @@ Checkboxes</h3>
 <div class="line"><span class="comment">// Alternative: toggle button</span></div>
 <div class="line"><span class="keywordtype">bool</span>&amp; flag = state.control.use_fixed_dt;</div>
 <div class="line">ImGui::Checkbox(<span class="stringliteral">&quot;Fixed Timestep&quot;</span>, &amp;flag);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md159"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md182"></a>
 Combo Boxes (Dropdowns)</h3>
 <div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keywordtype">char</span>* items[] = { <span class="stringliteral">&quot;Option 1&quot;</span>, <span class="stringliteral">&quot;Option 2&quot;</span>, <span class="stringliteral">&quot;Option 3&quot;</span> };</div>
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">int</span> currentItem = 0;</div>
@@ -392,7 +392,7 @@ Combo Boxes (Dropdowns)</h3>
 <div class="line">    }</div>
 <div class="line">    ImGui::EndCombo();</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md160"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md183"></a>
 Radio Buttons</h3>
 <div class="fragment"><div class="line"><span class="keyword">static</span> <span class="keywordtype">int</span> selected = 0;</div>
 <div class="line"> </div>
@@ -400,19 +400,19 @@ Radio Buttons</h3>
 <div class="line">ImGui::RadioButton(<span class="stringliteral">&quot;Mode 2&quot;</span>, &amp;selected, 1); ImGui::SameLine();</div>
 <div class="line">ImGui::RadioButton(<span class="stringliteral">&quot;Mode 3&quot;</span>, &amp;selected, 2);</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md162"></a>
+<h2><a class="anchor" id="autotoc_md185"></a>
 Layout and Spacing</h2>
-<h3><a class="anchor" id="autotoc_md163"></a>
+<h3><a class="anchor" id="autotoc_md186"></a>
 Same Line</h3>
 <div class="fragment"><div class="line">ImGui::Text(<span class="stringliteral">&quot;Label:&quot;</span>);</div>
 <div class="line">ImGui::SameLine();</div>
 <div class="line">ImGui::InputFloat(<span class="stringliteral">&quot;##value&quot;</span>, &amp;value);  <span class="comment">// ## hides label</span></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md164"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md187"></a>
 Spacing</h3>
 <div class="fragment"><div class="line">ImGui::Spacing();        <span class="comment">// Add vertical space</span></div>
 <div class="line">ImGui::Separator();      <span class="comment">// Horizontal line</span></div>
 <div class="line">ImGui::Dummy(ImVec2(0, 20));  <span class="comment">// Custom spacing</span></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md165"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md188"></a>
 Columns</h3>
 <div class="fragment"><div class="line">ImGui::Columns(2, <span class="stringliteral">&quot;mycolumns&quot;</span>);</div>
 <div class="line"> </div>
@@ -425,7 +425,7 @@ Columns</h3>
 <div class="line">ImGui::NextColumn();</div>
 <div class="line"> </div>
 <div class="line">ImGui::Columns(1);  <span class="comment">// Back to single column</span></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md166"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md189"></a>
 Groups</h3>
 <div class="fragment"><div class="line">ImGui::BeginGroup();</div>
 <div class="line">ImGui::Text(<span class="stringliteral">&quot;Grouped&quot;</span>);</div>
@@ -436,9 +436,9 @@ Groups</h3>
 <div class="line"><span class="comment">// Can query group size</span></div>
 <div class="line">ImVec2 size = ImGui::GetItemRectSize();</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md168"></a>
+<h2><a class="anchor" id="autotoc_md191"></a>
 Windows and Panels</h2>
-<h3><a class="anchor" id="autotoc_md169"></a>
+<h3><a class="anchor" id="autotoc_md192"></a>
 Basic Window</h3>
 <div class="fragment"><div class="line"><span class="comment">// From telemetry_panel.cpp</span></div>
 <div class="line"> </div>
@@ -457,7 +457,7 @@ Basic Window</h3>
 <div class="ttc" id="aclassTelemetryPanel_html_abe2679f505e98b764eb45e0d78d6049a"><div class="ttname"><a href="classTelemetryPanel.html#abe2679f505e98b764eb45e0d78d6049a">TelemetryPanel::draw</a></div><div class="ttdeci">void draw(SimulationState &amp;state, Camera &amp;camera) override</div><div class="ttdoc">Render the panel's ImGui interface.</div><div class="ttdef"><b>Definition:</b> telemetry_panel.cpp:10</div></div>
 <div class="ttc" id="astructSimulationState_html"><div class="ttname"><a href="structSimulationState.html">SimulationState</a></div><div class="ttdoc">Central shared state for the entire simulation.</div><div class="ttdef"><b>Definition:</b> simulation_state.h:28</div></div>
 <div class="ttc" id="astructSimulationState_html_a20e333ffdfe2eab81d5e0c9df189595d"><div class="ttname"><a href="structSimulationState.html#a20e333ffdfe2eab81d5e0c9df189595d">SimulationState::quaternion</a></div><div class="ttdeci">std::array&lt; double, 4 &gt; quaternion</div><div class="ttdoc">Current attitude quaternion [w, x, y, z].</div><div class="ttdef"><b>Definition:</b> simulation_state.h:31</div></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md170"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md193"></a>
 Window Flags</h3>
 <div class="fragment"><div class="line">ImGuiWindowFlags flags = ImGuiWindowFlags_NoResize |</div>
 <div class="line">                         ImGuiWindowFlags_NoMove |</div>
@@ -474,7 +474,7 @@ Window Flags</h3>
 <li><code>ImGuiWindowFlags_MenuBar</code> - Has menu bar</li>
 <li><code>ImGuiWindowFlags_HorizontalScrollbar</code> - Horizontal scroll</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md171"></a>
+<h3><a class="anchor" id="autotoc_md194"></a>
 Child Windows (Scrollable Regions)</h3>
 <div class="fragment"><div class="line">ImGui::BeginChild(<span class="stringliteral">&quot;ScrollRegion&quot;</span>, ImVec2(0, 300), <span class="keyword">true</span>);</div>
 <div class="line"> </div>
@@ -485,9 +485,9 @@ Child Windows (Scrollable Regions)</h3>
 <div class="line"> </div>
 <div class="line">ImGui::EndChild();</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md173"></a>
+<h2><a class="anchor" id="autotoc_md196"></a>
 Advanced Widgets</h2>
-<h3><a class="anchor" id="autotoc_md174"></a>
+<h3><a class="anchor" id="autotoc_md197"></a>
 Plotting</h3>
 <div class="fragment"><div class="line"><span class="comment">// From dynamics_panel.cpp</span></div>
 <div class="line"> </div>
@@ -499,14 +499,14 @@ Plotting</h3>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Histogram</span></div>
 <div class="line">ImGui::PlotHistogram(<span class="stringliteral">&quot;Distribution&quot;</span>, values, 100);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md175"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md198"></a>
 Progress Bars</h3>
 <div class="fragment"><div class="line"><span class="keywordtype">float</span> progress = 0.6f;  <span class="comment">// 60%</span></div>
 <div class="line">ImGui::ProgressBar(progress, ImVec2(0.0f, 0.0f));</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// With overlay text</span></div>
 <div class="line">ImGui::ProgressBar(progress, ImVec2(0.0f, 0.0f), <span class="stringliteral">&quot;60%&quot;</span>);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md176"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md199"></a>
 Color Pickers</h3>
 <div class="fragment"><div class="line">ImVec4 color = ImVec4(1.0f, 0.0f, 0.0f, 1.0f);  <span class="comment">// Red</span></div>
 <div class="line"> </div>
@@ -515,7 +515,7 @@ Color Pickers</h3>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Color picker</span></div>
 <div class="line">ImGui::ColorPicker3(<span class="stringliteral">&quot;Pick Color&quot;</span>, (<span class="keywordtype">float</span>*)&amp;color);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md177"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md200"></a>
 Images</h3>
 <div class="fragment"><div class="line"><span class="comment">// Display OpenGL texture</span></div>
 <div class="line">ImGui::Image((<span class="keywordtype">void</span>*)(intptr_t)textureID, ImVec2(800, 600));</div>
@@ -530,7 +530,7 @@ Images</h3>
 <div class="line"><span class="keywordflow">if</span> (ImGui::ImageButton((<span class="keywordtype">void</span>*)(intptr_t)textureID, ImVec2(64, 64))) {</div>
 <div class="line">    <span class="comment">// Clicked!</span></div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md178"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md201"></a>
 Trees</h3>
 <div class="fragment"><div class="line"><span class="keywordflow">if</span> (ImGui::TreeNode(<span class="stringliteral">&quot;Settings&quot;</span>)) {</div>
 <div class="line">    ImGui::Text(<span class="stringliteral">&quot;Nested content&quot;</span>);</div>
@@ -543,7 +543,7 @@ Trees</h3>
 <div class="line">    <span class="comment">// Content...</span></div>
 <div class="line">    ImGui::TreePop();</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md179"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md202"></a>
 Tabs</h3>
 <div class="fragment"><div class="line"><span class="keywordflow">if</span> (ImGui::BeginTabBar(<span class="stringliteral">&quot;MyTabBar&quot;</span>)) {</div>
 <div class="line">    <span class="keywordflow">if</span> (ImGui::BeginTabItem(<span class="stringliteral">&quot;Tab 1&quot;</span>)) {</div>
@@ -557,9 +557,9 @@ Tabs</h3>
 <div class="line">    ImGui::EndTabBar();</div>
 <div class="line">}</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md181"></a>
+<h2><a class="anchor" id="autotoc_md204"></a>
 Styling and Theming</h2>
-<h3><a class="anchor" id="autotoc_md182"></a>
+<h3><a class="anchor" id="autotoc_md205"></a>
 Colors</h3>
 <div class="fragment"><div class="line"><span class="comment">// From style.cpp</span></div>
 <div class="line"> </div>
@@ -575,7 +575,7 @@ Colors</h3>
 <div class="line">ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.0f, 0.0f, 1.0f));</div>
 <div class="line">ImGui::Text(<span class="stringliteral">&quot;Red text&quot;</span>);</div>
 <div class="line">ImGui::PopStyleColor();</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md183"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md206"></a>
 Sizes and Spacing</h3>
 <div class="fragment"><div class="line">ImGuiStyle&amp; style = ImGui::GetStyle();</div>
 <div class="line"> </div>
@@ -589,7 +589,7 @@ Sizes and Spacing</h3>
 <div class="line">ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(20, 10));</div>
 <div class="line">ImGui::Button(<span class="stringliteral">&quot;Big Padding&quot;</span>);</div>
 <div class="line">ImGui::PopStyleVar();</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md184"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md207"></a>
 Fonts</h3>
 <div class="fragment"><div class="line"><span class="comment">// From style.cpp LoadFonts()</span></div>
 <div class="line"> </div>
@@ -606,15 +606,15 @@ Fonts</h3>
 <div class="line">ImGui::Text(<span class="stringliteral">&quot;Custom font!&quot;</span>);</div>
 <div class="line">ImGui::PopFont();</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md186"></a>
+<h2><a class="anchor" id="autotoc_md209"></a>
 Docking</h2>
-<h3><a class="anchor" id="autotoc_md187"></a>
+<h3><a class="anchor" id="autotoc_md210"></a>
 Enable Docking</h3>
 <div class="fragment"><div class="line"><span class="comment">// From application.cpp init()</span></div>
 <div class="line"> </div>
 <div class="line">ImGuiIO&amp; io = ImGui::GetIO();</div>
 <div class="line">io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md188"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md211"></a>
 Dockspace Example</h3>
 <div class="fragment"><div class="line"><span class="comment">// From application.cpp renderDashboardLayout()</span></div>
 <div class="line"> </div>
@@ -631,9 +631,9 @@ Dockspace Example</h3>
 <div class="line"> </div>
 <div class="line"><span class="comment">// User can drag panels to dock them</span></div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md190"></a>
+<h2><a class="anchor" id="autotoc_md213"></a>
 Input Handling</h2>
-<h3><a class="anchor" id="autotoc_md191"></a>
+<h3><a class="anchor" id="autotoc_md214"></a>
 Mouse</h3>
 <div class="fragment"><div class="line"><span class="comment">// Get mouse position</span></div>
 <div class="line">ImVec2 mousePos = ImGui::GetMousePos();</div>
@@ -656,7 +656,7 @@ Mouse</h3>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Scroll wheel</span></div>
 <div class="line"><span class="keywordtype">float</span> wheel = ImGui::GetIO().MouseWheel;</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md192"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md215"></a>
 Keyboard</h3>
 <div class="fragment"><div class="line">ImGuiIO&amp; io = ImGui::GetIO();</div>
 <div class="line"> </div>
@@ -669,7 +669,7 @@ Keyboard</h3>
 <div class="line"><span class="keywordflow">if</span> (ImGui::IsKeyDown(ImGuiKey_Space)) {</div>
 <div class="line">    <span class="comment">// Space held down</span></div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md193"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md216"></a>
 Capturing Input</h3>
 <div class="fragment"><div class="line">ImGuiIO&amp; io = ImGui::GetIO();</div>
 <div class="line"> </div>
@@ -685,9 +685,9 @@ Capturing Input</h3>
 <div class="line">    <span class="keywordflow">return</span>;</div>
 <div class="line">}</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md195"></a>
+<h2><a class="anchor" id="autotoc_md218"></a>
 Custom Rendering</h2>
-<h3><a class="anchor" id="autotoc_md196"></a>
+<h3><a class="anchor" id="autotoc_md219"></a>
 Draw Lists</h3>
 <div class="fragment"><div class="line">ImDrawList* draw_list = ImGui::GetWindowDrawList();</div>
 <div class="line"> </div>
@@ -730,10 +730,10 @@ Draw Lists</h3>
 <div class="line">    <span class="stringliteral">&quot;Custom text&quot;</span></div>
 <div class="line">);</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md198"></a>
+<h2><a class="anchor" id="autotoc_md221"></a>
 Panel Manager Pattern</h2>
 <p>Our application uses a <b><a class="el" href="classPanel.html" title="Abstract base class for all UI panels.">Panel</a> Manager</b> to organize UI:</p>
-<h3><a class="anchor" id="autotoc_md199"></a>
+<h3><a class="anchor" id="autotoc_md222"></a>
 Base Panel Interface</h3>
 <div class="fragment"><div class="line"><span class="comment">// From panel.h</span></div>
 <div class="line"> </div>
@@ -747,7 +747,7 @@ Base Panel Interface</h3>
 <div class="ttc" id="aclassPanel_html_a7f9c2e03d792b7763150f29d0f8043e8"><div class="ttname"><a href="classPanel.html#a7f9c2e03d792b7763150f29d0f8043e8">Panel::~Panel</a></div><div class="ttdeci">virtual ~Panel()=default</div></div>
 <div class="ttc" id="aclassPanel_html_ab642ab4938eb6a680bcddd13636a58fa"><div class="ttname"><a href="classPanel.html#ab642ab4938eb6a680bcddd13636a58fa">Panel::draw</a></div><div class="ttdeci">virtual void draw(SimulationState &amp;state, Camera &amp;camera)=0</div><div class="ttdoc">Render the panel's ImGui interface.</div></div>
 <div class="ttc" id="aclassPanel_html_ae84f74fee1b1c3bf973ffbc5c3c81b57"><div class="ttname"><a href="classPanel.html#ae84f74fee1b1c3bf973ffbc5c3c81b57">Panel::name</a></div><div class="ttdeci">virtual const char * name() const =0</div><div class="ttdoc">Get the display name of this panel.</div></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md200"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md223"></a>
 Implementing a Panel</h3>
 <div class="fragment"><div class="line"><span class="comment">// From telemetry_panel.h</span></div>
 <div class="line"> </div>
@@ -771,7 +771,7 @@ Implementing a Panel</h3>
 <div class="line">};</div>
 <div class="ttc" id="aclassTelemetryPanel_html"><div class="ttname"><a href="classTelemetryPanel.html">TelemetryPanel</a></div><div class="ttdoc">UI panel displaying vehicle flight state.</div><div class="ttdef"><b>Definition:</b> telemetry_panel.h:23</div></div>
 <div class="ttc" id="aclassTelemetryPanel_html_a77e48ecea338c0898ac6c5c206094204"><div class="ttname"><a href="classTelemetryPanel.html#a77e48ecea338c0898ac6c5c206094204">TelemetryPanel::name</a></div><div class="ttdeci">const char * name() const override</div><div class="ttdoc">Get the display name of this panel.</div><div class="ttdef"><b>Definition:</b> telemetry_panel.h:25</div></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md201"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md224"></a>
 Panel Manager</h3>
 <div class="fragment"><div class="line"><span class="comment">// From panel_manager.cpp</span></div>
 <div class="line"> </div>
@@ -786,7 +786,7 @@ Panel Manager</h3>
 <div class="line">}</div>
 <div class="ttc" id="aclassPanelManager_html_a750c3149501b22f4a28951514c75b833"><div class="ttname"><a href="classPanelManager.html#a750c3149501b22f4a28951514c75b833">PanelManager::registerPanel</a></div><div class="ttdeci">void registerPanel(std::unique_ptr&lt; Panel &gt; panel)</div><div class="ttdoc">Register a panel for rendering.</div><div class="ttdef"><b>Definition:</b> panel_manager.cpp:6</div></div>
 <div class="ttc" id="aclassPanelManager_html_accbb2906139bed93e60a3b7390c43e90"><div class="ttname"><a href="classPanelManager.html#accbb2906139bed93e60a3b7390c43e90">PanelManager::drawAll</a></div><div class="ttdeci">void drawAll(SimulationState &amp;state, Camera &amp;camera)</div><div class="ttdoc">Render all registered panels.</div><div class="ttdef"><b>Definition:</b> panel_manager.cpp:10</div></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md202"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md225"></a>
 Usage</h3>
 <div class="fragment"><div class="line"><span class="comment">// From application.cpp</span></div>
 <div class="line"> </div>
@@ -806,9 +806,9 @@ Usage</h3>
 <div class="line">}</div>
 <div class="ttc" id="aclassApplication_html_a30d655c36d8fdd1158ca0522ce0770cd"><div class="ttname"><a href="classApplication.html#a30d655c36d8fdd1158ca0522ce0770cd">Application::camera</a></div><div class="ttdeci">Camera camera</div><div class="ttdoc">3D scene camera</div><div class="ttdef"><b>Definition:</b> application.h:48</div></div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md204"></a>
+<h2><a class="anchor" id="autotoc_md227"></a>
 Common Patterns</h2>
-<h3><a class="anchor" id="autotoc_md205"></a>
+<h3><a class="anchor" id="autotoc_md228"></a>
 Read-Only Display</h3>
 <div class="fragment"><div class="line">ImGui::BeginDisabled(<span class="keyword">true</span>);</div>
 <div class="line">ImGui::InputFloat(<span class="stringliteral">&quot;RPM&quot;</span>, &amp;rpm);  <span class="comment">// Grayed out, can&#39;t edit</span></div>
@@ -816,7 +816,7 @@ Read-Only Display</h3>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Or just use Text</span></div>
 <div class="line">ImGui::Text(<span class="stringliteral">&quot;RPM: %.0f&quot;</span>, rpm);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md206"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md229"></a>
 Conditional UI</h3>
 <div class="fragment"><div class="line"><span class="keywordflow">if</span> (state.<a class="code" href="structSimulationState.html#aff22ad8c34d8c4eca0682d4a7bf22fe8">control</a>.<a class="code" href="structSimulationState_1_1SimulationControl.html#abfee3fbb74e2fbf35a5ce513c49fac95">use_fixed_dt</a>) {</div>
 <div class="line">    ImGui::SliderFloat(<span class="stringliteral">&quot;Fixed dt&quot;</span>, &amp;state.<a class="code" href="structSimulationState.html#aff22ad8c34d8c4eca0682d4a7bf22fe8">control</a>.<a class="code" href="structSimulationState_1_1SimulationControl.html#a6b77ed0268a4bf54066341dd372eeb4b">fixed_dt</a>, 0.001f, 0.1f);</div>
@@ -828,10 +828,10 @@ Conditional UI</h3>
 <div class="line"><span class="keywordflow">if</span> (showAdvanced) {</div>
 <div class="line">    <span class="comment">// Advanced controls...</span></div>
 <div class="line">}</div>
-<div class="ttc" id="astructSimulationState_1_1SimulationControl_html_a6b77ed0268a4bf54066341dd372eeb4b"><div class="ttname"><a href="structSimulationState_1_1SimulationControl.html#a6b77ed0268a4bf54066341dd372eeb4b">SimulationState::SimulationControl::fixed_dt</a></div><div class="ttdeci">double fixed_dt</div><div class="ttdoc">Fixed timestep value (seconds)</div><div class="ttdef"><b>Definition:</b> simulation_state.h:189</div></div>
-<div class="ttc" id="astructSimulationState_1_1SimulationControl_html_abfee3fbb74e2fbf35a5ce513c49fac95"><div class="ttname"><a href="structSimulationState_1_1SimulationControl.html#abfee3fbb74e2fbf35a5ce513c49fac95">SimulationState::SimulationControl::use_fixed_dt</a></div><div class="ttdeci">bool use_fixed_dt</div><div class="ttdoc">Use fixed timestep instead of real-time.</div><div class="ttdef"><b>Definition:</b> simulation_state.h:188</div></div>
+<div class="ttc" id="astructSimulationState_1_1SimulationControl_html_a6b77ed0268a4bf54066341dd372eeb4b"><div class="ttname"><a href="structSimulationState_1_1SimulationControl.html#a6b77ed0268a4bf54066341dd372eeb4b">SimulationState::SimulationControl::fixed_dt</a></div><div class="ttdeci">double fixed_dt</div><div class="ttdoc">Fixed timestep value (seconds)</div><div class="ttdef"><b>Definition:</b> simulation_state.h:231</div></div>
+<div class="ttc" id="astructSimulationState_1_1SimulationControl_html_abfee3fbb74e2fbf35a5ce513c49fac95"><div class="ttname"><a href="structSimulationState_1_1SimulationControl.html#abfee3fbb74e2fbf35a5ce513c49fac95">SimulationState::SimulationControl::use_fixed_dt</a></div><div class="ttdeci">bool use_fixed_dt</div><div class="ttdoc">Use fixed timestep instead of real-time.</div><div class="ttdef"><b>Definition:</b> simulation_state.h:230</div></div>
 <div class="ttc" id="astructSimulationState_html_aff22ad8c34d8c4eca0682d4a7bf22fe8"><div class="ttname"><a href="structSimulationState.html#aff22ad8c34d8c4eca0682d4a7bf22fe8">SimulationState::control</a></div><div class="ttdeci">struct SimulationState::SimulationControl control</div></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md207"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md230"></a>
 Tooltips</h3>
 <div class="fragment"><div class="line">ImGui::Button(<span class="stringliteral">&quot;Help&quot;</span>);</div>
 <div class="line"><span class="keywordflow">if</span> (ImGui::IsItemHovered()) {</div>
@@ -843,9 +843,9 @@ Tooltips</h3>
 <div class="line">    ImGui::SetTooltip(<span class="stringliteral">&quot;Delayed tooltip&quot;</span>);</div>
 <div class="line">}</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md209"></a>
+<h2><a class="anchor" id="autotoc_md232"></a>
 Performance Tips</h2>
-<h3><a class="anchor" id="autotoc_md210"></a>
+<h3><a class="anchor" id="autotoc_md233"></a>
 1. Minimize State Changes</h3>
 <div class="fragment"><div class="line"><span class="comment">// BAD: Creates new ID every frame</span></div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; items.size(); i++) {</div>
@@ -860,19 +860,19 @@ Performance Tips</h2>
 <div class="line">    <span class="comment">// ...</span></div>
 <div class="line">    ImGui::PopID();</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md211"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md234"></a>
 2. Collapse Unused Panels</h3>
 <p>Users can collapse panels. ImGui skips most processing for collapsed windows.</p>
-<h3><a class="anchor" id="autotoc_md212"></a>
+<h3><a class="anchor" id="autotoc_md235"></a>
 3. Limit PlotLines Data</h3>
 <div class="fragment"><div class="line"><span class="comment">// Don&#39;t plot 10,000 points</span></div>
 <div class="line"><span class="comment">// Downsample or use a sliding window</span></div>
 <div class="line">constexpr <span class="keywordtype">size_t</span> MAX_SAMPLES = 512;</div>
 <div class="line">std::deque&lt;float&gt; history;  <span class="comment">// Auto-limits size</span></div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md214"></a>
+<h2><a class="anchor" id="autotoc_md237"></a>
 Debugging ImGui</h2>
-<h3><a class="anchor" id="autotoc_md215"></a>
+<h3><a class="anchor" id="autotoc_md238"></a>
 Demo Window</h3>
 <div class="fragment"><div class="line"><span class="comment">// Show ImGui demo (all widgets)</span></div>
 <div class="line">ImGui::ShowDemoWindow();</div>
@@ -881,7 +881,7 @@ Demo Window</h3>
 <li>See code examples</li>
 <li>Test styling</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md216"></a>
+<h3><a class="anchor" id="autotoc_md239"></a>
 Metrics Window</h3>
 <div class="fragment"><div class="line">ImGui::ShowMetricsWindow();</div>
 </div><!-- fragment --><p><b>Shows</b>:</p><ul>
@@ -890,13 +890,13 @@ Metrics Window</h3>
 <li>Active windows</li>
 <li>Draw calls</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md217"></a>
+<h3><a class="anchor" id="autotoc_md240"></a>
 Debug Log</h3>
 <div class="fragment"><div class="line">ImGui::LogToTTY();  <span class="comment">// Log to console</span></div>
 <div class="line">ImGui::Button(<span class="stringliteral">&quot;Test&quot;</span>);</div>
 <div class="line">ImGui::LogFinish();</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md219"></a>
+<h2><a class="anchor" id="autotoc_md242"></a>
 Next Steps</h2>
 <ol type="1">
 <li><b>Browse <code>gui/panels/</code></b>: See real examples</li>
@@ -904,7 +904,7 @@ Next Steps</h2>
 <li><b>Create a custom panel</b>: Implement <a class="el" href="classPanel.html" title="Abstract base class for all UI panels.">Panel</a> interface</li>
 <li><b>Experiment</b>: Try different layouts and styles</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md220"></a>
+<h2><a class="anchor" id="autotoc_md243"></a>
 Resources</h2>
 <ul>
 <li><a href="https://github.com/ocornut/imgui">ImGui GitHub</a> - Source and examples</li>

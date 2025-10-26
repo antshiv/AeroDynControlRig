@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['quaterniondemomodule_421',['QuaternionDemoModule',['../classQuaternionDemoModule.html',1,'']]]
+  ['quadcopterdynamicsmodule_449',['QuadcopterDynamicsModule',['../classQuadcopterDynamicsModule.html',1,'']]],
+  ['quaterniondemomodule_450',['QuaternionDemoModule',['../classQuaternionDemoModule.html',1,'']]]
 ];

@@ -106,6 +106,48 @@ struct SimulationState {
     double time_seconds{0.0};      ///< Elapsed simulation time (seconds)
     double last_dt{0.0};           ///< Last frame's timestep (seconds)
 
+    // === Physics State (6-DOF Rigid Body) ===
+    /**
+     * @struct PhysicsState
+     * @brief Complete 6-DOF rigid body state for quadcopter dynamics
+     */
+    struct PhysicsState {
+        glm::dvec3 position{0.0, 0.0, 0.0};         ///< Position in inertial frame (m)
+        glm::dvec3 velocity{0.0, 0.0, 0.0};         ///< Velocity in inertial frame (m/s)
+        glm::dvec3 force_body{0.0, 0.0, 0.0};       ///< Total force in body frame (N)
+        glm::dvec3 torque_body{0.0, 0.0, 0.0};      ///< Total torque in body frame (N·m)
+        glm::dvec3 acceleration{0.0, 0.0, 0.0};     ///< Acceleration in inertial frame (m/s²)
+        double mass{0.5};                            ///< Vehicle mass (kg)
+        glm::dmat3 inertia{{0.01, 0.0, 0.0},        ///< Inertia tensor (kg·m²)
+                           {0.0, 0.01, 0.0},
+                           {0.0, 0.0, 0.02}};
+    } physics;
+
+    /**
+     * @struct VehicleConfig
+     * @brief Physical parameters for quadcopter model
+     */
+    struct VehicleConfig {
+        double mass{0.5};                ///< Total mass including battery (kg)
+        double arm_length{0.225};        ///< Distance from center to rotor (m)
+        double gravity{9.81};            ///< Gravitational acceleration (m/s²)
+        double drag_coefficient{0.01};   ///< Linear drag coefficient
+
+        // Inertia tensor (kg·m²) - typical 450mm quadcopter
+        double Ixx{0.0075};  ///< Moment of inertia about X axis
+        double Iyy{0.0075};  ///< Moment of inertia about Y axis
+        double Izz{0.0130};  ///< Moment of inertia about Z axis
+    } vehicle_config;
+
+    /**
+     * @struct MotorCommands
+     * @brief Commanded rotor speeds for control input
+     */
+    struct MotorCommands {
+        std::array<double, 4> omega_rad_s{0.0, 0.0, 0.0, 0.0};  ///< Commanded angular velocities (rad/s)
+        std::array<double, 4> throttle_0_1{0.0, 0.0, 0.0, 0.0}; ///< Throttle commands [0, 1]
+    } motor_commands;
+
     /**
      * @struct DynamicsConfig
      * @brief Configuration for first-order dynamics test module

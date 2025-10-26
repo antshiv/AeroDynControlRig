@@ -291,3 +291,99 @@ void AxisRenderer::render3D(const Transform& transform) {
     glUseProgram(0);
 }
 
+void AxisRenderer::renderCornerGizmo(const Transform& transform, int windowWidth, int windowHeight, int corner) {
+    // Save current viewport
+    GLint viewport[4];
+    glGetIntegerv(GL_VIEWPORT, viewport);
+
+    // Define gizmo size (100x100 pixels)
+    const int gizmoSize = 100;
+    const int margin = 10;
+
+    // Calculate corner position
+    int x, y;
+    switch (corner) {
+        case 0: // Bottom-left
+            x = margin;
+            y = margin;
+            break;
+        case 1: // Bottom-right
+            x = windowWidth - gizmoSize - margin;
+            y = margin;
+            break;
+        case 2: // Top-left
+            x = margin;
+            y = windowHeight - gizmoSize - margin;
+            break;
+        case 3: // Top-right (default)
+        default:
+            x = windowWidth - gizmoSize - margin;
+            y = windowHeight - gizmoSize - margin;
+            break;
+    }
+
+    // Set viewport to corner region
+    glViewport(x, y, gizmoSize, gizmoSize);
+
+    // Disable depth test for overlay
+    glDisable(GL_DEPTH_TEST);
+
+    // Use shader program
+    glUseProgram(shaderProgram);
+
+    // Extract rotation from main scene (ignore translation)
+    glm::mat3 rotationOnly = glm::mat3(transform.model);
+    axisTransform.model = glm::mat4(rotationOnly);
+
+    // Use a fixed view matrix for the gizmo
+    axisTransform.view = glm::lookAt(
+        glm::vec3(0.0f, 0.0f, 3.5f),  // Camera closer for corner view
+        glm::vec3(0.0f, 0.0f, 0.0f),  // Look at origin
+        glm::vec3(0.0f, 1.0f, 0.0f)   // Up vector
+    );
+
+    // Use simple projection for corner view
+    axisTransform.projection = glm::perspective(
+        glm::radians(35.0f),  // Narrower FOV for corner
+        1.0f,                  // Square aspect ratio
+        0.1f,
+        100.0f
+    );
+
+    // Scale smaller for corner view
+    float scale = 0.4f;
+    axisTransform.model = glm::scale(axisTransform.model, glm::vec3(scale));
+
+    // Set uniforms
+    GLuint modelLoc = glGetUniformLocation(shaderProgram, "model");
+    GLuint viewLoc = glGetUniformLocation(shaderProgram, "view");
+    GLuint projLoc = glGetUniformLocation(shaderProgram, "projection");
+
+    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, &axisTransform.model[0][0]);
+    glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &axisTransform.view[0][0]);
+    glUniformMatrix4fv(projLoc, 1, GL_FALSE, &axisTransform.projection[0][0]);
+
+    // Draw axis lines
+    glBindVertexArray(vao);
+    glLineWidth(2.0f);  // Slightly thicker lines for corner view
+    glDrawArrays(GL_LINES, 0, 2);   // X-axis line
+    glDrawArrays(GL_LINES, 7, 2);   // Y-axis line
+    glDrawArrays(GL_LINES, 14, 2);  // Z-axis line
+
+    // Draw arrowheads
+    for (int i = 0; i < 3; i++) {
+        int baseVertex = 2 + (i * 7);
+        glDrawArrays(GL_TRIANGLE_FAN, baseVertex, 5);
+    }
+
+    glBindVertexArray(0);
+    glUseProgram(0);
+    glLineWidth(1.0f);  // Reset line width
+
+    // Re-enable depth test
+    glEnable(GL_DEPTH_TEST);
+
+    // Restore original viewport
+    glViewport(viewport[0], viewport[1], viewport[2], viewport[3]);
+}
+

@@ -16,10 +16,12 @@ var hierarchy =
     [ "Module", "classModule.html", [
       [ "ComplementaryEstimatorModule", "classComplementaryEstimatorModule.html", null ],
       [ "FirstOrderDynamicsModule", "classFirstOrderDynamicsModule.html", null ],
+      [ "QuadcopterDynamicsModule", "classQuadcopterDynamicsModule.html", null ],
       [ "QuaternionDemoModule", "classQuaternionDemoModule.html", null ],
       [ "RotorTelemetryModule", "classRotorTelemetryModule.html", null ],
       [ "SensorSimulatorModule", "classSensorSimulatorModule.html", null ]
     ] ],
+    [ "SimulationState::MotorCommands", "structSimulationState_1_1MotorCommands.html", null ],
     [ "ui::Palette", "structui_1_1Palette.html", null ],
     [ "Panel", "classPanel.html", [
       [ "ControlPanel", "classControlPanel.html", null ],
@@ -32,6 +34,7 @@ var hierarchy =
       [ "TelemetryPanel", "classTelemetryPanel.html", null ]
     ] ],
     [ "PanelManager", "classPanelManager.html", null ],
+    [ "SimulationState::PhysicsState", "structSimulationState_1_1PhysicsState.html", null ],
     [ "ui::PlotConfig", "structui_1_1PlotConfig.html", null ],
     [ "SimulationState::PowerHistory", "structSimulationState_1_1PowerHistory.html", null ],
     [ "Renderer", "classRenderer.html", null ],
@@ -45,5 +48,6 @@ var hierarchy =
     [ "SimulationState::SensorSample", "structSimulationState_1_1SensorSample.html", null ],
     [ "SimulationState::SimulationControl", "structSimulationState_1_1SimulationControl.html", null ],
     [ "SimulationState", "structSimulationState.html", null ],
-    [ "Transform", "classTransform.html", null ]
+    [ "Transform", "classTransform.html", null ],
+    [ "SimulationState::VehicleConfig", "structSimulationState_1_1VehicleConfig.html", null ]
 ];

@@ -88,52 +88,52 @@ $(document).ready(function(){initNavTree('gpu_pipeline.html',''); initResizable(
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#autotoc_md81">Overview</a></li>
-<li class="level1"><a href="#autotoc_md83">The Complete Pipeline</a></li>
-<li class="level1"><a href="#autotoc_md85">Stage 1: CPU Side - Your C++ Code</a><ul><li class="level2"><a href="#autotoc_md86">1.1 Application Update Loop</a></li>
-<li class="level2"><a href="#autotoc_md88">1.2 Module Updates (Pure CPU Work)</a></li>
-<li class="level2"><a href="#autotoc_md90">1.3 ImGui Vertex Generation</a></li>
-<li class="level2"><a href="#autotoc_md92">1.4 OpenGL Command Submission</a></li>
+<ul><li class="level1"><a href="#autotoc_md104">Overview</a></li>
+<li class="level1"><a href="#autotoc_md106">The Complete Pipeline</a></li>
+<li class="level1"><a href="#autotoc_md108">Stage 1: CPU Side - Your C++ Code</a><ul><li class="level2"><a href="#autotoc_md109">1.1 Application Update Loop</a></li>
+<li class="level2"><a href="#autotoc_md111">1.2 Module Updates (Pure CPU Work)</a></li>
+<li class="level2"><a href="#autotoc_md113">1.3 ImGui Vertex Generation</a></li>
+<li class="level2"><a href="#autotoc_md115">1.4 OpenGL Command Submission</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md94">Stage 2: PCIe Bus Transfer</a><ul><li class="level2"><a href="#autotoc_md95">2.1 CPU → GPU Communication</a></li>
+<li class="level1"><a href="#autotoc_md117">Stage 2: PCIe Bus Transfer</a><ul><li class="level2"><a href="#autotoc_md118">2.1 CPU → GPU Communication</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md97">Stage 3: GPU Side - Graphics Card</a><ul><li class="level2"><a href="#autotoc_md98">3.1 GPU Architecture Overview</a></li>
-<li class="level2"><a href="#autotoc_md100">3.2 GPU Memory Hierarchy</a></li>
-<li class="level2"><a href="#autotoc_md102">3.3 Vertex Shader Execution</a></li>
-<li class="level2"><a href="#autotoc_md104">3.4 Rasterization (Fixed-Function Hardware)</a></li>
-<li class="level2"><a href="#autotoc_md106">3.5 Fragment Shader Execution</a></li>
-<li class="level2"><a href="#autotoc_md108">3.6 Framebuffer Operations</a></li>
+<li class="level1"><a href="#autotoc_md120">Stage 3: GPU Side - Graphics Card</a><ul><li class="level2"><a href="#autotoc_md121">3.1 GPU Architecture Overview</a></li>
+<li class="level2"><a href="#autotoc_md123">3.2 GPU Memory Hierarchy</a></li>
+<li class="level2"><a href="#autotoc_md125">3.3 Vertex Shader Execution</a></li>
+<li class="level2"><a href="#autotoc_md127">3.4 Rasterization (Fixed-Function Hardware)</a></li>
+<li class="level2"><a href="#autotoc_md129">3.5 Fragment Shader Execution</a></li>
+<li class="level2"><a href="#autotoc_md131">3.6 Framebuffer Operations</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md110">Stage 4: Display Output</a><ul><li class="level2"><a href="#autotoc_md111">4.1 Swap Buffers</a></li>
-<li class="level2"><a href="#autotoc_md113">4.2 Display Controller Scanout</a></li>
+<li class="level1"><a href="#autotoc_md133">Stage 4: Display Output</a><ul><li class="level2"><a href="#autotoc_md134">4.1 Swap Buffers</a></li>
+<li class="level2"><a href="#autotoc_md136">4.2 Display Controller Scanout</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md115">Complete Frame Timing Breakdown</a></li>
-<li class="level1"><a href="#autotoc_md117">Memory Bandwidth Analysis</a><ul><li class="level2"><a href="#autotoc_md118">CPU Side (System RAM)</a></li>
-<li class="level2"><a href="#autotoc_md119">PCIe Bus (CPU ↔ GPU)</a></li>
-<li class="level2"><a href="#autotoc_md120">GPU Side (VRAM)</a></li>
+<li class="level1"><a href="#autotoc_md138">Complete Frame Timing Breakdown</a></li>
+<li class="level1"><a href="#autotoc_md140">Memory Bandwidth Analysis</a><ul><li class="level2"><a href="#autotoc_md141">CPU Side (System RAM)</a></li>
+<li class="level2"><a href="#autotoc_md142">PCIe Bus (CPU ↔ GPU)</a></li>
+<li class="level2"><a href="#autotoc_md143">GPU Side (VRAM)</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md122">Optimization Insights</a><ul><li class="level2"><a href="#autotoc_md123">Where Time Is Actually Spent</a></li>
-<li class="level2"><a href="#autotoc_md124">If You Wanted to Optimize</a></li>
+<li class="level1"><a href="#autotoc_md145">Optimization Insights</a><ul><li class="level2"><a href="#autotoc_md146">Where Time Is Actually Spent</a></li>
+<li class="level2"><a href="#autotoc_md147">If You Wanted to Optimize</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md126">Key Takeaways</a></li>
-<li class="level1"><a href="#autotoc_md128">Mapping to AeroDynControlRig Code</a></li>
-<li class="level1"><a href="#autotoc_md130">Related Documentation</a></li>
-<li class="level1"><a href="#autotoc_md132">Further Reading</a></li>
+<li class="level1"><a href="#autotoc_md149">Key Takeaways</a></li>
+<li class="level1"><a href="#autotoc_md151">Mapping to AeroDynControlRig Code</a></li>
+<li class="level1"><a href="#autotoc_md153">Related Documentation</a></li>
+<li class="level1"><a href="#autotoc_md155">Further Reading</a></li>
 </ul>
 </div>
 <div class="textblock"><p><a class="anchor" id="md_docs_gpu_pipeline"></a></p>
-<h1><a class="anchor" id="autotoc_md81"></a>
+<h1><a class="anchor" id="autotoc_md104"></a>
 Overview</h1>
 <p>This document explains <b>exactly</b> how data flows from your C++ code in RAM through the CPU cache, across the PCIe bus to the GPU, through shader execution units, and finally to pixels on your screen.</p>
 <p>Understanding this pipeline is critical for graphics programming because <b>you're working at the lowest level</b> - directly commanding the GPU hardware.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md83"></a>
+<h1><a class="anchor" id="autotoc_md106"></a>
 The Complete Pipeline</h1>
 <div class="fragment"><div class="line">┌─────────────────────────────────────────────────────────────────┐</div>
 <div class="line">│ CPU Side (Your C++ Code)                                        │</div>
@@ -179,9 +179,9 @@ The Complete Pipeline</h1>
 <div class="line">│                                                                 │</div>
 <div class="line">└─────────────────────────────────────────────────────────────────┘</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md85"></a>
+<h1><a class="anchor" id="autotoc_md108"></a>
 Stage 1: CPU Side - Your C++ Code</h1>
-<h2><a class="anchor" id="autotoc_md86"></a>
+<h2><a class="anchor" id="autotoc_md109"></a>
 1.1 Application Update Loop</h2>
 <p>File: <code><a class="el" href="application_8cpp.html">src/app/application.cpp</a>:364-418</code></p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> <a class="code" href="classApplication.html#af44c742342adf5305e430ff293f147c1">Application::tick</a>() {</div>
@@ -199,9 +199,9 @@ Stage 1: CPU Side - Your C++ Code</h1>
 <div class="line">    <span class="comment">// Step 3: Render everything</span></div>
 <div class="line">    <a class="code" href="classApplication.html#a4e7a520d659593b385b246a43e604dfb">render3D</a>();  <span class="comment">// This triggers GPU commands</span></div>
 <div class="line">}</div>
-<div class="ttc" id="aclassApplication_html_a4e7a520d659593b385b246a43e604dfb"><div class="ttname"><a href="classApplication.html#a4e7a520d659593b385b246a43e604dfb">Application::render3D</a></div><div class="ttdeci">void render3D()</div><div class="ttdoc">Render the 3D scene (cube + axes)</div><div class="ttdef"><b>Definition:</b> application.cpp:597</div></div>
+<div class="ttc" id="aclassApplication_html_a4e7a520d659593b385b246a43e604dfb"><div class="ttname"><a href="classApplication.html#a4e7a520d659593b385b246a43e604dfb">Application::render3D</a></div><div class="ttdeci">void render3D()</div><div class="ttdoc">Render the 3D scene (cube + axes)</div><div class="ttdef"><b>Definition:</b> application.cpp:601</div></div>
 <div class="ttc" id="aclassApplication_html_a7e2800cbc39cb5864efacb202b6bfb68"><div class="ttname"><a href="classApplication.html#a7e2800cbc39cb5864efacb202b6bfb68">Application::lastFrame</a></div><div class="ttdeci">float lastFrame</div><div class="ttdoc">Timestamp of last frame (seconds)</div><div class="ttdef"><b>Definition:</b> application.h:52</div></div>
-<div class="ttc" id="aclassApplication_html_af44c742342adf5305e430ff293f147c1"><div class="ttname"><a href="classApplication.html#af44c742342adf5305e430ff293f147c1">Application::tick</a></div><div class="ttdeci">void tick()</div><div class="ttdoc">Execute one frame: update simulation, render 3D, render UI.</div><div class="ttdef"><b>Definition:</b> application.cpp:376</div></div>
+<div class="ttc" id="aclassApplication_html_af44c742342adf5305e430ff293f147c1"><div class="ttname"><a href="classApplication.html#af44c742342adf5305e430ff293f147c1">Application::tick</a></div><div class="ttdeci">void tick()</div><div class="ttdoc">Execute one frame: update simulation, render 3D, render UI.</div><div class="ttdef"><b>Definition:</b> application.cpp:380</div></div>
 </div><!-- fragment --><p><b>Memory Location:</b> Your code is in RAM, executing on CPU cores. The <code>simulationState</code> object lives in <b>heap memory (RAM)</b>.</p>
 <p><b>CPU Cache:</b> When modules access <code>simulationState.attitude.quaternion</code>, the CPU checks:</p><ol type="1">
 <li><b>L1 cache</b> (4 cycles, ~1ns) - Private per CPU core, ~32-64 KB</li>
@@ -214,7 +214,7 @@ Stage 1: CPU Side - Your C++ Code</h1>
 <li>Random memory access (like pointer chasing) causes cache misses</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md88"></a>
+<h2><a class="anchor" id="autotoc_md111"></a>
 1.2 Module Updates (Pure CPU Work)</h2>
 <p>Example: <code><a class="el" href="quaternion__demo_8cpp.html">src/modules/quaternion_demo.cpp</a>:37-72</code></p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> <a class="code" href="classQuaternionDemoModule.html#ad7ebf21527722e8f6efb2eae537da1d0">QuaternionDemoModule::update</a>(<span class="keywordtype">double</span> dt, <a class="code" href="structSimulationState.html">SimulationState</a>&amp; state) {</div>
@@ -254,7 +254,7 @@ Stage 1: CPU Side - Your C++ Code</h1>
 <li>Other CPU cores see updated value via cache coherency protocol (MESI)</li>
 </ol>
 <hr  />
-<h2><a class="anchor" id="autotoc_md90"></a>
+<h2><a class="anchor" id="autotoc_md113"></a>
 1.3 ImGui Vertex Generation</h2>
 <p>When you call <code>ImGui::Text("Hello")</code>, ImGui builds vertex data <b>in RAM</b>:</p>
 <div class="fragment"><div class="line"><span class="comment">// Simplified version of what ImGui does internally</span></div>
@@ -280,7 +280,7 @@ Stage 1: CPU Side - Your C++ Code</h1>
 <li>Small enough to fit entirely in CPU L3 cache</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md92"></a>
+<h2><a class="anchor" id="autotoc_md115"></a>
 1.4 OpenGL Command Submission</h2>
 <p>File: <code><a class="el" href="renderer_8cpp.html">src/render/renderer.cpp</a>:78-85</code></p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> <a class="code" href="classRenderer.html#a02a137957c8783a44df5cad4b5e1b635">Renderer::renderFrame</a>(<span class="keyword">const</span> <a class="code" href="classTransform.html">Transform</a>&amp; transform) {</div>
@@ -313,9 +313,9 @@ Stage 1: CPU Side - Your C++ Code</h1>
 </ol>
 <p><b>Critical Detail:</b> <code>glDrawElements()</code> does NOT execute immediately! It's <b>queued</b> and executes later when you call <code>glfwSwapBuffers()</code>.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md94"></a>
+<h1><a class="anchor" id="autotoc_md117"></a>
 Stage 2: PCIe Bus Transfer</h1>
-<h2><a class="anchor" id="autotoc_md95"></a>
+<h2><a class="anchor" id="autotoc_md118"></a>
 2.1 CPU → GPU Communication</h2>
 <div class="fragment"><div class="line">┌──────────────┐          PCIe 3.0 x16          ┌──────────────┐</div>
 <div class="line">│     CPU      │  ←─────────────────────────→   │     GPU      │</div>
@@ -364,9 +364,9 @@ Stage 2: PCIe Bus Transfer</h1>
 <div class="line">    <span class="comment">// GPU now has a copy in VRAM. CPU can free RAM copy.</span></div>
 <div class="line">}</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md97"></a>
+<h1><a class="anchor" id="autotoc_md120"></a>
 Stage 3: GPU Side - Graphics Card</h1>
-<h2><a class="anchor" id="autotoc_md98"></a>
+<h2><a class="anchor" id="autotoc_md121"></a>
 3.1 GPU Architecture Overview</h2>
 <p>Modern GPUs (NVIDIA/AMD) have this structure:</p>
 <div class="fragment"><div class="line">┌─────────────────────────────────────────────────────┐</div>
@@ -408,7 +408,7 @@ Stage 3: GPU Side - Graphics Card</h1>
 <li><b>1.71 GHz boost clock</b></li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md100"></a>
+<h2><a class="anchor" id="autotoc_md123"></a>
 3.2 GPU Memory Hierarchy</h2>
 <div class="fragment"><div class="line">┌────────────────────────────────────────────────┐</div>
 <div class="line">│ Registers (per thread)                         │</div>
@@ -444,7 +444,7 @@ Stage 3: GPU Side - Graphics Card</h1>
 <li><b>Framebuffer:</b> VRAM, written by fragment shaders</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md102"></a>
+<h2><a class="anchor" id="autotoc_md125"></a>
 3.3 Vertex Shader Execution</h2>
 <p>File: <code>shaders/vertex3D.glsl</code></p>
 <div class="fragment"><div class="line">#version 330 core</div>
@@ -501,7 +501,7 @@ Stage 3: GPU Side - Graphics Card</h1>
 <li><b>Bottleneck for simple cube:</b> Memory bandwidth (VRAM access), not compute</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md104"></a>
+<h2><a class="anchor" id="autotoc_md127"></a>
 3.4 Rasterization (Fixed-Function Hardware)</h2>
 <p>After vertex shader, GPU has 8 transformed vertices. Now it converts triangles to pixels:</p>
 <div class="fragment"><div class="line">   Triangle in Clip Space              Rasterized Pixels</div>
@@ -528,7 +528,7 @@ Stage 3: GPU Side - Graphics Card</h1>
 <div class="line">  color = (1/3 * red) + (1/3 * green) + (1/3 * blue) = gray</div>
 </div><!-- fragment --><p><b>Output:</b> Fragment stream (one fragment per pixel covered by triangle)</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md106"></a>
+<h2><a class="anchor" id="autotoc_md129"></a>
 3.5 Fragment Shader Execution</h2>
 <p>File: <code>shaders/fragment3D.glsl</code></p>
 <div class="fragment"><div class="line">#version 330 core</div>
@@ -567,7 +567,7 @@ Stage 3: GPU Side - Graphics Card</h1>
 </li>
 </ol>
 <hr  />
-<h2><a class="anchor" id="autotoc_md108"></a>
+<h2><a class="anchor" id="autotoc_md131"></a>
 3.6 Framebuffer Operations</h2>
 <p>After fragment shader, GPU performs:</p>
 <ol type="1">
@@ -587,9 +587,9 @@ Stage 3: GPU Side - Graphics Card</h1>
 </ol>
 <p><b>Memory Location:</b> All framebuffers are in <b>GPU VRAM</b>.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md110"></a>
+<h1><a class="anchor" id="autotoc_md133"></a>
 Stage 4: Display Output</h1>
-<h2><a class="anchor" id="autotoc_md111"></a>
+<h2><a class="anchor" id="autotoc_md134"></a>
 4.1 Swap Buffers</h2>
 <p>File: <code><a class="el" href="application_8cpp.html">src/app/application.cpp</a>:522</code></p>
 <div class="fragment"><div class="line">glfwSwapBuffers(window);  <span class="comment">// ← This is when GPU work ACTUALLY happens!</span></div>
@@ -614,7 +614,7 @@ Stage 4: Display Output</h1>
 <li><b>Display controller</b> starts scanning front buffer</li>
 </ol>
 <hr  />
-<h2><a class="anchor" id="autotoc_md113"></a>
+<h2><a class="anchor" id="autotoc_md136"></a>
 4.2 Display Controller Scanout</h2>
 <div class="fragment"><div class="line">┌──────────────────────────────────────────────┐</div>
 <div class="line">│ GPU VRAM - Front Buffer (framebuffer)        │</div>
@@ -651,7 +651,7 @@ Stage 4: Display Output</h1>
 <li><b>V-Sync:</b> CPU/GPU wait for vertical blanking interval before swapping</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md115"></a>
+<h1><a class="anchor" id="autotoc_md138"></a>
 Complete Frame Timing Breakdown</h1>
 <p>Let's trace <b>one frame</b> of AeroDynControlRig at 60 FPS:</p>
 <div class="fragment"><div class="line">Time (ms)  Component       Action</div>
@@ -691,9 +691,9 @@ Complete Frame Timing Breakdown</h1>
 </div><!-- fragment --><p><b>Total Frame Time:</b> 1.25ms CPU + wait until 16.67ms for V-Sync</p>
 <p><b>GPU Utilization:</b> 1.2ms out of 16.67ms = <b>7% GPU load</b> (very light workload!)</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md117"></a>
+<h1><a class="anchor" id="autotoc_md140"></a>
 Memory Bandwidth Analysis</h1>
-<h2><a class="anchor" id="autotoc_md118"></a>
+<h2><a class="anchor" id="autotoc_md141"></a>
 CPU Side (System RAM)</h2>
 <div class="fragment"><div class="line">Operation                    Data Size    Bandwidth Used</div>
 <div class="line">─────────────────────────────────────────────────────────</div>
@@ -703,7 +703,7 @@ CPU Side (System RAM)</h2>
 <div class="line">─────────────────────────────────────────────────────────</div>
 <div class="line">Total CPU→RAM:               ~211 KB      DDR4: 50 GB/s available</div>
 <div class="line">Utilization:                              0.0004% (!!)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md119"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md142"></a>
 PCIe Bus (CPU ↔ GPU)</h2>
 <div class="fragment"><div class="line">Transfer                     Data Size    Transfer Time</div>
 <div class="line">─────────────────────────────────────────────────────────</div>
@@ -713,7 +713,7 @@ PCIe Bus (CPU ↔ GPU)</h2>
 <div class="line">─────────────────────────────────────────────────────────</div>
 <div class="line">Total:                       ~201 KB      PCIe 3.0: 16 GB/s</div>
 <div class="line">Utilization:                              0.001%</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md120"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md143"></a>
 GPU Side (VRAM)</h2>
 <div class="fragment"><div class="line">Operation                    Data Size    Bandwidth Used</div>
 <div class="line">─────────────────────────────────────────────────────────</div>
@@ -726,9 +726,9 @@ GPU Side (VRAM)</h2>
 <div class="line">Utilization:                              0.002%</div>
 </div><!-- fragment --><p><b>Conclusion:</b> This app is <b>massively underutilizing</b> the GPU. You could render 1000× more geometry!</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md122"></a>
+<h1><a class="anchor" id="autotoc_md145"></a>
 Optimization Insights</h1>
-<h2><a class="anchor" id="autotoc_md123"></a>
+<h2><a class="anchor" id="autotoc_md146"></a>
 Where Time Is Actually Spent</h2>
 <p><b>Not GPU-bound:</b></p><ul>
 <li>GPU utilization: ~7%</li>
@@ -744,7 +744,7 @@ Where Time Is Actually Spent</h2>
 <li><b>V-Sync wait</b> (14ms of idle time)</li>
 <li>Limited by monitor refresh rate (60 Hz)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md124"></a>
+<h2><a class="anchor" id="autotoc_md147"></a>
 If You Wanted to Optimize</h2>
 <p><b>GPU Side:</b></p><ol type="1">
 <li><b>Instanced rendering:</b> Draw 1000 cubes in one call <div class="fragment"><div class="line">glDrawElementsInstanced(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0, 1000);</div>
@@ -759,7 +759,7 @@ If You Wanted to Optimize</h2>
 </ol>
 <p><b>But honestly:</b> This app is already <b>extremely efficient</b>. No optimization needed.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md126"></a>
+<h1><a class="anchor" id="autotoc_md149"></a>
 Key Takeaways</h1>
 <ol type="1">
 <li><b>Your C++ code runs on CPU</b> and manipulates RAM</li>
@@ -771,7 +771,7 @@ Key Takeaways</h1>
 <li><b>V-Sync synchronizes</b> CPU frame generation with monitor refresh</li>
 </ol>
 <hr  />
-<h1><a class="anchor" id="autotoc_md128"></a>
+<h1><a class="anchor" id="autotoc_md151"></a>
 Mapping to AeroDynControlRig Code</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -790,16 +790,16 @@ Mapping to AeroDynControlRig Code</h1>
 <td class="markdownTableBodyNone">Framebuffer   </td><td class="markdownTableBodyNone">Store rendered image   </td><td class="markdownTableBodyNone"><b>GPU VRAM</b>   </td></tr>
 </table>
 <hr  />
-<h1><a class="anchor" id="autotoc_md130"></a>
+<h1><a class="anchor" id="autotoc_md153"></a>
 Related Documentation</h1>
 <ul>
 <li><a class="el" href="web_analogy.html">Web Development Analogy</a> - UI architecture mapping</li>
-<li><a class="el" href="architecture.html">Architecture Guide</a> - High-level system design</li>
+<li><a class="el" href="architecture.html">Complete System Architecture</a> - High-level system design</li>
 <li><code><a class="el" href="renderer_8h.html" title="Main 3D scene renderer using OpenGL 3.3.">src/render/renderer.h</a></code> - OpenGL rendering implementation</li>
 <li><code>shaders/</code> - GLSL shader source code</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md132"></a>
+<h1><a class="anchor" id="autotoc_md155"></a>
 Further Reading</h1>
 <ul>
 <li><a href="https://developer.nvidia.com/gpugems/gpugems3/contributors">GPU Gems (Free Online)</a> - Deep GPU optimization</li>

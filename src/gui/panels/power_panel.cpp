@@ -46,11 +46,12 @@ void PowerPanel::draw(SimulationState& state, Camera& camera) {
 
     ui::CardHeader("Power Consumption", "Last 5 Minutes");
 
-    if (fonts.heading) {
-        ImGui::PushFont(fonts.heading);
+    // Use large metrics font for primary value
+    if (fonts.metrics) {
+        ImGui::PushFont(fonts.metrics);
     }
     ImGui::Text("%.0f W", latest_power);
-    if (fonts.heading) {
+    if (fonts.metrics) {
         ImGui::PopFont();
     }
 

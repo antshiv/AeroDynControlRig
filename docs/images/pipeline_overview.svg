@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#357ABD;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#50E3C2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3BB3A3;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F5A623;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D68910;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Title -->
+  <text x="600" y="40" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#2C3E50">
+    Complete Rendering Pipeline: Keyboard → Monitor
+  </text>
+
+  <!-- Stage 1: Input -->
+  <g transform="translate(50, 80)">
+    <rect width="200" height="80" rx="10" fill="url(#grad1)" filter="url(#shadow)"/>
+    <text x="100" y="30" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="white">STAGE 1</text>
+    <text x="100" y="50" font-family="Arial" font-size="14" text-anchor="middle" fill="white">User Input</text>
+    <text x="100" y="68" font-family="Arial" font-size="11" text-anchor="middle" fill="#E8F4F8">Keyboard → GLFW</text>
+  </g>
+
+  <!-- Arrow -->
+  <path d="M 150 170 L 150 200" stroke="#2C3E50" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- Stage 2: CPU Math -->
+  <g transform="translate(50, 210)">
+    <rect width="200" height="80" rx="10" fill="url(#grad1)" filter="url(#shadow)"/>
+    <text x="100" y="30" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="white">STAGE 2</text>
+    <text x="100" y="50" font-family="Arial" font-size="14" text-anchor="middle" fill="white">CPU Math</text>
+    <text x="100" y="68" font-family="Arial" font-size="11" text-anchor="middle" fill="#E8F4F8">Quaternion → DCM → Matrix</text>
+  </g>
+
+  <!-- Arrow -->
+  <path d="M 150 300 L 150 330" stroke="#2C3E50" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- Stage 3: Upload to GPU -->
+  <g transform="translate(50, 340)">
+    <rect width="200" height="80" rx="10" fill="url(#grad2)" filter="url(#shadow)"/>
+    <text x="100" y="30" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="white">STAGE 3</text>
+    <text x="100" y="50" font-family="Arial" font-size="14" text-anchor="middle" fill="white">Upload to GPU</text>
+    <text x="100" y="68" font-family="Arial" font-size="11" text-anchor="middle" fill="#E8F4F8">CPU RAM → GPU VRAM</text>
+  </g>
+
+  <!-- Arrow -->
+  <path d="M 250 380 L 300 380" stroke="#2C3E50" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- Stage 4: Vertex Shader -->
+  <g transform="translate(310, 340)">
+    <rect width="200" height="80" rx="10" fill="url(#grad2)" filter="url(#shadow)"/>
+    <text x="100" y="30" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="white">STAGE 4</text>
+    <text x="100" y="50" font-family="Arial" font-size="14" text-anchor="middle" fill="white">Vertex Shader</text>
+    <text x="100" y="68" font-family="Arial" font-size="11" text-anchor="middle" fill="#E8F4F8">Transform Vertices</text>
+  </g>
+
+  <!-- Arrow -->
+  <path d="M 510 380 L 560 380" stroke="#2C3E50" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- Stage 5: Rasterizer -->
+  <g transform="translate(570, 340)">
+    <rect width="200" height="80" rx="10" fill="url(#grad2)" filter="url(#shadow)"/>
+    <text x="100" y="30" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="white">STAGE 5</text>
+    <text x="100" y="50" font-family="Arial" font-size="14" text-anchor="middle" fill="white">Rasterizer</text>
+    <text x="100" y="68" font-family="Arial" font-size="11" text-anchor="middle" fill="#E8F4F8">Fill Triangles</text>
+  </g>
+
+  <!-- Arrow -->
+  <path d="M 670 430 L 670 460" stroke="#2C3E50" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- Stage 6: Fragment Shader -->
+  <g transform="translate(570, 470)">
+    <rect width="200" height="80" rx="10" fill="url(#grad2)" filter="url(#shadow)"/>
+    <text x="100" y="30" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="white">STAGE 6</text>
+    <text x="100" y="50" font-family="Arial" font-size="14" text-anchor="middle" fill="white">Fragment Shader</text>
+    <text x="100" y="68" font-family="Arial" font-size="11" text-anchor="middle" fill="#E8F4F8">Color Pixels</text>
+  </g>
+
+  <!-- Arrow -->
+  <path d="M 570 510 L 520 510" stroke="#2C3E50" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- Stage 7: Framebuffer -->
+  <g transform="translate(310, 470)">
+    <rect width="200" height="80" rx="10" fill="url(#grad2)" filter="url(#shadow)"/>
+    <text x="100" y="30" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="white">STAGE 7</text>
+    <text x="100" y="50" font-family="Arial" font-size="14" text-anchor="middle" fill="white">Framebuffer</text>
+    <text x="100" y="68" font-family="Arial" font-size="11" text-anchor="middle" fill="#E8F4F8">Write Pixels to VRAM</text>
+  </g>
+
+  <!-- Arrow -->
+  <path d="M 310 510 L 260 510" stroke="#2C3E50" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- Stage 8: Display -->
+  <g transform="translate(50, 470)">
+    <rect width="200" height="80" rx="10" fill="url(#grad3)" filter="url(#shadow)"/>
+    <text x="100" y="30" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="white">STAGE 8</text>
+    <text x="100" y="50" font-family="Arial" font-size="14" text-anchor="middle" fill="white">Display</text>
+    <text x="100" y="68" font-family="Arial" font-size="11" text-anchor="middle" fill="#F5E6D3">GPU → HDMI → Monitor</text>
+  </g>
+
+  <!-- Arrow -->
+  <path d="M 150 560 L 150 590" stroke="#2C3E50" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- Stage 9: Vision -->
+  <g transform="translate(50, 600)">
+    <rect width="200" height="80" rx="10" fill="url(#grad3)" filter="url(#shadow)"/>
+    <text x="100" y="30" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="white">STAGE 9</text>
+    <text x="100" y="50" font-family="Arial" font-size="14" text-anchor="middle" fill="white">Human Vision</text>
+    <text x="100" y="68" font-family="Arial" font-size="11" text-anchor="middle" fill="#F5E6D3">Photons → Perception</text>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(850, 100)">
+    <text x="0" y="0" font-family="Arial" font-size="18" font-weight="bold" fill="#2C3E50">Processing Stages</text>
+
+    <rect x="0" y="20" width="30" height="20" fill="url(#grad1)"/>
+    <text x="40" y="35" font-family="Arial" font-size="14" fill="#2C3E50">CPU Processing</text>
+
+    <rect x="0" y="50" width="30" height="20" fill="url(#grad2)"/>
+    <text x="40" y="65" font-family="Arial" font-size="14" fill="#2C3E50">GPU Processing</text>
+
+    <rect x="0" y="80" width="30" height="20" fill="url(#grad3)"/>
+    <text x="40" y="95" font-family="Arial" font-size="14" fill="#2C3E50">Display/Output</text>
+  </g>
+
+  <!-- Timing Info -->
+  <g transform="translate(850, 220)">
+    <text x="0" y="0" font-family="Arial" font-size="18" font-weight="bold" fill="#2C3E50">Timing</text>
+    <text x="0" y="25" font-family="Arial" font-size="13" fill="#555">Input: ~1 ms</text>
+    <text x="0" y="45" font-family="Arial" font-size="13" fill="#555">CPU Math: ~0.01 ms</text>
+    <text x="0" y="65" font-family="Arial" font-size="13" fill="#555">GPU Upload: ~0.05 ms</text>
+    <text x="0" y="85" font-family="Arial" font-size="13" fill="#555">GPU Render: ~1 ms</text>
+    <text x="0" y="105" font-family="Arial" font-size="13" fill="#555">Display Scan: ~16.7 ms (60Hz)</text>
+    <text x="0" y="125" font-family="Arial" font-size="13" fill="#555">Neural: ~50 ms</text>
+    <line x1="0" y1="135" x2="250" y2="135" stroke="#2C3E50" stroke-width="1"/>
+    <text x="0" y="155" font-family="Arial" font-size="14" font-weight="bold" fill="#E74C3C">Total: ~75 ms</text>
+  </g>
+
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#2C3E50" />
+    </marker>
+  </defs>
+</svg>

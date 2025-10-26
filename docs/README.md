@@ -56,8 +56,10 @@ firefox docs/doxygen/html/index.html
 | File | Purpose |
 |------|---------|
 | `mainpage.md` | Main landing page with quick start guide |
+| `architecture.dox` | Complete system architecture with visual SVG diagrams |
 | `architecture.md` | Comprehensive architecture guide with diagrams |
 | `README.md` | This file - documentation build instructions |
+| `images/` | SVG diagrams for visual documentation |
 
 ## Documentation Features
 
@@ -95,12 +97,28 @@ Click "Files" → "File List" to:
 - See syntax-highlighted code
 - Jump to definitions with cross-references
 
-### 4. Visual Diagrams in Comments
+### 4. Visual SVG Diagrams
 
-The architecture guide (`architecture.md`) includes ASCII-art diagrams showing:
+The architecture documentation (`architecture.dox`) includes beautiful SVG diagrams:
 
-- **OpenGL rendering pipeline**: How data flows from CPU → GPU → Screen
-- **ImGui integration**: How immediate-mode UI works with retained-mode OpenGL
+- **Complete Rendering Pipeline** (`images/pipeline_overview.svg`): 9-stage journey from keyboard to monitor
+  - Input Capture → CPU Math → GPU Upload → Vertex Shader → Rasterization → Fragment Shader → Framebuffer → Display → Vision
+  - Shows timing breakdown (total: ~75ms latency)
+  - Color-coded stages: CPU (blue), GPU (teal), Display/Output (orange)
+
+- **OpenGL Buffer Objects** (`images/vao_vbo_ebo.svg`): VAO, VBO, and EBO relationships
+  - VBO = The Data (vertex positions, colors)
+  - VAO = The Recipe (layout instructions)
+  - EBO = The Connections (triangle indices)
+  - 4-step workflow showing how they work together
+
+- **Rotation Transformations** (`images/quaternion_to_matrix.svg`): Quaternion → DCM → OpenGL Matrix
+  - Why three representations are needed
+  - Conversion pipeline with code examples
+  - Trade-offs for each representation
+
+The architecture guide also includes ASCII-art diagrams showing:
+
 - **Frame execution sequence**: What happens each frame in what order
 - **Module data flow**: How simulation state flows through modules
 - **Initialization sequence**: Critical order of subsystem startup
@@ -121,24 +139,35 @@ After generating docs, navigate to:
    - Architecture overview
    - Links to essential classes
 
-2. **Architecture Guide** (click "Architecture Guide" in Related Pages)
+2. **Complete System Architecture** (click "Complete System Architecture" in Related Pages)
+   - **The Complete Pipeline**: Keyboard → Monitor (11 stages with timing)
+   - **OpenGL Buffer Objects**: VAO, VBO, EBO with visual diagrams
+   - **Rotation Transformations**: Quaternion → DCM → OpenGL Matrix
+   - **Shader Pipeline**: Vertex and Fragment shader explanations
+   - **Memory Layout**: CPU RAM vs GPU VRAM breakdown
+   - **ImGui Integration**: How immediate-mode UI generates OpenGL calls
+   - **Performance Characteristics**: Bottlenecks and optimizations
+   - **Hardware Pipeline**: GPU architecture (shader cores, rasterizer, VRAM)
+   - **Debugging Tips**: Common issues and solutions
+
+3. **Architecture Guide** (click "Architecture Guide" in Related Pages)
    - OpenGL concepts (VAO, VBO, shaders, FBO)
    - ImGui immediate mode paradigm
    - Frame-by-frame execution flow
    - Class interaction diagrams
    - Data flow through simulation
 
-3. **Class List** (click "Classes" → "Class List")
+4. **Class List** (click "Classes" → "Class List")
    - See all 23+ classes
    - Each has detailed documentation
    - Inheritance and collaboration diagrams
 
-4. **Class Hierarchy** (click "Classes" → "Class Hierarchy")
+5. **Class Hierarchy** (click "Classes" → "Class Hierarchy")
    - Visual tree of class relationships
    - Module hierarchy
    - Panel hierarchy
 
-5. **File List** (click "Files" → "File List")
+6. **File List** (click "Files" → "File List")
    - Browse source code
    - See file dependencies
    - Jump to definitions
@@ -189,13 +218,18 @@ Application::tick()
 ### For Beginners
 
 1. Start with **Main Page** → Read the Quick Start
-2. Read **Architecture Guide** → Understand OpenGL and ImGui basics
-3. Browse **Class List** → See what classes exist
-4. Pick a simple class like `TelemetryPanel`
+2. Read **Complete System Architecture** → Understand the rendering pipeline
+   - See how keyboard input becomes pixels on your monitor
+   - View beautiful SVG diagrams showing VAO/VBO/EBO relationships
+   - Understand quaternion → DCM → OpenGL matrix conversion
+   - Learn the 11-stage pipeline with timing breakdown
+3. Read **Architecture Guide** → Understand OpenGL and ImGui basics
+4. Browse **Class List** → See what classes exist
+5. Pick a simple class like `TelemetryPanel`
    - Read its documentation
    - Click the collaboration diagram
    - See that it reads from `SimulationState`
-5. Read `Application::init()` documentation
+6. Read `Application::init()` documentation
    - See the initialization sequence diagram
    - Understand why order matters
 
@@ -214,13 +248,22 @@ Application::tick()
 
 ### For Understanding Rendering
 
-1. Read **Architecture Guide** → OpenGL Rendering Pipeline
-2. Look at `Renderer` class documentation
+1. Read **Complete System Architecture** → The Complete Pipeline
+   - Understand the 11-stage journey from keyboard to vision
+   - See timing breakdown (Input: 1ms, GPU: 1ms, Display: 16.7ms, etc.)
+   - View SVG diagrams showing the complete data flow
+2. Read **Complete System Architecture** → OpenGL Buffer Objects
+   - Understand VAO (the recipe), VBO (the data), EBO (the connections)
+   - See how they work together with visual diagrams
+3. Read **Complete System Architecture** → Rotation Transformations
+   - Understand why we need quaternion → DCM → OpenGL matrix
+   - See the trade-offs for each representation
+4. Look at `Renderer` class documentation
    - See the coordinate transformation explanation
    - Understand model/view/projection matrices
-3. Look at `Application::renderSceneToTexture()`
+5. Look at `Application::renderSceneToTexture()`
    - See how off-screen rendering works
-4. Read about Framebuffer Objects (FBO) in architecture guide
+6. Read about Framebuffer Objects (FBO) in architecture guide
 
 ### For Adding Features
 

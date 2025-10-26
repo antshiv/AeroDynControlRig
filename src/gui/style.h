@@ -90,6 +90,7 @@ struct FontSet {
     ImFont* heading = nullptr;  ///< 22px SpaceGrotesk-SemiBold (for titles)
     ImFont* mono = nullptr;     ///< 17px SpaceGrotesk-Medium (for numeric data)
     ImFont* icon = nullptr;     ///< 20px MaterialSymbolsRounded (icon glyphs)
+    ImFont* metrics = nullptr;  ///< 36px SpaceGrotesk-SemiBold (for large metric values)
 };
 
 /**

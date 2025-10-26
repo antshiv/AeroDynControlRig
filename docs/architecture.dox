@@ -1,0 +1,402 @@
+/**
+ * @page architecture Complete System Architecture
+ * @tableofcontents
+ *
+ * This page explains the complete architecture of AeroDynControlRig, from keyboard input to pixels on your monitor.
+ *
+ * @section arch_overview Overview
+ *
+ * AeroDynControlRig is a flight dynamics simulator that renders 3D quadcopter visualization using OpenGL.
+ * Understanding how data flows from user input to rendered pixels is essential for working with this codebase.
+ *
+ * @image html pipeline_overview.svg "Complete Rendering Pipeline" width=1000px
+ *
+ * @section arch_pipeline The Complete Pipeline
+ *
+ * ### From Keyboard to Photons: The Journey
+ *
+ * When you press a key to rotate the quadcopter, here's what happens:
+ *
+ * 1. **Input Capture** (1ms) - Keyboard → OS → GLFW → Your Code
+ * 2. **CPU Math** (0.01ms) - Quaternion → DCM → 4×4 Matrix
+ * 3. **Upload to GPU** (0.05ms) - RAM → PCIe → GPU VRAM
+ * 4. **Vertex Shader** (0.1ms) - Transform vertices
+ * 5. **Rasterization** (0.2ms) - Fill triangles
+ * 6. **Fragment Shader** (0.5ms) - Color pixels
+ * 7. **Framebuffer** (0.1ms) - Write to VRAM
+ * 8. **Display Controller** (16.7ms) - Scan framebuffer @ 60Hz
+ * 9. **HDMI** (0.01ms) - Digital signal to monitor
+ * 10. **Monitor** (5ms) - LCD processing
+ * 11. **Vision** (50ms) - Photons → Eye → Brain
+ *
+ * **Total latency: ~75ms** (dominated by display refresh and neural processing)
+ *
+ * @section arch_opengl_buffers OpenGL Buffer Objects
+ *
+ * OpenGL uses three types of buffer objects to manage geometry data:
+ *
+ * @image html vao_vbo_ebo.svg "VAO, VBO, and EBO Relationship" width=900px
+ *
+ * ### VBO (Vertex Buffer Object) - The Data
+ *
+ * Contains the actual vertex data (positions, colors, normals, etc.)
+ *
+ * @code{.cpp}
+ * float vertices[] = {
+ *     // Position (x,y,z)  Color (r,g,b)
+ *     -1, -1, -1,         1, 0, 0,    // Vertex 0: red
+ *      1, -1, -1,         0, 1, 0,    // Vertex 1: green
+ *      1,  1, -1,         0, 0, 1,    // Vertex 2: blue
+ *     -1,  1, -1,         1, 1, 0,    // Vertex 3: yellow
+ * };
+ *
+ * glGenBuffers(1, &VBO);
+ * glBindBuffer(GL_ARRAY_BUFFER, VBO);
+ * glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+ * @endcode
+ *
+ * ### VAO (Vertex Array Object) - The Recipe
+ *
+ * Describes how to interpret the VBO data (layout information)
+ *
+ * @code{.cpp}
+ * glGenVertexArrays(1, &VAO);
+ * glBindVertexArray(VAO);
+ *
+ * // Attribute 0: Position (3 floats, stride=24 bytes, offset=0)
+ * glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6*sizeof(float), (void*)0);
+ * glEnableVertexAttribArray(0);
+ *
+ * // Attribute 1: Color (3 floats, stride=24 bytes, offset=12 bytes)
+ * glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6*sizeof(float), (void*)(3*sizeof(float)));
+ * glEnableVertexAttribArray(1);
+ * @endcode
+ *
+ * ### EBO (Element Buffer Object) - The Connections
+ *
+ * Defines which vertices form each triangle (saves memory by reusing vertices)
+ *
+ * @code{.cpp}
+ * unsigned int indices[] = {
+ *     0, 1, 2,  // Triangle 1: vertices 0, 1, 2
+ *     0, 2, 3   // Triangle 2: vertices 0, 2, 3 (reuses 0 and 2!)
+ * };
+ *
+ * glGenBuffers(1, &EBO);
+ * glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+ * glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+ * @endcode
+ *
+ * ### Drawing with VAO/VBO/EBO
+ *
+ * @code{.cpp}
+ * glBindVertexArray(VAO);
+ * glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+ * @endcode
+ *
+ * The GPU reads the VBO layout from the VAO, fetches vertices using EBO indices, and draws triangles.
+ *
+ * @section arch_transformations Rotation Transformations
+ *
+ * @image html quaternion_to_matrix.svg "Quaternion to OpenGL Matrix Conversion" width=1000px
+ *
+ * ### Why Three Representations?
+ *
+ * #### Quaternion (Internal Representation)
+ * - ✅ No gimbal lock
+ * - ✅ Smooth interpolation (SLERP)
+ * - ✅ Compact (4 numbers)
+ * - ✅ Numerically stable
+ * - ❌ GPU doesn't understand quaternions
+ *
+ * #### DCM (Direction Cosine Matrix - 3×3)
+ * - ✅ Standard rotation matrix
+ * - ✅ Easy to understand (each row = axis direction)
+ * - ❌ Needs to be 4×4 for OpenGL
+ *
+ * #### OpenGL Matrix (4×4)
+ * - ✅ GPU hardware accelerated
+ * - ✅ Combines rotation + translation
+ * - ✅ Can chain transformations
+ * - ✅ Standard graphics pipeline
+ *
+ * ### Conversion Code
+ *
+ * @code{.cpp}
+ * // 1. Start with quaternion
+ * double q[4] = {state.quaternion[0], state.quaternion[1],
+ *                state.quaternion[2], state.quaternion[3]};
+ *
+ * // 2. Convert to DCM (3×3 rotation matrix)
+ * double dcm[3][3];
+ * quaternion_to_dcm(q, dcm);
+ *
+ * // 3. Expand to 4×4 for OpenGL
+ * glm::mat4 modelMatrix(1.0f);  // Start with identity
+ * for (int row = 0; row < 3; ++row) {
+ *     for (int col = 0; col < 3; ++col) {
+ *         modelMatrix[col][row] = dcm[row][col];
+ *     }
+ * }
+ *
+ * // 4. Upload to GPU
+ * glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+ * @endcode
+ *
+ * @section arch_shaders Shader Pipeline
+ *
+ * ### Vertex Shader (runs once per vertex)
+ *
+ * @code{.glsl}
+ * #version 330 core
+ * layout (location = 0) in vec3 aPos;
+ * layout (location = 1) in vec3 aColor;
+ *
+ * uniform mat4 model;
+ * uniform mat4 view;
+ * uniform mat4 projection;
+ *
+ * out vec3 vColor;
+ *
+ * void main() {
+ *     // Transform vertex: model → world → camera → screen
+ *     vec4 worldPos = model * vec4(aPos, 1.0);
+ *     gl_Position = projection * view * worldPos;
+ *     vColor = aColor;
+ * }
+ * @endcode
+ *
+ * **What it does:**
+ * - **INPUT**: Vertex position from VBO, transformation matrices
+ * - **PROCESS**: Matrix multiplication (rotation + camera + projection)
+ * - **OUTPUT**: Screen coordinates (gl_Position), color for fragment shader
+ *
+ * ### Fragment Shader (runs once per pixel)
+ *
+ * @code{.glsl}
+ * #version 330 core
+ * in vec3 vColor;
+ * out vec4 FragColor;
+ *
+ * void main() {
+ *     FragColor = vec4(vColor, 1.0);
+ * }
+ * @endcode
+ *
+ * **What it does:**
+ * - **INPUT**: Interpolated color from vertex shader
+ * - **PROCESS**: Compute final pixel color (can add lighting, textures, etc.)
+ * - **OUTPUT**: Final RGBA color for this pixel
+ *
+ * @section arch_memory Memory Layout
+ *
+ * ### CPU RAM
+ * - `SimulationState` struct: ~4 KB
+ * - Vertex arrays (before upload): ~10 KB
+ * - ImGui state: ~1 MB
+ *
+ * ### GPU VRAM
+ * - VBO (vertex buffer): 10 KB
+ * - Framebuffer (1920×1080×4 bytes): 8 MB
+ * - Depth buffer: 8 MB
+ * - Textures (fonts, etc.): 5 MB
+ * - Shader uniforms: 1 KB
+ * - **Total: ~21 MB**
+ *
+ * ### Bandwidth Usage
+ * - CPU → GPU (per frame): ~100 bytes (just the matrix!)
+ * - GPU → Monitor (per frame): 8 MB (framebuffer)
+ * - GPU → Monitor (per second): 480 MB (60 fps × 8 MB)
+ *
+ * @section arch_imgui ImGui Integration
+ *
+ * ### How ImGui Works
+ *
+ * ImGui is an **immediate mode** GUI library that generates OpenGL calls:
+ *
+ * @code{.cpp}
+ * // You write high-level code:
+ * ImGui::Begin("Panel");
+ * ImGui::Text("Roll: %.2f", roll);
+ * ImGui::SliderFloat("Zoom", &zoom, 0.1f, 10.0f);
+ * ImGui::End();
+ *
+ * // ImGui generates OpenGL calls internally:
+ * // 1. Rasterize text using font atlas
+ * // 2. Create quads (rectangles) for backgrounds/text
+ * // 3. Build vertex buffer with positions, UVs, colors
+ * // 4. Upload to GPU: glBufferData(...)
+ * // 5. Draw: glDrawElements(GL_TRIANGLES, ...)
+ * @endcode
+ *
+ * **INPUT**: High-level API (Text, Button, Slider, etc.)
+ *
+ * **OUTPUT**: OpenGL draw calls (VBO/VAO/draw commands)
+ *
+ * Think of it as "transpiling" from ImGui API to OpenGL.
+ *
+ * @section arch_modules Module Architecture
+ *
+ * ### Update Loop
+ *
+ * Every frame, modules are updated in sequence:
+ *
+ * @code{.cpp}
+ * void Application::tick() {
+ *     // 1. Process input
+ *     glfwPollEvents();
+ *
+ *     // 2. Update simulation modules
+ *     for (auto& module : modules) {
+ *         module->update(dt, simulationState);
+ *     }
+ *
+ *     // 3. Render 3D scene
+ *     render3D();
+ *
+ *     // 4. Render UI
+ *     ImGui::Render();
+ *
+ *     // 5. Display
+ *     glfwSwapBuffers(window);
+ * }
+ * @endcode
+ *
+ * ### Module Execution Order
+ *
+ * 1. @ref QuadcopterDynamicsModule - Physics simulation (quaternion updates)
+ * 2. @ref FirstOrderDynamicsModule - Smooth dynamics
+ * 3. @ref SensorSimulatorModule - Generate IMU data
+ * 4. @ref ComplementaryEstimatorModule - State estimation
+ * 5. @ref RotorTelemetryModule - Capture motor telemetry
+ *
+ * @section arch_dataflow Data Flow Diagram
+ *
+ * @code
+ * User Input (Keyboard)
+ *     ↓
+ * keyCallback()
+ *     ↓
+ * Update Euler angles
+ *     ↓
+ * euler_to_quaternion()
+ *     ↓
+ * Quaternion {w,x,y,z}
+ *     ↓
+ * quaternion_to_dcm()
+ *     ↓
+ * DCM (3×3 matrix)
+ *     ↓
+ * Expand to 4×4
+ *     ↓
+ * glm::mat4
+ *     ↓
+ * glUniformMatrix4fv() ←─── Upload to GPU
+ *     ↓
+ * Vertex Shader ←─── VBO (vertices)
+ *     ↓
+ * Transformed vertices
+ *     ↓
+ * Rasterizer
+ *     ↓
+ * Fragments (pixels)
+ *     ↓
+ * Fragment Shader
+ *     ↓
+ * Colored pixels
+ *     ↓
+ * Framebuffer (VRAM)
+ *     ↓
+ * Display Controller
+ *     ↓
+ * HDMI Signal
+ *     ↓
+ * Monitor
+ *     ↓
+ * Photons → Your Eyes!
+ * @endcode
+ *
+ * @section arch_performance Performance Characteristics
+ *
+ * ### Bottlenecks
+ *
+ * 1. **Display Refresh (16.7ms @ 60Hz)** - Unavoidable, hardware limit
+ * 2. **Neural Processing (~50ms)** - Biological limit
+ * 3. **Fragment Shader (~0.5ms)** - Most expensive GPU operation (millions of pixels)
+ *
+ * ### Optimizations
+ *
+ * - **Vertex reuse with EBO** - Saves 50% memory for cube (8 vertices vs 12 triangles × 3)
+ * - **Static VBO** - Uploaded once at startup, not every frame
+ * - **Uniform uploads** - Only 64 bytes (4×4 matrix) uploaded per frame
+ * - **GPU parallelism** - Processes millions of vertices/pixels simultaneously
+ *
+ * @section arch_hardware Hardware Pipeline
+ *
+ * ### GPU Architecture (Simplified)
+ *
+ * @code
+ * CPU (Intel/AMD)
+ *     ↓ PCIe Bus (16 GB/s)
+ * GPU (NVIDIA/AMD)
+ *     ├─ Command Processor (reads draw calls)
+ *     ├─ Vertex Shader Cores (transform vertices)
+ *     ├─ Rasterizer (fixed-function, fill triangles)
+ *     ├─ Fragment Shader Cores (color pixels)
+ *     ├─ ROP (Render Output Units - depth test, blend)
+ *     └─ VRAM (21 MB for this app)
+ *         ├─ VBO (vertex data)
+ *         ├─ Framebuffer (8 MB color)
+ *         ├─ Depth Buffer (8 MB z-values)
+ *         └─ Textures (fonts, etc.)
+ *     ↓ Display Controller
+ * HDMI → Monitor
+ * @endcode
+ *
+ * @section arch_debugging Debugging Tips
+ *
+ * ### Common Issues
+ *
+ * **Black screen?**
+ * - Check shader compilation (look for errors in console)
+ * - Verify VBO data uploaded correctly
+ * - Check matrix is not identity (no rotation)
+ *
+ * **Wrong rotation?**
+ * - Print quaternion values
+ * - Check DCM conversion
+ * - Verify matrix multiplication order (projection × view × model)
+ *
+ * **Performance issues?**
+ * - Profile GPU with tools like RenderDoc
+ * - Check fragment shader complexity
+ * - Verify not uploading VBO every frame
+ *
+ * ### Useful Debug Prints
+ *
+ * @code{.cpp}
+ * // Print quaternion
+ * std::cout << "q = {" << q[0] << ", " << q[1] << ", "
+ *           << q[2] << ", " << q[3] << "}" << std::endl;
+ *
+ * // Print matrix
+ * for (int i = 0; i < 4; i++) {
+ *     for (int j = 0; j < 4; j++) {
+ *         std::cout << matrix[i][j] << " ";
+ *     }
+ *     std::cout << std::endl;
+ * }
+ * @endcode
+ *
+ * @section arch_references Further Reading
+ *
+ * - [OpenGL Specification](https://www.khronos.org/opengl/)
+ * - [Learn OpenGL](https://learnopengl.com/)
+ * - [ImGui Documentation](https://github.com/ocornut/imgui)
+ * - [GLM Documentation](https://glm.g-truc.net/)
+ * - [Quaternion Mathematics](https://en.wikipedia.org/wiki/Quaternion)
+ *
+ * @see @ref modules for module-specific documentation
+ * @see @ref renderer for rendering implementation details
+ * @see @ref attitude for quaternion math library
+ */

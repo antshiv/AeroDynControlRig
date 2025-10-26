@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>AeroDynControlRig: Architecture Guide</title>
+<title>AeroDynControlRig: Complete System Architecture</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -84,64 +84,496 @@ $(document).ready(function(){initNavTree('architecture.html',''); initResizable(
 
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">Architecture Guide </div>  </div>
+<div class="title">Complete System Architecture </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#autotoc_md0">AeroDynControlRig Architecture Guide</a><ul><li class="level2"><a href="#autotoc_md1">Table of Contents</a></li>
-<li class="level2"><a href="#autotoc_md3">System Overview</a><ul><li class="level3"><a href="#autotoc_md4">High-Level Architecture</a></li>
-<li class="level3"><a href="#autotoc_md5">Technology Stack</a></li>
+<ul><li class="level1"><a href="#arch_overview">Overview</a></li>
+<li class="level1"><a href="#arch_pipeline">The Complete Pipeline</a><ul><ul><li class="level3"><a href="#autotoc_md0">From Keyboard to Photons: The Journey</a></li>
+</ul>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md7">OpenGL Rendering Pipeline</a><ul><li class="level3"><a href="#autotoc_md8">The Graphics Hardware Pipeline</a></li>
-<li class="level3"><a href="#autotoc_md9">Key OpenGL Concepts</a><ul><li class="level4"><a href="#autotoc_md10">1. Vertex Buffer Objects (VBO)</a></li>
-<li class="level4"><a href="#autotoc_md11">2. Vertex Array Objects (VAO)</a></li>
-<li class="level4"><a href="#autotoc_md12">3. Element Buffer Objects (EBO)</a></li>
-<li class="level4"><a href="#autotoc_md13">4. Shaders (GLSL)</a></li>
-<li class="level4"><a href="#autotoc_md14">5. Framebuffer Objects (FBO)</a></li>
+<li class="level1"><a href="#arch_opengl_buffers">OpenGL Buffer Objects</a><ul><ul><li class="level3"><a href="#autotoc_md1">VBO (Vertex Buffer Object) - The Data</a></li>
+<li class="level3"><a href="#autotoc_md2">VAO (Vertex Array Object) - The Recipe</a></li>
+<li class="level3"><a href="#autotoc_md3">EBO (Element Buffer Object) - The Connections</a></li>
+<li class="level3"><a href="#autotoc_md4">Drawing with VAO/VBO/EBO</a></li>
+</ul>
 </ul>
 </li>
-<li class="level3"><a href="#autotoc_md15">Coordinate Transformations</a></li>
+<li class="level1"><a href="#arch_transformations">Rotation Transformations</a><ul><ul><li class="level3"><a href="#autotoc_md5">Why Three Representations?</a><ul><li class="level4"><a href="#autotoc_md6">Quaternion (Internal Representation)</a></li>
+<li class="level4"><a href="#autotoc_md7">DCM (Direction Cosine Matrix - 3×3)</a></li>
+<li class="level4"><a href="#autotoc_md8">OpenGL Matrix (4×4)</a></li>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md17">ImGui Integration</a><ul><li class="level3"><a href="#autotoc_md18">Immediate Mode GUI Paradigm</a></li>
-<li class="level3"><a href="#autotoc_md19">ImGui Rendering Flow</a></li>
-<li class="level3"><a href="#autotoc_md20">ImGui + OpenGL Interaction</a></li>
+<li class="level3"><a href="#autotoc_md9">Conversion Code</a></li>
+</ul>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md22">Frame Execution Flow</a><ul><li class="level3"><a href="#autotoc_md23">Main Loop Sequence Diagram</a></li>
-<li class="level3"><a href="#autotoc_md24">Timing Diagram</a></li>
+<li class="level1"><a href="#arch_shaders">Shader Pipeline</a><ul><ul><li class="level3"><a href="#autotoc_md10">Vertex Shader (runs once per vertex)</a></li>
+<li class="level3"><a href="#autotoc_md11">Fragment Shader (runs once per pixel)</a></li>
+</ul>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md26">Class Interactions</a><ul><li class="level3"><a href="#autotoc_md27">Module System</a></li>
-<li class="level3"><a href="#autotoc_md28">Renderer Hierarchy</a></li>
-<li class="level3"><a href="#autotoc_md29">Panel System</a></li>
+<li class="level1"><a href="#arch_memory">Memory Layout</a><ul><ul><li class="level3"><a href="#autotoc_md12">CPU RAM</a></li>
+<li class="level3"><a href="#autotoc_md13">GPU VRAM</a></li>
+<li class="level3"><a href="#autotoc_md14">Bandwidth Usage</a></li>
+</ul>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md31">Data Flow</a><ul><li class="level3"><a href="#autotoc_md32">State Updates</a></li>
-<li class="level3"><a href="#autotoc_md33">Simulation Data Flow</a></li>
-<li class="level3"><a href="#autotoc_md34">Rendering Data Flow</a></li>
+<li class="level1"><a href="#arch_imgui">ImGui Integration</a><ul><ul><li class="level3"><a href="#autotoc_md15">How ImGui Works</a></li>
+</ul>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md36">Quick Reference: Key Files</a></li>
-<li class="level2"><a href="#autotoc_md38">Debugging Tips</a><ul><li class="level3"><a href="#autotoc_md39">OpenGL Debugging</a></li>
-<li class="level3"><a href="#autotoc_md40">ImGui Debugging</a></li>
+<li class="level1"><a href="#arch_modules">Module Architecture</a><ul><ul><li class="level3"><a href="#autotoc_md16">Update Loop</a></li>
+<li class="level3"><a href="#autotoc_md17">Module Execution Order</a></li>
+</ul>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md42">Next Steps for Learning</a></li>
+<li class="level1"><a href="#arch_dataflow">Data Flow Diagram</a></li>
+<li class="level1"><a href="#arch_performance">Performance Characteristics</a><ul><ul><li class="level3"><a href="#autotoc_md18">Bottlenecks</a></li>
+<li class="level3"><a href="#autotoc_md19">Optimizations</a></li>
+</ul>
+</ul>
+</li>
+<li class="level1"><a href="#arch_hardware">Hardware Pipeline</a><ul><ul><li class="level3"><a href="#autotoc_md20">GPU Architecture (Simplified)</a></li>
+</ul>
+</ul>
+</li>
+<li class="level1"><a href="#arch_debugging">Debugging Tips</a><ul><ul><li class="level3"><a href="#autotoc_md21">Common Issues</a></li>
+<li class="level3"><a href="#autotoc_md22">Useful Debug Prints</a></li>
+</ul>
+</ul>
+</li>
+<li class="level1"><a href="#arch_references">Further Reading</a></li>
+<li class="level1"><a href="#autotoc_md23">AeroDynControlRig Architecture Guide</a><ul><li class="level2"><a href="#autotoc_md24">Table of Contents</a></li>
+<li class="level2"><a href="#autotoc_md26">System Overview</a><ul><li class="level3"><a href="#autotoc_md27">High-Level Architecture</a></li>
+<li class="level3"><a href="#autotoc_md28">Technology Stack</a></li>
+</ul>
+</li>
+<li class="level2"><a href="#autotoc_md30">OpenGL Rendering Pipeline</a><ul><li class="level3"><a href="#autotoc_md31">The Graphics Hardware Pipeline</a></li>
+<li class="level3"><a href="#autotoc_md32">Key OpenGL Concepts</a><ul><li class="level4"><a href="#autotoc_md33">1. Vertex Buffer Objects (VBO)</a></li>
+<li class="level4"><a href="#autotoc_md34">2. Vertex Array Objects (VAO)</a></li>
+<li class="level4"><a href="#autotoc_md35">3. Element Buffer Objects (EBO)</a></li>
+<li class="level4"><a href="#autotoc_md36">4. Shaders (GLSL)</a></li>
+<li class="level4"><a href="#autotoc_md37">5. Framebuffer Objects (FBO)</a></li>
+</ul>
+</li>
+<li class="level3"><a href="#autotoc_md38">Coordinate Transformations</a></li>
+</ul>
+</li>
+<li class="level2"><a href="#autotoc_md40">ImGui Integration</a><ul><li class="level3"><a href="#autotoc_md41">Immediate Mode GUI Paradigm</a></li>
+<li class="level3"><a href="#autotoc_md42">ImGui Rendering Flow</a></li>
+<li class="level3"><a href="#autotoc_md43">ImGui + OpenGL Interaction</a></li>
+</ul>
+</li>
+<li class="level2"><a href="#autotoc_md45">Frame Execution Flow</a><ul><li class="level3"><a href="#autotoc_md46">Main Loop Sequence Diagram</a></li>
+<li class="level3"><a href="#autotoc_md47">Timing Diagram</a></li>
+</ul>
+</li>
+<li class="level2"><a href="#autotoc_md49">Class Interactions</a><ul><li class="level3"><a href="#autotoc_md50">Module System</a></li>
+<li class="level3"><a href="#autotoc_md51">Renderer Hierarchy</a></li>
+<li class="level3"><a href="#autotoc_md52">Panel System</a></li>
+</ul>
+</li>
+<li class="level2"><a href="#autotoc_md54">Data Flow</a><ul><li class="level3"><a href="#autotoc_md55">State Updates</a></li>
+<li class="level3"><a href="#autotoc_md56">Simulation Data Flow</a></li>
+<li class="level3"><a href="#autotoc_md57">Rendering Data Flow</a></li>
+</ul>
+</li>
+<li class="level2"><a href="#autotoc_md59">Quick Reference: Key Files</a></li>
+<li class="level2"><a href="#autotoc_md61">Debugging Tips</a><ul><li class="level3"><a href="#autotoc_md62">OpenGL Debugging</a></li>
+<li class="level3"><a href="#autotoc_md63">ImGui Debugging</a></li>
+</ul>
+</li>
+<li class="level2"><a href="#autotoc_md65">Next Steps for Learning</a></li>
 </ul>
 </li>
 </ul>
 </div>
-<div class="textblock"><p>Comprehensive guide to OpenGL, ImGui, and system architecture</p><ul>
+<div class="textblock"><p>This page explains the complete architecture of AeroDynControlRig, from keyboard input to pixels on your monitor.</p>
+<h1><a class="anchor" id="arch_overview"></a>
+Overview</h1>
+<p>AeroDynControlRig is a flight dynamics simulator that renders 3D quadcopter visualization using OpenGL. Understanding how data flows from user input to rendered pixels is essential for working with this codebase.</p>
+<div class="image">
+<object type="image/svg+xml" data="pipeline_overview.svg" width="1000px" style="pointer-events: none;"></object>
+<div class="caption">
+Complete Rendering Pipeline</div></div>
+<h1><a class="anchor" id="arch_pipeline"></a>
+The Complete Pipeline</h1>
+<h3><a class="anchor" id="autotoc_md0"></a>
+From Keyboard to Photons: The Journey</h3>
+<p>When you press a key to rotate the quadcopter, here's what happens:</p>
+<ol type="1">
+<li><b>Input Capture</b> (1ms) - Keyboard → OS → GLFW → Your Code</li>
+<li><b>CPU Math</b> (0.01ms) - Quaternion → DCM → 4×4 Matrix</li>
+<li><b>Upload to GPU</b> (0.05ms) - RAM → PCIe → GPU VRAM</li>
+<li><b>Vertex Shader</b> (0.1ms) - <a class="el" href="classTransform.html">Transform</a> vertices</li>
+<li><b>Rasterization</b> (0.2ms) - Fill triangles</li>
+<li><b>Fragment Shader</b> (0.5ms) - Color pixels</li>
+<li><b>Framebuffer</b> (0.1ms) - Write to VRAM</li>
+<li><b>Display Controller</b> (16.7ms) - Scan framebuffer @ 60Hz</li>
+<li><b>HDMI</b> (0.01ms) - Digital signal to monitor</li>
+<li><b>Monitor</b> (5ms) - LCD processing</li>
+<li><b>Vision</b> (50ms) - Photons → Eye → Brain</li>
+</ol>
+<p><b>Total latency: ~75ms</b> (dominated by display refresh and neural processing)</p>
+<h1><a class="anchor" id="arch_opengl_buffers"></a>
+OpenGL Buffer Objects</h1>
+<p>OpenGL uses three types of buffer objects to manage geometry data:</p>
+<div class="image">
+<object type="image/svg+xml" data="vao_vbo_ebo.svg" width="900px" style="pointer-events: none;"></object>
+<div class="caption">
+VAO, VBO, and EBO Relationship</div></div>
+<h3><a class="anchor" id="autotoc_md1"></a>
+VBO (Vertex Buffer Object) - The Data</h3>
+<p>Contains the actual vertex data (positions, colors, normals, etc.)</p>
+<div class="fragment"><div class="line"><span class="keywordtype">float</span> vertices[] = {</div>
+<div class="line">    <span class="comment">// Position (x,y,z)  Color (r,g,b)</span></div>
+<div class="line">    -1, -1, -1,         1, 0, 0,    <span class="comment">// Vertex 0: red</span></div>
+<div class="line">     1, -1, -1,         0, 1, 0,    <span class="comment">// Vertex 1: green</span></div>
+<div class="line">     1,  1, -1,         0, 0, 1,    <span class="comment">// Vertex 2: blue</span></div>
+<div class="line">    -1,  1, -1,         1, 1, 0,    <span class="comment">// Vertex 3: yellow</span></div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line">glGenBuffers(1, &amp;VBO);</div>
+<div class="line">glBindBuffer(GL_ARRAY_BUFFER, VBO);</div>
+<div class="line">glBufferData(GL_ARRAY_BUFFER, <span class="keyword">sizeof</span>(vertices), vertices, GL_STATIC_DRAW);</div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md2"></a>
+VAO (Vertex Array Object) - The Recipe</h3>
+<p>Describes how to interpret the VBO data (layout information)</p>
+<div class="fragment"><div class="line">glGenVertexArrays(1, &amp;VAO);</div>
+<div class="line">glBindVertexArray(VAO);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Attribute 0: Position (3 floats, stride=24 bytes, offset=0)</span></div>
+<div class="line">glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6*<span class="keyword">sizeof</span>(<span class="keywordtype">float</span>), (<span class="keywordtype">void</span>*)0);</div>
+<div class="line">glEnableVertexAttribArray(0);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Attribute 1: Color (3 floats, stride=24 bytes, offset=12 bytes)</span></div>
+<div class="line">glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6*<span class="keyword">sizeof</span>(<span class="keywordtype">float</span>), (<span class="keywordtype">void</span>*)(3*<span class="keyword">sizeof</span>(<span class="keywordtype">float</span>)));</div>
+<div class="line">glEnableVertexAttribArray(1);</div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md3"></a>
+EBO (Element Buffer Object) - The Connections</h3>
+<p>Defines which vertices form each triangle (saves memory by reusing vertices)</p>
+<div class="fragment"><div class="line"><span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> indices[] = {</div>
+<div class="line">    0, 1, 2,  <span class="comment">// Triangle 1: vertices 0, 1, 2</span></div>
+<div class="line">    0, 2, 3   <span class="comment">// Triangle 2: vertices 0, 2, 3 (reuses 0 and 2!)</span></div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line">glGenBuffers(1, &amp;EBO);</div>
+<div class="line">glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);</div>
+<div class="line">glBufferData(GL_ELEMENT_ARRAY_BUFFER, <span class="keyword">sizeof</span>(indices), indices, GL_STATIC_DRAW);</div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md4"></a>
+Drawing with VAO/VBO/EBO</h3>
+<div class="fragment"><div class="line">glBindVertexArray(VAO);</div>
+<div class="line">glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);</div>
+</div><!-- fragment --><p>The GPU reads the VBO layout from the VAO, fetches vertices using EBO indices, and draws triangles.</p>
+<h1><a class="anchor" id="arch_transformations"></a>
+Rotation Transformations</h1>
+<div class="image">
+<object type="image/svg+xml" data="quaternion_to_matrix.svg" width="1000px" style="pointer-events: none;"></object>
+<div class="caption">
+Quaternion to OpenGL Matrix Conversion</div></div>
+<h3><a class="anchor" id="autotoc_md5"></a>
+Why Three Representations?</h3>
+<h4><a class="anchor" id="autotoc_md6"></a>
+Quaternion (Internal Representation)</h4>
+<ul>
+<li>✅ No gimbal lock</li>
+<li>✅ Smooth interpolation (SLERP)</li>
+<li>✅ Compact (4 numbers)</li>
+<li>✅ Numerically stable</li>
+<li>❌ GPU doesn't understand quaternions</li>
+</ul>
+<h4><a class="anchor" id="autotoc_md7"></a>
+DCM (Direction Cosine Matrix - 3×3)</h4>
+<ul>
+<li>✅ Standard rotation matrix</li>
+<li>✅ Easy to understand (each row = axis direction)</li>
+<li>❌ Needs to be 4×4 for OpenGL</li>
+</ul>
+<h4><a class="anchor" id="autotoc_md8"></a>
+OpenGL Matrix (4×4)</h4>
+<ul>
+<li>✅ GPU hardware accelerated</li>
+<li>✅ Combines rotation + translation</li>
+<li>✅ Can chain transformations</li>
+<li>✅ Standard graphics pipeline</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md9"></a>
+Conversion Code</h3>
+<div class="fragment"><div class="line"><span class="comment">// 1. Start with quaternion</span></div>
+<div class="line"><span class="keywordtype">double</span> q[4] = {state.quaternion[0], state.quaternion[1],</div>
+<div class="line">               state.quaternion[2], state.quaternion[3]};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// 2. Convert to DCM (3×3 rotation matrix)</span></div>
+<div class="line"><span class="keywordtype">double</span> dcm[3][3];</div>
+<div class="line"><a class="code" href="quaternion_8h.html#a4724f7a83c16709fb4b1fcfb742c7157">quaternion_to_dcm</a>(q, dcm);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// 3. Expand to 4×4 for OpenGL</span></div>
+<div class="line">glm::mat4 modelMatrix(1.0f);  <span class="comment">// Start with identity</span></div>
+<div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">int</span> row = 0; row &lt; 3; ++row) {</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> col = 0; col &lt; 3; ++col) {</div>
+<div class="line">        modelMatrix[col][row] = dcm[row][col];</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// 4. Upload to GPU</span></div>
+<div class="line">glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(modelMatrix));</div>
+<div class="ttc" id="aquaternion_8h_html_a4724f7a83c16709fb4b1fcfb742c7157"><div class="ttname"><a href="quaternion_8h.html#a4724f7a83c16709fb4b1fcfb742c7157">quaternion_to_dcm</a></div><div class="ttdeci">void quaternion_to_dcm(const double q[4], double dcm[3][3])</div><div class="ttdef"><b>Definition:</b> quaternion.c:7</div></div>
+</div><!-- fragment --><h1><a class="anchor" id="arch_shaders"></a>
+Shader Pipeline</h1>
+<h3><a class="anchor" id="autotoc_md10"></a>
+Vertex Shader (runs once per vertex)</h3>
+<div class="fragment"><div class="line">#version 330 core</div>
+<div class="line">layout (location = 0) in vec3 aPos;</div>
+<div class="line">layout (location = 1) in vec3 aColor;</div>
+<div class="line"> </div>
+<div class="line">uniform mat4 model;</div>
+<div class="line">uniform mat4 view;</div>
+<div class="line">uniform mat4 projection;</div>
+<div class="line"> </div>
+<div class="line">out vec3 vColor;</div>
+<div class="line"> </div>
+<div class="line">void main() {</div>
+<div class="line">    // Transform vertex: model → world → camera → screen</div>
+<div class="line">    vec4 worldPos = model * vec4(aPos, 1.0);</div>
+<div class="line">    gl_Position = projection * view * worldPos;</div>
+<div class="line">    vColor = aColor;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p><b>What it does:</b></p><ul>
+<li><b>INPUT</b>: Vertex position from VBO, transformation matrices</li>
+<li><b>PROCESS</b>: Matrix multiplication (rotation + camera + projection)</li>
+<li><b>OUTPUT</b>: Screen coordinates (gl_Position), color for fragment shader</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md11"></a>
+Fragment Shader (runs once per pixel)</h3>
+<div class="fragment"><div class="line">#version 330 core</div>
+<div class="line">in vec3 vColor;</div>
+<div class="line">out vec4 FragColor;</div>
+<div class="line"> </div>
+<div class="line">void main() {</div>
+<div class="line">    FragColor = vec4(vColor, 1.0);</div>
+<div class="line">}</div>
+</div><!-- fragment --><p><b>What it does:</b></p><ul>
+<li><b>INPUT</b>: Interpolated color from vertex shader</li>
+<li><b>PROCESS</b>: Compute final pixel color (can add lighting, textures, etc.)</li>
+<li><b>OUTPUT</b>: Final RGBA color for this pixel</li>
+</ul>
+<h1><a class="anchor" id="arch_memory"></a>
+Memory Layout</h1>
+<h3><a class="anchor" id="autotoc_md12"></a>
+CPU RAM</h3>
+<ul>
+<li><code><a class="el" href="structSimulationState.html" title="Central shared state for the entire simulation.">SimulationState</a></code> struct: ~4 KB</li>
+<li>Vertex arrays (before upload): ~10 KB</li>
+<li>ImGui state: ~1 MB</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md13"></a>
+GPU VRAM</h3>
+<ul>
+<li>VBO (vertex buffer): 10 KB</li>
+<li>Framebuffer (1920×1080×4 bytes): 8 MB</li>
+<li>Depth buffer: 8 MB</li>
+<li>Textures (fonts, etc.): 5 MB</li>
+<li>Shader uniforms: 1 KB</li>
+<li><b>Total: ~21 MB</b></li>
+</ul>
+<h3><a class="anchor" id="autotoc_md14"></a>
+Bandwidth Usage</h3>
+<ul>
+<li>CPU → GPU (per frame): ~100 bytes (just the matrix!)</li>
+<li>GPU → Monitor (per frame): 8 MB (framebuffer)</li>
+<li>GPU → Monitor (per second): 480 MB (60 fps × 8 MB)</li>
+</ul>
+<h1><a class="anchor" id="arch_imgui"></a>
+ImGui Integration</h1>
+<h3><a class="anchor" id="autotoc_md15"></a>
+How ImGui Works</h3>
+<p>ImGui is an <b>immediate mode</b> GUI library that generates OpenGL calls:</p>
+<div class="fragment"><div class="line"><span class="comment">// You write high-level code:</span></div>
+<div class="line">ImGui::Begin(<span class="stringliteral">&quot;Panel&quot;</span>);</div>
+<div class="line">ImGui::Text(<span class="stringliteral">&quot;Roll: %.2f&quot;</span>, roll);</div>
+<div class="line">ImGui::SliderFloat(<span class="stringliteral">&quot;Zoom&quot;</span>, &amp;zoom, 0.1f, 10.0f);</div>
+<div class="line">ImGui::End();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// ImGui generates OpenGL calls internally:</span></div>
+<div class="line"><span class="comment">// 1. Rasterize text using font atlas</span></div>
+<div class="line"><span class="comment">// 2. Create quads (rectangles) for backgrounds/text</span></div>
+<div class="line"><span class="comment">// 3. Build vertex buffer with positions, UVs, colors</span></div>
+<div class="line"><span class="comment">// 4. Upload to GPU: glBufferData(...)</span></div>
+<div class="line"><span class="comment">// 5. Draw: glDrawElements(GL_TRIANGLES, ...)</span></div>
+</div><!-- fragment --><p><b>INPUT</b>: High-level API (Text, Button, Slider, etc.)</p>
+<p><b>OUTPUT</b>: OpenGL draw calls (VBO/VAO/draw commands)</p>
+<p>Think of it as "transpiling" from ImGui API to OpenGL.</p>
+<h1><a class="anchor" id="arch_modules"></a>
+Module Architecture</h1>
+<h3><a class="anchor" id="autotoc_md16"></a>
+Update Loop</h3>
+<p>Every frame, modules are updated in sequence:</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> <a class="code" href="classApplication.html#af44c742342adf5305e430ff293f147c1">Application::tick</a>() {</div>
+<div class="line">    <span class="comment">// 1. Process input</span></div>
+<div class="line">    glfwPollEvents();</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// 2. Update simulation modules</span></div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; module : modules) {</div>
+<div class="line">        module-&gt;update(dt, simulationState);</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// 3. Render 3D scene</span></div>
+<div class="line">    <a class="code" href="classApplication.html#a4e7a520d659593b385b246a43e604dfb">render3D</a>();</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// 4. Render UI</span></div>
+<div class="line">    ImGui::Render();</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// 5. Display</span></div>
+<div class="line">    glfwSwapBuffers(window);</div>
+<div class="line">}</div>
+<div class="ttc" id="aclassApplication_html_a4e7a520d659593b385b246a43e604dfb"><div class="ttname"><a href="classApplication.html#a4e7a520d659593b385b246a43e604dfb">Application::render3D</a></div><div class="ttdeci">void render3D()</div><div class="ttdoc">Render the 3D scene (cube + axes)</div><div class="ttdef"><b>Definition:</b> application.cpp:601</div></div>
+<div class="ttc" id="aclassApplication_html_af44c742342adf5305e430ff293f147c1"><div class="ttname"><a href="classApplication.html#af44c742342adf5305e430ff293f147c1">Application::tick</a></div><div class="ttdeci">void tick()</div><div class="ttdoc">Execute one frame: update simulation, render 3D, render UI.</div><div class="ttdef"><b>Definition:</b> application.cpp:380</div></div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md17"></a>
+Module Execution Order</h3>
+<ol type="1">
+<li><a class="el" href="classQuadcopterDynamicsModule.html">QuadcopterDynamicsModule</a> - Physics simulation (quaternion updates)</li>
+<li><a class="el" href="classFirstOrderDynamicsModule.html">FirstOrderDynamicsModule</a> - Smooth dynamics</li>
+<li><a class="el" href="classSensorSimulatorModule.html">SensorSimulatorModule</a> - Generate IMU data</li>
+<li><a class="el" href="classComplementaryEstimatorModule.html">ComplementaryEstimatorModule</a> - State estimation</li>
+<li><a class="el" href="classRotorTelemetryModule.html">RotorTelemetryModule</a> - Capture motor telemetry</li>
+</ol>
+<h1><a class="anchor" id="arch_dataflow"></a>
+Data Flow Diagram</h1>
+<div class="fragment"><div class="line">User Input (Keyboard)</div>
+<div class="line">    ↓</div>
+<div class="line">keyCallback()</div>
+<div class="line">    ↓</div>
+<div class="line">Update Euler angles</div>
+<div class="line">    ↓</div>
+<div class="line"><a class="code" href="euler_8h.html#ad774b88fd06267fc2a237871fc635362">euler_to_quaternion</a>()</div>
+<div class="line">    ↓</div>
+<div class="line">Quaternion {w,x,y,z}</div>
+<div class="line">    ↓</div>
+<div class="line"><a class="code" href="quaternion_8h.html#a4724f7a83c16709fb4b1fcfb742c7157">quaternion_to_dcm</a>()</div>
+<div class="line">    ↓</div>
+<div class="line">DCM (3×3 matrix)</div>
+<div class="line">    ↓</div>
+<div class="line">Expand to 4×4</div>
+<div class="line">    ↓</div>
+<div class="line">glm::mat4</div>
+<div class="line">    ↓</div>
+<div class="line">glUniformMatrix4fv() ←─── Upload to GPU</div>
+<div class="line">    ↓</div>
+<div class="line">Vertex Shader ←─── VBO (vertices)</div>
+<div class="line">    ↓</div>
+<div class="line">Transformed vertices</div>
+<div class="line">    ↓</div>
+<div class="line">Rasterizer</div>
+<div class="line">    ↓</div>
+<div class="line">Fragments (pixels)</div>
+<div class="line">    ↓</div>
+<div class="line">Fragment Shader</div>
+<div class="line">    ↓</div>
+<div class="line">Colored pixels</div>
+<div class="line">    ↓</div>
+<div class="line">Framebuffer (VRAM)</div>
+<div class="line">    ↓</div>
+<div class="line">Display Controller</div>
+<div class="line">    ↓</div>
+<div class="line">HDMI Signal</div>
+<div class="line">    ↓</div>
+<div class="line">Monitor</div>
+<div class="line">    ↓</div>
+<div class="line">Photons → Your Eyes!</div>
+<div class="ttc" id="aeuler_8h_html_ad774b88fd06267fc2a237871fc635362"><div class="ttname"><a href="euler_8h.html#ad774b88fd06267fc2a237871fc635362">euler_to_quaternion</a></div><div class="ttdeci">void euler_to_quaternion(const EulerAngles *e, double q[4])</div><div class="ttdef"><b>Definition:</b> euler.c:33</div></div>
+</div><!-- fragment --><h1><a class="anchor" id="arch_performance"></a>
+Performance Characteristics</h1>
+<h3><a class="anchor" id="autotoc_md18"></a>
+Bottlenecks</h3>
+<ol type="1">
+<li><b>Display Refresh (16.7ms @ 60Hz)</b> - Unavoidable, hardware limit</li>
+<li><b>Neural Processing (~50ms)</b> - Biological limit</li>
+<li><b>Fragment Shader (~0.5ms)</b> - Most expensive GPU operation (millions of pixels)</li>
+</ol>
+<h3><a class="anchor" id="autotoc_md19"></a>
+Optimizations</h3>
+<ul>
+<li><b>Vertex reuse with EBO</b> - Saves 50% memory for cube (8 vertices vs 12 triangles × 3)</li>
+<li><b>Static VBO</b> - Uploaded once at startup, not every frame</li>
+<li><b>Uniform uploads</b> - Only 64 bytes (4×4 matrix) uploaded per frame</li>
+<li><b>GPU parallelism</b> - Processes millions of vertices/pixels simultaneously</li>
+</ul>
+<h1><a class="anchor" id="arch_hardware"></a>
+Hardware Pipeline</h1>
+<h3><a class="anchor" id="autotoc_md20"></a>
+GPU Architecture (Simplified)</h3>
+<div class="fragment"><div class="line">CPU (Intel/AMD)</div>
+<div class="line">    ↓ PCIe Bus (16 GB/s)</div>
+<div class="line">GPU (NVIDIA/AMD)</div>
+<div class="line">    ├─ Command Processor (reads draw calls)</div>
+<div class="line">    ├─ Vertex Shader Cores (transform vertices)</div>
+<div class="line">    ├─ Rasterizer (fixed-<span class="keyword">function</span>, fill triangles)</div>
+<div class="line">    ├─ Fragment Shader Cores (color pixels)</div>
+<div class="line">    ├─ ROP (Render Output Units - depth test, blend)</div>
+<div class="line">    └─ VRAM (21 MB <span class="keywordflow">for</span> <span class="keyword">this</span> app)</div>
+<div class="line">        ├─ VBO (vertex data)</div>
+<div class="line">        ├─ Framebuffer (8 MB color)</div>
+<div class="line">        ├─ Depth Buffer (8 MB z-values)</div>
+<div class="line">        └─ Textures (fonts, etc.)</div>
+<div class="line">    ↓ Display Controller</div>
+<div class="line">HDMI → Monitor</div>
+</div><!-- fragment --><h1><a class="anchor" id="arch_debugging"></a>
+Debugging Tips</h1>
+<h3><a class="anchor" id="autotoc_md21"></a>
+Common Issues</h3>
+<p><b>Black screen?</b></p><ul>
+<li>Check shader compilation (look for errors in console)</li>
+<li>Verify VBO data uploaded correctly</li>
+<li>Check matrix is not identity (no rotation)</li>
+</ul>
+<p><b>Wrong rotation?</b></p><ul>
+<li>Print quaternion values</li>
+<li>Check DCM conversion</li>
+<li>Verify matrix multiplication order (projection × view × model)</li>
+</ul>
+<p><b>Performance issues?</b></p><ul>
+<li>Profile GPU with tools like RenderDoc</li>
+<li>Check fragment shader complexity</li>
+<li>Verify not uploading VBO every frame</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md22"></a>
+Useful Debug Prints</h3>
+<div class="fragment"><div class="line"><span class="comment">// Print quaternion</span></div>
+<div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;q = {&quot;</span> &lt;&lt; q[0] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; q[1] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span></div>
+<div class="line">          &lt;&lt; q[2] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; q[3] &lt;&lt; <span class="stringliteral">&quot;}&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Print matrix</span></div>
+<div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 4; i++) {</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; 4; j++) {</div>
+<div class="line">        std::cout &lt;&lt; matrix[i][j] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line">    }</div>
+<div class="line">    std::cout &lt;&lt; std::endl;</div>
+<div class="line">}</div>
+</div><!-- fragment --><h1><a class="anchor" id="arch_references"></a>
+Further Reading</h1>
+<ul>
+<li><a href="https://www.khronos.org/opengl/">OpenGL Specification</a></li>
+<li><a href="https://learnopengl.com/">Learn OpenGL</a></li>
+<li><a href="https://github.com/ocornut/imgui">ImGui Documentation</a></li>
+<li><a href="https://glm.g-truc.net/">GLM Documentation</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Quaternion">Quaternion Mathematics</a></li>
+</ul>
+<dl class="section see"><dt>See also</dt><dd>modules for module-specific documentation </dd>
+<dd>
+renderer for rendering implementation details </dd>
+<dd>
+attitude for quaternion math library</dd></dl>
+<p>Comprehensive guide to OpenGL, ImGui, and system architecture</p><ul>
 <li><ul>
 <li>* */</li>
 </ul>
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md0"></a>
+<h1><a class="anchor" id="autotoc_md23"></a>
 AeroDynControlRig Architecture Guide</h1>
-<h2><a class="anchor" id="autotoc_md1"></a>
+<h2><a class="anchor" id="autotoc_md24"></a>
 Table of Contents</h2>
 <ol type="1">
 <li><a href="#system-overview">System Overview</a></li>
@@ -152,17 +584,17 @@ Table of Contents</h2>
 <li><a href="#data-flow">Data Flow</a></li>
 </ol>
 <hr  />
-<h2><a class="anchor" id="autotoc_md3"></a>
+<h2><a class="anchor" id="autotoc_md26"></a>
 System Overview</h2>
 <p>AeroDynControlRig is a desktop application combining real-time 3D rendering (OpenGL) with an interactive dashboard (ImGui) for flight control algorithm development.</p>
-<h3><a class="anchor" id="autotoc_md4"></a>
+<h3><a class="anchor" id="autotoc_md27"></a>
 High-Level Architecture</h3>
 <div class="dotgraph">
 <img src="dot_inline_dotgraph_1.png" alt="dot_inline_dotgraph_1.png" border="0" usemap="#dot_inline_dotgraph_1.map"/>
 <div class="caption">
 System Architecture</div>
 </div>
-<h3><a class="anchor" id="autotoc_md5"></a>
+<h3><a class="anchor" id="autotoc_md28"></a>
 Technology Stack</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -179,15 +611,15 @@ Technology Stack</h3>
 <td class="markdownTableBodyNone">Attitude Math   </td><td class="markdownTableBodyNone">Custom C library   </td><td class="markdownTableBodyNone">Quaternion/Euler angle conversions   </td></tr>
 </table>
 <hr  />
-<h2><a class="anchor" id="autotoc_md7"></a>
+<h2><a class="anchor" id="autotoc_md30"></a>
 OpenGL Rendering Pipeline</h2>
-<h3><a class="anchor" id="autotoc_md8"></a>
+<h3><a class="anchor" id="autotoc_md31"></a>
 The Graphics Hardware Pipeline</h3>
 <div class="fragment"><div class="line">CPU Side                           GPU Side</div>
 <div class="line">────────                           ────────</div>
 <div class="line"> </div>
 <div class="line">┌─────────────────┐</div>
-<div class="line">│ Application.cpp │</div>
+<div class="line">│ <a class="code" href="classApplication.html">Application</a>.cpp │</div>
 <div class="line">│  tick()         │</div>
 <div class="line">└────────┬────────┘</div>
 <div class="line">         │</div>
@@ -205,7 +637,7 @@ The Graphics Hardware Pipeline</h3>
 <div class="line">         │</div>
 <div class="line">         ▼                         ┌──────────────────┐</div>
 <div class="line">┌─────────────────┐                │  Vertex Shader   │</div>
-<div class="line">│ renderer.       │───────────────►│  (Transform      │</div>
+<div class="line">│ renderer.       │───────────────►│  (<a class="code" href="classTransform.html">Transform</a>      │</div>
 <div class="line">│ renderFrame3D() │                │   vertices)      │</div>
 <div class="line">└────────┬────────┘                └────────┬─────────┘</div>
 <div class="line">         │                                  │</div>
@@ -236,9 +668,11 @@ The Graphics Hardware Pipeline</h3>
 <div class="line">│ texture in          │</div>
 <div class="line">│ Image() widget      │</div>
 <div class="line">└─────────────────────┘</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md9"></a>
+<div class="ttc" id="aclassApplication_html"><div class="ttname"><a href="classApplication.html">Application</a></div><div class="ttdoc">Main application orchestrating the simulation, rendering, and UI.</div><div class="ttdef"><b>Definition:</b> application.h:41</div></div>
+<div class="ttc" id="aclassTransform_html"><div class="ttname"><a href="classTransform.html">Transform</a></div><div class="ttdef"><b>Definition:</b> transform.h:7</div></div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md32"></a>
 Key OpenGL Concepts</h3>
-<h4><a class="anchor" id="autotoc_md10"></a>
+<h4><a class="anchor" id="autotoc_md33"></a>
 1. Vertex Buffer Objects (VBO)</h4>
 <div class="fragment"><div class="line"><span class="comment">// Stores vertex data in GPU memory</span></div>
 <div class="line"><span class="keywordtype">float</span> vertices[] = {</div>
@@ -248,7 +682,7 @@ Key OpenGL Concepts</h3>
 <div class="line">    <span class="comment">// ... more vertices</span></div>
 <div class="line">};</div>
 <div class="line">glBufferData(GL_ARRAY_BUFFER, <span class="keyword">sizeof</span>(vertices), vertices, GL_STATIC_DRAW);</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md11"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md34"></a>
 2. Vertex Array Objects (VAO)</h4>
 <div class="fragment"><div class="line"><span class="comment">// Stores the &quot;format&quot; of vertex data</span></div>
 <div class="line">glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6*<span class="keyword">sizeof</span>(<span class="keywordtype">float</span>), (<span class="keywordtype">void</span>*)0);</div>
@@ -256,7 +690,7 @@ Key OpenGL Concepts</h3>
 <div class="line"> </div>
 <div class="line">glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6*<span class="keyword">sizeof</span>(<span class="keywordtype">float</span>), (<span class="keywordtype">void</span>*)(3*<span class="keyword">sizeof</span>(<span class="keywordtype">float</span>)));</div>
 <div class="line"><span class="comment">// ↑ Attribute 1 (color): 3 floats, starting at offset 3</span></div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md12"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md35"></a>
 3. Element Buffer Objects (EBO)</h4>
 <div class="fragment"><div class="line"><span class="comment">// Indices for drawing triangles (avoids duplicate vertices)</span></div>
 <div class="line"><span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> indices[] = {</div>
@@ -264,7 +698,7 @@ Key OpenGL Concepts</h3>
 <div class="line">    2, 3, 0   <span class="comment">// Second triangle</span></div>
 <div class="line">};</div>
 <div class="line">glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md13"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md36"></a>
 4. Shaders (GLSL)</h4>
 <div class="fragment"><div class="line">// Vertex Shader (runs per vertex)</div>
 <div class="line">#version 330 core</div>
@@ -290,7 +724,7 @@ Key OpenGL Concepts</h3>
 <div class="line">void main() {</div>
 <div class="line">    FragColor = vec4(ourColor, 1.0);</div>
 <div class="line">}</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md14"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md37"></a>
 5. Framebuffer Objects (FBO)</h4>
 <div class="fragment"><div class="line"><span class="comment">// Render to texture instead of screen</span></div>
 <div class="line">glGenFramebuffers(1, &amp;fbo);</div>
@@ -305,9 +739,9 @@ Key OpenGL Concepts</h3>
 <div class="line">                          GL_RENDERBUFFER, depthBuffer);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Now all rendering goes to this FBO instead of the window</span></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md15"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md38"></a>
 Coordinate Transformations</h3>
-<div class="fragment"><div class="line">Local Space          World Space         Camera Space        Clip Space</div>
+<div class="fragment"><div class="line">Local Space          World Space         <a class="code" href="classCamera.html">Camera</a> Space        Clip Space</div>
 <div class="line">(Model coords)       (Scene coords)      (View coords)       (Screen coords)</div>
 <div class="line"> </div>
 <div class="line">   Cube                 Cube                 Cube                Screen</div>
@@ -321,10 +755,11 @@ Coordinate Transformations</h3>
 <div class="line">    │                    │                    │                    │</div>
 <div class="line">    └────────────────────┴────────────────────┴────────────────────┘</div>
 <div class="line">                              gl_Position = projection * view * model * vertex</div>
+<div class="ttc" id="aclassCamera_html"><div class="ttname"><a href="classCamera.html">Camera</a></div><div class="ttdoc">First-person camera with mouse look and WASD movement.</div><div class="ttdef"><b>Definition:</b> camera.h:43</div></div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md17"></a>
+<h2><a class="anchor" id="autotoc_md40"></a>
 ImGui Integration</h2>
-<h3><a class="anchor" id="autotoc_md18"></a>
+<h3><a class="anchor" id="autotoc_md41"></a>
 Immediate Mode GUI Paradigm</h3>
 <p><b>Traditional GUI (Retained Mode):</b> </p><div class="fragment"><div class="line">Button* btn = <span class="keyword">new</span> Button(<span class="stringliteral">&quot;Click me&quot;</span>);</div>
 <div class="line">btn-&gt;setPosition(10, 10);</div>
@@ -334,10 +769,10 @@ Immediate Mode GUI Paradigm</h3>
 <div class="line"><span class="keywordflow">if</span> (ImGui::Button(<span class="stringliteral">&quot;Click me&quot;</span>)) {</div>
 <div class="line">    <span class="comment">// Button was just clicked</span></div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md19"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md42"></a>
 ImGui Rendering Flow</h3>
 <div class="fragment"><div class="line">┌─────────────────────────────────────────────────────────────┐</div>
-<div class="line">│ Application::tick()                                         │</div>
+<div class="line">│ <a class="code" href="classApplication.html#af44c742342adf5305e430ff293f147c1">Application::tick</a>()                                         │</div>
 <div class="line">└────────┬────────────────────────────────────────────────────┘</div>
 <div class="line">         │</div>
 <div class="line">         ▼</div>
@@ -350,17 +785,17 @@ ImGui Rendering Flow</h3>
 <div class="line">         │</div>
 <div class="line">         ▼</div>
 <div class="line">┌─────────────────────────────────────────────────────────────┐</div>
-<div class="line">│ Application::renderDashboardLayout()                        │</div>
+<div class="line">│ <a class="code" href="classApplication.html">Application</a>::renderDashboardLayout()                        │</div>
 <div class="line">│                                                             │</div>
-<div class="line">│   ImGui::Begin(&quot;Control Panel&quot;);                           │</div>
+<div class="line">│   ImGui::Begin(&quot;Control <a class="code" href="classPanel.html">Panel</a>&quot;);                           │</div>
 <div class="line">│   ├─ if (ImGui::Button(&quot;Pause&quot;))                           │</div>
 <div class="line">│   │     state.control.paused = !state.control.paused;      │</div>
 <div class="line">│   ├─ ImGui::SliderFloat(&quot;Speed&quot;, &amp;state.control.timescale);│</div>
 <div class="line">│   └─ ImGui::End();                                          │</div>
 <div class="line">│                                                             │</div>
-<div class="line">│   PanelManager::drawAll(state, camera)                     │</div>
-<div class="line">│   ├─ TelemetryPanel::draw(state, camera)                   │</div>
-<div class="line">│   ├─ RotorPanel::draw(state, camera)                       │</div>
+<div class="line">│   <a class="code" href="classPanelManager.html">PanelManager</a>::drawAll(state, camera)                     │</div>
+<div class="line">│   ├─ <a class="code" href="classTelemetryPanel.html">TelemetryPanel</a>::draw(state, camera)                   │</div>
+<div class="line">│   ├─ <a class="code" href="classRotorPanel.html">RotorPanel</a>::draw(state, camera)                       │</div>
 <div class="line">│   └─ ... (all 7 panels)                                    │</div>
 <div class="line">└────────┬────────────────────────────────────────────────────┘</div>
 <div class="line">         │</div>
@@ -380,7 +815,11 @@ ImGui Rendering Flow</h3>
 <div class="line">│ - Draw all UI quads/triangles                               │</div>
 <div class="line">│ - Use texture atlas for fonts/icons                         │</div>
 <div class="line">└─────────────────────────────────────────────────────────────┘</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md20"></a>
+<div class="ttc" id="aclassPanelManager_html"><div class="ttname"><a href="classPanelManager.html">PanelManager</a></div><div class="ttdoc">Manages registration and rendering of all UI panels.</div><div class="ttdef"><b>Definition:</b> panel_manager.h:36</div></div>
+<div class="ttc" id="aclassPanel_html"><div class="ttname"><a href="classPanel.html">Panel</a></div><div class="ttdoc">Abstract base class for all UI panels.</div><div class="ttdef"><b>Definition:</b> panel.h:27</div></div>
+<div class="ttc" id="aclassRotorPanel_html"><div class="ttname"><a href="classRotorPanel.html">RotorPanel</a></div><div class="ttdoc">UI panel displaying rotor performance metrics.</div><div class="ttdef"><b>Definition:</b> rotor_panel.h:26</div></div>
+<div class="ttc" id="aclassTelemetryPanel_html"><div class="ttname"><a href="classTelemetryPanel.html">TelemetryPanel</a></div><div class="ttdoc">UI panel displaying vehicle flight state.</div><div class="ttdef"><b>Definition:</b> telemetry_panel.h:23</div></div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md43"></a>
 ImGui + OpenGL Interaction</h3>
 <div class="fragment"><div class="line">┌─────────────────────────────────────────────────────────────┐</div>
 <div class="line">│                     Single Frame                             │</div>
@@ -395,7 +834,7 @@ ImGui + OpenGL Interaction</h3>
 <div class="line">                      │</div>
 <div class="line">                      ▼</div>
 <div class="line">              ┌───────────────┐</div>
-<div class="line">              │ renderTexture │ ← 3D scene now in this texture</div>
+<div class="line">              │ renderTexture │ ← 3D scene now in <span class="keyword">this</span> texture</div>
 <div class="line">              └───────┬───────┘</div>
 <div class="line">                      │</div>
 <div class="line">2. ImGui Frame                │</div>
@@ -406,7 +845,7 @@ ImGui + OpenGL Interaction</h3>
 <div class="line">   │ ImGui::Image(renderTexture, size);   │ ← Display 3D scene</div>
 <div class="line">   │ ImGui::End();                        │</div>
 <div class="line">   │                                      │</div>
-<div class="line">   │ ImGui::Begin(&quot;Control Panel&quot;);       │</div>
+<div class="line">   │ ImGui::Begin(&quot;Control <a class="code" href="classPanel.html">Panel</a>&quot;);       │</div>
 <div class="line">   │ if (ImGui::Button(&quot;Pause&quot;)) { ... }  │</div>
 <div class="line">   │ ImGui::End();                        │</div>
 <div class="line">   │                                      │</div>
@@ -424,12 +863,12 @@ ImGui + OpenGL Interaction</h3>
 <div class="line">   │ glfwSwapBuffers(window);             │ ← Show frame</div>
 <div class="line">   └──────────────────────────────────────┘</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md22"></a>
+<h2><a class="anchor" id="autotoc_md45"></a>
 Frame Execution Flow</h2>
-<h3><a class="anchor" id="autotoc_md23"></a>
+<h3><a class="anchor" id="autotoc_md46"></a>
 Main Loop Sequence Diagram</h3>
 <div class="fragment"><div class="line">┌──────┐     ┌────────────┐     ┌─────────┐     ┌────────┐     ┌──────────┐</div>
-<div class="line">│ main │     │Application │     │ Modules │     │Renderer│     │  ImGui   │</div>
+<div class="line">│ <a class="code" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> │     │Application │     │ Modules │     │Renderer│     │  ImGui   │</div>
 <div class="line">└──┬───┘     └─────┬──────┘     └────┬────┘     └───┬────┘     └────┬─────┘</div>
 <div class="line">   │               │                  │              │               │</div>
 <div class="line">   │ init()        │                  │              │               │</div>
@@ -485,8 +924,8 @@ Main Loop Sequence Diagram</h3>
 <div class="line">   │ │             │ │ ImGui::Image(renderTexture) ◄─────3D viewport │   │</div>
 <div class="line">   │ │             │ │                │              │               │   │</div>
 <div class="line">   │ │             │ │ panelManager.drawAll(state, camera)           │   │</div>
-<div class="line">   │ │             │ │  ├─ ControlPanel::draw()    ◄─────read/write  │   │</div>
-<div class="line">   │ │             │ │  ├─ TelemetryPanel::draw()  ◄─────read state  │   │</div>
+<div class="line">   │ │             │ │  ├─ <a class="code" href="classControlPanel.html">ControlPanel</a>::draw()    ◄─────read/write  │   │</div>
+<div class="line">   │ │             │ │  ├─ <a class="code" href="classTelemetryPanel.html">TelemetryPanel</a>::draw()  ◄─────read state  │   │</div>
 <div class="line">   │ │             │ │  └─ ... (7 panels total)                      │   │</div>
 <div class="line">   │ │             │ └────────────────┼──────────────┼───────────────┼───┤</div>
 <div class="line">   │ │             │                  │              │               │   │</div>
@@ -506,7 +945,9 @@ Main Loop Sequence Diagram</h3>
 <div class="line">   │ └─────────────┼──────────────────┼──────────────┼───────────────┼───┘</div>
 <div class="line">   │ Loop          │                  │              │               │</div>
 <div class="line">   └───────────────┼──────────────────┼──────────────┼───────────────┘</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md24"></a>
+<div class="ttc" id="aclassControlPanel_html"><div class="ttname"><a href="classControlPanel.html">ControlPanel</a></div><div class="ttdoc">UI panel for simulation playback control.</div><div class="ttdef"><b>Definition:</b> control_panel.h:22</div></div>
+<div class="ttc" id="amain_8cpp_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdef"><b>Definition:</b> main.cpp:4</div></div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md47"></a>
 Timing Diagram</h3>
 <div class="fragment"><div class="line">Time ────────────────────────────────────────────────────────────►</div>
 <div class="line"> </div>
@@ -530,15 +971,15 @@ Timing Diagram</h3>
 <div class="line"> </div>
 <div class="line">   ◄────16ms────►  ◄────16ms────►    (60 FPS)</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md26"></a>
+<h2><a class="anchor" id="autotoc_md49"></a>
 Class Interactions</h2>
-<h3><a class="anchor" id="autotoc_md27"></a>
+<h3><a class="anchor" id="autotoc_md50"></a>
 Module System</h3>
 <div class="fragment"><div class="line">┌────────────────────────────────────────────────────────────┐</div>
-<div class="line">│                    SimulationState                         │</div>
+<div class="line">│                    <a class="code" href="structSimulationState.html">SimulationState</a>                         │</div>
 <div class="line">│  (Shared data structure - single source of truth)          │</div>
 <div class="line">│                                                            │</div>
-<div class="line">│  .quaternion                                               │</div>
+<div class="line">│  .<a class="code" href="structSimulationState.html#a20e333ffdfe2eab81d5e0c9df189595d">quaternion</a>                                               │</div>
 <div class="line">│  .euler                                                    │</div>
 <div class="line">│  .angular_rate_deg_per_sec                                 │</div>
 <div class="line">│  .sensor { gyro_rad_s, accel_mps2 }                        │</div>
@@ -554,7 +995,7 @@ Module System</h3>
 <div class="line">┌──────────┐ ┌──────────┐ ┌──────────────┐</div>
 <div class="line">│Quaternion│ │  Sensor  │ │Complementary │</div>
 <div class="line">│  Demo    │ │Simulator │ │  Estimator   │</div>
-<div class="line">│  Module  │ │  Module  │ │   Module     │</div>
+<div class="line">│  <a class="code" href="classModule.html">Module</a>  │ │  <a class="code" href="classModule.html">Module</a>  │ │   <a class="code" href="classModule.html">Module</a>     │</div>
 <div class="line">└────┬─────┘ └────┬─────┘ └──────┬───────┘</div>
 <div class="line">     │            │               │</div>
 <div class="line">     │ Reads:     │ Reads:        │ Reads:</div>
@@ -570,7 +1011,7 @@ Module System</h3>
 <div class="line">                                               │</div>
 <div class="line">                                               ▼</div>
 <div class="line">                                    ┌─────────────────┐</div>
-<div class="line">                                    │  PanelManager   │</div>
+<div class="line">                                    │  <a class="code" href="classPanelManager.html">PanelManager</a>   │</div>
 <div class="line">                                    │  drawAll()      │</div>
 <div class="line">                                    └────────┬────────┘</div>
 <div class="line">                                             │</div>
@@ -579,7 +1020,7 @@ Module System</h3>
 <div class="line">                     ▼                       ▼                   ▼</div>
 <div class="line">              ┌─────────────┐        ┌─────────────┐    ┌─────────────┐</div>
 <div class="line">              │ Telemetry   │        │  Estimator  │    │   Sensor    │</div>
-<div class="line">              │   Panel     │        │   Panel     │    │   Panel     │</div>
+<div class="line">              │   <a class="code" href="classPanel.html">Panel</a>     │        │   <a class="code" href="classPanel.html">Panel</a>     │    │   <a class="code" href="classPanel.html">Panel</a>     │</div>
 <div class="line">              │ (displays   │        │ (displays   │    │ (displays   │</div>
 <div class="line">              │  quaternion,│        │  estimator. │    │  sensor.    │</div>
 <div class="line">              │  euler,     │        │  quaternion,│    │  gyro,      │</div>
@@ -589,21 +1030,24 @@ Module System</h3>
 <div class="line">                     └───────────────────────┴───────────────────┘</div>
 <div class="line">                                     │</div>
 <div class="line">                                     │ All panels READ from</div>
-<div class="line">                                     │ SimulationState</div>
+<div class="line">                                     │ <a class="code" href="structSimulationState.html">SimulationState</a></div>
 <div class="line">                                     │</div>
-<div class="line">                                     │ ControlPanel WRITES to</div>
+<div class="line">                                     │ <a class="code" href="classControlPanel.html">ControlPanel</a> WRITES to</div>
 <div class="line">                                     │ state.control.paused,</div>
 <div class="line">                                     │ state.control.time_scale, etc.</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md28"></a>
+<div class="ttc" id="aclassModule_html"><div class="ttname"><a href="classModule.html">Module</a></div><div class="ttdoc">Abstract base class for all simulation modules.</div><div class="ttdef"><b>Definition:</b> module.h:21</div></div>
+<div class="ttc" id="astructSimulationState_html"><div class="ttname"><a href="structSimulationState.html">SimulationState</a></div><div class="ttdoc">Central shared state for the entire simulation.</div><div class="ttdef"><b>Definition:</b> simulation_state.h:28</div></div>
+<div class="ttc" id="astructSimulationState_html_a20e333ffdfe2eab81d5e0c9df189595d"><div class="ttname"><a href="structSimulationState.html#a20e333ffdfe2eab81d5e0c9df189595d">SimulationState::quaternion</a></div><div class="ttdeci">std::array&lt; double, 4 &gt; quaternion</div><div class="ttdoc">Current attitude quaternion [w, x, y, z].</div><div class="ttdef"><b>Definition:</b> simulation_state.h:31</div></div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md51"></a>
 Renderer Hierarchy</h3>
 <div class="fragment"><div class="line">┌─────────────────────────────────────────────────────────────┐</div>
-<div class="line">│                      Application                            │</div>
+<div class="line">│                      <a class="code" href="classApplication.html">Application</a>                            │</div>
 <div class="line">└─────┬───────────────────────────┬───────────────────────────┘</div>
 <div class="line">      │                           │</div>
 <div class="line">      │                           │</div>
 <div class="line">      ▼                           ▼</div>
 <div class="line">┌─────────────┐           ┌─────────────┐</div>
-<div class="line">│  Renderer   │           │AxisRenderer │</div>
+<div class="line">│  <a class="code" href="classRenderer.html">Renderer</a>   │           │AxisRenderer │</div>
 <div class="line">│             │           │             │</div>
 <div class="line">│ Cube        │           │ RGB Axes    │</div>
 <div class="line">│ Geometry    │           │ Gizmo       │</div>
@@ -613,7 +1057,7 @@ Renderer Hierarchy</h3>
 <div class="line">      │                          │</div>
 <div class="line">      ▼                          ▼</div>
 <div class="line">┌─────────────────────────────────────────┐</div>
-<div class="line">│            Transform                     │</div>
+<div class="line">│            <a class="code" href="classTransform.html">Transform</a>                     │</div>
 <div class="line">│  (GLM matrix utilities)                 │</div>
 <div class="line">└─────────────┬───────────────────────────┘</div>
 <div class="line">              │</div>
@@ -621,7 +1065,7 @@ Renderer Hierarchy</h3>
 <div class="line">              │</div>
 <div class="line">              ▼</div>
 <div class="line">┌─────────────────────────────────────────┐</div>
-<div class="line">│            Camera                       │</div>
+<div class="line">│            <a class="code" href="classCamera.html">Camera</a>                       │</div>
 <div class="line">│  - position                             │</div>
 <div class="line">│  - front, up, right                     │</div>
 <div class="line">│  - yaw, pitch, zoom                     │</div>
@@ -629,12 +1073,13 @@ Renderer Hierarchy</h3>
 <div class="line">│  getViewMatrix()                        │</div>
 <div class="line">│  getProjectionMatrix()                  │</div>
 <div class="line">└─────────────────────────────────────────┘</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md29"></a>
+<div class="ttc" id="aclassRenderer_html"><div class="ttname"><a href="classRenderer.html">Renderer</a></div><div class="ttdoc">OpenGL 3.3 renderer for the main 3D scene.</div><div class="ttdef"><b>Definition:</b> renderer.h:35</div></div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md52"></a>
 Panel System</h3>
 <div class="fragment"><div class="line">┌────────────────────────────────────────────────────────────┐</div>
-<div class="line">│                    Panel (Interface)                       │</div>
-<div class="line">│  virtual const char* name() const = 0;                     │</div>
-<div class="line">│  virtual void draw(SimulationState&amp;, Camera&amp;) = 0;         │</div>
+<div class="line">│                    <a class="code" href="classPanel.html">Panel</a> (Interface)                       │</div>
+<div class="line">│  <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* name() <span class="keyword">const</span> = 0;                     │</div>
+<div class="line">│  <span class="keyword">virtual</span> <span class="keywordtype">void</span> draw(<a class="code" href="structSimulationState.html">SimulationState</a>&amp;, <a class="code" href="classCamera.html">Camera</a>&amp;) = 0;         │</div>
 <div class="line">└───────────────────────┬────────────────────────────────────┘</div>
 <div class="line">                        │</div>
 <div class="line">                        │ Implemented by</div>
@@ -644,7 +1089,7 @@ Panel System</h3>
 <div class="line">        ▼               ▼               ▼                ▼</div>
 <div class="line">┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐</div>
 <div class="line">│ControlPanel  │ │ Telemetry    │ │  Dynamics    │ │   Rotor      │</div>
-<div class="line">│              │ │   Panel      │ │   Panel      │ │   Panel      │</div>
+<div class="line">│              │ │   <a class="code" href="classPanel.html">Panel</a>      │ │   <a class="code" href="classPanel.html">Panel</a>      │ │   <a class="code" href="classPanel.html">Panel</a>      │</div>
 <div class="line">│ Buttons:     │ │              │ │              │ │              │</div>
 <div class="line">│ - Pause      │ │ Displays:    │ │ Has:         │ │ Displays:    │</div>
 <div class="line">│ - Resume     │ │ - Quaternion │ │ - PlotLines  │ │ - RPM[4]     │</div>
@@ -653,9 +1098,9 @@ Panel System</h3>
 <div class="line">│ - Time scale │ │ - Time       │ │              │ │              │</div>
 <div class="line">└──────────────┘ └──────────────┘ └──────────────┘ └──────────────┘</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md31"></a>
+<h2><a class="anchor" id="autotoc_md54"></a>
 Data Flow</h2>
-<h3><a class="anchor" id="autotoc_md32"></a>
+<h3><a class="anchor" id="autotoc_md55"></a>
 State Updates</h3>
 <div class="fragment"><div class="line">User Input (Keyboard/Mouse)</div>
 <div class="line">    │</div>
@@ -663,15 +1108,15 @@ State Updates</h3>
 <div class="line">    │</div>
 <div class="line">    ▼</div>
 <div class="line">┌─────────────────────────────────┐</div>
-<div class="line">│   Application::keyCallback()    │</div>
-<div class="line">│   Application::mouseCallback()  │</div>
+<div class="line">│   <a class="code" href="classApplication.html#ad8ade3f4f891c7ac54b5c69d6ca9ce5a">Application::keyCallback</a>()    │</div>
+<div class="line">│   <a class="code" href="classApplication.html">Application</a>::mouseCallback()  │</div>
 <div class="line">└─────────────┬───────────────────┘</div>
 <div class="line">              │</div>
 <div class="line">              │ Updates</div>
 <div class="line">              │</div>
 <div class="line">              ▼</div>
 <div class="line">┌─────────────────────────────────┐</div>
-<div class="line">│          Camera                 │</div>
+<div class="line">│          <a class="code" href="classCamera.html">Camera</a>                 │</div>
 <div class="line">│  - position                     │</div>
 <div class="line">│  - yaw, pitch                   │</div>
 <div class="line">└─────────────┬───────────────────┘</div>
@@ -680,7 +1125,7 @@ State Updates</h3>
 <div class="line">              │</div>
 <div class="line">              ▼</div>
 <div class="line">┌─────────────────────────────────┐</div>
-<div class="line">│  Renderer::setViewMatrix()      │</div>
+<div class="line">│  <a class="code" href="classRenderer.html">Renderer</a>::setViewMatrix()      │</div>
 <div class="line">│  (Rendering uses camera view)   │</div>
 <div class="line">└─────────────────────────────────┘</div>
 <div class="line"> </div>
@@ -691,7 +1136,7 @@ State Updates</h3>
 <div class="line">    │</div>
 <div class="line">    ▼</div>
 <div class="line">┌─────────────────────────────────┐</div>
-<div class="line">│   Panel::draw()                 │</div>
+<div class="line">│   <a class="code" href="classPanel.html">Panel</a>::draw()                 │</div>
 <div class="line">│   if (ImGui::Button(&quot;Pause&quot;))   │</div>
 <div class="line">│     state.control.paused = true;│</div>
 <div class="line">└─────────────┬───────────────────┘</div>
@@ -700,7 +1145,7 @@ State Updates</h3>
 <div class="line">              │</div>
 <div class="line">              ▼</div>
 <div class="line">┌─────────────────────────────────┐</div>
-<div class="line">│      SimulationState            │</div>
+<div class="line">│      <a class="code" href="structSimulationState.html">SimulationState</a>            │</div>
 <div class="line">│  .control.paused                │</div>
 <div class="line">│  .control.time_scale            │</div>
 <div class="line">│  .dynamics_config.*             │</div>
@@ -710,11 +1155,12 @@ State Updates</h3>
 <div class="line">              │</div>
 <div class="line">              ▼</div>
 <div class="line">┌─────────────────────────────────┐</div>
-<div class="line">│  Application::tick()            │</div>
+<div class="line">│  <a class="code" href="classApplication.html">Application</a>::tick()            │</div>
 <div class="line">│  if (!state.control.paused)     │</div>
 <div class="line">│    module.update(dt, state);    │</div>
 <div class="line">└─────────────────────────────────┘</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md33"></a>
+<div class="ttc" id="aclassApplication_html_ad8ade3f4f891c7ac54b5c69d6ca9ce5a"><div class="ttname"><a href="classApplication.html#ad8ade3f4f891c7ac54b5c69d6ca9ce5a">Application::keyCallback</a></div><div class="ttdeci">static void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods)</div><div class="ttdoc">Keyboard input callback.</div><div class="ttdef"><b>Definition:</b> application.cpp:461</div></div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md56"></a>
 Simulation Data Flow</h3>
 <div class="fragment"><div class="line">┌─────────────────────────────────────────────────────────────┐</div>
 <div class="line">│                    Simulation Tick                          │</div>
@@ -722,7 +1168,7 @@ Simulation Data Flow</h3>
 <div class="line"> </div>
 <div class="line">Step 1: Attitude Integration</div>
 <div class="line">┌──────────────────────┐</div>
-<div class="line">│ QuaternionDemoModule │</div>
+<div class="line">│ <a class="code" href="classQuaternionDemoModule.html">QuaternionDemoModule</a> │</div>
 <div class="line">│                      │</div>
 <div class="line">│ Read:  angular_rate  │</div>
 <div class="line">│ Write: quaternion    │</div>
@@ -745,7 +1191,7 @@ Simulation Data Flow</h3>
 <div class="line">Step 3: State Estimation</div>
 <div class="line">┌──────────────────────────┐</div>
 <div class="line">│ ComplementaryEstimator   │</div>
-<div class="line">│         Module           │</div>
+<div class="line">│         <a class="code" href="classModule.html">Module</a>           │</div>
 <div class="line">│                          │</div>
 <div class="line">│ Read:  sensor.gyro       │</div>
 <div class="line">│        sensor.accel      │</div>
@@ -756,7 +1202,7 @@ Simulation Data Flow</h3>
 <div class="line">           ▼</div>
 <div class="line">Step 4: Rotor Calculations</div>
 <div class="line">┌──────────────────────┐</div>
-<div class="line">│ RotorTelemetryModule │</div>
+<div class="line">│ <a class="code" href="classRotorTelemetryModule.html">RotorTelemetryModule</a> │</div>
 <div class="line">│                      │</div>
 <div class="line">│ Read:  rotor_config  │</div>
 <div class="line">│ Write: rotor.rpm[]   │</div>
@@ -774,22 +1220,24 @@ Simulation Data Flow</h3>
 <div class="line">│ Write: power.current │</div>
 <div class="line">│        power.energy  │</div>
 <div class="line">└──────────────────────┘</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md34"></a>
+<div class="ttc" id="aclassQuaternionDemoModule_html"><div class="ttname"><a href="classQuaternionDemoModule.html">QuaternionDemoModule</a></div><div class="ttdoc">Simulates rigid body attitude dynamics using quaternion integration.</div><div class="ttdef"><b>Definition:</b> quaternion_demo.h:24</div></div>
+<div class="ttc" id="aclassRotorTelemetryModule_html"><div class="ttname"><a href="classRotorTelemetryModule.html">RotorTelemetryModule</a></div><div class="ttdoc">Computes rotor thrust, torque, and power from RPM measurements.</div><div class="ttdef"><b>Definition:</b> rotor_telemetry.h:36</div></div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md57"></a>
 Rendering Data Flow</h3>
-<div class="fragment"><div class="line">SimulationState.model_matrix</div>
+<div class="fragment"><div class="line"><a class="code" href="structSimulationState.html">SimulationState</a>.<a class="code" href="structSimulationState.html#acef78e29043f3602fe7456343636eb07">model_matrix</a></div>
 <div class="line">           │</div>
-<div class="line">           │ Set by QuaternionDemoModule</div>
+<div class="line">           │ Set by <a class="code" href="classQuaternionDemoModule.html">QuaternionDemoModule</a></div>
 <div class="line">           │</div>
 <div class="line">           ▼</div>
 <div class="line">┌──────────────────────────┐</div>
-<div class="line">│ Renderer::setModelMatrix │</div>
+<div class="line">│ <a class="code" href="classRenderer.html#a5a9884059a536cf621b3fc92bf4922ad">Renderer::setModelMatrix</a> │</div>
 <div class="line">└──────────┬───────────────┘</div>
 <div class="line">           │</div>
 <div class="line">           │ Combined with</div>
 <div class="line">           │</div>
 <div class="line">           ▼</div>
-<div class="line">Camera.getViewMatrix()</div>
-<div class="line">Camera.getProjectionMatrix()</div>
+<div class="line"><a class="code" href="classCamera.html">Camera</a>.<a class="code" href="classCamera.html#a2f90e661a78172675ca06ea69667b531">getViewMatrix</a>()</div>
+<div class="line"><a class="code" href="classCamera.html">Camera</a>.<a class="code" href="classCamera.html#aa2ed9d27803f5edc824e4afe8cbbbfbc">getProjectionMatrix</a>()</div>
 <div class="line">           │</div>
 <div class="line">           │ Sent to GPU as uniforms</div>
 <div class="line">           │</div>
@@ -806,7 +1254,7 @@ Rendering Data Flow</h3>
 <div class="line">           ▼</div>
 <div class="line">┌──────────────────────────┐</div>
 <div class="line">│ Fragment Shader          │</div>
-<div class="line">│ (Colors pixels)          │</div>
+<div class="line">│ (<a class="code" href="group__UITheme.html#ga447c8573ad59f48165a527a06c94fb62">Colors</a> pixels)          │</div>
 <div class="line">└──────────┬───────────────┘</div>
 <div class="line">           │</div>
 <div class="line">           │ Output to</div>
@@ -824,8 +1272,13 @@ Rendering Data Flow</h3>
 <div class="line">│ ImGui::Image()           │</div>
 <div class="line">│ (Viewport panel)         │</div>
 <div class="line">└──────────────────────────┘</div>
+<div class="ttc" id="aclassCamera_html_a2f90e661a78172675ca06ea69667b531"><div class="ttname"><a href="classCamera.html#a2f90e661a78172675ca06ea69667b531">Camera::getViewMatrix</a></div><div class="ttdeci">glm::mat4 getViewMatrix() const</div><div class="ttdoc">Get the view matrix for rendering.</div><div class="ttdef"><b>Definition:</b> camera.cpp:12</div></div>
+<div class="ttc" id="aclassCamera_html_aa2ed9d27803f5edc824e4afe8cbbbfbc"><div class="ttname"><a href="classCamera.html#aa2ed9d27803f5edc824e4afe8cbbbfbc">Camera::getProjectionMatrix</a></div><div class="ttdeci">glm::mat4 getProjectionMatrix(float aspectRatio) const</div><div class="ttdoc">Get the perspective projection matrix.</div><div class="ttdef"><b>Definition:</b> camera.cpp:16</div></div>
+<div class="ttc" id="aclassRenderer_html_a5a9884059a536cf621b3fc92bf4922ad"><div class="ttname"><a href="classRenderer.html#a5a9884059a536cf621b3fc92bf4922ad">Renderer::setModelMatrix</a></div><div class="ttdeci">void setModelMatrix(const float *modelMat)</div><div class="ttdoc">Set the model matrix (object → world transform)</div><div class="ttdef"><b>Definition:</b> renderer.cpp:98</div></div>
+<div class="ttc" id="agroup__UITheme_html_ga447c8573ad59f48165a527a06c94fb62"><div class="ttname"><a href="group__UITheme.html#ga447c8573ad59f48165a527a06c94fb62">ui::Colors</a></div><div class="ttdeci">const Palette &amp; Colors()</div><div class="ttdoc">Get global color palette.</div><div class="ttdef"><b>Definition:</b> style.cpp:180</div></div>
+<div class="ttc" id="astructSimulationState_html_acef78e29043f3602fe7456343636eb07"><div class="ttname"><a href="structSimulationState.html#acef78e29043f3602fe7456343636eb07">SimulationState::model_matrix</a></div><div class="ttdeci">glm::mat4 model_matrix</div><div class="ttdoc">Model transformation matrix for rendering.</div><div class="ttdef"><b>Definition:</b> simulation_state.h:32</div></div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md36"></a>
+<h2><a class="anchor" id="autotoc_md59"></a>
 Quick Reference: Key Files</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -848,9 +1301,9 @@ Quick Reference: Key Files</h2>
 <td class="markdownTableBodyNone"><code><a class="el" href="panel__manager_8h.html" title="Registry and orchestrator for ImGui UI panels.">panel_manager.h</a>/cpp</code>   </td><td class="markdownTableBodyNone">UI registry   </td><td class="markdownTableBodyNone">Owns and draws all panels   </td></tr>
 </table>
 <hr  />
-<h2><a class="anchor" id="autotoc_md38"></a>
+<h2><a class="anchor" id="autotoc_md61"></a>
 Debugging Tips</h2>
-<h3><a class="anchor" id="autotoc_md39"></a>
+<h3><a class="anchor" id="autotoc_md62"></a>
 OpenGL Debugging</h3>
 <div class="fragment"><div class="line"><span class="comment">// Check for OpenGL errors after suspicious calls</span></div>
 <div class="line">GLenum err = glGetError();</div>
@@ -866,7 +1319,7 @@ OpenGL Debugging</h3>
 <div class="line">    glGetShaderInfoLog(shader, 512, NULL, infoLog);</div>
 <div class="line">    std::cerr &lt;&lt; <span class="stringliteral">&quot;Shader compilation failed: &quot;</span> &lt;&lt; infoLog &lt;&lt; std::endl;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md40"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md63"></a>
 ImGui Debugging</h3>
 <div class="fragment"><div class="line"><span class="comment">// Show demo window with all widgets and examples</span></div>
 <div class="line">ImGui::ShowDemoWindow();</div>
@@ -882,7 +1335,7 @@ ImGui Debugging</h3>
 <div class="line">          &lt;&lt; state.quaternion[2] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span></div>
 <div class="line">          &lt;&lt; state.quaternion[3] &lt;&lt; <span class="stringliteral">&quot;]&quot;</span> &lt;&lt; std::endl;</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md42"></a>
+<h2><a class="anchor" id="autotoc_md65"></a>
 Next Steps for Learning</h2>
 <ol type="1">
 <li><b>OpenGL Tutorial</b>: <a href="https://learnopengl.com/">https://learnopengl.com/</a><ul>

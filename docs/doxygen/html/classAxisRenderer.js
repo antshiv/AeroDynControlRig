@@ -5,6 +5,7 @@ var classAxisRenderer =
     [ "init", "classAxisRenderer.html#aeffaaf38c5561bc783f4d614f3b75edf", null ],
     [ "render", "classAxisRenderer.html#a84dd219a1a4655ec3b434c4b9705c6a0", null ],
     [ "render3D", "classAxisRenderer.html#aeafc1964746638b7067055b5bf616d51", null ],
+    [ "renderCornerGizmo", "classAxisRenderer.html#a5acba49f712b1ca5777576827e977511", null ],
     [ "shutdown", "classAxisRenderer.html#ab327f44ce3abe6fdf30380d4d081b413", null ],
     [ "axisTransform", "classAxisRenderer.html#a9074f64c35fbc194ae92e31d4b9cbc9c", null ],
     [ "modelLoc", "classAxisRenderer.html#a3d6ea174de4266f2a4bc068229984522", null ],

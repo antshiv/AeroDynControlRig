@@ -112,12 +112,13 @@ $(document).ready(function(){initNavTree('hierarchy.html',''); initResizable(); 
 </td></tr>
 <tr><td><img src="inherit_graph_4.png" border="0" usemap="#aModule" alt=""/>
 <map name="aModule" id="aModule">
-<area shape="rect" href="classModule.html" title="Abstract base class for all simulation modules." alt="" coords="5,107,76,133"/>
+<area shape="rect" href="classModule.html" title="Abstract base class for all simulation modules." alt="" coords="5,132,76,159"/>
 <area shape="rect" href="classComplementaryEstimatorModule.html" title="Estimates attitude using a complementary filter fusing gyro and accel." alt="" coords="124,5,363,32"/>
 <area shape="rect" href="classFirstOrderDynamicsModule.html" title="Simulates a simple first&#45;order linear time&#45;invariant (LTI) system." alt="" coords="144,56,343,83"/>
-<area shape="rect" href="classQuaternionDemoModule.html" title="Simulates rigid body attitude dynamics using quaternion integration." alt="" coords="153,107,334,133"/>
-<area shape="rect" href="classRotorTelemetryModule.html" title="Computes rotor thrust, torque, and power from RPM measurements." alt="" coords="158,157,329,184"/>
-<area shape="rect" href="classSensorSimulatorModule.html" title="Simulates IMU sensor measurements (gyro + accel) based on vehicle state." alt="" coords="155,208,332,235"/>
+<area shape="rect" href="classQuadcopterDynamicsModule.html" title="Physics&#45;based quadcopter simulation using dynamic_models library." alt="" coords="138,107,349,133"/>
+<area shape="rect" href="classQuaternionDemoModule.html" title="Simulates rigid body attitude dynamics using quaternion integration." alt="" coords="153,157,334,184"/>
+<area shape="rect" href="classRotorTelemetryModule.html" title="Computes rotor thrust, torque, and power from RPM measurements." alt="" coords="158,208,329,235"/>
+<area shape="rect" href="classSensorSimulatorModule.html" title="Simulates IMU sensor measurements (gyro + accel) based on vehicle state." alt="" coords="155,259,332,285"/>
 </map>
 </td></tr>
 <tr><td><img src="inherit_graph_5.png" border="0" usemap="#aPanel" alt=""/>
@@ -183,77 +184,92 @@ $(document).ready(function(){initNavTree('hierarchy.html',''); initResizable(); 
 <area shape="rect" href="structSimulationState_1_1EstimatorState.html" title="State estimate from sensor fusion algorithm." alt="" coords="5,5,203,47"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_16.png" border="0" usemap="#aSimulationState_1_1PowerHistory" alt=""/>
+<tr><td><img src="inherit_graph_16.png" border="0" usemap="#aSimulationState_1_1MotorCommands" alt=""/>
+<map name="aSimulationState_1_1MotorCommands" id="aSimulationState_1_1MotorCommands">
+<area shape="rect" href="structSimulationState_1_1MotorCommands.html" title="Commanded rotor speeds for control input." alt="" coords="5,5,252,32"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_17.png" border="0" usemap="#aSimulationState_1_1PhysicsState" alt=""/>
+<map name="aSimulationState_1_1PhysicsState" id="aSimulationState_1_1PhysicsState">
+<area shape="rect" href="structSimulationState_1_1PhysicsState.html" title="Complete 6&#45;DOF rigid body state for quadcopter dynamics." alt="" coords="5,5,188,47"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_18.png" border="0" usemap="#aSimulationState_1_1PowerHistory" alt=""/>
 <map name="aSimulationState_1_1PowerHistory" id="aSimulationState_1_1PowerHistory">
 <area shape="rect" href="structSimulationState_1_1PowerHistory.html" title="Electrical power consumption tracking." alt="" coords="5,5,227,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_17.png" border="0" usemap="#aSimulationState_1_1RotorConfig" alt=""/>
+<tr><td><img src="inherit_graph_19.png" border="0" usemap="#aSimulationState_1_1RotorConfig" alt=""/>
 <map name="aSimulationState_1_1RotorConfig" id="aSimulationState_1_1RotorConfig">
 <area shape="rect" href="structSimulationState_1_1RotorConfig.html" title="Physical configuration for rotor/propeller models." alt="" coords="5,5,216,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_18.png" border="0" usemap="#aSimulationState_1_1RotorHistory" alt=""/>
+<tr><td><img src="inherit_graph_20.png" border="0" usemap="#aSimulationState_1_1RotorHistory" alt=""/>
 <map name="aSimulationState_1_1RotorHistory" id="aSimulationState_1_1RotorHistory">
 <area shape="rect" href="structSimulationState_1_1RotorHistory.html" title=" " alt="" coords="5,5,221,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_19.png" border="0" usemap="#aSimulationState_1_1RotorSample" alt=""/>
+<tr><td><img src="inherit_graph_21.png" border="0" usemap="#aSimulationState_1_1RotorSample" alt=""/>
 <map name="aSimulationState_1_1RotorSample" id="aSimulationState_1_1RotorSample">
 <area shape="rect" href="structSimulationState_1_1RotorSample.html" title="Historical sample of rotor telemetry for one motor." alt="" coords="5,5,224,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_20.png" border="0" usemap="#aSimulationState_1_1RotorTelemetry" alt=""/>
+<tr><td><img src="inherit_graph_22.png" border="0" usemap="#aSimulationState_1_1RotorTelemetry" alt=""/>
 <map name="aSimulationState_1_1RotorTelemetry" id="aSimulationState_1_1RotorTelemetry">
 <area shape="rect" href="structSimulationState_1_1RotorTelemetry.html" title="Computed rotor performance metrics." alt="" coords="5,5,240,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_21.png" border="0" usemap="#aSimulationState_1_1SensorFrame" alt=""/>
+<tr><td><img src="inherit_graph_23.png" border="0" usemap="#aSimulationState_1_1SensorFrame" alt=""/>
 <map name="aSimulationState_1_1SensorFrame" id="aSimulationState_1_1SensorFrame">
 <area shape="rect" href="structSimulationState_1_1SensorFrame.html" title="Simulated IMU sensor measurements." alt="" coords="5,5,224,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_22.png" border="0" usemap="#aSimulationState_1_1SensorHistory" alt=""/>
+<tr><td><img src="inherit_graph_24.png" border="0" usemap="#aSimulationState_1_1SensorHistory" alt=""/>
 <map name="aSimulationState_1_1SensorHistory" id="aSimulationState_1_1SensorHistory">
 <area shape="rect" href="structSimulationState_1_1SensorHistory.html" title=" " alt="" coords="5,5,231,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_23.png" border="0" usemap="#aSimulationState_1_1SensorSample" alt=""/>
+<tr><td><img src="inherit_graph_25.png" border="0" usemap="#aSimulationState_1_1SensorSample" alt=""/>
 <map name="aSimulationState_1_1SensorSample" id="aSimulationState_1_1SensorSample">
 <area shape="rect" href="structSimulationState_1_1SensorSample.html" title="Historical IMU sensor sample." alt="" coords="5,5,232,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_24.png" border="0" usemap="#aSimulationState_1_1SimulationControl" alt=""/>
+<tr><td><img src="inherit_graph_26.png" border="0" usemap="#aSimulationState_1_1SimulationControl" alt=""/>
 <map name="aSimulationState_1_1SimulationControl" id="aSimulationState_1_1SimulationControl">
 <area shape="rect" href="structSimulationState_1_1SimulationControl.html" title="User&#45;controlled simulation playback parameters." alt="" coords="5,5,209,47"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_25.png" border="0" usemap="#aTransform" alt=""/>
+<tr><td><img src="inherit_graph_27.png" border="0" usemap="#aSimulationState_1_1VehicleConfig" alt=""/>
+<map name="aSimulationState_1_1VehicleConfig" id="aSimulationState_1_1VehicleConfig">
+<area shape="rect" href="structSimulationState_1_1VehicleConfig.html" title="Physical parameters for quadcopter model." alt="" coords="5,5,187,47"/>
+</map>
+</td></tr>
+<tr><td><img src="inherit_graph_28.png" border="0" usemap="#aTransform" alt=""/>
 <map name="aTransform" id="aTransform">
 <area shape="rect" href="classTransform.html" title=" " alt="" coords="5,5,92,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_26.png" border="0" usemap="#aui_1_1CardOptions" alt=""/>
+<tr><td><img src="inherit_graph_29.png" border="0" usemap="#aui_1_1CardOptions" alt=""/>
 <map name="aui_1_1CardOptions" id="aui_1_1CardOptions">
 <area shape="rect" href="structui_1_1CardOptions.html" title="Configuration options for Card widget." alt="" coords="5,5,128,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_27.png" border="0" usemap="#aui_1_1ChipConfig" alt=""/>
+<tr><td><img src="inherit_graph_30.png" border="0" usemap="#aui_1_1ChipConfig" alt=""/>
 <map name="aui_1_1ChipConfig" id="aui_1_1ChipConfig">
 <area shape="rect" href="structui_1_1ChipConfig.html" title=" " alt="" coords="5,5,117,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_28.png" border="0" usemap="#aui_1_1FontSet" alt=""/>
+<tr><td><img src="inherit_graph_31.png" border="0" usemap="#aui_1_1FontSet" alt=""/>
 <map name="aui_1_1FontSet" id="aui_1_1FontSet">
 <area shape="rect" href="structui_1_1FontSet.html" title="Typography system (font families and sizes)" alt="" coords="5,5,96,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_29.png" border="0" usemap="#aui_1_1Palette" alt=""/>
+<tr><td><img src="inherit_graph_32.png" border="0" usemap="#aui_1_1Palette" alt=""/>
 <map name="aui_1_1Palette" id="aui_1_1Palette">
 <area shape="rect" href="structui_1_1Palette.html" title="Color palette (design tokens)" alt="" coords="5,5,92,32"/>
 </map>
 </td></tr>
-<tr><td><img src="inherit_graph_30.png" border="0" usemap="#aui_1_1PlotConfig" alt=""/>
+<tr><td><img src="inherit_graph_33.png" border="0" usemap="#aui_1_1PlotConfig" alt=""/>
 <map name="aui_1_1PlotConfig" id="aui_1_1PlotConfig">
 <area shape="rect" href="structui_1_1PlotConfig.html" title="Plot configuration options." alt="" coords="5,5,113,32"/>
 </map>

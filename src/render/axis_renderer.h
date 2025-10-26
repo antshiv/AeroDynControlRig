@@ -60,6 +60,15 @@ public:
     void render3D(const Transform& transform);
 
     /**
+     * @brief Render axis gizmo in screen corner (overlay)
+     * @param transform Transformation utilities (view/projection matrices)
+     * @param windowWidth Width of the window in pixels
+     * @param windowHeight Height of the window in pixels
+     * @param corner 0=bottom-left, 1=bottom-right, 2=top-left, 3=top-right
+     */
+    void renderCornerGizmo(const Transform& transform, int windowWidth, int windowHeight, int corner = 3);
+
+    /**
      * @brief Release OpenGL resources
      */
     void shutdown();

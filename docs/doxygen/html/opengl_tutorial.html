@@ -88,77 +88,77 @@ $(document).ready(function(){initNavTree('opengl_tutorial.html',''); initResizab
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#autotoc_md330">OpenGL Deep Dive Tutorial</a><ul><li class="level2"><a href="#autotoc_md331">What is OpenGL?</a><ul><li class="level3"><a href="#autotoc_md332">Why Use OpenGL?</a></li>
-<li class="level3"><a href="#autotoc_md333">OpenGL in Our Application</a></li>
+<ul><li class="level1"><a href="#autotoc_md353">OpenGL Deep Dive Tutorial</a><ul><li class="level2"><a href="#autotoc_md354">What is OpenGL?</a><ul><li class="level3"><a href="#autotoc_md355">Why Use OpenGL?</a></li>
+<li class="level3"><a href="#autotoc_md356">OpenGL in Our Application</a></li>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md335">The Mental Model: CPU ↔ GPU Pipeline</a></li>
-<li class="level2"><a href="#autotoc_md337">Core Concept 1: Vertices</a><ul><li class="level3"><a href="#autotoc_md338">What is a Vertex?</a></li>
-<li class="level3"><a href="#autotoc_md339">Example from &lt;tt&gt;renderer.cpp&lt;/tt&gt;</a></li>
+<li class="level2"><a href="#autotoc_md358">The Mental Model: CPU ↔ GPU Pipeline</a></li>
+<li class="level2"><a href="#autotoc_md360">Core Concept 1: Vertices</a><ul><li class="level3"><a href="#autotoc_md361">What is a Vertex?</a></li>
+<li class="level3"><a href="#autotoc_md362">Example from &lt;tt&gt;renderer.cpp&lt;/tt&gt;</a></li>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md341">Core Concept 2: VBO (Vertex Buffer Object)</a><ul><li class="level3"><a href="#autotoc_md342">What is a VBO?</a></li>
-<li class="level3"><a href="#autotoc_md343">Why Use VBOs?</a></li>
-<li class="level3"><a href="#autotoc_md344">Creating a VBO in Our Code</a></li>
-<li class="level3"><a href="#autotoc_md345">Buffer Usage Hints</a></li>
+<li class="level2"><a href="#autotoc_md364">Core Concept 2: VBO (Vertex Buffer Object)</a><ul><li class="level3"><a href="#autotoc_md365">What is a VBO?</a></li>
+<li class="level3"><a href="#autotoc_md366">Why Use VBOs?</a></li>
+<li class="level3"><a href="#autotoc_md367">Creating a VBO in Our Code</a></li>
+<li class="level3"><a href="#autotoc_md368">Buffer Usage Hints</a></li>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md347">Core Concept 3: VAO (Vertex Array Object)</a><ul><li class="level3"><a href="#autotoc_md348">What is a VAO?</a></li>
-<li class="level3"><a href="#autotoc_md349">Analogy</a></li>
-<li class="level3"><a href="#autotoc_md350">Creating a VAO in Our Code</a></li>
-<li class="level3"><a href="#autotoc_md351">Understanding Stride and Offset</a></li>
+<li class="level2"><a href="#autotoc_md370">Core Concept 3: VAO (Vertex Array Object)</a><ul><li class="level3"><a href="#autotoc_md371">What is a VAO?</a></li>
+<li class="level3"><a href="#autotoc_md372">Analogy</a></li>
+<li class="level3"><a href="#autotoc_md373">Creating a VAO in Our Code</a></li>
+<li class="level3"><a href="#autotoc_md374">Understanding Stride and Offset</a></li>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md353">Core Concept 4: EBO (Element Buffer Object)</a><ul><li class="level3"><a href="#autotoc_md354">What is an EBO?</a></li>
-<li class="level3"><a href="#autotoc_md355">The Problem: Duplicate Vertices</a></li>
-<li class="level3"><a href="#autotoc_md356">The Solution: Indexed Drawing</a></li>
-<li class="level3"><a href="#autotoc_md357">Creating an EBO</a></li>
-<li class="level3"><a href="#autotoc_md358">Drawing with Indices</a></li>
+<li class="level2"><a href="#autotoc_md376">Core Concept 4: EBO (Element Buffer Object)</a><ul><li class="level3"><a href="#autotoc_md377">What is an EBO?</a></li>
+<li class="level3"><a href="#autotoc_md378">The Problem: Duplicate Vertices</a></li>
+<li class="level3"><a href="#autotoc_md379">The Solution: Indexed Drawing</a></li>
+<li class="level3"><a href="#autotoc_md380">Creating an EBO</a></li>
+<li class="level3"><a href="#autotoc_md381">Drawing with Indices</a></li>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md360">Core Concept 5: Shaders</a><ul><li class="level3"><a href="#autotoc_md361">What are Shaders?</a></li>
-<li class="level3"><a href="#autotoc_md362">Two Required Shaders</a></li>
-<li class="level3"><a href="#autotoc_md363">Vertex Shader Example (from &lt;tt&gt;shaders/vertex_shader.glsl&lt;/tt&gt;)</a></li>
-<li class="level3"><a href="#autotoc_md364">Fragment Shader Example (from &lt;tt&gt;shaders/fragment_shader.glsl&lt;/tt&gt;)</a></li>
-<li class="level3"><a href="#autotoc_md365">Compiling Shaders in C++</a></li>
+<li class="level2"><a href="#autotoc_md383">Core Concept 5: Shaders</a><ul><li class="level3"><a href="#autotoc_md384">What are Shaders?</a></li>
+<li class="level3"><a href="#autotoc_md385">Two Required Shaders</a></li>
+<li class="level3"><a href="#autotoc_md386">Vertex Shader Example (from &lt;tt&gt;shaders/vertex_shader.glsl&lt;/tt&gt;)</a></li>
+<li class="level3"><a href="#autotoc_md387">Fragment Shader Example (from &lt;tt&gt;shaders/fragment_shader.glsl&lt;/tt&gt;)</a></li>
+<li class="level3"><a href="#autotoc_md388">Compiling Shaders in C++</a></li>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md367">Core Concept 6: Uniforms</a><ul><li class="level3"><a href="#autotoc_md368">What are Uniforms?</a></li>
-<li class="level3"><a href="#autotoc_md369">Setting Uniforms in Our Code</a></li>
-<li class="level3"><a href="#autotoc_md370">Uniform Types</a></li>
+<li class="level2"><a href="#autotoc_md390">Core Concept 6: Uniforms</a><ul><li class="level3"><a href="#autotoc_md391">What are Uniforms?</a></li>
+<li class="level3"><a href="#autotoc_md392">Setting Uniforms in Our Code</a></li>
+<li class="level3"><a href="#autotoc_md393">Uniform Types</a></li>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md372">Core Concept 7: Coordinate Transformations</a><ul><li class="level3"><a href="#autotoc_md373">The Four Coordinate Spaces</a></li>
-<li class="level3"><a href="#autotoc_md374">1. Local Space (Model Space)</a></li>
-<li class="level3"><a href="#autotoc_md375">2. World Space</a></li>
-<li class="level3"><a href="#autotoc_md376">3. View Space (Camera Space)</a></li>
-<li class="level3"><a href="#autotoc_md377">4. Clip Space (NDC - Normalized Device Coordinates)</a></li>
+<li class="level2"><a href="#autotoc_md395">Core Concept 7: Coordinate Transformations</a><ul><li class="level3"><a href="#autotoc_md396">The Four Coordinate Spaces</a></li>
+<li class="level3"><a href="#autotoc_md397">1. Local Space (Model Space)</a></li>
+<li class="level3"><a href="#autotoc_md398">2. World Space</a></li>
+<li class="level3"><a href="#autotoc_md399">3. View Space (Camera Space)</a></li>
+<li class="level3"><a href="#autotoc_md400">4. Clip Space (NDC - Normalized Device Coordinates)</a></li>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md379">Core Concept 8: FBO (Framebuffer Object)</a><ul><li class="level3"><a href="#autotoc_md380">What is an FBO?</a></li>
-<li class="level3"><a href="#autotoc_md381">Why Use FBOs?</a></li>
-<li class="level3"><a href="#autotoc_md382">Creating an FBO in Our Code</a></li>
-<li class="level3"><a href="#autotoc_md383">Rendering to an FBO</a></li>
+<li class="level2"><a href="#autotoc_md402">Core Concept 8: FBO (Framebuffer Object)</a><ul><li class="level3"><a href="#autotoc_md403">What is an FBO?</a></li>
+<li class="level3"><a href="#autotoc_md404">Why Use FBOs?</a></li>
+<li class="level3"><a href="#autotoc_md405">Creating an FBO in Our Code</a></li>
+<li class="level3"><a href="#autotoc_md406">Rendering to an FBO</a></li>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md385">Complete Rendering Loop</a></li>
-<li class="level2"><a href="#autotoc_md387">Common Pitfalls and Solutions</a><ul><li class="level3"><a href="#autotoc_md388">Problem: Black Screen</a></li>
-<li class="level3"><a href="#autotoc_md389">Problem: Vertices in Wrong Position</a></li>
-<li class="level3"><a href="#autotoc_md390">Problem: Memory Leaks</a></li>
+<li class="level2"><a href="#autotoc_md408">Complete Rendering Loop</a></li>
+<li class="level2"><a href="#autotoc_md410">Common Pitfalls and Solutions</a><ul><li class="level3"><a href="#autotoc_md411">Problem: Black Screen</a></li>
+<li class="level3"><a href="#autotoc_md412">Problem: Vertices in Wrong Position</a></li>
+<li class="level3"><a href="#autotoc_md413">Problem: Memory Leaks</a></li>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md392">Performance Tips</a><ul><li class="level3"><a href="#autotoc_md393">1. Minimize State Changes</a></li>
-<li class="level3"><a href="#autotoc_md394">2. Use Instancing for Repeated Objects</a></li>
-<li class="level3"><a href="#autotoc_md395">3. Batch Similar Objects</a></li>
+<li class="level2"><a href="#autotoc_md415">Performance Tips</a><ul><li class="level3"><a href="#autotoc_md416">1. Minimize State Changes</a></li>
+<li class="level3"><a href="#autotoc_md417">2. Use Instancing for Repeated Objects</a></li>
+<li class="level3"><a href="#autotoc_md418">3. Batch Similar Objects</a></li>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md397">Debugging Tools</a><ul><li class="level3"><a href="#autotoc_md398">1. glGetError()</a></li>
-<li class="level3"><a href="#autotoc_md399">2. Shader Info Log</a></li>
-<li class="level3"><a href="#autotoc_md400">3. RenderDoc</a></li>
+<li class="level2"><a href="#autotoc_md420">Debugging Tools</a><ul><li class="level3"><a href="#autotoc_md421">1. glGetError()</a></li>
+<li class="level3"><a href="#autotoc_md422">2. Shader Info Log</a></li>
+<li class="level3"><a href="#autotoc_md423">3. RenderDoc</a></li>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md402">Next Steps</a></li>
-<li class="level2"><a href="#autotoc_md403">Resources</a></li>
+<li class="level2"><a href="#autotoc_md425">Next Steps</a></li>
+<li class="level2"><a href="#autotoc_md426">Resources</a></li>
 </ul>
 </li>
 </ul>
@@ -169,12 +169,12 @@ $(document).ready(function(){initNavTree('opengl_tutorial.html',''); initResizab
 </ul>
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md330"></a>
+<h1><a class="anchor" id="autotoc_md353"></a>
 OpenGL Deep Dive Tutorial</h1>
-<h2><a class="anchor" id="autotoc_md331"></a>
+<h2><a class="anchor" id="autotoc_md354"></a>
 What is OpenGL?</h2>
 <p><b>OpenGL (Open Graphics Library)</b> is a cross-platform API for rendering 2D and 3D graphics. Think of it as a translator between your C++ code and your graphics card (GPU).</p>
-<h3><a class="anchor" id="autotoc_md332"></a>
+<h3><a class="anchor" id="autotoc_md355"></a>
 Why Use OpenGL?</h3>
 <ul>
 <li><b>Hardware Acceleration</b>: GPU can process millions of vertices in parallel</li>
@@ -182,7 +182,7 @@ Why Use OpenGL?</h3>
 <li><b>Mature</b>: Battle-tested since 1992</li>
 <li><b>Well-Documented</b>: Tons of resources and tutorials</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md333"></a>
+<h3><a class="anchor" id="autotoc_md356"></a>
 OpenGL in Our Application</h3>
 <p>We use <b>OpenGL 3.3 Core Profile</b> - a modern version that:</p><ul>
 <li>Removes deprecated legacy features</li>
@@ -190,7 +190,7 @@ OpenGL in Our Application</h3>
 <li>Requires explicit vertex specification (VAO/VBO)</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md335"></a>
+<h2><a class="anchor" id="autotoc_md358"></a>
 The Mental Model: CPU ↔ GPU Pipeline</h2>
 <p>Before diving into code, understand the <b>fundamental concept</b>:</p>
 <div class="fragment"><div class="line">┌─────────────────────────────────────────────────────────────┐</div>
@@ -211,15 +211,15 @@ The Mental Model: CPU ↔ GPU Pipeline</h2>
 <div class="line">└─────────────────────────────────────────────────────────────┘</div>
 </div><!-- fragment --><p><b>Key Insight</b>: You prepare data once, then the GPU processes it in parallel at incredible speed.</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md337"></a>
+<h2><a class="anchor" id="autotoc_md360"></a>
 Core Concept 1: Vertices</h2>
-<h3><a class="anchor" id="autotoc_md338"></a>
+<h3><a class="anchor" id="autotoc_md361"></a>
 What is a Vertex?</h3>
 <p>A <b>vertex</b> is a point in space with associated data. In our app, each vertex has:</p><ul>
 <li><b>Position</b> (x, y, z)</li>
 <li><b>Color</b> (r, g, b)</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md339"></a>
+<h3><a class="anchor" id="autotoc_md362"></a>
 Example from &lt;tt&gt;renderer.cpp&lt;/tt&gt;</h3>
 <div class="fragment"><div class="line"><span class="comment">// Define 8 vertices for a cube</span></div>
 <div class="line"><span class="comment">// Each vertex: 6 floats (3 for position + 3 for color)</span></div>
@@ -234,18 +234,18 @@ Example from &lt;tt&gt;renderer.cpp&lt;/tt&gt;</h3>
 <div class="line">};</div>
 </div><!-- fragment --><p><b>Why floats?</b> GPUs work with floating-point numbers. Coordinates are typically in range [-1, 1] for normalized device coordinates (NDC).</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md341"></a>
+<h2><a class="anchor" id="autotoc_md364"></a>
 Core Concept 2: VBO (Vertex Buffer Object)</h2>
-<h3><a class="anchor" id="autotoc_md342"></a>
+<h3><a class="anchor" id="autotoc_md365"></a>
 What is a VBO?</h3>
 <p>A <b>VBO</b> is a chunk of GPU memory that stores vertex data. Think of it as an array on the graphics card.</p>
-<h3><a class="anchor" id="autotoc_md343"></a>
+<h3><a class="anchor" id="autotoc_md366"></a>
 Why Use VBOs?</h3>
 <ul>
 <li><b>Performance</b>: Data stays on GPU (no CPU→GPU transfer every frame)</li>
 <li><b>Efficiency</b>: GPU can access data instantly</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md344"></a>
+<h3><a class="anchor" id="autotoc_md367"></a>
 Creating a VBO in Our Code</h3>
 <div class="fragment"><div class="line"><span class="comment">// From renderer.cpp setupCubeGeometry3D()</span></div>
 <div class="line"> </div>
@@ -264,7 +264,7 @@ Creating a VBO in Our Code</h3>
 <div class="line">    GL_STATIC_DRAW             <span class="comment">// Usage hint: data won&#39;t change</span></div>
 <div class="line">);</div>
 </div><!-- fragment --><p><b>Think of binding like selecting a tool</b>: You "bind" (select) a VBO before operating on it.</p>
-<h3><a class="anchor" id="autotoc_md345"></a>
+<h3><a class="anchor" id="autotoc_md368"></a>
 Buffer Usage Hints</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -277,22 +277,22 @@ Buffer Usage Hints</h3>
 <td class="markdownTableBodyNone"><code>GL_STREAM_DRAW</code>   </td><td class="markdownTableBodyNone">Data changes every frame   </td><td class="markdownTableBodyNone">Particle systems, dynamic meshes   </td></tr>
 </table>
 <hr  />
-<h2><a class="anchor" id="autotoc_md347"></a>
+<h2><a class="anchor" id="autotoc_md370"></a>
 Core Concept 3: VAO (Vertex Array Object)</h2>
-<h3><a class="anchor" id="autotoc_md348"></a>
+<h3><a class="anchor" id="autotoc_md371"></a>
 What is a VAO?</h3>
 <p>A <b>VAO</b> stores the <b>format</b> of your vertex data. It remembers:</p><ul>
 <li>Which VBO to use</li>
 <li>How data is laid out (stride, offset)</li>
 <li>Which attributes are enabled</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md349"></a>
+<h3><a class="anchor" id="autotoc_md372"></a>
 Analogy</h3>
 <ul>
 <li><b>VBO</b> = A filing cabinet (stores the data)</li>
 <li><b>VAO</b> = An index card (tells you how files are organized)</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md350"></a>
+<h3><a class="anchor" id="autotoc_md373"></a>
 Creating a VAO in Our Code</h3>
 <div class="fragment"><div class="line"><span class="comment">// From renderer.cpp setupCubeGeometry3D()</span></div>
 <div class="line"> </div>
@@ -327,7 +327,7 @@ Creating a VAO in Our Code</h3>
 <div class="line">    (<span class="keywordtype">void</span>*)(3 * <span class="keyword">sizeof</span>(<span class="keywordtype">float</span>))  <span class="comment">// Offset: skip 3 floats (position)</span></div>
 <div class="line">);</div>
 <div class="line">glEnableVertexAttribArray(1);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md351"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md374"></a>
 Understanding Stride and Offset</h3>
 <p>Our vertex data layout: </p><div class="fragment"><div class="line">[x, y, z, r, g, b] [x, y, z, r, g, b] [x, y, z, r, g, b] ...</div>
 <div class="line"> \_____/  \_____/</div>
@@ -338,16 +338,16 @@ Understanding Stride and Offset</h3>
 <li><b>Color offset</b>: 3 floats (skip position to get to color)</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md353"></a>
+<h2><a class="anchor" id="autotoc_md376"></a>
 Core Concept 4: EBO (Element Buffer Object)</h2>
-<h3><a class="anchor" id="autotoc_md354"></a>
+<h3><a class="anchor" id="autotoc_md377"></a>
 What is an EBO?</h3>
 <p>An <b>EBO</b> (or <b>IBO</b> - Index Buffer Object) stores <b>indices</b> that reference vertices, avoiding duplication.</p>
-<h3><a class="anchor" id="autotoc_md355"></a>
+<h3><a class="anchor" id="autotoc_md378"></a>
 The Problem: Duplicate Vertices</h3>
 <p>A cube has 6 faces. Each face has 2 triangles. That's 12 triangles × 3 vertices = <b>36 vertices</b>.</p>
 <p>But a cube only has <b>8 unique corners</b>! We're duplicating data.</p>
-<h3><a class="anchor" id="autotoc_md356"></a>
+<h3><a class="anchor" id="autotoc_md379"></a>
 The Solution: Indexed Drawing</h3>
 <div class="fragment"><div class="line"><span class="comment">// From renderer.cpp</span></div>
 <div class="line"> </div>
@@ -366,7 +366,7 @@ The Solution: Indexed Drawing</h3>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// ... more faces</span></div>
 <div class="line">};</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md357"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md380"></a>
 Creating an EBO</h3>
 <div class="fragment"><div class="line">GLuint ebo;</div>
 <div class="line">glGenBuffers(1, &amp;ebo);</div>
@@ -377,7 +377,7 @@ Creating an EBO</h3>
 <div class="line">    indices,</div>
 <div class="line">    GL_STATIC_DRAW</div>
 <div class="line">);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md358"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md381"></a>
 Drawing with Indices</h3>
 <div class="fragment"><div class="line"><span class="comment">// Instead of:</span></div>
 <div class="line"><span class="comment">// glDrawArrays(GL_TRIANGLES, 0, 36);  // Draw 36 vertices</span></div>
@@ -391,18 +391,18 @@ Drawing with Indices</h3>
 <div class="line">);</div>
 </div><!-- fragment --><p><b>Benefit</b>: 8 vertices instead of 36! Saves memory and bandwidth.</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md360"></a>
+<h2><a class="anchor" id="autotoc_md383"></a>
 Core Concept 5: Shaders</h2>
-<h3><a class="anchor" id="autotoc_md361"></a>
+<h3><a class="anchor" id="autotoc_md384"></a>
 What are Shaders?</h3>
 <p><b>Shaders</b> are programs that run <b>on the GPU</b>. Written in <b>GLSL</b> (OpenGL Shading Language), they look like C.</p>
-<h3><a class="anchor" id="autotoc_md362"></a>
+<h3><a class="anchor" id="autotoc_md385"></a>
 Two Required Shaders</h3>
 <ol type="1">
 <li><b>Vertex Shader</b>: Runs once per vertex (transforms position)</li>
 <li><b>Fragment Shader</b>: Runs once per fragment/pixel (determines color)</li>
 </ol>
-<h3><a class="anchor" id="autotoc_md363"></a>
+<h3><a class="anchor" id="autotoc_md386"></a>
 Vertex Shader Example (from &lt;tt&gt;shaders/vertex_shader.glsl&lt;/tt&gt;)</h3>
 <div class="fragment"><div class="line">#version 330 core</div>
 <div class="line"> </div>
@@ -430,7 +430,7 @@ Vertex Shader Example (from &lt;tt&gt;shaders/vertex_shader.glsl&lt;/tt&gt;)</h3
 <li><code>uniform</code>: Set from C++ code, same for all vertices</li>
 <li><code>gl_Position</code>: Built-in output (final vertex position)</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md364"></a>
+<h3><a class="anchor" id="autotoc_md387"></a>
 Fragment Shader Example (from &lt;tt&gt;shaders/fragment_shader.glsl&lt;/tt&gt;)</h3>
 <div class="fragment"><div class="line">#version 330 core</div>
 <div class="line"> </div>
@@ -444,7 +444,7 @@ Fragment Shader Example (from &lt;tt&gt;shaders/fragment_shader.glsl&lt;/tt&gt;)
 <div class="line">    FragColor = vec4(ourColor, 1.0);  // RGB + Alpha</div>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Interpolation Magic</b>: If vertex 0 is red and vertex 1 is green, pixels in between smoothly blend from red to green!</p>
-<h3><a class="anchor" id="autotoc_md365"></a>
+<h3><a class="anchor" id="autotoc_md388"></a>
 Compiling Shaders in C++</h3>
 <div class="fragment"><div class="line"><span class="comment">// From renderer.cpp loadShader()</span></div>
 <div class="line"> </div>
@@ -479,16 +479,16 @@ Compiling Shaders in C++</h3>
 <div class="line">glDeleteShader(vertexShader);</div>
 <div class="line">glDeleteShader(fragmentShader);</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md367"></a>
+<h2><a class="anchor" id="autotoc_md390"></a>
 Core Concept 6: Uniforms</h2>
-<h3><a class="anchor" id="autotoc_md368"></a>
+<h3><a class="anchor" id="autotoc_md391"></a>
 What are Uniforms?</h3>
 <p><b>Uniforms</b> are variables in shaders that:</p><ul>
 <li>Are set from C++ code</li>
 <li>Remain constant for an entire draw call</li>
 <li>Can be accessed by all vertices/fragments</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md369"></a>
+<h3><a class="anchor" id="autotoc_md392"></a>
 Setting Uniforms in Our Code</h3>
 <div class="fragment"><div class="line"><span class="comment">// From renderer.cpp renderFrame3D()</span></div>
 <div class="line"> </div>
@@ -501,7 +501,7 @@ Setting Uniforms in Our Code</h3>
 <div class="line">glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(modelMatrix));</div>
 <div class="line">glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(viewMatrix));</div>
 <div class="line">glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projMatrix));</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md370"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md393"></a>
 Uniform Types</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -516,9 +516,9 @@ Uniform Types</h3>
 <td class="markdownTableBodyNone"><code>glUniformMatrix4fv()</code>   </td><td class="markdownTableBodyNone"><code>mat4</code>   </td><td class="markdownTableBodyNone">Transformation matrices   </td></tr>
 </table>
 <hr  />
-<h2><a class="anchor" id="autotoc_md372"></a>
+<h2><a class="anchor" id="autotoc_md395"></a>
 Core Concept 7: Coordinate Transformations</h2>
-<h3><a class="anchor" id="autotoc_md373"></a>
+<h3><a class="anchor" id="autotoc_md396"></a>
 The Four Coordinate Spaces</h3>
 <p>Every vertex goes through <b>four transformations</b>:</p>
 <div class="fragment"><div class="line">Local Space          World Space         View Space          Clip Space</div>
@@ -535,13 +535,13 @@ The Four Coordinate Spaces</h3>
 <div class="line">    │                    │                    │                    │</div>
 <div class="line">    └────────────────────┴────────────────────┴────────────────────┘</div>
 <div class="line">                gl_Position = projection * view * model * localPos</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md374"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md397"></a>
 1. Local Space (Model Space)</h3>
 <p><b>What</b>: Coordinates relative to the object's origin</p>
 <p><b>Example</b>: A cube centered at (0, 0, 0) with size 1.0</p>
 <div class="fragment"><div class="line"><span class="comment">// Vertex positions are in local space</span></div>
 <div class="line">glm::vec3 vertex = glm::vec3(-0.5f, -0.5f, -0.5f);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md375"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md398"></a>
 2. World Space</h3>
 <p><b>What</b>: Coordinates in the global scene</p>
 <p><b>How</b>: Apply <b>model matrix</b></p>
@@ -551,7 +551,7 @@ The Four Coordinate Spaces</h3>
 <div class="line"> </div>
 <div class="line"><span class="comment">// This matrix might rotate the cube:</span></div>
 <div class="line"><span class="comment">// modelMatrix = glm::rotate(mat4(1.0), angle, axis);</span></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md376"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md399"></a>
 3. View Space (Camera Space)</h3>
 <p><b>What</b>: Coordinates relative to the camera</p>
 <p><b>How</b>: Apply <b>view matrix</b></p>
@@ -568,7 +568,7 @@ The Four Coordinate Spaces</h3>
 <div class="ttc" id="aclassCamera_html_a3fe5f351380fb118ffc600591769f049"><div class="ttname"><a href="classCamera.html#a3fe5f351380fb118ffc600591769f049">Camera::up</a></div><div class="ttdeci">glm::vec3 up</div><div class="ttdoc">Normalized up direction vector (local)</div><div class="ttdef"><b>Definition:</b> camera.h:48</div></div>
 <div class="ttc" id="aclassCamera_html_a8847cf29c9c124906ad5d97ecb5c55d1"><div class="ttname"><a href="classCamera.html#a8847cf29c9c124906ad5d97ecb5c55d1">Camera::front</a></div><div class="ttdeci">glm::vec3 front</div><div class="ttdoc">Normalized forward direction vector.</div><div class="ttdef"><b>Definition:</b> camera.h:47</div></div>
 </div><!-- fragment --><p><b>Think of it</b>: The world moves opposite to the camera. If camera moves right, world moves left.</p>
-<h3><a class="anchor" id="autotoc_md377"></a>
+<h3><a class="anchor" id="autotoc_md400"></a>
 4. Clip Space (NDC - Normalized Device Coordinates)</h3>
 <p><b>What</b>: Final coordinates in range [-1, 1] for x, y, z</p>
 <p><b>How</b>: Apply <b>projection matrix</b></p>
@@ -586,12 +586,12 @@ The Four Coordinate Spaces</h3>
 </div><!-- fragment --><p><b>Perspective</b>: Objects farther away appear smaller (realistic)</p>
 <p><b>Orthographic</b>: Objects stay same size regardless of distance (CAD, 2D)</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md379"></a>
+<h2><a class="anchor" id="autotoc_md402"></a>
 Core Concept 8: FBO (Framebuffer Object)</h2>
-<h3><a class="anchor" id="autotoc_md380"></a>
+<h3><a class="anchor" id="autotoc_md403"></a>
 What is an FBO?</h3>
 <p>A <b>Framebuffer</b> is the destination for rendering. By default, you render to the screen. An <b>FBO</b> lets you render to a texture instead.</p>
-<h3><a class="anchor" id="autotoc_md381"></a>
+<h3><a class="anchor" id="autotoc_md404"></a>
 Why Use FBOs?</h3>
 <p>In our application, we:</p><ol type="1">
 <li>Render 3D scene to an FBO (off-screen texture)</li>
@@ -599,7 +599,7 @@ Why Use FBOs?</h3>
 <li>Overlay UI on top</li>
 </ol>
 <p>This allows ImGui and OpenGL rendering to coexist!</p>
-<h3><a class="anchor" id="autotoc_md382"></a>
+<h3><a class="anchor" id="autotoc_md405"></a>
 Creating an FBO in Our Code</h3>
 <div class="fragment"><div class="line"><span class="comment">// From application.cpp ensureRenderTarget()</span></div>
 <div class="line"> </div>
@@ -653,7 +653,7 @@ Creating an FBO in Our Code</h3>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Step 7: Unbind (switch back to default framebuffer)</span></div>
 <div class="line">glBindFramebuffer(GL_FRAMEBUFFER, 0);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md383"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md406"></a>
 Rendering to an FBO</h3>
 <div class="fragment"><div class="line"><span class="comment">// From application.cpp renderSceneToTexture()</span></div>
 <div class="line"> </div>
@@ -672,7 +672,7 @@ Rendering to an FBO</h3>
 <div class="line"><span class="comment">// Step 5: Use texture in ImGui</span></div>
 <div class="line">ImGui::Image((<span class="keywordtype">void</span>*)(intptr_t)renderTexture, ImVec2(800, 600));</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md385"></a>
+<h2><a class="anchor" id="autotoc_md408"></a>
 Complete Rendering Loop</h2>
 <p>Putting it all together, here's what happens every frame in <code><a class="el" href="classApplication.html#af44c742342adf5305e430ff293f147c1" title="Execute one frame: update simulation, render 3D, render UI.">Application::tick()</a></code>:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> <a class="code" href="classApplication.html#af44c742342adf5305e430ff293f147c1">Application::tick</a>() {</div>
@@ -713,7 +713,7 @@ Complete Rendering Loop</h2>
 <div class="line">}</div>
 <div class="ttc" id="aclassApplication_html_a30d655c36d8fdd1158ca0522ce0770cd"><div class="ttname"><a href="classApplication.html#a30d655c36d8fdd1158ca0522ce0770cd">Application::camera</a></div><div class="ttdeci">Camera camera</div><div class="ttdoc">3D scene camera</div><div class="ttdef"><b>Definition:</b> application.h:48</div></div>
 <div class="ttc" id="aclassApplication_html_a32eeac4b1ccc4e25034a54214c1df85b"><div class="ttname"><a href="classApplication.html#a32eeac4b1ccc4e25034a54214c1df85b">Application::transform</a></div><div class="ttdeci">Transform transform</div><div class="ttdoc">Transformation matrix utilities.</div><div class="ttdef"><b>Definition:</b> application.h:47</div></div>
-<div class="ttc" id="aclassApplication_html_af44c742342adf5305e430ff293f147c1"><div class="ttname"><a href="classApplication.html#af44c742342adf5305e430ff293f147c1">Application::tick</a></div><div class="ttdeci">void tick()</div><div class="ttdoc">Execute one frame: update simulation, render 3D, render UI.</div><div class="ttdef"><b>Definition:</b> application.cpp:376</div></div>
+<div class="ttc" id="aclassApplication_html_af44c742342adf5305e430ff293f147c1"><div class="ttname"><a href="classApplication.html#af44c742342adf5305e430ff293f147c1">Application::tick</a></div><div class="ttdeci">void tick()</div><div class="ttdoc">Execute one frame: update simulation, render 3D, render UI.</div><div class="ttdef"><b>Definition:</b> application.cpp:380</div></div>
 <div class="ttc" id="aclassPanelManager_html_accbb2906139bed93e60a3b7390c43e90"><div class="ttname"><a href="classPanelManager.html#accbb2906139bed93e60a3b7390c43e90">PanelManager::drawAll</a></div><div class="ttdeci">void drawAll(SimulationState &amp;state, Camera &amp;camera)</div><div class="ttdoc">Render all registered panels.</div><div class="ttdef"><b>Definition:</b> panel_manager.cpp:10</div></div>
 <div class="ttc" id="aclassRenderer_html_a5a9884059a536cf621b3fc92bf4922ad"><div class="ttname"><a href="classRenderer.html#a5a9884059a536cf621b3fc92bf4922ad">Renderer::setModelMatrix</a></div><div class="ttdeci">void setModelMatrix(const float *modelMat)</div><div class="ttdoc">Set the model matrix (object → world transform)</div><div class="ttdef"><b>Definition:</b> renderer.cpp:98</div></div>
 <div class="ttc" id="aclassRenderer_html_a5c4417eb759e6322707ee2ab0ecb595f"><div class="ttname"><a href="classRenderer.html#a5c4417eb759e6322707ee2ab0ecb595f">Renderer::renderFrame3D</a></div><div class="ttdeci">void renderFrame3D(const Transform &amp;transform)</div><div class="ttdoc">Render a 3D frame with the current model/view/projection matrices.</div><div class="ttdef"><b>Definition:</b> renderer.cpp:235</div></div>
@@ -721,9 +721,9 @@ Complete Rendering Loop</h2>
 <div class="ttc" id="aclassRenderer_html_ae2535387a5c53cb9f04ba2599fe2a1c8"><div class="ttname"><a href="classRenderer.html#ae2535387a5c53cb9f04ba2599fe2a1c8">Renderer::setProjectionMatrix</a></div><div class="ttdeci">void setProjectionMatrix(const glm::mat4 &amp;proj)</div><div class="ttdoc">Set the projection matrix (camera → clip space transform)</div><div class="ttdef"><b>Definition:</b> renderer.cpp:107</div></div>
 <div class="ttc" id="astructSimulationState_html_acef78e29043f3602fe7456343636eb07"><div class="ttname"><a href="structSimulationState.html#acef78e29043f3602fe7456343636eb07">SimulationState::model_matrix</a></div><div class="ttdeci">glm::mat4 model_matrix</div><div class="ttdoc">Model transformation matrix for rendering.</div><div class="ttdef"><b>Definition:</b> simulation_state.h:32</div></div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md387"></a>
+<h2><a class="anchor" id="autotoc_md410"></a>
 Common Pitfalls and Solutions</h2>
-<h3><a class="anchor" id="autotoc_md388"></a>
+<h3><a class="anchor" id="autotoc_md411"></a>
 Problem: Black Screen</h3>
 <p><b>Causes</b>:</p><ul>
 <li>Forgot to bind VAO before drawing</li>
@@ -736,7 +736,7 @@ Problem: Black Screen</h3>
 <div class="line">glUseProgram(shaderProgram);</div>
 <div class="line"><span class="comment">// Set uniforms...</span></div>
 <div class="line">glDrawElements(...);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md389"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md412"></a>
 Problem: Vertices in Wrong Position</h3>
 <p><b>Causes</b>:</p><ul>
 <li>Matrix multiplication order wrong</li>
@@ -748,7 +748,7 @@ Problem: Vertices in Wrong Position</h3>
 <div class="line"> </div>
 <div class="line"><span class="comment">// GLM uses radians</span></div>
 <div class="line">glm::perspective(glm::radians(45.0f), aspect, near, far);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md390"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md413"></a>
 Problem: Memory Leaks</h3>
 <p><b>Causes</b>:</p><ul>
 <li>Not deleting buffers/textures when done</li>
@@ -759,9 +759,9 @@ Problem: Memory Leaks</h3>
 <div class="line">glDeleteBuffers(1, &amp;ebo);</div>
 <div class="line">glDeleteProgram(shaderProgram);</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md392"></a>
+<h2><a class="anchor" id="autotoc_md415"></a>
 Performance Tips</h2>
-<h3><a class="anchor" id="autotoc_md393"></a>
+<h3><a class="anchor" id="autotoc_md416"></a>
 1. Minimize State Changes</h3>
 <p><b>Bad</b> (slow): </p><div class="fragment"><div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 1000; i++) {</div>
 <div class="line">    glBindVertexArray(vao[i]);</div>
@@ -772,23 +772,23 @@ Performance Tips</h2>
 <div class="line">    <span class="comment">// Update uniforms if needed</span></div>
 <div class="line">    glDrawElements(...);</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md394"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md417"></a>
 2. Use Instancing for Repeated Objects</h3>
 <div class="fragment"><div class="line"><span class="comment">// Draw 1000 cubes in one call</span></div>
 <div class="line">glDrawElementsInstanced(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0, 1000);</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md395"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md418"></a>
 3. Batch Similar Objects</h3>
 <p>Render all opaque objects first, then all transparent objects.</p>
 <hr  />
-<h2><a class="anchor" id="autotoc_md397"></a>
+<h2><a class="anchor" id="autotoc_md420"></a>
 Debugging Tools</h2>
-<h3><a class="anchor" id="autotoc_md398"></a>
+<h3><a class="anchor" id="autotoc_md421"></a>
 1. glGetError()</h3>
 <div class="fragment"><div class="line">GLenum err = glGetError();</div>
 <div class="line"><span class="keywordflow">if</span> (err != GL_NO_ERROR) {</div>
 <div class="line">    std::cerr &lt;&lt; <span class="stringliteral">&quot;OpenGL Error: &quot;</span> &lt;&lt; err &lt;&lt; std::endl;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md399"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md422"></a>
 2. Shader Info Log</h3>
 <div class="fragment"><div class="line">GLint success;</div>
 <div class="line">glGetShaderiv(shader, GL_COMPILE_STATUS, &amp;success);</div>
@@ -797,7 +797,7 @@ Debugging Tools</h2>
 <div class="line">    glGetShaderInfoLog(shader, 512, NULL, infoLog);</div>
 <div class="line">    std::cerr &lt;&lt; <span class="stringliteral">&quot;Shader Error:\n&quot;</span> &lt;&lt; infoLog &lt;&lt; std::endl;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md400"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md423"></a>
 3. RenderDoc</h3>
 <p>Download <b>RenderDoc</b> (free tool) to:</p><ul>
 <li>Capture frames</li>
@@ -806,7 +806,7 @@ Debugging Tools</h2>
 <li>Debug shaders</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md402"></a>
+<h2><a class="anchor" id="autotoc_md425"></a>
 Next Steps</h2>
 <ol type="1">
 <li><b>Modify the cube</b>: Change colors in <code><a class="el" href="renderer_8cpp.html">renderer.cpp</a></code></li>
@@ -814,7 +814,7 @@ Next Steps</h2>
 <li><b>Experiment with shaders</b>: Add lighting or textures</li>
 <li><b>Learn about</b>: Textures, lighting, normal mapping</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md403"></a>
+<h2><a class="anchor" id="autotoc_md426"></a>
 Resources</h2>
 <ul>
 <li><a href="https://learnopengl.com/">LearnOpenGL</a> - Best OpenGL tutorial</li>

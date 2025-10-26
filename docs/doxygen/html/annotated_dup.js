@@ -20,6 +20,7 @@ var annotated_dup =
     [ "Panel", "classPanel.html", "classPanel" ],
     [ "PanelManager", "classPanelManager.html", "classPanelManager" ],
     [ "PowerPanel", "classPowerPanel.html", "classPowerPanel" ],
+    [ "QuadcopterDynamicsModule", "classQuadcopterDynamicsModule.html", "classQuadcopterDynamicsModule" ],
     [ "QuaternionDemoModule", "classQuaternionDemoModule.html", "classQuaternionDemoModule" ],
     [ "Renderer", "classRenderer.html", "classRenderer" ],
     [ "RingBuffer", "structRingBuffer.html", "structRingBuffer" ],

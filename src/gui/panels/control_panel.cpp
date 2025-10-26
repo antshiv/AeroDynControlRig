@@ -30,7 +30,7 @@ void ControlPanel::draw(SimulationState& state, Camera& camera) {
     if (!state.control.manual_rotation_mode) {
         ImGui::Text("Hold Q/E/Arrows/I/K/J/L to spin  |  Space: Stop");
     } else {
-        ImGui::Text("W/A/S/D/Q/E: 5\xC2\xB0 steps  |  Shift+key: 1\xC2\xB0");
+        ImGui::Text("WASD/QE/IJKL/Arrows: 5\xC2\xB0 steps  |  Shift+key: 1\xC2\xB0");
     }
 
     ImGui::Separator();
@@ -69,13 +69,16 @@ void ControlPanel::draw(SimulationState& state, Camera& camera) {
         ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.2f, 1.0f), "MANUAL MODE - Discrete Step Rotation");
         ImGui::Indent();
         ImGui::Text("For testing/debugging quaternions:");
-        ImGui::BulletText("W / S   - Pitch up/down (5\xC2\xB0 steps)");
-        ImGui::BulletText("A / D   - Roll left/right (5\xC2\xB0 steps)");
-        ImGui::BulletText("Q / E   - Yaw left/right (5\xC2\xB0 steps)");
-        ImGui::BulletText("R       - Reset to identity quaternion");
+        ImGui::BulletText("W/I/Up      - Pitch up (5\xC2\xB0 steps)");
+        ImGui::BulletText("S/K/Down    - Pitch down (5\xC2\xB0 steps)");
+        ImGui::BulletText("A           - Roll left (5\xC2\xB0 steps)");
+        ImGui::BulletText("D           - Roll right (5\xC2\xB0 steps)");
+        ImGui::BulletText("Q/J/Left    - Yaw left (5\xC2\xB0 steps)");
+        ImGui::BulletText("E/L/Right   - Yaw right (5\xC2\xB0 steps)");
+        ImGui::BulletText("R           - Reset to identity quaternion");
         ImGui::Spacing();
         ImGui::Text("Fine control (hold Shift):");
-        ImGui::BulletText("Shift + W/A/S/D/Q/E - Same rotations but 1\xC2\xB0 steps");
+        ImGui::BulletText("Shift + any key above - Same rotations but 1\xC2\xB0 steps");
         ImGui::Text("Behavior: No momentum, rotation only on key press");
         ImGui::Unindent();
         ImGui::Spacing();

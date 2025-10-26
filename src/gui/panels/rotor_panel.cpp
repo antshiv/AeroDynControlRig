@@ -57,11 +57,12 @@ void RotorPanel::draw(SimulationState& state, Camera& camera) {
     ImGui::TextUnformatted("Rotor RPM");
     ImGui::PopStyleColor();
 
-    if (fonts.heading) {
-        ImGui::PushFont(fonts.heading);
+    // Use large metrics font for primary value
+    if (fonts.metrics) {
+        ImGui::PushFont(fonts.metrics);
     }
     ImGui::Text("%.0f RPM", avg_rpm);
-    if (fonts.heading) {
+    if (fonts.metrics) {
         ImGui::PopFont();
     }
 

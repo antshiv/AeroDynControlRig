@@ -115,7 +115,7 @@ Modules</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Understanding AeroDynControlRig through web development concepts. </p>
 <p>This group maps the entire UI architecture to familiar web technologies. If you know HTML, CSS, and JavaScript, you already understand this codebase.</p>
-<h2><a class="anchor" id="autotoc_md133"></a>
+<h2><a class="anchor" id="autotoc_md156"></a>
 The Three Pillars</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -127,9 +127,9 @@ The Three Pillars</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>JavaScript</b>   </td><td class="markdownTableBodyNone">ImGui immediate mode + state updates   </td><td class="markdownTableBodyNone"><a class="el" href="classPanel.html" title="Abstract base class for all UI panels.">Panel</a> <code>draw()</code> methods   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md134"></a>
+<h2><a class="anchor" id="autotoc_md157"></a>
 Quick Reference</h2>
-<h3><a class="anchor" id="autotoc_md135"></a>
+<h3><a class="anchor" id="autotoc_md158"></a>
 Structure (HTML ↔ ImGui)</h3>
 <div class="fragment"><div class="line">&lt;div class=&quot;card&quot;&gt;</div>
 <div class="line">  &lt;h2&gt;Title&lt;/h2&gt;</div>
@@ -142,7 +142,7 @@ Structure (HTML ↔ ImGui)</h3>
 <div class="ttc" id="agroup__UIWidgets_html_ga2fb6bd477996a90c7d6373454fe6c06c"><div class="ttname"><a href="group__UIWidgets.html#ga2fb6bd477996a90c7d6373454fe6c06c">ui::CardHeader</a></div><div class="ttdeci">void CardHeader(const char *title, const char *badge_label, const ImVec4 *badge_color)</div><div class="ttdoc">Render a card header with optional badge.</div><div class="ttdef"><b>Definition:</b> card.cpp:52</div></div>
 <div class="ttc" id="agroup__UIWidgets_html_gaab4c47f869143e855e5a9cb8b6f2cf8b"><div class="ttname"><a href="group__UIWidgets.html#gaab4c47f869143e855e5a9cb8b6f2cf8b">ui::EndCard</a></div><div class="ttdeci">void EndCard()</div><div class="ttdoc">End a Card container (must be called after BeginCard)</div><div class="ttdef"><b>Definition:</b> card.cpp:46</div></div>
 <div class="ttc" id="agroup__UIWidgets_html_gae86fdebbe43a915410d1bf0c16c4cb17"><div class="ttname"><a href="group__UIWidgets.html#gae86fdebbe43a915410d1bf0c16c4cb17">ui::BeginCard</a></div><div class="ttdeci">bool BeginCard(const char *id, const CardOptions &amp;options, bool *open, ImGuiWindowFlags flags)</div><div class="ttdoc">Begin a Card container with consistent styling.</div><div class="ttdef"><b>Definition:</b> card.cpp:20</div></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md136"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md159"></a>
 Styling (CSS ↔ Palette)</h3>
 <div class="fragment"><div class="line">:root {</div>
 <div class="line">  --accent-base: #1193d4;</div>
@@ -150,10 +150,10 @@ Styling (CSS ↔ Palette)</h3>
 <div class="line">}</div>
 </div><!-- fragment --> <div class="fragment"><div class="line"><span class="keyword">const</span> <a class="code" href="structui_1_1Palette.html">ui::Palette</a>&amp; palette = <a class="code" href="group__UITheme.html#ga447c8573ad59f48165a527a06c94fb62">ui::Colors</a>();</div>
 <div class="line">ImGui::PushStyleColor(ImGuiCol_Text, palette.<a class="code" href="structui_1_1Palette.html#a76e362f3a440a98c3e9114806ec55f52">text_muted</a>);</div>
-<div class="ttc" id="agroup__UITheme_html_ga447c8573ad59f48165a527a06c94fb62"><div class="ttname"><a href="group__UITheme.html#ga447c8573ad59f48165a527a06c94fb62">ui::Colors</a></div><div class="ttdeci">const Palette &amp; Colors()</div><div class="ttdoc">Get global color palette.</div><div class="ttdef"><b>Definition:</b> style.cpp:173</div></div>
-<div class="ttc" id="astructui_1_1Palette_html"><div class="ttname"><a href="structui_1_1Palette.html">ui::Palette</a></div><div class="ttdoc">Color palette (design tokens)</div><div class="ttdef"><b>Definition:</b> style.h:145</div></div>
-<div class="ttc" id="astructui_1_1Palette_html_a76e362f3a440a98c3e9114806ec55f52"><div class="ttname"><a href="structui_1_1Palette.html#a76e362f3a440a98c3e9114806ec55f52">ui::Palette::text_muted</a></div><div class="ttdeci">ImVec4 text_muted</div><div class="ttdoc">#98aeb9 - Lower contrast (labels, secondary)</div><div class="ttdef"><b>Definition:</b> style.h:164</div></div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md137"></a>
+<div class="ttc" id="agroup__UITheme_html_ga447c8573ad59f48165a527a06c94fb62"><div class="ttname"><a href="group__UITheme.html#ga447c8573ad59f48165a527a06c94fb62">ui::Colors</a></div><div class="ttdeci">const Palette &amp; Colors()</div><div class="ttdoc">Get global color palette.</div><div class="ttdef"><b>Definition:</b> style.cpp:180</div></div>
+<div class="ttc" id="astructui_1_1Palette_html"><div class="ttname"><a href="structui_1_1Palette.html">ui::Palette</a></div><div class="ttdoc">Color palette (design tokens)</div><div class="ttdef"><b>Definition:</b> style.h:146</div></div>
+<div class="ttc" id="astructui_1_1Palette_html_a76e362f3a440a98c3e9114806ec55f52"><div class="ttname"><a href="structui_1_1Palette.html#a76e362f3a440a98c3e9114806ec55f52">ui::Palette::text_muted</a></div><div class="ttdeci">ImVec4 text_muted</div><div class="ttdoc">#98aeb9 - Lower contrast (labels, secondary)</div><div class="ttdef"><b>Definition:</b> style.h:165</div></div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md160"></a>
 Interactivity (JavaScript ↔ ImGui)</h3>
 <div class="fragment"><div class="line">button.addEventListener(&#39;click&#39;, () =&gt; {</div>
 <div class="line">  state.paused = !state.paused;</div>
@@ -161,7 +161,7 @@ Interactivity (JavaScript ↔ ImGui)</h3>
 </div><!-- fragment --> <div class="fragment"><div class="line"><span class="keywordflow">if</span> (ImGui::Button(<span class="stringliteral">&quot;Pause&quot;</span>)) {</div>
 <div class="line">    state.paused = !state.paused;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md138"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md161"></a>
 Essential Reading</h2>
 <ol type="1">
 <li><b><a class="el" href="web_analogy.html">Web Development Analogy</a></b> - Complete web development mapping</li>

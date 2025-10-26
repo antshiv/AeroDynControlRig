@@ -88,14 +88,14 @@ $(document).ready(function(){initNavTree('md_README.html',''); initResizable(); 
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>Desktop visualization and testbed for the flight-control stack. The rig stitches together OpenGL rendering, GLFW window/input handling, and Dear ImGui dashboards so we can exercise quaternion math today and layer in PID control, dynamic models, state estimation, and the full INS loop tomorrow.</p>
-<h1><a class="anchor" id="autotoc_md517"></a>
+<h1><a class="anchor" id="autotoc_md540"></a>
 Overview</h1>
 <ul>
 <li><b>Purpose</b> – Provide a fast feedback loop for control-algorithm development: visualize attitude changes, tune controllers, and replay telemetry from the same interface.</li>
 <li><b>Stack</b> – C++17, OpenGL 3.3, GLFW, Dear ImGui. External libraries (attitude math, estimators, controllers, dynamics, INS) live under <code>external/</code> as git submodules.</li>
 <li><b>Architecture</b> – HMVC-inspired split: simulation modules update a shared <code><a class="el" href="structSimulationState.html" title="Central shared state for the entire simulation.">SimulationState</a></code>, renderers draw the scene, and ImGui panels expose controls/data.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md518"></a>
+<h1><a class="anchor" id="autotoc_md541"></a>
 Directory Layout</h1>
 <ul>
 <li><code>external/</code> – Third-party and sibling libraries (currently <code>attitudeMathLibrary</code>; PID, dynamics, estimator, and INS modules will land here next).</li>
@@ -105,7 +105,7 @@ Directory Layout</h1>
 <li><code>assets/</code> – Static resources such as screenshots or fonts (<code>assets/ui_preview.png</code> shows the refreshed cockpit UI).</li>
 <li><code>build/</code> – CMake build output (ignored by git).</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md519"></a>
+<h1><a class="anchor" id="autotoc_md542"></a>
 Getting Started</h1>
 <ol type="1">
 <li><b>Install deps</b> – CMake ≥ 3.20, a C++17 compiler, OpenGL 3.3 capable GPU/driver, and development headers for GLFW/GLAD (platform package names vary).</li>
@@ -118,7 +118,7 @@ Getting Started</h1>
 <li><b>Run</b> <div class="fragment"><div class="line">./build/AeroDynControlRig</div>
 </div><!-- fragment --></li>
 </ol>
-<h1><a class="anchor" id="autotoc_md520"></a>
+<h1><a class="anchor" id="autotoc_md543"></a>
 Current Features</h1>
 <ul>
 <li><b>Quaternion Visualization</b> – Real-time 3D rotation with dual modes (AUTOMATIC for continuous drone simulation, MANUAL for discrete quaternion testing)</li>
@@ -129,7 +129,7 @@ Current Features</h1>
 <li><b>Axis Gizmo &amp; Scene</b> – OpenGL 3.3 rendering with proper face culling and depth testing</li>
 <li><b>In-App Documentation</b> – Keyboard controls help modal with mode-specific instructions</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md521"></a>
+<h1><a class="anchor" id="autotoc_md544"></a>
 Roadmap</h1>
 <ol type="1">
 <li>Modularize the codebase (<code>src/app</code>, <code>src/core</code>, <code>src/modules</code>, <code>src/render</code>, <code>src/gui</code>) to mirror the HMVC layout.</li>
@@ -137,7 +137,7 @@ Roadmap</h1>
 <li>Expand UI with tuning panels, telemetry plots, and scenario playback controls.</li>
 <li>Hook in log replay and export to evaluate controllers against recorded flights.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md522"></a>
+<h1><a class="anchor" id="autotoc_md545"></a>
 Long-Term Goals</h1>
 <ul>
 <li><b>Stage 0 – Core Visual Sandbox</b> <br  />
@@ -153,7 +153,7 @@ Long-Term Goals</h1>
 <li><b>Stage 5 – High-Fidelity Simulation</b> <br  />
  Render vehicles/obstacles, simulate disturbances (wind, payload shifts), support path-planning behaviours, and log or replay 3D missions.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md523"></a>
+<h1><a class="anchor" id="autotoc_md546"></a>
 Ecosystem Map</h1>
 <p>AeroDynControlRig sits at the centre of a toolchain of shared modules and physical rigs:</p>
 <ul>
@@ -173,9 +173,9 @@ Ecosystem Map</h1>
 </li>
 </ul>
 <p>All telemetry and coefficient data loop back into AeroDynControlRig for visualization and INS/controller tuning, keeping software and hardware in sync.</p>
-<h1><a class="anchor" id="autotoc_md524"></a>
+<h1><a class="anchor" id="autotoc_md547"></a>
 UI Preview</h1>
-<h2><a class="anchor" id="autotoc_md525"></a>
+<h2><a class="anchor" id="autotoc_md548"></a>
 Latest UI (October 2025)</h2>
 <p><img src="assets/ui_preview_2.png" alt="Latest UI" class="inline"/></p>
 <p>The current interface features a comprehensive docking layout with:</p><ul>
@@ -187,7 +187,7 @@ Latest UI (October 2025)</h2>
 <li><b>Power Monitor</b> – Bus voltage, current, and energy consumption tracking</li>
 <li><b>Flight Telemetry</b> – Additional system metrics and diagnostics</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md526"></a>
+<h2><a class="anchor" id="autotoc_md549"></a>
 Previous Iterations</h2>
 <p><img src="assets/GUI_screenshot.png" alt="Previous UI" class="inline"/> <img src="assets/ui_preview.png" alt="Updated UI" class="inline"/></p>
 <p>The evolution shows progression from a basic control layout to a fully-featured flight dynamics workbench with real-time plotting, multi-panel telemetry, and professional styling. </p>

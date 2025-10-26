@@ -1,49 +1,63 @@
 #include "modules/rotor_telemetry.h"
 
 #include <cmath>
+#include <limits>
 
 #include "core/simulation_state.h"
 
 void RotorTelemetryModule::initialize(SimulationState& state) {
-    base_rpm_ = 1500.0;
-    phase_ = 0.0;
-
-    state.rotor.total_power_watt = 0.0;
-    state.rotor.total_thrust_newton = 0.0;
+    // Initialize history buffers
+    for (int i = 0; i < 4; ++i) {
+        state.rotor_history.window_seconds = 60.0;
+        state.rotor_history.sample_interval = 0.1; // 10 Hz sampling
+        state.rotor_history.last_sample_time = -std::numeric_limits<double>::infinity();
+    }
 }
 
 void RotorTelemetryModule::update(double dt, SimulationState& state) {
-    (void)dt;
+    // Capture rotor telemetry to history buffers (data comes from QuadcopterDynamicsModule)
+    if (state.time_seconds - state.rotor_history.last_sample_time >= state.rotor_history.sample_interval) {
+        // Sample each rotor
+        for (int i = 0; i < 4; ++i) {
+            SimulationState::RotorSample sample;
+            sample.timestamp = state.time_seconds;
+            sample.rpm = state.rotor.rpm[i];
+            sample.thrust = state.rotor.thrust_newton[i];
+            sample.power = state.rotor.total_power_watt / 4.0; // Divide total by 4 for now
+            sample.temperature = 25.0 + (sample.power * 0.1); // Simple thermal model
+            sample.voltage = state.power.bus_voltage;
+            sample.current = (sample.power > 0) ? (sample.power / sample.voltage) : 0.0;
 
-    // Simple synthetic model: base RPM plus slight phase offset per rotor
-    constexpr double two_pi = 6.28318530718;
-    phase_ += dt * 0.5; // slow oscillation
+            // Add to appropriate rotor history
+            switch (i) {
+                case 0: state.rotor_history.rotor1_samples.push_back(sample); break;
+                case 1: state.rotor_history.rotor2_samples.push_back(sample); break;
+                case 2: state.rotor_history.rotor3_samples.push_back(sample); break;
+                case 3: state.rotor_history.rotor4_samples.push_back(sample); break;
+            }
+        }
 
-    double total_thrust = 0.0;
-    double total_power = 0.0;
+        state.rotor_history.last_sample_time = state.time_seconds;
 
-    for (std::size_t i = 0; i < state.rotor.rpm.size(); ++i) {
-        double phase_offset = phase_ + static_cast<double>(i) * two_pi / 4.0;
-        double rpm = base_rpm_ + 50.0 * std::sin(phase_offset);
+        // Prune old samples for all rotors
+        auto prune_samples = [&](std::deque<SimulationState::RotorSample>& samples) {
+            while (!samples.empty()) {
+                double age = state.time_seconds - samples.front().timestamp;
+                if (age > state.rotor_history.window_seconds) {
+                    samples.pop_front();
+                } else {
+                    break;
+                }
+            }
+        };
 
-        state.rotor.rpm[i] = rpm;
-
-        // Momentum-theory-inspired placeholders
-        double omega = rpm * two_pi / 60.0;
-        double thrust = state.rotor_config.thrust_coefficient * omega * omega;
-        double torque = state.rotor_config.torque_coefficient * omega * omega;
-        double power = torque * omega;
-
-        state.rotor.thrust_newton[i] = thrust;
-        state.rotor.torque_newton_metre[i] = torque;
-
-        total_thrust += thrust;
-        total_power += power;
+        prune_samples(state.rotor_history.rotor1_samples);
+        prune_samples(state.rotor_history.rotor2_samples);
+        prune_samples(state.rotor_history.rotor3_samples);
+        prune_samples(state.rotor_history.rotor4_samples);
     }
 
-    state.rotor.total_thrust_newton = total_thrust;
-    state.rotor.total_power_watt = total_power;
-
-    state.power.bus_current = total_power / state.power.bus_voltage;
-    state.power.energy_joule += total_power * dt;
+    // Update power consumption metrics
+    state.power.bus_current = state.rotor.total_power_watt / state.power.bus_voltage;
+    state.power.energy_joule += state.rotor.total_power_watt * dt;
 }
