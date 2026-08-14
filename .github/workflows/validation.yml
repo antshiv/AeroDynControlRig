@@ -1,0 +1,35 @@
+name: Application validation
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install graphics development packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libglfw3-dev libglew-dev libglm-dev libgl1-mesa-dev xvfb
+
+      - name: Configure
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
+
+      - name: Build
+        run: cmake --build build --parallel
+
+      - name: Headless numerical tests
+        run: ctest --test-dir build --output-on-failure
+
+      - name: Virtual-display application smoke test
+        run: |
+          set +e
+          timeout 5s xvfb-run -a ./build/AeroDynControlRig
+          status=$?
+          set -e
+          test "$status" -eq 124

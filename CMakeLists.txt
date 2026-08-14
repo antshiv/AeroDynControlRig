@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
 project(AeroDynControlRig CXX)
 
+include(CTest)
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_compile_options(-g)
@@ -23,9 +25,6 @@ set(IMPLOT_SRC
     external/implot/implot.cpp
     external/implot/implot_items.cpp
 )
-
-# Include the attitude library
-add_subdirectory(external/attitudeMathLibrary/)
 
 # Include the dynamic models library
 add_subdirectory(external/dynamic_models/)
@@ -65,8 +64,8 @@ target_include_directories(AeroDynControlRig
         imgui
         imgui/backends
         external/implot
-        external/attitudeMathLibrary/include
         external/dynamic_models/include
+        external/dynamic_models/external/attitudeMathLibrary/include
 )
 
 # Link libraries
@@ -76,7 +75,6 @@ find_package(GLEW REQUIRED)
 
 target_link_libraries(AeroDynControlRig
     PRIVATE
-    attitude
     dynamic_models
     OpenGL::GL
     glfw
@@ -84,6 +82,21 @@ target_link_libraries(AeroDynControlRig
     dl             # Add this line to link the dynamic loading library
     stdc++         # Explicitly link the standard C++ library
 )
+
+if(BUILD_TESTING)
+    add_executable(aerodyn_headless_plant_test
+        tests/test_quadcopter_dynamics.cpp
+        src/modules/quadcopter_dynamics.cpp
+    )
+    target_include_directories(aerodyn_headless_plant_test
+        PRIVATE
+            src
+            external/dynamic_models/include
+            external/dynamic_models/external/attitudeMathLibrary/include
+    )
+    target_link_libraries(aerodyn_headless_plant_test PRIVATE dynamic_models)
+    add_test(NAME aerodyn_headless_plant_test COMMAND aerodyn_headless_plant_test)
+endif()
 
 # If attitude is set up as an imported or interface library,
 # make sure to link properly and ensure that INTERFACE include dirs are set.

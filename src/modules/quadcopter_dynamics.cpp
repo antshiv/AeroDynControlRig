@@ -3,6 +3,7 @@
 #include <cmath>
 #include <cstring>
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #include "attitude/euler.h"
 #include "attitude/quaternion.h"
@@ -11,6 +12,24 @@
 
 namespace {
 constexpr double kPi = 3.14159265358979323846;
+constexpr double kMaxPhysicsStepS = 0.0025;
+constexpr double kMaxFrameStepS = 0.25;
+
+glm::mat4 renderFromNed()
+{
+    // NED (north, east, down) -> renderer (right/east, up, back/-north).
+    glm::mat4 transform(1.0f);
+    transform[0][0] = 0.0f;
+    transform[1][0] = 1.0f;
+    transform[2][0] = 0.0f;
+    transform[0][1] = 0.0f;
+    transform[1][1] = 0.0f;
+    transform[2][1] = -1.0f;
+    transform[0][2] = -1.0f;
+    transform[1][2] = 0.0f;
+    transform[2][2] = 0.0f;
+    return transform;
+}
 
 /**
  * @brief Compute hover throttle for a quadcopter
@@ -112,6 +131,10 @@ void QuadcopterDynamicsModule::initialize(SimulationState& state) {
 
     // Copy initial state to simulation
     copyStateToSim(physics_state_, state);
+    state.physics.integration_valid = true;
+    state.physics.last_result = static_cast<int>(DM_OK);
+    state.physics.accepted_steps = 0;
+    state.physics.rejected_steps = 0;
 }
 
 void QuadcopterDynamicsModule::setupRotorConfiguration() {
@@ -131,7 +154,7 @@ void QuadcopterDynamicsModule::setupRotorConfiguration() {
     vehicle_config_.rotors[0].position_body[2] = 0.0;
     vehicle_config_.rotors[0].axis_body[0] = 0.0;
     vehicle_config_.rotors[0].axis_body[1] = 0.0;
-    vehicle_config_.rotors[0].axis_body[2] = 1.0;
+    vehicle_config_.rotors[0].axis_body[2] = -1.0;
     vehicle_config_.rotors[0].direction = 1.0;  // CW
     vehicle_config_.rotors[0].thrust_coeff = 1.2e-6;
     vehicle_config_.rotors[0].torque_coeff = 2.5e-8;
@@ -142,7 +165,7 @@ void QuadcopterDynamicsModule::setupRotorConfiguration() {
     vehicle_config_.rotors[1].position_body[2] = 0.0;
     vehicle_config_.rotors[1].axis_body[0] = 0.0;
     vehicle_config_.rotors[1].axis_body[1] = 0.0;
-    vehicle_config_.rotors[1].axis_body[2] = 1.0;
+    vehicle_config_.rotors[1].axis_body[2] = -1.0;
     vehicle_config_.rotors[1].direction = -1.0;  // CCW
     vehicle_config_.rotors[1].thrust_coeff = 1.2e-6;
     vehicle_config_.rotors[1].torque_coeff = 2.5e-8;
@@ -153,7 +176,7 @@ void QuadcopterDynamicsModule::setupRotorConfiguration() {
     vehicle_config_.rotors[2].position_body[2] = 0.0;
     vehicle_config_.rotors[2].axis_body[0] = 0.0;
     vehicle_config_.rotors[2].axis_body[1] = 0.0;
-    vehicle_config_.rotors[2].axis_body[2] = 1.0;
+    vehicle_config_.rotors[2].axis_body[2] = -1.0;
     vehicle_config_.rotors[2].direction = 1.0;  // CW
     vehicle_config_.rotors[2].thrust_coeff = 1.2e-6;
     vehicle_config_.rotors[2].torque_coeff = 2.5e-8;
@@ -164,14 +187,20 @@ void QuadcopterDynamicsModule::setupRotorConfiguration() {
     vehicle_config_.rotors[3].position_body[2] = 0.0;
     vehicle_config_.rotors[3].axis_body[0] = 0.0;
     vehicle_config_.rotors[3].axis_body[1] = 0.0;
-    vehicle_config_.rotors[3].axis_body[2] = 1.0;
+    vehicle_config_.rotors[3].axis_body[2] = -1.0;
     vehicle_config_.rotors[3].direction = -1.0;  // CCW
     vehicle_config_.rotors[3].thrust_coeff = 1.2e-6;
     vehicle_config_.rotors[3].torque_coeff = 2.5e-8;
 }
 
 void QuadcopterDynamicsModule::update(double dt, SimulationState& state) {
-    if (dt <= 0.0) return;
+    if (!std::isfinite(dt) || dt <= 0.0 || dt > kMaxFrameStepS) {
+        state.physics.last_result = static_cast<int>(DM_INVALID_ARGUMENT);
+        state.physics.integration_valid = false;
+        ++state.physics.rejected_steps;
+        state.control.paused = true;
+        return;
+    }
 
     // Copy simulation state to physics state
     copyStateFromSim(state, physics_state_);
@@ -182,45 +211,23 @@ void QuadcopterDynamicsModule::update(double dt, SimulationState& state) {
         rotor_omega[i] = state.motor_commands.omega_rad_s[i];
     }
 
-    // Compute state derivatives
-    dm_state_t state_dot;
+    const int substep_count = static_cast<int>(std::ceil(dt / kMaxPhysicsStepS));
+    const double substep_dt = dt / static_cast<double>(substep_count);
     vehicle_model_.state = physics_state_;
-    dm_vehicle_evaluate(&vehicle_model_, rotor_omega, &state_dot);
-
-    // RK4 integration
-    // For simplicity, using Euler integration here
-    // TODO: Implement proper RK4 or use dm_rk4_step from utilities/numerical_solver.h
-
-    physics_state_.position[0] += state_dot.position[0] * dt;
-    physics_state_.position[1] += state_dot.position[1] * dt;
-    physics_state_.position[2] += state_dot.position[2] * dt;
-
-    physics_state_.velocity[0] += state_dot.velocity[0] * dt;
-    physics_state_.velocity[1] += state_dot.velocity[1] * dt;
-    physics_state_.velocity[2] += state_dot.velocity[2] * dt;
-
-    physics_state_.quaternion[0] += state_dot.quaternion[0] * dt;
-    physics_state_.quaternion[1] += state_dot.quaternion[1] * dt;
-    physics_state_.quaternion[2] += state_dot.quaternion[2] * dt;
-    physics_state_.quaternion[3] += state_dot.quaternion[3] * dt;
-
-    // Normalize quaternion
-    double qnorm = std::sqrt(
-        physics_state_.quaternion[0] * physics_state_.quaternion[0] +
-        physics_state_.quaternion[1] * physics_state_.quaternion[1] +
-        physics_state_.quaternion[2] * physics_state_.quaternion[2] +
-        physics_state_.quaternion[3] * physics_state_.quaternion[3]
-    );
-    if (qnorm > 1e-6) {
-        physics_state_.quaternion[0] /= qnorm;
-        physics_state_.quaternion[1] /= qnorm;
-        physics_state_.quaternion[2] /= qnorm;
-        physics_state_.quaternion[3] /= qnorm;
+    for (int substep = 0; substep < substep_count; ++substep) {
+        const dm_result_t result =
+            dm_vehicle_step_rk4_checked(&vehicle_model_, rotor_omega, substep_dt);
+        state.physics.last_result = static_cast<int>(result);
+        state.physics.integration_valid = result == DM_OK;
+        if (result != DM_OK) {
+            ++state.physics.rejected_steps;
+            state.control.paused = true;
+            return;
+        }
+        ++state.physics.accepted_steps;
     }
 
-    physics_state_.angular_rate[0] += state_dot.angular_rate[0] * dt;
-    physics_state_.angular_rate[1] += state_dot.angular_rate[1] * dt;
-    physics_state_.angular_rate[2] += state_dot.angular_rate[2] * dt;
+    physics_state_ = vehicle_model_.state;
 
     // Copy physics state back to simulation
     copyStateToSim(physics_state_, state);
@@ -258,17 +265,25 @@ void QuadcopterDynamicsModule::copyStateToSim(const dm_state_t& dm_state, Simula
     state.euler.yaw = yaw;
     state.euler.order = EULER_ZYX;
 
-    // Compute DCM for visualization
+    // Keep physics in NED and adapt only at the renderer boundary.
     double dcm[3][3];
-    euler_to_dcm(&state.euler, dcm);
+    quaternion_to_dcm(q, dcm);
 
-    glm::mat4 model(1.0f);
+    glm::mat4 ned_from_body(1.0f);
     for (int row = 0; row < 3; ++row) {
         for (int col = 0; col < 3; ++col) {
-            model[col][row] = static_cast<float>(dcm[row][col]);
+            ned_from_body[col][row] = static_cast<float>(dcm[row][col]);
         }
     }
-    state.model_matrix = model;
+    const glm::mat4 render_from_ned = renderFromNed();
+    const glm::vec4 position_ned(static_cast<float>(dm_state.position[0]),
+                                 static_cast<float>(dm_state.position[1]),
+                                 static_cast<float>(dm_state.position[2]),
+                                 1.0f);
+    const glm::vec3 position_render = glm::vec3(render_from_ned * position_ned);
+    const glm::mat4 translation = glm::translate(
+        glm::mat4(1.0f), position_render);
+    state.model_matrix = translation * render_from_ned * ned_from_body;
 }
 
 void QuadcopterDynamicsModule::copyStateFromSim(const SimulationState& state, dm_state_t& dm_state) {
