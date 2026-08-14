@@ -7,6 +7,7 @@
 #define SIMULATION_STATE_H
 
 #include <array>
+#include <cstdint>
 #include <deque>
 #include <limits>
 #include <glm/glm.hpp>
@@ -121,6 +122,10 @@ struct SimulationState {
         glm::dmat3 inertia{{0.01, 0.0, 0.0},        ///< Inertia tensor (kg·m²)
                            {0.0, 0.01, 0.0},
                            {0.0, 0.0, 0.02}};
+        bool integration_valid{true};                ///< Last plant step passed every numerical gate
+        int last_result{0};                          ///< Last dm_result_t value without coupling UI to the C header
+        std::uint64_t accepted_steps{0};             ///< Successfully committed plant steps
+        std::uint64_t rejected_steps{0};             ///< Plant steps rejected before state commit
     } physics;
 
     /**

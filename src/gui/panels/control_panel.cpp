@@ -158,6 +158,17 @@ void ControlPanel::draw(SimulationState& state, Camera& camera) {
     ImGui::Separator();
     ImGui::Text("Last dt: %.5f s", state.last_dt);
     ImGui::Text("Sim time: %.2f s", state.time_seconds);
+    if (state.physics.integration_valid) {
+        ImGui::TextColored(ImVec4(0.2f, 0.9f, 0.5f, 1.0f),
+                           "Plant: checked RK4 | accepted: %llu",
+                           static_cast<unsigned long long>(state.physics.accepted_steps));
+    } else {
+        ImGui::TextColored(ImVec4(1.0f, 0.3f, 0.3f, 1.0f),
+                           "Plant rejected step | result: %d | rejected: %llu",
+                           state.physics.last_result,
+                           static_cast<unsigned long long>(state.physics.rejected_steps));
+        ImGui::TextWrapped("Simulation paused before an invalid state was committed.");
+    }
     if (ImGui::Button("Reset Simulation Time")) {
         state.time_seconds = 0.0;
         state.attitude_history.samples.clear();

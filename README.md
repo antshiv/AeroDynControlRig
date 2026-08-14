@@ -48,12 +48,13 @@ Desktop visualization and testbed for the flight-control stack. The rig stitches
 - **State Estimator Panel** – Complementary filter output with error tracking and attitude history visualization
 - **Docking Workspace** – Fully customizable ImGui layout with control, telemetry, dynamics, rotor, sensor, power, and estimator panels
 - **Axis Gizmo & Scene** – OpenGL 3.3 rendering with proper face culling and depth testing
+- **Checked Plant Propagation** – The visual scene consumes `dynamic_models`' transactional RK4 step; failed stages pause the simulation before invalid state is rendered
 - **In-App Documentation** – Keyboard controls help modal with mode-specific instructions
 
 ## Roadmap
 
 1. Modularize the codebase (`src/app`, `src/core`, `src/modules`, `src/render`, `src/gui`) to mirror the HMVC layout.
-2. Add modules for PID control (wrapping `controlSystems`), quad dynamics, state estimation, and INS orchestration.
+2. Add modules for PID control (wrapping `controlSystems`), state estimation, and INS orchestration around the checked quad plant.
 3. Expand UI with tuning panels, telemetry plots, and scenario playback controls.
 4. Hook in log replay and export to evaluate controllers against recorded flights.
 
