@@ -58,6 +58,20 @@ void Camera::reset() {
     updateCameraVectors();
 }
 
+void Camera::fitSphere(const glm::vec3& center, float radius, float aspectRatio,
+                       float padding) {
+    const float safeRadius = glm::max(radius, 0.01f);
+    const float safeAspect = glm::max(aspectRatio, 0.1f);
+    const float verticalHalfFov = glm::radians(zoom) * 0.5f;
+    const float horizontalHalfFov = std::atan(std::tan(verticalHalfFov) * safeAspect);
+    const float limitingHalfFov = glm::min(verticalHalfFov, horizontalHalfFov);
+    const float distance = safeRadius * glm::max(padding, 1.0f) /
+                           glm::max(std::sin(limitingHalfFov), 0.05f);
+
+    target = center;
+    position = center - front * distance;
+}
+
 void Camera::orbit(float yawDegrees, float pitchDegrees) {
     yaw += yawDegrees;
     pitch = glm::clamp(pitch + pitchDegrees, -89.0f, 89.0f);

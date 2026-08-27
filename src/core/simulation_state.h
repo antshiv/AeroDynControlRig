@@ -274,14 +274,14 @@ struct SimulationState {
      * @brief User-controlled simulation playback parameters
      */
     struct SimulationControl {
-        bool paused{false};              ///< Pause simulation updates
+        bool paused{true};               ///< Start paused so the aircraft remains inspectable before a run
         bool use_legacy_ui{false};       ///< Toggle between legacy and dashboard layouts
         bool use_fixed_dt{false};        ///< Use fixed timestep instead of real-time
         double fixed_dt{0.01};           ///< Fixed timestep value (seconds)
         double time_scale{1.0};          ///< Simulation speed multiplier
         bool manual_rotation_mode{false}; ///< If true: discrete step rotation (W/A/S/D/Q/E). If false: continuous angular rates (arrow keys)
         bool reset_requested{false};      ///< Reset the SIL plant and controller on the next application tick
-        bool camera_reset_requested{false}; ///< Restore the inspection camera to its default pose
+        bool camera_fit_requested{false};   ///< Frame the complete aircraft in the 3D viewport
     } control;
 };
 

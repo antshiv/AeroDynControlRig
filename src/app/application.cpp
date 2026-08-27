@@ -344,6 +344,7 @@ bool Application::init() {
     // These are custom components that encapsulate specific application logic
     // (e.g., physics simulation, sensor data) and their corresponding UI panels.
     initializeModules();
+    fitCameraToAircraft(800.0f / 600.0f);
     initializePanels();
     lastFrame = glfwGetTime(); // Record the time for delta time calculations
 
@@ -387,9 +388,11 @@ void Application::tick() {
 
     // Input remains live while simulation time is paused.
     joystickInput.poll(simulationState);
-    if (simulationState.control.camera_reset_requested) {
-        camera.reset();
-        simulationState.control.camera_reset_requested = false;
+    if (simulationState.control.camera_fit_requested) {
+        fitCameraToAircraft(sceneHeight > 0
+                                ? static_cast<float>(sceneWidth) / sceneHeight
+                                : 4.0f / 3.0f);
+        simulationState.control.camera_fit_requested = false;
     }
     if (simulationState.control.reset_requested) {
         resetSimulation();
@@ -465,6 +468,21 @@ void Application::resetSimulation() {
         module->initialize(simulationState);
     }
     transform.model = simulationState.model_matrix;
+}
+
+void Application::fitCameraToAircraft(float aspectRatio) {
+    const glm::vec3 local_center = renderer.aircraftCenter();
+    const glm::vec3 world_center = glm::vec3(
+        simulationState.model_matrix * glm::vec4(local_center, 1.0f));
+    const glm::mat4& model = simulationState.model_matrix;
+    const float maximum_scale = std::max({
+        glm::length(glm::vec3(model[0])),
+        glm::length(glm::vec3(model[1])),
+        glm::length(glm::vec3(model[2]))});
+    camera.reset();
+    camera.orbit(-35.0f, -25.0f);
+    camera.fitSphere(world_center, renderer.aircraftRadius() * maximum_scale,
+                     aspectRatio);
 }
 
 void Application::shutdown() {
@@ -753,6 +771,8 @@ void Application::renderDashboardLayout(ImGuiIO& io) {
             ImGui::DockBuilderDockWindow("Flight Scene", dock_left);
             ImGui::DockBuilderDockWindow("Rotor Dynamics", dock_right);
             ImGui::DockBuilderDockWindow("Power Monitor", dock_right_bottom);
+            ImGui::DockBuilderDockWindow("F310 Flight Controls", dock_right_bottom);
+            ImGui::DockBuilderDockWindow("Rotor Analysis", dock_right_bottom);
             ImGui::DockBuilderDockWindow("Estimator", dock_bottom_left);
             ImGui::DockBuilderDockWindow("Control Panel", dock_bottom_center);
             ImGui::DockBuilderDockWindow("Sensor Suite", dock_bottom_right);
@@ -802,6 +822,18 @@ void Application::renderDashboardLayout(ImGuiIO& io) {
                          ImVec2(1.0f, 0.0f));
             viewport_hovered = ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenBlockedByPopup);
             viewport_active = ImGui::IsItemActive();
+            const ImVec2 after_canvas = ImGui::GetCursorScreenPos();
+            ImGui::SetCursorScreenPos(
+                {canvas_pos.x + viewport_size.x - 126.0f, canvas_pos.y + 16.0f});
+            ui::PushPillButtonStyle(ui::PillStyle::Secondary);
+            if (ImGui::Button("Fit aircraft", ImVec2(108.0f, 30.0f))) {
+                fitCameraToAircraft(viewport_size.x / viewport_size.y);
+            }
+            ui::PopPillButtonStyle();
+            if (ImGui::IsItemHovered()) {
+                ImGui::SetTooltip("Frame the complete simulated aircraft (R3)");
+            }
+            ImGui::SetCursorScreenPos(after_canvas);
 
             char quat_buf[96];
             std::snprintf(
@@ -1168,8 +1200,6 @@ void Application::initializePanels() {
     panelManager.registerPanel(std::make_unique<DynamicsPanel>());
     panelManager.registerPanel(std::make_unique<EstimatorPanel>());
     panelManager.registerPanel(std::make_unique<RotorAnalysisPanel>());
-    // Draw last so a newly introduced floating controller panel is not hidden
-    // behind an existing persisted docking layout.
     panelManager.registerPanel(std::make_unique<JoystickPanel>());
 }
 

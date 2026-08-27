@@ -168,6 +168,7 @@ private:
      */
     void initializePanels();
     void resetSimulation();
+    void fitCameraToAircraft(float aspectRatio);
 
     // === Rendering Helpers ===
     /**

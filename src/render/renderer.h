@@ -83,6 +83,9 @@ public:
      */
     void shutdown();
 
+    glm::vec3 aircraftCenter() const { return aircraftCenter_; }
+    float aircraftRadius() const { return aircraftRadius_; }
+
 private:
     // === OpenGL Resources ===
     unsigned int shaderProgram;              ///< Lighting shader program ID
@@ -96,6 +99,8 @@ private:
     unsigned int backgroundVbo;             ///< Background quad VBO
 
     unsigned int cubeIndexCount;            ///< Index count for cube
+    glm::vec3 aircraftCenter_{0.0f};         ///< Loaded mesh centre in object space
+    float aircraftRadius_{0.5f};             ///< Bounding-sphere radius in object space
 
     // === Shader Uniform Locations ===
     int modelLoc;                  ///< Location of model matrix uniform

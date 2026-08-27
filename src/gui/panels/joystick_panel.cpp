@@ -156,7 +156,7 @@ void JoystickPanel::draw(SimulationState& state, Camera& camera)
         ImGui::BulletText("D-pad: one-degree roll/pitch trim");
         ImGui::BulletText("LB/RB: decrease/increase command authority");
         ImGui::BulletText("LT/RT: decrease/increase collective thrust");
-        ImGui::BulletText("L3: clear trim  |  R3: reset camera");
+        ImGui::BulletText("L3: clear trim  |  R3: fit aircraft in view");
         ImGui::BulletText("START: reset aircraft, controller, and telemetry");
         ImGui::BulletText("MODE: hardware mapping switch; may not emit a button event");
     }

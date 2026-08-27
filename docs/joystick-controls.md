@@ -19,13 +19,15 @@ AeroDyn polls the Logitech F310 through GLFW's standardized gamepad API. It does
 | LB / RB | Reduce/increase stick command authority from 25% to 100% |
 | LT / RT | Reduce/increase collective around the left-stick command |
 | Left-stick click | Clear trim and level the attitude target |
-| Right-stick click | Reset the 3D inspection camera |
+| Right-stick click | Fit the complete aircraft in the 3D viewport |
 | Start | Reset the SIL aircraft, controller, and telemetry |
 | Guide | Show or hide the in-application guide when exposed by GLFW |
 
 The physical **MODE** button is different from the Guide button. On the F310 it may switch the D-pad and left-stick mapping in hardware, so Linux/GLFW may not report it as an independent button. The panel still exposes the resulting axis and D-pad state, making that mode change visible.
 
 The input panel highlights active sticks and face buttons. It also displays raw normalized axes so mapping, centring, and hardware-mode faults are visible.
+
+The application opens with the SIL plant paused and the complete aircraft fitted in the 3D viewport. Press B (or use the simulation UI) when ready to begin the run. The **Fit aircraft** viewport button and right-stick click restore that inspection view at any time.
 
 ## Safety Boundary
 

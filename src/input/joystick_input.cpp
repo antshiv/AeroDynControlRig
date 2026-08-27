@@ -156,7 +156,7 @@ void JoystickInput::poll(SimulationState& state)
         state.pilot.status = "Pilot trims cleared and attitude target levelled.";
     }
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_RIGHT_THUMB]) {
-        state.control.camera_reset_requested = true;
+        state.control.camera_fit_requested = true;
     }
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_START]) {
         state.control.reset_requested = true;

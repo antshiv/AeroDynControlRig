@@ -112,6 +112,10 @@ public:
      */
     void reset();
 
+    /** Frame a world-space sphere while preserving the current view direction. */
+    void fitSphere(const glm::vec3& center, float radius, float aspectRatio,
+                   float padding = 1.25f);
+
     /**
      * @brief Orbit camera around target by adjusting yaw/pitch.
      * @param yawDegrees Change in yaw (degrees)

@@ -1,5 +1,6 @@
 #include "renderer.h"
 #include "render/obj_mesh.h"
+#include <cmath>
 #include <iostream>
 #include <GL/glew.h>
 // If using Glad: #include <glad/glad.h>
@@ -343,6 +344,8 @@ void Renderer::setupCubeGeometry3D() {
     glEnableVertexAttribArray(2);
 
     cubeIndexCount = sizeof(indices) / sizeof(unsigned int);
+    aircraftCenter_ = glm::vec3(0.0f);
+    aircraftRadius_ = std::sqrt(3.0f) * 0.5f;
 
     glBindVertexArray(0);
 }
@@ -380,6 +383,10 @@ bool Renderer::setupAircraftGeometry(const std::string& path) {
     glEnableVertexAttribArray(2);
 
     cubeIndexCount = static_cast<unsigned int>(mesh.indices.size());
+    const glm::vec3 minimum(mesh.minimum[0], mesh.minimum[1], mesh.minimum[2]);
+    const glm::vec3 maximum(mesh.maximum[0], mesh.maximum[1], mesh.maximum[2]);
+    aircraftCenter_ = (minimum + maximum) * 0.5f;
+    aircraftRadius_ = glm::length(maximum - minimum) * 0.5f;
     glBindVertexArray(0);
     std::cout << "Loaded aircraft geometry: " << path << " ("
               << mesh.indices.size() / 3u << " triangles)" << std::endl;
