@@ -21,15 +21,19 @@ This removes the previous failure mode where the simulator could display one veh
 - Generated FreeCAD, STEP, STL, and OBJ artifacts.
 - Generated OBJ rendering under the plant's model transform.
 - A controller-coefficient bundle linked to the exact aircraft revision and marked `simulation_only`.
+- Logitech F310 Mode 2 pilot commands through `controlSystems`' quaternion PID and geometry-derived mixer.
+- A 40 ms controller cadence feeding the finer checked RK4 plant substeps.
 
 ## What Is Not Yet Connected
 
-- PID/LQR tuning from `controlSystems` into the closed simulation loop.
+- Identified and accepted PID/LQR tuning; current PID gains remain provisional SIL fixtures.
 - Per-rotor blade geometry or visible rotor animation.
 - OpenFOAM coefficient extraction and mesh-convergence evidence.
 - Thrust-stand measurements and system-identification fitting.
 - Firmware generation for ASR-FC.
 - Gazebo scenarios, environmental models, or ruggedness claims.
+
+The joystick path is documented in [F310 Flight Controls](joystick-controls.md).
 
 ## Next Evidence Loop
 

@@ -10,3 +10,6 @@
 [submodule "external/dynamic_models"]
 	path = external/dynamic_models
 	url = ../dynamic_models
+[submodule "external/controlSystems"]
+	path = external/controlSystems
+	url = https://github.com/antshiv/controlSystems.git

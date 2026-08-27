@@ -2,6 +2,7 @@
 #include "render/renderer.h"
 #include "modules/quaternion_demo.h"
 #include "modules/quadcopter_dynamics.h"
+#include "modules/flight_control.h"
 #include "modules/first_order_dynamics.h"
 #include "modules/sensor_simulator.h"
 #include "modules/complementary_estimator.h"
@@ -10,6 +11,7 @@
 #include "gui/widgets/card.h"
 #include "gui/style.h"
 #include "gui/panels/control_panel.h"
+#include "gui/panels/joystick_panel.h"
 #include "gui/panels/telemetry_panel.h"
 #include "gui/panels/dynamics_panel.h"
 #include "gui/panels/estimator_panel.h"
@@ -361,7 +363,8 @@ bool Application::running() const {
 }
 
 void Application::initializeModules() {
-    // Use QuadcopterDynamicsModule for physics-based simulation
+    // Pilot command -> controller/mixer -> rigid-body plant.
+    modules.emplace_back(std::make_unique<FlightControlModule>());
     modules.emplace_back(std::make_unique<QuadcopterDynamicsModule>());
     // Keep QuaternionDemoModule commented out (replaced by QuadcopterDynamicsModule)
     // modules.emplace_back(std::make_unique<QuaternionDemoModule>());
@@ -382,13 +385,16 @@ void Application::tick() {
     double real_dt = static_cast<double>(currentFrame - lastFrame);
     lastFrame = currentFrame;
 
+    // Input remains live while simulation time is paused.
+    joystickInput.poll(simulationState);
+
     updateCamera(static_cast<float>(real_dt));
 
     // === ROTATION MODE TOGGLE ===
     // Two modes: Manual (discrete steps) vs Automatic (continuous angular rates)
     // Toggle with 'M' key, controlled in keyCallback
 
-    if (!simulationState.control.manual_rotation_mode) {
+    if (!simulationState.pilot.enabled && !simulationState.control.manual_rotation_mode) {
         // AUTOMATIC MODE: Continuous angular rate control (like flying a drone)
         glm::dvec3& body_rates = simulationState.angular_rate_deg_per_sec;
         auto adjust_rotation = [&](int key, int axis, double direction) {
@@ -1145,6 +1151,9 @@ void Application::initializePanels() {
     panelManager.registerPanel(std::make_unique<DynamicsPanel>());
     panelManager.registerPanel(std::make_unique<EstimatorPanel>());
     panelManager.registerPanel(std::make_unique<RotorAnalysisPanel>());
+    // Draw last so a newly introduced floating controller panel is not hidden
+    // behind an existing persisted docking layout.
+    panelManager.registerPanel(std::make_unique<JoystickPanel>());
 }
 
 ImTextureID Application::renderSceneToTexture(const ImVec2& size) {

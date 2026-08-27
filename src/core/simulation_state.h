@@ -28,6 +28,9 @@
  * - Panels have read/write access for interactive control
  */
 struct SimulationState {
+    static constexpr std::size_t kJoystickAxisCount = 4;
+    static constexpr std::size_t kJoystickButtonCount = 15;
+
     struct AircraftContractState {
         std::string aircraft_id;
         std::string coefficient_bundle_id;
@@ -163,6 +166,32 @@ struct SimulationState {
         std::array<double, 4> omega_rad_s{0.0, 0.0, 0.0, 0.0};  ///< Commanded angular velocities (rad/s)
         std::array<double, 4> throttle_0_1{0.0, 0.0, 0.0, 0.0}; ///< Throttle commands [0, 1]
     } motor_commands;
+
+    struct JoystickState {
+        bool connected{false};
+        bool standardized_mapping{false};
+        bool analog_mode_warning{false};
+        std::string name{"No joystick"};
+        std::array<float, kJoystickAxisCount> axes{0.0f, 0.0f, 0.0f, 0.0f};
+        std::array<bool, kJoystickButtonCount> buttons{};
+        std::array<bool, kJoystickButtonCount> pressed{};
+        bool show_guide{true};
+        std::string status{"Connect a gamepad to enable pilot input."};
+    } joystick;
+
+    struct PilotControlState {
+        bool enabled{false};
+        bool controller_valid{false};
+        bool reset_controller{false};
+        double target_roll_rad{0.0};
+        double target_pitch_rad{0.0};
+        double target_yaw_rad{0.0};
+        double collective_thrust_n{0.0};
+        glm::dvec3 requested_torque_nm{0.0};
+        std::uint64_t accepted_updates{0};
+        std::uint64_t rejected_updates{0};
+        std::string status{"Closed-loop pilot control disabled."};
+    } pilot;
 
     /**
      * @struct DynamicsConfig

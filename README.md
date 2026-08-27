@@ -53,6 +53,7 @@ AeroDyn now loads its vehicle geometry, mass properties, rotor coefficients, tim
 - **Checked Plant Propagation** – The visual scene consumes `dynamic_models`' transactional RK4 step; failed stages pause the simulation before invalid state is rendered
 - **Versioned Aircraft Contract** – Aircraft and controller artifacts are provenance-linked; mismatched revisions and invalid physical parameters fail closed
 - **Generated Aircraft Geometry** – One aircraft contract drives headless FreeCAD, STEP, STL, OBJ, and the live OpenGL scene instead of a separately maintained display model
+- **Joystick Closed Loop** – A Logitech F310 can drive simulation-only attitude/throttle commands through the real `controlSystems` PID, geometry-derived mixer, and checked RK4 plant with a live control diagram
 - **In-App Documentation** – Keyboard controls help modal with mode-specific instructions
 
 ## Roadmap

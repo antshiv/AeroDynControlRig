@@ -36,6 +36,8 @@ set(IMPLOT_SRC
 
 # Include the dynamic models library
 add_subdirectory(external/dynamic_models/)
+set(CS_BUILD_TESTS OFF CACHE BOOL "Disable nested controlSystems tests" FORCE)
+add_subdirectory(external/controlSystems/)
 
 if(BUILD_AERODYN_GUI)
   # Source files for the test_rig application
@@ -44,16 +46,19 @@ if(BUILD_AERODYN_GUI)
     src/app/application.cpp
     src/modules/quaternion_demo.cpp
     src/modules/quadcopter_dynamics.cpp
+    src/modules/flight_control.cpp
     src/modules/first_order_dynamics.cpp
     src/modules/sensor_simulator.cpp
     src/modules/complementary_estimator.cpp
     src/modules/rotor_telemetry.cpp
     src/config/aircraft_config.cpp
+    src/input/joystick_input.cpp
     src/gui/panel_manager.cpp
     src/gui/style.cpp
     src/gui/widgets/card.cpp
     src/gui/widgets/chip.cpp
     src/gui/panels/control_panel.cpp
+    src/gui/panels/joystick_panel.cpp
     src/gui/panels/telemetry_panel.cpp
     src/gui/panels/dynamics_panel.cpp
     src/gui/panels/estimator_panel.cpp
@@ -87,6 +92,7 @@ if(BUILD_AERODYN_GUI)
   target_link_libraries(AeroDynControlRig
     PRIVATE
     dynamic_models
+    control_systems
     OpenGL::GL
     glfw
     GLEW::GLEW
@@ -134,6 +140,20 @@ if(BUILD_TESTING)
         ASR_DEFAULT_AIRCRAFT_SPEC="${CMAKE_CURRENT_SOURCE_DIR}/config/reference-quad.aircraft.json"
         ASR_DEFAULT_COEFFICIENT_BUNDLE="${CMAKE_CURRENT_SOURCE_DIR}/config/reference-quad.coefficients.json")
     add_test(NAME aerodyn_aircraft_contract_test COMMAND aerodyn_aircraft_contract_test)
+
+    add_executable(aerodyn_flight_control_test
+        tests/test_flight_control.cpp
+        src/modules/flight_control.cpp
+        src/modules/quadcopter_dynamics.cpp
+        src/config/aircraft_config.cpp)
+    target_include_directories(aerodyn_flight_control_test
+        PRIVATE src external/controlSystems/include)
+    target_link_libraries(aerodyn_flight_control_test
+        PRIVATE control_systems dynamic_models PkgConfig::JSONC)
+    target_compile_definitions(aerodyn_flight_control_test PRIVATE
+        ASR_DEFAULT_AIRCRAFT_SPEC="${CMAKE_CURRENT_SOURCE_DIR}/config/reference-quad.aircraft.json"
+        ASR_DEFAULT_COEFFICIENT_BUNDLE="${CMAKE_CURRENT_SOURCE_DIR}/config/reference-quad.coefficients.json")
+    add_test(NAME aerodyn_flight_control_test COMMAND aerodyn_flight_control_test)
 
     add_executable(aerodyn_generated_mesh_test
         tests/test_obj_mesh.cpp
