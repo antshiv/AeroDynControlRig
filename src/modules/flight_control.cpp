@@ -12,6 +12,7 @@ constexpr double kPi = 3.14159265358979323846;
 constexpr double kMaximumTiltRad = 25.0 * kPi / 180.0;
 constexpr double kMaximumYawRateRadS = 60.0 * kPi / 180.0;
 constexpr double kCollectiveRange = 0.40;
+constexpr double kTriggerCollectiveBias = 0.20;
 constexpr float kStickDeadzone = 0.08f;
 
 double applyDeadzone(float value)
@@ -112,12 +113,28 @@ void FlightControlModule::update(double dt, SimulationState& state)
     }
 
     const double yaw_input = applyDeadzone(state.joystick.axes[0]);
-    const double collective_input = -applyDeadzone(state.joystick.axes[1]);
+    const double left_trigger = state.joystick.standardized_mapping
+                                    ? (state.joystick.axes[4] + 1.0) * 0.5
+                                    : 0.0;
+    const double right_trigger = state.joystick.standardized_mapping
+                                     ? (state.joystick.axes[5] + 1.0) * 0.5
+                                     : 0.0;
+    const double collective_input = std::clamp(
+        -applyDeadzone(state.joystick.axes[1]) +
+            (right_trigger - left_trigger) * kTriggerCollectiveBias,
+        -1.0, 1.0);
     const double roll_input = applyDeadzone(state.joystick.axes[2]);
     const double pitch_input = -applyDeadzone(state.joystick.axes[3]);
-    state.pilot.target_roll_rad = roll_input * kMaximumTiltRad;
-    state.pilot.target_pitch_rad = pitch_input * kMaximumTiltRad;
-    state.pilot.target_yaw_rad += yaw_input * kMaximumYawRateRadS * control_dt;
+    state.pilot.target_roll_rad = std::clamp(
+        state.pilot.roll_trim_rad +
+            roll_input * kMaximumTiltRad * state.pilot.command_scale,
+        -kMaximumTiltRad, kMaximumTiltRad);
+    state.pilot.target_pitch_rad = std::clamp(
+        state.pilot.pitch_trim_rad +
+            pitch_input * kMaximumTiltRad * state.pilot.command_scale,
+        -kMaximumTiltRad, kMaximumTiltRad);
+    state.pilot.target_yaw_rad += yaw_input * kMaximumYawRateRadS *
+                                  state.pilot.command_scale * control_dt;
 
     EulerAngles target_euler{state.pilot.target_roll_rad,
                              state.pilot.target_pitch_rad,

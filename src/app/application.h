@@ -167,6 +167,7 @@ private:
      * - Sensor readouts
      */
     void initializePanels();
+    void resetSimulation();
 
     // === Rendering Helpers ===
     /**

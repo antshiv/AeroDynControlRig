@@ -42,6 +42,19 @@ int main()
     assert(std::abs(state.euler.roll) > 1e-5);
     assert(state.physics.integration_valid);
 
+    state.pilot.roll_trim_rad = 2.0 * 3.14159265358979323846 / 180.0;
+    state.pilot.pitch_trim_rad = -3.0 * 3.14159265358979323846 / 180.0;
+    state.pilot.command_scale = 0.5;
+    state.joystick.axes[2] = 0.0f;
+    state.joystick.axes[3] = 0.0f;
+    state.joystick.standardized_mapping = true;
+    state.joystick.axes[4] = 1.0f;
+    state.joystick.axes[5] = -1.0f;
+    controller.update(0.04, state);
+    assert(std::abs(state.pilot.target_roll_rad - state.pilot.roll_trim_rad) < 1e-12);
+    assert(std::abs(state.pilot.target_pitch_rad - state.pilot.pitch_trim_rad) < 1e-12);
+    assert(state.pilot.collective_thrust_n > -state.physics.mass * 9.81);
+
     controller.update(0.10, state);
     assert(!state.pilot.enabled);
     assert(state.pilot.rejected_updates == 1u);

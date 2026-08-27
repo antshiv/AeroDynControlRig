@@ -9,10 +9,14 @@
 
 namespace {
 constexpr float kEnableDeadzone = 0.25f;
+constexpr double kTrimStepRad = 3.14159265358979323846 / 180.0;
+constexpr double kMaximumTrimRad = 15.0 * 3.14159265358979323846 / 180.0;
+constexpr double kMinimumCommandScale = 0.25;
+constexpr double kCommandScaleStep = 0.10;
 
 bool sticksCentered(const SimulationState::JoystickState& joystick)
 {
-    return std::all_of(joystick.axes.begin(), joystick.axes.end(),
+    return std::all_of(joystick.axes.begin(), joystick.axes.begin() + 4,
                        [](float value) { return std::abs(value) <= kEnableDeadzone; });
 }
 }
@@ -26,7 +30,7 @@ void JoystickInput::poll(SimulationState& state)
         joystick.name = "No joystick";
         joystick.standardized_mapping = false;
         joystick.analog_mode_warning = false;
-        joystick.axes.fill(0.0f);
+        joystick.axes = {0.0f, 0.0f, 0.0f, 0.0f, -1.0f, -1.0f};
         joystick.buttons.fill(false);
         state.pilot.enabled = false;
         state.pilot.status = "Joystick disconnected; closed-loop pilot control disabled.";
@@ -47,6 +51,8 @@ void JoystickInput::poll(SimulationState& state)
             gamepad.axes[GLFW_GAMEPAD_AXIS_LEFT_Y],
             gamepad.axes[GLFW_GAMEPAD_AXIS_RIGHT_X],
             gamepad.axes[GLFW_GAMEPAD_AXIS_RIGHT_Y],
+            gamepad.axes[GLFW_GAMEPAD_AXIS_LEFT_TRIGGER],
+            gamepad.axes[GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER],
         };
         for (std::size_t index = 0; index < joystick.buttons.size(); ++index) {
             joystick.buttons[index] = gamepad.buttons[index] == GLFW_PRESS;
@@ -57,7 +63,8 @@ void JoystickInput::poll(SimulationState& state)
         const float* axes = glfwGetJoystickAxes(GLFW_JOYSTICK_1, &axis_count);
         const unsigned char* buttons =
             glfwGetJoystickButtons(GLFW_JOYSTICK_1, &button_count);
-        for (std::size_t index = 0; index < joystick.axes.size(); ++index) {
+        joystick.axes = {0.0f, 0.0f, 0.0f, 0.0f, -1.0f, -1.0f};
+        for (std::size_t index = 0; index < 4; ++index) {
             joystick.axes[index] =
                 axes != nullptr && static_cast<int>(index) < axis_count ? axes[index] : 0.0f;
         }
@@ -78,7 +85,7 @@ void JoystickInput::poll(SimulationState& state)
     previous_buttons_ = joystick.buttons;
 
     joystick.analog_mode_warning = std::all_of(
-        joystick.axes.begin(), joystick.axes.end(),
+        joystick.axes.begin(), joystick.axes.begin() + 4,
         [](float value) { return value < -0.95f; });
     if (joystick.analog_mode_warning) {
         joystick.status =
@@ -114,6 +121,47 @@ void JoystickInput::poll(SimulationState& state)
         state.pilot.status = "Attitude target levelled; current heading retained.";
     }
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_Y]) {
+        joystick.show_guide = !joystick.show_guide;
+    }
+    if (joystick.pressed[GLFW_GAMEPAD_BUTTON_DPAD_LEFT]) {
+        state.pilot.roll_trim_rad =
+            std::max(-kMaximumTrimRad, state.pilot.roll_trim_rad - kTrimStepRad);
+    }
+    if (joystick.pressed[GLFW_GAMEPAD_BUTTON_DPAD_RIGHT]) {
+        state.pilot.roll_trim_rad =
+            std::min(kMaximumTrimRad, state.pilot.roll_trim_rad + kTrimStepRad);
+    }
+    if (joystick.pressed[GLFW_GAMEPAD_BUTTON_DPAD_UP]) {
+        state.pilot.pitch_trim_rad =
+            std::min(kMaximumTrimRad, state.pilot.pitch_trim_rad + kTrimStepRad);
+    }
+    if (joystick.pressed[GLFW_GAMEPAD_BUTTON_DPAD_DOWN]) {
+        state.pilot.pitch_trim_rad =
+            std::max(-kMaximumTrimRad, state.pilot.pitch_trim_rad - kTrimStepRad);
+    }
+    if (joystick.pressed[GLFW_GAMEPAD_BUTTON_LEFT_BUMPER]) {
+        state.pilot.command_scale =
+            std::max(kMinimumCommandScale, state.pilot.command_scale - kCommandScaleStep);
+    }
+    if (joystick.pressed[GLFW_GAMEPAD_BUTTON_RIGHT_BUMPER]) {
+        state.pilot.command_scale =
+            std::min(1.0, state.pilot.command_scale + kCommandScaleStep);
+    }
+    if (joystick.pressed[GLFW_GAMEPAD_BUTTON_LEFT_THUMB]) {
+        state.pilot.roll_trim_rad = 0.0;
+        state.pilot.pitch_trim_rad = 0.0;
+        state.pilot.target_roll_rad = 0.0;
+        state.pilot.target_pitch_rad = 0.0;
+        state.pilot.reset_controller = true;
+        state.pilot.status = "Pilot trims cleared and attitude target levelled.";
+    }
+    if (joystick.pressed[GLFW_GAMEPAD_BUTTON_RIGHT_THUMB]) {
+        state.control.camera_reset_requested = true;
+    }
+    if (joystick.pressed[GLFW_GAMEPAD_BUTTON_START]) {
+        state.control.reset_requested = true;
+    }
+    if (joystick.pressed[GLFW_GAMEPAD_BUTTON_GUIDE]) {
         joystick.show_guide = !joystick.show_guide;
     }
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_BACK]) {

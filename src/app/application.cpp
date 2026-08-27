@@ -387,6 +387,13 @@ void Application::tick() {
 
     // Input remains live while simulation time is paused.
     joystickInput.poll(simulationState);
+    if (simulationState.control.camera_reset_requested) {
+        camera.reset();
+        simulationState.control.camera_reset_requested = false;
+    }
+    if (simulationState.control.reset_requested) {
+        resetSimulation();
+    }
 
     updateCamera(static_cast<float>(real_dt));
 
@@ -448,6 +455,16 @@ void Application::tick() {
     captureAttitudeHistorySample();
     transform.model = simulationState.model_matrix;
     render3D();
+}
+
+void Application::resetSimulation() {
+    const bool show_guide = simulationState.joystick.show_guide;
+    simulationState = SimulationState{};
+    simulationState.joystick.show_guide = show_guide;
+    for (auto& module : modules) {
+        module->initialize(simulationState);
+    }
+    transform.model = simulationState.model_matrix;
 }
 
 void Application::shutdown() {

@@ -28,7 +28,7 @@
  * - Panels have read/write access for interactive control
  */
 struct SimulationState {
-    static constexpr std::size_t kJoystickAxisCount = 4;
+    static constexpr std::size_t kJoystickAxisCount = 6;
     static constexpr std::size_t kJoystickButtonCount = 15;
 
     struct AircraftContractState {
@@ -172,7 +172,7 @@ struct SimulationState {
         bool standardized_mapping{false};
         bool analog_mode_warning{false};
         std::string name{"No joystick"};
-        std::array<float, kJoystickAxisCount> axes{0.0f, 0.0f, 0.0f, 0.0f};
+        std::array<float, kJoystickAxisCount> axes{0.0f, 0.0f, 0.0f, 0.0f, -1.0f, -1.0f};
         std::array<bool, kJoystickButtonCount> buttons{};
         std::array<bool, kJoystickButtonCount> pressed{};
         bool show_guide{true};
@@ -186,6 +186,9 @@ struct SimulationState {
         double target_roll_rad{0.0};
         double target_pitch_rad{0.0};
         double target_yaw_rad{0.0};
+        double roll_trim_rad{0.0};
+        double pitch_trim_rad{0.0};
+        double command_scale{1.0};
         double collective_thrust_n{0.0};
         glm::dvec3 requested_torque_nm{0.0};
         std::uint64_t accepted_updates{0};
@@ -277,6 +280,8 @@ struct SimulationState {
         double fixed_dt{0.01};           ///< Fixed timestep value (seconds)
         double time_scale{1.0};          ///< Simulation speed multiplier
         bool manual_rotation_mode{false}; ///< If true: discrete step rotation (W/A/S/D/Q/E). If false: continuous angular rates (arrow keys)
+        bool reset_requested{false};      ///< Reset the SIL plant and controller on the next application tick
+        bool camera_reset_requested{false}; ///< Restore the inspection camera to its default pose
     } control;
 };
 
