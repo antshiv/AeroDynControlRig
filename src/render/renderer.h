@@ -130,6 +130,8 @@ private:
      */
     void setupCubeGeometry3D();
 
+    bool setupAircraftGeometry(const std::string& path);
+
     /**
      * @brief Setup full-screen background quad
      */

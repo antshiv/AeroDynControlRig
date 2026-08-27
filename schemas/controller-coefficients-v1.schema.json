@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.antshiv.com/schemas/controller-coefficients-v1.schema.json",
+  "title": "Antshiv controller coefficient bundle v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "bundle_id", "aircraft_id", "aircraft_revision", "status", "source", "timing", "attitude_pid", "acceptance"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "bundle_id": {"type": "string", "minLength": 1},
+    "aircraft_id": {"type": "string", "minLength": 1},
+    "aircraft_revision": {"type": "integer", "minimum": 1},
+    "status": {"enum": ["simulation_only", "hil_validated", "flight_tested"]},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "note"],
+      "properties": {
+        "method": {"type": "string", "minLength": 1},
+        "note": {"type": "string", "minLength": 1}
+      }
+    },
+    "timing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nominal_period_s", "minimum_period_s", "maximum_period_s"],
+      "properties": {
+        "nominal_period_s": {"type": "number", "exclusiveMinimum": 0},
+        "minimum_period_s": {"type": "number", "exclusiveMinimum": 0},
+        "maximum_period_s": {"type": "number", "exclusiveMinimum": 0}
+      }
+    },
+    "attitude_pid": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rate_weight", "roll", "pitch", "yaw"],
+      "properties": {
+        "rate_weight": {"type": "number", "minimum": 0},
+        "roll": {"$ref": "#/$defs/pid_axis"},
+        "pitch": {"$ref": "#/$defs/pid_axis"},
+        "yaw": {"$ref": "#/$defs/pid_axis"}
+      }
+    },
+    "acceptance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["physical_flight_approved", "required_gates"],
+      "properties": {
+        "physical_flight_approved": {"type": "boolean"},
+        "required_gates": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        }
+      }
+    }
+  },
+  "$defs": {
+    "pid_axis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kp", "ki", "kd", "integrator_limit", "output_limit"],
+      "properties": {
+        "kp": {"type": "number", "minimum": 0},
+        "ki": {"type": "number", "minimum": 0},
+        "kd": {"type": "number", "minimum": 0},
+        "integrator_limit": {"type": "number", "minimum": 0},
+        "output_limit": {"type": "number", "exclusiveMinimum": 0}
+      }
+    }
+  }
+}

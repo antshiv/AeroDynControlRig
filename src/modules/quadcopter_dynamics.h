@@ -11,6 +11,7 @@
 #define MODULES_QUADCOPTER_DYNAMICS_H
 
 #include "core/module.h"
+#include "config/aircraft_config.h"
 #include "drone/physics_model.h"
 
 /**
@@ -66,6 +67,8 @@ private:
     dm_vehicle_config_t vehicle_config_;    ///< Vehicle physical parameters
     dm_vehicle_model_t vehicle_model_;      ///< Runtime physics model
     dm_state_t physics_state_;              ///< Current vehicle state for dm library
+    AircraftSpec aircraft_spec_;
+    ControllerCoefficientBundle coefficient_bundle_;
 
     /**
      * @brief Copy dm_state to SimulationState
@@ -80,7 +83,7 @@ private:
     /**
      * @brief Configure standard X-frame quadcopter rotor layout
      */
-    void setupRotorConfiguration();
+    bool loadConfiguration(SimulationState& state);
 
     /**
      * @brief Update rotor telemetry from physics model

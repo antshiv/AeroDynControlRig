@@ -49,7 +49,7 @@ void Camera::processMouseScroll(float yOffset) {
 }
 
 void Camera::reset() {
-    position = glm::vec3(0.0f, 0.0f, 3.0f);
+    position = glm::vec3(0.0f, 0.0f, 1.2f);
     target = glm::vec3(0.0f, 0.0f, 0.0f);
     worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
     yaw = -90.0f;

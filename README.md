@@ -5,6 +5,8 @@
 
 Desktop visualization and testbed for the flight-control stack. The rig stitches together OpenGL rendering, GLFW window/input handling, and Dear ImGui dashboards so we can exercise quaternion math today and layer in PID control, dynamic models, state estimation, and the full INS loop tomorrow.
 
+AeroDyn now loads its vehicle geometry, mass properties, rotor coefficients, timing, and controller gains from a versioned [aircraft contract](docs/aircraft-contract.md). The same contract is intended to feed controller tuning, firmware generation, FreeCAD/OpenFOAM adapters, HIL, and later Gazebo scenarios without duplicating configuration.
+
 📚 **[View Documentation](https://antshiv.github.io/AeroDynControlRig/)** - Complete system architecture with visual diagrams
 
 ## Overview
@@ -49,6 +51,8 @@ Desktop visualization and testbed for the flight-control stack. The rig stitches
 - **Docking Workspace** – Fully customizable ImGui layout with control, telemetry, dynamics, rotor, sensor, power, and estimator panels
 - **Axis Gizmo & Scene** – OpenGL 3.3 rendering with proper face culling and depth testing
 - **Checked Plant Propagation** – The visual scene consumes `dynamic_models`' transactional RK4 step; failed stages pause the simulation before invalid state is rendered
+- **Versioned Aircraft Contract** – Aircraft and controller artifacts are provenance-linked; mismatched revisions and invalid physical parameters fail closed
+- **Generated Aircraft Geometry** – One aircraft contract drives headless FreeCAD, STEP, STL, OBJ, and the live OpenGL scene instead of a separately maintained display model
 - **In-App Documentation** – Keyboard controls help modal with mode-specific instructions
 
 ## Roadmap
@@ -57,6 +61,7 @@ Desktop visualization and testbed for the flight-control stack. The rig stitches
 2. Add modules for PID control (wrapping `controlSystems`), state estimation, and INS orchestration around the checked quad plant.
 3. Expand UI with tuning panels, telemetry plots, and scenario playback controls.
 4. Hook in log replay and export to evaluate controllers against recorded flights.
+5. Connect the shared rotor specification to BEMT, OpenFOAM, and thrust-stand coefficient fitting before accepting revised propulsion coefficients.
 
 ## Long-Term Goals
 

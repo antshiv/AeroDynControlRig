@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "aircraft_id": "asr-reference-quad",
+  "aircraft_revision": 1,
+  "coordinate_contract": "FRD; source metres; CAD exports millimetres",
+  "source": {
+    "path": "config/reference-quad.aircraft.json",
+    "sha256": "4ffea382908db5c0da8cd9e18ab015b903a5a71d79641585153248b79399c8fc"
+  },
+  "bounds_mm": {
+    "minimum": [
+      -202.5,
+      -202.49300659501836,
+      -35.0
+    ],
+    "maximum": [
+      202.5,
+      202.49300659501836,
+      136.0
+    ]
+  },
+  "artifacts": {
+    "fcstd": {
+      "path": "asr-reference-quad.FCStd",
+      "sha256": "b9279085e1e981af4345fd6937d9b013b6d705cd9611b321355f1ff2f87d81db",
+      "byte_reproducible": false
+    },
+    "step": {
+      "path": "asr-reference-quad.step",
+      "sha256": "78c4a39e2cdb56d7769d80330e81c41b3465778ebd5b7ffc4eaea6e4185071ea",
+      "byte_reproducible": false
+    },
+    "stl": {
+      "path": "asr-reference-quad.stl",
+      "sha256": "ef5dd9fff13fc083b436f2c3dbc26e43d396ab7e3015dd02132fa03dbfc58c98",
+      "byte_reproducible": true
+    },
+    "obj": {
+      "path": "asr-reference-quad.obj",
+      "sha256": "d31fcc268f7a92fee94f030249b77f9e7dfe7864edfcdfc91efa67919bd5b2c4",
+      "byte_reproducible": true
+    }
+  }
+}

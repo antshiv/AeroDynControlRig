@@ -10,6 +10,7 @@
 #include <cstdint>
 #include <deque>
 #include <limits>
+#include <string>
 #include <glm/glm.hpp>
 #include "attitude/euler.h"
 
@@ -27,6 +28,15 @@
  * - Panels have read/write access for interactive control
  */
 struct SimulationState {
+    struct AircraftContractState {
+        std::string aircraft_id;
+        std::string coefficient_bundle_id;
+        std::uint32_t aircraft_revision{0};
+        bool loaded{false};
+        bool physical_flight_approved{false};
+        std::string error;
+    } aircraft_contract;
+
     // === Attitude Representation ===
     EulerAngles euler{0.0, 0.0, 0.0, EULER_ZYX};              ///< Current attitude in Euler angles (ZYX convention)
     std::array<double, 4> quaternion{1.0, 0.0, 0.0, 0.0};     ///< Current attitude quaternion [w, x, y, z]
@@ -126,6 +136,7 @@ struct SimulationState {
         int last_result{0};                          ///< Last dm_result_t value without coupling UI to the C header
         std::uint64_t accepted_steps{0};             ///< Successfully committed plant steps
         std::uint64_t rejected_steps{0};             ///< Plant steps rejected before state commit
+        bool motor_command_saturated{false};          ///< At least one rotor command reached its configured limit
     } physics;
 
     /**
@@ -201,6 +212,7 @@ struct SimulationState {
         double thrust_coefficient{1.2e-6};  ///< Thrust coefficient (N/(rad/s)²)
         double torque_coefficient{2.5e-7};  ///< Torque coefficient (N·m/(rad/s)²)
         double arm_length_m{0.2};           ///< Distance from rotor to center of mass (meters)
+        double maximum_speed_rad_s{0.0};    ///< Lowest configured rotor speed limit (rad/s)
     } rotor_config;
 
     /**

@@ -1,5 +1,6 @@
 #include "modules/quadcopter_dynamics.h"
 
+#include <algorithm>
 #include <cmath>
 #include <cstring>
 #include <glm/glm.hpp>
@@ -60,39 +61,11 @@ double throttleToOmega(double throttle, double thrust_coeff) {
 }  // namespace
 
 void QuadcopterDynamicsModule::initialize(SimulationState& state) {
-    // Initialize vehicle configuration from simulation state
-    vehicle_config_.rotor_count = 4;
-    vehicle_config_.mass = state.vehicle_config.mass;
-    vehicle_config_.gravity = state.vehicle_config.gravity;
-
-    // Inertia tensor (diagonal, assuming symmetry)
-    vehicle_config_.inertia[0][0] = state.vehicle_config.Ixx;
-    vehicle_config_.inertia[0][1] = 0.0;
-    vehicle_config_.inertia[0][2] = 0.0;
-
-    vehicle_config_.inertia[1][0] = 0.0;
-    vehicle_config_.inertia[1][1] = state.vehicle_config.Iyy;
-    vehicle_config_.inertia[1][2] = 0.0;
-
-    vehicle_config_.inertia[2][0] = 0.0;
-    vehicle_config_.inertia[2][1] = 0.0;
-    vehicle_config_.inertia[2][2] = state.vehicle_config.Izz;
-
-    // Inertia inverse (for diagonal matrix, just invert diagonal elements)
-    vehicle_config_.inertia_inv[0][0] = 1.0 / state.vehicle_config.Ixx;
-    vehicle_config_.inertia_inv[0][1] = 0.0;
-    vehicle_config_.inertia_inv[0][2] = 0.0;
-
-    vehicle_config_.inertia_inv[1][0] = 0.0;
-    vehicle_config_.inertia_inv[1][1] = 1.0 / state.vehicle_config.Iyy;
-    vehicle_config_.inertia_inv[1][2] = 0.0;
-
-    vehicle_config_.inertia_inv[2][0] = 0.0;
-    vehicle_config_.inertia_inv[2][1] = 0.0;
-    vehicle_config_.inertia_inv[2][2] = 1.0 / state.vehicle_config.Izz;
-
-    // Setup rotor configuration (X-frame quadcopter)
-    setupRotorConfiguration();
+    if (!loadConfiguration(state)) {
+        state.physics.integration_valid = false;
+        state.control.paused = true;
+        return;
+    }
 
     // Initialize physics state
     std::memset(&physics_state_, 0, sizeof(physics_state_));
@@ -121,10 +94,12 @@ void QuadcopterDynamicsModule::initialize(SimulationState& state) {
     vehicle_model_.state = physics_state_;
 
     // Initialize motor commands to hover
-    double hover_thrust = computeHoverThrust(vehicle_config_.mass, vehicle_config_.gravity, 4);
-    double hover_omega = std::sqrt(hover_thrust / state.rotor_config.thrust_coefficient);
+    double hover_thrust = computeHoverThrust(vehicle_config_.mass, vehicle_config_.gravity,
+                                             vehicle_config_.rotor_count);
 
-    for (int i = 0; i < 4; ++i) {
+    for (std::size_t i = 0; i < vehicle_config_.rotor_count; ++i) {
+        const double hover_omega =
+            std::sqrt(hover_thrust / vehicle_config_.rotors[i].thrust_coeff);
         state.motor_commands.omega_rad_s[i] = hover_omega;
         state.motor_commands.throttle_0_1[i] = 0.5;  // 50% throttle for hover
     }
@@ -137,60 +112,84 @@ void QuadcopterDynamicsModule::initialize(SimulationState& state) {
     state.physics.rejected_steps = 0;
 }
 
-void QuadcopterDynamicsModule::setupRotorConfiguration() {
-    // X-frame quadcopter configuration (45° from body axes)
-    // Front-right, front-left, back-left, back-right
-    // Rotor 0: Front-right (+X, +Y), CW
-    // Rotor 1: Front-left  (+X, -Y), CCW
-    // Rotor 2: Back-left   (-X, -Y), CW
-    // Rotor 3: Back-right  (-X, +Y), CCW
+bool QuadcopterDynamicsModule::loadConfiguration(SimulationState& state) {
+    std::string error;
+    if (!loadAircraftSpec(ASR_DEFAULT_AIRCRAFT_SPEC, aircraft_spec_, error) ||
+        !loadControllerCoefficientBundle(ASR_DEFAULT_COEFFICIENT_BUNDLE,
+                                         aircraft_spec_, coefficient_bundle_,
+                                         error)) {
+        state.aircraft_contract.error = error;
+        state.aircraft_contract.loaded = false;
+        return false;
+    }
+    if (aircraft_spec_.rotors.size() != 4u) {
+        state.aircraft_contract.error =
+            "the current AeroDyn renderer and telemetry path requires four rotors";
+        state.aircraft_contract.loaded = false;
+        return false;
+    }
 
-    const double arm_length = 0.225;  // 225mm arms (450mm wheelbase)
-    const double diag = arm_length / std::sqrt(2.0);
+    std::memset(&vehicle_config_, 0, sizeof(vehicle_config_));
+    vehicle_config_.rotor_count = aircraft_spec_.rotors.size();
+    vehicle_config_.mass = aircraft_spec_.mass_kg;
+    vehicle_config_.gravity = aircraft_spec_.gravity_m_s2;
+    for (std::size_t row = 0; row < 3u; ++row) {
+        for (std::size_t column = 0; column < 3u; ++column) {
+            vehicle_config_.inertia[row][column] =
+                aircraft_spec_.inertia[row][column];
+            vehicle_config_.inertia_inv[row][column] =
+                aircraft_spec_.inertia_inverse[row][column];
+        }
+    }
+    for (std::size_t index = 0; index < aircraft_spec_.rotors.size(); ++index) {
+        const AircraftRotorSpec& source = aircraft_spec_.rotors[index];
+        dm_rotor_config_t& target = vehicle_config_.rotors[index];
+        std::memcpy(target.position_body, source.position_body_m.data(),
+                    sizeof(target.position_body));
+        std::memcpy(target.axis_body, source.thrust_axis_body.data(),
+                    sizeof(target.axis_body));
+        target.direction = source.spin_direction;
+        target.thrust_coeff = source.thrust_coefficient;
+        target.torque_coeff = source.torque_coefficient;
+    }
+    if (dm_vehicle_config_validate(&vehicle_config_) != DM_OK) {
+        state.aircraft_contract.error =
+            "dynamic_models rejected the loaded aircraft specification";
+        state.aircraft_contract.loaded = false;
+        return false;
+    }
 
-    // Rotor 0: Front-right
-    vehicle_config_.rotors[0].position_body[0] = diag;
-    vehicle_config_.rotors[0].position_body[1] = diag;
-    vehicle_config_.rotors[0].position_body[2] = 0.0;
-    vehicle_config_.rotors[0].axis_body[0] = 0.0;
-    vehicle_config_.rotors[0].axis_body[1] = 0.0;
-    vehicle_config_.rotors[0].axis_body[2] = -1.0;
-    vehicle_config_.rotors[0].direction = 1.0;  // CW
-    vehicle_config_.rotors[0].thrust_coeff = 1.2e-6;
-    vehicle_config_.rotors[0].torque_coeff = 2.5e-8;
-
-    // Rotor 1: Front-left
-    vehicle_config_.rotors[1].position_body[0] = diag;
-    vehicle_config_.rotors[1].position_body[1] = -diag;
-    vehicle_config_.rotors[1].position_body[2] = 0.0;
-    vehicle_config_.rotors[1].axis_body[0] = 0.0;
-    vehicle_config_.rotors[1].axis_body[1] = 0.0;
-    vehicle_config_.rotors[1].axis_body[2] = -1.0;
-    vehicle_config_.rotors[1].direction = -1.0;  // CCW
-    vehicle_config_.rotors[1].thrust_coeff = 1.2e-6;
-    vehicle_config_.rotors[1].torque_coeff = 2.5e-8;
-
-    // Rotor 2: Back-left
-    vehicle_config_.rotors[2].position_body[0] = -diag;
-    vehicle_config_.rotors[2].position_body[1] = -diag;
-    vehicle_config_.rotors[2].position_body[2] = 0.0;
-    vehicle_config_.rotors[2].axis_body[0] = 0.0;
-    vehicle_config_.rotors[2].axis_body[1] = 0.0;
-    vehicle_config_.rotors[2].axis_body[2] = -1.0;
-    vehicle_config_.rotors[2].direction = 1.0;  // CW
-    vehicle_config_.rotors[2].thrust_coeff = 1.2e-6;
-    vehicle_config_.rotors[2].torque_coeff = 2.5e-8;
-
-    // Rotor 3: Back-right
-    vehicle_config_.rotors[3].position_body[0] = -diag;
-    vehicle_config_.rotors[3].position_body[1] = diag;
-    vehicle_config_.rotors[3].position_body[2] = 0.0;
-    vehicle_config_.rotors[3].axis_body[0] = 0.0;
-    vehicle_config_.rotors[3].axis_body[1] = 0.0;
-    vehicle_config_.rotors[3].axis_body[2] = -1.0;
-    vehicle_config_.rotors[3].direction = -1.0;  // CCW
-    vehicle_config_.rotors[3].thrust_coeff = 1.2e-6;
-    vehicle_config_.rotors[3].torque_coeff = 2.5e-8;
+    state.vehicle_config.mass = aircraft_spec_.mass_kg;
+    state.vehicle_config.gravity = aircraft_spec_.gravity_m_s2;
+    state.vehicle_config.Ixx = aircraft_spec_.inertia[0][0];
+    state.vehicle_config.Iyy = aircraft_spec_.inertia[1][1];
+    state.vehicle_config.Izz = aircraft_spec_.inertia[2][2];
+    state.rotor_config.thrust_coefficient =
+        aircraft_spec_.rotors.front().thrust_coefficient;
+    state.rotor_config.torque_coefficient =
+        aircraft_spec_.rotors.front().torque_coefficient;
+    double arm_length_sum = 0.0;
+    double minimum_speed_limit = aircraft_spec_.rotors.front().maximum_speed_rad_s;
+    for (const AircraftRotorSpec& rotor : aircraft_spec_.rotors) {
+        arm_length_sum += std::sqrt(
+            rotor.position_body_m[0] * rotor.position_body_m[0] +
+            rotor.position_body_m[1] * rotor.position_body_m[1] +
+            rotor.position_body_m[2] * rotor.position_body_m[2]);
+        minimum_speed_limit =
+            std::min(minimum_speed_limit, rotor.maximum_speed_rad_s);
+    }
+    state.rotor_config.arm_length_m =
+        arm_length_sum / static_cast<double>(aircraft_spec_.rotors.size());
+    state.rotor_config.maximum_speed_rad_s = minimum_speed_limit;
+    state.aircraft_contract.aircraft_id = aircraft_spec_.aircraft_id;
+    state.aircraft_contract.aircraft_revision = aircraft_spec_.revision;
+    state.aircraft_contract.coefficient_bundle_id =
+        coefficient_bundle_.bundle_id;
+    state.aircraft_contract.physical_flight_approved =
+        coefficient_bundle_.physical_flight_approved;
+    state.aircraft_contract.loaded = true;
+    state.aircraft_contract.error.clear();
+    return true;
 }
 
 void QuadcopterDynamicsModule::update(double dt, SimulationState& state) {
@@ -207,8 +206,19 @@ void QuadcopterDynamicsModule::update(double dt, SimulationState& state) {
 
     // Prepare motor speeds array
     double rotor_omega[DM_MAX_ROTORS] = {0};
-    for (size_t i = 0; i < 4; ++i) {
-        rotor_omega[i] = state.motor_commands.omega_rad_s[i];
+    state.physics.motor_command_saturated = false;
+    for (size_t i = 0; i < vehicle_config_.rotor_count; ++i) {
+        const double command = state.motor_commands.omega_rad_s[i];
+        if (!std::isfinite(command)) {
+            state.physics.last_result = static_cast<int>(DM_INVALID_ARGUMENT);
+            state.physics.integration_valid = false;
+            ++state.physics.rejected_steps;
+            state.control.paused = true;
+            return;
+        }
+        rotor_omega[i] = std::clamp(
+            command, 0.0, aircraft_spec_.rotors[i].maximum_speed_rad_s);
+        state.physics.motor_command_saturated |= rotor_omega[i] != command;
     }
 
     const int substep_count = static_cast<int>(std::ceil(dt / kMaxPhysicsStepS));
