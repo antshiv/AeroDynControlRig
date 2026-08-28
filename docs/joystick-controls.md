@@ -1,6 +1,6 @@
-# Logitech F310 Flight Controls
+# Mode 2 Flight Controls
 
-AeroDyn polls the Logitech F310 through GLFW's standardized gamepad API. It does not read `/dev/input` directly, so keyboard, UI, and gamepad events remain under one desktop input boundary.
+AeroDyn polls Logitech F310 and Dual Action controllers through GLFW's standardized gamepad API. It does not read `/dev/input` directly, so keyboard, UI, and gamepad events remain under one desktop input boundary. Linux may expose product `046d:c216` as a DirectInput Dual Action; AeroDyn installs the corresponding maintained SDL mapping before consuming any buttons.
 
 ## Mode 2 Mapping
 
@@ -10,11 +10,11 @@ AeroDyn polls the Logitech F310 through GLFW's standardized gamepad API. It does
 | Left stick Y | Collective thrust around hover |
 | Right stick X | Roll-attitude target, limited to 25 degrees |
 | Right stick Y | Pitch-attitude target, limited to 25 degrees |
-| A | Enable or disable closed-loop SIL control |
-| B | Pause or resume simulation |
+| A | Run or resume closed-loop SIL control |
+| B | Pause simulation |
 | X | Level roll/pitch and retain current heading |
-| Y | Show or hide the in-application guide |
-| Back | Disable control and clear PID state |
+| Y | Recenter the aircraft in the 3D viewport |
+| Back | Emergency stop, pause, clear motors, and reset PID state |
 | D-pad | Apply one-degree roll/pitch trim steps |
 | LB / RB | Reduce/increase stick command authority from 25% to 100% |
 | LT / RT | Reduce/increase collective around the left-stick command |
@@ -27,18 +27,18 @@ The physical **MODE** button is different from the Guide button. On the F310 it 
 
 The input panel highlights active sticks and face buttons. It also displays raw normalized axes so mapping, centring, and hardware-mode faults are visible.
 
-The application opens with the SIL plant paused and the complete aircraft fitted in the 3D viewport. Press B (or use the simulation UI) when ready to begin the run. The **Fit aircraft** viewport button and right-stick click restore that inspection view at any time.
+The application opens with the SIL plant paused and the complete aircraft fitted in the 3D viewport. Press A (or use `Run / resume SIL`) when ready to begin. The **Fit aircraft** viewport button, Y button, and right-stick click restore that inspection view at any time.
 
 ## Safety Boundary
 
-Pressing A does not blindly activate control. All four axes must be within the enable deadzone and the F310 must not report the known all-axes-at-minus-one state. Disconnecting the controller disables pilot control. Invalid input, controller timing, PID output, or mixer output fails closed.
+Pressing A does not blindly activate control. All four axes must be within the enable deadzone and the controller must not report the known all-axes-at-minus-one state. Disconnecting the controller disables pilot control. Invalid input, controller timing, PID output, or mixer output fails closed.
 
 The current coefficient bundle is marked `simulation_only`. Joystick enablement is not motor arming and cannot approve physical flight. ASR-FC hardware requires separate arming, watchdog, command-timeout, HIL, restrained-motor, and flight-test gates.
 
 ## Runtime Path
 
 ```text
-F310 / GLFW
+Mode 2 gamepad / GLFW
     -> normalized pilot command
     -> quaternion attitude setpoint + yaw-rate target + collective
     -> controlSystems PID (40 ms declared cadence)

@@ -405,7 +405,8 @@ void Application::tick() {
     // Two modes: Manual (discrete steps) vs Automatic (continuous angular rates)
     // Toggle with 'M' key, controlled in keyCallback
 
-    if (!simulationState.pilot.enabled && !simulationState.control.manual_rotation_mode) {
+    if (simulationState.control.use_legacy_ui &&
+        !simulationState.control.manual_rotation_mode) {
         // AUTOMATIC MODE: Continuous angular rate control (like flying a drone)
         glm::dvec3& body_rates = simulationState.angular_rate_deg_per_sec;
         auto adjust_rotation = [&](int key, int axis, double direction) {
@@ -434,7 +435,7 @@ void Application::tick() {
         if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
             body_rates = glm::dvec3(0.0f);
         }
-    } else {
+    } else if (simulationState.control.use_legacy_ui) {
         // MANUAL MODE: Keep angular rates at zero (rotation via W/A/S/D/Q/E in keyCallback)
         simulationState.angular_rate_deg_per_sec = glm::dvec3(0.0);
     }
@@ -515,6 +516,12 @@ void Application::keyCallback(GLFWwindow* window, int key, int scancode, int act
 
     if (action == GLFW_PRESS && key == GLFW_KEY_ESCAPE) {
         glfwSetWindowShouldClose(window, GLFW_TRUE);
+        return;
+    }
+
+    // The dashboard owns a single joystick -> controller -> plant path.
+    // Legacy quaternion keyboard controls are available only in the legacy UI.
+    if (!app->simulationState.control.use_legacy_ui) {
         return;
     }
 
@@ -772,7 +779,7 @@ void Application::renderDashboardLayout(ImGuiIO& io) {
             ImGui::DockBuilderDockWindow("Flight Scene", dock_left);
             ImGui::DockBuilderDockWindow("Rotor Dynamics", dock_right);
             ImGui::DockBuilderDockWindow("Power Monitor", dock_right_bottom);
-            ImGui::DockBuilderDockWindow("F310 Flight Controls", dock_right_bottom);
+            ImGui::DockBuilderDockWindow("Mode 2 Flight Controls", dock_right_bottom);
             ImGui::DockBuilderDockWindow("Rotor Analysis", dock_right_bottom);
             ImGui::DockBuilderDockWindow("Estimator", dock_bottom_left);
             ImGui::DockBuilderDockWindow("Control Panel", dock_bottom_center);

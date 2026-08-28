@@ -3,7 +3,7 @@
 The desktop demo is a closed software loop, not a scripted animation:
 
 ```text
-Logitech F310
+Mode 2 gamepad
     -> controlSystems PID
     -> geometry-derived four-rotor mixer
     -> checked dynamic_models RK4 plant
@@ -14,15 +14,19 @@ The aircraft contract in `config/reference-quad.aircraft.json` supplies mass, in
 
 ## Running The Demo
 
-1. Connect a Logitech F310 in XInput mode.
-2. Start `AeroDynControlRig` and open the `F310 Flight Controls` tab.
+1. Connect a Logitech F310 or Dual Action controller. AeroDyn installs the maintained Dual Action mapping when Linux exposes product `046d:c216` in DirectInput mode.
+2. Start `AeroDynControlRig` and open the `Mode 2 Flight Controls` tab.
 3. Center both sticks and confirm that the controller, mixer, and RK4 readiness gates pass.
-4. Press `A` or select `Enable + run desktop SIL`.
+4. Press `A` or select `Run / resume SIL`.
 5. Use the left stick for collective thrust and yaw. Use the right stick for pitch and roll.
 6. Press the right stick (`R3`) to fit the aircraft in the scene.
 7. Press `BACK` to stop control, reset the PID, and clear every virtual motor command.
 
-The remaining mapped controls are shown directly on the in-application F310 diagram. Motor commands are virtual. This mode does not energize hardware.
+The face buttons are deliberately idempotent: `A` always runs or resumes, `B` always pauses, `X` always levels the attitude target, and `Y` always recenters the aircraft. Repeated presses do not switch a button to a different operation.
+
+The remaining mapped controls are shown directly on the in-application controller diagram. A Dual Action is rendered with its physical `1` through `4` labels while the input boundary normalizes it to standard gamepad actions. Motor commands are virtual. This mode does not energize hardware.
+
+Both sticks are spring-centered, unlike a traditional RC transmitter. AeroDyn therefore interprets the left vertical axis as a collective-thrust offset around hover rather than an absolute throttle position. The default 35% expo softens motion near stick center without removing full travel; the value can be adjusted in the controller panel.
 
 ## Mathematical Plant
 

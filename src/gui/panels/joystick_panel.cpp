@@ -90,12 +90,15 @@ void JoystickPanel::draw(SimulationState& state, Camera& camera)
         return;
     }
     const auto& joystick = state.joystick;
+    const bool dual_action =
+        joystick.profile.find("Dual Action") != std::string::npos;
     ImGui::TextColored(joystick.connected ? ImVec4(0.25f, 0.9f, 0.55f, 1.0f)
                                            : ImVec4(1.0f, 0.35f, 0.30f, 1.0f),
                        "%s", joystick.connected ? "CONNECTED" : "DISCONNECTED");
     ImGui::SameLine();
     ImGui::TextUnformatted(joystick.name.c_str());
     ImGui::TextWrapped("%s", joystick.status.c_str());
+    ImGui::TextDisabled("Profile: %s", joystick.profile.c_str());
     ImGui::TextColored(state.pilot.enabled ? ImVec4(1.0f, 0.58f, 0.16f, 1.0f)
                                            : ImVec4(0.55f, 0.62f, 0.70f, 1.0f),
                        "SIL CONTROL: %s", state.pilot.enabled ? "ACTIVE" : "OFF");
@@ -125,7 +128,7 @@ void JoystickPanel::draw(SimulationState& state, Camera& camera)
     ImGui::SeparatorText("Readiness gates");
     ImGui::TextColored(joystick.connected ? ImVec4(0.25f, 0.9f, 0.55f, 1.0f)
                                           : ImVec4(1.0f, 0.35f, 0.30f, 1.0f),
-                       "%s  F310 connected", joystick.connected ? "PASS" : "WAIT");
+                       "%s  controller connected", joystick.connected ? "PASS" : "WAIT");
     ImGui::TextColored(centered ? ImVec4(0.25f, 0.9f, 0.55f, 1.0f)
                                 : ImVec4(1.0f, 0.70f, 0.20f, 1.0f),
                        "%s  sticks centered", centered ? "PASS" : "WAIT");
@@ -140,15 +143,10 @@ void JoystickPanel::draw(SimulationState& state, Camera& camera)
                        "%s  checked RK4 plant",
                        state.physics.integration_valid ? "PASS" : "FAIL");
 
-    if (ImGui::Button(state.pilot.enabled ? "Stop + clear motors" :
-                                            "Enable + run desktop SIL")) {
+    if (ImGui::Button("Run / resume SIL")) {
         if (state.pilot.enabled) {
-            state.pilot.enabled = false;
-            state.pilot.reset_controller = true;
-            state.control.paused = true;
-            state.motor_commands.omega_rad_s.fill(0.0);
-            state.motor_commands.throttle_0_1.fill(0.0);
-            state.pilot.status = "Desktop SIL stopped and virtual motors cleared.";
+            state.control.paused = false;
+            state.pilot.status = "Desktop SIL already active; simulation running.";
         } else if (joystick.connected && centered &&
                    !joystick.analog_mode_warning &&
                    state.pilot.controller_valid &&
@@ -165,10 +163,19 @@ void JoystickPanel::draw(SimulationState& state, Camera& camera)
         }
     }
     ImGui::SameLine();
-    if (ImGui::Button(state.control.paused ? "Resume" : "Pause")) {
-        state.control.paused = !state.control.paused;
+    if (ImGui::Button("Pause")) {
+        state.control.paused = true;
+        state.pilot.status = "Desktop SIL paused; controller remains armed in simulation.";
     }
     ImGui::SameLine();
+    if (ImGui::Button("Emergency stop")) {
+        state.pilot.enabled = false;
+        state.pilot.reset_controller = true;
+        state.control.paused = true;
+        state.motor_commands.omega_rad_s.fill(0.0);
+        state.motor_commands.throttle_0_1.fill(0.0);
+        state.pilot.status = "Emergency stop: SIL paused and virtual motors cleared.";
+    }
     if (ImGui::Button("Reset aircraft")) {
         state.control.reset_requested = true;
     }
@@ -206,10 +213,14 @@ void JoystickPanel::draw(SimulationState& state, Camera& camera)
     drawDpad(draw, {origin.x + width * 0.18f, origin.y + 205.0f}, joystick);
 
     const ImVec2 face{origin.x + width * 0.82f, origin.y + 135.0f};
-    drawButton(draw, {face.x, face.y + 31.0f}, "A", joystick.buttons[0]);
-    drawButton(draw, {face.x + 31.0f, face.y}, "B", joystick.buttons[1]);
-    drawButton(draw, {face.x - 31.0f, face.y}, "X", joystick.buttons[2]);
-    drawButton(draw, {face.x, face.y - 31.0f}, "Y", joystick.buttons[3]);
+    drawButton(draw, {face.x, face.y + 31.0f}, dual_action ? "2" : "A",
+               joystick.buttons[GLFW_GAMEPAD_BUTTON_A]);
+    drawButton(draw, {face.x + 31.0f, face.y}, dual_action ? "3" : "B",
+               joystick.buttons[GLFW_GAMEPAD_BUTTON_B]);
+    drawButton(draw, {face.x - 31.0f, face.y}, dual_action ? "1" : "X",
+               joystick.buttons[GLFW_GAMEPAD_BUTTON_X]);
+    drawButton(draw, {face.x, face.y - 31.0f}, dual_action ? "4" : "Y",
+               joystick.buttons[GLFW_GAMEPAD_BUTTON_Y]);
 
     drawPill(draw, {origin.x + width * 0.43f, origin.y + 110.0f}, {22.0f, 8.0f},
              "BACK", joystick.buttons[GLFW_GAMEPAD_BUTTON_BACK]);
@@ -219,7 +230,9 @@ void JoystickPanel::draw(SimulationState& state, Camera& camera)
              "START", joystick.buttons[GLFW_GAMEPAD_BUTTON_START]);
 
     draw->AddText({origin.x + 20.0f, origin.y + 10.0f},
-                  IM_COL32(230, 236, 242, 255), "LOGITECH F310 / MODE 2");
+                  IM_COL32(230, 236, 242, 255),
+                  dual_action ? "LOGITECH DUAL ACTION / MODE 2" :
+                                "GAMEPAD / MODE 2");
     draw->AddText({left.x - 48.0f, origin.y + 240.0f},
                   IM_COL32(155, 170, 184, 255), "THROTTLE / YAW");
     draw->AddText({right.x - 35.0f, origin.y + 240.0f},
@@ -228,10 +241,14 @@ void JoystickPanel::draw(SimulationState& state, Camera& camera)
 
     if (joystick.show_guide) {
         ImGui::SeparatorText("Button guide");
-        ImGui::BulletText("A: enable/disable SIL control (sticks must be centered)");
-        ImGui::BulletText("B: pause/resume simulation");
-        ImGui::BulletText("X: level roll/pitch and retain current heading");
-        ImGui::BulletText("Y: show/hide this guide");
+        ImGui::BulletText("%s: run/resume SIL control (sticks centered)",
+                          dual_action ? "2 / A" : "A");
+        ImGui::BulletText("%s: pause simulation",
+                          dual_action ? "3 / B" : "B");
+        ImGui::BulletText("%s: level roll/pitch and retain current heading",
+                          dual_action ? "1 / X" : "X");
+        ImGui::BulletText("%s: recenter aircraft in the viewport",
+                          dual_action ? "4 / Y" : "Y");
         ImGui::BulletText("BACK: disable control and clear PID state");
         ImGui::BulletText("D-pad: one-degree roll/pitch trim");
         ImGui::BulletText("LB/RB: decrease/increase command authority");
@@ -246,6 +263,12 @@ void JoystickPanel::draw(SimulationState& state, Camera& camera)
                 (joystick.axes[4] + 1.0f) * 0.5f,
                 (joystick.axes[5] + 1.0f) * 0.5f,
                 state.pilot.command_scale * 100.0);
+    const double minimum_expo = 0.0;
+    const double maximum_expo = 0.75;
+    ImGui::SliderScalar("Stick expo", ImGuiDataType_Double,
+                        &state.pilot.stick_expo, &minimum_expo, &maximum_expo,
+                        "%.2f", ImGuiSliderFlags_AlwaysClamp);
+    ImGui::TextDisabled("More expo softens small stick motions without reducing full travel.");
     ImGui::Text("Trim  roll %+.1f deg  pitch %+.1f deg",
                 state.pilot.roll_trim_rad * 180.0 / 3.14159265358979323846,
                 state.pilot.pitch_trim_rad * 180.0 / 3.14159265358979323846);

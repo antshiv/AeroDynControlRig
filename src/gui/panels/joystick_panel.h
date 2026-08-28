@@ -5,7 +5,7 @@
 
 class JoystickPanel final : public Panel {
 public:
-    const char* name() const override { return "F310 Flight Controls"; }
+    const char* name() const override { return "Mode 2 Flight Controls"; }
     void draw(SimulationState& state, Camera& camera) override;
 };
 

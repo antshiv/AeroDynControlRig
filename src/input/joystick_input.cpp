@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <string>
 
 #include <GLFW/glfw3.h>
 
@@ -29,6 +30,28 @@ void stopDesktopSil(SimulationState& state, const char* status)
     state.motor_commands.throttle_0_1.fill(0.0);
     state.pilot.status = status;
 }
+
+bool isLogitechDualAction(const char* name)
+{
+    return name != nullptr &&
+           std::string(name).find("Logitech Dual Action") != std::string::npos;
+}
+
+bool installLogitechDualActionMapping(int joystick_id)
+{
+    const char* guid = glfwGetJoystickGUID(joystick_id);
+    if (guid == nullptr) {
+        return false;
+    }
+    const std::string mapping =
+        std::string(guid) +
+        ",Logitech Dual Action,"
+        "a:b1,b:b2,x:b0,y:b3,back:b8,start:b9,"
+        "leftshoulder:b4,rightshoulder:b5,lefttrigger:b6,righttrigger:b7,"
+        "leftstick:b10,rightstick:b11,leftx:a0,lefty:a1,rightx:a2,righty:a3,"
+        "dpup:h0.1,dpright:h0.2,dpdown:h0.4,dpleft:h0.8,";
+    return glfwUpdateGamepadMappings(mapping.c_str()) == GLFW_TRUE;
+}
 }
 
 void JoystickInput::poll(SimulationState& state)
@@ -48,14 +71,27 @@ void JoystickInput::poll(SimulationState& state)
         joystick.status = "Connect a gamepad to enable pilot input.";
         previous_buttons_.fill(false);
         was_connected_ = false;
+        mapping_attempted_ = false;
         return;
     }
 
     const char* name = glfwGetJoystickName(GLFW_JOYSTICK_1);
     joystick.name = name != nullptr ? name : "Unknown joystick";
+    if (!mapping_attempted_) {
+        joystick.known_mapping_installed =
+            isLogitechDualAction(name) &&
+            installLogitechDualActionMapping(GLFW_JOYSTICK_1);
+        mapping_attempted_ = true;
+    }
+    joystick.profile = isLogitechDualAction(name)
+                           ? "Logitech Dual Action / Mode 2"
+                           : "Generic gamepad / Mode 2";
     GLFWgamepadstate gamepad{};
     joystick.standardized_mapping =
         glfwGetGamepadState(GLFW_JOYSTICK_1, &gamepad) == GLFW_TRUE;
+    if (isLogitechDualAction(name) && joystick.standardized_mapping) {
+        joystick.known_mapping_installed = true;
+    }
     if (joystick.standardized_mapping) {
         joystick.axes = {
             gamepad.axes[GLFW_GAMEPAD_AXIS_LEFT_X],
@@ -100,18 +136,20 @@ void JoystickInput::poll(SimulationState& state)
         [](float value) { return value < -0.95f; });
     if (joystick.analog_mode_warning) {
         joystick.status =
-            "All axes report -1. Press the F310 MODE button and verify the sticks recenter.";
+            "All axes report -1. Press the controller MODE button and verify the sticks recenter.";
     } else if (!joystick.standardized_mapping) {
         joystick.status = "Using raw DirectInput fallback mapping.";
+    } else if (joystick.known_mapping_installed) {
+        joystick.status =
+            "Dual Action mapping loaded. Center the sticks, then press physical button 2 (A).";
     } else {
-        joystick.status = "F310 ready. Center the sticks, then press A to enable SIL control.";
+        joystick.status = "Gamepad ready. Center the sticks, then press A to enable SIL control.";
     }
 
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_A]) {
         if (state.pilot.enabled) {
-            stopDesktopSil(
-                state,
-                "SIL control disabled; simulation paused and motors cleared.");
+            state.control.paused = false;
+            state.pilot.status = "Desktop SIL already active; simulation running.";
         } else if (sticksCentered(joystick) && !joystick.analog_mode_warning) {
             state.pilot.enabled = true;
             state.pilot.reset_controller = true;
@@ -124,7 +162,8 @@ void JoystickInput::poll(SimulationState& state)
         }
     }
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_B]) {
-        state.control.paused = !state.control.paused;
+        state.control.paused = true;
+        state.pilot.status = "Desktop SIL paused; controller remains armed in simulation.";
     }
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_X]) {
         state.pilot.target_roll_rad = 0.0;
@@ -134,7 +173,8 @@ void JoystickInput::poll(SimulationState& state)
         state.pilot.status = "Attitude target levelled; current heading retained.";
     }
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_Y]) {
-        joystick.show_guide = !joystick.show_guide;
+        state.control.camera_fit_requested = true;
+        state.pilot.status = "Camera recenter requested.";
     }
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_DPAD_LEFT]) {
         state.pilot.roll_trim_rad =

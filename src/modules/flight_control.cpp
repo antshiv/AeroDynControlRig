@@ -15,14 +15,17 @@ constexpr double kCollectiveRange = 0.40;
 constexpr double kTriggerCollectiveBias = 0.20;
 constexpr float kStickDeadzone = 0.08f;
 
-double applyDeadzone(float value)
+double applyDeadzone(float value, double expo)
 {
     const double magnitude = std::abs(static_cast<double>(value));
     if (magnitude <= kStickDeadzone) {
         return 0.0;
     }
     const double scaled = (magnitude - kStickDeadzone) / (1.0 - kStickDeadzone);
-    return std::copysign(std::min(1.0, scaled), value);
+    const double signed_value = std::copysign(std::min(1.0, scaled), value);
+    const double bounded_expo = std::clamp(expo, 0.0, 0.75);
+    return (1.0 - bounded_expo) * signed_value +
+           bounded_expo * signed_value * signed_value * signed_value;
 }
 }
 
@@ -112,7 +115,8 @@ void FlightControlModule::update(double dt, SimulationState& state)
         return;
     }
 
-    const double yaw_input = applyDeadzone(state.joystick.axes[0]);
+    const double yaw_input =
+        applyDeadzone(state.joystick.axes[0], state.pilot.stick_expo);
     const double left_trigger = state.joystick.standardized_mapping
                                     ? (state.joystick.axes[4] + 1.0) * 0.5
                                     : 0.0;
@@ -120,11 +124,13 @@ void FlightControlModule::update(double dt, SimulationState& state)
                                      ? (state.joystick.axes[5] + 1.0) * 0.5
                                      : 0.0;
     const double collective_input = std::clamp(
-        -applyDeadzone(state.joystick.axes[1]) +
+        -applyDeadzone(state.joystick.axes[1], state.pilot.stick_expo) +
             (right_trigger - left_trigger) * kTriggerCollectiveBias,
         -1.0, 1.0);
-    const double roll_input = applyDeadzone(state.joystick.axes[2]);
-    const double pitch_input = -applyDeadzone(state.joystick.axes[3]);
+    const double roll_input =
+        applyDeadzone(state.joystick.axes[2], state.pilot.stick_expo);
+    const double pitch_input =
+        -applyDeadzone(state.joystick.axes[3], state.pilot.stick_expo);
     state.pilot.target_roll_rad = std::clamp(
         state.pilot.roll_trim_rad +
             roll_input * kMaximumTiltRad * state.pilot.command_scale,

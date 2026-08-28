@@ -204,6 +204,8 @@ struct SimulationState {
         bool standardized_mapping{false};
         bool analog_mode_warning{false};
         std::string name{"No joystick"};
+        std::string profile{"Generic gamepad"};
+        bool known_mapping_installed{false};
         std::array<float, kJoystickAxisCount> axes{0.0f, 0.0f, 0.0f, 0.0f, -1.0f, -1.0f};
         std::array<bool, kJoystickButtonCount> buttons{};
         std::array<bool, kJoystickButtonCount> pressed{};
@@ -220,7 +222,8 @@ struct SimulationState {
         double target_yaw_rad{0.0};
         double roll_trim_rad{0.0};
         double pitch_trim_rad{0.0};
-        double command_scale{1.0};
+        double command_scale{0.5};
+        double stick_expo{0.35};
         double collective_thrust_n{0.0};
         glm::dvec3 requested_torque_nm{0.0};
         std::uint64_t accepted_updates{0};

@@ -3,7 +3,7 @@
 [![Doxygen](https://github.com/antshiv/AeroDynControlRig/actions/workflows/doxygen.yml/badge.svg)](https://github.com/antshiv/AeroDynControlRig/actions/workflows/doxygen.yml)
 [![Documentation](https://img.shields.io/badge/docs-doxygen-blue.svg)](https://antshiv.github.io/AeroDynControlRig/)
 
-Desktop visualization and testbed for the Antshiv flight-control stack. The current demo sends Logitech F310 commands through the real `controlSystems` PID and geometry-derived mixer, advances a checked six-degree-of-freedom RK4 plant from `dynamic_models`, and renders the resulting aircraft motion in OpenGL.
+Desktop visualization and testbed for the Antshiv flight-control stack. The current demo sends Mode 2 gamepad commands through the real `controlSystems` PID and geometry-derived mixer, advances a checked six-degree-of-freedom RK4 plant from `dynamic_models`, and renders the resulting aircraft motion in OpenGL.
 
 AeroDyn now loads its vehicle geometry, mass properties, rotor coefficients, timing, and controller gains from a versioned [aircraft contract](docs/aircraft-contract.md). The same contract is intended to feed controller tuning, firmware generation, FreeCAD/OpenFOAM adapters, HIL, and later Gazebo scenarios without duplicating configuration.
 
@@ -55,7 +55,7 @@ See [Desktop SIL Demo](docs/desktop-sil-demo.md) for the joystick workflow, safe
 - **Checked Plant Propagation** – The visual scene consumes `dynamic_models`' transactional RK4 step; failed stages pause the simulation before invalid state is rendered
 - **Versioned Aircraft Contract** – Aircraft and controller artifacts are provenance-linked; mismatched revisions and invalid physical parameters fail closed
 - **Generated Aircraft Geometry** – One aircraft contract drives headless FreeCAD, STEP, STL, OBJ, and the live OpenGL scene instead of a separately maintained display model
-- **Joystick Closed Loop** – A Logitech F310 can drive simulation-only attitude/throttle commands through the real `controlSystems` PID, geometry-derived mixer, and checked RK4 plant with a live control diagram
+- **Joystick Closed Loop** – A Logitech F310 or Dual Action controller can drive simulation-only attitude/collective commands through the real `controlSystems` PID, geometry-derived mixer, and checked RK4 plant with a device-aware control diagram
 - **Visible Mathematical Contract** – The aircraft-model panel shows the nonlinear Newton-Euler equations used by the plant, loaded mass and inertia, hover rotor speed, a 12-state hover linearization, and local transfer functions
 - **Staged Execution Modes** – The UI identifies Desktop SIL as the active path and reserves explicit, disabled entries for nRF5340 HIL and live CEVA replay until their transports are connected
 - **In-App Documentation** – Keyboard controls help modal with mode-specific instructions
