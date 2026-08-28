@@ -20,6 +20,7 @@
 #include "core/module.h"
 #include "gui/panel_manager.h"
 #include "imgui.h"
+#include "input/joystick_input.h"
 
 /**
  * @class Application
@@ -138,6 +139,7 @@ private:
     SimulationState simulationState;                 ///< Shared simulation state
     std::vector<std::unique_ptr<Module>> modules;    ///< Registered simulation modules
     PanelManager panelManager;                       ///< UI panel manager
+    JoystickInput joystickInput;                     ///< Optional pilot-command input
 
     // === Initialization Helpers ===
     /**
@@ -165,6 +167,8 @@ private:
      * - Sensor readouts
      */
     void initializePanels();
+    void resetSimulation();
+    void fitCameraToAircraft(float aspectRatio);
 
     // === Rendering Helpers ===
     /**

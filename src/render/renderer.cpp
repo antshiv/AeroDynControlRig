@@ -1,4 +1,6 @@
 #include "renderer.h"
+#include "render/obj_mesh.h"
+#include <cmath>
 #include <iostream>
 #include <GL/glew.h>
 // If using Glad: #include <glad/glad.h>
@@ -74,8 +76,11 @@ bool Renderer::init() {
         return false;
     }
 
-    // Set up geometry
-    setupCubeGeometry3D();
+    // CAD exports use millimetres; the loader converts them to simulation metres.
+    if (!setupAircraftGeometry(ASR_DEFAULT_AIRCRAFT_MESH)) {
+        std::cerr << "Falling back to placeholder geometry" << std::endl;
+        setupCubeGeometry3D();
+    }
     setupBackgroundQuad();
 
     setDefaultMatrices();
@@ -145,7 +150,7 @@ void Renderer::setDefaultMatrices() {
     model = glm::mat4(1.0f); // Identity matrix
 
     view = glm::lookAt(
-        glm::vec3(0.0f, 0.0f, 3.0f), // Camera position
+        glm::vec3(0.0f, 0.0f, 1.2f), // Camera position
         glm::vec3(0.0f, 0.0f, 0.0f), // Look at origin
         glm::vec3(0.0f, 1.0f, 0.0f)  // Up vector
     );
@@ -339,8 +344,53 @@ void Renderer::setupCubeGeometry3D() {
     glEnableVertexAttribArray(2);
 
     cubeIndexCount = sizeof(indices) / sizeof(unsigned int);
+    aircraftCenter_ = glm::vec3(0.0f);
+    aircraftRadius_ = std::sqrt(3.0f) * 0.5f;
 
     glBindVertexArray(0);
+}
+
+bool Renderer::setupAircraftGeometry(const std::string& path) {
+    ObjMesh mesh;
+    std::string error;
+    if (!loadObjMesh(path, 0.001f, mesh, error)) {
+        std::cerr << error << std::endl;
+        return false;
+    }
+
+    glGenVertexArrays(1, &cubeVao);
+    glGenBuffers(1, &cubeVbo);
+    glGenBuffers(1, &cubeEbo);
+    glBindVertexArray(cubeVao);
+
+    glBindBuffer(GL_ARRAY_BUFFER, cubeVbo);
+    glBufferData(GL_ARRAY_BUFFER,
+                 static_cast<GLsizeiptr>(mesh.vertices.size() * sizeof(ObjMeshVertex)),
+                 mesh.vertices.data(), GL_STATIC_DRAW);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, cubeEbo);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER,
+                 static_cast<GLsizeiptr>(mesh.indices.size() * sizeof(unsigned int)),
+                 mesh.indices.data(), GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(ObjMeshVertex),
+                          reinterpret_cast<void*>(offsetof(ObjMeshVertex, position)));
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(ObjMeshVertex),
+                          reinterpret_cast<void*>(offsetof(ObjMeshVertex, normal)));
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(ObjMeshVertex),
+                          reinterpret_cast<void*>(offsetof(ObjMeshVertex, color)));
+    glEnableVertexAttribArray(2);
+
+    cubeIndexCount = static_cast<unsigned int>(mesh.indices.size());
+    const glm::vec3 minimum(mesh.minimum[0], mesh.minimum[1], mesh.minimum[2]);
+    const glm::vec3 maximum(mesh.maximum[0], mesh.maximum[1], mesh.maximum[2]);
+    aircraftCenter_ = (minimum + maximum) * 0.5f;
+    aircraftRadius_ = glm::length(maximum - minimum) * 0.5f;
+    glBindVertexArray(0);
+    std::cout << "Loaded aircraft geometry: " << path << " ("
+              << mesh.indices.size() / 3u << " triangles)" << std::endl;
+    return true;
 }
 
 void Renderer::setupBackgroundQuad() {

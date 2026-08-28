@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "bundle_id": "asr-reference-quad-controller-r1",
+  "aircraft_id": "asr-reference-quad",
+  "aircraft_revision": 1,
+  "status": "simulation_only",
+  "source": {
+    "method": "initial_sil_fixture",
+    "note": "Not approved for physical flight. Replace with identified and validated coefficients."
+  },
+  "timing": {
+    "nominal_period_s": 0.04,
+    "minimum_period_s": 0.02,
+    "maximum_period_s": 0.06
+  },
+  "attitude_pid": {
+    "rate_weight": 1.0,
+    "roll":  {"kp": 0.30, "ki": 0.01, "kd": 0.05, "integrator_limit": 0.20, "output_limit": 0.50},
+    "pitch": {"kp": 0.30, "ki": 0.01, "kd": 0.05, "integrator_limit": 0.20, "output_limit": 0.50},
+    "yaw":   {"kp": 0.20, "ki": 0.00, "kd": 0.03, "integrator_limit": 0.00, "output_limit": 0.20}
+  },
+  "acceptance": {
+    "physical_flight_approved": false,
+    "required_gates": ["axis_mapping", "system_identification", "gain_sweep", "fault_injection", "hil", "restrained_motor_test"]
+  }
+}

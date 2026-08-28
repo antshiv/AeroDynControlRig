@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "aircraft_id": "asr-reference-quad",
+  "revision": 1,
+  "description": "Initial ASR-FC and AeroDyn shared quadrotor contract",
+  "frames": {
+    "inertial": "NED",
+    "body": "FRD",
+    "quaternion": "body_to_inertial_scalar_first"
+  },
+  "mass_properties": {
+    "mass_kg": 1.2,
+    "center_of_mass_m": [0.0, 0.0, 0.0],
+    "inertia_kg_m2": [
+      [0.020, 0.0, 0.0],
+      [0.0, 0.020, 0.0],
+      [0.0, 0.0, 0.040]
+    ]
+  },
+  "environment": {"gravity_m_s2": 9.80665},
+  "geometry": {
+    "body": {"dimensions_m": [0.220, 0.160, 0.070]},
+    "arm": {"outer_diameter_m": 0.018},
+    "motor_mount": {"diameter_m": 0.045, "thickness_m": 0.008},
+    "landing_gear": {
+      "skid_length_m": 0.260,
+      "skid_spacing_m": 0.150,
+      "ground_clearance_m": 0.095,
+      "tube_diameter_m": 0.012
+    }
+  },
+  "rotors": [
+    {"id": "front_right", "position_body_m": [0.18, 0.18, 0.0], "thrust_axis_body": [0.0, 0.0, -1.0], "spin_direction": "CW", "thrust_coefficient_n_per_rad_s2": 0.000008, "torque_coefficient_nm_per_rad_s2": 0.00000012, "maximum_speed_rad_s": 1000.0},
+    {"id": "front_left", "position_body_m": [0.18, -0.18, 0.0], "thrust_axis_body": [0.0, 0.0, -1.0], "spin_direction": "CCW", "thrust_coefficient_n_per_rad_s2": 0.000008, "torque_coefficient_nm_per_rad_s2": 0.00000012, "maximum_speed_rad_s": 1000.0},
+    {"id": "rear_left", "position_body_m": [-0.18, -0.18, 0.0], "thrust_axis_body": [0.0, 0.0, -1.0], "spin_direction": "CW", "thrust_coefficient_n_per_rad_s2": 0.000008, "torque_coefficient_nm_per_rad_s2": 0.00000012, "maximum_speed_rad_s": 1000.0},
+    {"id": "rear_right", "position_body_m": [-0.18, 0.18, 0.0], "thrust_axis_body": [0.0, 0.0, -1.0], "spin_direction": "CCW", "thrust_coefficient_n_per_rad_s2": 0.000008, "torque_coefficient_nm_per_rad_s2": 0.00000012, "maximum_speed_rad_s": 1000.0}
+  ]
+}

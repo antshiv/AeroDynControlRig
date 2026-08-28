@@ -2,6 +2,8 @@
 #include "render/renderer.h"
 #include "modules/quaternion_demo.h"
 #include "modules/quadcopter_dynamics.h"
+#include "modules/flight_control.h"
+#include "modules/mission_control.h"
 #include "modules/first_order_dynamics.h"
 #include "modules/sensor_simulator.h"
 #include "modules/complementary_estimator.h"
@@ -10,6 +12,8 @@
 #include "gui/widgets/card.h"
 #include "gui/style.h"
 #include "gui/panels/control_panel.h"
+#include "gui/panels/joystick_panel.h"
+#include "gui/panels/mathematical_model_panel.h"
 #include "gui/panels/telemetry_panel.h"
 #include "gui/panels/dynamics_panel.h"
 #include "gui/panels/estimator_panel.h"
@@ -342,6 +346,7 @@ bool Application::init() {
     // These are custom components that encapsulate specific application logic
     // (e.g., physics simulation, sensor data) and their corresponding UI panels.
     initializeModules();
+    fitCameraToAircraft(800.0f / 600.0f);
     initializePanels();
     lastFrame = glfwGetTime(); // Record the time for delta time calculations
 
@@ -361,7 +366,9 @@ bool Application::running() const {
 }
 
 void Application::initializeModules() {
-    // Use QuadcopterDynamicsModule for physics-based simulation
+    // Mission contract -> pilot/controller/mixer -> rigid-body plant.
+    modules.emplace_back(std::make_unique<MissionControlModule>());
+    modules.emplace_back(std::make_unique<FlightControlModule>());
     modules.emplace_back(std::make_unique<QuadcopterDynamicsModule>());
     // Keep QuaternionDemoModule commented out (replaced by QuadcopterDynamicsModule)
     // modules.emplace_back(std::make_unique<QuaternionDemoModule>());
@@ -382,13 +389,26 @@ void Application::tick() {
     double real_dt = static_cast<double>(currentFrame - lastFrame);
     lastFrame = currentFrame;
 
+    // Input remains live while simulation time is paused.
+    joystickInput.poll(simulationState);
+    if (simulationState.control.camera_fit_requested) {
+        fitCameraToAircraft(sceneHeight > 0
+                                ? static_cast<float>(sceneWidth) / sceneHeight
+                                : 4.0f / 3.0f);
+        simulationState.control.camera_fit_requested = false;
+    }
+    if (simulationState.control.reset_requested) {
+        resetSimulation();
+    }
+
     updateCamera(static_cast<float>(real_dt));
 
     // === ROTATION MODE TOGGLE ===
     // Two modes: Manual (discrete steps) vs Automatic (continuous angular rates)
     // Toggle with 'M' key, controlled in keyCallback
 
-    if (!simulationState.control.manual_rotation_mode) {
+    if (simulationState.control.use_legacy_ui &&
+        !simulationState.control.manual_rotation_mode) {
         // AUTOMATIC MODE: Continuous angular rate control (like flying a drone)
         glm::dvec3& body_rates = simulationState.angular_rate_deg_per_sec;
         auto adjust_rotation = [&](int key, int axis, double direction) {
@@ -417,7 +437,7 @@ void Application::tick() {
         if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
             body_rates = glm::dvec3(0.0f);
         }
-    } else {
+    } else if (simulationState.control.use_legacy_ui) {
         // MANUAL MODE: Keep angular rates at zero (rotation via W/A/S/D/Q/E in keyCallback)
         simulationState.angular_rate_deg_per_sec = glm::dvec3(0.0);
     }
@@ -442,6 +462,36 @@ void Application::tick() {
     captureAttitudeHistorySample();
     transform.model = simulationState.model_matrix;
     render3D();
+}
+
+void Application::resetSimulation() {
+    const bool show_guide = simulationState.joystick.show_guide;
+    const std::uint64_t action_sequence =
+        simulationState.joystick.action_sequence;
+    const std::string last_action = simulationState.joystick.last_action;
+    simulationState = SimulationState{};
+    simulationState.joystick.show_guide = show_guide;
+    simulationState.joystick.action_sequence = action_sequence;
+    simulationState.joystick.last_action = last_action;
+    for (auto& module : modules) {
+        module->initialize(simulationState);
+    }
+    transform.model = simulationState.model_matrix;
+}
+
+void Application::fitCameraToAircraft(float aspectRatio) {
+    const glm::vec3 local_center = renderer.aircraftCenter();
+    const glm::vec3 world_center = glm::vec3(
+        simulationState.model_matrix * glm::vec4(local_center, 1.0f));
+    const glm::mat4& model = simulationState.model_matrix;
+    const float maximum_scale = std::max({
+        glm::length(glm::vec3(model[0])),
+        glm::length(glm::vec3(model[1])),
+        glm::length(glm::vec3(model[2]))});
+    camera.reset();
+    camera.orbit(-35.0f, -25.0f);
+    camera.fitSphere(world_center, renderer.aircraftRadius() * maximum_scale,
+                     aspectRatio);
 }
 
 void Application::shutdown() {
@@ -473,6 +523,12 @@ void Application::keyCallback(GLFWwindow* window, int key, int scancode, int act
 
     if (action == GLFW_PRESS && key == GLFW_KEY_ESCAPE) {
         glfwSetWindowShouldClose(window, GLFW_TRUE);
+        return;
+    }
+
+    // The dashboard owns a single joystick -> controller -> plant path.
+    // Legacy quaternion keyboard controls are available only in the legacy UI.
+    if (!app->simulationState.control.use_legacy_ui) {
         return;
     }
 
@@ -730,11 +786,14 @@ void Application::renderDashboardLayout(ImGuiIO& io) {
             ImGui::DockBuilderDockWindow("Flight Scene", dock_left);
             ImGui::DockBuilderDockWindow("Rotor Dynamics", dock_right);
             ImGui::DockBuilderDockWindow("Power Monitor", dock_right_bottom);
+            ImGui::DockBuilderDockWindow("Mode 2 Flight Controls", dock_right_bottom);
+            ImGui::DockBuilderDockWindow("Rotor Analysis", dock_right_bottom);
             ImGui::DockBuilderDockWindow("Estimator", dock_bottom_left);
             ImGui::DockBuilderDockWindow("Control Panel", dock_bottom_center);
             ImGui::DockBuilderDockWindow("Sensor Suite", dock_bottom_right);
             ImGui::DockBuilderDockWindow("Flight Telemetry", dock_bottom_center);
             ImGui::DockBuilderDockWindow("Dynamics", dock_right_bottom);
+            ImGui::DockBuilderDockWindow("Aircraft Mathematical Model", dock_right_bottom);
             ImGui::DockBuilderFinish(dockspace_id);
         }
     }
@@ -779,6 +838,18 @@ void Application::renderDashboardLayout(ImGuiIO& io) {
                          ImVec2(1.0f, 0.0f));
             viewport_hovered = ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenBlockedByPopup);
             viewport_active = ImGui::IsItemActive();
+            const ImVec2 after_canvas = ImGui::GetCursorScreenPos();
+            ImGui::SetCursorScreenPos(
+                {canvas_pos.x + viewport_size.x - 126.0f, canvas_pos.y + 16.0f});
+            ui::PushPillButtonStyle(ui::PillStyle::Secondary);
+            if (ImGui::Button("Fit aircraft", ImVec2(108.0f, 30.0f))) {
+                fitCameraToAircraft(viewport_size.x / viewport_size.y);
+            }
+            ui::PopPillButtonStyle();
+            if (ImGui::IsItemHovered()) {
+                ImGui::SetTooltip("Frame the complete simulated aircraft (R3)");
+            }
+            ImGui::SetCursorScreenPos(after_canvas);
 
             char quat_buf[96];
             std::snprintf(
@@ -906,25 +977,25 @@ void Application::renderDashboardLayout(ImGuiIO& io) {
 
         scene_control_button(
             "rotate",
-            "Rotate",
+            "Camera orbit",
             u8"\ue5d1",
             [&](const char* popup_id, bool hovered) {
                 if (hovered) {
-                    ImGui::SetTooltip("Orbit the camera. Keys: Q/E, arrow keys, IJKL");
+                    ImGui::SetTooltip("CAMERA VIEW ONLY: orbit around the aircraft");
                 }
                 if (ImGui::BeginPopup(popup_id)) {
                     ImGui::TextUnformatted("Orbit camera");
                     ImGui::Separator();
-                    if (ImGui::MenuItem("Orbit left", "Q / ← / J")) {
+                    if (ImGui::MenuItem("Orbit left")) {
                         camera.orbit(-orbit_step_deg, 0.0f);
                     }
-                    if (ImGui::MenuItem("Orbit right", "E / → / L")) {
+                    if (ImGui::MenuItem("Orbit right")) {
                         camera.orbit(orbit_step_deg, 0.0f);
                     }
-                    if (ImGui::MenuItem("Tilt up", "I / ↑")) {
+                    if (ImGui::MenuItem("Tilt up")) {
                         camera.orbit(0.0f, tilt_step_deg);
                     }
-                    if (ImGui::MenuItem("Tilt down", "K / ↓")) {
+                    if (ImGui::MenuItem("Tilt down")) {
                         camera.orbit(0.0f, -tilt_step_deg);
                     }
                     ImGui::Separator();
@@ -938,19 +1009,19 @@ void Application::renderDashboardLayout(ImGuiIO& io) {
 
         scene_control_button(
             "pan",
-            "Pan",
+            "Camera pan",
             u8"\ue55d",
             [&](const char* popup_id, bool hovered) {
                 if (hovered) {
-                    ImGui::SetTooltip("Translate the camera laterally. Keys: WASD");
+                    ImGui::SetTooltip("CAMERA VIEW ONLY: move the viewpoint laterally");
                 }
                 if (ImGui::BeginPopup(popup_id)) {
                     ImGui::TextUnformatted("Pan camera");
                     ImGui::Separator();
-                    if (ImGui::MenuItem("Pan left", "A")) {
+                    if (ImGui::MenuItem("Pan left")) {
                         camera.pan(-pan_step_units, 0.0f);
                     }
-                    if (ImGui::MenuItem("Pan right", "D")) {
+                    if (ImGui::MenuItem("Pan right")) {
                         camera.pan(pan_step_units, 0.0f);
                     }
                     if (ImGui::MenuItem("Pan up")) {
@@ -966,11 +1037,11 @@ void Application::renderDashboardLayout(ImGuiIO& io) {
 
         scene_control_button(
             "zoom",
-            "Zoom",
+            "Camera zoom",
             u8"\ue8ff",
             [&](const char* popup_id, bool hovered) {
                 if (hovered) {
-                    ImGui::SetTooltip("Adjust zoom. Use mouse wheel for quick changes.");
+                    ImGui::SetTooltip("CAMERA VIEW ONLY: adjust viewing distance");
                 }
                 if (ImGui::BeginPopup(popup_id)) {
                     ImGui::TextUnformatted("Zoom & dolly");
@@ -1005,14 +1076,14 @@ void Application::renderDashboardLayout(ImGuiIO& io) {
                     ImGui::SetTooltip("Show keyboard and mouse shortcuts");
                 }
                 if (ImGui::BeginPopup(popup_id)) {
-                    ImGui::TextUnformatted("Scene controls");
+                    ImGui::TextUnformatted("CAMERA VIEW ONLY");
                     ImGui::Separator();
-                    ImGui::TextUnformatted("Orbit: left-drag, Q/E, arrows, IJKL");
-                    ImGui::TextUnformatted("Pan: right/middle drag, WASD");
+                    ImGui::TextUnformatted("Orbit: left-drag or Camera orbit menu");
+                    ImGui::TextUnformatted("Pan: right/middle drag or Camera pan menu");
                     ImGui::TextUnformatted("Zoom: mouse wheel or Zoom menu");
                     ImGui::TextUnformatted("Reset: Rotate→Reset view, Zoom→Reset zoom");
                     ImGui::Separator();
-                    ImGui::TextUnformatted("Space: zero body rates");
+                    ImGui::TextUnformatted("Drone movement uses the Mode 2 controller panel");
                     ImGui::EndPopup();
                 }
             });
@@ -1121,6 +1192,9 @@ void Application::renderLegacyLayout() {
 }
 
 void Application::updateCamera(float deltaTime) {
+    if (!simulationState.control.use_legacy_ui) {
+        return;
+    }
     ImGuiIO& io = ImGui::GetIO();
     if (io.WantCaptureKeyboard) {
         return;
@@ -1145,6 +1219,8 @@ void Application::initializePanels() {
     panelManager.registerPanel(std::make_unique<DynamicsPanel>());
     panelManager.registerPanel(std::make_unique<EstimatorPanel>());
     panelManager.registerPanel(std::make_unique<RotorAnalysisPanel>());
+    panelManager.registerPanel(std::make_unique<JoystickPanel>());
+    panelManager.registerPanel(std::make_unique<MathematicalModelPanel>());
 }
 
 ImTextureID Application::renderSceneToTexture(const ImVec2& size) {

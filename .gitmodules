@@ -10,3 +10,9 @@
 [submodule "external/dynamic_models"]
 	path = external/dynamic_models
 	url = ../dynamic_models
+[submodule "external/controlSystems"]
+	path = external/controlSystems
+	url = https://github.com/antshiv/controlSystems.git
+[submodule "external/asr_fc"]
+	path = external/asr_fc
+	url = https://github.com/antshiv/ASR-FC.git

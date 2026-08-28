@@ -62,7 +62,7 @@ public:
      * @param startYaw Initial yaw angle (degrees)
      * @param startPitch Initial pitch angle (degrees)
      */
-    Camera(glm::vec3 startPosition = glm::vec3(0.0f, 0.0f, 3.0f),
+    Camera(glm::vec3 startPosition = glm::vec3(0.0f, 0.0f, 1.2f),
            glm::vec3 startUp = glm::vec3(0.0f, 1.0f, 0.0f),
            float startYaw = -90.0f,
            float startPitch = 0.0f);
@@ -111,6 +111,10 @@ public:
      * @brief Reset camera position/orientation/zoom to defaults
      */
     void reset();
+
+    /** Frame a world-space sphere while preserving the current view direction. */
+    void fitSphere(const glm::vec3& center, float radius, float aspectRatio,
+                   float padding = 1.25f);
 
     /**
      * @brief Orbit camera around target by adjusting yaw/pitch.

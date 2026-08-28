@@ -10,6 +10,7 @@
 #include <cstdint>
 #include <deque>
 #include <limits>
+#include <string>
 #include <glm/glm.hpp>
 #include "attitude/euler.h"
 
@@ -27,6 +28,50 @@
  * - Panels have read/write access for interactive control
  */
 struct SimulationState {
+    static constexpr std::size_t kJoystickAxisCount = 6;
+    static constexpr std::size_t kJoystickButtonCount = 15;
+
+    struct AircraftContractState {
+        std::string aircraft_id;
+        std::string coefficient_bundle_id;
+        std::uint32_t aircraft_revision{0};
+        bool loaded{false};
+        bool physical_flight_approved{false};
+        std::string error;
+    } aircraft_contract;
+
+    enum class ExecutionMode {
+        DesktopSil,
+        Nrf5340Hil,
+        LiveCevaReplay
+    };
+
+    struct ExecutionState {
+        ExecutionMode selected_mode{ExecutionMode::DesktopSil};
+        bool nrf_hil_available{false};
+        bool ceva_replay_available{false};
+        std::string active_path{"Joystick -> PID -> mixer -> RK4 plant"};
+    } execution;
+
+    struct MathematicalModelState {
+        static constexpr std::size_t kStateCount = 12;
+        static constexpr std::size_t kInputCount = 4;
+        bool valid{false};
+        std::string model_name{"6-DOF quadrotor Newton-Euler model"};
+        std::string linearization{"Hover equilibrium, small roll/pitch angles"};
+        std::array<const char*, kStateCount> state_names{
+            "p_n", "p_e", "p_d", "v_n", "v_e", "v_d",
+            "phi", "theta", "psi", "p", "q", "r"};
+        std::array<const char*, kInputCount> input_names{
+            "dT", "tau_x", "tau_y", "tau_z"};
+        std::array<double, kStateCount * kStateCount> A{};
+        std::array<double, kStateCount * kInputCount> B{};
+        double hover_omega_rad_s{0.0};
+        double mass_kg{0.0};
+        double gravity_m_s2{0.0};
+        std::array<double, 3> inertia_diagonal{};
+    } mathematical_model;
+
     // === Attitude Representation ===
     EulerAngles euler{0.0, 0.0, 0.0, EULER_ZYX};              ///< Current attitude in Euler angles (ZYX convention)
     std::array<double, 4> quaternion{1.0, 0.0, 0.0, 0.0};     ///< Current attitude quaternion [w, x, y, z]
@@ -126,6 +171,7 @@ struct SimulationState {
         int last_result{0};                          ///< Last dm_result_t value without coupling UI to the C header
         std::uint64_t accepted_steps{0};             ///< Successfully committed plant steps
         std::uint64_t rejected_steps{0};             ///< Plant steps rejected before state commit
+        bool motor_command_saturated{false};          ///< At least one rotor command reached its configured limit
     } physics;
 
     /**
@@ -152,6 +198,63 @@ struct SimulationState {
         std::array<double, 4> omega_rad_s{0.0, 0.0, 0.0, 0.0};  ///< Commanded angular velocities (rad/s)
         std::array<double, 4> throttle_0_1{0.0, 0.0, 0.0, 0.0}; ///< Throttle commands [0, 1]
     } motor_commands;
+
+    struct JoystickState {
+        bool connected{false};
+        bool standardized_mapping{false};
+        bool analog_mode_warning{false};
+        std::string name{"No joystick"};
+        std::string profile{"Generic gamepad"};
+        bool known_mapping_installed{false};
+        std::array<float, kJoystickAxisCount> axes{0.0f, 0.0f, 0.0f, 0.0f, -1.0f, -1.0f};
+        std::array<bool, kJoystickButtonCount> buttons{};
+        std::array<bool, kJoystickButtonCount> pressed{};
+        bool show_guide{true};
+        std::uint64_t action_sequence{0};
+        std::string last_action{"No controller action yet."};
+        std::string status{"Connect a gamepad to enable pilot input."};
+    } joystick;
+
+    struct PilotControlState {
+        bool enabled{false};
+        bool controller_valid{false};
+        bool reset_controller{false};
+        bool assisted_velocity_mode{true};
+        double target_roll_rad{0.0};
+        double target_pitch_rad{0.0};
+        double target_yaw_rad{0.0};
+        double roll_trim_rad{0.0};
+        double pitch_trim_rad{0.0};
+        double command_scale{0.35};
+        double stick_expo{0.35};
+        glm::dvec3 desired_velocity_ned{0.0};
+        double collective_thrust_n{0.0};
+        glm::dvec3 requested_torque_nm{0.0};
+        std::uint64_t accepted_updates{0};
+        std::uint64_t rejected_updates{0};
+        std::string status{"Closed-loop pilot control disabled."};
+    } pilot;
+
+    enum class FlightPhase {
+        Grounded,
+        TakingOff,
+        Flying,
+        Landing,
+        EmergencyStopped,
+    };
+
+    struct MissionState {
+        FlightPhase phase{FlightPhase::Grounded};
+        bool takeoff_requested{false};
+        bool landing_requested{false};
+        bool vertical_velocity_override{false};
+        double vertical_velocity_down_mps{0.0};
+        double takeoff_altitude_m{1.5};
+        double altitude_tolerance_m{0.08};
+        double vertical_speed_tolerance_mps{0.10};
+        std::uint64_t transition_count{0};
+        std::string status{"Aircraft grounded; virtual motors stopped."};
+    } mission;
 
     /**
      * @struct DynamicsConfig
@@ -201,6 +304,7 @@ struct SimulationState {
         double thrust_coefficient{1.2e-6};  ///< Thrust coefficient (N/(rad/s)²)
         double torque_coefficient{2.5e-7};  ///< Torque coefficient (N·m/(rad/s)²)
         double arm_length_m{0.2};           ///< Distance from rotor to center of mass (meters)
+        double maximum_speed_rad_s{0.0};    ///< Lowest configured rotor speed limit (rad/s)
     } rotor_config;
 
     /**
@@ -230,12 +334,14 @@ struct SimulationState {
      * @brief User-controlled simulation playback parameters
      */
     struct SimulationControl {
-        bool paused{false};              ///< Pause simulation updates
+        bool paused{true};               ///< Start paused so the aircraft remains inspectable before a run
         bool use_legacy_ui{false};       ///< Toggle between legacy and dashboard layouts
         bool use_fixed_dt{false};        ///< Use fixed timestep instead of real-time
         double fixed_dt{0.01};           ///< Fixed timestep value (seconds)
         double time_scale{1.0};          ///< Simulation speed multiplier
         bool manual_rotation_mode{false}; ///< If true: discrete step rotation (W/A/S/D/Q/E). If false: continuous angular rates (arrow keys)
+        bool reset_requested{false};      ///< Reset the SIL plant and controller on the next application tick
+        bool camera_fit_requested{false};   ///< Frame the complete aircraft in the 3D viewport
     } control;
 };
 

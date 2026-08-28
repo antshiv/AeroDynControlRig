@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.antshiv.com/schemas/aircraft-spec-v1.schema.json",
+  "title": "Antshiv aircraft specification v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "aircraft_id", "revision", "frames", "mass_properties", "environment", "geometry", "rotors"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "aircraft_id": {"type": "string", "minLength": 1},
+    "revision": {"type": "integer", "minimum": 1},
+    "description": {"type": "string"},
+    "frames": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["inertial", "body", "quaternion"],
+      "properties": {
+        "inertial": {"const": "NED"},
+        "body": {"const": "FRD"},
+        "quaternion": {"const": "body_to_inertial_scalar_first"}
+      }
+    },
+    "mass_properties": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mass_kg", "center_of_mass_m", "inertia_kg_m2"],
+      "properties": {
+        "mass_kg": {"type": "number", "exclusiveMinimum": 0},
+        "center_of_mass_m": {"$ref": "#/$defs/vector3"},
+        "inertia_kg_m2": {
+          "type": "array", "minItems": 3, "maxItems": 3,
+          "items": {"$ref": "#/$defs/vector3"}
+        }
+      }
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["gravity_m_s2"],
+      "properties": {"gravity_m_s2": {"type": "number", "exclusiveMinimum": 0}}
+    },
+    "geometry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["body", "arm", "motor_mount", "landing_gear"],
+      "properties": {
+        "body": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["dimensions_m"],
+          "properties": {
+            "dimensions_m": {"$ref": "#/$defs/positive_vector3"}
+          }
+        },
+        "arm": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["outer_diameter_m"],
+          "properties": {
+            "outer_diameter_m": {"type": "number", "exclusiveMinimum": 0}
+          }
+        },
+        "motor_mount": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["diameter_m", "thickness_m"],
+          "properties": {
+            "diameter_m": {"type": "number", "exclusiveMinimum": 0},
+            "thickness_m": {"type": "number", "exclusiveMinimum": 0}
+          }
+        },
+        "landing_gear": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["skid_length_m", "skid_spacing_m", "ground_clearance_m", "tube_diameter_m"],
+          "properties": {
+            "skid_length_m": {"type": "number", "exclusiveMinimum": 0},
+            "skid_spacing_m": {"type": "number", "exclusiveMinimum": 0},
+            "ground_clearance_m": {"type": "number", "exclusiveMinimum": 0},
+            "tube_diameter_m": {"type": "number", "exclusiveMinimum": 0}
+          }
+        }
+      }
+    },
+    "rotors": {
+      "type": "array", "minItems": 1, "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "position_body_m", "thrust_axis_body", "spin_direction", "thrust_coefficient_n_per_rad_s2", "torque_coefficient_nm_per_rad_s2", "maximum_speed_rad_s"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "position_body_m": {"$ref": "#/$defs/vector3"},
+          "thrust_axis_body": {"$ref": "#/$defs/vector3"},
+          "spin_direction": {"enum": ["CW", "CCW"]},
+          "thrust_coefficient_n_per_rad_s2": {"type": "number", "exclusiveMinimum": 0},
+          "torque_coefficient_nm_per_rad_s2": {"type": "number", "minimum": 0},
+          "maximum_speed_rad_s": {"type": "number", "exclusiveMinimum": 0}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "vector3": {
+      "type": "array", "minItems": 3, "maxItems": 3,
+      "items": {"type": "number"}
+    },
+    "positive_vector3": {
+      "type": "array", "minItems": 3, "maxItems": 3,
+      "items": {"type": "number", "exclusiveMinimum": 0}
+    }
+  }
+}

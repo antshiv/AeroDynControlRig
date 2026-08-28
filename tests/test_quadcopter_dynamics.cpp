@@ -34,6 +34,27 @@ int main()
     QuadcopterDynamicsModule plant;
     plant.initialize(state);
 
+    expectNear("published plant mass", state.physics.mass, 1.2, 1e-12);
+    expectNear("published inertia xx", state.physics.inertia[0][0], 0.02, 1e-12);
+    expectNear("published inertia yy", state.physics.inertia[1][1], 0.02, 1e-12);
+    expectNear("published inertia zz", state.physics.inertia[2][2], 0.04, 1e-12);
+
+    const auto& model = state.mathematical_model;
+    const auto a = [&](std::size_t row, std::size_t column) {
+        return model.A[row * model.kStateCount + column];
+    };
+    const auto b = [&](std::size_t row, std::size_t column) {
+        return model.B[row * model.kInputCount + column];
+    };
+    expectTrue("hover linearization is valid", model.valid);
+    expectNear("model mass", model.mass_kg, 1.2, 1e-12);
+    expectNear("north position integrator", a(0u, 3u), 1.0, 0.0);
+    expectNear("north pitch coupling", a(3u, 7u), -9.80665, 1e-12);
+    expectNear("down thrust input", b(5u, 0u), -1.0 / 1.2, 1e-12);
+    expectNear("roll torque input", b(9u, 1u), 1.0 / 0.02, 1e-12);
+    expectTrue("hover rotor speed is finite", std::isfinite(model.hover_omega_rad_s));
+    expectTrue("hover rotor speed is positive", model.hover_omega_rad_s > 0.0);
+
     // Identity body attitude in NED maps to right/east, up/-down, back/-north.
     expectNear("render row0 col1", state.model_matrix[1][0], 1.0, 1e-7);
     expectNear("render row1 col2", state.model_matrix[2][1], -1.0, 1e-7);
