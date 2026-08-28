@@ -21,6 +21,7 @@ struct Rig {
         controller.initialize(state);
         plant.initialize(state);
         state.pilot.enabled = true;
+        state.mission.phase = SimulationState::FlightPhase::Flying;
     }
 
     void run(double seconds, const std::array<float, 4>& sticks)

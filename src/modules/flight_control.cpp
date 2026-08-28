@@ -95,6 +95,12 @@ void FlightControlModule::update(double dt, SimulationState& state)
     if (!state.pilot.enabled) {
         return;
     }
+    if (state.mission.phase == SimulationState::FlightPhase::Grounded ||
+        state.mission.phase == SimulationState::FlightPhase::EmergencyStopped) {
+        state.motor_commands.omega_rad_s.fill(0.0);
+        state.motor_commands.throttle_0_1.fill(0.0);
+        return;
+    }
     if (!state.joystick.connected || !std::isfinite(dt) || dt <= 0.0 ||
         dt > coefficients_.maximum_period_s) {
         state.pilot.enabled = false;
@@ -151,8 +157,10 @@ void FlightControlModule::update(double dt, SimulationState& state)
             cosine_yaw * desired_forward - sine_yaw * desired_right;
         const double desired_east =
             sine_yaw * desired_forward + cosine_yaw * desired_right;
-        const double desired_down = -collective_input *
-            kMaximumVerticalSpeedMps * state.pilot.command_scale;
+        const double desired_down = state.mission.vertical_velocity_override
+            ? state.mission.vertical_velocity_down_mps
+            : -collective_input * kMaximumVerticalSpeedMps *
+                  state.pilot.command_scale;
         state.pilot.desired_velocity_ned = {
             desired_north, desired_east, desired_down};
 

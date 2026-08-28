@@ -3,6 +3,7 @@
 #include "modules/quaternion_demo.h"
 #include "modules/quadcopter_dynamics.h"
 #include "modules/flight_control.h"
+#include "modules/mission_control.h"
 #include "modules/first_order_dynamics.h"
 #include "modules/sensor_simulator.h"
 #include "modules/complementary_estimator.h"
@@ -365,7 +366,8 @@ bool Application::running() const {
 }
 
 void Application::initializeModules() {
-    // Pilot command -> controller/mixer -> rigid-body plant.
+    // Mission contract -> pilot/controller/mixer -> rigid-body plant.
+    modules.emplace_back(std::make_unique<MissionControlModule>());
     modules.emplace_back(std::make_unique<FlightControlModule>());
     modules.emplace_back(std::make_unique<QuadcopterDynamicsModule>());
     // Keep QuaternionDemoModule commented out (replaced by QuadcopterDynamicsModule)

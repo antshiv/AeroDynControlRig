@@ -21,8 +21,15 @@ bool sticksCentered(const SimulationState::JoystickState& joystick)
                        [](float value) { return std::abs(value) <= kEnableDeadzone; });
 }
 
-void stopDesktopSil(SimulationState& state, const char* status)
+void stopDesktopSil(SimulationState& state, const char* status,
+                    bool latch_emergency)
 {
+    if (latch_emergency &&
+        state.mission.phase != SimulationState::FlightPhase::EmergencyStopped) {
+        state.mission.phase = SimulationState::FlightPhase::EmergencyStopped;
+        state.mission.status = status;
+        ++state.mission.transition_count;
+    }
     state.pilot.enabled = false;
     state.pilot.reset_controller = true;
     state.control.paused = true;
@@ -73,7 +80,8 @@ void JoystickInput::poll(SimulationState& state)
         joystick.buttons.fill(false);
         stopDesktopSil(
             state,
-            "Joystick disconnected; SIL paused and virtual motors cleared.");
+            "Joystick disconnected; SIL paused and virtual motors cleared.",
+            state.pilot.enabled);
         joystick.status = "Connect a gamepad to enable pilot input.";
         previous_buttons_.fill(false);
         was_connected_ = false;
@@ -241,6 +249,7 @@ void JoystickInput::poll(SimulationState& state)
         recordAction(state, "Back: emergency stop");
         stopDesktopSil(
             state,
-            "Emergency stop: SIL paused, PID reset, and virtual motors cleared.");
+            "Emergency stop: SIL paused, PID reset, and virtual motors cleared.",
+            true);
     }
 }

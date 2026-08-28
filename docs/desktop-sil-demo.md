@@ -17,10 +17,12 @@ The aircraft contract in `config/reference-quad.aircraft.json` supplies mass, in
 1. Connect a Logitech F310 or Dual Action controller. AeroDyn installs the maintained Dual Action mapping when Linux exposes product `046d:c216` in DirectInput mode.
 2. Start `AeroDynControlRig` and open the `Mode 2 Flight Controls` tab.
 3. Center both sticks and confirm that the controller, mixer, and RK4 readiness gates pass.
-4. Press `A` or select `Run / resume SIL`.
-5. Push the left stick up/down to climb/descend and left/right to rotate in place. Push the right stick up/down to move forward/back and left/right to move sideways.
-6. Press the right stick (`R3`) to fit the aircraft in the scene.
-7. Press `BACK` to stop control, reset the PID, and clear every virtual motor command.
+4. Confirm the controller, centred-stick, mixer, and RK4 readiness gates pass. `A` remains an optional run/resume control for the simulation clock.
+5. Select the takeoff altitude and press `Take off`. Mission control enables the SIL path and owns the bounded climb until the altitude and vertical-speed gates pass.
+6. Push the left stick up/down to climb/descend and left/right to rotate in place. Push the right stick up/down to move forward/back and left/right to move sideways.
+7. Press `Land` to return through the bounded descent and ground-contact gates.
+8. Press the right stick (`R3`) to fit the aircraft in the scene.
+9. Press `BACK` to stop control, reset the PID, clear every virtual motor command, and latch the emergency-stop phase until reset.
 
 The face buttons are deliberately idempotent: `A` always runs or resumes, `B` always pauses, `X` always levels the attitude target, and `Y` always recenters the aircraft. Repeated presses do not switch a button to a different operation.
 
@@ -53,7 +55,7 @@ The A and B matrices and local transfer functions are analysis views of the load
 
 ## Current Boundary
 
-Desktop SIL currently validates joystick mapping, controller timing, mixing, saturation, rigid-body propagation, and visualization. It does not yet model propulsion transients, ESC current loops, battery sag, sensor noise, CEVA estimation, wind, ground contact, navigation, or mission logic.
+Desktop SIL currently validates joystick mapping, mission transitions, controller timing, mixing, saturation, rigid-body propagation, a rigid level ground plane, and visualization. The repeatable baseline is `grounded -> takeoff -> hover/flight -> landing -> grounded`. It does not yet model landing-gear compliance, propulsion transients, ESC current loops, battery sag, sensor noise, CEVA estimation, wind, navigation, or autonomous mission planning.
 
 The mode selector reserves two later paths:
 

@@ -235,6 +235,27 @@ struct SimulationState {
         std::string status{"Closed-loop pilot control disabled."};
     } pilot;
 
+    enum class FlightPhase {
+        Grounded,
+        TakingOff,
+        Flying,
+        Landing,
+        EmergencyStopped,
+    };
+
+    struct MissionState {
+        FlightPhase phase{FlightPhase::Grounded};
+        bool takeoff_requested{false};
+        bool landing_requested{false};
+        bool vertical_velocity_override{false};
+        double vertical_velocity_down_mps{0.0};
+        double takeoff_altitude_m{1.5};
+        double altitude_tolerance_m{0.08};
+        double vertical_speed_tolerance_mps{0.10};
+        std::uint64_t transition_count{0};
+        std::string status{"Aircraft grounded; virtual motors stopped."};
+    } mission;
+
     /**
      * @struct DynamicsConfig
      * @brief Configuration for first-order dynamics test module

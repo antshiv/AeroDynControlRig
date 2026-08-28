@@ -32,32 +32,6 @@ glm::mat4 renderFromNed()
     return transform;
 }
 
-/**
- * @brief Compute hover throttle for a quadcopter
- * @param mass Vehicle mass (kg)
- * @param gravity Gravitational acceleration (m/s²)
- * @param num_rotors Number of rotors
- * @return Hover thrust per rotor (N)
- */
-double computeHoverThrust(double mass, double gravity, int num_rotors) {
-    return (mass * gravity) / num_rotors;
-}
-
-/**
- * @brief Convert throttle [0, 1] to rotor angular velocity (rad/s)
- * @param throttle Throttle command [0, 1]
- * @param thrust_coeff Thrust coefficient
- * @return Angular velocity (rad/s)
- */
-double throttleToOmega(double throttle, double thrust_coeff) {
-    if (throttle <= 0.0 || thrust_coeff <= 0.0) return 0.0;
-    // T = k_t * omega^2  =>  omega = sqrt(T / k_t)
-    // Assume max throttle = 1.0 corresponds to 4x hover thrust
-    double max_thrust = 4.0 * thrust_coeff * (500.0 * 500.0); // ~500 rad/s max
-    double thrust = throttle * max_thrust;
-    return std::sqrt(thrust / thrust_coeff);
-}
-
 }  // namespace
 
 void QuadcopterDynamicsModule::initialize(SimulationState& state) {
@@ -94,15 +68,10 @@ void QuadcopterDynamicsModule::initialize(SimulationState& state) {
     vehicle_model_.config = &vehicle_config_;
     vehicle_model_.state = physics_state_;
 
-    // Initialize motor commands to hover
-    double hover_thrust = computeHoverThrust(vehicle_config_.mass, vehicle_config_.gravity,
-                                             vehicle_config_.rotor_count);
-
+    // A reset aircraft starts on the ground with virtual motors stopped.
     for (std::size_t i = 0; i < vehicle_config_.rotor_count; ++i) {
-        const double hover_omega =
-            std::sqrt(hover_thrust / vehicle_config_.rotors[i].thrust_coeff);
-        state.motor_commands.omega_rad_s[i] = hover_omega;
-        state.motor_commands.throttle_0_1[i] = 0.5;  // 50% throttle for hover
+        state.motor_commands.omega_rad_s[i] = 0.0;
+        state.motor_commands.throttle_0_1[i] = 0.0;
     }
 
     // Copy initial state to simulation
@@ -293,6 +262,15 @@ void QuadcopterDynamicsModule::update(double dt, SimulationState& state) {
     }
 
     physics_state_ = vehicle_model_.state;
+
+    // NED uses positive Z downward. The desktop baseline models a rigid,
+    // level ground plane at Z=0 without adding landing-gear compliance yet.
+    if (physics_state_.position[2] > 0.0) {
+        physics_state_.position[2] = 0.0;
+        if (physics_state_.velocity[2] > 0.0) {
+            physics_state_.velocity[2] = 0.0;
+        }
+    }
 
     // Copy physics state back to simulation
     copyStateToSim(physics_state_, state);

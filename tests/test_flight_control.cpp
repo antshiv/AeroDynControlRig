@@ -12,6 +12,7 @@ int main()
     state.joystick.connected = true;
     state.pilot.enabled = true;
     state.pilot.assisted_velocity_mode = false;
+    state.mission.phase = SimulationState::FlightPhase::Flying;
 
     FlightControlModule controller;
     controller.initialize(state);

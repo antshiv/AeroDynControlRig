@@ -36,7 +36,7 @@ Training assist is the default. The right stick commands body-relative horizonta
 
 Advanced mode exposes the underlying attitude/collective behavior directly. Releasing the right stick levels the attitude but does not brake accumulated horizontal velocity. This mode is useful for studying the plant and controller, but it is intentionally harder to fly.
 
-The application opens with the SIL plant paused and the complete aircraft fitted in the 3D viewport. Press A (or use `Run / resume SIL`) when ready to begin. The **Fit aircraft** viewport button, Y button, and right-stick click restore that inspection view at any time.
+The application opens grounded, paused, and with all virtual motors stopped. Set the altitude and press **Take off** to run the checked climb and hover transition. Press **Land** to run the checked descent and return to a zero-motor grounded state. The **Fit aircraft** viewport button, Y button, and right-stick click restore the inspection view at any time.
 
 ## Safety Boundary
 
@@ -49,6 +49,7 @@ The current coefficient bundle is marked `simulation_only`. Joystick enablement 
 ```text
 Mode 2 gamepad / GLFW
     -> normalized pilot command
+    -> grounded / takeoff / flight / landing mission contract
     -> velocity-assist outer loop (default)
     -> quaternion attitude setpoint + yaw-rate target + collective
     -> controlSystems PID (40 ms declared cadence)

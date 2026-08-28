@@ -16,6 +16,18 @@ bool sticksCentered(const SimulationState::JoystickState& joystick)
         [](float value) { return std::abs(value) <= 0.25f; });
 }
 
+const char* phaseLabel(SimulationState::FlightPhase phase)
+{
+    switch (phase) {
+    case SimulationState::FlightPhase::Grounded: return "GROUNDED";
+    case SimulationState::FlightPhase::TakingOff: return "TAKING OFF";
+    case SimulationState::FlightPhase::Flying: return "FLYING";
+    case SimulationState::FlightPhase::Landing: return "LANDING";
+    case SimulationState::FlightPhase::EmergencyStopped: return "EMERGENCY STOPPED";
+    }
+    return "UNKNOWN";
+}
+
 ImU32 buttonColor(bool active)
 {
     return ImGui::GetColorU32(active ? ImVec4(1.0f, 0.55f, 0.12f, 1.0f)
@@ -105,6 +117,14 @@ void JoystickPanel::draw(SimulationState& state, Camera& camera)
     ImGui::TextColored(state.pilot.enabled ? ImVec4(1.0f, 0.58f, 0.16f, 1.0f)
                                            : ImVec4(0.55f, 0.62f, 0.70f, 1.0f),
                        "SIL CONTROL: %s", state.pilot.enabled ? "ACTIVE" : "OFF");
+    ImGui::Text("FLIGHT PHASE: %s", phaseLabel(state.mission.phase));
+    ImGui::TextWrapped("%s", state.mission.status.c_str());
+    ImGui::Text("Altitude target / actual  %.2f / %.2f m",
+                state.mission.takeoff_altitude_m,
+                std::max(0.0, -state.physics.position.z));
+    ImGui::Text("Vertical speed  %+.2f m/s  |  transitions %llu",
+                -state.physics.velocity.z,
+                static_cast<unsigned long long>(state.mission.transition_count));
     ImGui::TextWrapped(
         "DRONE FLIGHT: left stick changes height and heading; right stick moves horizontally.");
     if (ImGui::Checkbox("Training assist: sticks command velocity",
@@ -163,6 +183,39 @@ void JoystickPanel::draw(SimulationState& state, Camera& camera)
                        "%s  checked RK4 plant",
                        state.physics.integration_valid ? "PASS" : "FAIL");
 
+    ImGui::SetNextItemWidth(180.0f);
+    const double minimum_takeoff_altitude_m = 0.5;
+    const double maximum_takeoff_altitude_m = 5.0;
+    ImGui::SliderScalar("Takeoff altitude (m)", ImGuiDataType_Double,
+                        &state.mission.takeoff_altitude_m,
+                        &minimum_takeoff_altitude_m,
+                        &maximum_takeoff_altitude_m, "%.1f");
+
+    const bool ready_for_takeoff = joystick.connected && centered &&
+        !joystick.analog_mode_warning && state.pilot.controller_valid &&
+        state.physics.integration_valid &&
+        state.mission.phase == SimulationState::FlightPhase::Grounded;
+    ImGui::BeginDisabled(!ready_for_takeoff);
+    if (ImGui::Button("Take off")) {
+        state.pilot.enabled = true;
+        state.pilot.reset_controller = true;
+        state.pilot.target_yaw_rad = state.euler.yaw;
+        state.mission.takeoff_requested = true;
+        state.control.paused = false;
+        state.pilot.status = "Takeoff requested; mission controller owns climb rate.";
+    }
+    ImGui::EndDisabled();
+    ImGui::SameLine();
+    const bool can_land = state.mission.phase == SimulationState::FlightPhase::TakingOff ||
+                          state.mission.phase == SimulationState::FlightPhase::Flying;
+    ImGui::BeginDisabled(!can_land);
+    if (ImGui::Button("Land")) {
+        state.mission.landing_requested = true;
+        state.control.paused = false;
+        state.pilot.status = "Landing requested; mission controller owns descent rate.";
+    }
+    ImGui::EndDisabled();
+
     if (ImGui::Button("Run / resume SIL")) {
         if (state.pilot.enabled) {
             state.control.paused = false;
@@ -191,6 +244,9 @@ void JoystickPanel::draw(SimulationState& state, Camera& camera)
     if (ImGui::Button("Emergency stop")) {
         state.pilot.enabled = false;
         state.pilot.reset_controller = true;
+        state.mission.phase = SimulationState::FlightPhase::EmergencyStopped;
+        state.mission.status = "Emergency stop latched; reset required.";
+        ++state.mission.transition_count;
         state.control.paused = true;
         state.motor_commands.omega_rad_s.fill(0.0);
         state.motor_commands.throttle_0_1.fill(0.0);
