@@ -26,7 +26,7 @@ The face buttons are deliberately idempotent: `A` always runs or resumes, `B` al
 
 The remaining mapped controls are shown directly on the in-application controller diagram. A Dual Action is rendered with its physical `1` through `4` labels while the input boundary normalizes it to standard gamepad actions. Motor commands are virtual. This mode does not energize hardware.
 
-Both sticks are spring-centered, unlike a traditional RC transmitter. AeroDyn therefore interprets the left vertical axis as a collective-thrust offset around hover rather than an absolute throttle position. The default 35% expo softens motion near stick center without removing full travel; the value can be adjusted in the controller panel.
+Both sticks are spring-centered, unlike a traditional RC transmitter. In the default training-assist mode, AeroDyn interprets the left vertical axis as desired climb/descent speed rather than absolute throttle. The right stick requests horizontal speed, and centring it asks the controller to brake. Advanced mode exposes direct collective and attitude commands for controller study. The default 35% expo softens motion near stick centre without removing full travel; the value can be adjusted in the controller panel.
 
 ## Mathematical Plant
 

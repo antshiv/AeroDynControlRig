@@ -464,8 +464,13 @@ void Application::tick() {
 
 void Application::resetSimulation() {
     const bool show_guide = simulationState.joystick.show_guide;
+    const std::uint64_t action_sequence =
+        simulationState.joystick.action_sequence;
+    const std::string last_action = simulationState.joystick.last_action;
     simulationState = SimulationState{};
     simulationState.joystick.show_guide = show_guide;
+    simulationState.joystick.action_sequence = action_sequence;
+    simulationState.joystick.last_action = last_action;
     for (auto& module : modules) {
         module->initialize(simulationState);
     }

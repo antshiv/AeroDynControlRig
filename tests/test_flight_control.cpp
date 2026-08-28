@@ -11,6 +11,7 @@ int main()
     SimulationState state;
     state.joystick.connected = true;
     state.pilot.enabled = true;
+    state.pilot.assisted_velocity_mode = false;
 
     FlightControlModule controller;
     controller.initialize(state);

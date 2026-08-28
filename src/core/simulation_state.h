@@ -210,6 +210,8 @@ struct SimulationState {
         std::array<bool, kJoystickButtonCount> buttons{};
         std::array<bool, kJoystickButtonCount> pressed{};
         bool show_guide{true};
+        std::uint64_t action_sequence{0};
+        std::string last_action{"No controller action yet."};
         std::string status{"Connect a gamepad to enable pilot input."};
     } joystick;
 
@@ -217,13 +219,15 @@ struct SimulationState {
         bool enabled{false};
         bool controller_valid{false};
         bool reset_controller{false};
+        bool assisted_velocity_mode{true};
         double target_roll_rad{0.0};
         double target_pitch_rad{0.0};
         double target_yaw_rad{0.0};
         double roll_trim_rad{0.0};
         double pitch_trim_rad{0.0};
-        double command_scale{0.5};
+        double command_scale{0.35};
         double stick_expo{0.35};
+        glm::dvec3 desired_velocity_ned{0.0};
         double collective_thrust_n{0.0};
         glm::dvec3 requested_torque_nm{0.0};
         std::uint64_t accepted_updates{0};

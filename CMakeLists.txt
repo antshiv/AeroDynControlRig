@@ -142,6 +142,20 @@ if(BUILD_TESTING)
             ASR_DEFAULT_AIRCRAFT_SPEC="${CMAKE_CURRENT_SOURCE_DIR}/config/reference-quad.aircraft.json"
             ASR_DEFAULT_COEFFICIENT_BUNDLE="${CMAKE_CURRENT_SOURCE_DIR}/config/reference-quad.coefficients.json")
         add_test(NAME aerodyn_flight_control_test COMMAND aerodyn_flight_control_test)
+
+        add_executable(aerodyn_mode2_response_test
+            tests/test_mode2_response.cpp
+            src/modules/flight_control.cpp
+            src/modules/quadcopter_dynamics.cpp
+            src/config/aircraft_config.cpp)
+        target_include_directories(aerodyn_mode2_response_test
+            PRIVATE src external/controlSystems/include ${GLM_INCLUDE_DIR})
+        target_link_libraries(aerodyn_mode2_response_test
+            PRIVATE control_systems dynamic_models PkgConfig::JSONC)
+        target_compile_definitions(aerodyn_mode2_response_test PRIVATE
+            ASR_DEFAULT_AIRCRAFT_SPEC="${CMAKE_CURRENT_SOURCE_DIR}/config/reference-quad.aircraft.json"
+            ASR_DEFAULT_COEFFICIENT_BUNDLE="${CMAKE_CURRENT_SOURCE_DIR}/config/reference-quad.coefficients.json")
+        add_test(NAME aerodyn_mode2_response_test COMMAND aerodyn_mode2_response_test)
     else()
         message(STATUS "GLM not found; skipping plant and flight-control integration tests")
     endif()

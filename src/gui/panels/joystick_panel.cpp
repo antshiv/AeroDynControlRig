@@ -99,11 +99,29 @@ void JoystickPanel::draw(SimulationState& state, Camera& camera)
     ImGui::TextUnformatted(joystick.name.c_str());
     ImGui::TextWrapped("%s", joystick.status.c_str());
     ImGui::TextDisabled("Profile: %s", joystick.profile.c_str());
+    ImGui::TextWrapped("Last action #%llu: %s",
+                       static_cast<unsigned long long>(joystick.action_sequence),
+                       joystick.last_action.c_str());
     ImGui::TextColored(state.pilot.enabled ? ImVec4(1.0f, 0.58f, 0.16f, 1.0f)
                                            : ImVec4(0.55f, 0.62f, 0.70f, 1.0f),
                        "SIL CONTROL: %s", state.pilot.enabled ? "ACTIVE" : "OFF");
     ImGui::TextWrapped(
         "DRONE FLIGHT: left stick changes height and heading; right stick moves horizontally.");
+    if (ImGui::Checkbox("Training assist: sticks command velocity",
+                        &state.pilot.assisted_velocity_mode)) {
+        state.pilot.reset_controller = true;
+    }
+    if (state.pilot.assisted_velocity_mode) {
+        ImGui::TextDisabled(
+            "Release the sticks to brake horizontal and vertical drift.");
+        ImGui::Text("Velocity target N/E/D  %+.2f  %+.2f  %+.2f m/s",
+                    state.pilot.desired_velocity_ned.x,
+                    state.pilot.desired_velocity_ned.y,
+                    state.pilot.desired_velocity_ned.z);
+    } else {
+        ImGui::TextDisabled(
+            "Advanced mode: direct attitude + collective; no automatic braking.");
+    }
 
     ImGui::SeparatorText("Demo execution path");
     bool desktop_sil = state.execution.selected_mode ==
@@ -256,7 +274,7 @@ void JoystickPanel::draw(SimulationState& state, Camera& camera)
         ImGui::BulletText("BACK: disable control and clear PID state");
         ImGui::BulletText("D-pad: one-degree roll/pitch trim");
         ImGui::BulletText("LB/RB: decrease/increase command authority");
-        ImGui::BulletText("LT/RT: decrease/increase collective thrust");
+        ImGui::BulletText("LT/RT: descend/climb (alternate vertical command)");
         ImGui::BulletText("L3: clear trim  |  R3: fit aircraft in view");
         ImGui::BulletText("START: reset aircraft, controller, and telemetry");
         ImGui::BulletText("MODE: hardware mapping switch; may not emit a button event");

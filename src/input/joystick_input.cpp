@@ -31,6 +31,12 @@ void stopDesktopSil(SimulationState& state, const char* status)
     state.pilot.status = status;
 }
 
+void recordAction(SimulationState& state, const char* action)
+{
+    ++state.joystick.action_sequence;
+    state.joystick.last_action = action;
+}
+
 bool isLogitechDualAction(const char* name)
 {
     return name != nullptr &&
@@ -147,6 +153,7 @@ void JoystickInput::poll(SimulationState& state)
     }
 
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_A]) {
+        recordAction(state, "2 / A: run or resume SIL");
         if (state.pilot.enabled) {
             state.control.paused = false;
             state.pilot.status = "Desktop SIL already active; simulation running.";
@@ -162,10 +169,12 @@ void JoystickInput::poll(SimulationState& state)
         }
     }
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_B]) {
+        recordAction(state, "3 / B: pause SIL");
         state.control.paused = true;
         state.pilot.status = "Desktop SIL paused; controller remains armed in simulation.";
     }
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_X]) {
+        recordAction(state, "1 / X: level attitude target");
         state.pilot.target_roll_rad = 0.0;
         state.pilot.target_pitch_rad = 0.0;
         state.pilot.target_yaw_rad = state.euler.yaw;
@@ -173,34 +182,42 @@ void JoystickInput::poll(SimulationState& state)
         state.pilot.status = "Attitude target levelled; current heading retained.";
     }
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_Y]) {
+        recordAction(state, "4 / Y: recenter aircraft view");
         state.control.camera_fit_requested = true;
         state.pilot.status = "Camera recenter requested.";
     }
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_DPAD_LEFT]) {
+        recordAction(state, "D-pad left: decrease roll trim");
         state.pilot.roll_trim_rad =
             std::max(-kMaximumTrimRad, state.pilot.roll_trim_rad - kTrimStepRad);
     }
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_DPAD_RIGHT]) {
+        recordAction(state, "D-pad right: increase roll trim");
         state.pilot.roll_trim_rad =
             std::min(kMaximumTrimRad, state.pilot.roll_trim_rad + kTrimStepRad);
     }
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_DPAD_UP]) {
+        recordAction(state, "D-pad up: increase pitch trim");
         state.pilot.pitch_trim_rad =
             std::min(kMaximumTrimRad, state.pilot.pitch_trim_rad + kTrimStepRad);
     }
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_DPAD_DOWN]) {
+        recordAction(state, "D-pad down: decrease pitch trim");
         state.pilot.pitch_trim_rad =
             std::max(-kMaximumTrimRad, state.pilot.pitch_trim_rad - kTrimStepRad);
     }
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_LEFT_BUMPER]) {
+        recordAction(state, "Left shoulder: decrease command authority");
         state.pilot.command_scale =
             std::max(kMinimumCommandScale, state.pilot.command_scale - kCommandScaleStep);
     }
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_RIGHT_BUMPER]) {
+        recordAction(state, "Right shoulder: increase command authority");
         state.pilot.command_scale =
             std::min(1.0, state.pilot.command_scale + kCommandScaleStep);
     }
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_LEFT_THUMB]) {
+        recordAction(state, "Left-stick click: clear trim and level");
         state.pilot.roll_trim_rad = 0.0;
         state.pilot.pitch_trim_rad = 0.0;
         state.pilot.target_roll_rad = 0.0;
@@ -209,15 +226,19 @@ void JoystickInput::poll(SimulationState& state)
         state.pilot.status = "Pilot trims cleared and attitude target levelled.";
     }
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_RIGHT_THUMB]) {
+        recordAction(state, "Right-stick click: recenter aircraft view");
         state.control.camera_fit_requested = true;
     }
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_START]) {
+        recordAction(state, "Start: reset aircraft and telemetry");
         state.control.reset_requested = true;
     }
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_GUIDE]) {
+        recordAction(state, "Guide: toggle controller help");
         joystick.show_guide = !joystick.show_guide;
     }
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_BACK]) {
+        recordAction(state, "Back: emergency stop");
         stopDesktopSil(
             state,
             "Emergency stop: SIL paused, PID reset, and virtual motors cleared.");

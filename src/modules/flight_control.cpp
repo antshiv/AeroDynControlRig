@@ -11,8 +11,12 @@ namespace {
 constexpr double kPi = 3.14159265358979323846;
 constexpr double kMaximumTiltRad = 25.0 * kPi / 180.0;
 constexpr double kMaximumYawRateRadS = 60.0 * kPi / 180.0;
-constexpr double kCollectiveRange = 0.40;
+constexpr double kCollectiveRange = 0.20;
 constexpr double kTriggerCollectiveBias = 0.20;
+constexpr double kMaximumHorizontalSpeedMps = 2.0;
+constexpr double kMaximumVerticalSpeedMps = 1.5;
+constexpr double kHorizontalVelocityGain = 1.2;
+constexpr double kVerticalVelocityGain = 2.0;
 constexpr float kStickDeadzone = 0.08f;
 
 double applyDeadzone(float value, double expo)
@@ -133,14 +137,59 @@ void FlightControlModule::update(double dt, SimulationState& state)
     // which produces forward acceleration in the hover model.
     const double pitch_input =
         applyDeadzone(state.joystick.axes[3], state.pilot.stick_expo);
-    state.pilot.target_roll_rad = std::clamp(
-        state.pilot.roll_trim_rad +
-            roll_input * kMaximumTiltRad * state.pilot.command_scale,
-        -kMaximumTiltRad, kMaximumTiltRad);
-    state.pilot.target_pitch_rad = std::clamp(
-        state.pilot.pitch_trim_rad +
-            pitch_input * kMaximumTiltRad * state.pilot.command_scale,
-        -kMaximumTiltRad, kMaximumTiltRad);
+    double collective_scale = 1.0;
+    if (state.pilot.assisted_velocity_mode) {
+        const double forward_input = -pitch_input;
+        const double desired_forward = forward_input *
+            kMaximumHorizontalSpeedMps * state.pilot.command_scale;
+        const double desired_right = roll_input *
+            kMaximumHorizontalSpeedMps * state.pilot.command_scale;
+        const double yaw = state.euler.yaw;
+        const double cosine_yaw = std::cos(yaw);
+        const double sine_yaw = std::sin(yaw);
+        const double desired_north =
+            cosine_yaw * desired_forward - sine_yaw * desired_right;
+        const double desired_east =
+            sine_yaw * desired_forward + cosine_yaw * desired_right;
+        const double desired_down = -collective_input *
+            kMaximumVerticalSpeedMps * state.pilot.command_scale;
+        state.pilot.desired_velocity_ned = {
+            desired_north, desired_east, desired_down};
+
+        const double north_error = desired_north - state.physics.velocity.x;
+        const double east_error = desired_east - state.physics.velocity.y;
+        const double forward_error =
+            cosine_yaw * north_error + sine_yaw * east_error;
+        const double right_error =
+            -sine_yaw * north_error + cosine_yaw * east_error;
+        const double maximum_assist_tilt =
+            kMaximumTiltRad * state.pilot.command_scale;
+        state.pilot.target_roll_rad = std::clamp(
+            state.pilot.roll_trim_rad +
+                kHorizontalVelocityGain * right_error / aircraft_.gravity_m_s2,
+            -maximum_assist_tilt, maximum_assist_tilt);
+        state.pilot.target_pitch_rad = std::clamp(
+            state.pilot.pitch_trim_rad -
+                kHorizontalVelocityGain * forward_error / aircraft_.gravity_m_s2,
+            -maximum_assist_tilt, maximum_assist_tilt);
+        collective_scale += std::clamp(
+            kVerticalVelocityGain *
+                (state.physics.velocity.z - desired_down) /
+                aircraft_.gravity_m_s2,
+            -kCollectiveRange, kCollectiveRange);
+    } else {
+        state.pilot.desired_velocity_ned = {0.0, 0.0, 0.0};
+        state.pilot.target_roll_rad = std::clamp(
+            state.pilot.roll_trim_rad +
+                roll_input * kMaximumTiltRad * state.pilot.command_scale,
+            -kMaximumTiltRad, kMaximumTiltRad);
+        state.pilot.target_pitch_rad = std::clamp(
+            state.pilot.pitch_trim_rad +
+                pitch_input * kMaximumTiltRad * state.pilot.command_scale,
+            -kMaximumTiltRad, kMaximumTiltRad);
+        collective_scale += collective_input * kCollectiveRange *
+                            state.pilot.command_scale;
+    }
     state.pilot.target_yaw_rad += yaw_input * kMaximumYawRateRadS *
                                   state.pilot.command_scale * control_dt;
 
@@ -170,7 +219,7 @@ void FlightControlModule::update(double dt, SimulationState& state)
     // The aircraft contract uses FRD and thrust axes along body -Z.
     command.collective_thrust =
         -aircraft_.mass_kg * aircraft_.gravity_m_s2 *
-        std::clamp(1.0 + collective_input * kCollectiveRange, 0.6, 1.4);
+        std::clamp(collective_scale, 0.8, 1.2);
     state.pilot.collective_thrust_n = command.collective_thrust;
     state.pilot.requested_torque_nm = {
         command.body_torque[0], command.body_torque[1], command.body_torque[2]};
