@@ -6,10 +6,10 @@ AeroDyn polls Logitech F310 and Dual Action controllers through GLFW's standardi
 
 | Input | Simulation command |
 |---|---|
-| Left stick X | Yaw-rate target |
-| Left stick Y | Collective thrust around hover |
-| Right stick X | Roll-attitude target, limited to 25 degrees |
-| Right stick Y | Pitch-attitude target, limited to 25 degrees |
+| Left stick left/right | Rotate in place by changing the yaw-rate target |
+| Left stick up/down | Climb/descend by changing collective thrust around hover |
+| Right stick left/right | Move left/right through a roll-attitude target |
+| Right stick up/down | Move forward/back through a pitch-attitude target |
 | A | Run or resume closed-loop SIL control |
 | B | Pause simulation |
 | X | Level roll/pitch and retain current heading |
@@ -26,6 +26,8 @@ AeroDyn polls Logitech F310 and Dual Action controllers through GLFW's standardi
 The physical **MODE** button is different from the Guide button. On the F310 it may switch the D-pad and left-stick mapping in hardware, so Linux/GLFW may not report it as an independent button. The panel still exposes the resulting axis and D-pad state, making that mode change visible.
 
 The input panel highlights active sticks and face buttons. It also displays raw normalized axes so mapping, centring, and hardware-mode faults are visible.
+
+The `Camera orbit`, `Camera pan`, and `Camera zoom` controls under the OpenGL scene move only the viewpoint. They never command the aircraft. Dashboard keyboard letters are intentionally disconnected from both camera and flight motion to avoid ambiguous control ownership.
 
 The application opens with the SIL plant paused and the complete aircraft fitted in the 3D viewport. Press A (or use `Run / resume SIL`) when ready to begin. The **Fit aircraft** viewport button, Y button, and right-stick click restore that inspection view at any time.
 

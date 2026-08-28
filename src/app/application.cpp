@@ -970,25 +970,25 @@ void Application::renderDashboardLayout(ImGuiIO& io) {
 
         scene_control_button(
             "rotate",
-            "Rotate",
+            "Camera orbit",
             u8"\ue5d1",
             [&](const char* popup_id, bool hovered) {
                 if (hovered) {
-                    ImGui::SetTooltip("Orbit the camera. Keys: Q/E, arrow keys, IJKL");
+                    ImGui::SetTooltip("CAMERA VIEW ONLY: orbit around the aircraft");
                 }
                 if (ImGui::BeginPopup(popup_id)) {
                     ImGui::TextUnformatted("Orbit camera");
                     ImGui::Separator();
-                    if (ImGui::MenuItem("Orbit left", "Q / ← / J")) {
+                    if (ImGui::MenuItem("Orbit left")) {
                         camera.orbit(-orbit_step_deg, 0.0f);
                     }
-                    if (ImGui::MenuItem("Orbit right", "E / → / L")) {
+                    if (ImGui::MenuItem("Orbit right")) {
                         camera.orbit(orbit_step_deg, 0.0f);
                     }
-                    if (ImGui::MenuItem("Tilt up", "I / ↑")) {
+                    if (ImGui::MenuItem("Tilt up")) {
                         camera.orbit(0.0f, tilt_step_deg);
                     }
-                    if (ImGui::MenuItem("Tilt down", "K / ↓")) {
+                    if (ImGui::MenuItem("Tilt down")) {
                         camera.orbit(0.0f, -tilt_step_deg);
                     }
                     ImGui::Separator();
@@ -1002,19 +1002,19 @@ void Application::renderDashboardLayout(ImGuiIO& io) {
 
         scene_control_button(
             "pan",
-            "Pan",
+            "Camera pan",
             u8"\ue55d",
             [&](const char* popup_id, bool hovered) {
                 if (hovered) {
-                    ImGui::SetTooltip("Translate the camera laterally. Keys: WASD");
+                    ImGui::SetTooltip("CAMERA VIEW ONLY: move the viewpoint laterally");
                 }
                 if (ImGui::BeginPopup(popup_id)) {
                     ImGui::TextUnformatted("Pan camera");
                     ImGui::Separator();
-                    if (ImGui::MenuItem("Pan left", "A")) {
+                    if (ImGui::MenuItem("Pan left")) {
                         camera.pan(-pan_step_units, 0.0f);
                     }
-                    if (ImGui::MenuItem("Pan right", "D")) {
+                    if (ImGui::MenuItem("Pan right")) {
                         camera.pan(pan_step_units, 0.0f);
                     }
                     if (ImGui::MenuItem("Pan up")) {
@@ -1030,11 +1030,11 @@ void Application::renderDashboardLayout(ImGuiIO& io) {
 
         scene_control_button(
             "zoom",
-            "Zoom",
+            "Camera zoom",
             u8"\ue8ff",
             [&](const char* popup_id, bool hovered) {
                 if (hovered) {
-                    ImGui::SetTooltip("Adjust zoom. Use mouse wheel for quick changes.");
+                    ImGui::SetTooltip("CAMERA VIEW ONLY: adjust viewing distance");
                 }
                 if (ImGui::BeginPopup(popup_id)) {
                     ImGui::TextUnformatted("Zoom & dolly");
@@ -1069,14 +1069,14 @@ void Application::renderDashboardLayout(ImGuiIO& io) {
                     ImGui::SetTooltip("Show keyboard and mouse shortcuts");
                 }
                 if (ImGui::BeginPopup(popup_id)) {
-                    ImGui::TextUnformatted("Scene controls");
+                    ImGui::TextUnformatted("CAMERA VIEW ONLY");
                     ImGui::Separator();
-                    ImGui::TextUnformatted("Orbit: left-drag, Q/E, arrows, IJKL");
-                    ImGui::TextUnformatted("Pan: right/middle drag, WASD");
+                    ImGui::TextUnformatted("Orbit: left-drag or Camera orbit menu");
+                    ImGui::TextUnformatted("Pan: right/middle drag or Camera pan menu");
                     ImGui::TextUnformatted("Zoom: mouse wheel or Zoom menu");
                     ImGui::TextUnformatted("Reset: Rotate→Reset view, Zoom→Reset zoom");
                     ImGui::Separator();
-                    ImGui::TextUnformatted("Space: zero body rates");
+                    ImGui::TextUnformatted("Drone movement uses the Mode 2 controller panel");
                     ImGui::EndPopup();
                 }
             });
@@ -1185,6 +1185,9 @@ void Application::renderLegacyLayout() {
 }
 
 void Application::updateCamera(float deltaTime) {
+    if (!simulationState.control.use_legacy_ui) {
+        return;
+    }
     ImGuiIO& io = ImGui::GetIO();
     if (io.WantCaptureKeyboard) {
         return;

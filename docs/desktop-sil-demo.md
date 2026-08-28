@@ -18,7 +18,7 @@ The aircraft contract in `config/reference-quad.aircraft.json` supplies mass, in
 2. Start `AeroDynControlRig` and open the `Mode 2 Flight Controls` tab.
 3. Center both sticks and confirm that the controller, mixer, and RK4 readiness gates pass.
 4. Press `A` or select `Run / resume SIL`.
-5. Use the left stick for collective thrust and yaw. Use the right stick for pitch and roll.
+5. Push the left stick up/down to climb/descend and left/right to rotate in place. Push the right stick up/down to move forward/back and left/right to move sideways.
 6. Press the right stick (`R3`) to fit the aircraft in the scene.
 7. Press `BACK` to stop control, reset the PID, and clear every virtual motor command.
 

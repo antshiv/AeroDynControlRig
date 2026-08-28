@@ -102,6 +102,8 @@ void JoystickPanel::draw(SimulationState& state, Camera& camera)
     ImGui::TextColored(state.pilot.enabled ? ImVec4(1.0f, 0.58f, 0.16f, 1.0f)
                                            : ImVec4(0.55f, 0.62f, 0.70f, 1.0f),
                        "SIL CONTROL: %s", state.pilot.enabled ? "ACTIVE" : "OFF");
+    ImGui::TextWrapped(
+        "DRONE FLIGHT: left stick changes height and heading; right stick moves horizontally.");
 
     ImGui::SeparatorText("Demo execution path");
     bool desktop_sil = state.execution.selected_mode ==
@@ -233,10 +235,12 @@ void JoystickPanel::draw(SimulationState& state, Camera& camera)
                   IM_COL32(230, 236, 242, 255),
                   dual_action ? "LOGITECH DUAL ACTION / MODE 2" :
                                 "GAMEPAD / MODE 2");
-    draw->AddText({left.x - 48.0f, origin.y + 240.0f},
-                  IM_COL32(155, 170, 184, 255), "THROTTLE / YAW");
-    draw->AddText({right.x - 35.0f, origin.y + 240.0f},
-                  IM_COL32(155, 170, 184, 255), "PITCH / ROLL");
+    draw->AddText({origin.x + 18.0f, origin.y + 238.0f},
+                  IM_COL32(155, 170, 184, 255),
+                  "LEFT: UP CLIMB / DOWN DESCEND / SIDE TURN");
+    draw->AddText({origin.x + 18.0f, origin.y + 258.0f},
+                  IM_COL32(155, 170, 184, 255),
+                  "RIGHT: UP FORWARD / DOWN BACK / SIDE STRAFE");
     ImGui::Dummy({width, height});
 
     if (joystick.show_guide) {

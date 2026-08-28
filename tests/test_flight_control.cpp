@@ -55,6 +55,11 @@ int main()
     assert(std::abs(state.pilot.target_pitch_rad - state.pilot.pitch_trim_rad) < 1e-12);
     assert(state.pilot.collective_thrust_n > -state.physics.mass * 9.81);
 
+    state.pilot.pitch_trim_rad = 0.0;
+    state.joystick.axes[3] = -0.5f;
+    controller.update(0.04, state);
+    assert(state.pilot.target_pitch_rad < 0.0);
+
     controller.update(0.10, state);
     assert(!state.pilot.enabled);
     assert(state.pilot.rejected_updates == 1u);

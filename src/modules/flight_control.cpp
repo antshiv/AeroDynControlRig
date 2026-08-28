@@ -129,8 +129,10 @@ void FlightControlModule::update(double dt, SimulationState& state)
         -1.0, 1.0);
     const double roll_input =
         applyDeadzone(state.joystick.axes[2], state.pilot.stick_expo);
+    // GLFW reports stick-forward as negative. Negative FRD pitch is nose-down,
+    // which produces forward acceleration in the hover model.
     const double pitch_input =
-        -applyDeadzone(state.joystick.axes[3], state.pilot.stick_expo);
+        applyDeadzone(state.joystick.axes[3], state.pilot.stick_expo);
     state.pilot.target_roll_rad = std::clamp(
         state.pilot.roll_trim_rad +
             roll_input * kMaximumTiltRad * state.pilot.command_scale,
