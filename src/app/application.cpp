@@ -12,6 +12,7 @@
 #include "gui/style.h"
 #include "gui/panels/control_panel.h"
 #include "gui/panels/joystick_panel.h"
+#include "gui/panels/mathematical_model_panel.h"
 #include "gui/panels/telemetry_panel.h"
 #include "gui/panels/dynamics_panel.h"
 #include "gui/panels/estimator_panel.h"
@@ -778,6 +779,7 @@ void Application::renderDashboardLayout(ImGuiIO& io) {
             ImGui::DockBuilderDockWindow("Sensor Suite", dock_bottom_right);
             ImGui::DockBuilderDockWindow("Flight Telemetry", dock_bottom_center);
             ImGui::DockBuilderDockWindow("Dynamics", dock_right_bottom);
+            ImGui::DockBuilderDockWindow("Aircraft Mathematical Model", dock_right_bottom);
             ImGui::DockBuilderFinish(dockspace_id);
         }
     }
@@ -1201,6 +1203,7 @@ void Application::initializePanels() {
     panelManager.registerPanel(std::make_unique<EstimatorPanel>());
     panelManager.registerPanel(std::make_unique<RotorAnalysisPanel>());
     panelManager.registerPanel(std::make_unique<JoystickPanel>());
+    panelManager.registerPanel(std::make_unique<MathematicalModelPanel>());
 }
 
 ImTextureID Application::renderSceneToTexture(const ImVec2& size) {

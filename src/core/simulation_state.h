@@ -40,6 +40,38 @@ struct SimulationState {
         std::string error;
     } aircraft_contract;
 
+    enum class ExecutionMode {
+        DesktopSil,
+        Nrf5340Hil,
+        LiveCevaReplay
+    };
+
+    struct ExecutionState {
+        ExecutionMode selected_mode{ExecutionMode::DesktopSil};
+        bool nrf_hil_available{false};
+        bool ceva_replay_available{false};
+        std::string active_path{"Joystick -> PID -> mixer -> RK4 plant"};
+    } execution;
+
+    struct MathematicalModelState {
+        static constexpr std::size_t kStateCount = 12;
+        static constexpr std::size_t kInputCount = 4;
+        bool valid{false};
+        std::string model_name{"6-DOF quadrotor Newton-Euler model"};
+        std::string linearization{"Hover equilibrium, small roll/pitch angles"};
+        std::array<const char*, kStateCount> state_names{
+            "p_n", "p_e", "p_d", "v_n", "v_e", "v_d",
+            "phi", "theta", "psi", "p", "q", "r"};
+        std::array<const char*, kInputCount> input_names{
+            "dT", "tau_x", "tau_y", "tau_z"};
+        std::array<double, kStateCount * kStateCount> A{};
+        std::array<double, kStateCount * kInputCount> B{};
+        double hover_omega_rad_s{0.0};
+        double mass_kg{0.0};
+        double gravity_m_s2{0.0};
+        std::array<double, 3> inertia_diagonal{};
+    } mathematical_model;
+
     // === Attitude Representation ===
     EulerAngles euler{0.0, 0.0, 0.0, EULER_ZYX};              ///< Current attitude in Euler angles (ZYX convention)
     std::array<double, 4> quaternion{1.0, 0.0, 0.0, 0.0};     ///< Current attitude quaternion [w, x, y, z]

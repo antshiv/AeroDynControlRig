@@ -3,7 +3,7 @@
 [![Doxygen](https://github.com/antshiv/AeroDynControlRig/actions/workflows/doxygen.yml/badge.svg)](https://github.com/antshiv/AeroDynControlRig/actions/workflows/doxygen.yml)
 [![Documentation](https://img.shields.io/badge/docs-doxygen-blue.svg)](https://antshiv.github.io/AeroDynControlRig/)
 
-Desktop visualization and testbed for the flight-control stack. The rig stitches together OpenGL rendering, GLFW window/input handling, and Dear ImGui dashboards so we can exercise quaternion math today and layer in PID control, dynamic models, state estimation, and the full INS loop tomorrow.
+Desktop visualization and testbed for the Antshiv flight-control stack. The current demo sends Logitech F310 commands through the real `controlSystems` PID and geometry-derived mixer, advances a checked six-degree-of-freedom RK4 plant from `dynamic_models`, and renders the resulting aircraft motion in OpenGL.
 
 AeroDyn now loads its vehicle geometry, mass properties, rotor coefficients, timing, and controller gains from a versioned [aircraft contract](docs/aircraft-contract.md). The same contract is intended to feed controller tuning, firmware generation, FreeCAD/OpenFOAM adapters, HIL, and later Gazebo scenarios without duplicating configuration.
 
@@ -17,7 +17,7 @@ AeroDyn now loads its vehicle geometry, mass properties, rotor coefficients, tim
 
 ## Directory Layout
 
-- `external/` – Third-party and sibling libraries (currently `attitudeMathLibrary`; PID, dynamics, estimator, and INS modules will land here next).
+- `external/` – Pinned sibling libraries and integration targets, including attitude math, control systems, dynamics, INS, state estimation, and ASR-FC.
 - `imgui/` – Dear ImGui source and backend glue (kept vendor-clean; the app talks to it through thin wrappers in `src/gui`).
 - `src/` – Application code (entry point, simulation modules, rendering, GUI panels). Refactors will pull the existing files into `app/`, `core/`, `modules/`, `render/`, and `gui/` namespaces.
 - `shaders/` – GLSL programs for scene meshes, gizmos, and future HUD widgets.
@@ -42,6 +42,8 @@ AeroDyn now loads its vehicle geometry, mass properties, rotor coefficients, tim
    ./build/AeroDynControlRig
    ```
 
+See [Desktop SIL Demo](docs/desktop-sil-demo.md) for the joystick workflow, safety gates, equations, and current simulation boundary.
+
 ## Current Features
 
 - **Quaternion Visualization** – Real-time 3D rotation with dual modes (AUTOMATIC for continuous drone simulation, MANUAL for discrete quaternion testing)
@@ -54,6 +56,8 @@ AeroDyn now loads its vehicle geometry, mass properties, rotor coefficients, tim
 - **Versioned Aircraft Contract** – Aircraft and controller artifacts are provenance-linked; mismatched revisions and invalid physical parameters fail closed
 - **Generated Aircraft Geometry** – One aircraft contract drives headless FreeCAD, STEP, STL, OBJ, and the live OpenGL scene instead of a separately maintained display model
 - **Joystick Closed Loop** – A Logitech F310 can drive simulation-only attitude/throttle commands through the real `controlSystems` PID, geometry-derived mixer, and checked RK4 plant with a live control diagram
+- **Visible Mathematical Contract** – The aircraft-model panel shows the nonlinear Newton-Euler equations used by the plant, loaded mass and inertia, hover rotor speed, a 12-state hover linearization, and local transfer functions
+- **Staged Execution Modes** – The UI identifies Desktop SIL as the active path and reserves explicit, disabled entries for nRF5340 HIL and live CEVA replay until their transports are connected
 - **In-App Documentation** – Keyboard controls help modal with mode-specific instructions
 
 ## Roadmap

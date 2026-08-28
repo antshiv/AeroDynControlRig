@@ -19,6 +19,16 @@ bool sticksCentered(const SimulationState::JoystickState& joystick)
     return std::all_of(joystick.axes.begin(), joystick.axes.begin() + 4,
                        [](float value) { return std::abs(value) <= kEnableDeadzone; });
 }
+
+void stopDesktopSil(SimulationState& state, const char* status)
+{
+    state.pilot.enabled = false;
+    state.pilot.reset_controller = true;
+    state.control.paused = true;
+    state.motor_commands.omega_rad_s.fill(0.0);
+    state.motor_commands.throttle_0_1.fill(0.0);
+    state.pilot.status = status;
+}
 }
 
 void JoystickInput::poll(SimulationState& state)
@@ -32,8 +42,9 @@ void JoystickInput::poll(SimulationState& state)
         joystick.analog_mode_warning = false;
         joystick.axes = {0.0f, 0.0f, 0.0f, 0.0f, -1.0f, -1.0f};
         joystick.buttons.fill(false);
-        state.pilot.enabled = false;
-        state.pilot.status = "Joystick disconnected; closed-loop pilot control disabled.";
+        stopDesktopSil(
+            state,
+            "Joystick disconnected; SIL paused and virtual motors cleared.");
         joystick.status = "Connect a gamepad to enable pilot input.";
         previous_buttons_.fill(false);
         was_connected_ = false;
@@ -98,14 +109,16 @@ void JoystickInput::poll(SimulationState& state)
 
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_A]) {
         if (state.pilot.enabled) {
-            state.pilot.enabled = false;
-            state.pilot.reset_controller = true;
-            state.pilot.status = "Closed-loop pilot control disabled by A button.";
+            stopDesktopSil(
+                state,
+                "SIL control disabled; simulation paused and motors cleared.");
         } else if (sticksCentered(joystick) && !joystick.analog_mode_warning) {
             state.pilot.enabled = true;
             state.pilot.reset_controller = true;
             state.pilot.target_yaw_rad = state.euler.yaw;
-            state.pilot.status = "Closed-loop pilot control enabled for simulation only.";
+            state.control.paused = false;
+            state.pilot.status =
+                "Desktop SIL active: joystick -> PID -> mixer -> RK4 plant.";
         } else {
             state.pilot.status = "Enable rejected: center all sticks and clear the MODE warning.";
         }
@@ -165,8 +178,8 @@ void JoystickInput::poll(SimulationState& state)
         joystick.show_guide = !joystick.show_guide;
     }
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_BACK]) {
-        state.pilot.enabled = false;
-        state.pilot.reset_controller = true;
-        state.pilot.status = "Pilot control disabled and controller state cleared.";
+        stopDesktopSil(
+            state,
+            "Emergency stop: SIL paused, PID reset, and virtual motors cleared.");
     }
 }

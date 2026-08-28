@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(AeroDynControlRig CXX)
+project(AeroDynControlRig LANGUAGES C CXX)
 
 include(CTest)
 find_package(PkgConfig REQUIRED)
@@ -59,6 +59,7 @@ if(BUILD_AERODYN_GUI)
     src/gui/widgets/chip.cpp
     src/gui/panels/control_panel.cpp
     src/gui/panels/joystick_panel.cpp
+    src/gui/panels/mathematical_model_panel.cpp
     src/gui/panels/telemetry_panel.cpp
     src/gui/panels/dynamics_panel.cpp
     src/gui/panels/estimator_panel.cpp
@@ -127,8 +128,22 @@ if(BUILD_TESTING)
             ASR_DEFAULT_AIRCRAFT_SPEC="${CMAKE_CURRENT_SOURCE_DIR}/config/reference-quad.aircraft.json"
             ASR_DEFAULT_COEFFICIENT_BUNDLE="${CMAKE_CURRENT_SOURCE_DIR}/config/reference-quad.coefficients.json")
         add_test(NAME aerodyn_headless_plant_test COMMAND aerodyn_headless_plant_test)
+
+        add_executable(aerodyn_flight_control_test
+            tests/test_flight_control.cpp
+            src/modules/flight_control.cpp
+            src/modules/quadcopter_dynamics.cpp
+            src/config/aircraft_config.cpp)
+        target_include_directories(aerodyn_flight_control_test
+            PRIVATE src external/controlSystems/include ${GLM_INCLUDE_DIR})
+        target_link_libraries(aerodyn_flight_control_test
+            PRIVATE control_systems dynamic_models PkgConfig::JSONC)
+        target_compile_definitions(aerodyn_flight_control_test PRIVATE
+            ASR_DEFAULT_AIRCRAFT_SPEC="${CMAKE_CURRENT_SOURCE_DIR}/config/reference-quad.aircraft.json"
+            ASR_DEFAULT_COEFFICIENT_BUNDLE="${CMAKE_CURRENT_SOURCE_DIR}/config/reference-quad.coefficients.json")
+        add_test(NAME aerodyn_flight_control_test COMMAND aerodyn_flight_control_test)
     else()
-        message(STATUS "GLM not found; skipping the visual plant integration test")
+        message(STATUS "GLM not found; skipping plant and flight-control integration tests")
     endif()
 
     add_executable(aerodyn_aircraft_contract_test
@@ -140,20 +155,6 @@ if(BUILD_TESTING)
         ASR_DEFAULT_AIRCRAFT_SPEC="${CMAKE_CURRENT_SOURCE_DIR}/config/reference-quad.aircraft.json"
         ASR_DEFAULT_COEFFICIENT_BUNDLE="${CMAKE_CURRENT_SOURCE_DIR}/config/reference-quad.coefficients.json")
     add_test(NAME aerodyn_aircraft_contract_test COMMAND aerodyn_aircraft_contract_test)
-
-    add_executable(aerodyn_flight_control_test
-        tests/test_flight_control.cpp
-        src/modules/flight_control.cpp
-        src/modules/quadcopter_dynamics.cpp
-        src/config/aircraft_config.cpp)
-    target_include_directories(aerodyn_flight_control_test
-        PRIVATE src external/controlSystems/include)
-    target_link_libraries(aerodyn_flight_control_test
-        PRIVATE control_systems dynamic_models PkgConfig::JSONC)
-    target_compile_definitions(aerodyn_flight_control_test PRIVATE
-        ASR_DEFAULT_AIRCRAFT_SPEC="${CMAKE_CURRENT_SOURCE_DIR}/config/reference-quad.aircraft.json"
-        ASR_DEFAULT_COEFFICIENT_BUNDLE="${CMAKE_CURRENT_SOURCE_DIR}/config/reference-quad.coefficients.json")
-    add_test(NAME aerodyn_flight_control_test COMMAND aerodyn_flight_control_test)
 
     add_executable(aerodyn_generated_mesh_test
         tests/test_obj_mesh.cpp

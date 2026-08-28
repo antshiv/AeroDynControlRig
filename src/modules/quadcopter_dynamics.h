@@ -85,6 +85,9 @@ private:
      */
     bool loadConfiguration(SimulationState& state);
 
+    /** Publish the hover-linearized state-space model used for analysis. */
+    void publishMathematicalModel(SimulationState& state);
+
     /**
      * @brief Update rotor telemetry from physics model
      */

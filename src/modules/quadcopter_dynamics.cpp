@@ -66,6 +66,7 @@ void QuadcopterDynamicsModule::initialize(SimulationState& state) {
         state.control.paused = true;
         return;
     }
+    publishMathematicalModel(state);
 
     // Initialize physics state
     std::memset(&physics_state_, 0, sizeof(physics_state_));
@@ -164,6 +165,14 @@ bool QuadcopterDynamicsModule::loadConfiguration(SimulationState& state) {
     state.vehicle_config.Ixx = aircraft_spec_.inertia[0][0];
     state.vehicle_config.Iyy = aircraft_spec_.inertia[1][1];
     state.vehicle_config.Izz = aircraft_spec_.inertia[2][2];
+    state.physics.mass = aircraft_spec_.mass_kg;
+    for (std::size_t row = 0; row < 3u; ++row) {
+        for (std::size_t column = 0; column < 3u; ++column) {
+            // GLM indexes matrices as [column][row].
+            state.physics.inertia[column][row] =
+                aircraft_spec_.inertia[row][column];
+        }
+    }
     state.rotor_config.thrust_coefficient =
         aircraft_spec_.rotors.front().thrust_coefficient;
     state.rotor_config.torque_coefficient =
@@ -190,6 +199,52 @@ bool QuadcopterDynamicsModule::loadConfiguration(SimulationState& state) {
     state.aircraft_contract.loaded = true;
     state.aircraft_contract.error.clear();
     return true;
+}
+
+void QuadcopterDynamicsModule::publishMathematicalModel(
+    SimulationState& state) {
+    auto& model = state.mathematical_model;
+    model = SimulationState::MathematicalModelState{};
+    model.mass_kg = vehicle_config_.mass;
+    model.gravity_m_s2 = vehicle_config_.gravity;
+    model.inertia_diagonal = {
+        vehicle_config_.inertia[0][0],
+        vehicle_config_.inertia[1][1],
+        vehicle_config_.inertia[2][2],
+    };
+
+    const auto a = [&](std::size_t row, std::size_t column) -> double& {
+        return model.A[row * model.kStateCount + column];
+    };
+    const auto b = [&](std::size_t row, std::size_t column) -> double& {
+        return model.B[row * model.kInputCount + column];
+    };
+
+    // x = [position, velocity, Euler attitude, body rate] in NED/FRD.
+    a(0u, 3u) = 1.0;
+    a(1u, 4u) = 1.0;
+    a(2u, 5u) = 1.0;
+    a(3u, 7u) = -vehicle_config_.gravity;
+    a(4u, 6u) = vehicle_config_.gravity;
+    a(6u, 9u) = 1.0;
+    a(7u, 10u) = 1.0;
+    a(8u, 11u) = 1.0;
+
+    // u = [incremental total thrust, roll, pitch, yaw body torque].
+    b(5u, 0u) = -1.0 / vehicle_config_.mass;
+    b(9u, 1u) = 1.0 / vehicle_config_.inertia[0][0];
+    b(10u, 2u) = 1.0 / vehicle_config_.inertia[1][1];
+    b(11u, 3u) = 1.0 / vehicle_config_.inertia[2][2];
+
+    double total_thrust_coefficient = 0.0;
+    for (std::size_t index = 0u; index < vehicle_config_.rotor_count; ++index) {
+        total_thrust_coefficient +=
+            vehicle_config_.rotors[index].thrust_coeff;
+    }
+    model.hover_omega_rad_s = std::sqrt(
+        vehicle_config_.mass * vehicle_config_.gravity /
+        total_thrust_coefficient);
+    model.valid = std::isfinite(model.hover_omega_rad_s);
 }
 
 void QuadcopterDynamicsModule::update(double dt, SimulationState& state) {

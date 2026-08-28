@@ -9,6 +9,13 @@
 #include "render/camera.h"
 
 namespace {
+bool sticksCentered(const SimulationState::JoystickState& joystick)
+{
+    return std::all_of(
+        joystick.axes.begin(), joystick.axes.begin() + 4,
+        [](float value) { return std::abs(value) <= 0.25f; });
+}
+
 ImU32 buttonColor(bool active)
 {
     return ImGui::GetColorU32(active ? ImVec4(1.0f, 0.55f, 0.12f, 1.0f)
@@ -92,6 +99,79 @@ void JoystickPanel::draw(SimulationState& state, Camera& camera)
     ImGui::TextColored(state.pilot.enabled ? ImVec4(1.0f, 0.58f, 0.16f, 1.0f)
                                            : ImVec4(0.55f, 0.62f, 0.70f, 1.0f),
                        "SIL CONTROL: %s", state.pilot.enabled ? "ACTIVE" : "OFF");
+
+    ImGui::SeparatorText("Demo execution path");
+    bool desktop_sil = state.execution.selected_mode ==
+        SimulationState::ExecutionMode::DesktopSil;
+    if (ImGui::RadioButton("Desktop SIL", desktop_sil)) {
+        state.execution.selected_mode =
+            SimulationState::ExecutionMode::DesktopSil;
+    }
+    ImGui::SameLine();
+    ImGui::BeginDisabled(!state.execution.nrf_hil_available);
+    bool nrf_hil = state.execution.selected_mode ==
+        SimulationState::ExecutionMode::Nrf5340Hil;
+    ImGui::RadioButton("nRF5340 HIL", nrf_hil);
+    ImGui::EndDisabled();
+    ImGui::SameLine();
+    ImGui::BeginDisabled(!state.execution.ceva_replay_available);
+    bool ceva_replay = state.execution.selected_mode ==
+        SimulationState::ExecutionMode::LiveCevaReplay;
+    ImGui::RadioButton("CEVA replay", ceva_replay);
+    ImGui::EndDisabled();
+    ImGui::TextDisabled("Active: %s", state.execution.active_path.c_str());
+
+    const bool centered = sticksCentered(joystick);
+    ImGui::SeparatorText("Readiness gates");
+    ImGui::TextColored(joystick.connected ? ImVec4(0.25f, 0.9f, 0.55f, 1.0f)
+                                          : ImVec4(1.0f, 0.35f, 0.30f, 1.0f),
+                       "%s  F310 connected", joystick.connected ? "PASS" : "WAIT");
+    ImGui::TextColored(centered ? ImVec4(0.25f, 0.9f, 0.55f, 1.0f)
+                                : ImVec4(1.0f, 0.70f, 0.20f, 1.0f),
+                       "%s  sticks centered", centered ? "PASS" : "WAIT");
+    ImGui::TextColored(state.pilot.controller_valid ?
+                           ImVec4(0.25f, 0.9f, 0.55f, 1.0f) :
+                           ImVec4(1.0f, 0.35f, 0.30f, 1.0f),
+                       "%s  controller + mixer contract",
+                       state.pilot.controller_valid ? "PASS" : "FAIL");
+    ImGui::TextColored(state.physics.integration_valid ?
+                           ImVec4(0.25f, 0.9f, 0.55f, 1.0f) :
+                           ImVec4(1.0f, 0.35f, 0.30f, 1.0f),
+                       "%s  checked RK4 plant",
+                       state.physics.integration_valid ? "PASS" : "FAIL");
+
+    if (ImGui::Button(state.pilot.enabled ? "Stop + clear motors" :
+                                            "Enable + run desktop SIL")) {
+        if (state.pilot.enabled) {
+            state.pilot.enabled = false;
+            state.pilot.reset_controller = true;
+            state.control.paused = true;
+            state.motor_commands.omega_rad_s.fill(0.0);
+            state.motor_commands.throttle_0_1.fill(0.0);
+            state.pilot.status = "Desktop SIL stopped and virtual motors cleared.";
+        } else if (joystick.connected && centered &&
+                   !joystick.analog_mode_warning &&
+                   state.pilot.controller_valid &&
+                   state.physics.integration_valid) {
+            state.pilot.enabled = true;
+            state.pilot.reset_controller = true;
+            state.pilot.target_yaw_rad = state.euler.yaw;
+            state.control.paused = false;
+            state.pilot.status =
+                "Desktop SIL active: joystick -> PID -> mixer -> RK4 plant.";
+        } else {
+            state.pilot.status =
+                "SIL start rejected: satisfy every readiness gate first.";
+        }
+    }
+    ImGui::SameLine();
+    if (ImGui::Button(state.control.paused ? "Resume" : "Pause")) {
+        state.control.paused = !state.control.paused;
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Reset aircraft")) {
+        state.control.reset_requested = true;
+    }
 
     const ImVec2 origin = ImGui::GetCursorScreenPos();
     const float width = std::max(330.0f, ImGui::GetContentRegionAvail().x);
