@@ -26,7 +26,7 @@ AeroDyn now loads its vehicle geometry, mass properties, rotor coefficients, tim
 
 ## Getting Started
 
-1. **Install deps** – CMake ≥ 3.20, a C++17 compiler, OpenGL 3.3 capable GPU/driver, and development headers for GLFW/GLAD (platform package names vary).
+1. **Install deps** – CMake >= 3.20, a C++17 compiler, an OpenGL 3.3 capable GPU/driver, and development headers for GLFW, GLEW, GLM, and json-c (platform package names vary).
 2. **Clone with submodules**
    ```bash
    git clone --recurse-submodules <repo-url>
