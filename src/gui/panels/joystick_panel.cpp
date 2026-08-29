@@ -101,7 +101,7 @@ void JoystickPanel::draw(SimulationState& state, Camera& camera)
         ImGui::End();
         return;
     }
-    const auto& joystick = state.joystick;
+    auto& joystick = state.joystick;
     const bool dual_action =
         joystick.profile.find("Dual Action") != std::string::npos;
     ImGui::TextColored(joystick.connected ? ImVec4(0.25f, 0.9f, 0.55f, 1.0f)
@@ -330,21 +330,26 @@ void JoystickPanel::draw(SimulationState& state, Camera& camera)
 
     if (joystick.show_guide) {
         ImGui::SeparatorText("Button guide");
-        ImGui::BulletText("%s: take off from ground / resume while airborne",
+        ImGui::BulletText("%s: take off from ground",
                           dual_action ? "2 / A" : "A");
-        ImGui::BulletText("%s: land while airborne / pause otherwise",
+        ImGui::BulletText("%s: land while airborne",
                           dual_action ? "3 / B" : "B");
-        ImGui::BulletText("%s: level roll/pitch and retain current heading",
+        ImGui::BulletText("%s: pause or resume an active flight",
                           dual_action ? "1 / X" : "X");
         ImGui::BulletText("%s: recenter aircraft in the viewport",
                           dual_action ? "4 / Y" : "Y");
-        ImGui::BulletText("BACK: disable control and clear PID state");
-        ImGui::BulletText("D-pad: one-degree roll/pitch trim");
-        ImGui::BulletText("LB/RB: decrease/increase command authority");
-        ImGui::BulletText("LT/RT: descend/climb (alternate vertical command)");
-        ImGui::BulletText("L3: clear trim  |  R3: fit aircraft in view");
+        ImGui::BulletText("BACK: emergency stop and clear virtual motors");
         ImGui::BulletText("START: reset aircraft, controller, and telemetry");
         ImGui::BulletText("MODE: hardware mapping switch; may not emit a button event");
+        ImGui::Checkbox("Advanced trim and trigger controls",
+                        &joystick.advanced_controls);
+        ImGui::TextDisabled("Off by default so every basic button has one stable meaning.");
+        if (joystick.advanced_controls) {
+            ImGui::BulletText("D-pad: one-degree roll/pitch trim");
+            ImGui::BulletText("LB/RB: decrease/increase command authority");
+            ImGui::BulletText("LT/RT: alternate descend/climb command");
+            ImGui::BulletText("L3: clear trim  |  R3: fit aircraft in view");
+        }
     }
     ImGui::Text("Axes  LX %+.2f  LY %+.2f  RX %+.2f  RY %+.2f",
                 joystick.axes[0], joystick.axes[1], joystick.axes[2], joystick.axes[3]);

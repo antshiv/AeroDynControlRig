@@ -209,6 +209,7 @@ struct SimulationState {
         bool connected{false};
         bool standardized_mapping{false};
         bool analog_mode_warning{false};
+        bool advanced_controls{false};
         std::string name{"No joystick"};
         std::string profile{"Generic gamepad"};
         bool known_mapping_installed{false};

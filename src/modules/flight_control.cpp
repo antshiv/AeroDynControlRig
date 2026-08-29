@@ -127,10 +127,12 @@ void FlightControlModule::update(double dt, SimulationState& state)
 
     const double yaw_input =
         applyDeadzone(state.joystick.axes[0], state.pilot.stick_expo);
-    const double left_trigger = state.joystick.standardized_mapping
+    const double left_trigger = state.joystick.standardized_mapping &&
+                                    state.joystick.advanced_controls
                                     ? (state.joystick.axes[4] + 1.0) * 0.5
                                     : 0.0;
-    const double right_trigger = state.joystick.standardized_mapping
+    const double right_trigger = state.joystick.standardized_mapping &&
+                                     state.joystick.advanced_controls
                                      ? (state.joystick.axes[5] + 1.0) * 0.5
                                      : 0.0;
     const double collective_input = std::clamp(

@@ -7,6 +7,7 @@
 #include <GLFW/glfw3.h>
 
 #include "core/simulation_state.h"
+#include "input/basic_flight_actions.h"
 
 namespace {
 constexpr float kEnableDeadzone = 0.25f;
@@ -14,6 +15,12 @@ constexpr double kTrimStepRad = 3.14159265358979323846 / 180.0;
 constexpr double kMaximumTrimRad = 15.0 * 3.14159265358979323846 / 180.0;
 constexpr double kMinimumCommandScale = 0.25;
 constexpr double kCommandScaleStep = 0.10;
+
+void recordAction(SimulationState& state, const char* action)
+{
+    ++state.joystick.action_sequence;
+    state.joystick.last_action = action;
+}
 
 bool sticksCentered(const SimulationState::JoystickState& joystick)
 {
@@ -36,12 +43,6 @@ void stopDesktopSil(SimulationState& state, const char* status,
     state.motor_commands.omega_rad_s.fill(0.0);
     state.motor_commands.throttle_0_1.fill(0.0);
     state.pilot.status = status;
-}
-
-void recordAction(SimulationState& state, const char* action)
-{
-    ++state.joystick.action_sequence;
-    state.joystick.last_action = action;
 }
 
 bool isLogitechDualAction(const char* name)
@@ -160,62 +161,30 @@ void JoystickInput::poll(SimulationState& state)
         joystick.status = "Gamepad ready. Center the sticks, then press A to enable SIL control.";
     }
 
-    if (joystick.pressed[GLFW_GAMEPAD_BUTTON_A]) {
-        if (state.mission.phase == SimulationState::FlightPhase::EmergencyStopped) {
-            recordAction(state, "2 / A: takeoff rejected; reset emergency stop");
-            state.pilot.status = "Takeoff rejected: press START to reset the emergency stop.";
-        } else if (state.mission.phase == SimulationState::FlightPhase::Grounded) {
-            recordAction(state, "2 / A: request takeoff");
-            if (sticksCentered(joystick) && !joystick.analog_mode_warning &&
-                state.pilot.controller_valid && state.physics.integration_valid) {
-                state.pilot.enabled = true;
-                state.pilot.reset_controller = true;
-                state.pilot.target_yaw_rad = state.euler.yaw;
-                state.mission.takeoff_requested = true;
-                state.control.paused = false;
-                state.pilot.status =
-                    "Takeoff requested; mission controller owns climb rate.";
-            } else {
-                state.pilot.status =
-                    "Takeoff rejected: center the sticks and satisfy all readiness gates.";
-            }
-        } else if (state.pilot.enabled) {
-            recordAction(state, "2 / A: resume flight simulation");
-            state.control.paused = false;
-            state.pilot.status = "Desktop SIL already active; simulation running.";
-        } else {
-            recordAction(state, "2 / A: resume rejected");
-            state.pilot.status = "Resume rejected: reset the aircraft and retry.";
-        }
-    }
+    const bool input_ready = sticksCentered(joystick) &&
+        !joystick.analog_mode_warning && state.pilot.controller_valid &&
+        state.physics.integration_valid;
+    if (joystick.pressed[GLFW_GAMEPAD_BUTTON_A])
+        applyBasicFlightAction(BasicFlightAction::Takeoff, input_ready, state);
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_B]) {
-        if (state.mission.phase == SimulationState::FlightPhase::TakingOff ||
-            state.mission.phase == SimulationState::FlightPhase::Flying) {
-            recordAction(state, "3 / B: request landing");
-            state.mission.landing_requested = true;
-            state.control.paused = false;
-            state.pilot.status =
-                "Landing requested; mission controller owns descent rate.";
-        } else {
-            recordAction(state, "3 / B: pause SIL");
-            state.control.paused = true;
-            state.pilot.status =
-                "Desktop SIL paused; controller remains armed in simulation.";
-        }
+        applyBasicFlightAction(BasicFlightAction::Land, input_ready, state);
     }
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_X]) {
-        recordAction(state, "1 / X: level attitude target");
-        state.pilot.target_roll_rad = 0.0;
-        state.pilot.target_pitch_rad = 0.0;
-        state.pilot.target_yaw_rad = state.euler.yaw;
-        state.pilot.reset_controller = true;
-        state.pilot.status = "Attitude target levelled; current heading retained.";
+        applyBasicFlightAction(BasicFlightAction::TogglePause, input_ready, state);
     }
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_Y]) {
-        recordAction(state, "4 / Y: recenter aircraft view");
-        state.control.camera_fit_requested = true;
-        state.pilot.status = "Camera recenter requested.";
+        applyBasicFlightAction(BasicFlightAction::FitView, input_ready, state);
     }
+    if (joystick.pressed[GLFW_GAMEPAD_BUTTON_START])
+        applyBasicFlightAction(BasicFlightAction::Reset, input_ready, state);
+    if (joystick.pressed[GLFW_GAMEPAD_BUTTON_BACK])
+        applyBasicFlightAction(BasicFlightAction::EmergencyStop, input_ready, state);
+
+    if (joystick.pressed[GLFW_GAMEPAD_BUTTON_GUIDE]) {
+        recordAction(state, "Guide: toggle controller help");
+        joystick.show_guide = !joystick.show_guide;
+    }
+    if (!joystick.advanced_controls) return;
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_DPAD_LEFT]) {
         recordAction(state, "D-pad left: decrease roll trim");
         state.pilot.roll_trim_rad =
@@ -258,20 +227,5 @@ void JoystickInput::poll(SimulationState& state)
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_RIGHT_THUMB]) {
         recordAction(state, "Right-stick click: recenter aircraft view");
         state.control.camera_fit_requested = true;
-    }
-    if (joystick.pressed[GLFW_GAMEPAD_BUTTON_START]) {
-        recordAction(state, "Start: reset aircraft and telemetry");
-        state.control.reset_requested = true;
-    }
-    if (joystick.pressed[GLFW_GAMEPAD_BUTTON_GUIDE]) {
-        recordAction(state, "Guide: toggle controller help");
-        joystick.show_guide = !joystick.show_guide;
-    }
-    if (joystick.pressed[GLFW_GAMEPAD_BUTTON_BACK]) {
-        recordAction(state, "Back: emergency stop");
-        stopDesktopSil(
-            state,
-            "Emergency stop: SIL paused, PID reset, and virtual motors cleared.",
-            true);
     }
 }
