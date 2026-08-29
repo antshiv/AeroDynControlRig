@@ -1,3 +1,4 @@
+#include <chrono>
 #include <cstdint>
 #include <iostream>
 #include <string>
@@ -19,7 +20,11 @@ int main(int argc, char** argv)
     }
 
     asr_fc_hil_sensor_guidance_t request{};
-    request.session_id = 0x50524f42u;
+    const auto ticks = static_cast<std::uint64_t>(
+        std::chrono::steady_clock::now().time_since_epoch().count());
+    request.session_id = static_cast<std::uint32_t>(
+        ticks ^ (ticks >> 32u) ^ 0x50524f42u);
+    if (request.session_id == 0u) request.session_id = 1u;
     request.host_timestamp_us = 10000u;
     request.sensor_timestamp_us = 10000u;
     request.sensor_accuracy = 3u;
