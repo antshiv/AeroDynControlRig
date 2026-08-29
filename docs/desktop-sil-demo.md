@@ -75,16 +75,16 @@ firmware still contains no PWM or physical motor-output implementation.
 
 `Live CEVA replay` remains disabled until its replay timing contract is connected.
 
-### Remote nRF5340 on the W530
+### Remote nRF5340 over SSH
 
-Keep the serial device behind SSH rather than exposing a raw TCP listener. From
-the T14, create a local pseudo-terminal backed by the W530's stable J-Link
-interface:
+Keep the serial device behind SSH rather than exposing a raw TCP listener.
+Create a local pseudo-terminal backed by a stable remote `/dev/serial/by-id`
+path:
 
 ```bash
 python3 tools/ssh_serial_pty.py \
-  --host w530 \
-  --device /dev/serial/by-id/usb-SEGGER_J-Link_000960169267-if04 \
+  --host <ssh-host-or-config-alias> \
+  --device <remote-/dev/serial/by-id-path> \
   --link /tmp/asr-fc-hil
 ```
 

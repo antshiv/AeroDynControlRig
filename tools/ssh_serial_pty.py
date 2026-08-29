@@ -62,7 +62,7 @@ finally:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--host", default="w530", help="SSH host or config alias")
+    parser.add_argument("--host", required=True, help="SSH host or config alias")
     parser.add_argument("--device", required=True, help="remote serial device")
     parser.add_argument(
         "--link", default="/tmp/asr-fc-hil", help="local PTY symlink to create"
