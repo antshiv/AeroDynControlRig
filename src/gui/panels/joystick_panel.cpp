@@ -319,9 +319,9 @@ void JoystickPanel::draw(SimulationState& state, Camera& camera)
 
     if (joystick.show_guide) {
         ImGui::SeparatorText("Button guide");
-        ImGui::BulletText("%s: run/resume SIL control (sticks centered)",
+        ImGui::BulletText("%s: take off from ground / resume while airborne",
                           dual_action ? "2 / A" : "A");
-        ImGui::BulletText("%s: pause simulation",
+        ImGui::BulletText("%s: land while airborne / pause otherwise",
                           dual_action ? "3 / B" : "B");
         ImGui::BulletText("%s: level roll/pitch and retain current heading",
                           dual_action ? "1 / X" : "X");

@@ -161,25 +161,47 @@ void JoystickInput::poll(SimulationState& state)
     }
 
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_A]) {
-        recordAction(state, "2 / A: run or resume SIL");
-        if (state.pilot.enabled) {
+        if (state.mission.phase == SimulationState::FlightPhase::EmergencyStopped) {
+            recordAction(state, "2 / A: takeoff rejected; reset emergency stop");
+            state.pilot.status = "Takeoff rejected: press START to reset the emergency stop.";
+        } else if (state.mission.phase == SimulationState::FlightPhase::Grounded) {
+            recordAction(state, "2 / A: request takeoff");
+            if (sticksCentered(joystick) && !joystick.analog_mode_warning &&
+                state.pilot.controller_valid && state.physics.integration_valid) {
+                state.pilot.enabled = true;
+                state.pilot.reset_controller = true;
+                state.pilot.target_yaw_rad = state.euler.yaw;
+                state.mission.takeoff_requested = true;
+                state.control.paused = false;
+                state.pilot.status =
+                    "Takeoff requested; mission controller owns climb rate.";
+            } else {
+                state.pilot.status =
+                    "Takeoff rejected: center the sticks and satisfy all readiness gates.";
+            }
+        } else if (state.pilot.enabled) {
+            recordAction(state, "2 / A: resume flight simulation");
             state.control.paused = false;
             state.pilot.status = "Desktop SIL already active; simulation running.";
-        } else if (sticksCentered(joystick) && !joystick.analog_mode_warning) {
-            state.pilot.enabled = true;
-            state.pilot.reset_controller = true;
-            state.pilot.target_yaw_rad = state.euler.yaw;
-            state.control.paused = false;
-            state.pilot.status =
-                "Desktop SIL active: joystick -> PID -> mixer -> RK4 plant.";
         } else {
-            state.pilot.status = "Enable rejected: center all sticks and clear the MODE warning.";
+            recordAction(state, "2 / A: resume rejected");
+            state.pilot.status = "Resume rejected: reset the aircraft and retry.";
         }
     }
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_B]) {
-        recordAction(state, "3 / B: pause SIL");
-        state.control.paused = true;
-        state.pilot.status = "Desktop SIL paused; controller remains armed in simulation.";
+        if (state.mission.phase == SimulationState::FlightPhase::TakingOff ||
+            state.mission.phase == SimulationState::FlightPhase::Flying) {
+            recordAction(state, "3 / B: request landing");
+            state.mission.landing_requested = true;
+            state.control.paused = false;
+            state.pilot.status =
+                "Landing requested; mission controller owns descent rate.";
+        } else {
+            recordAction(state, "3 / B: pause SIL");
+            state.control.paused = true;
+            state.pilot.status =
+                "Desktop SIL paused; controller remains armed in simulation.";
+        }
     }
     if (joystick.pressed[GLFW_GAMEPAD_BUTTON_X]) {
         recordAction(state, "1 / X: level attitude target");

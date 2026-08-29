@@ -10,8 +10,8 @@ AeroDyn polls Logitech F310 and Dual Action controllers through GLFW's standardi
 | Left stick up/down | Climb/descend speed; centred commands zero vertical speed |
 | Right stick left/right | Fly left/right; centred brakes lateral motion |
 | Right stick up/down | Fly forward/back; centred brakes forward motion |
-| A | Run or resume closed-loop SIL control |
-| B | Pause simulation |
+| A | Take off from the ground, or resume while airborne |
+| B | Land while taking off/flying, or pause otherwise |
 | X | Level roll/pitch and retain current heading |
 | Y | Recenter the aircraft in the 3D viewport |
 | Back | Emergency stop, pause, clear motors, and reset PID state |
@@ -36,7 +36,7 @@ Training assist is the default. The right stick commands body-relative horizonta
 
 Advanced mode exposes the underlying attitude/collective behavior directly. Releasing the right stick levels the attitude but does not brake accumulated horizontal velocity. This mode is useful for studying the plant and controller, but it is intentionally harder to fly.
 
-The application opens grounded, paused, and with all virtual motors stopped. Set the altitude and press **Take off** to run the checked climb and hover transition. Press **Land** to run the checked descent and return to a zero-motor grounded state. The **Fit aircraft** viewport button, Y button, and right-stick click restore the inspection view at any time.
+The application opens grounded, paused, and with all virtual motors stopped. Set the altitude and press **A** (physical button 2 on a Dual Action) or click **Take off** to run the checked climb and hover transition. Press **B** (physical button 3) or click **Land** to run the checked descent and return to a zero-motor grounded state. The sticks command flight only after takeoff begins; they cannot move a grounded aircraft. The **Fit aircraft** viewport button, Y button, and right-stick click restore the inspection view at any time.
 
 ## Safety Boundary
 
