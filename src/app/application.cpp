@@ -4,6 +4,7 @@
 #include "modules/quadcopter_dynamics.h"
 #include "modules/flight_control.h"
 #include "modules/mission_control.h"
+#include "modules/nrf_hil.h"
 #include "modules/first_order_dynamics.h"
 #include "modules/sensor_simulator.h"
 #include "modules/complementary_estimator.h"
@@ -370,6 +371,8 @@ void Application::initializeModules() {
     // Mission contract -> pilot/controller/mixer -> rigid-body plant.
     modules.emplace_back(std::make_unique<MissionControlModule>());
     modules.emplace_back(std::make_unique<FlightControlModule>());
+    // HIL overrides the desktop mix only after a checked physical-MCU response.
+    modules.emplace_back(std::make_unique<NrfHilModule>());
     modules.emplace_back(std::make_unique<QuadcopterDynamicsModule>());
     // Keep QuaternionDemoModule commented out (replaced by QuadcopterDynamicsModule)
     // modules.emplace_back(std::make_unique<QuaternionDemoModule>());

@@ -51,6 +51,12 @@ struct SimulationState {
         bool nrf_hil_available{false};
         bool ceva_replay_available{false};
         std::string active_path{"Joystick -> PID -> mixer -> RK4 plant"};
+        std::string nrf_hil_device;
+        std::string nrf_hil_status{"Set ASR_FC_HIL_DEVICE to enable hardware HIL."};
+        std::uint64_t nrf_hil_requests{0};
+        std::uint64_t nrf_hil_failures{0};
+        std::uint32_t nrf_hil_execution_us{0};
+        std::uint32_t nrf_hil_fault_flags{0};
     } execution;
 
     struct MathematicalModelState {
