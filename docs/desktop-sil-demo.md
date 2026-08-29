@@ -66,4 +66,11 @@ The mode selector reserves two later paths:
 - `nRF5340 HIL` will send simulated sensor frames to physical ASR-FC firmware and return four virtual motor commands before advancing the plant.
 - `Live CEVA replay` will drive the visualization and diagnostics from captured FSM300 output.
 
-Both remain disabled until their transports and timing contracts are implemented and tested.
+`nRF5340 HIL` becomes available only when `ASR_FC_HIL_DEVICE` names a serial
+endpoint that opens successfully. The host sends the checked ASR-FC wire format,
+waits for the matching session and sequence, and applies only a fault-free MCU
+response. A timeout, corrupt frame, stale identity, controller rejection, or
+fault flag pauses the plant and clears all four virtual motor commands. The
+firmware still contains no PWM or physical motor-output implementation.
+
+`Live CEVA replay` remains disabled until its replay timing contract is connected.

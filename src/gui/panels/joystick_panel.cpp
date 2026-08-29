@@ -154,7 +154,10 @@ void JoystickPanel::draw(SimulationState& state, Camera& camera)
     ImGui::BeginDisabled(!state.execution.nrf_hil_available);
     bool nrf_hil = state.execution.selected_mode ==
         SimulationState::ExecutionMode::Nrf5340Hil;
-    ImGui::RadioButton("nRF5340 HIL", nrf_hil);
+    if (ImGui::RadioButton("nRF5340 HIL", nrf_hil)) {
+        state.execution.selected_mode =
+            SimulationState::ExecutionMode::Nrf5340Hil;
+    }
     ImGui::EndDisabled();
     ImGui::SameLine();
     ImGui::BeginDisabled(!state.execution.ceva_replay_available);
@@ -163,6 +166,14 @@ void JoystickPanel::draw(SimulationState& state, Camera& camera)
     ImGui::RadioButton("CEVA replay", ceva_replay);
     ImGui::EndDisabled();
     ImGui::TextDisabled("Active: %s", state.execution.active_path.c_str());
+    ImGui::TextWrapped("HIL: %s", state.execution.nrf_hil_status.c_str());
+    if (state.execution.nrf_hil_available) {
+        ImGui::TextDisabled("%s | requests %llu | failures %llu | MCU %u us",
+            state.execution.nrf_hil_device.c_str(),
+            static_cast<unsigned long long>(state.execution.nrf_hil_requests),
+            static_cast<unsigned long long>(state.execution.nrf_hil_failures),
+            state.execution.nrf_hil_execution_us);
+    }
 
     const bool centered = sticksCentered(joystick);
     ImGui::SeparatorText("Readiness gates");

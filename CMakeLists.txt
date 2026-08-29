@@ -38,6 +38,7 @@ set(IMPLOT_SRC
 add_subdirectory(external/dynamic_models/)
 set(CS_BUILD_TESTS OFF CACHE BOOL "Disable nested controlSystems tests" FORCE)
 add_subdirectory(external/controlSystems/)
+add_subdirectory(external/asr_fc/)
 
 if(BUILD_AERODYN_GUI)
   # Source files for the test_rig application
@@ -48,6 +49,8 @@ if(BUILD_AERODYN_GUI)
     src/modules/quadcopter_dynamics.cpp
     src/modules/flight_control.cpp
     src/modules/mission_control.cpp
+    src/modules/nrf_hil.cpp
+    src/hil/nrf_hil_transport.cpp
     src/modules/first_order_dynamics.cpp
     src/modules/sensor_simulator.cpp
     src/modules/complementary_estimator.cpp
@@ -95,6 +98,7 @@ if(BUILD_AERODYN_GUI)
     PRIVATE
     dynamic_models
     control_systems
+    asr_fc_motor_link
     OpenGL::GL
     glfw
     GLEW::GLEW
@@ -107,6 +111,19 @@ if(BUILD_AERODYN_GUI)
     ASR_DEFAULT_AIRCRAFT_SPEC="${CMAKE_CURRENT_SOURCE_DIR}/config/reference-quad.aircraft.json"
     ASR_DEFAULT_COEFFICIENT_BUNDLE="${CMAKE_CURRENT_SOURCE_DIR}/config/reference-quad.coefficients.json"
     ASR_DEFAULT_AIRCRAFT_MESH="${CMAKE_CURRENT_SOURCE_DIR}/assets/generated/asr-reference-quad.obj")
+endif()
+
+if(BUILD_TESTING AND UNIX)
+    find_package(Threads REQUIRED)
+    add_executable(aerodyn_nrf_hil_transport_test
+        tests/test_nrf_hil_transport.cpp
+        src/hil/nrf_hil_transport.cpp)
+    target_include_directories(aerodyn_nrf_hil_transport_test
+        PRIVATE src external/asr_fc/include)
+    target_link_libraries(aerodyn_nrf_hil_transport_test
+        PRIVATE asr_fc_motor_link Threads::Threads util)
+    add_test(NAME aerodyn_nrf_hil_transport_test
+        COMMAND aerodyn_nrf_hil_transport_test)
 endif()
 
 if(BUILD_TESTING)
