@@ -342,6 +342,7 @@ struct SimulationState {
         bool manual_rotation_mode{false}; ///< If true: discrete step rotation (W/A/S/D/Q/E). If false: continuous angular rates (arrow keys)
         bool reset_requested{false};      ///< Reset the SIL plant and controller on the next application tick
         bool camera_fit_requested{false};   ///< Frame the complete aircraft in the 3D viewport
+        bool camera_follow_aircraft{true};  ///< Translate the camera with the aircraft while preserving its view angle
     } control;
 };
 

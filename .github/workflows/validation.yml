@@ -26,10 +26,13 @@ jobs:
       - name: Headless numerical tests
         run: ctest --test-dir build --output-on-failure
 
-      - name: Virtual-display application smoke test
-        run: |
-          set +e
-          timeout 5s xvfb-run -a ./build/AeroDynControlRig
-          status=$?
-          set -e
-          test "$status" -eq 124
+      - name: Virtual-display framebuffer evidence
+        run: xvfb-run -a ./build/AeroDynControlRig --render-check build/render-evidence.ppm
+
+      - name: Upload framebuffer evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: aerodyn-render-evidence
+          path: build/render-evidence.ppm
+          if-no-files-found: error

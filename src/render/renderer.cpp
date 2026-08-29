@@ -237,7 +237,7 @@ GLuint createShaderProgram(const char* vertexPath, const char* fragmentPath) {
     return program;
 }
 
-void Renderer::renderFrame3D(const Transform& transform) {
+void Renderer::renderFrame3D(const Transform& transform, bool draw_aircraft) {
     glClearColor(0.06f, 0.08f, 0.13f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -263,7 +263,7 @@ void Renderer::renderFrame3D(const Transform& transform) {
     glUniform3fv(lightColorLoc, 1, glm::value_ptr(directionalColor));
     glUniform3fv(cameraPosLoc, 1, glm::value_ptr(transform.camera_position));
 
-    if (cubeIndexCount > 0) {
+    if (draw_aircraft && cubeIndexCount > 0) {
         glBindVertexArray(cubeVao);
         glDrawElements(GL_TRIANGLES, cubeIndexCount, GL_UNSIGNED_INT, 0);
     }

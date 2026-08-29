@@ -26,6 +26,7 @@
 #include "attitude/quaternion.h"
 #include "attitude/attitude_utils.h"
 #include <iostream>
+#include <fstream>
 #include <algorithm>
 #include <string>
 #include <cstdio>
@@ -461,6 +462,7 @@ void Application::tick() {
 
     captureAttitudeHistorySample();
     transform.model = simulationState.model_matrix;
+    updateCameraFollow();
     render3D();
 }
 
@@ -492,6 +494,24 @@ void Application::fitCameraToAircraft(float aspectRatio) {
     camera.orbit(-35.0f, -25.0f);
     camera.fitSphere(world_center, renderer.aircraftRadius() * maximum_scale,
                      aspectRatio);
+    followedAircraftCenter = world_center;
+    followedAircraftCenterValid = true;
+}
+
+void Application::updateCameraFollow() {
+    const glm::vec3 current_center = glm::vec3(
+        simulationState.model_matrix * glm::vec4(renderer.aircraftCenter(), 1.0f));
+    if (!followedAircraftCenterValid) {
+        followedAircraftCenter = current_center;
+        followedAircraftCenterValid = true;
+        return;
+    }
+    if (simulationState.control.camera_follow_aircraft) {
+        const glm::vec3 translation = current_center - followedAircraftCenter;
+        camera.position += translation;
+        camera.target += translation;
+    }
+    followedAircraftCenter = current_center;
 }
 
 void Application::shutdown() {
@@ -848,6 +868,13 @@ void Application::renderDashboardLayout(ImGuiIO& io) {
             ui::PopPillButtonStyle();
             if (ImGui::IsItemHovered()) {
                 ImGui::SetTooltip("Frame the complete simulated aircraft (R3)");
+            }
+            ImGui::SetCursorScreenPos(
+                {canvas_pos.x + viewport_size.x - 126.0f, canvas_pos.y + 52.0f});
+            ImGui::Checkbox("Follow", &simulationState.control.camera_follow_aircraft);
+            if (ImGui::IsItemHovered()) {
+                ImGui::SetTooltip(
+                    "Move the camera with the aircraft while preserving orbit and zoom");
             }
             ImGui::SetCursorScreenPos(after_canvas);
 
@@ -1256,6 +1283,110 @@ ImTextureID Application::renderSceneToTexture(const ImVec2& size) {
     glViewport(0, 0, window_width, window_height);
 
     return static_cast<ImTextureID>(renderTexture);
+}
+
+bool Application::runRenderEvidenceCheck(const std::string& output_path) {
+    constexpr int width = 640;
+    constexpr int height = 480;
+    constexpr int minimum_changed_pixels = 1000;
+    constexpr int minimum_extent_pixels = 40;
+
+    fitCameraToAircraft(static_cast<float>(width) / static_cast<float>(height));
+    transform.model = simulationState.model_matrix;
+    transform.view = camera.getViewMatrix();
+    transform.projection = camera.getProjectionMatrix(
+        static_cast<float>(width) / static_cast<float>(height));
+    transform.camera_position = camera.position;
+
+    if (!ensureRenderTarget(width, height)) {
+        std::cerr << "RENDER_EVIDENCE result=FAIL reason=framebuffer_incomplete\n";
+        return false;
+    }
+
+    while (glGetError() != GL_NO_ERROR) {
+    }
+
+    std::vector<unsigned char> baseline(
+        static_cast<std::size_t>(width) * height * 4u);
+    std::vector<unsigned char> aircraft(baseline.size());
+    const auto capture = [&](bool draw_aircraft,
+                             std::vector<unsigned char>& pixels) {
+        glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+        glViewport(0, 0, width, height);
+        renderer.renderFrame3D(transform, draw_aircraft);
+        glReadBuffer(GL_COLOR_ATTACHMENT0);
+        glPixelStorei(GL_PACK_ALIGNMENT, 1);
+        glFinish();
+        glReadPixels(0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE,
+                     pixels.data());
+    };
+
+    capture(false, baseline);
+    capture(true, aircraft);
+    const GLenum gl_error = glGetError();
+
+    int changed_pixels = 0;
+    int minimum_x = width;
+    int minimum_y = height;
+    int maximum_x = -1;
+    int maximum_y = -1;
+    for (int y = 0; y < height; ++y) {
+        for (int x = 0; x < width; ++x) {
+            const std::size_t offset =
+                (static_cast<std::size_t>(y) * width + x) * 4u;
+            const int difference =
+                std::abs(static_cast<int>(aircraft[offset]) - baseline[offset]) +
+                std::abs(static_cast<int>(aircraft[offset + 1]) - baseline[offset + 1]) +
+                std::abs(static_cast<int>(aircraft[offset + 2]) - baseline[offset + 2]);
+            if (difference >= 24) {
+                ++changed_pixels;
+                minimum_x = std::min(minimum_x, x);
+                minimum_y = std::min(minimum_y, y);
+                maximum_x = std::max(maximum_x, x);
+                maximum_y = std::max(maximum_y, y);
+            }
+        }
+    }
+
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    int window_width = 0;
+    int window_height = 0;
+    glfwGetFramebufferSize(window, &window_width, &window_height);
+    glViewport(0, 0, window_width, window_height);
+
+    std::ofstream evidence(output_path, std::ios::binary);
+    if (!evidence) {
+        std::cerr << "RENDER_EVIDENCE result=FAIL reason=output_open path="
+                  << output_path << '\n';
+        return false;
+    }
+    evidence << "P6\n" << width << ' ' << height << "\n255\n";
+    for (int y = height - 1; y >= 0; --y) {
+        for (int x = 0; x < width; ++x) {
+            const std::size_t offset =
+                (static_cast<std::size_t>(y) * width + x) * 4u;
+            evidence.write(reinterpret_cast<const char*>(&aircraft[offset]), 3);
+        }
+    }
+    evidence.close();
+
+    const int extent_x = maximum_x >= minimum_x ? maximum_x - minimum_x + 1 : 0;
+    const int extent_y = maximum_y >= minimum_y ? maximum_y - minimum_y + 1 : 0;
+    const bool bounded = minimum_x > 1 && minimum_y > 1 &&
+                         maximum_x < width - 2 && maximum_y < height - 2;
+    const bool passed = gl_error == GL_NO_ERROR &&
+                        changed_pixels >= minimum_changed_pixels &&
+                        extent_x >= minimum_extent_pixels &&
+                        extent_y >= minimum_extent_pixels && bounded;
+
+    std::cout << "RENDER_EVIDENCE result=" << (passed ? "PASS" : "FAIL")
+              << " changed_pixels=" << changed_pixels
+              << " bbox=" << minimum_x << ',' << minimum_y << ','
+              << maximum_x << ',' << maximum_y
+              << " extent=" << extent_x << 'x' << extent_y
+              << " gl_error=" << static_cast<unsigned int>(gl_error)
+              << " path=" << output_path << '\n';
+    return passed;
 }
 
 bool Application::ensureRenderTarget(int width, int height) {
