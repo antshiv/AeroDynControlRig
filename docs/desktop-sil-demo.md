@@ -57,6 +57,10 @@ The A and B matrices and local transfer functions are analysis views of the load
 
 Desktop SIL currently validates joystick mapping, mission transitions, controller timing, mixing, saturation, rigid-body propagation, a rigid level ground plane, and visualization. The repeatable baseline is `grounded -> takeoff -> hover/flight -> landing -> grounded`. It does not yet model landing-gear compliance, propulsion transients, ESC current loops, battery sag, sensor noise, CEVA estimation, wind, navigation, or autonomous mission planning.
 
+The scene follows the aircraft by default, so takeoff and translation do not silently move it outside the camera frustum. Disable **Follow** to inspect motion against a fixed world-space viewpoint. **Fit aircraft** restores a deterministic orbit and framing.
+
+CI executes `AeroDynControlRig --render-check <artifact.ppm>` under Xvfb. The check renders a background-only baseline and an aircraft frame through the same off-screen framebuffer, then requires a bounded, non-trivial changed-pixel region and no OpenGL error. This proves visible geometry rather than merely proving that the process stayed alive.
+
 The mode selector reserves two later paths:
 
 - `nRF5340 HIL` will send simulated sensor frames to physical ASR-FC firmware and return four virtual motor commands before advancing the plant.

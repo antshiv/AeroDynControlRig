@@ -10,6 +10,7 @@
 #include <GLFW/glfw3.h>
 #include "attitude/euler.h" // from your attitude library
 #include <memory>
+#include <string>
 #include <vector>
 
 #include "render/renderer.h"
@@ -81,6 +82,9 @@ public:
      */
     void tick();
 
+    /** Render a fixed scene twice and verify that the aircraft changes pixels. */
+    bool runRenderEvidenceCheck(const std::string& output_path);
+
     /**
      * @brief Render the 3D scene (cube + axes)
      *
@@ -134,6 +138,8 @@ private:
     GLuint depthBuffer;                              ///< Depth/stencil renderbuffer
     int sceneWidth = 0;                              ///< Current render target width
     int sceneHeight = 0;                             ///< Current render target height
+    glm::vec3 followedAircraftCenter{0.0f};           ///< Last world-space centre used by camera follow
+    bool followedAircraftCenterValid{false};
 
     // === Simulation State and Modules ===
     SimulationState simulationState;                 ///< Shared simulation state
@@ -169,6 +175,7 @@ private:
     void initializePanels();
     void resetSimulation();
     void fitCameraToAircraft(float aspectRatio);
+    void updateCameraFollow();
 
     // === Rendering Helpers ===
     /**

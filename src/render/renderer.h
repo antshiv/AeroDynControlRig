@@ -58,7 +58,7 @@ public:
      * @brief Render a 3D frame with the current model/view/projection matrices
      * @param transform 3D transformation utilities
      */
-    void renderFrame3D(const Transform& transform);
+    void renderFrame3D(const Transform& transform, bool draw_aircraft = true);
 
     /**
      * @brief Set the model matrix (object → world transform)
