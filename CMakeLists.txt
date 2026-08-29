@@ -115,6 +115,13 @@ endif()
 
 if(BUILD_TESTING AND UNIX)
     find_package(Threads REQUIRED)
+    add_executable(aerodyn_nrf_hil_probe
+        tools/nrf_hil_probe.cpp
+        src/hil/nrf_hil_transport.cpp)
+    target_include_directories(aerodyn_nrf_hil_probe
+        PRIVATE src external/asr_fc/include)
+    target_link_libraries(aerodyn_nrf_hil_probe PRIVATE asr_fc_motor_link)
+
     add_executable(aerodyn_nrf_hil_transport_test
         tests/test_nrf_hil_transport.cpp
         src/hil/nrf_hil_transport.cpp)
