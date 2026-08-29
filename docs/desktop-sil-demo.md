@@ -74,3 +74,32 @@ fault flag pauses the plant and clears all four virtual motor commands. The
 firmware still contains no PWM or physical motor-output implementation.
 
 `Live CEVA replay` remains disabled until its replay timing contract is connected.
+
+### Remote nRF5340 on the W530
+
+Keep the serial device behind SSH rather than exposing a raw TCP listener. From
+the T14, create a local pseudo-terminal backed by the W530's stable J-Link
+interface:
+
+```bash
+python3 tools/ssh_serial_pty.py \
+  --host w530 \
+  --device /dev/serial/by-id/usb-SEGGER_J-Link_000960169267-if04 \
+  --link /tmp/asr-fc-hil
+```
+
+In another terminal, validate the disarmed endpoint before starting the GUI:
+
+```bash
+./build/aerodyn_nrf_hil_probe /tmp/asr-fc-hil
+```
+
+Then launch AeroDyn against the same local endpoint:
+
+```bash
+ASR_FC_HIL_DEVICE=/tmp/asr-fc-hil ./build/AeroDynControlRig
+```
+
+The bridge opens no listening socket. Removing SSH access or stopping the
+bridge breaks the serial stream, which causes AeroDyn's HIL path to clear all
+virtual motor commands and pause the plant.
