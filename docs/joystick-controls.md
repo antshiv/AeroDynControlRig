@@ -10,20 +10,17 @@ AeroDyn polls Logitech F310 and Dual Action controllers through GLFW's standardi
 | Left stick up/down | Climb/descend speed; centred commands zero vertical speed |
 | Right stick left/right | Fly left/right; centred brakes lateral motion |
 | Right stick up/down | Fly forward/back; centred brakes forward motion |
-| A | Take off from the ground, or resume while airborne |
-| B | Land while taking off/flying, or pause otherwise |
-| X | Level roll/pitch and retain current heading |
+| A | Take off from the ground |
+| B | Land while taking off or flying |
+| X | Pause or resume an active flight |
 | Y | Recenter the aircraft in the 3D viewport |
-| Back | Emergency stop, pause, clear motors, and reset PID state |
-| D-pad | Apply one-degree roll/pitch trim steps |
-| LB / RB | Reduce/increase stick command authority from 25% to 100% |
-| LT / RT | Descend/climb; an alternate vertical-speed command |
-| Left-stick click | Clear trim and level the attitude target |
-| Right-stick click | Fit the complete aircraft in the 3D viewport |
+| Back | Emergency stop, pause, clear motors, and require a reset |
 | Start | Reset the SIL aircraft, controller, and telemetry |
 | Guide | Show or hide the in-application guide when exposed by GLFW |
 
 The physical **MODE** button is different from the Guide button. On the F310 it may switch the D-pad and left-stick mapping in hardware, so Linux/GLFW may not report it as an independent button. The panel still exposes the resulting axis and D-pad state, making that mode change visible.
+
+The basic profile deliberately gives each button one meaning. Pressing A while airborne, B while grounded, or X without an active flight is ignored with a visible status message rather than triggering a second command.
 
 The input panel highlights active sticks and face buttons. It also displays raw normalized axes so mapping, centring, and hardware-mode faults are visible.
 It records a monotonic action number and the last normalized physical action, so repeated-button behavior can be diagnosed independently of controller-status messages.
@@ -34,9 +31,11 @@ The `Camera orbit`, `Camera pan`, and `Camera zoom` controls under the OpenGL sc
 
 Training assist is the default. The right stick commands body-relative horizontal velocity, the left vertical stick commands climb/descent velocity, and releasing the sticks commands zero velocity. A proportional outer loop converts velocity error into bounded roll, pitch, and collective targets before the existing attitude PID and mixer.
 
-Advanced mode exposes the underlying attitude/collective behavior directly. Releasing the right stick levels the attitude but does not brake accumulated horizontal velocity. This mode is useful for studying the plant and controller, but it is intentionally harder to fly.
+Advanced flight mode exposes the underlying attitude/collective behavior directly. Releasing the right stick levels the attitude but does not brake accumulated horizontal velocity. This mode is useful for studying the plant and controller, but it is intentionally harder to fly.
 
-The application opens grounded, paused, and with all virtual motors stopped. Set the altitude and press **A** (physical button 2 on a Dual Action) or click **Take off** to run the checked climb and hover transition. Press **B** (physical button 3) or click **Land** to run the checked descent and return to a zero-motor grounded state. The sticks command flight only after takeoff begins; they cannot move a grounded aircraft. The **Fit aircraft** viewport button, Y button, and right-stick click restore the inspection view at any time.
+The separate **Advanced trim and trigger controls** checkbox enables D-pad trim, LB/RB authority changes, trigger-based vertical commands, and stick-click shortcuts. These inputs are disabled by default so hardware mode changes or accidental trigger values cannot alter the basic flight contract.
+
+The application opens grounded, paused, and with all virtual motors stopped. Set the altitude and press **A** (physical button 2 on a Dual Action) or click **Take off** to run the checked climb and hover transition. Press **B** (physical button 3) or click **Land** to run the checked descent and return to a zero-motor grounded state. Use **X** to pause or resume an active flight. The sticks command flight only after takeoff begins; they cannot move a grounded aircraft. The **Fit aircraft** viewport button and Y button restore the inspection view at any time.
 
 ## Safety Boundary
 

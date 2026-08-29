@@ -56,6 +56,7 @@ if(BUILD_AERODYN_GUI)
     src/modules/complementary_estimator.cpp
     src/modules/rotor_telemetry.cpp
     src/config/aircraft_config.cpp
+    src/input/basic_flight_actions.cpp
     src/input/joystick_input.cpp
     src/gui/panel_manager.cpp
     src/gui/style.cpp
@@ -196,6 +197,17 @@ if(BUILD_TESTING)
             ASR_DEFAULT_AIRCRAFT_SPEC="${CMAKE_CURRENT_SOURCE_DIR}/config/reference-quad.aircraft.json"
             ASR_DEFAULT_COEFFICIENT_BUNDLE="${CMAKE_CURRENT_SOURCE_DIR}/config/reference-quad.coefficients.json")
         add_test(NAME aerodyn_mission_sequence_test COMMAND aerodyn_mission_sequence_test)
+
+        add_executable(aerodyn_basic_flight_actions_test
+            tests/test_basic_flight_actions.cpp
+            src/input/basic_flight_actions.cpp)
+        target_include_directories(aerodyn_basic_flight_actions_test
+            PRIVATE
+                src
+                ${GLM_INCLUDE_DIR}
+                external/dynamic_models/external/attitudeMathLibrary/include)
+        add_test(NAME aerodyn_basic_flight_actions_test
+            COMMAND aerodyn_basic_flight_actions_test)
     else()
         message(STATUS "GLM not found; skipping plant and flight-control integration tests")
     endif()
