@@ -85,8 +85,13 @@ path:
 python3 tools/ssh_serial_pty.py \
   --host <ssh-host-or-config-alias> \
   --device <remote-/dev/serial/by-id-path> \
+  --baud 115200 \
   --link /tmp/asr-fc-hil
 ```
+
+The bridge configures the physical remote UART explicitly. Baud settings applied
+to the local pseudo-terminal do not propagate through SSH to the J-Link serial
+device.
 
 In another terminal, validate the disarmed endpoint before starting the GUI:
 

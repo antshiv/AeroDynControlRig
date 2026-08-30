@@ -26,8 +26,14 @@ import termios
 import tty
 
 device = sys.argv[1]
+baud = int(sys.argv[2])
 serial_fd = os.open(device, os.O_RDWR | os.O_NOCTTY | os.O_NONBLOCK)
 tty.setraw(serial_fd)
+serial_attrs = termios.tcgetattr(serial_fd)
+baud_constant = getattr(termios, f"B{baud}")
+serial_attrs[4] = baud_constant
+serial_attrs[5] = baud_constant
+termios.tcsetattr(serial_fd, termios.TCSANOW, serial_attrs)
 termios.tcflush(serial_fd, termios.TCIOFLUSH)
 stdin_fd = sys.stdin.fileno()
 stdout_fd = sys.stdout.fileno()
@@ -65,6 +71,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--host", required=True, help="SSH host or config alias")
     parser.add_argument("--device", required=True, help="remote serial device")
     parser.add_argument(
+        "--baud", type=int, default=115200, help="remote serial baud rate"
+    )
+    parser.add_argument(
         "--link", default="/tmp/asr-fc-hil", help="local PTY symlink to create"
     )
     return parser.parse_args()
@@ -98,7 +107,8 @@ def main() -> int:
     encoded = base64.b64encode(REMOTE_BRIDGE.encode("utf-8")).decode("ascii")
     remote_command = (
         "python3 -u -c \"import base64;"
-        f"exec(base64.b64decode('{encoded}'))\" {shlex.quote(args.device)}"
+        f"exec(base64.b64decode('{encoded}'))\" {shlex.quote(args.device)} "
+        f"{args.baud}"
     )
     process = subprocess.Popen(
         ["ssh", "-T", args.host, remote_command],
