@@ -27,6 +27,7 @@ std::uint32_t newSessionId()
 void NrfHilModule::initialize(SimulationState& state)
 {
     session_id_ = newSessionId();
+    state.execution.nrf_hil_session_id = session_id_;
     const char* configured = std::getenv("ASR_FC_HIL_DEVICE");
     if (configured == nullptr || configured[0] == '\0') {
         return;
@@ -140,8 +141,10 @@ void NrfHilModule::update(double dt, SimulationState& state)
         request.guidance_quaternion[index] =
             static_cast<float>(guidance_quaternion[index]);
     }
-    request.collective_thrust_n =
-        static_cast<float>(state.pilot.collective_thrust_n);
+    // The desktop mixer uses signed FRD body-axis thrust. The wire ABI carries
+    // the non-negative collective magnitude and lets the endpoint own axes.
+    request.collective_thrust_n = static_cast<float>(
+        std::abs(state.pilot.collective_thrust_n));
 
     asr_fc_hil_flight_output_t response{};
     std::string error;
@@ -159,8 +162,12 @@ void NrfHilModule::update(double dt, SimulationState& state)
         return;
     }
     response_valid_ = true;
+    state.execution.nrf_hil_sequence = response.acknowledged_sequence;
+    state.execution.nrf_hil_round_trip_us = transport_.lastRoundTripUs();
+    state.execution.nrf_hil_device_timestamp_us = response.device_timestamp_us;
     state.execution.nrf_hil_execution_us = response.execution_time_us;
     state.execution.nrf_hil_fault_flags = response.fault_flags;
+    state.execution.nrf_hil_flight_state = response.flight_state;
     state.execution.nrf_hil_status = "nRF5340 controller -> virtual motors -> RK4 plant.";
     state.execution.active_path = state.execution.nrf_hil_status;
     for (std::size_t index = 0; index < 4; ++index) {

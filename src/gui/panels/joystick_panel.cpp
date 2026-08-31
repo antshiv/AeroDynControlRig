@@ -168,11 +168,17 @@ void JoystickPanel::draw(SimulationState& state, Camera& camera)
     ImGui::TextDisabled("Active: %s", state.execution.active_path.c_str());
     ImGui::TextWrapped("HIL: %s", state.execution.nrf_hil_status.c_str());
     if (state.execution.nrf_hil_available) {
-        ImGui::TextDisabled("%s | requests %llu | failures %llu | MCU %u us",
+        ImGui::TextDisabled("%s | session %08x | seq %u | requests %llu | failures %llu",
             state.execution.nrf_hil_device.c_str(),
+            state.execution.nrf_hil_session_id,
+            state.execution.nrf_hil_sequence,
             static_cast<unsigned long long>(state.execution.nrf_hil_requests),
-            static_cast<unsigned long long>(state.execution.nrf_hil_failures),
-            state.execution.nrf_hil_execution_us);
+            static_cast<unsigned long long>(state.execution.nrf_hil_failures));
+        ImGui::TextDisabled("round trip %llu us | MCU %u us | state %u | faults 0x%08x",
+            static_cast<unsigned long long>(state.execution.nrf_hil_round_trip_us),
+            state.execution.nrf_hil_execution_us,
+            static_cast<unsigned>(state.execution.nrf_hil_flight_state),
+            state.execution.nrf_hil_fault_flags);
     }
 
     const bool centered = sticksCentered(joystick);

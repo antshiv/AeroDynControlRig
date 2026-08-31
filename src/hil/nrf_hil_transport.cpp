@@ -19,6 +19,14 @@ std::uint64_t monotonicMilliseconds()
             clock::now().time_since_epoch()).count());
 }
 
+std::uint64_t monotonicMicroseconds()
+{
+    using clock = std::chrono::steady_clock;
+    return static_cast<std::uint64_t>(
+        std::chrono::duration_cast<std::chrono::microseconds>(
+            clock::now().time_since_epoch()).count());
+}
+
 int remainingMilliseconds(std::uint64_t deadline_ms)
 {
     const std::uint64_t now = monotonicMilliseconds();
@@ -102,6 +110,7 @@ bool NrfHilTransport::openDevice(const std::string& path, std::string& error)
 
     device_ = path;
     sequence_ = 0;
+    last_round_trip_us_ = 0;
     asr_fc_hil_parser_init(&parser_);
     error.clear();
     return true;
@@ -115,6 +124,7 @@ void NrfHilTransport::closeDevice()
     descriptor_ = -1;
     device_.clear();
     sequence_ = 0;
+    last_round_trip_us_ = 0;
     asr_fc_hil_parser_init(&parser_);
 }
 
@@ -152,6 +162,7 @@ bool NrfHilTransport::exchange(const asr_fc_hil_sensor_guidance_t& request,
         return false;
     }
     const std::uint64_t deadline_ms = monotonicMilliseconds() + timeout_ms;
+    const std::uint64_t started_us = monotonicMicroseconds();
     const std::uint32_t expected_sequence = ++sequence_;
     std::uint8_t encoded[ASR_FC_HIL_MAX_FRAME_SIZE]{};
     std::size_t encoded_size = 0;
@@ -163,11 +174,15 @@ bool NrfHilTransport::exchange(const asr_fc_hil_sensor_guidance_t& request,
     }
 
     std::uint8_t input[ASR_FC_HIL_MAX_FRAME_SIZE]{};
+    bool corrupt_response_seen = false;
     for (;;) {
         if (!waitForDescriptor(descriptor_, POLLIN, deadline_ms,
                                "response", error)) {
             asr_fc_hil_parser_init(&parser_);
             tcflush(descriptor_, TCIFLUSH);
+            if (corrupt_response_seen) {
+                error = "nRF HIL response was corrupt and no valid response arrived";
+            }
             return false;
         }
         const ssize_t count = ::read(descriptor_, input, sizeof(input));
@@ -190,9 +205,11 @@ bool NrfHilTransport::exchange(const asr_fc_hil_sensor_guidance_t& request,
             if (asr_fc_hil_parser_push(&parser_, input[index], frame,
                                        sizeof(frame), &frame_size,
                                        &ready) != ASR_FC_HIL_OK) {
-                error = "nRF HIL response framing failed";
-                asr_fc_hil_parser_init(&parser_);
-                return false;
+                // The parser resynchronizes itself. Keep scanning this response
+                // window so one damaged or stale fragment cannot hide a valid
+                // frame that follows it.
+                corrupt_response_seen = true;
+                continue;
             }
             if (!ready) {
                 continue;
@@ -209,6 +226,7 @@ bool NrfHilTransport::exchange(const asr_fc_hil_sensor_guidance_t& request,
                 return false;
             }
             error.clear();
+            last_round_trip_us_ = monotonicMicroseconds() - started_us;
             return true;
         }
     }
