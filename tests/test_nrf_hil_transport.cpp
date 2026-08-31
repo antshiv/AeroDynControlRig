@@ -13,7 +13,7 @@
 #include "asr_fc/protocol/hil_link.h"
 
 namespace {
-enum class ReplyMode { Valid, WrongIdentity, Silent };
+enum class ReplyMode { Valid, WrongIdentity, Corrupt, Delayed, Silent };
 
 struct PseudoTerminal {
     int master{-1};
@@ -104,6 +104,12 @@ void emulateEndpoint(int descriptor, ReplyMode mode)
     assert(asr_fc_hil_encode_flight_output(
         sequence, &response, encoded, sizeof(encoded), &encoded_size) ==
         ASR_FC_HIL_OK);
+    if (mode == ReplyMode::Corrupt) {
+        encoded[20] ^= 0x01u;
+    }
+    if (mode == ReplyMode::Delayed) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(80));
+    }
     const std::size_t split = encoded_size / 2u;
     assert(::write(descriptor, encoded, split) == static_cast<ssize_t>(split));
     std::this_thread::sleep_for(std::chrono::milliseconds(2));
@@ -131,6 +137,8 @@ void testExchange(ReplyMode mode, bool expected_success,
         assert(response.acknowledged_sequence == 1u);
         assert(response.execution_time_us == 73u);
         assert(response.motor_q15[3] == 12003u);
+        assert(transport.lastSequence() == 1u);
+        assert(transport.lastRoundTripUs() > 0u);
     } else {
         assert(error.find(expected_error) != std::string::npos);
     }
@@ -141,6 +149,8 @@ int main()
 {
     testExchange(ReplyMode::Valid, true, "");
     testExchange(ReplyMode::WrongIdentity, false, "identity mismatch");
+    testExchange(ReplyMode::Corrupt, false, "corrupt");
+    testExchange(ReplyMode::Delayed, false, "timed out");
     testExchange(ReplyMode::Silent, false, "timed out");
 
     NrfHilTransport unopened;

@@ -89,6 +89,11 @@ python3 tools/ssh_serial_pty.py \
   --link /tmp/asr-fc-hil
 ```
 
+Use `ls -l /dev/serial/by-id` on the remote host rather than assuming a
+`ttyACM` number. A multi-interface J-Link exposes several CDC ports. The bridge
+takes an exclusive lock on the selected remote serial device and creates a
+unique lease so a second bridge cannot silently consume the same responses.
+
 The bridge configures the physical remote UART explicitly. Baud settings applied
 to the local pseudo-terminal do not propagate through SSH to the J-Link serial
 device.
@@ -108,3 +113,13 @@ ASR_FC_HIL_DEVICE=/tmp/asr-fc-hil ./build/AeroDynControlRig
 The bridge opens no listening socket. Removing SSH access or stopping the
 bridge breaks the serial stream, which causes AeroDyn's HIL path to clear all
 virtual motor commands and pause the plant.
+
+For a repeatable headless physical gate and CSV capture:
+
+```bash
+./build/aerodyn_nrf_hil_mission \
+  /tmp/asr-fc-hil artifacts/hil/physical-mission-3x.csv 3
+```
+
+The first three-run physical result and its limitations are recorded in
+[`physical-hil-evidence-2026-08-31.md`](physical-hil-evidence-2026-08-31.md).

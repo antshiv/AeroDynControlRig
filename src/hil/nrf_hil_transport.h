@@ -20,6 +20,8 @@ public:
     void closeDevice();
     bool available() const { return descriptor_ >= 0; }
     const std::string& device() const { return device_; }
+    std::uint32_t lastSequence() const { return sequence_; }
+    std::uint64_t lastRoundTripUs() const { return last_round_trip_us_; }
 
     bool exchange(const asr_fc_hil_sensor_guidance_t& request,
                   asr_fc_hil_flight_output_t& response,
@@ -33,6 +35,7 @@ private:
     int descriptor_{-1};
     std::string device_;
     std::uint32_t sequence_{0};
+    std::uint64_t last_round_trip_us_{0};
     asr_fc_hil_parser_t parser_{};
 };
 

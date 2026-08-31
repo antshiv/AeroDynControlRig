@@ -15,10 +15,12 @@ import subprocess
 import sys
 import termios
 import tty
+import uuid
 
 
 REMOTE_BRIDGE = r"""
 import errno
+import fcntl
 import os
 import select
 import sys
@@ -27,14 +29,11 @@ import tty
 
 device = sys.argv[1]
 baud = int(sys.argv[2])
-serial_fd = os.open(device, os.O_RDWR | os.O_NOCTTY | os.O_NONBLOCK)
-tty.setraw(serial_fd)
-serial_attrs = termios.tcgetattr(serial_fd)
-baud_constant = getattr(termios, f"B{baud}")
-serial_attrs[4] = baud_constant
-serial_attrs[5] = baud_constant
-termios.tcsetattr(serial_fd, termios.TCSANOW, serial_attrs)
-termios.tcflush(serial_fd, termios.TCIOFLUSH)
+lease = sys.argv[3]
+lease_fd = os.open(lease, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+os.write(lease_fd, str(os.getpid()).encode("ascii"))
+os.close(lease_fd)
+serial_fd = -1
 stdin_fd = sys.stdin.fileno()
 stdout_fd = sys.stdout.fileno()
 
@@ -47,6 +46,15 @@ def write_all(fd, data):
             select.select([], [fd], [])
 
 try:
+    serial_fd = os.open(device, os.O_RDWR | os.O_NOCTTY | os.O_NONBLOCK)
+    fcntl.flock(serial_fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    tty.setraw(serial_fd)
+    serial_attrs = termios.tcgetattr(serial_fd)
+    baud_constant = getattr(termios, f"B{baud}")
+    serial_attrs[4] = baud_constant
+    serial_attrs[5] = baud_constant
+    termios.tcsetattr(serial_fd, termios.TCSANOW, serial_attrs)
+    termios.tcflush(serial_fd, termios.TCIOFLUSH)
     while True:
         readable, _, _ = select.select([serial_fd, stdin_fd], [], [])
         if serial_fd in readable:
@@ -62,7 +70,34 @@ try:
                 break
             write_all(serial_fd, data)
 finally:
-    os.close(serial_fd)
+    if serial_fd >= 0:
+        os.close(serial_fd)
+    try:
+        os.unlink(lease)
+    except FileNotFoundError:
+        pass
+"""
+
+REMOTE_STOP = r"""
+import os
+import signal
+import sys
+
+lease = sys.argv[1]
+try:
+    with open(lease, "r", encoding="ascii") as handle:
+        pid = int(handle.read())
+    with open(f"/proc/{pid}/cmdline", "rb") as handle:
+        command = handle.read()
+    if lease.encode("utf-8") in command:
+        os.kill(pid, signal.SIGTERM)
+except (FileNotFoundError, ProcessLookupError, ValueError):
+    pass
+finally:
+    try:
+        os.unlink(lease)
+    except FileNotFoundError:
+        pass
 """
 
 
@@ -96,6 +131,25 @@ def write_all(fd: int, data: bytes) -> None:
             select.select([], [fd], [])
 
 
+def stop_remote_bridge(host: str, lease: str) -> None:
+    encoded = base64.b64encode(REMOTE_STOP.encode("utf-8")).decode("ascii")
+    command = (
+        "python3 -c \"import base64;"
+        f"exec(base64.b64decode('{encoded}'))\" {shlex.quote(lease)}"
+    )
+    try:
+        subprocess.run(
+            ["ssh", "-T", host, command],
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            timeout=5,
+            check=False,
+        )
+    except subprocess.TimeoutExpired:
+        pass
+
+
 def main() -> int:
     args = parse_args()
     link = Path(args.link)
@@ -103,12 +157,13 @@ def main() -> int:
     tty.setraw(slave_fd)
     slave_path = os.ttyname(slave_fd)
     install_link(link, slave_path)
+    lease = f"/tmp/asr-fc-serial-bridge-{uuid.uuid4().hex}.pid"
 
     encoded = base64.b64encode(REMOTE_BRIDGE.encode("utf-8")).decode("ascii")
     remote_command = (
         "python3 -u -c \"import base64;"
         f"exec(base64.b64decode('{encoded}'))\" {shlex.quote(args.device)} "
-        f"{args.baud}"
+        f"{args.baud} {shlex.quote(lease)}"
     )
     process = subprocess.Popen(
         ["ssh", "-T", args.host, remote_command],
@@ -146,6 +201,7 @@ def main() -> int:
                     break
                 write_all(master_fd, data)
     finally:
+        stop_remote_bridge(args.host, lease)
         process.terminate()
         try:
             process.wait(timeout=3)

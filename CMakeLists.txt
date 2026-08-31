@@ -132,9 +132,28 @@ if(BUILD_TESTING AND UNIX)
         PRIVATE asr_fc_motor_link Threads::Threads util)
     add_test(NAME aerodyn_nrf_hil_transport_test
         COMMAND aerodyn_nrf_hil_transport_test)
+
+    add_executable(aerodyn_nrf_hil_fail_closed_test
+        tests/test_nrf_hil_fail_closed.cpp
+        src/modules/nrf_hil.cpp
+        src/hil/nrf_hil_transport.cpp)
+    target_include_directories(aerodyn_nrf_hil_fail_closed_test
+        PRIVATE src external/asr_fc/include
+            external/dynamic_models/external/attitudeMathLibrary/include)
+    target_link_libraries(aerodyn_nrf_hil_fail_closed_test
+        PRIVATE asr_fc_motor_link attitude Threads::Threads util)
+    add_test(NAME aerodyn_nrf_hil_fail_closed_test
+        COMMAND aerodyn_nrf_hil_fail_closed_test)
 endif()
 
 if(BUILD_TESTING)
+    find_package(Python3 COMPONENTS Interpreter REQUIRED)
+    add_test(NAME aerodyn_physical_hil_evidence_test
+        COMMAND ${Python3_EXECUTABLE}
+            ${CMAKE_CURRENT_SOURCE_DIR}/tools/verify_hil_mission_evidence.py
+            ${CMAKE_CURRENT_SOURCE_DIR}/artifacts/hil/physical-mission-3x.csv
+            --runs 3)
+
     find_path(GLM_INCLUDE_DIR glm/glm.hpp)
     if(GLM_INCLUDE_DIR)
         add_executable(aerodyn_headless_plant_test
@@ -197,6 +216,26 @@ if(BUILD_TESTING)
             ASR_DEFAULT_AIRCRAFT_SPEC="${CMAKE_CURRENT_SOURCE_DIR}/config/reference-quad.aircraft.json"
             ASR_DEFAULT_COEFFICIENT_BUNDLE="${CMAKE_CURRENT_SOURCE_DIR}/config/reference-quad.coefficients.json")
         add_test(NAME aerodyn_mission_sequence_test COMMAND aerodyn_mission_sequence_test)
+
+        if(UNIX)
+            add_executable(aerodyn_nrf_hil_mission
+                tools/nrf_hil_mission.cpp
+                src/modules/mission_control.cpp
+                src/modules/flight_control.cpp
+                src/modules/nrf_hil.cpp
+                src/modules/quadcopter_dynamics.cpp
+                src/hil/nrf_hil_transport.cpp
+                src/config/aircraft_config.cpp)
+            target_include_directories(aerodyn_nrf_hil_mission
+                PRIVATE src external/asr_fc/include
+                    external/controlSystems/include ${GLM_INCLUDE_DIR})
+            target_link_libraries(aerodyn_nrf_hil_mission
+                PRIVATE asr_fc_motor_link control_systems dynamic_models
+                    PkgConfig::JSONC)
+            target_compile_definitions(aerodyn_nrf_hil_mission PRIVATE
+                ASR_DEFAULT_AIRCRAFT_SPEC="${CMAKE_CURRENT_SOURCE_DIR}/config/reference-quad.aircraft.json"
+                ASR_DEFAULT_COEFFICIENT_BUNDLE="${CMAKE_CURRENT_SOURCE_DIR}/config/reference-quad.coefficients.json")
+        endif()
 
         add_executable(aerodyn_basic_flight_actions_test
             tests/test_basic_flight_actions.cpp

@@ -1,0 +1,24 @@
+{
+  "date": "2026-08-31",
+  "firmware_commit": "cd07150",
+  "runs": 3,
+  "steps_per_run": 992,
+  "rk4_substeps_per_run": 3968,
+  "simulated_dt_s": 0.01,
+  "session_ids": [2909152613, 427807111, 2164593186],
+  "fault_rows": 0,
+  "mcu_execution_us": {
+    "median": 890,
+    "p95": 894,
+    "max": 1474
+  },
+  "ssh_round_trip_us": {
+    "median_range": [23338, 23398],
+    "maximum": 25243
+  },
+  "maximum_altitude_m": 1.525103,
+  "final_position_m": [0.202591, -0.000370, 0.0],
+  "final_velocity_m_s": [0.000677, 0.000048, 0.0],
+  "maximum_motor_speed_rad_s": 648.266418,
+  "csv_sha256": "f6545192f6804f55b8ebb019942923efe41731364496e5388c39274190ccbb28"
+}

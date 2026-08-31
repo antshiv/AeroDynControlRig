@@ -55,8 +55,13 @@ struct SimulationState {
         std::string nrf_hil_status{"Set ASR_FC_HIL_DEVICE to enable hardware HIL."};
         std::uint64_t nrf_hil_requests{0};
         std::uint64_t nrf_hil_failures{0};
+        std::uint32_t nrf_hil_session_id{0};
+        std::uint32_t nrf_hil_sequence{0};
+        std::uint64_t nrf_hil_round_trip_us{0};
+        std::uint64_t nrf_hil_device_timestamp_us{0};
         std::uint32_t nrf_hil_execution_us{0};
         std::uint32_t nrf_hil_fault_flags{0};
+        std::uint8_t nrf_hil_flight_state{0};
     } execution;
 
     struct MathematicalModelState {
